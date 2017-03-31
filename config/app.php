@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Hobbyliga-West Düsseldorf',
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'de',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +177,20 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Laravel-Permission
+         */
+        Spatie\Permission\PermissionServiceProvider::class,
+
+        /*
+         * Laravel-Activitylog
+         */
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
+
+        /*
+         * Laravel-debugbar
+         */
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
