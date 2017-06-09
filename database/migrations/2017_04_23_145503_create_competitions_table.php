@@ -19,8 +19,6 @@ class CreateCompetitionsTable extends Migration
             $table->boolean('published')->default('0');
 
             $table->timestamps();
-            // soft deletes
-            $table->softDeletes();
         });
     }
 

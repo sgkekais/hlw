@@ -21,7 +21,9 @@ class CreateMatchweeksTable extends Migration
             $table->date('begin')->nullable();
             $table->date('end')->nullable();
             $table->boolean('published')->default('0');
+
             $table->timestamps();
+
             // foreign keys
             $table->foreign('season_id')
                 ->references('id')->on('seasons')

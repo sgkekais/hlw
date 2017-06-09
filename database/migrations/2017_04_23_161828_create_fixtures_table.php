@@ -25,13 +25,13 @@ class CreateFixturesTable extends Migration
             $table->integer('goals_away')->unsigned()->nullable();
             $table->integer('goals_home_11m')->unsigned()->nullable();
             $table->integer('goals_away_11m')->unsigned()->nullable();
-            $table->integer('goals_home_rated')->unsigned()->nullable();    // if fixture result has been rated (due to ruling or other)
-            $table->integer('goals_away_rated')->unsigned()->nullable();    // if fixture result has been rated (due to ruling or other)
+            $table->integer('goals_home_rated')->unsigned()->nullable();    // if match result has been rated (due to ruling or other)
+            $table->integer('goals_away_rated')->unsigned()->nullable();    // if match result has been rated (due to ruling or other)
             $table->text('note')->nullable();
             $table->boolean('cancelled')->default('0');    // complete cancellation, default: not cancelled
             $table->boolean('published')->default('0');    // publish on website?, default: not listed/published
-            $table->integer('rescheduled_from_fixtures_id')->unsigned()->nullable();    // Fixture has been rescheduled from fixture_id
-            $table->integer('rescheduled_to_fixtures_id')->unsigned()->nullable();      // Fixture has been rescheduled to fixture_id
+            $table->integer('rescheduled_from_fixtures_id')->unsigned()->nullable();    // match has been rescheduled from fixture_id
+            $table->integer('rescheduled_to_fixtures_id')->unsigned()->nullable();      // match has been rescheduled to fixture_id
             $table->timestamps();
 
             // foreign keys

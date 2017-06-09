@@ -31,8 +31,7 @@ class CreateSeasonsTable extends Migration
             $table->boolean('published')->default('0');
 
             $table->timestamps();
-            // soft deletes
-            $table->softDeletes();
+
             // foreign keys
             $table->foreign('division_id')
                 ->references('id')->on('divisions')

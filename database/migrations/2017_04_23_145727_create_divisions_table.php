@@ -21,8 +21,6 @@ class CreateDivisionsTable extends Migration
             $table->boolean('published')->default('0');
 
             $table->timestamps();
-            // soft deletes
-            $table->softDeletes();
 
             // foreign keys
             $table->foreign('competition_id')

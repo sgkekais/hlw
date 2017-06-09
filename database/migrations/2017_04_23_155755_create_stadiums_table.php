@@ -19,9 +19,8 @@ class CreateStadiumsTable extends Migration
             $table->string('name_short')->nullable();
             $table->text('gmaps')->nullable();
             $table->text('note')->nullable();
+
             $table->timestamps();
-            // soft deletes
-            $table->softDeletes();
         });
     }
 

@@ -12,7 +12,7 @@
 */
 
 /**
- * Frontend routs
+ * Frontend routes
  */
 
 Auth::routes();
