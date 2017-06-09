@@ -43,4 +43,6 @@ class Season extends Model
     public function matchweeks(){
         return $this->hasMany(Matchweek::class);
     }
+
+    // TODO: many-to-many clubs_seasons
 }
