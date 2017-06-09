@@ -27,7 +27,7 @@ Route::get('/home', 'HomeController@index');
  * Admin Routes
  */
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
     // Show Admin Dashboard after login into admin panel
     Route::get('', 'AdminController@index');
 });
