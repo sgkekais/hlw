@@ -3,12 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Competition extends Model
 {
-    /**
-     * Mass assignable fields
-     */
+    use LogsActivity;
+
+    // log attributes
+    protected static $logAttributes = [
+        'name'
+    ];
+
+    // Mass assignable fields
     protected $fillable = [
         'name'
     ];

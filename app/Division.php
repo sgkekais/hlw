@@ -3,14 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Division extends Model
 {
-    /**
-     * Mass assignable fields
-     */
+    use LogsActivity;
+
+    // log attributes
+    protected static $logAttributes = [
+        'name', 'hierarchy_level'
+    ];
+
+    // mass assignable fields
     protected $fillable = [
-        'name', 'hierachy_level'
+        'name', 'hierarchy_level'
     ];
 
     /**
