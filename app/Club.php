@@ -35,4 +35,5 @@ class Club extends Model
     }
 
     // TODO: more relationships, e.g. fixtures (home, away, all, create function in controller that uses relationship in combination with year)
+    // TODO: rescheduled by club
 }

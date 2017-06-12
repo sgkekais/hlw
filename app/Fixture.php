@@ -46,6 +46,6 @@ class Fixture extends Model
     public function stadium(){
         return $this->belongsTo(Stadium::class);
     }
-    // TODO: club relationships
-    // TODO: rescheduled relationships
+    // TODO: club relationships (home, away, all?)
+    // TODO: rescheduled relationships (from, to, by which club)
 }
