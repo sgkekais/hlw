@@ -11,12 +11,12 @@ class Competition extends Model
 
     // log attributes
     protected static $logAttributes = [
-        'name'
+        'name', 'published'
     ];
 
     // Mass assignable fields
     protected $fillable = [
-        'name'
+        'name', 'published'
     ];
 
     /**

@@ -3,9 +3,29 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Season extends Model
 {
+    use LogsActivity;
+
+    // log attributes
+    protected static $logAttributes = [
+        'year_begin',
+        'year_end',
+        'season_nr',
+        'champion',
+        'ranks_champion',
+        'ranks_promotion',
+        'ranks_relegation',
+        'playoff_champion',
+        'playoff_cup',
+        'playoff_relegation',
+        'rules',
+        'note',
+        'published'
+    ];
+
     // mass assignable fields
     protected $fillable = [
         'year_begin',
@@ -19,7 +39,8 @@ class Season extends Model
         'playoff_cup',
         'playoff_relegation',
         'rules',
-        'note'
+        'note',
+        'published'
     ];
 
     /**
