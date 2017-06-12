@@ -3,12 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Matchweek extends Model
 {
+    use LogsActivity;
+
+    // log attributes
+    protected static $logAttributes = [
+        'number_consecutive', 'name', 'begin', 'end', 'published'
+    ];
+
     // mass assignable fields
     protected $fillable = [
-        'number_consecutive', 'name', 'begin', 'end'
+        'number_consecutive', 'name', 'begin', 'end', 'published'
     ];
 
     /**
