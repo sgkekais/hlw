@@ -1,5 +1,8 @@
 @extends('admin.adminlayout')
 
 @section('content')
-    Hallo Admin.
+    <div class="container">
+            Hallo Admin.
+
+    </div>
 @endsection

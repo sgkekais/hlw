@@ -36,18 +36,45 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="/images/hlwlogo.png" alt="HLW" height="20">
+                    <!--{{ config('app.name', 'Laravel') }}-->
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    <li class="active"><a href="/admin/">Dashboard<span class="sr-only">(current)</span></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Spielbetrieb<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/admin/competitions">Wettbewerbe</a></li>
+                            <li><a href="/admin/divisions">Spielklassen</a></li>
+                            <li><a href="/admin/seasons">Saisons</a></li>
+                            <!--<li role="separator" class="divider"></li>-->
+                            <li><a href="/admin/matchweeks">Spielwochen</a></li>
+                            <li><a href="/admin/fixtures">Paarungen</a></li>
+                            <li><a href="/admin/stadiums">Spielorte</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clubs & Spieler<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/admin/people">Personen</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/admin/clubs">Mannschaften</a></li>
+                            <li><a href="/admin/contacts">Ansprechpartner</a></li>
+                            <li><a href="/admin/players">Spieler</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/admin/referees">Schiedsrichter</a></li>
+                        </ul>
+                    </li>                    &nbsp;
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Benutzer</a></li>
+                    <li><a href="#">Log</a></li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>
