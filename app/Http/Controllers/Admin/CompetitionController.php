@@ -15,7 +15,9 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        //
+        $competitions = Competition::all();
+
+        return view('admin.competitions.index', compact('competitions'));
     }
 
     /**

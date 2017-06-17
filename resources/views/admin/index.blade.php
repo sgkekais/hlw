@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-            Hallo Admin.
-
+        Hallo Admin.
     </div>
 @endsection

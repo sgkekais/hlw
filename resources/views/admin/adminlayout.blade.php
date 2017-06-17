@@ -74,7 +74,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Benutzer</a></li>
-                    <li><a href="#">Log</a></li>
+                    <li><a href="/admin/log">Log</a></li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>

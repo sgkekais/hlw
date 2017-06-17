@@ -30,4 +30,8 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
     // Show Admin Dashboard after login into admin panel
     Route::get('', 'AdminController@index');
+
+    Route::get('log', 'LogController@index');
+
+    Route::resource('competitions', 'CompetitionController');
 });
