@@ -27,7 +27,7 @@ class CompetitionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.competitions.create');
     }
 
     /**
@@ -38,7 +38,11 @@ class CompetitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $competition = new Competition();
+        $competition->name = $request->name;
+        $competition->save();
+
+        return redirect()->route('competitions.index');
     }
 
     /**

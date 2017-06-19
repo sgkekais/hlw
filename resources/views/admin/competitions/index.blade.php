@@ -3,51 +3,52 @@
 @section('content')
 
     <div class="container">
-        <h1>Wettbewerbe</h1>
-        <!-- controls -->
-        <a href="competitions/create" title="Wettbewerb hinzufügen">
-            <button type="button" class="btn btn-primary">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Wettbewerb hinzufügen
-            </button>
-        </a>
-        <hr>
+        <h1 class="mt-4">Wettbewerbe</h1>
+        <p>
+            Verwaltung der Wettbewerbe.
+        </p>
+        <div class="row">
+            <div class="col-3">
+                <!-- controls -->
+                <a class="btn btn-primary" href="{{ route('competitions.create') }}" title="Wettbewerb hinzufügen">
+                    <span class="fa fa-plus-circle"></span> Wettbewerb anlegen
+                </a>
+            </div>
+        </div>
+
+
         <!-- list all competitions -->
-        <h2>Angelegte Wettbewerbe <span class="badge">{{ $competitions->count() }}</span></h2>
-        <table class="table table-condensed table-striped table-hover">
-            <thead>
+        <h2 class="mt-4">Angelegte Wettbewerbe <span class="badge badge-default">{{ $competitions->count() }}</span></h2>
+        <table class="table table-sm table-striped table-hover">
+            <thead class="thead-default">
             <tr>
-                <th class="col-md-1">ID</th>
-                <th class="col-md-2">Name</th>
-                <th class="col-md-2">Aktionen</th>
-                <th class="col-md-2"></th>
+                <th class="">ID</th>
+                <th class="">Name</th>
+                <th class="">Aktionen</th>
+                <th class="">Änderungen</th>
             </tr>
             </thead>
             <tbody>
             @foreach($competitions as $competition)
                 <tr>
-                    <td>{{ $competition->id }}</td>
+                    <td><b>{{ $competition->id }}</b></td>
                     <td>
                         <a href="competitions/{{ $competition->id }}" title="Bearbeiten">{{ $competition->name }}</a>
                         <br>Spielklassen: {{ $competition->divisions()->get()->count() }}
                     </td>
                     <td>
-                        <a href="competitions/{{ $competition->id }}">
-                            <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                            </button>
+                        <a class="btn btn-secondary" href="{{ route('competitions.show', $competition) }}" title="Wettbewerb anzeigen">
+                            <span class="fa fa-eye"></span>
                         </a>
-                        <a href="competitions/{{ $competition->id }}/edit">
-                            <button type="button" class="btn btn-primary ">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </button>
+                        <a class="btn btn-primary" href="{{ route('competitions.edit', $competition) }}" title="Wettbewerb bearbeiten">
+                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                         </a>
                     </td>
                     <td>
-                        {{ $competition->created_at->format('d.m.Y \\u\\m h:i') }} Uhr
+                        angelegt am {{ $competition->created_at->format('d.m.Y \\u\\m h:i') }} Uhr
                         <br>
-                        {{ $competition->updated_at->format('d.m.Y \\u\\m h:i') }} Uhr
+                        geändert am {{ $competition->updated_at->format('d.m.Y \\u\\m h:i') }} Uhr
                     </td>
-
                 </tr>
             @endforeach
             </tbody>

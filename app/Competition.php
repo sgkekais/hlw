@@ -33,6 +33,16 @@ class Competition extends Model
         return $created_by;
     }
 
+    public function changedBy(){
+        $changed_by = Activity::where([
+            ['description', 'updated'],
+            ['subject_id', $this->id],
+            ['subject_type', 'App\Competition']
+        ])->orderBy('updated_at','asc')->first()->causer;
+
+        return $changed_by;
+    }
+
     /**
      * Relationships
      * 1. One-to-Many
