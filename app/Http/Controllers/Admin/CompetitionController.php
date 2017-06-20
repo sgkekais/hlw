@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Competition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class CompetitionController extends Controller
 {
@@ -42,6 +43,8 @@ class CompetitionController extends Controller
         $competition->name = $request->name;
         $competition->save();
 
+        Session::flash('success', 'Wettbewerb '.$competition->name.' erfolgreich angelegt.');
+
         return redirect()->route('competitions.index');
     }
 
@@ -53,7 +56,10 @@ class CompetitionController extends Controller
      */
     public function show(Competition $competition)
     {
-        //
+        // eager load divisions
+        $competition->load('divisions');
+
+        return view('admin.competitions.show', compact('competition'));
     }
 
     /**
@@ -64,7 +70,7 @@ class CompetitionController extends Controller
      */
     public function edit(Competition $competition)
     {
-        //
+        return view('admin.competitions.edit', compact('competition'));
     }
 
     /**
@@ -76,7 +82,15 @@ class CompetitionController extends Controller
      */
     public function update(Request $request, Competition $competition)
     {
-        //
+        // validate the input data
+        $this->validate($request, [
+            'name' => 'required|min:4'
+        ]);
+
+        // update the model
+        $competition->update($request->all());
+
+        return redirect()->route('competitions.index');
     }
 
     /**

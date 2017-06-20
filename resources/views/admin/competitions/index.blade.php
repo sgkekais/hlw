@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-3">
                 <!-- controls -->
-                <a class="btn btn-primary" href="{{ route('competitions.create') }}" title="Wettbewerb hinzufügen">
+                <a class="btn btn-primary" href="{{ route('competitions.create') }}" title="Wettbewerb anlegen">
                     <span class="fa fa-plus-circle"></span> Wettbewerb anlegen
                 </a>
             </div>
