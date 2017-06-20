@@ -6,8 +6,16 @@
         <!-- show competition details -->
         <h1 class="mt-4">Details zu Wettbewerb:</h1>
         <h2 class="mt-4">{{ $competition->name }}</h2>
-        Bla
-
+        <a class="btn btn-primary mb-4" href="{{ route('competitions.edit', $competition ) }}" title="Wettbewerb bearbeiten">
+            <span class="fa fa-pencil"></span> Bearbeiten
+        </a>
+        <a class="btn btn-danger mb-4" href="{{ route('competitions.destroy', $competition) }}" title="Wettbewerb löschen" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+            <span class="fa fa-trash"></span> Löschen
+        </a>
+            <form id="delete-form" action="{{ route('competitions.destroy', $competition) }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+            </form>
         <h3 class="mt-4">
             Zugeordnete Spielklassen
             <span class="badge badge-default">{{ $competition->divisions->count() }}</span>

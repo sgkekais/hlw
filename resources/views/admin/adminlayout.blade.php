@@ -4,7 +4,9 @@
     <!-- Navigation -->
     @include('admin._includes.nav')
     <!-- alerts -->
-    @include('admin.alerts')
+    <div class="container">
+        @include('admin.alerts')
+    </div>
     <!-- validation errors -->
     @if (count($errors) > 0)
         <div class="container">

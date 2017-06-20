@@ -101,6 +101,16 @@ class CompetitionController extends Controller
      */
     public function destroy(Competition $competition)
     {
-        //
+        $name = $competition->name;
+        $id = $competition->id;
+
+        // delete the model
+        $competition->delete();
+
+        // flash message
+        Session::flash('success', 'Wettbewerb '.$name.' mit der ID '.$id.' gelöscht.');
+
+        // return to index
+        return redirect()->route('competitions.index');
     }
 }
