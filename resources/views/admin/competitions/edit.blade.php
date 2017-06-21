@@ -16,7 +16,7 @@
                 <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
             </div>
             <button type="submit" class="btn btn-primary">Ändern</button>
-            <a class="btn btn-secondary" href="{{ route('competitions.index') }}">Abbrechen</a>
+            <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>
         </form>
     </div>
 
