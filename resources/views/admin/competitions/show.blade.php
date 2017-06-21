@@ -20,11 +20,16 @@
             </div>
             <!-- dates -->
             <div class="col-md-4">
-                Angelegt am: {{ $competition->created_at->format('d.m.Y H:m') }} Uhr
+                Angelegt am: {{ $competition->created_at->format('d.m.Y H:i') }} Uhr
+                @if($causer = ModelHelper::causerOfAction($competition,'created'))
+                    von {{ $causer->name }}
+                @endif
                 <br>
-                Geändert am: {{ $competition->updated_at->format('d.m.Y H:m') }} Uhr
-                @if($competition->changedBy())
-                    von {{ $competition->changedBy()->name }}
+                @if($competition->updated_at != $competition->created_at)
+                    Geändert am: {{ $competition->updated_at->format('d.m.Y H:i') }} Uhr
+                    @if($causer = ModelHelper::causerOfAction($competition,'updated'))
+                        von {{ $causer->name }}
+                    @endif
                 @endif
             </div>
         </div>

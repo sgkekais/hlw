@@ -12,11 +12,11 @@ class ModelHelper{
      * @param $description = ['created', 'updated', 'deleted']
      * @return User $causer
      */
-    public function causerOfAction(Model $model, $description)
+    public static function causerOfAction(Model $model, $description)
     {
         $causer = Activity::where([
             ['description', $description],
-            ['subject_id', $this->id],
+            ['subject_id', $model->id],
             ['subject_type', 'App\\' . class_basename($model)],
         ])->orderBy('updated_at','desc')->first();
 

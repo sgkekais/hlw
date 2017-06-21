@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Models\Activity;
+// use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Competition extends Model
@@ -20,9 +20,10 @@ class Competition extends Model
         'name', 'published'
     ];
 
-    /**
+    /* replaced by helper function
+    **
      * @return User created_by
-     */
+     *
     public function createdBy(){
         $created_by = Activity::where([
             ['description', 'created'],
@@ -56,6 +57,7 @@ class Competition extends Model
             return $changed_by;
         }
     }
+    */
 
     /**
      * Relationships
