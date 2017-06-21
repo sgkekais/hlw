@@ -3,10 +3,11 @@
 @section('content')
 
     <div class="container">
-        <h1 class="mt-4">Details zu Wettbewerb:</h1>
-        <h2 class="mt-4">{{ $competition->name }}</h2>
+        <h1 class="mt-4">Details zu Wettbewerb</h1>
+        <h2 class="mt-4 text-primary">&mdash; {{ $competition->name }}</h2>
         <div class="row">
             <div class="col-md-4">
+                <h3 class="mt-4">Aktionen</h3>
                 <a class="btn btn-primary mb-4" href="{{ route('competitions.edit', $competition ) }}" title="Wettbewerb bearbeiten">
                     <span class="fa fa-pencil"></span> Bearbeiten
                 </a>
@@ -20,6 +21,7 @@
             </div>
             <!-- dates -->
             <div class="col-md-4">
+                <h3 class="mt-4">Änderungen</h3>
                 Angelegt am: {{ $competition->created_at->format('d.m.Y H:i') }} Uhr
                 @if($causer = ModelHelper::causerOfAction($competition,'created'))
                     von {{ $causer->name }}
