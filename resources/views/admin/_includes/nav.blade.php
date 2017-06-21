@@ -1,7 +1,7 @@
 <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
     <div class="container">
         <!-- toggler -->
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse1" aria-controls="navbarCollapse1" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -12,20 +12,20 @@
         </a>
 
         <!-- toggable navigation bar -->
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="collapse navbar-collapse" id="navbarCollapse1">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/admin/"><span class="fa fa-dashboard"></span> Dashboard <span class="sr-only">(current)</span></a>
+                <li class="nav-item {{ Route::is('admin') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('admin') }}"><span class="fa fa-dashboard"></span> Dashboard</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-soccer-ball-o"></span> Spielbetrieb</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="{{ route('competitions.index') }}">Wettbewerbe</a>
-                        <a class="dropdown-item" href="{{ route('divisions.index') }}">Spielklassen</a>
-                        <a class="dropdown-item" href="{{ route('seasons.index') }}">Saisons</a>
-                        <a class="dropdown-item" href="{{ route('matchweeks.index') }}">Spielwochen</a>
-                        <a class="dropdown-item" href="{{ route('fixtures.index') }}">Paarungen</a>
-                        <a class="dropdown-item" href="{{ route('stadiums.index') }}">Spielorte</a>
+                        <a class="dropdown-item {{ Route::is('competitions.*') ? 'active' : null }}" href="{{ route('competitions.index') }}">Wettbewerbe</a>
+                        <a class="dropdown-item {{ Route::is('divisions.*') ? 'active' : null }}" href="{{ route('divisions.index') }}">Spielklassen</a>
+                        <a class="dropdown-item {{ Route::is('seasons.*') ? 'active' : null }}" href="{{ route('seasons.index') }}">Saisons</a>
+                        <a class="dropdown-item {{ Route::is('matchweeks.*') ? 'active' : null }}" href="{{ route('matchweeks.index') }}">Spielwochen</a>
+                        <a class="dropdown-item {{ Route::is('fixtures.*') ? 'active' : null }}" href="{{ route('fixtures.index') }}">Paarungen</a>
+                        <a class="dropdown-item {{ Route::is('stadiums.*') ? 'active' : null }}" href="{{ route('stadiums.index') }}">Spielorte</a>
                     </div>
                 </li>
             </ul>
@@ -35,7 +35,7 @@
                         <span class="fa fa-users"></span> Users
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::is('log') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('log') }}">
                         <span class="fa fa-history"></span> Log
                     </a>
@@ -59,5 +59,23 @@
             </ul>
         </div>
     </div>
-
+</nav>
+<!-- secondary navigation -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <!-- toggler -->
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse2" aria-controls="navbarCollapse2" aria-expanded="false" aria-label="toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarCollapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ route('competitions.index') }}">Wettbewerbe</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('divisions.index') }}">Spielklassen</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('seasons.index') }}">Saisons</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('matchweeks.index') }}">Spielwochen</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('fixtures.index') }}">Paarungen</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('stadiums.index') }}">Spielorte</a></li>
+            </ul>
+        </div>
+    </div>
 </nav>

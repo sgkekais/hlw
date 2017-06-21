@@ -5,6 +5,7 @@
     <div class="container">
         <h1 class="mt-4">Details zu Wettbewerb</h1>
         <h2 class="mt-4 text-primary">&mdash; {{ $competition->name }}</h2>
+        {{ Route::is('competitions.*') ? 'JA' : 'NEIN' }}
         <div class="row">
             <div class="col-md-4">
                 <h3 class="mt-4">Aktionen</h3>
