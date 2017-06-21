@@ -28,9 +28,16 @@ class Competition extends Model
             ['description', 'created'],
             ['subject_id', $this->id],
             ['subject_type', 'App\Competition']
-        ])->orderBy('created_at','asc')->first()->causer;
+        ])->orderBy('created_at','desc')->first();
 
-        return $created_by;
+        // did we find a log entry?
+        if($created_by){
+            // then return the user
+            return $created_by->causer;
+        }else{
+            // else return null
+            return $created_by;
+        }
     }
 
     public function changedBy(){
@@ -38,9 +45,16 @@ class Competition extends Model
             ['description', 'updated'],
             ['subject_id', $this->id],
             ['subject_type', 'App\Competition']
-        ])->orderBy('updated_at','asc')->first()->causer;
+        ])->orderBy('updated_at','desc')->first();
 
-        return $changed_by;
+        // did we find a log entry?
+        if($changed_by){
+            // then return the user
+            return $changed_by->causer;
+        }else{
+            // else return null
+            return $changed_by;
+        }
     }
 
     /**

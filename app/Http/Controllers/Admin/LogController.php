@@ -10,7 +10,7 @@ class LogController extends Controller
 {
     public function index(){
 
-        $log = Activity::all();
+        $log = Activity::all()->sortByDesc('id');
 
         return view('admin.log', compact('log'));
     }

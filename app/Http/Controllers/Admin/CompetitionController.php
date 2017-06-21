@@ -39,6 +39,9 @@ class CompetitionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+           'name' => 'required|min:4'
+        ]);
         $competition = new Competition();
         $competition->name = $request->name;
         $competition->save();
@@ -89,6 +92,9 @@ class CompetitionController extends Controller
 
         // update the model
         $competition->update($request->all());
+
+        // flash success message
+        Session::flash('success', 'Wettbewerb '.$competition->name.' erfolgreich geändert.');
 
         return redirect()->route('competitions.index');
     }
