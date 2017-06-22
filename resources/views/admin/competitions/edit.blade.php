@@ -15,6 +15,13 @@
                 <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" value="{{ $competition->name }}" placeholder="{{ $competition->name }}">
                 <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
             </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="published" id="published" aria-describedby="publishHelp" {{ $competition->published ? "checked" : "" }}>
+                    Veröffentlichen
+                    <small id="publishHelp" class="form-text text-muted">Wettbewerb veröffentlichen?</small>
+                </label>
+            </div>
             <button type="submit" class="btn btn-primary">Ändern</button>
             <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>
         </form>

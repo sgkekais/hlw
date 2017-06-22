@@ -24,6 +24,7 @@
                 <tr>
                     <th class="">ID</th>
                     <th class="">Name</th>
+                    <th class="">Veröffentlicht?</th>
                     <th class="">Aktionen</th>
                     <th class="">Änderungen</th>
                 </tr>
@@ -36,6 +37,7 @@
                             <a href="competitions/{{ $competition->id }}" title="Bearbeiten">{{ $competition->name }}</a>
                             <br>Spielklassen: {{ $competition->divisions()->get()->count() }}
                         </td>
+                        <td>{{ $competition->published ? "JA" : "NEIN" }}</td>
                         <td>
                             <!-- display details -->
                             <a class="btn btn-secondary" href="{{ route('competitions.show', $competition) }}" title="Wettbewerb anzeigen">

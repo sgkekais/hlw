@@ -42,12 +42,24 @@ class CompetitionController extends Controller
         $this->validate($request, [
            'name' => 'required|min:4'
         ]);
-        $competition = new Competition();
-        $competition->name = $request->name;
+
+        // create a new object
+        $competition = new Competition($request->all());
+
+        // published checkbox set?
+        if($request->has('published')){
+            $competition->published = 1;
+        }else{
+            $competition->published = 0;
+        }
+
+        // store the new object
         $competition->save();
 
+        // flash success message
         Session::flash('success', 'Wettbewerb '.$competition->name.' erfolgreich angelegt.');
 
+        // return to index
         return redirect()->route('competitions.index');
     }
 
@@ -90,8 +102,17 @@ class CompetitionController extends Controller
             'name' => 'required|min:4'
         ]);
 
+        $competition->name = $request->name;
+
+        // published checkbox set?
+        if($request->has('published')){
+            $competition->published = 1;
+        }else{
+            $competition->published = 0;
+        }
+
         // update the model
-        $competition->update($request->all());
+        $competition->save();
 
         // flash success message
         Session::flash('success', 'Wettbewerb '.$competition->name.' erfolgreich geändert.');
