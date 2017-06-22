@@ -7,7 +7,7 @@
         <h2 class="mt-4 text-primary">&mdash; {{ $competition->name }}</h2>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h3 class="mt-4">Aktionen</h3>
                 <a class="btn btn-primary mb-4" href="{{ route('competitions.edit', $competition ) }}" title="Wettbewerb bearbeiten">
                     <span class="fa fa-pencil"></span> Bearbeiten
@@ -21,27 +21,27 @@
                 </form>
             </div>
             <!-- dates -->
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h3 class="mt-4">Änderungen</h3>
+                <!-- published -->
+                @if($competition->published)
+                    <span class="fa fa-eye"></span> Öffentlich
+                @else
+                    <span class="fa fa-eye-slash"></span> <b>Nicht</b> öffentlich
+                @endif
+                <br>
+                <!-- created at -->
                 Angelegt am: {{ $competition->created_at->format('d.m.Y H:i') }} Uhr
                 @if($causer = ModelHelper::causerOfAction($competition,'created'))
                     von {{ $causer->name }}
                 @endif
                 <br>
+                <!-- updated at -->
                 @if($competition->updated_at != $competition->created_at)
                     Geändert am: {{ $competition->updated_at->format('d.m.Y H:i') }} Uhr
                     @if($causer = ModelHelper::causerOfAction($competition,'updated'))
                         von {{ $causer->name }}
                     @endif
-                @endif
-            </div>
-            <!-- published -->
-            <div class="col-md-4">
-                <h3 class="mt-4">&nbsp;</h3>
-                @if($competition->published)
-                    <span class="fa fa-eye"></span> Öffentlich
-                @else
-                    <span class="fa fa-eye-slash"></span> <b>Nicht</b> öffentlich
                 @endif
             </div>
         </div>
