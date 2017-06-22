@@ -57,13 +57,13 @@
                             </form>
                         </td>
                         <td>
-                            angelegt am {{ $competition->created_at->format('d.m.Y \\u\\m h:i') }} Uhr
+                            angelegt am {{ $competition->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
                             @if($causer = ModelHelper::causerOfAction($competition,'created'))
                                 von {{ $causer->name }}
                             @endif
                             <br>
                             @if($competition->updated_at != $competition->created_at)
-                                geändert am {{ $competition->updated_at->format('d.m.Y \\u\\m h:i') }} Uhr
+                                geändert am {{ $competition->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
                                 @if($causer = ModelHelper::causerOfAction($competition,'updated'))
                                     von {{ $causer->name }}
                                 @endif
