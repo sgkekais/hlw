@@ -117,7 +117,8 @@ class CompetitionController extends Controller
         // flash success message
         Session::flash('success', 'Wettbewerb '.$competition->name.' erfolgreich geändert.');
 
-        return redirect()->route('competitions.index');
+        // redirect to updated competition
+        return redirect()->route('competitions.show', $competition);
     }
 
     /**
