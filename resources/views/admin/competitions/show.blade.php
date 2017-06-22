@@ -5,7 +5,7 @@
     <div class="container">
         <h1 class="mt-4">Details zu Wettbewerb</h1>
         <h2 class="mt-4 text-primary">&mdash; {{ $competition->name }}</h2>
-        {{ Route::is('competitions.*') ? 'JA' : 'NEIN' }}
+
         <div class="row">
             <div class="col-md-4">
                 <h3 class="mt-4">Aktionen</h3>
@@ -33,6 +33,15 @@
                     @if($causer = ModelHelper::causerOfAction($competition,'updated'))
                         von {{ $causer->name }}
                     @endif
+                @endif
+            </div>
+            <!-- published -->
+            <div class="col-md-4">
+                <h3 class="mt-4">&nbsp;</h3>
+                @if($competition->published)
+                    <span class="fa fa-eye"></span> Öffentlich
+                @else
+                    <span class="fa fa-eye-slash"></span> <b>Nicht</b> öffentlich
                 @endif
             </div>
         </div>
