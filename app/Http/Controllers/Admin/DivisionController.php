@@ -133,6 +133,16 @@ class DivisionController extends Controller
      */
     public function destroy(Division $division)
     {
-        //
+        $name = $division->name;
+        $id = $division->id;
+
+        // delete the model
+        $division->delete();
+
+        // flash message
+        Session::flash('success', 'Spielklasse '.$name.' mit der ID '.$id.' gelöscht.');
+
+        // return to index
+        return redirect()->route('divisions.index');
     }
 }
