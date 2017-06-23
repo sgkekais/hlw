@@ -36,7 +36,10 @@
                     <td><b>{{ $division->id }}</b></td>
                     <td>
                         <a href="{{ route('divisions.show', $division ) }}" title="Anzeigen">{{ $division->name }}</a>
-                        <br>Saisons: {{ $division->seasons()->get()->count() }}
+                        <br>
+                        <span class="text-muted">{{ $division->competition->name }}</span>
+                        <br>
+                        Saisons: {{ $division->seasons()->get()->count() }}
                     </td>
                     <td>{{ $division->hierarchy_level }}</td>
                     <td>{{ $division->published ? "JA" : "NEIN" }}</td>
