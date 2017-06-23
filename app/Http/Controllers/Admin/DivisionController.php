@@ -84,7 +84,7 @@ class DivisionController extends Controller
      */
     public function edit(Division $division)
     {
-        //
+        return view('admin.divisions.edit', compact('division'));
     }
 
     /**
@@ -96,7 +96,26 @@ class DivisionController extends Controller
      */
     public function update(Request $request, Division $division)
     {
-        //
+        // validate the input data
+        $this->validate($request, [
+            'name' => 'required|min:4',
+            'hierarchy_level' => 'required' // TODO: should be unique for one competition
+        ]);
+
+        if($request->has('published')){
+            $division->published = 1;
+        }else{
+            $division->published = 0;
+        }
+
+        $division->save();
+        $division->update($request->all());
+
+        // flash success message
+        Session::flash('success', 'Spielklasse '.$division->name.' erfolgreich geändert.');
+
+        // redirect to updated competition
+        return redirect()->route('divisions.index', $division);
     }
 
     /**

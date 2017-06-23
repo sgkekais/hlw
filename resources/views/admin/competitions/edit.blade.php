@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <!-- create a new competition -->
+        <!-- edit the competition -->
         <h1 class="mt-4">Wettbewerb</h1>
         <h2 class="mt-4 text-primary">&mdash; {{ $competition->name }}</h2>
         <!-- created at -->
