@@ -34,7 +34,7 @@
                     <tr>
                         <td><b>{{ $competition->id }}</b></td>
                         <td>
-                            <a href="competitions/{{ $competition->id }}" title="Bearbeiten">{{ $competition->name }}</a>
+                            <a href="{{ route('competitions.show', $competition ) }}" title="Anzeigen">{{ $competition->name }}</a>
                             <br>Spielklassen: {{ $competition->divisions()->get()->count() }}
                         </td>
                         <td>{{ $competition->published ? "JA" : "NEIN" }}</td>
