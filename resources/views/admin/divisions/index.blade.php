@@ -51,14 +51,6 @@
                         <a class="btn btn-primary" href="{{ route('divisions.edit', $division) }}" title="Spielklasse bearbeiten">
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                         </a>
-                        <!-- delete -->
-                        <a class="btn btn-danger" href="{{ route('divisions.destroy', $division->id) }}" title="Spielklasse löschen" onclick="event.preventDefault(); document.getElementById('delete-form{{ $division->id }}').submit();">
-                            <span class="fa fa-trash"></span>
-                        </a>
-                        <form id="delete-form{{ $division->id }}" action="{{ route('divisions.destroy', $division->id) }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                        </form>
                     </td>
                     <td>
                         angelegt am {{ $division->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
