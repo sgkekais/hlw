@@ -42,7 +42,7 @@ class DivisionController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:2',
-            'hierarchy_level' => 'required' // TODO: sollte unique sein fuer gleiche competition
+            'hierarchy_level' => 'required' // TODO: should be unique for one competition
         ]);
 
         // create a new object

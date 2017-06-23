@@ -51,19 +51,6 @@
             <span class="badge badge-default">{{ $competition->divisions->count() }}</span>
         </h3>
         <div class="row">
-            <div class="col-md-4">
-                <a class="btn btn-primary mb-4" href="{{ route('divisions.create') }}" title="Spielklasse anlegen">
-                    <span class="fa fa-plus-circle"></span> Spielklasse anlegen
-                </a>
-            </div>
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
                 @if($competition->divisions->count() == 0)
                     <br>
