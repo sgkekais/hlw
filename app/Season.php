@@ -11,16 +11,12 @@ class Season extends Model
 
     // log attributes
     protected static $logAttributes = [
-        'year_begin',
-        'year_end',
+        'division_id',
+        'year_begin', 'year_end',
         'season_nr',
         'champion',
-        'ranks_champion',
-        'ranks_promotion',
-        'ranks_relegation',
-        'playoff_champion',
-        'playoff_cup',
-        'playoff_relegation',
+        'ranks_champion', 'ranks_promotion', 'ranks_relegation',
+        'playoff_champion', 'playoff_cup', 'playoff_relegation',
         'rules',
         'note',
         'published'
@@ -28,16 +24,12 @@ class Season extends Model
 
     // mass assignable fields
     protected $fillable = [
-        'year_begin',
-        'year_end',
+        'division_id',
+        'year_begin', 'year_end',
         'season_nr',
         'champion',
-        'ranks_champion',
-        'ranks_promotion',
-        'ranks_relegation',
-        'playoff_champion',
-        'playoff_cup',
-        'playoff_relegation',
+        'ranks_champion', 'ranks_promotion', 'ranks_relegation',
+        'playoff_champion', 'playoff_cup', 'playoff_relegation',
         'rules',
         'note',
         'published'

@@ -29,7 +29,7 @@ class SeasonController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.seasons.create');
     }
 
     /**
@@ -62,7 +62,7 @@ class SeasonController extends Controller
      */
     public function edit(Season $season)
     {
-        //
+        return view('admin.seasons.edit', compact('season'));
     }
 
     /**
