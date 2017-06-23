@@ -11,12 +11,12 @@ class Division extends Model
 
     // log attributes
     protected static $logAttributes = [
-        'name', 'hierarchy_level', 'published'
+        'name', 'competition_id', 'hierarchy_level', 'published'
     ];
 
     // mass assignable fields
     protected $fillable = [
-        'name', 'hierarchy_level', 'published'
+        'name', 'competition_id', 'hierarchy_level', 'published'
     ];
 
     /**

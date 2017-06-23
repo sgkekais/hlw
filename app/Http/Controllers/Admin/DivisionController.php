@@ -6,6 +6,7 @@ use App\Competition;
 use App\Division;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class DivisionController extends Controller
 {
@@ -46,23 +47,22 @@ class DivisionController extends Controller
 
         // create a new object
         $division = new Division($request->all());
-        return $division;
-//        // published checkbox set?
-//        if($request->has('published')){
-//            $division->published = 1;
-//        }else{
-//            $division->published = 0;
-//        }
-//
-//        // find the associated competiton and create new division
-//        $competition = Competition::find($division->competition_id)->get();
-//        $competition->divisions()->save($division);
-//
-//        // flash success message
-//        Session::flash('success', 'Spielklasse '.$division->name.' erfolgreich angelegt und Wettbewerb '.$competition->name.' zugeordnet.');
-//
-//        // return to index
-//        return redirect()->route('divisions.index');
+
+        // published checkbox set?
+        if($request->has('published')){
+            $division->published = 1;
+        }else{
+            $division->published = 0;
+        }
+
+        // save the division
+        $division->save();
+
+        // flash success message and return competition name as test
+        Session::flash('success', 'Spielklasse '.$division->name.' erfolgreich angelegt und Wettbewerb '.$division->competition->name.' zugeordnet.');
+
+        // return to index
+        return redirect()->route('divisions.index');
     }
 
     /**
