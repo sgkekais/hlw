@@ -15,7 +15,11 @@ class SeasonController extends Controller
      */
     public function index()
     {
-        //
+        // get all seasons
+        $seasons = Season::all();
+
+        // return index view
+        return view('admin.seasons.index', compact('seasons'));
     }
 
     /**

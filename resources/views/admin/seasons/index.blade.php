@@ -45,6 +45,7 @@
                             {{ $season->year_begin }}
                         @else
                             {{ $season->year_begin }} / {{ $season->year_end }}
+                        @endif
                     </td>
                     <td>{{ $season->published ? "JA" : "NEIN" }}</td>
                     <td>
