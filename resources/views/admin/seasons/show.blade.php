@@ -45,6 +45,7 @@
                 @endif
             </div>
         </div>
+        <hr>
         <!-- show season details -->
         <h3 class="mt-4">
             Zugeordnete Spielwochen

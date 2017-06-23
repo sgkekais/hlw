@@ -38,6 +38,7 @@
                 @endif
             </div>
         </div>
+        <hr>
         <!-- show division details -->
         <h3 class="mt-4">
             Zugeordnete Saisons
