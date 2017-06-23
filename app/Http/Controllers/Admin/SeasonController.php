@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Season;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class SeasonController extends Controller
 {
@@ -40,7 +41,29 @@ class SeasonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$this->validate($request, [
+            'name' => 'required|min:2',
+            'hierarchy_level' => 'required' // TODO
+        ]);*/
+
+        // create a new object
+        $season = new Season($request->all());
+
+        // published checkbox set?
+        if($request->has('published')){
+            $season->published = 1;
+        }else{
+            $season->published = 0;
+        }
+
+        // save the season
+        $season->save();
+
+        // flash success message and return competition name as test
+        Session::flash('success', 'Saison '.$season->year_begin.' / '.$season->year_end.' erfolgreich angelegt und Wettbewerb '.$season->division->name.' zugeordnet.');
+
+        // return to index
+        return redirect()->route('seasons.index');
     }
 
     /**
