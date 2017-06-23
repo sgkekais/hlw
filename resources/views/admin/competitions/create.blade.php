@@ -4,15 +4,19 @@
 
     <div class="container">
         <!-- create a new competition -->
-        <h1 class="mt-4">Wettbewerb anlegen</h1>
+        <h1 class="mt-4 mb-4">Wettbewerb anlegen</h1>
 
         <form method="POST" action="{{ route('competitions.store') }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="{{ old('name', 'Hobbyliga-West') }}">
-                <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <label for="name">Name</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="{{ old('name', 'Hobbyliga-West') }}">
+                    <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
+                </div>
             </div>
             <div class="form-check">
                 <label class="form-check-label">

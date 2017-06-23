@@ -20,8 +20,6 @@ class Competition extends Model
         'name', 'published'
     ];
 
-
-
     /**
      * Relationships
      * 1. One-to-Many

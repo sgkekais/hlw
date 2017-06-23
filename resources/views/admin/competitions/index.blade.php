@@ -15,8 +15,7 @@
                 </a>
             </div>
         </div>
-
-
+        <hr>
         <!-- list all competitions -->
         <h2 class="mt-4">Angelegte Wettbewerbe <span class="badge badge-default">{{ $competitions->count() }}</span></h2>
             <table class="table table-sm table-striped table-hover">
