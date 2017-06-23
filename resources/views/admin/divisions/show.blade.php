@@ -53,33 +53,56 @@
                         <thead class="thead-default">
                         <tr>
                             <th class="">ID</th>
-                            <th class="">Name</th>
-                            <th class="">Hierarchieebene</th>
-                            <th class="">Öffentlich?</th>
+                            <th class="">Jahr</th>
+                            <th class="">Veröffentlicht?</th>
                             <th class="">Aktionen</th>
-                            <th></th>
+                            <th class="">Änderungen</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($division->divisions as $division)
+                        @foreach($division->seasons as $season)
                             <tr>
-                                <td><b>{{ $division->id }}</b></td>
-                                <td>{{ $division->name }}</td>
-                                <td>{{ $division->hierarchy_level }}</td>
-                                <td>{{ $division->published ? "Ja" : "Nein" }}</td>
+                                <td><b>{{ $season->id }}</b></td>
                                 <td>
-                                    <a class="btn btn-secondary" href="{{ route('divisions.show', $division) }}" title="Spielklasse anzeigen">
+                                    <a href="{{ route('seasons.show', $season ) }}" title="Anzeigen">
+                                        @if($season->year_begin == $season->year_end)
+                                            {{ $season->year_begin }}
+                                        @else
+                                            {{ $season->year_begin }} / {{ $season->year_end }}
+                                        @endif
+                                    </a>
+                                    <br>
+                                    <span class="text-muted">{{ $season->division->name }}</span>
+                                    <br>
+                                    Spielwochen: {{ $season->matchweeks()->get()->count() }}
+                                </td>
+                                <td>{{ $season->published ? "JA" : "NEIN" }}</td>
+                                <td>
+                                    <!-- display details -->
+                                    <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
                                         <span class="fa fa-eye"></span>
                                     </a>
-                                    <a class="btn btn-primary" href="{{ route('divisions.edit', $division) }}" title="Spielklasse bearbeiten">
+                                    <!-- edit -->
+                                    <a class="btn btn-primary" href="{{ route('seasons.edit', $season) }}" title="Saison bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
                                 </td>
                                 <td>
-
+                                    angelegt am {{ $season->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                    @if($causer = ModelHelper::causerOfAction($season,'created'))
+                                        von {{ $causer->name }}
+                                    @endif
+                                    <br>
+                                    @if($season->updated_at != $season->created_at)
+                                        geändert am {{ $season->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                        @if($causer = ModelHelper::causerOfAction($season,'updated'))
+                                            von {{ $causer->name }}
+                                        @endif
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
+                        </tbody>
                     </table>
                 @endif
             </div>

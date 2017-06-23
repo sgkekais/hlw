@@ -22,7 +22,6 @@
             <thead class="thead-default">
             <tr>
                 <th class="">ID</th>
-                <th class="">Name</th>
                 <th class="">Jahr</th>
                 <th class="">Veröffentlicht?</th>
                 <th class="">Aktionen</th>
@@ -34,18 +33,17 @@
                 <tr>
                     <td><b>{{ $season->id }}</b></td>
                     <td>
-                        <a href="{{ route('seasons.show', $season ) }}" title="Anzeigen">{{ $season->name }}</a>
+                        <a href="{{ route('seasons.show', $season ) }}" title="Anzeigen">
+                            @if($season->year_begin == $season->year_end)
+                                {{ $season->year_begin }}
+                            @else
+                                {{ $season->year_begin }} / {{ $season->year_end }}
+                            @endif
+                        </a>
                         <br>
                         <span class="text-muted">{{ $season->division->name }}</span>
                         <br>
                         Spielwochen: {{ $season->matchweeks()->get()->count() }}
-                    </td>
-                    <td>
-                        @if($season->year_begin == $season->year_end)
-                            {{ $season->year_begin }}
-                        @else
-                            {{ $season->year_begin }} / {{ $season->year_end }}
-                        @endif
                     </td>
                     <td>{{ $season->published ? "JA" : "NEIN" }}</td>
                     <td>

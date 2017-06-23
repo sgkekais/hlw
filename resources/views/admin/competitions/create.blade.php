@@ -5,7 +5,6 @@
     <div class="container">
         <!-- create a new competition -->
         <h1 class="mt-4 mb-4">Wettbewerb anlegen</h1>
-
         <form method="POST" action="{{ route('competitions.store') }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}

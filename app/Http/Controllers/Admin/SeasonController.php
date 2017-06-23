@@ -74,7 +74,10 @@ class SeasonController extends Controller
      */
     public function show(Season $season)
     {
-        //
+        // eager load matchweeks
+        $season->load('matchweeks');
+
+        return view('admin.seasons.show', compact('season'));
     }
 
     /**
