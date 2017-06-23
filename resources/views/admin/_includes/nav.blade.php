@@ -69,12 +69,24 @@
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarCollapse2">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('competitions.index') }}">Wettbewerbe</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('divisions.index') }}">Spielklassen</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('seasons.index') }}">Saisons</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('matchweeks.index') }}">Spielwochen</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('fixtures.index') }}">Paarungen</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('stadiums.index') }}">Spielorte</a></li>
+                <li class="nav-item {{ Route::is('competitions.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('competitions.index') }}">Wettbewerbe</a>
+                </li>
+                <li class="nav-item {{ Route::is('divisions.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('divisions.index') }}">Spielklassen</a>
+                </li>
+                <li class="nav-item {{ Route::is('seasons.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('seasons.index') }}">Saisons</a>
+                </li>
+                <li class="nav-item {{ Route::is('matchweeks.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('matchweeks.index') }}">Spielwochen</a>
+                </li>
+                <li class="nav-item {{ Route::is('fixtures.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('fixtures.index') }}">Paarungen</a>
+                </li>
+                <li class="nav-item {{ Route::is('stadiums.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('stadiums.index') }}">Spielorte</a>
+                </li>
             </ul>
         </div>
     </div>
