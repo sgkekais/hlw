@@ -102,13 +102,17 @@ class DivisionController extends Controller
             'hierarchy_level' => 'required' // TODO: should be unique for one competition
         ]);
 
+        // published checkbox checked?
         if($request->has('published')){
             $division->published = 1;
         }else{
             $division->published = 0;
         }
 
+        // save the published state
         $division->save();
+
+        // update the remaining changes
         $division->update($request->all());
 
         // flash success message
