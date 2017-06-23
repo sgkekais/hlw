@@ -73,7 +73,10 @@ class DivisionController extends Controller
      */
     public function show(Division $division)
     {
-        //
+        // eager load divisions
+        $division->load('seasons');
+
+        return view('admin.divisions.show', compact('division'));
     }
 
     /**

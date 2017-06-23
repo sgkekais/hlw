@@ -40,14 +40,14 @@
         </div>
         <!-- show division details -->
         <h3 class="mt-4">
-            Zugeordnete Spielklassen
-            <span class="badge badge-default">{{ $division->divisions->count() }}</span>
+            Zugeordnete Saisons
+            <span class="badge badge-default">{{ $division->seasons->count() }}</span>
         </h3>
         <div class="row">
             <div class="col-md-12">
-                @if($division->divisions->count() == 0)
+                @if($division->seasons->count() == 0)
                     <br>
-                    <i>Keine Spielklassen zugeordnet</i>
+                    <i>Keine Saisons zugeordnet</i>
                 @else
                     <table class="table table-sm table-striped table-hover">
                         <thead class="thead-default">
@@ -83,6 +83,6 @@
                     </table>
                 @endif
             </div>
-        </div> <!-- ./assigned divisions -->
+        </div> <!-- ./assigned seasons -->
     </div>
 @endsection
