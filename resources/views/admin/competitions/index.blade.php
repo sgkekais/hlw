@@ -47,14 +47,14 @@
                             <a class="btn btn-primary" href="{{ route('competitions.edit', $competition) }}" title="Wettbewerb bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                             </a>
-                            <!-- delete -->
+                            <!-- delete
                             <a class="btn btn-danger" href="{{ route('competitions.destroy', $competition->id) }}" title="Wettbewerb löschen" onclick="event.preventDefault(); document.getElementById('delete-form{{ $competition->id }}').submit();">
                                 <span class="fa fa-trash"></span>
                             </a>
                             <form id="delete-form{{ $competition->id }}" action="{{ route('competitions.destroy', $competition->id) }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
-                            </form>
+                            </form>-->
                         </td>
                         <td>
                             angelegt am {{ $competition->created_at->format('d.m.Y \\u\\m H:i') }} Uhr

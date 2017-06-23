@@ -20,44 +20,7 @@ class Competition extends Model
         'name', 'published'
     ];
 
-    /* replaced by helper function
-    **
-     * @return User created_by
-     *
-    public function createdBy(){
-        $created_by = Activity::where([
-            ['description', 'created'],
-            ['subject_id', $this->id],
-            ['subject_type', 'App\Competition']
-        ])->orderBy('created_at','desc')->first();
 
-        // did we find a log entry?
-        if($created_by){
-            // then return the user
-            return $created_by->causer;
-        }else{
-            // else return null
-            return $created_by;
-        }
-    }
-
-    public function changedBy(){
-        $changed_by = Activity::where([
-            ['description', 'updated'],
-            ['subject_id', $this->id],
-            ['subject_type', 'App\Competition']
-        ])->orderBy('updated_at','desc')->first();
-
-        // did we find a log entry?
-        if($changed_by){
-            // then return the user
-            return $changed_by->causer;
-        }else{
-            // else return null
-            return $changed_by;
-        }
-    }
-    */
 
     /**
      * Relationships

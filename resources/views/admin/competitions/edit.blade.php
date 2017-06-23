@@ -4,8 +4,22 @@
 
     <div class="container">
         <!-- create a new competition -->
-        <h1 class="mt-4">Wettbewerb anlegen</h1>
-
+        <h1 class="mt-4">Wettbewerb</h1>
+        <h2 class="mt-4 text-primary">&mdash; {{ $competition->name }}</h2>
+        <!-- created at -->
+        Angelegt: {{ $competition->created_at->format('d.m.Y H:i') }} Uhr
+        @if($causer = ModelHelper::causerOfAction($competition,'created'))
+            von {{ $causer->name }}
+        @endif
+        <br>
+        <!-- updated at -->
+        @if($competition->updated_at != $competition->created_at)
+            Geändert: {{ $competition->updated_at->format('d.m.Y H:i') }} Uhr
+            @if($causer = ModelHelper::causerOfAction($competition,'updated'))
+                von {{ $causer->name }}
+            @endif
+        @endif
+        <h3 class="mt-4">Wettbewerb ändern</h3>
         <form method="POST" action="{{ route('competitions.update', $competition) }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
@@ -25,6 +39,17 @@
             <button type="submit" class="btn btn-primary">Ändern</button>
             <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>
         </form>
+        <h3 class="mt-4">Wettbewerb löschen</h3>
+        <form method="POST" action="{{ route('competitions.destroy', $competition) }}">
+            <!-- protection against CSRF (cross-site request forgery) attacks-->
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <span class="form-text">Löscht den Wettbewerb und <b>alle zugeordneten Objekte <span class="text-danger">unwiderruflich</span></b>.</span>
+            <br>
+            <button type="submit" class="btn btn-danger">Löschen</button>
+            <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>
+        </form>
+
     </div>
 
 @endsection
