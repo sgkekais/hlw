@@ -15,7 +15,9 @@ class ClubController extends Controller
      */
     public function index()
     {
-        //
+        $clubs = Club::all();
+
+        return view('admin.clubs.index',compact('clubs'));
     }
 
     /**
