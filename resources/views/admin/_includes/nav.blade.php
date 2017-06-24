@@ -33,6 +33,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdown02">
                         <a class="dropdown-item {{ Route::is('clubs.*') ? 'active' : null }}" href="{{ route('clubs.index') }}">Mannschaften</a>
                         <a class="dropdown-item {{ Route::is('players.*') ? 'active' : null }}" href="{{ route('players.index') }}">Spieler</a>
+                        <a class="dropdown-item {{ Route::is('positions.*') ? 'active' : null }}" href="{{ route('positions.index') }}">Positionen</a>
                         <a class="dropdown-item {{ Route::is('referees.*') ? 'active' : null }}" href="{{ route('referees.index') }}">Schiedsrichter</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item {{ Route::is('people.*') ? 'active' : null }}" href="{{ route('people.index') }}">Personen</a>
