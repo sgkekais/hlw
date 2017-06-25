@@ -95,8 +95,21 @@
                 <li class="nav-item {{ Route::is('fixtures.*') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('fixtures.index') }}">Paarungen</a>
                 </li>
+                <li class="nav-item nav-divider"></li>
                 <li class="nav-item {{ Route::is('stadiums.*') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('stadiums.index') }}">Spielorte</a>
+                </li>
+                <li class="nav-item {{ Route::is('clubs.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('clubs.index') }}">Mannschaften</a>
+                </li>
+                <li class="nav-item {{ Route::is('players.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('players.index') }}">Spieler</a>
+                </li>
+                <li class="nav-item {{ Route::is('positions.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('positions.index') }}">Positionen</a>
+                </li>
+                <li class="nav-item {{ Route::is('people.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('people.index') }}">Personen</a>
                 </li>
             </ul>
         </div>
