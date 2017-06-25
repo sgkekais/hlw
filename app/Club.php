@@ -3,9 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Club extends Model
 {
+    use LogsActivity;
+
+    // log attributes
+    protected static $logAttributes = [
+        'name', 'name_short', 'name_code',
+        'logo_url',
+        'founded', 'league_entry', 'league_exit',
+        'colours_club', 'colours_kit',
+        'website', 'facebook',
+        'note', 'is_real_club', 'published'
+    ];
+
     // mass assignable fields
     protected $fillable = [
         'name', 'name_short', 'name_code',
@@ -13,7 +26,7 @@ class Club extends Model
         'founded', 'league_entry', 'league_exit',
         'colours_club', 'colours_kit',
         'website', 'facebook',
-        'note'
+        'note', 'is_real_club', 'published'
     ];
 
     /**
