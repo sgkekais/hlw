@@ -107,7 +107,25 @@ class ClubController extends Controller
      */
     public function update(Request $request, Club $club)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2',
+            'name_short' => 'nullable|min:2',
+            'name_code' => 'nullable|min:2',
+            'founded' => 'nullable|date',
+            'league_entry' => 'nullable|date',
+            'league_exit' => 'nullable|date',
+            'website' => 'nullable|url',
+            'facebook' => 'nullable|url'
+        ]);
+
+        // save the remaining changes
+        $club->update($request->all());
+
+        // flash success message and return club name as test
+        Session::flash('success', 'Mannschaft '.$club->name.' erfolgreich geändert.');
+
+        // return to index
+        return redirect()->route('clubs.index');
     }
 
     /**
