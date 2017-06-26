@@ -39,7 +39,7 @@
             </div>
         </div>
         <hr>
-        <h3 class="mt-4">Zuordnungen</h3>
+        <h3 class="mt-4 mb-4">Zuordnungen</h3>
         <!-- show club tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
@@ -61,9 +61,13 @@
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
                 Kader (aktiv + ehemalige)
+                <br>
+                Aktiv: {{ $club->players()->whereNull('sign_off')->count() }}
+                Ehemalige: {{ $club->players()->whereNotNull('sign_off')->count() }}
             </div>
             <div class="tab-pane" id="stadiums" role="tabpanel">
-                Spielort(e)
+                Spielort(e): {{ $club->stadiums->count() }}
+
             </div>
         </div>
     </div>
