@@ -134,23 +134,29 @@
                     <small id="noteHelp" class="form-text text-muted">Interne Notiz</small>
                 </div>
             </div>
-            <!-- real club -->
-            <div class="form-group">
-                <label for="is_real_club">"Echter" Verein?</label>
-                <select class="form-control" id="is_real_club" name="is_real_club" aria-describedby="is_real_clubHelp">
-                    <option value="0">Nein</option>
-                    <option value="1" {{ $club->is_real_club ? "selected" : null }}>Ja</option>
-                </select>
-                <small id="is_real_clubHelp" class="form-text text-muted">Setzen für echte, eingetragene Vereine, wie bspw. DjK TuSA 06 e.V.</small>
-            </div>
-            <!-- published -->
-            <div class="form-group">
-                <label for="published">Veröffentlichen?</label>
-                <select class="form-control" id="published" name="published" aria-describedby="publishedHelp">
+            <div class="form-group row">
+                <!-- real club -->
+                <div class="col-md-2">
+                    <label for="is_real_club">"Echter" Verein?</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control" id="is_real_club" name="is_real_club" aria-describedby="is_real_clubHelp">
+                        <option value="0">Nein</option>
+                        <option value="1" {{ $club->is_real_club ? "selected" : null }}>Ja</option>
+                    </select>
+                    <small id="is_real_clubHelp" class="form-text text-muted">Setzen für echte, eingetragene Vereine, wie bspw. DjK TuSA 06 e.V.</small>
+                </div>
+                <!-- published -->
+                <div class="col-md-2">
+                    <label for="published">Veröffentlichen?</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control" id="published" name="published" aria-describedby="publishedHelp">
                     <option value="0">Nein</option>
                     <option value="1" {{ $club->published ? "selected" : null }}>Ja</option>
-                </select>
-                <small id="publishedHelp" class="form-text text-muted">Verein auf Seite veröffentlichen?</small>
+                    </select>
+                    <small id="publishedHelp" class="form-text text-muted">Verein auf Seite veröffentlichen?</small>
+                </div>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Ändern</button>
@@ -158,12 +164,12 @@
             </div>
         </form>
         <hr>
-        <h3 class="mt-4">Spielklasse löschen</h3>
+        <h3 class="mt-4">Verein löschen</h3>
         <form method="POST" action="{{ route('clubs.destroy', $club) }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
-            <span class="form-text">Löscht die Spielklasse und <b>alle zugeordneten Objekte <span class="text-danger">unwiderruflich</span></b>.</span>
+            <span class="form-text">Löscht den Verein und <b>alle zugeordneten Objekte <span class="text-danger">unwiderruflich</span></b>.</span>
             <br>
             <button type="submit" class="btn btn-danger">Löschen</button>
             <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>

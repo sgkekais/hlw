@@ -136,6 +136,16 @@ class ClubController extends Controller
      */
     public function destroy(Club $club)
     {
-        //
+        $name = $club->name;
+        $id = $club->id;
+
+        // delete the model
+        $club->delete();
+
+        // flash message
+        Session::flash('success', 'Mannschaft '.$name.' mit der ID '.$id.' gelöscht.');
+
+        // return to index
+        return redirect()->route('clubs.index');
     }
 }
