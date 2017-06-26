@@ -46,13 +46,6 @@ class CompetitionController extends Controller
         // create a new object
         $competition = new Competition($request->all());
 
-        // published checkbox set?
-        if($request->has('published')){
-            $competition->published = 1;
-        }else{
-            $competition->published = 0;
-        }
-
         // store the new object
         $competition->save();
 
@@ -102,17 +95,8 @@ class CompetitionController extends Controller
             'name' => 'required|min:4'
         ]);
 
-        $competition->name = $request->name;
-
-        // published checkbox set?
-        if($request->has('published')){
-            $competition->published = 1;
-        }else{
-            $competition->published = 0;
-        }
-
         // update the model
-        $competition->save();
+        $competition->update($request->all());
 
         // flash success message
         Session::flash('success', 'Wettbewerb '.$competition->name.' erfolgreich geändert.');

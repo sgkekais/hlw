@@ -53,19 +53,6 @@ class ClubController extends Controller
         // create a new object
         $club = new Club($request->all());
 
-        // real club checkbox set?
-        if($request->has('is_real_club')){
-            $club->is_real_club = 1;
-        }else{
-            $club->is_real_club = 0;
-        }
-        // published checkbox set?
-        if($request->has('published')){
-            $club->published = 1;
-        }else{
-            $club->published = 0;
-        }
-
         // save the club
         $club->save();
 

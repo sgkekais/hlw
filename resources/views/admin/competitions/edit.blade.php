@@ -34,12 +34,18 @@
                     <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
                 </div>
             </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="published" id="published" aria-describedby="publishHelp" {{ $competition->published ? "checked" : "" }}>
-                    Veröffentlichen
-                    <small id="publishHelp" class="form-text text-muted">Wettbewerb veröffentlichen?</small>
-                </label>
+            <!-- published -->
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <label for="published">Veröffentlichen?</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control" id="published" name="published" aria-describedby="publishedHelp">
+                        <option value="0">Nein</option>
+                        <option value="1" {{ $competition->published ? "selected" : null }}>Ja</option>
+                    </select>
+                    <small id="publishedHelp" class="form-text text-muted">Verein auf Seite veröffentlichen?</small>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Ändern</button>
             <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>

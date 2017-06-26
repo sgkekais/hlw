@@ -118,21 +118,29 @@
                     <small id="noteHelp" class="form-text text-muted">Interne Notiz</small>
                 </div>
             </div>
-            <!-- real club -->
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="is_real_club" id="is_real_club" aria-describedby="is_real_clubHelp">
-                    "Echter" Verein?
+            <div class="form-group row">
+                <!-- real club -->
+                <div class="col-md-2">
+                    <label for="is_real_club">"Echter" Verein?</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control" id="is_real_club" name="is_real_club" aria-describedby="is_real_clubHelp">
+                        <option value="0">Nein</option>
+                        <option value="1">Ja</option>
+                    </select>
                     <small id="is_real_clubHelp" class="form-text text-muted">Setzen für echte, eingetragene Vereine, wie bspw. DjK TuSA 06 e.V.</small>
-                </label>
-            </div>
-            <!-- published -->
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="published" id="published" aria-describedby="pubishHelp">
-                    Veröffentlichen
-                    <small id="publishHelp" class="form-text text-muted">Verein veröffentlichen?</small>
-                </label>
+                </div>
+                <!-- published -->
+                <div class="col-md-2">
+                    <label for="published">Veröffentlichen?</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control" id="published" name="published" aria-describedby="publishedHelp">
+                        <option value="0">Nein</option>
+                        <option value="1">Ja</option>
+                    </select>
+                    <small id="publishedHelp" class="form-text text-muted">Verein auf Seite veröffentlichen?</small>
+                </div>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Anlegen</button>
