@@ -40,11 +40,11 @@ class Club extends Model
     }
 
     public function seasons(){
-        return $this->belongsToMany(Season::class); // TODO: CHECK
+        return $this->belongsToMany(Season::class, 'clubs_seasons'); // TODO: CHECK
     }
 
     public function stadiums(){
-        return $this->belongsToMany(Stadium::class); // TODO: CHECK
+        return $this->belongsToMany(Stadium::class, 'clubs_stadiums'); // TODO: CHECK
     }
 
     // TODO: more relationships, e.g. fixtures (home, away, all, create function in controller that uses relationship in combination with year)
