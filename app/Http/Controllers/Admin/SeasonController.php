@@ -94,8 +94,8 @@ class SeasonController extends Controller
     public function update(Request $request, Season $season)
     {
         $this->validate($request, [
-            'name' => 'required|min:2',
-            'hierarchy_level' => 'required' // TODO
+            'year_begin' => 'required|digits:4',
+            'year_end' => 'required|digits:4|after_or_equal:year_begin',
         ]);
 
         // update the season

@@ -54,10 +54,11 @@
                     <label for="year_end"> &dash; bis</label>
                 </div>
                 <div class="col-md-2">
-                    <input type="number" class="form-control" name="year_begin" id="year_begin" value="{{ $season->year_begin }}" placeholder="{{ old('year_begin', date('Y')) }}">
+                    <input type="number" class="form-control" name="year_begin" id="year_begin" aria-describedby="year_beginHelp" value="{{ $season->year_begin }}">
+                    <small id="year_beginHelp" class="form-text text-muted">JJJJ</small>
                 </div>
                 <div class="col-md-2">
-                    <input type="number" class="form-control" name="year_end" id="year_end" value="{{ $season->year_end }}" placeholder="{{ old('year_end', date('Y')) }}">
+                    <input type="number" class="form-control" name="year_end" id="year_end" value="{{ $season->year_end }}">
                 </div>
             </div>
             <!-- season nr -->
@@ -66,7 +67,7 @@
                     <label for="season_nr">Saison Nr.</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="number" class="form-control" name="season_nr" id="season_nr" aria-describedby="season_nrHelp" value="{{ $season->season_nr }}" placeholder="{{ old('season_nr', '1') }}">
+                    <input type="number" class="form-control" name="season_nr" id="season_nr" aria-describedby="season_nrHelp" value="{{ $season->season_nr }}">
                     <small id="season_nrHelp" class="form-text text-muted">Spielzeit, bspw. 24. Es wird automatisch die nächsthöchste festgelegt.</small>
                 </div>
             </div>
