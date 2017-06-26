@@ -49,13 +49,6 @@ class SeasonController extends Controller
         // create a new object
         $season = new Season($request->all());
 
-        // published checkbox set?
-        if($request->has('published')){
-            $season->published = 1;
-        }else{
-            $season->published = 0;
-        }
-
         // save the season
         $season->save();
 
@@ -100,7 +93,19 @@ class SeasonController extends Controller
      */
     public function update(Request $request, Season $season)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2',
+            'hierarchy_level' => 'required' // TODO
+        ]);
+
+        // update the season
+        $season->update($request->all());
+
+        // flash success message and return competition name as test
+        Session::flash('success', 'Saison '.$season->year_begin.' / '.$season->year_end.' erfolgreich geändert.');
+
+        // return to index
+        return redirect()->route('seasons.index');
     }
 
     /**

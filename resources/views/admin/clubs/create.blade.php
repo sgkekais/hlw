@@ -74,7 +74,9 @@
                     <small id="league_exitHelp" class="form-text text-muted">Austrittsdatum</small>
                 </div>
             </div>
-            <!-- colors -->
+            <!-- colors
+                TODO: change to a primary and a secondary color for club and kit
+            -->
             <div class="form-group row">
                 <div class="col-md-2">
                     <label for="colours_club">Vereinsfarbe</label>

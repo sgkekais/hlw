@@ -128,12 +128,17 @@
                 </div>
             </div>
             <!-- published -->
-            <div class="form-check">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="published" id="published" aria-describedby="pubishHelp">
-                    Veröffentlichen
-                    <small id="publishHelp" class="form-text text-muted">Spielklasse veröffentlichen?</small>
-                </label>
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <label for="published">Veröffentlichen?</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-control" id="published" name="published" aria-describedby="publishedHelp">
+                        <option value="0">Nein</option>
+                        <option value="1">Ja</option>
+                    </select>
+                    <small id="publishedHelp" class="form-text text-muted">Saison auf Seite veröffentlichen?</small>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Anlegen</button>
             <a class="btn btn-secondary" href="{{ route('seasons.index') }}">Abbrechen</a>
