@@ -27,7 +27,7 @@
                         <option value="0">Nein</option>
                         <option value="1">Ja</option>
                     </select>
-                    <small id="publishedHelp" class="form-text text-muted">Verein auf Seite veröffentlichen?</small>
+                    <small id="publishedHelp" class="form-text text-muted">Wettbewerb auf Seite veröffentlichen?</small>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Anlegen</button>
