@@ -168,7 +168,17 @@
             <button type="submit" class="btn btn-primary">Ändern</button>
             <a class="btn btn-secondary" href="{{ route('seasons.index') }}">Abbrechen</a>
         </form>
-
+        <hr>
+        <h3 class="mt-4">Saison löschen</h3>
+        <form method="POST" action="{{ route('seasons.destroy', $season) }}">
+            <!-- protection against CSRF (cross-site request forgery) attacks-->
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <span class="form-text">Löscht die Saison und <b>alle zugeordneten Objekte <span class="text-danger">unwiderruflich</span></b>.</span>
+            <br>
+            <button type="submit" class="btn btn-danger">Löschen</button>
+            <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>
+        </form>
     </div>
 
 @endsection
