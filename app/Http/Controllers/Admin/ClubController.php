@@ -45,7 +45,7 @@ class ClubController extends Controller
             'name_code' => 'nullable|min:2',
             'founded' => 'nullable|date',
             'league_entry' => 'nullable|date',
-            'league_exit' => 'nullable|date',
+            'league_exit' => 'nullable|date|after_or_equal:league_entry',
             'website' => 'nullable|url',
             'facebook' => 'nullable|url'
         ]);
@@ -71,7 +71,7 @@ class ClubController extends Controller
      */
     public function show(Club $club)
     {
-        //
+        return view('admin.clubs.show', compact('club'));
     }
 
     /**
@@ -100,7 +100,7 @@ class ClubController extends Controller
             'name_code' => 'nullable|min:2',
             'founded' => 'nullable|date',
             'league_entry' => 'nullable|date',
-            'league_exit' => 'nullable|date',
+            'league_exit' => 'nullable|date|after_or_equal:league_entry',
             'website' => 'nullable|url',
             'facebook' => 'nullable|url'
         ]);
