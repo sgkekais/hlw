@@ -60,13 +60,17 @@
                 + jeweilige Paarungen
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
-                <a class="btn btn-primary mb-4" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
-                    <span class="fa fa-pencil"></span> Spieler zuordnen
-                </a>
-                Kader (aktiv + ehemalige)
-                <br>
-                Aktiv: {{ $club->players()->whereNull('sign_off')->count() }}
-                Ehemalige: {{ $club->players()->whereNotNull('sign_off')->count() }}
+                <div class="row mt-4 ml-0 mr-0">
+                    <a class="btn btn-primary mb-4" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
+                        <span class="fa fa-pencil"></span> Spieler zuordnen
+                    </a>
+                </div>
+                <div class="row ml-0 mr-0">
+                    Kader (aktiv + ehemalige)
+                    <br>
+                    Aktiv: {{ $club->players()->whereNull('sign_off')->count() }}
+                    Ehemalige: {{ $club->players()->whereNotNull('sign_off')->count() }}
+                </div>
             </div>
             <div class="tab-pane" id="stadiums" role="tabpanel">
                 Spielort(e): {{ $club->stadiums->count() }}

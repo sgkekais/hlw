@@ -23,6 +23,7 @@
                 <tr>
                     <th class="">ID</th>
                     <th class="">Name</th>
+                    <th class="">Echter Verein?</th>
                     <th class="">Veröffentlicht?</th>
                     <th class="">Aktionen</th>
                     <th class="">Änderungen</th>
@@ -36,6 +37,7 @@
                             <a href="{{ route('clubs.show', $club ) }}" title="Anzeigen">{{ $club->name }}</a>
                             <br>Spieler: {{ $club->players()->get()->count() }}
                         </td>
+                        <td>{{ $club->is_real_club ? "JA" : null }}</td>
                         <td>{{ $club->published ? "JA" : "NEIN" }}</td>
                         <td>
                             <!-- display details -->
