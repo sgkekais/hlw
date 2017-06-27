@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Person;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class PersonController extends Controller
 {
@@ -27,7 +28,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.people.create');
     }
 
     /**
@@ -38,7 +39,19 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required|min:2',
+            'last_name' => 'required|min:2',
+            'date_of_birth' => 'nullable|date'
+        ]);
+
+        $person = new Person($request->all());
+
+        $person->save();
+
+        Session::flash('success','Person '.$person->first_name." ".$person->last_name." erfolgreich mit der ID ".$person->id." angelegt.");
+
+        return redirect()->route('people.index');
     }
 
     /**

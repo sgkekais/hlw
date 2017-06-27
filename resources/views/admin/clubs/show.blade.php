@@ -60,6 +60,9 @@
                 + jeweilige Paarungen
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
+                <a class="btn btn-primary mb-4" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
+                    <span class="fa fa-pencil"></span> Spieler zuordnen
+                </a>
                 Kader (aktiv + ehemalige)
                 <br>
                 Aktiv: {{ $club->players()->whereNull('sign_off')->count() }}
