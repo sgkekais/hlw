@@ -35,8 +35,28 @@ class Person extends Model
         'date_of_birth'
     ];
 
+    /**
+     * A person can be one or many players at one or more clubs
+     * A player is always one specific person
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function players(){
         return $this->hasMany(Player::class);
     }
 
+    /**
+     * Same as players relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function referees(){
+        return $this->hasMany(Referee::class);
+    }
+
+    /**
+     * Same as players relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contacts(){
+        return $this->hasMany(Contact::class);
+    }
 }
