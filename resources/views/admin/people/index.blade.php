@@ -22,9 +22,10 @@
                 <thead class="thead-default">
                 <tr>
                     <th class="">ID</th>
-                    <th class="">Nachname</th>
-                    <th class="">Vorname</th>
-                    <th class="">Veröffentlicht?</th>
+                    <th class="">Nachname, Vorname</th>
+                    <th class="">Geb.datum</th>
+                    <th class="">Foto</th>
+                    <th class="">Vereinsspieler</th>
                     <th class="">Aktionen</th>
                     <th class="">Änderungen</th>
                 </tr>
@@ -34,17 +35,17 @@
                     <tr>
                         <td><b>{{ $person->id }}</b></td>
                         <td>
-                            <a href="{{ route('people.show', $person ) }}" title="Anzeigen">{{ $person->name }}</a>
+                            <a href="{{ route('people.show', $person ) }}" title="Anzeigen">{{ $person->last_name }}, {{ $person->first_name }}</a>
                             <br>Ist Spieler: {{ $person->players()->get()->count() }}
                         </td>
-                        <td>{{ $person->published ? "JA" : "NEIN" }}</td>
+                        <td>{{ $person->date_of_birth->format('d.m.Y') }}</td>
                         <td>
                             <!-- display details -->
-                            <a class="btn btn-secondary" href="{{ route('people.show', $person) }}" title="Mannschaft anzeigen">
+                            <a class="btn btn-secondary" href="{{ route('people.show', $person) }}" title="Person anzeigen">
                                 <span class="fa fa-eye"></span>
                             </a>
                             <!-- edit -->
-                            <a class="btn btn-primary" href="{{ route('people.edit', $person) }}" title="Mannschaft bearbeiten">
+                            <a class="btn btn-primary" href="{{ route('people.edit', $person) }}" title="Person bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                             </a>
                         </td>

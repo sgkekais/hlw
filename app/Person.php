@@ -9,16 +9,30 @@ class Person extends Model
 {
     use LogsActivity;
 
-    // log attributes
+    /**
+     * The attributes that should be logged.
+     * @var array
+     */
     protected static $logAttributes = [
         'first_name', 'last_name',
         'date_of_birth', 'photo', 'registered_at_club'
     ];
 
-    // Mass assignable fields
+    /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
     protected $fillable = [
         'first_name', 'last_name',
         'date_of_birth', 'photo', 'registered_at_club'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     * @var array
+     */
+    protected $dates = [
+        'date_of_birth'
     ];
 
     public function players(){
