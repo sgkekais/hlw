@@ -71,7 +71,11 @@ class ClubController extends Controller
      */
     public function show(Club $club)
     {
-        return view('admin.clubs.show', compact('club'));
+        // eager load active and inactive players
+        $players_active   = $club->players()->whereNull('sign_off')->get();
+        $players_inactive = $club->players()->whereNotNull('sign_off')->get();
+
+        return view('admin.clubs.show', compact('club','players_active','players_inactive'));
     }
 
     /**

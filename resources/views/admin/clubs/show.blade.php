@@ -60,17 +60,96 @@
                 + jeweilige Paarungen
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
-                <div class="row mt-4 ml-0 mr-0">
-                    <a class="btn btn-primary mb-4" href="{{ route('players.create') }}" title="Spieler zuordnen">
-                        <span class="fa fa-pencil"></span> Spieler zuordnen
-                    </a>
-                </div>
-                <div class="row ml-0 mr-0">
-                    Kader (aktiv + ehemalige)
-                    <br>
-                    Aktiv: {{ $club->players()->whereNull('sign_off')->count() }}
-                    Ehemalige: {{ $club->players()->whereNotNull('sign_off')->count() }}
-                </div>
+                <h4 class="mb-4 mt-4">Aktive  <span class="badge badge-default">{{ $players_active->count() }}</span></h4>
+                <a class="btn btn-primary mb-4" href="{{ route('players.create') }}" title="Spieler zuordnen">
+                    <span class="fa fa-pencil"></span> Spieler zuordnen
+                </a>
+                <table class="table table-sm table-striped table-hover">
+                    <thead class="thead-default">
+                    <tr>
+                        <th class="">ID</th>
+                        <th class="">Nachname, Vorname</th>
+                        <th class="">Anmeldung</th>
+                        <th class="">Nummer</th>
+                        <th class="">Position</th>
+                        <th class="">Aktionen</th>
+                        <th class="">Änderungen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($players_active as $p_active)
+                        <tr>
+                            <td>{{ $p_active->id }}</td>
+                            <td>{{ $p_active->person->last_name }}, {{ $p_active->person->first_name }}</td>
+                            <td>{{ $p_active->sign_on->format('d.m.Y') }}</td>
+                            <td>{{ $p_active->number }}</td>
+                            <td>{{ $p_active->position_id }}</td>
+                            <td>
+                                <!-- edit -->
+                                <a class="btn btn-primary" href="{{ route('players.edit', $p_active) }}" title="Spieler bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                angelegt am {{ $p_active->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                @if($causer = ModelHelper::causerOfAction($p_active,'created'))
+                                    von {{ $causer->name }}
+                                @endif
+                                <br>
+                                @if($p_active->updated_at != $p_active->created_at)
+                                    geändert am {{ $p_active->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                    @if($causer = ModelHelper::causerOfAction($p_active,'updated'))
+                                        von {{ $causer->name }}
+                                    @endif
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <hr>
+                <h4 class="mb-4 mt-4">Ehemalige  <span class="badge badge-default">{{ $club->players()->whereNotNull('sign_off')->count() }}</span></h4>
+                <table class="table table-sm table-striped table-hover">
+                    <thead class="thead-default">
+                    <tr>
+                        <th class="">ID</th>
+                        <th class="">Nachname, Vorname</th>
+                        <th class="">Anmeldung</th>
+                        <th class="">Abmeldung</th>
+                        <th class="">Aktionen</th>
+                        <th class="">Änderungen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($players_inactive as $p_inactive)
+                        <tr>
+                            <td>{{ $p_inactive->id }}</td>
+                            <td>{{ $p_inactive->person->last_name }}, {{ $p_inactive->person->first_name }}</td>
+                            <td>{{ $p_inactive->sign_on->format('d.m.Y') }}</td>
+                            <td>{{ $p_inactive->sign_off->format('d.m.Y') }}</td>
+                            <td>
+                                <!-- edit -->
+                                <a class="btn btn-primary" href="{{ route('players.edit', $p_inactive) }}" title="Spieler bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                angelegt am {{ $p_inactive->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                @if($causer = ModelHelper::causerOfAction($p_inactive,'created'))
+                                    von {{ $causer->name }}
+                                @endif
+                                <br>
+                                @if($p_inactive->updated_at != $p_inactive->created_at)
+                                    geändert am {{ $p_inactive->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                    @if($causer = ModelHelper::causerOfAction($p_inactive,'updated'))
+                                        von {{ $causer->name }}
+                                    @endif
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
             <div class="tab-pane" id="stadiums" role="tabpanel">
                 Spielort(e): {{ $club->stadiums->count() }}
