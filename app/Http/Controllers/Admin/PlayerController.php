@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Player;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class PlayerController extends Controller
 {
@@ -15,7 +16,8 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        //
+        // TODO
+        // return view('admin.players.index');
     }
 
     /**
@@ -25,7 +27,9 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        // TODO: persons, clubs und positions schon mitgeben und nicht in view machen
+
+        return view('admin.players.create');
     }
 
     /**
@@ -36,7 +40,18 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'sign_on'  => 'required|date',
+            'sign_off' => 'nullable|date|after_or_equal:sign_on'
+        ]);
+
+        $player = new Player($request->all());
+
+        $player->save();
+
+        Session::flash('success','Spieler erfolgreich angelegt.');
+
+        return redirect()->route('clubs.show', $player->club());
     }
 
     /**

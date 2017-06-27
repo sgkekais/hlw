@@ -14,8 +14,9 @@ class Player extends Model
      * @var array
      */
     protected static $logAttributes = [
+        'person_id', 'club_id',
         'sign_on', 'sign_off',
-        'number'
+        'number', 'position_id'
     ];
 
     /**
@@ -23,8 +24,17 @@ class Player extends Model
      * @var array
      */
     protected $fillable = [
+        'person_id', 'club_id',
         'sign_on', 'sign_off',
-        'number'
+        'number', 'position_id'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     * @var array
+     */
+    protected $dates = [
+        'sign_on', 'sign_off'
     ];
 
     /**

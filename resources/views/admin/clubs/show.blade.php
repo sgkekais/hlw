@@ -61,7 +61,7 @@
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
                 <div class="row mt-4 ml-0 mr-0">
-                    <a class="btn btn-primary mb-4" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
+                    <a class="btn btn-primary mb-4" href="{{ route('players.create') }}" title="Spieler zuordnen">
                         <span class="fa fa-pencil"></span> Spieler zuordnen
                     </a>
                 </div>

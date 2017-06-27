@@ -20,7 +20,7 @@ class CreatePlayersTable extends Migration
             $table->date('sign_on');                    // signed with club
             $table->date('sign_off')->nullable();       // left club
             $table->string('number')->nullable();       // jersey / team number, string because there can be crazy stuff in sunday / hobby leagues
-            $table->integer('positions_id')->unsigned()->nullable();    // relation with position, enables only one position
+            $table->integer('position_id')->unsigned()->nullable();    // relation with position, enables only one position
 
             $table->timestamps();
 
