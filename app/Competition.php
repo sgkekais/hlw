@@ -10,12 +10,18 @@ class Competition extends Model
 {
     use LogsActivity;
 
-    // log attributes
+    /**
+     * The attributes that should be logged.
+     * @var array
+     */
     protected static $logAttributes = [
         'name', 'published'
     ];
 
-    // Mass assignable fields
+    /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
     protected $fillable = [
         'name', 'published'
     ];

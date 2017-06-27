@@ -22,7 +22,10 @@ class Season extends Model
         'published'
     ];
 
-    // mass assignable fields
+    /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
     protected $fillable = [
         'division_id',
         'year_begin', 'year_end',

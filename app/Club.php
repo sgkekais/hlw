@@ -9,7 +9,10 @@ class Club extends Model
 {
     use LogsActivity;
 
-    // log attributes
+    /**
+     * The attributes that should be logged.
+     * @var array
+     */
     protected static $logAttributes = [
         'name', 'name_short', 'name_code',
         'logo_url',
@@ -19,7 +22,10 @@ class Club extends Model
         'note', 'is_real_club', 'published'
     ];
 
-    // mass assignable fields
+    /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
     protected $fillable = [
         'name', 'name_short', 'name_code',
         'logo_url',
