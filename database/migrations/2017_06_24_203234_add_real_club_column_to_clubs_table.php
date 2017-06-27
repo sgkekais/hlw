@@ -15,7 +15,7 @@ class AddRealClubColumnToClubsTable extends Migration
     {
         Schema::table('clubs', function (Blueprint $table) {
             // add a "real club" column to indicate real clubs
-            $table->boolean('is_real_club')->default('0');
+            $table->boolean('is_real_club')->default('0')->after('note');
         });
     }
 
