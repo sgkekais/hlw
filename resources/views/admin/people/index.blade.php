@@ -17,7 +17,7 @@
         </div>
         <hr>
         <!-- list all people -->
-        <h2 class="mt-4">Angelegte Personen<span class="badge badge-default">{{ $people->count() }}</span></h2>
+        <h2 class="mt-4">Angelegte Personen <span class="badge badge-default">{{ $people->count() }}</span></h2>
             <table class="table table-sm table-striped table-hover">
                 <thead class="thead-default">
                 <tr>
@@ -39,6 +39,8 @@
                             <br>Ist Spieler: {{ $person->players()->get()->count() }}
                         </td>
                         <td>{{ $person->date_of_birth->format('d.m.Y') }}</td>
+                        <td>{{ $person->photo ? "X" : null }}</td>
+                        <td>{{ $person->registered_at_club ? "X" : null }}</td>
                         <td>
                             <!-- display details -->
                             <a class="btn btn-secondary" href="{{ route('people.show', $person) }}" title="Person anzeigen">
