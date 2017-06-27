@@ -15,7 +15,9 @@ class PersonController extends Controller
      */
     public function index()
     {
-        //
+        $people = Person::all();
+
+        return view('admin.people.index', compact('people'));
     }
 
     /**
