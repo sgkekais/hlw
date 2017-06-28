@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Person;
 use App\Player;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -73,7 +74,9 @@ class PlayerController extends Controller
      */
     public function edit(Player $player)
     {
-        //
+        $people = Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get();
+
+        return view('admin.players.edit', compact('player', 'people'));
     }
 
     /**
@@ -85,7 +88,16 @@ class PlayerController extends Controller
      */
     public function update(Request $request, Player $player)
     {
-        //
+        $this->validate($request,[
+            'sign_on'  => 'required|date',
+            'sign_off' => 'nullable|date|after_or_equal:sign_on'
+        ]);
+
+        $player->update($request->all());
+
+        Session::flash('success','Spieler erfolgreich geändert.');
+
+        return redirect()->back();
     }
 
     /**
