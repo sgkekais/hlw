@@ -111,6 +111,17 @@ class PersonController extends Controller
      */
     public function destroy(Person $person)
     {
-        //
+        $first_name = $person->first_name;
+        $last_name = $person->last_name;
+        $id = $person->id;
+
+        // delete the model
+        $person->delete();
+
+        // flash message
+        Session::flash('success', 'Person '.$first_name.' '.$last_name.' mit der ID '.$id.' gelöscht.');
+
+        // return to index
+        return redirect()->route('people.index');
     }
 }

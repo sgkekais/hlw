@@ -4,8 +4,23 @@
 
     <div class="container">
         <!-- edit a person -->
-        <h1 class="mt-4 mb-4">Person bearbeiten</h1>
-
+        <h1 class="mt-4 mb-4">Person</h1>
+        <h2 class="mt-4 text-primary">&mdash; {{ $person->first_name }} {{ $person->last_name }}</h2>
+        <!-- created at -->
+        Angelegt: {{ $person->created_at->format('d.m.Y H:i') }} Uhr
+        @if($causer = ModelHelper::causerOfAction($person,'created'))
+            von {{ $causer->name }}
+        @endif
+        <br>
+        <!-- updated at -->
+        @if($person->updated_at != $person->created_at)
+            Geändert: {{ $person->updated_at->format('d.m.Y H:i') }} Uhr
+            @if($causer = ModelHelper::causerOfAction($person,'updated'))
+                von {{ $causer->name }}
+            @endif
+        @endif
+        <hr>
+        <h3 class="mt-4 mb-4">Person ändern</h3>
         <form method="POST" action="{{ route('people.update', $person) }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
@@ -64,6 +79,17 @@
                 <button type="submit" class="btn btn-primary">Ändern</button>
                 <a class="btn btn-secondary" href="{{ route('people.index') }}">Abbrechen</a>
             </div>
+        </form>
+        <hr>
+        <h3 class="mt-4 mb-4">Person löschen</h3>
+        <form method="POST" action="{{ route('people.destroy', $person) }}">
+            <!-- protection against CSRF (cross-site request forgery) attacks-->
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <span class="form-text">Löscht die Person und <b>alle zugeordneten Objekte <span class="text-danger">unwiderruflich</span></b>.</span>
+            <br>
+            <button type="submit" class="btn btn-danger">Löschen</button>
+            <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>
         </form>
     </div>
 
