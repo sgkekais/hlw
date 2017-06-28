@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Club;
 use App\Person;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,9 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return view('admin.people.create');
+        $real_clubs = Club::where('is_real_club', true)->get();
+
+        return view('admin.people.create', compact('real_clubs'));
     }
 
     /**
@@ -73,7 +76,9 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        //
+        $real_clubs = Club::where('is_real_club', true)->get();
+
+        return view('admin.people.edit', compact('person', 'real_clubs'));
     }
 
     /**

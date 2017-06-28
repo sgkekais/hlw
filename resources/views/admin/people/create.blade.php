@@ -52,8 +52,8 @@
                 <div class="col-md-4">
                     <select class="form-control" id="registered_at_club" name="registered_at_club" aria-describedby="competition_idHelp">
                         <option></option>
-                        @foreach($clubs = \App\Club::where('is_real_club','1')->get() as $club)
-                            <option value="{{ $club->id }}">{{ $club->name }}</option>
+                        @foreach($real_clubs as $real_club)
+                            <option value="{{ $real_club->id }}">{{ $real_club->name }}</option>
                         @endforeach
                     </select>
                     <small id="registered_at_clubHelp" class="form-text text-muted">Verein des Spielers auswählen</small>
