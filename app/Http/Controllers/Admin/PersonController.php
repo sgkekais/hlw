@@ -90,7 +90,17 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required|min:2',
+            'last_name' => 'required|min:2',
+            'date_of_birth' => 'nullable|date'
+        ]);
+
+        $person->update($request->all());
+
+        Session::flash('success','Person '.$person->first_name.' '.$person->last_name.' erfolgreich geändert.');
+
+        return redirect()->route('people.index');
     }
 
     /**

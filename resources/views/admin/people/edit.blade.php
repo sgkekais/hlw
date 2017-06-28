@@ -57,7 +57,7 @@
                             <option value="{{ $real_club->id }}" {{ $person->registered_at_club == $real_club->id ? "selected" : null }}>{{ $real_club->name }}</option>
                         @endforeach
                     </select>
-                    <small id="registered_at_clubHelp" class="form-text text-muted">Verein des Spielers auswählen</small>
+                    <small id="registered_at_clubHelp" class="form-text text-muted">Verein des Spielers auswählen. Leeren Eintrag auswählen, wenn Person kein Vereinsspieler ist.</small>
                 </div>
             </div>
             <div class="form-group">
