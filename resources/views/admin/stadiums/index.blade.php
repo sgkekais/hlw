@@ -23,7 +23,8 @@
                 <tr>
                     <th class="">ID</th>
                     <th class="">Name</th>
-                    <th class="">Adresse?</th>
+                    <th class="">Name - kurz</th>
+                    <th class="">gmaps?</th>
                     <th class="">Veröffentlicht?</th>
                     <th class="">Aktionen</th>
                     <th class="">Änderungen</th>
@@ -35,26 +36,20 @@
                         <td><b>{{ $stadium->id }}</b></td>
                         <td>
                             <a href="{{ route('stadiums.show', $stadium ) }}" title="Anzeigen">{{ $stadium->name }}</a>
-                            <br>Spielklassen: {{ $stadium->divisions()->get()->count() }}
+                            <br>Mannschaften: {{ $stadium->clubs()->get()->count() }}
                         </td>
+                        <td>{{ $stadium->name_short }}</td>
+                        <td>{{ $stadium->gmaps ? "JA" : "NEIN" }}</td>
                         <td>{{ $stadium->published ? "JA" : "NEIN" }}</td>
                         <td>
                             <!-- display details -->
-                            <a class="btn btn-secondary" href="{{ route('stadiums.show', $stadium) }}" title="Wettbewerb anzeigen">
+                            <a class="btn btn-secondary" href="{{ route('stadiums.show', $stadium) }}" title="Spielort anzeigen">
                                 <span class="fa fa-eye"></span>
                             </a>
                             <!-- edit -->
-                            <a class="btn btn-primary" href="{{ route('stadiums.edit', $stadium) }}" title="Wettbewerb bearbeiten">
+                            <a class="btn btn-primary" href="{{ route('stadiums.edit', $stadium) }}" title="Spielort bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                             </a>
-                            <!-- delete
-                            <a class="btn btn-danger" href="{{ route('stadiums.destroy', $stadium->id) }}" title="Wettbewerb löschen" onclick="event.preventDefault(); document.getElementById('delete-form{{ $stadium->id }}').submit();">
-                                <span class="fa fa-trash"></span>
-                            </a>
-                            <form id="delete-form{{ $stadium->id }}" action="{{ route('stadiums.destroy', $stadium->id) }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                            </form>-->
                         </td>
                         <td>
                             angelegt am {{ $stadium->created_at->format('d.m.Y \\u\\m H:i') }} Uhr

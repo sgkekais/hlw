@@ -16,6 +16,22 @@ class Stadium extends Model
 
     use LogsActivity;
 
+    /**
+     * The attributes that should be logged.
+     * @var array
+     */
+    protected static $logAttributes = [
+        'name', 'name_short', 'gmaps', 'note', 'published'
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'name_short', 'gmaps', 'note', 'published'
+    ];
+
     public function clubs(){
         return $this->belongsToMany(Club::class, 'clubs_stadiums'); // TODO: CHECK
     }

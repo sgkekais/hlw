@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Stadium;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class StadiumController extends Controller
 {
@@ -27,7 +28,7 @@ class StadiumController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.stadiums.create');
     }
 
     /**
@@ -38,7 +39,19 @@ class StadiumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2',
+            'name_short' => 'required|min:2',
+            'gmaps' => 'nullable|url'
+        ]);
+
+        $stadium = new Stadium($request->all());
+
+        $stadium->save();
+
+        Session::flash('success', 'Spielort '.$stadium->name_short.' erfolgreich angelegt.');
+
+        return redirect()->route('stadiums.index');
     }
 
     /**
