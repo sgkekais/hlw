@@ -25,4 +25,11 @@ class Position extends Model
         'name'
     ];
 
+    /**
+     * A position has many players who have that position
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function players(){
+        return $this->hasMany(Player::class);
+    }
 }
