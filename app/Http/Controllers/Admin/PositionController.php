@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Position;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class PositionController extends Controller
 {
@@ -15,7 +16,9 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::all();
+
+        return view('admin.positions.index', compact('positions'));
     }
 
     /**
@@ -25,7 +28,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.positions.create');
     }
 
     /**
@@ -36,7 +39,17 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2'
+        ]);
+
+        $position = new Position($request->all());
+
+        $position->save();
+
+        Session::flash('success', 'Position '.$position->name.' erfolgreich angelegt.');
+
+        return redirect()->route('positions.index');
     }
 
     /**
@@ -47,7 +60,7 @@ class PositionController extends Controller
      */
     public function show(Position $position)
     {
-        //
+        return view('admin.positions.show', compact('position'));
     }
 
     /**
@@ -58,7 +71,7 @@ class PositionController extends Controller
      */
     public function edit(Position $position)
     {
-        //
+        return view('admin.positions.edit', compact('position'));
     }
 
     /**
@@ -70,7 +83,15 @@ class PositionController extends Controller
      */
     public function update(Request $request, Position $position)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:2'
+        ]);
+
+        $position->update($request->all());
+
+        Session::flash('success', 'Position '.$position->name.' erfolgreich geändert.');
+
+        return back();
     }
 
     /**
@@ -81,6 +102,13 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        //
+        $id = $position->id;
+        $name = $position->name;
+
+        $position->delete();
+
+        Session::flash('success', 'Position '.$name.' mit ID '.$id.' erfolgreich gelöscht.');
+
+        return redirect()->route('positions.index');
     }
 }
