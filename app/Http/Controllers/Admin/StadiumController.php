@@ -15,7 +15,9 @@ class StadiumController extends Controller
      */
     public function index()
     {
-        //
+        $stadiums = Stadium::all();
+
+        return view('admin.stadiums.index', compact('stadiums'));
     }
 
     /**

@@ -19,6 +19,7 @@ class CreateStadiumsTable extends Migration
             $table->string('name_short')->nullable();
             $table->text('gmaps')->nullable();
             $table->text('note')->nullable();
+            $table->boolean('published')->default('0');
 
             $table->timestamps();
         });

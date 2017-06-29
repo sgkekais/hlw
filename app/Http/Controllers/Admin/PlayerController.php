@@ -31,8 +31,9 @@ class PlayerController extends Controller
     public function create()
     {
         // TODO: persons, clubs und positions schon mitgeben und nicht in view machen
+        $positions = Position::all();
 
-        return view('admin.players.create');
+        return view('admin.players.create', compact('positions'));
     }
 
     /**
@@ -54,7 +55,7 @@ class PlayerController extends Controller
 
         Session::flash('success','Spieler erfolgreich angelegt.');
 
-        return redirect()->route('clubs.show', $player->club());
+        return redirect()->route('clubs.show', $player->club);
     }
 
     /**
