@@ -12,6 +12,9 @@
                 <a class="btn btn-primary mb-4" href="{{ route('clubs.edit', $club ) }}" title="Wettbewerb bearbeiten">
                     <span class="fa fa-pencil"></span> Bearbeiten
                 </a>
+                <a class="btn btn-primary mb-4" href="{{ route('players.create') }}" title="Spieler zuordnen">
+                    <span class="fa fa-pencil"></span> Spieler zuordnen
+                </a>
             </div>
             <!-- dates -->
             <div class="col-md-6">
@@ -61,9 +64,6 @@
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
                 <h4 class="mb-4 mt-4">Aktive  <span class="badge badge-default">{{ $players_active->count() }}</span></h4>
-                <a class="btn btn-primary mb-4" href="{{ route('players.create') }}" title="Spieler zuordnen">
-                    <span class="fa fa-pencil"></span> Spieler zuordnen
-                </a>
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
@@ -83,7 +83,13 @@
                             <td>{{ $p_active->person->last_name }}, {{ $p_active->person->first_name }}</td>
                             <td>{{ $p_active->sign_on->format('d.m.Y') }}</td>
                             <td>{{ $p_active->number }}</td>
-                            <td>{{ $p_active->position_id }}</td>
+                            <td>
+                                @if($p_active->position)
+                                    {{ $p_active->position->name }}
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td>
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('players.edit', $p_active) }}" title="Spieler bearbeiten">

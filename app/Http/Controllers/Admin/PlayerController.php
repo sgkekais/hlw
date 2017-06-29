@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Club;
 use App\Person;
 use App\Player;
+use App\Position;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -74,9 +76,9 @@ class PlayerController extends Controller
      */
     public function edit(Player $player)
     {
-        $people = Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get();
+        $positions = Position::all();
 
-        return view('admin.players.edit', compact('player', 'people'));
+        return view('admin.players.edit', compact('player', 'positions'));
     }
 
     /**
