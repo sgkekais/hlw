@@ -15,6 +15,9 @@
                 <a class="btn btn-primary mb-4" href="{{ route('players.create') }}" title="Spieler zuordnen">
                     <span class="fa fa-pencil"></span> Spieler zuordnen
                 </a>
+                <a class="btn btn-primary mb-4" href="{{ route('stad.create') }}" title="Spielort zuordnen">
+                    <span class="fa fa-pencil"></span> Spielort zuordnen
+                </a>
             </div>
             <!-- dates -->
             <div class="col-md-6">

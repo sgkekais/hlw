@@ -45,12 +45,24 @@ class Club extends Model
         return $this->hasMany(Player::class);
     }
 
+    /**
+     * A club is related to many seasons
+     * A season is related to many clubs
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function seasons(){
         return $this->belongsToMany(Season::class, 'clubs_seasons'); // TODO: CHECK
     }
 
+    /**
+     * A club can be related to one or more stadiums
+     * A stadium can be related to one or more clubs
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function stadiums(){
-        return $this->belongsToMany(Stadium::class, 'clubs_stadiums'); // TODO: CHECK
+        return $this->belongsToMany(Stadium::class, 'clubs_stadiums')
+            ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
+            ->withTimestamps(); // TODO: CHECK
     }
 
     // TODO: more relationships, e.g. fixtures (home, away, all, create function in controller that uses relationship in combination with year)
