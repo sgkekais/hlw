@@ -62,7 +62,7 @@ class Club extends Model
     public function stadiums(){
         return $this->belongsToMany(Stadium::class, 'clubs_stadiums')
             ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
-            ->withTimestamps(); // TODO: CHECK
+            ->withTimestamps(); // TODO: CHECK, works with $club->stadiums()->save($stadium)!
     }
 
     // TODO: more relationships, e.g. fixtures (home, away, all, create function in controller that uses relationship in combination with year)
