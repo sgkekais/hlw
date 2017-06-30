@@ -33,6 +33,8 @@ class Stadium extends Model
     ];
 
     public function clubs(){
-        return $this->belongsToMany(Club::class, 'clubs_stadiums'); // TODO: CHECK
+        return $this->belongsToMany(Club::class, 'clubs_stadiums')
+            ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
+            ->withTimestamps(); // TODO: CHECK, works with $club->stadiums()->save($stadium)!
     }
 }
