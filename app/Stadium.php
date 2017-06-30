@@ -32,6 +32,10 @@ class Stadium extends Model
         'name', 'name_short', 'gmaps', 'note', 'published'
     ];
 
+    /**
+     * A stadium can be related to many clubs
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function clubs(){
         return $this->belongsToMany(Club::class, 'clubs_stadiums')
             ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
