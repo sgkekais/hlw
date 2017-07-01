@@ -32,7 +32,7 @@ class CreateClubsSeasonsTable extends Migration
                 ->references('id')->on('seasons')
                 ->onUpdate('cascade')->onDelete('cascade');
             // combine foreign keys to composite primary key
-            $table->primary(['club_id','season_id']);
+            $table->primary(['club_id','season_id'],'id');
         });
     }
 

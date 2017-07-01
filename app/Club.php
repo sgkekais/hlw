@@ -50,7 +50,7 @@ class Club extends Model
      */
     public function players(){
         return $this->belongsToMany(Person::class, 'clubs_people')
-            ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
+            ->withPivot('sign_on','sign_off','number','position_id')
             ->withTimestamps();
     }
 
