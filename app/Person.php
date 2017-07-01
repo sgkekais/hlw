@@ -45,7 +45,7 @@ class Person extends Model
     }*/
 
     /**
-     *
+     * A player is a person related to a club
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function clubs(){
