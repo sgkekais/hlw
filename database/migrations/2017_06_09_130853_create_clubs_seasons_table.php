@@ -16,6 +16,7 @@ class CreateClubsSeasonsTable extends Migration
         Schema::create('clubs_seasons', function (Blueprint $table) {
             $table->integer('club_id')->unsigned();
             $table->integer('season_id')->unsigned();
+            $table->integer('rank')->nullable()->unsigned();    // rank at the end of the season
             $table->integer('deduction_points')->nullable();    // point penalty
             $table->integer('deduction_goals')->nullable();     // goal penalty
             $table->date('withdrawal')->nullable();     // date when club left mid-season

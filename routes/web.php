@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::resource('stadiums', 'StadiumController');
 
     Route::resource('clubs', 'ClubController');
-    Route::resource('players', 'PlayerController');
+    // Route::resource('players', 'PlayerController');
     Route::resource('positions', 'PositionController');
     Route::resource('referees', 'RefereeController');
     Route::resource('people', 'PersonController');

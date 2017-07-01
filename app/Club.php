@@ -40,9 +40,18 @@ class Club extends Model
      * - a club has many players
      * - a player belongs to one club at a given time
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+
     public function players(){
         return $this->hasMany(Player::class);
+    }*/
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function players(){
+        return $this->belongsToMany(Person::class, 'clubs_people')
+            ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
+            ->withTimestamps();
     }
 
     /**
@@ -63,16 +72,6 @@ class Club extends Model
         return $this->belongsToMany(Stadium::class, 'clubs_stadiums')
             ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
             ->withTimestamps(); // TODO: CHECK, works with $club->stadiums()->save($stadium)!
-    }
-
-    /**
-     * A clubs has a has-many-through relationship to people through the player class
-     * - Actual people who are related to the club
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-     */
-    public function people(){
-        return $this->hasManyThrough(Person::class, Player::class,
-            'club_id','person_id','id');
     }
 
     // TODO: more relationships, e.g. fixtures (home, away, all, create function in controller that uses relationship in combination with year)
