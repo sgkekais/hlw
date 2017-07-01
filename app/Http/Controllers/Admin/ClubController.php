@@ -72,9 +72,6 @@ class ClubController extends Controller
     public function show(Club $club)
     {
         // lazy eager load relationships
-        // $players_active   = $club->players()->whereNull('sign_off')->get();
-        // $players_inactive = $club->players()->whereNotNull('sign_off')->get();
-
         $club->load('players','stadiums');
 
         return view('admin.clubs.show', compact('club'));
