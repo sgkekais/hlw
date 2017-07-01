@@ -15,9 +15,6 @@
                 <a class="btn btn-primary mb-4" href="{{ route('players.create') }}" title="Spieler zuordnen">
                     <span class="fa fa-pencil"></span> Spieler zuordnen
                 </a>
-                <a class="btn btn-primary mb-4" href="{{ route('stad.create') }}" title="Spielort zuordnen">
-                    <span class="fa fa-pencil"></span> Spielort zuordnen
-                </a>
             </div>
             <!-- dates -->
             <div class="col-md-6">
@@ -66,7 +63,7 @@
                 + jeweilige Paarungen
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
-                <h4 class="mb-4 mt-4">Aktive  <span class="badge badge-default">{{ $players_active->count() }}</span></h4>
+                <h4 class="mb-4 mt-4">Aktive  <span class="badge badge-default">{{ $club->players()->whereNull('sign_off')->count() }}</span></h4>
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
@@ -80,7 +77,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($players_active as $p_active)
+                    @foreach($club->players()->whereNull('sign_off')->get() as $p_active)
                         <tr>
                             <td>{{ $p_active->id }}</td>
                             <td>{{ $p_active->person->last_name }}, {{ $p_active->person->first_name }}</td>
@@ -130,7 +127,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($players_inactive as $p_inactive)
+                    @foreach($club->players()->whereNotNull('sign_off')->get() as $p_inactive)
                         <tr>
                             <td>{{ $p_inactive->id }}</td>
                             <td>{{ $p_inactive->person->last_name }}, {{ $p_inactive->person->first_name }}</td>
@@ -160,8 +157,48 @@
                     </tbody>
                 </table>
             </div>
+            <!-- stadiums -->
             <div class="tab-pane" id="stadiums" role="tabpanel">
-                Spielort(e): {{ $club->stadiums->count() }}
+                <h4 class="mb-4 mt-4">Spielort(e)  <span class="badge badge-default">{{ $club->stadiums()->count() }}</span></h4>
+                <table class="table table-sm table-striped table-hover">
+                    <thead class="thead-default">
+                    <tr>
+                        <th class="">ID</th>
+                        <th class="">Name</th>
+
+                        <th class="">Aktionen</th>
+                        <th class="">Änderungen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($club->stadiums as $stadium)
+                        <tr>
+                            <td>{{ $stadium->id }}</td>
+                            <td>{{ $stadium->name }}</td>
+
+                            <td>
+                                <!-- edit -->
+                                <a class="btn btn-primary" href="{{ route('players.edit', $stadium) }}" title="Spieler bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                angelegt am {{ $stadium->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                @if($causer = ModelHelper::causerOfAction($stadium,'created'))
+                                    von {{ $causer->name }}
+                                @endif
+                                <br>
+                                @if($stadium->updated_at != $stadium->created_at)
+                                    geändert am {{ $stadium->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                    @if($causer = ModelHelper::causerOfAction($stadium,'updated'))
+                                        von {{ $causer->name }}
+                                    @endif
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
 
             </div>
         </div>
