@@ -12,9 +12,6 @@
                 <a class="btn btn-primary mb-4" href="{{ route('clubs.edit', $club ) }}" title="Wettbewerb bearbeiten">
                     <span class="fa fa-pencil"></span> Bearbeiten
                 </a>
-                <a class="btn btn-primary mb-4" href="{{ route('players.create') }}" title="Spieler zuordnen">
-                    <span class="fa fa-pencil"></span> Spieler zuordnen
-                </a>
             </div>
             <!-- dates -->
             <div class="col-md-6">
@@ -65,7 +62,7 @@
             <div class="tab-pane" id="players" role="tabpanel">
                 <h4 class="mb-4 mt-4">Aktive
                     <span class="badge badge-default">
-                        {{ $club->players()->whereNull('sign_off')->count() }}
+                        {{ $club->players()->count() }}
                     </span>
                     (davon
                         <span class="badge badge-default">
@@ -87,7 +84,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($club->players()->whereNull('sign_off')->get() as $p_active)
+                    @foreach($club->players() as $p_active)
                         <tr>
                             <td>{{ $p_active->id }}</td>
                             <td>

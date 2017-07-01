@@ -35,8 +35,9 @@
                     <tr>
                         <td><b>{{ $person->id }}</b></td>
                         <td>
-                            <a href="{{ route('people.show', $person ) }}" title="Anzeigen">{{ $person->last_name }}, {{ $person->first_name }}</a>
-                            <br>Ist Spieler: {{ $person->players()->get()->count() }}
+                            <a href="{{ route('people.show', $person ) }}" title="Anzeigen">
+                                {{ $person->last_name }}, {{ $person->first_name }}
+                            </a>
                         </td>
                         <td>{{ $person->date_of_birth->format('d.m.Y') }}</td>
                         <td>{{ $person->photo ? "X" : null }}</td>

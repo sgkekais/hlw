@@ -32,7 +32,6 @@
                     <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-soccer-ball-o"></span> Clubs & Leute</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown02">
                         <a class="dropdown-item {{ Route::is('clubs.*') ? 'active' : null }}" href="{{ route('clubs.index') }}">Mannschaften</a>
-                        <a class="dropdown-item {{ Route::is('players.*') ? 'active' : null }}" href="{{ route('players.index') }}">Spieler</a>
                         <a class="dropdown-item {{ Route::is('positions.*') ? 'active' : null }}" href="{{ route('positions.index') }}">Positionen</a>
                         <a class="dropdown-item {{ Route::is('referees.*') ? 'active' : null }}" href="{{ route('referees.index') }}">Schiedsrichter</a>
                         <div class="dropdown-divider"></div>
@@ -101,9 +100,6 @@
                 </li>
                 <li class="nav-item {{ Route::is('clubs.*') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('clubs.index') }}">Mannschaften</a>
-                </li>
-                <li class="nav-item {{ Route::is('players.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('players.index') }}">Spieler</a>
                 </li>
                 <li class="nav-item {{ Route::is('positions.*') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('positions.index') }}">Positionen</a>
