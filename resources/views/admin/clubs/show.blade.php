@@ -63,13 +63,23 @@
                 + jeweilige Paarungen
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
-                <h4 class="mb-4 mt-4">Aktive  <span class="badge badge-default">{{ $club->players()->whereNull('sign_off')->count() }}</span></h4>
+                <h4 class="mb-4 mt-4">Aktive
+                    <span class="badge badge-default">
+                        {{ $club->players()->whereNull('sign_off')->count() }}
+                    </span>
+                    (davon
+                        <span class="badge badge-default">
+
+                        </span>
+                    Vereinsspieler)
+                </h4>
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
                         <th class="">ID</th>
                         <th class="">Nachname, Vorname</th>
                         <th class="">Anmeldung</th>
+                        <th class="">Vereinsspieler?</th>
                         <th class="">Nummer</th>
                         <th class="">Position</th>
                         <th class="">Aktionen</th>
@@ -80,8 +90,19 @@
                     @foreach($club->players()->whereNull('sign_off')->get() as $p_active)
                         <tr>
                             <td>{{ $p_active->id }}</td>
-                            <td>{{ $p_active->person->last_name }}, {{ $p_active->person->first_name }}</td>
+                            <td>
+                                <a href="{{ route('people.edit', $p_active->person) }}" title="Person bearbeiten">
+                                    {{ $p_active->person->last_name }}, {{ $p_active->person->first_name }}
+                                </a>
+                            </td>
                             <td>{{ $p_active->sign_on->format('d.m.Y') }}</td>
+                            <td>
+                                @if($p_active->person->registered_at_club)
+                                    <span class='text-danger'>JA</span>
+                                @else
+                                    <span class='text-success'>NEIN</span>
+                                @endif
+                            </td>
                             <td>{{ $p_active->number }}</td>
                             <td>
                                 @if($p_active->position)

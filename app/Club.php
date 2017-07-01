@@ -65,6 +65,15 @@ class Club extends Model
             ->withTimestamps(); // TODO: CHECK, works with $club->stadiums()->save($stadium)!
     }
 
+    /**
+     * A clubs has a has-many-through relationship to people through the player class
+     * - Actual people who are related to the club
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function people(){
+        return $this->hasManyThrough(Person::class, Player::class);
+    }
+
     // TODO: more relationships, e.g. fixtures (home, away, all, create function in controller that uses relationship in combination with year)
     // TODO: rescheduled by club
 }
