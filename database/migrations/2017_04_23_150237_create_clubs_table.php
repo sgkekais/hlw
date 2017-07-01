@@ -28,8 +28,8 @@ class CreateClubsTable extends Migration
             $table->text('website')->nullable();
             $table->text('facebook')->nullable();
             $table->text('note')->nullable();
+            $table->boolean('is_real_club')->default('0');
             $table->boolean('published')->default('0');
-
             $table->timestamps();
         });
     }

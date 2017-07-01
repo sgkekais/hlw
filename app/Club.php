@@ -71,7 +71,8 @@ class Club extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function people(){
-        return $this->hasManyThrough(Person::class, Player::class);
+        return $this->hasManyThrough(Person::class, Player::class,
+            'club_id','person_id','id');
     }
 
     // TODO: more relationships, e.g. fixtures (home, away, all, create function in controller that uses relationship in combination with year)
