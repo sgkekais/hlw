@@ -17,7 +17,9 @@ class Club extends Model
         'name', 'name_short', 'name_code',
         'logo_url',
         'founded', 'league_entry', 'league_exit',
-        'colours_club', 'colours_kit',
+        'colours_club_primary', 'colours_club_secondary',
+        'colours_kit_home_primary', 'colours_kit_home_secondary',
+        'colours_kit_away_primary', 'colours_kit_away_secondary',
         'website', 'facebook',
         'note', 'is_real_club', 'published'
     ];
@@ -30,7 +32,9 @@ class Club extends Model
         'name', 'name_short', 'name_code',
         'logo_url',
         'founded', 'league_entry', 'league_exit',
-        'colours_club', 'colours_kit',
+        'colours_club_primary', 'colours_club_secondary',
+        'colours_kit_home_primary', 'colours_kit_home_secondary',
+        'colours_kit_away_primary', 'colours_kit_away_secondary',
         'website', 'facebook',
         'note', 'is_real_club', 'published'
     ];
