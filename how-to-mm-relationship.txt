@@ -1,0 +1,34 @@
+Guys, agreed, some documentation would be nice, but after toying with it, here's how it works.
+
+Let's say M-M for User and Books. And you're also adding a store_id attribute to the pivot table. How can you get that Store model based on the store_id?
+
+// User.php
+
+public function books()
+{
+    return $this->belongsToMany(Book::class)
+                ->withPivot('store_id')
+                ->using(BookUser::class);
+}
+
+So now when you hit $user->books->first()->pivot you're getting the BookUser model. Remember, $user->books returns a collection. You want a Book from the collection to make use of BookUser. (...so above i just used ->first())
+
+// BookUser.php
+class BookUser extends Pivot {
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+}
+
+Bingo. Now.... $user->books->first()->pivot->store yields the Store of store_id.
+
+So now you might use it for something like this...
+
+@foreach ($user->books as $book)
+  Store name: {{ $book->pivot->store->name }}
+@endforeach
+
+So that's it. Each row in the pivot table is now coming back to you as a BookUser model. And you can do relations, saves, updates, whatever.
+
+I hope that helps.
