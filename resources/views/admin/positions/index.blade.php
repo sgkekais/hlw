@@ -23,6 +23,7 @@
                 <tr>
                     <th class="">ID</th>
                     <th class="">Name</th>
+                    <th class="">Typ</th>
                     <th class="">Aktionen</th>
                     <th class="">Änderungen</th>
                 </tr>
@@ -33,7 +34,14 @@
                         <td><b>{{ $position->id }}</b></td>
                         <td>
                             <a href="{{ route('positions.show', $position ) }}" title="Anzeigen">{{ $position->name }}</a>
-                            <br>Spieler: {{ $position->players()->get()->count() }}
+
+                        </td>
+                        <td>
+                            @if($position->type == "player")
+                                Spieler
+                            @elseif($position->type == "staff")
+                                Stab
+                            @endif
                         </td>
                         <td>
                             <!-- display details -->

@@ -16,7 +16,7 @@ class Position extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name'
+        'name', 'type'
     ];
 
     /**
@@ -24,7 +24,7 @@ class Position extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name', 'type'
     ];
 
     /**
