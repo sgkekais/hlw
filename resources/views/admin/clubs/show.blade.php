@@ -62,11 +62,11 @@
             <div class="tab-pane" id="players" role="tabpanel">
                 <h4 class="mb-4 mt-4">Aktive
                     <span class="badge badge-default">
-                        {{ $club->players()->count() }}
+                        {{ $club->players()->whereNull('sign_off')->get()->count() }}
                     </span>
                     (davon
                         <span class="badge badge-default">
-
+                            {{ $club->players()->whereNotNull('registered_at_club')->get()->count() }}
                         </span>
                     Vereinsspieler)
                 </h4>
