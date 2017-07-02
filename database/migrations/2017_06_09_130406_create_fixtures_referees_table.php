@@ -25,7 +25,7 @@ class CreateFixturesRefereesTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('referee_id')
                 ->references('id')->on('referees')
-                ->onUpdate('cascade')->onDelete('set null');
+                ->onUpdate('cascade')->onDelete('cascade');
             // composite key
             $table->primary(['fixture_id','referee_id'], 'id');
         });
