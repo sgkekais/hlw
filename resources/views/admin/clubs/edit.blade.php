@@ -140,14 +140,14 @@
                     <label for="website">Homepage</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="url" class="form-control" name="website" id="website" aria-describedby="websiteHelp" value="{{ $club->website }}" placeholder="{{ old('website', 'https://www.verein.de') }}">
+                    <input type="url" class="form-control" name="website" id="website" aria-describedby="websiteHelp" value="{{ $club->website }}">
                     <small id="websiteHelp" class="form-text text-muted">Homepage des Vereins</small>
                 </div>
                 <div class="col-md-2">
                     <label for="facebook">Facebook</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="url" class="form-control" name="facebook" id="facebook" aria-describedby="facebookHelp" value="{{ $club->facebook }}" placeholder="{{ old('facebook', 'https://www.facebook.com/verein') }}">
+                    <input type="url" class="form-control" name="facebook" id="facebook" aria-describedby="facebookHelp" value="{{ $club->facebook }}">
                     <small id="facebookHelp" class="form-text text-muted">Facebook-Seite des Vereins</small>
                 </div>
             </div>
