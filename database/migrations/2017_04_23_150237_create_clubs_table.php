@@ -23,8 +23,12 @@ class CreateClubsTable extends Migration
             $table->date('founded')->nullable();
             $table->date('league_entry')->nullable();       // entry into HLW
             $table->date('league_exit')->nullable();        // exit from HLW
-            $table->string('colours_club')->nullable();     // primary colours of club, e.g. for bg-color on club page
-            $table->string('colours_kit')->nullable();
+            $table->string('colours_club_primary')->nullable();     // primary colours of club, e.g. for bg-color on club page
+            $table->string('colours_club_secondary')->nullable();
+            $table->string('colours_kit_home_primary')->nullable();
+            $table->string('colours_kit_home_secondary')->nullable();
+            $table->string('colours_kit_away_primary')->nullable();
+            $table->string('colours_kit_away_secondary')->nullable();
             $table->text('website')->nullable();
             $table->text('facebook')->nullable();
             $table->text('note')->nullable();

@@ -25,13 +25,16 @@ class CreateClubsPeopleTable extends Migration
 
             // foreign keys
             $table->foreign('club_id')
-                ->references('id')->on('clubs');
+                ->references('id')->on('clubs')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('person_id')
-                ->references('id')->on('people');
+                ->references('id')->on('people')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('position_id')
-                ->references('id')->on('positions');
+                ->references('id')->on('positions')
+                ->onUpdate('cascade')->onDelete('set null');
             // combine foreign keys to composite primary key
-            $table->primary(['club_id','person_id']);
+            $table->primary(['club_id','person_id'], 'id');
         });
     }
 

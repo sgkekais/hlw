@@ -25,7 +25,7 @@ class CreateDivisionsTable extends Migration
             // foreign keys
             $table->foreign('competition_id')
                 ->references('id')->on('competitions')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('restrict'); // should not be able to delete a competition if a division is assigned to it
         });
     }
 

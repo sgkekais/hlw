@@ -25,9 +25,6 @@ class CreateGoalsTable extends Migration
             $table->foreign('fixture_id')
                 ->references('id')->on('fixtures')
                 ->onUpdate('cascade')->onDelete('cascade');
-            /*$table->foreign('player_id')
-                ->references('id')->on('players')
-                ->onUpdate('cascade')->onDelete('cascade');*/
         });
     }
 

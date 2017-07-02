@@ -31,7 +31,7 @@ class CreateClubsStadiumsTable extends Migration
                 ->references('id')->on('stadiums')
                 ->onUpdate('cascade')->onDelete('cascade');
             // combine foreign keys to composite primary key
-            $table->primary(['club_id','stadium_id']);
+            $table->primary(['club_id','stadium_id'], 'id');
         });
     }
 

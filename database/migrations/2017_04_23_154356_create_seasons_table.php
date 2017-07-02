@@ -35,7 +35,7 @@ class CreateSeasonsTable extends Migration
             // foreign keys
             $table->foreign('division_id')
                 ->references('id')->on('divisions')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('champion')
                 ->references('id')->on('clubs')
                 ->onUpdate('cascade')->onDelete('set null');

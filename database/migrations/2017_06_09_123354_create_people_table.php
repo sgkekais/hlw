@@ -23,7 +23,10 @@ class CreatePeopleTable extends Migration
 
             $table->timestamps();
 
-            // TODO: foreign key for 'registered_at_club'
+            // foreign keys
+            $table->foreign('registered_at_club')
+                ->references('id')->on('clubs')
+                ->onUpdate('cascade')->onDelete('set null');
         });
     }
 

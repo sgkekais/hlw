@@ -32,26 +32,32 @@ class CreateFixturesTable extends Migration
             $table->boolean('published')->default('0');    // publish on website?, default: not listed/published
             $table->integer('rescheduled_from_fixtures_id')->unsigned()->nullable();    // match has been rescheduled from fixture_id
             $table->integer('rescheduled_to_fixtures_id')->unsigned()->nullable();      // match has been rescheduled to fixture_id
+            // add a rescheduled_by column to identify the team that cancelled the match
+            $table->integer('rescheduled_by_club')->nullable()->unsigned();
+
             $table->timestamps();
 
             // foreign keys
             $table->foreign('matchweek_id')
                 ->references('id')->on('matchweeks')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('stadium_id')
                 ->references('id')->on('stadiums')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('set null');
             $table->foreign('club_id_home')
                 ->references('id')->on('clubs')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('set null');
             $table->foreign('club_id_away')
                 ->references('id')->on('clubs')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('set null');
             $table->foreign('rescheduled_from_fixtures_id')
                 ->references('id')->on('fixtures')
                 ->onUpdate('cascade')->onDelete('set null');
             $table->foreign('rescheduled_to_fixtures_id')
                 ->references('id')->on('fixtures')
+                ->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('rescheduled_by_club')
+                ->references('id')->on('clubs')
                 ->onUpdate('cascade')->onDelete('set null');
         });
     }

@@ -27,7 +27,7 @@ class CreateMatchweeksTable extends Migration
             // foreign keys
             $table->foreign('season_id')
                 ->references('id')->on('seasons')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
