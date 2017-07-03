@@ -69,7 +69,6 @@
                     </span>
                     <small class="text-muted">(davon <b>{{ $club->players()->whereNotNull('registered_at_club')->get()->count() }}</b> Vereinsspieler)</small>
                 </h4>
-
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
@@ -84,7 +83,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($club->players as $p_active)
+                    @foreach($club->players()->whereNull('sign_off')->get() as $p_active)
                         <tr>
                             <td>{{ $p_active->id }}</td>
                             <td>
@@ -162,7 +161,7 @@
                             <td>{{ $p_inactive->pivot->sign_off->format('d.m.Y') }}</td>
                             <td>
                                 <!-- edit -->
-                                <a class="btn btn-primary" href="#" title="Spieler bearbeiten">
+                                <a class="btn btn-primary" href="{{ route('players.edit', [$club, $p_inactive]) }}" title="Spieler bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             </td>

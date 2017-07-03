@@ -33,6 +33,32 @@ class Player extends Pivot
         'sign_on', 'sign_off'
     ];
 
+    /*******************************************************
+     * SCOPES
+     * ******************************************************/
+
+    /**
+     * Scope a query to only include active players (sign_off == null)
+     * @param $query
+     * @return mixed
+     */
+    public function scopeActive($query){
+        return $query->whereNull('sign_off');
+    }
+
+    /**
+     * Scope a query to only include inactive players (sign_off == null)
+     * @param $query
+     * @return mixed
+     */
+    public function scopeInactive($query){
+        return $query->whereNotNull('sign_off');
+    }
+
+    /*******************************************************
+     * RELATIONSHIPS
+     * ******************************************************/
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

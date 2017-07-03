@@ -53,11 +53,43 @@ class PlayerController extends Controller
         return redirect()->route('clubs.show', compact('club'));
     }
 
+    /**
+     * Show the edit form for a given club/player relationship
+     * @param Club $club
+     * @param Person $person
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Club $club, Person $person){
 
         $positions = Position::all();
         $player    = $club->players->find($person);
 
         return view('admin.players.edit', compact('club', 'player','positions'));
+    }
+
+    public function update(Request $request, Club $club, Person $person){
+
+        $this->validate($request, [
+            'sign_on' => 'required|date',
+            'sign_off'=> 'nullable|date|after_or_equal:sign_on',
+            'number'  => 'nullable|max:4'
+        ]);
+
+        $sign_on = $request->sign_on;
+        $sign_off = $request->sign_off;
+        $number = $request->number;
+        $position_id = $request->position_id;
+
+        // sync with existing pivot entry
+        $club->players()->updateExistingPivot($person->id, [
+            'sign_on'       => $sign_on,
+            'sign_off'      => $sign_off,
+            'number'        => $number,
+            'position_id'   => $position_id
+        ]);
+
+        Session::flash('success', 'Spieler '.$person->first_name.' '.$person->last_name.' erfolgreich geändert.');
+
+        return redirect()->route('clubs.show', compact('club'));
     }
 }

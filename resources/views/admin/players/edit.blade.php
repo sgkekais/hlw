@@ -48,7 +48,7 @@
                     @if($player->pivot->sign_off)
                         <input type="date" class="form-control" name="sign_off" id="sign_off" aria-describedby="sign_offHelp" value="{{ $player->pivot->sign_off->format('Y-m-d') }}">
                     @else
-                        <input type="date" class="form-control" name="sign_off" id="sign_off" aria-describedby="sign_offHelp" value="">
+                        <input type="date" class="form-control" name="sign_off" id="sign_off" aria-describedby="sign_offHelp" >
                     @endif
                     <small id="sign_offHelp" class="form-text text-muted">JJJJ-MM-TT</small>
                 </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Anlegen</button>
+                <button type="submit" class="btn btn-primary">Ändern</button>
                 <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}">Abbrechen</a>
             </div>
         </form>
