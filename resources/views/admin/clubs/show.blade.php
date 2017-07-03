@@ -12,6 +12,9 @@
                 <a class="btn btn-primary mb-4" href="{{ route('clubs.edit', $club ) }}" title="Wettbewerb bearbeiten">
                     <span class="fa fa-pencil"></span> Bearbeiten
                 </a>
+                <a class="btn btn-primary mb-4" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
+                    <span class="fa fa-pencil"></span> Spieler zuordnen
+                </a>
             </div>
             <!-- dates -->
             <div class="col-md-6">
@@ -64,12 +67,9 @@
                     <span class="badge badge-default">
                         {{ $club->players()->whereNull('sign_off')->get()->count() }}
                     </span>
-                    (davon
-                        <span class="badge badge-default">
-                            {{ $club->players()->whereNotNull('registered_at_club')->get()->count() }}
-                        </span>
-                    Vereinsspieler)
+                    <small class="text-muted">(davon <b>{{ $club->players()->whereNotNull('registered_at_club')->get()->count() }}</b> Vereinsspieler)</small>
                 </h4>
+
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
@@ -88,11 +88,11 @@
                         <tr>
                             <td>{{ $p_active->id }}</td>
                             <td>
-                                <a href="" title="Person bearbeiten">
+                                <a href="{{ route('people.edit', $p_active) }}" title="Person bearbeiten (nicht Spieler)">
                                     {{ $p_active->last_name }}, {{ $p_active->first_name }}
                                 </a>
                             </td>
-                            <td>{{ $p_active->pivot->sign_on }}</td>
+                            <td>{{ $p_active->pivot->sign_on->format('d.m.Y') }}</td>
                             <td>
                                 @if($p_active->registered_at_club)
                                     <span class='text-danger'>JA</span>
@@ -103,14 +103,14 @@
                             <td>{{ $p_active->pivot->number }}</td>
                             <td>
                                 @if($p_active->pivot->position_id)
-                                    {{ $p_active->position->name }}
+                                    {{ $p_active->pivot->position->name }}
                                 @else
                                     -
                                 @endif
                             </td>
                             <td>
                                 <!-- edit -->
-                                <a class="btn btn-primary" href="#" title="Spieler bearbeiten">
+                                <a class="btn btn-primary" href="{{ route('players.edit', [$club, $p_active]) }}" title="Spieler bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             </td>
@@ -132,7 +132,58 @@
                     </tbody>
                 </table>
                 <hr>
+                <h4 class="mb-4 mt-4">Ehemalige
+                    <span class="badge badge-default">
+                        {{ $club->players()->whereNotNull('sign_off')->get()->count() }}
+                    </span>                    
+                </h4>
 
+                <table class="table table-sm table-striped table-hover">
+                    <thead class="thead-default">
+                    <tr>
+                        <th class="">ID</th>
+                        <th class="">Nachname, Vorname</th>
+                        <th class="">Anmeldung</th>
+                        <th class="">Abmeldung</th>
+                        <th class="">Aktionen</th>
+                        <th class="">Änderungen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($club->players()->whereNotNull('sign_off')->get() as $p_inactive)
+                        <tr>
+                            <td>{{ $p_inactive->id }}</td>
+                            <td>
+                                <a href="" title="Person bearbeiten">
+                                    {{ $p_inactive->last_name }}, {{ $p_inactive->first_name }}
+                                </a>
+                            </td>
+                            <td>{{ $p_inactive->pivot->sign_on->format('d.m.Y') }}</td>
+                            <td>{{ $p_inactive->pivot->sign_off->format('d.m.Y') }}</td>
+                            <td>
+                                <!-- edit -->
+                                <a class="btn btn-primary" href="#" title="Spieler bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td>
+                                angelegt am {{ $p_inactive->pivot->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                @if($causer = ModelHelper::causerOfAction($p_inactive,'created'))
+                                    von {{ $causer->name }}
+                                @endif
+                                <br>
+                                @if($p_inactive->pivot->updated_at != $p_inactive->pivot->created_at)
+                                    geändert am {{ $p_inactive->pivot->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
+                                    @if($causer = ModelHelper::causerOfAction($p_inactive,'updated'))
+                                        von {{ $causer->name }}
+                                    @endif
+                                @endif
+                            </td>
+                        </tr>
+
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
             <!-- stadiums -->
             <div class="tab-pane" id="stadiums" role="tabpanel">

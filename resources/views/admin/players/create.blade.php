@@ -8,7 +8,7 @@
         <p>
             Ein Spieler ist eine Person, die in einem bestimmten Zeitraum für eine Mannschaft spielt. Die Person muss zuvor angelegt werden. Sollte eine Person den Verein wechseln, so ist hier das Austrittsdatum zu vermerken und anschließend ein neuer Spieler anzulegen.
         </p>
-        <form method="POST" action="{{ route('players.store') }}">
+        <form method="POST" action="{{ route('players.store', $club) }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
             <!-- which person is this? -->
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-4">
                     <select class="form-control" id="person_id" name="person_id" aria-describedby="person_idHelp">
-                        @foreach($people = \App\Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get() as $person)
+                        @foreach($people as $person)
                             <option value="{{ $person->id }}">{{ $person->last_name }}, {{ $person->first_name }}</option>
                         @endforeach
                     </select>
@@ -31,11 +31,7 @@
                     <label for="club_id">Mannschaft</label>
                 </div>
                 <div class="col-md-4">
-                    <select class="form-control" id="club_id" name="club_id" aria-describedby="club_idHelp">
-                        @foreach($clubs = \App\Club::all() as $club)
-                            <option value="{{ $club->id }}">{{ $club->name }}</option>
-                        @endforeach
-                    </select>
+                    <input type="text" class="form-control" name="club_id" aria-describedby="club_idHelp" value="{{ $club->name }}" disabled>
                     <small id="club_idHelp" class="form-text text-muted">Welcher Mannschaft soll der Spieler zugeordnet werden?</small>
                 </div>
             </div>
@@ -82,7 +78,7 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Anlegen</button>
-                <a class="btn btn-secondary" href="{{ back() }}">Abbrechen</a>
+                <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}">Abbrechen</a>
             </div>
         </form>
     </div>

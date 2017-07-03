@@ -33,7 +33,17 @@ class Player extends Pivot
         'sign_on', 'sign_off'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function position(){
-        $this->belongsTo(Position::class);
+        return $this->belongsTo(Position::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function person(){
+        return $this->belongsTo(Person::class);
     }
 }

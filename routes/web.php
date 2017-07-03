@@ -41,7 +41,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::resource('stadiums', 'StadiumController');
 
     Route::resource('clubs', 'ClubController');
-    // Route::resource('players', 'PlayerController');
+
+        // assigning and managing players
+        Route::get('clubs/{club}/players/create', 'PlayerController@create')->name('players.create');
+        Route::post('clubs/{club}/players', 'PlayerController@store')->name('players.store');
+        Route::get('clubs/{club}/players/{person}/edit', 'PlayerController@edit')->name('players.edit');
+        Route::put('clubs/{club}/players/{person}', 'PlayerController@update')->name('players.update');
+
     Route::resource('positions', 'PositionController');
     Route::resource('referees', 'RefereeController');
     Route::resource('people', 'PersonController');
