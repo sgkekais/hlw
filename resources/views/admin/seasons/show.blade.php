@@ -46,7 +46,7 @@
             </div>
         </div>
         <hr>
-
+        <h3 class="mt-4 mb-4">Zuordnungen</h3>
         <!-- show season tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
@@ -60,10 +60,10 @@
         <div class="tab-content">
             <div class="tab-pane active" id="matchweeks" role="tabpanel">
                 <!-- show season details -->
-                <h3 class="mt-4">
+                <h4 class="mt-4">
                     Zugeordnete Spielwochen
                     <span class="badge badge-default">{{ $season->matchweeks->count() }}</span>
-                </h3>
+                </h4>
                 @if($season->matchweeks->count() == 0)
                     <br>
                     <i>Keine Spielwochen zugeordnet</i>
@@ -103,11 +103,11 @@
                 @endif
             </div>
             <!-- assigned clubs -->
-            <div class="tab-pane active" id="clubs" role="tabpanel">
-                <h3 class="mt-4">
+            <div class="tab-pane" id="clubs" role="tabpanel">
+                <h4 class="mt-4">
                     Zugeordnete Mannschaften
                     <span class="badge badge-default">{{ $season->matchweeks->count() }}</span>
-                </h3>
+                </h4>
             </div>
     </div>
 @endsection

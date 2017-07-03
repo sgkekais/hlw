@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Matchweek;
+use App\Season;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class MatchweekController extends Controller
 {
@@ -15,7 +17,9 @@ class MatchweekController extends Controller
      */
     public function index()
     {
-        //
+        $matchweeks = Matchweek::all();
+
+        return view('admin.matchweeks.index', compact('matchweeks'));
     }
 
     /**
@@ -25,7 +29,9 @@ class MatchweekController extends Controller
      */
     public function create()
     {
-        //
+        $seasons = Season::all();
+
+        return view('admin.matchweeks.create', compact('seasons'));
     }
 
     /**
@@ -36,7 +42,23 @@ class MatchweekController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'number_consecutive' => 'required|integer',
+            'begin' => 'required|date',
+            'end' => 'required|date|after_or_equal:begin'
+        ]);
+
+        // create a new object
+        $matchweek = new Matchweek($request->all());
+
+        // save the season
+        $matchweek->save();
+
+        // flash success message and return competition name as test
+        Session::flash('success', 'Spielwoche '.$matchweek->number_consecutive.' erfolgreich angelegt.');
+
+        // return to index
+        return redirect()->route('matchweeks.index');
     }
 
     /**

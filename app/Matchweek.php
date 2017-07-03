@@ -9,12 +9,18 @@ class Matchweek extends Model
 {
     use LogsActivity;
 
-    // log attributes
+    /**
+     * The attributes that should be logged
+     * @var array
+     */
     protected static $logAttributes = [
         'number_consecutive', 'name', 'begin', 'end', 'published'
     ];
 
-    // mass assignable fields
+    /**
+     * The attributes that can be mass assigned
+     * @var array
+     */
     protected $fillable = [
         'number_consecutive', 'name', 'begin', 'end', 'published'
     ];
