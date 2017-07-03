@@ -60,5 +60,18 @@ class Season extends Model
         return $this->hasMany(Matchweek::class);
     }
 
-    // TODO: many-to-many clubs_seasons
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function clubs(){
+        return $this->belongsToMany(Club::class, 'clubs_seasons')
+            ->withPivot(
+                'rank',
+                'deduction_points',
+                'deduction_goals',
+                'withdrawal',
+                'note'
+            )->withTimestamps();
+
+    }
 }
