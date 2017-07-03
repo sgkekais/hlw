@@ -23,7 +23,6 @@
                         <a class="dropdown-item {{ Route::is('competitions.*') ? 'active' : null }}" href="{{ route('competitions.index') }}">Wettbewerbe</a>
                         <a class="dropdown-item {{ Route::is('divisions.*') ? 'active' : null }}" href="{{ route('divisions.index') }}">Spielklassen</a>
                         <a class="dropdown-item {{ Route::is('seasons.*') ? 'active' : null }}" href="{{ route('seasons.index') }}">Saisons</a>
-                        <a class="dropdown-item {{ Route::is('matchweeks.*') ? 'active' : null }}" href="{{ route('matchweeks.index') }}">Spielwochen</a>
                         <a class="dropdown-item {{ Route::is('fixtures.*') ? 'active' : null }}" href="{{ route('fixtures.index') }}">Paarungen</a>
                         <a class="dropdown-item {{ Route::is('stadiums.*') ? 'active' : null }}" href="{{ route('stadiums.index') }}">Spielorte</a>
                     </div>
@@ -66,47 +65,6 @@
                     </div>
                 </li>
 
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- secondary navigation -->
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-    <!-- toggler -->
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse2" aria-controls="navbarCollapse2" aria-expanded="false" aria-label="toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="container">
-        <div class="collapse navbar-collapse" id="navbarCollapse2">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item {{ Route::is('competitions.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('competitions.index') }}">Wettbewerbe</a>
-                </li>
-                <li class="nav-item {{ Route::is('divisions.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('divisions.index') }}">Spielklassen</a>
-                </li>
-                <li class="nav-item {{ Route::is('seasons.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('seasons.index') }}">Saisons</a>
-                </li>
-                <li class="nav-item {{ Route::is('matchweeks.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('matchweeks.index') }}">Spielwochen</a>
-                </li>
-                <li class="nav-item {{ Route::is('fixtures.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('fixtures.index') }}">Paarungen</a>
-                </li>
-                <li class="nav-item nav-divider"></li>
-                <li class="nav-item {{ Route::is('stadiums.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('stadiums.index') }}">Spielorte</a>
-                </li>
-                <li class="nav-item {{ Route::is('clubs.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('clubs.index') }}">Mannschaften</a>
-                </li>
-                <li class="nav-item {{ Route::is('positions.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('positions.index') }}">Positionen</a>
-                </li>
-                <li class="nav-item {{ Route::is('people.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('people.index') }}">Personen</a>
-                </li>
             </ul>
         </div>
     </div>

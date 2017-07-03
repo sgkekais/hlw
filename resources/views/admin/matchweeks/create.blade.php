@@ -6,20 +6,16 @@
         <!-- create a new matchweek -->
         <h1 class="mt-4 mb-4">Spielwoche anlegen</h1>
 
-        <form method="POST" action="{{ route('matchweeks.store') }}">
+        <form method="POST" action="{{ route('seasons.matchweeks.store', $season) }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
-            <!-- competition -->
+            <!-- season -->
             <div class="form-group row">
                 <div class="col-md-2">
                     <label for="season_id">Saison</label>
                 </div>
                 <div class="col-md-4">
-                    <select class="form-control" id="season_id" name="season_id" aria-describedby="season_idHelp">
-                        @foreach($seasons as $season)
-                            <option value="{{ $season->id }}">({{ $season->id }}) {{ $season->year_begin }} / {{ $season->year_end }} | {{ $season->division->name }}</option>
-                        @endforeach
-                    </select>
+                    <input type="text" class="form-control" name="season_id" id="season_id" value="({{ $season->id }}) {{ $season->year_begin }} / {{ $season->year_end }} | {{ $season->division->name }}" disabled>
                     <small id="season_idHelp" class="form-text text-muted">Zuordnung zu welcher Saison?</small>
                 </div>
             </div>
@@ -43,7 +39,7 @@
                     <small id="nameHelp" class="form-text text-muted">Bezeichnung der Spielwoche, bspw. "Relegation" (optional)</small>
                 </div>
             </div>
-            <!-- beginn and end -->
+            <!-- begin and end -->
             <div class="form-group row">
                 <div class="col-md-2">
                     <label for="begin">Beginn</label>
@@ -74,7 +70,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Anlegen</button>
-            <a class="btn btn-secondary" href="{{ route('matchweeks.index') }}">Abbrechen</a>
+            <a class="btn btn-secondary" href="{{ route('seasons.index') }}">Abbrechen</a>
         </form>
     </div>
 

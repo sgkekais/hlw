@@ -27,11 +27,9 @@ class MatchweekController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Season $season)
     {
-        $seasons = Season::all();
-
-        return view('admin.matchweeks.create', compact('seasons'));
+        return view('admin.matchweeks.create', compact('season'));
     }
 
     /**
@@ -40,7 +38,7 @@ class MatchweekController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Season $season)
     {
         $this->validate($request, [
             'number_consecutive' => 'required|integer',
@@ -52,13 +50,13 @@ class MatchweekController extends Controller
         $matchweek = new Matchweek($request->all());
 
         // save the season
-        $matchweek->save();
+        $season->matchweeks()->save($matchweek);
 
         // flash success message and return competition name as test
         Session::flash('success', 'Spielwoche '.$matchweek->number_consecutive.' erfolgreich angelegt.');
 
         // return to index
-        return redirect()->route('matchweeks.index');
+        return redirect()->route('seasons.show', $season);
     }
 
     /**
@@ -78,9 +76,9 @@ class MatchweekController extends Controller
      * @param  \App\Matchweek  $matchweek
      * @return \Illuminate\Http\Response
      */
-    public function edit(Matchweek $matchweek)
+    public function edit(Season $season, Matchweek $matchweek)
     {
-        //
+        return view('admin.matchweeks.edit',compact('season','matchweek'));
     }
 
     /**
@@ -90,9 +88,19 @@ class MatchweekController extends Controller
      * @param  \App\Matchweek  $matchweek
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Matchweek $matchweek)
+    public function update(Request $request, Season $season, Matchweek $matchweek)
     {
-        //
+        $this->validate($request, [
+            'number_consecutive' => 'required|integer',
+            'begin' => 'required|date',
+            'end' => 'required|date|after_or_equal:begin'
+        ]);
+
+        $matchweek->update($request->all());
+
+        Session::flash('success','Spielwoche erfoglreich geändert.');
+
+        return redirect()->route('seasons.show', $season);
     }
 
     /**
