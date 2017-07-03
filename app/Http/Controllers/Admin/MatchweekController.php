@@ -65,9 +65,9 @@ class MatchweekController extends Controller
      * @param  \App\Matchweek  $matchweek
      * @return \Illuminate\Http\Response
      */
-    public function show(Matchweek $matchweek)
+    public function show(Season $season, Matchweek $matchweek)
     {
-        //
+        return view('admin.matchweeks.show', compact('season', 'matchweek'));
     }
 
     /**
