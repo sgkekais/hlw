@@ -67,6 +67,13 @@ class PlayerController extends Controller
         return view('admin.players.edit', compact('club', 'player','positions'));
     }
 
+    /**
+     * Update the relationship
+     * @param Request $request
+     * @param Club $club
+     * @param Person $person
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, Club $club, Person $person){
 
         $this->validate($request, [
@@ -91,5 +98,14 @@ class PlayerController extends Controller
         Session::flash('success', 'Spieler '.$person->first_name.' '.$person->last_name.' erfolgreich geändert.');
 
         return redirect()->route('clubs.show', compact('club'));
+    }
+
+    public function destroy(Club $club, Person $person){
+
+        $club->players()->detach($person->id);
+
+        Session::flash('success', 'Zuordnung gelöscht.');
+
+        return redirect()->route('clubs.show', $club);
     }
 }

@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         Route::post('clubs/{club}/players', 'PlayerController@store')->name('players.store');
         Route::get('clubs/{club}/players/{person}/edit', 'PlayerController@edit')->name('players.edit');
         Route::patch('clubs/{club}/players/{person}', 'PlayerController@update')->name('players.update');
+        Route::delete('clubs/{club}/players/{person}', 'PlayerController@destroy')->name('players.destroy');
 
     Route::resource('positions', 'PositionController');
     Route::resource('referees', 'RefereeController');

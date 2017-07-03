@@ -3,11 +3,24 @@
 @section('content')
 
     <div class="container">
-        <!-- create a new player and assign to club and person -->
-        <h1 class="mt-4 mb-4">Spieler bearbeiten</h1>
-        <p>
-            Ein Spieler ist eine Person, die in einem bestimmten Zeitraum für eine Mannschaft spielt. Die Person muss zuvor angelegt werden. Sollte eine Person den Verein wechseln, so ist hier das Austrittsdatum zu vermerken und anschließend ein neuer Spieler anzulegen.
-        </p>
+        <!-- edit the club -->
+        <h1 class="mt-4">Spielerzuordnung</h1>
+        <h2 class="mt-4 text-primary">&mdash; {{ $club->name }} / {{ $player->last_name }}, {{ $player->first_name }}</h2>
+        <!-- created at -->
+        Angelegt: {{ $player->pivot->created_at->format('d.m.Y H:i') }} Uhr
+        @if($causer = ModelHelper::causerOfAction($club,'created'))
+            von {{ $causer->name }}
+        @endif
+        <br>
+        <!-- updated at -->
+        @if($player->pivot->updated_at != $player->pivot->created_at)
+            Geändert: {{ $club->updated_at->format('d.m.Y H:i') }} Uhr
+            @if($causer = ModelHelper::causerOfAction($club,'updated'))
+                von {{ $causer->name }}
+            @endif
+        @endif
+        <hr>
+        <h3 class="mb-4">Spielerzuordnung bearbeiten</h3>
         <form method="POST" action="{{ route('players.update', [$club, $player]) }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
@@ -81,6 +94,17 @@
                 <button type="submit" class="btn btn-primary">Ändern</button>
                 <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}">Abbrechen</a>
             </div>
+        </form>
+        <hr>
+        <h3 class="mt-4">Spielerzuordnung löschen</h3>
+        <form method="POST" action="{{ route('players.destroy', [$club, $player]) }}">
+            <!-- protection against CSRF (cross-site request forgery) attacks-->
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <span class="form-text">Löscht die Spieler<b>zuordnung</b>. Mannschaft und Person bleiben erhalten.</span>
+            <br>
+            <button type="submit" class="btn btn-danger">Löschen</button>
+            <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}">Abbrechen</a>
         </form>
     </div>
 
