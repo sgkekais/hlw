@@ -16,15 +16,17 @@
         <div class="row">
             <div class="col-md-6">
                 <h3 class="mt-4">Aktionen</h3>
-                <a class="btn btn-primary mb-4" href="{{ route('seasons.edit', $season ) }}" title="Saison bearbeiten">
-                    <span class="fa fa-pencil"></span> Bearbeiten
-                </a>
-                <a class="btn btn-primary mb-4" href="{{ route('seasons.matchweeks.create', $season ) }}" title="Spielwoche hinzufügen">
-                    <span class="fa fa-pencil"></span> Spielwoche hinzufügen
-                </a>
-                <a class="btn btn-primary mb-4" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
-                    <span class="fa fa-pencil"></span> Mannschaft zuordnen
-                </a>
+                    <a class="btn btn-primary mb-2" href="{{ route('seasons.edit', $season ) }}" title="Saison bearbeiten">
+                        <span class="fa fa-pencil"></span> Saison bearbeiten
+                    </a>
+                    <br>
+                    <a class="btn btn-outline-success mb-2" href="{{ route('seasons.matchweeks.create', $season ) }}" title="Spielwoche hinzufügen">
+                        <span class="fa fa-plus-circle"></span> Spielwoche hinzufügen
+                    </a>
+                    <br>
+                    <a class="btn btn-outline-success" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
+                        <span class="fa fa-plus-circle"></span> Mannschaft zuordnen
+                    </a>
             </div>
             <!-- dates -->
             <div class="col-md-6">
