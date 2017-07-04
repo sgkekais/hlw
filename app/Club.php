@@ -63,6 +63,10 @@ class Club extends Model
         return $query->where('is_real_club','1');
     }
 
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
+
     /**
      * A club has many players
      * A player can be related to many clubs (though not at the same time)
