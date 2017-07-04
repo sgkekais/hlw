@@ -83,9 +83,19 @@ class Fixture extends Model
      * - a stadium has many fixtures
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function stadium(){
+    public function stadium()
+    {
         return $this->belongsTo(Stadium::class);
     }
-    // TODO: club relationships (home, away, all?)
+
+    public function club_home()
+    {
+        return $this->belongsTo(Club::class, 'club_id_home');
+    }
+
+    public function club_away()
+    {
+        return $this->belongsTo(Club::class, 'club_id_away');
+    }
     // TODO: rescheduled relationships (from, to, by which club)
 }
