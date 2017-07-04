@@ -141,7 +141,7 @@ class SeasonController extends Controller
     public function createClubAssignment(Season $season)
     {
         // determine the clubs (not real clubs!) which are not assigned to the season, yet
-        $all_clubs          = Club::Is;
+        $all_clubs          = Club::IsNotRealClub()->get();
         $unassigned_clubs = $all_clubs->diff($season->clubs);
 
         return view('admin.seasons.createClubAssignment', compact('season', 'unassigned_clubs'));

@@ -56,10 +56,15 @@
         <!-- show season tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#matchweeks" role="tab">Spielwochen</a>
+                <a class="nav-link active" data-toggle="tab" href="#matchweeks" role="tab">
+                    Spielwochen
+                    <span class="badge badge-pill badge-default">{{ $season->matchweeks->count() }}</span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#clubs" role="tab">Mannschaften</a>
+                <a class="nav-link" data-toggle="tab" href="#clubs" role="tab">
+                    Mannschaften
+                    <span class="badge badge-pill badge-default">{{ $season->clubs->count() }}</span></a>
             </li>
         </ul>
         <!-- show club details -->
@@ -68,7 +73,6 @@
                 <!-- show season details -->
                 <h4 class="mt-4">
                     Zugeordnete Spielwochen
-                    <span class="badge badge-default">{{ $season->matchweeks->count() }}</span>
                 </h4>
                 @if($season->matchweeks->count() == 0)
                     <br>
@@ -129,7 +133,6 @@
             <div class="tab-pane" id="clubs" role="tabpanel">
                 <h4 class="mt-4">
                     Zugeordnete Mannschaften
-                    <span class="badge badge-default">{{ $season->clubs->count() }}</span>
                 </h4>
                 @if($season->clubs->count() == 0)
                     <br>
@@ -149,37 +152,31 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($season->clubs as $clubs)
+                        @foreach($season->clubs as $club)
                             <tr>
-                                <td><b>{{ $matchweek->id }}</b></td>
+                                <td><b>{{ $club->id }}</b></td>
                                 <td>
-                                    <a href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Anzeigen">{{ $matchweek->number_consecutive }}</a>
-                                    <br>
-                                    Paarungen: {{ $matchweek->fixtures()->get()->count() }}
+                                    <a href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">{{ $club->name }}</a>
                                 </td>
-                                <td>{{ $matchweek->name }}</td>
-                                <td>{{ $matchweek->published ? "JA" : "NEIN" }}</td>
+                                <td>{{ $club->rank }}</td>
+                                <td>{{ $club->deduction_points }}</td>
+                                <td>{{ $club->deduction_goals }}</td>
+                                <td>{{ $club->withdrawal }}</td>
                                 <td>
                                     <!-- display details -->
-                                    <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Spielwoche anzeigen">
+                                    <a class="btn btn-secondary" href="#" title="Zuordnung anzeigen">
                                         <span class="fa fa-eye"></span>
                                     </a>
                                     <!-- edit -->
-                                    <a class="btn btn-primary" href="{{ route('seasons.matchweeks.edit', [$season, $matchweek]) }}" title="Spielwoche bearbeiten">
+                                    <a class="btn btn-primary" href="#" title="Zuordnung bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
                                 </td>
                                 <td>
-                                    angelegt am {{ $matchweek->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    @if($causer = ModelHelper::causerOfAction($matchweek,'created'))
-                                        von {{ $causer->name }}
-                                    @endif
+                                    zugeordnet am {{ $club->pivot->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
                                     <br>
-                                    @if($matchweek->updated_at != $matchweek->created_at)
-                                        geändert am {{ $matchweek->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                        @if($causer = ModelHelper::causerOfAction($matchweek,'updated'))
-                                            von {{ $causer->name }}
-                                        @endif
+                                    @if($club->pivot->updated_at != $club->pivot->created_at)
+                                        geändert am {{ $club->pivot->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
                                     @endif
                                 </td>
                             </tr>

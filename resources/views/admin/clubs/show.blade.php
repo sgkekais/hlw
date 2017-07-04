@@ -46,13 +46,25 @@
         <!-- show club tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#fixtures" role="tab">Paarungen</a>
+                <a class="nav-link active" data-toggle="tab" href="#fixtures" role="tab">
+                    Paarungen
+                    <span class="badge badge-pill badge-default">
+                        0
+                    </span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#players" role="tab">Kader</a>
+                <a class="nav-link" data-toggle="tab" href="#players" role="tab">
+                    Kader
+                    <span class="badge badge-pill badge-default">
+                        {{ $club->players()->whereNull('sign_off')->get()->count() }}
+                    </span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#stadiums" role="tab">Spielort(e)</a>
+                <a class="nav-link" data-toggle="tab" href="#stadiums" role="tab">
+                    Spielort(e)
+                    <span class="badge badge-pill badge-default">{{ $club->stadiums()->count() }}</span>
+                </a>
             </li>
         </ul>
         <!-- show club details -->
@@ -64,9 +76,6 @@
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
                 <h4 class="mb-4 mt-4">Aktive
-                    <span class="badge badge-default">
-                        {{ $club->players()->whereNull('sign_off')->get()->count() }}
-                    </span>
                     <small class="text-muted">(davon <b>{{ $club->players()->whereNotNull('registered_at_club')->get()->count() }}</b> Vereinsspieler)</small>
                 </h4>
                 <table class="table table-sm table-striped table-hover">
@@ -115,15 +124,9 @@
                             </td>
                             <td>
                                 angelegt am {{ $p_active->pivot->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @if($causer = ModelHelper::causerOfAction($p_active,'created'))
-                                    von {{ $causer->name }}
-                                @endif
                                 <br>
                                 @if($p_active->pivot->updated_at != $p_active->pivot->created_at)
                                     geändert am {{ $p_active->pivot->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    @if($causer = ModelHelper::causerOfAction($p_active,'updated'))
-                                        von {{ $causer->name }}
-                                    @endif
                                 @endif
                             </td>
                         </tr>
@@ -132,9 +135,9 @@
                 </table>
                 <hr>
                 <h4 class="mb-4 mt-4">Ehemalige
-                    <span class="badge badge-default">
+                    <span class="badge badge-pill badge-default">
                         {{ $club->players()->whereNotNull('sign_off')->get()->count() }}
-                    </span>                    
+                    </span>
                 </h4>
 
                 <table class="table table-sm table-striped table-hover">
@@ -167,15 +170,9 @@
                             </td>
                             <td>
                                 angelegt am {{ $p_inactive->pivot->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @if($causer = ModelHelper::causerOfAction($p_inactive,'created'))
-                                    von {{ $causer->name }}
-                                @endif
                                 <br>
                                 @if($p_inactive->pivot->updated_at != $p_inactive->pivot->created_at)
                                     geändert am {{ $p_inactive->pivot->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    @if($causer = ModelHelper::causerOfAction($p_inactive,'updated'))
-                                        von {{ $causer->name }}
-                                    @endif
                                 @endif
                             </td>
                         </tr>
@@ -186,7 +183,9 @@
             </div>
             <!-- stadiums -->
             <div class="tab-pane" id="stadiums" role="tabpanel">
-                <h4 class="mb-4 mt-4">Spielort(e)  <span class="badge badge-default">{{ $club->stadiums()->count() }}</span></h4>
+                <h4 class="mb-4 mt-4">
+                    Spielort(e)
+                </h4>
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
