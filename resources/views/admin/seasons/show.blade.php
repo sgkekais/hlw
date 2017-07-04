@@ -139,15 +139,17 @@
                         <thead class="thead-default">
                         <tr>
                             <th class="">ID</th>
-                            <th class="">Nummer</th>
                             <th class="">Name</th>
-                            <th class="">Veröffentlicht?</th>
-                            <th class="">Aktionen</th>
-                            <th class="">Änderungen</th>
+                            <th class="">Rang</th>
+                            <th class="">Punktabzug</th>
+                            <th class="">Torabzug</th>
+                            <th class="">Ausgeschieden?</th>
+                            <th>Aktionen</th>
+                            <th>Änderungen</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($season->matchweeks as $matchweek)
+                        @foreach($season->clubs as $clubs)
                             <tr>
                                 <td><b>{{ $matchweek->id }}</b></td>
                                 <td>

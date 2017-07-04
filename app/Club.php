@@ -39,6 +39,30 @@ class Club extends Model
         'note', 'is_real_club', 'published'
     ];
 
+    /***********************************************************
+     * SCOPES
+     ************************************************************/
+
+    /**
+     * Scope a query to only include hobby clubs
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeIsNotRealClub($query)
+    {
+        return $query->where('is_real_club','0');
+    }
+
+    /**
+     * Scope a query to only include real clubs
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeIsRealClub($query)
+    {
+        return $query->where('is_real_club','1');
+    }
+
     /**
      * A club has many players
      * A player can be related to many clubs (though not at the same time)

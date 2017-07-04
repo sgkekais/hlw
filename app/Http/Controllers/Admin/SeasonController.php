@@ -69,7 +69,7 @@ class SeasonController extends Controller
     public function show(Season $season)
     {
         // eager load matchweeks
-        $season->load('matchweeks');
+        $season->load('matchweeks','clubs');
 
         return view('admin.seasons.show', compact('season'));
     }
@@ -140,8 +140,8 @@ class SeasonController extends Controller
      */
     public function createClubAssignment(Season $season)
     {
-        // determine the clubs which are not assigned to the season, yet
-        $all_clubs          = Club::all();
+        // determine the clubs (not real clubs!) which are not assigned to the season, yet
+        $all_clubs          = Club::Is;
         $unassigned_clubs = $all_clubs->diff($season->clubs);
 
         return view('admin.seasons.createClubAssignment', compact('season', 'unassigned_clubs'));
