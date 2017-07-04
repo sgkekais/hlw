@@ -158,17 +158,13 @@
                                 <td>
                                     <a href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">{{ $club->name }}</a>
                                 </td>
-                                <td>{{ $club->rank }}</td>
-                                <td>{{ $club->deduction_points }}</td>
-                                <td>{{ $club->deduction_goals }}</td>
-                                <td>{{ $club->withdrawal }}</td>
+                                <td>{{ $club->pivot->rank }}</td>
+                                <td>{{ $club->pivot->deduction_points }}</td>
+                                <td>{{ $club->pivot->deduction_goals }}</td>
+                                <td>{{ $club->pivot->withdrawal }}</td>
                                 <td>
-                                    <!-- display details -->
-                                    <a class="btn btn-secondary" href="#" title="Zuordnung anzeigen">
-                                        <span class="fa fa-eye"></span>
-                                    </a>
                                     <!-- edit -->
-                                    <a class="btn btn-primary" href="#" title="Zuordnung bearbeiten">
+                                    <a class="btn btn-primary" href="{{ route('editClubAssignment',[$season,$club]) }}" title="Zuordnung bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
                                 </td>

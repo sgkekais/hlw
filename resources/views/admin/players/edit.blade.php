@@ -8,16 +8,10 @@
         <h2 class="mt-4 text-primary">&mdash; {{ $club->name }} / {{ $player->last_name }}, {{ $player->first_name }}</h2>
         <!-- created at -->
         Angelegt: {{ $player->pivot->created_at->format('d.m.Y H:i') }} Uhr
-        @if($causer = ModelHelper::causerOfAction($club,'created'))
-            von {{ $causer->name }}
-        @endif
         <br>
         <!-- updated at -->
         @if($player->pivot->updated_at != $player->pivot->created_at)
             Geändert: {{ $club->updated_at->format('d.m.Y H:i') }} Uhr
-            @if($causer = ModelHelper::causerOfAction($club,'updated'))
-                von {{ $causer->name }}
-            @endif
         @endif
         <hr>
         <h3 class="mb-4">Spielerzuordnung bearbeiten</h3>

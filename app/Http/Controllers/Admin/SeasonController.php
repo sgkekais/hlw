@@ -172,4 +172,35 @@ class SeasonController extends Controller
 
         return redirect()->route('seasons.show', $season);
     }
+
+    public function editClubAssignment(Season $season, Club $club)
+    {
+        // get the pivot values
+        $club = $season->clubs->find($club);
+
+        return view('admin.seasons.editClubAssignment', compact('season','club'));
+    }
+
+    public function updateClubAssignment(Request $request, Season $season, Club $club)
+    {
+        $this->validate($request, [
+            'rank'              => 'nullable|integer|min:1',
+            'deduction_points'  => 'nullable|integer|min:1',
+            'deduction_goals'   => 'nullable|integer|min:1',
+            'withdrawal'        => 'nullable|date'
+        ]);
+
+        // sync with existing pivot entry
+        $season->clubs()->updateExistingPivot($club->id, [
+            'rank'              => $request->rank,
+            'deduction_points'  => $request->deduction_points,
+            'deduction_goals'   => $request->deduction_goals,
+            'withdrawal'        => $request->withdrawal,
+            'note'              => $request->note
+        ]);
+
+        Session::flash('success', 'Zuordnung erfolgreich geändert.');
+
+        return redirect()->route('seasons.show', $season);
+    }
 }
