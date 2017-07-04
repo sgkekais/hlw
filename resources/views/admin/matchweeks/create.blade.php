@@ -70,7 +70,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Anlegen</button>
-            <a class="btn btn-secondary" href="{{ route('seasons.index') }}">Abbrechen</a>
+            <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}">Abbrechen</a>
         </form>
     </div>
 
