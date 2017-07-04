@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Club;
 use App\Season;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -128,5 +129,47 @@ class SeasonController extends Controller
 
         // return to index
         return redirect()->route('seasons.index');
+    }
+
+    /*************************************************************/
+
+    /**
+     * Show the form for assigning a new club to a specific season
+     * @param Season $season
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createClubAssignment(Season $season)
+    {
+        // determine the clubs which are not assigned to the season, yet
+        $all_clubs          = Club::all();
+        $unassigned_clubs = $all_clubs->diff($season->clubs);
+
+        return view('admin.seasons.createClubAssignment', compact('season', 'unassigned_clubs'));
+    }
+
+    public function storeClubAssignment(Request $request, Season $season)
+    {
+        $this->validate($request, [
+            'rank'              => 'nullable|integer|min:1',
+            'deduction_points'  => 'nullable|integer|min:1',
+            'deduction_goals'   => 'nullable|integer|min:1',
+            'withdrawal'        => 'nullable|date'
+        ]);
+
+        // get the club
+        $club = Club::find($request->club_id);
+
+        // store the assignment in the pivot table
+        $season->clubs()->attach($club, [
+            'rank'              => $request->rank,
+            'deduction_points'  => $request->deduction_points,
+            'deduction_goals'   => $request->deduction_goals,
+            'withdrawal'        => $request->withdrawal,
+            'note'              => $request->note
+        ]);
+
+        Session::flash('success', 'Mannschaft '.$club->name.'erfolgreich zugeordnet.');
+
+        return redirect()->route('seasons.show', $season);
     }
 }

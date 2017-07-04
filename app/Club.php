@@ -40,17 +40,8 @@ class Club extends Model
     ];
 
     /**
-     * Relationship
-     * - a club has many players
-     * - a player belongs to one club at a given time
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-
-    public function players(){
-        return $this->hasMany(Player::class);
-    }*/
-
-    /**
-     *
+     * A club has many players
+     * A player can be related to many clubs (though not at the same time)
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function players(){
@@ -66,7 +57,9 @@ class Club extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function seasons(){
-        return $this->belongsToMany(Season::class, 'clubs_seasons'); // TODO: CHECK
+        return $this->belongsToMany(Season::class, 'clubs_seasons')
+            ->withPivot('rank', 'deduction_points', 'deduction_goals', 'withdrawal', 'note')
+            ->withTimestamps();
     }
 
     /**

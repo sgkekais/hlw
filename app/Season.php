@@ -65,13 +65,8 @@ class Season extends Model
      */
     public function clubs(){
         return $this->belongsToMany(Club::class, 'clubs_seasons')
-            ->withPivot(
-                'rank',
-                'deduction_points',
-                'deduction_goals',
-                'withdrawal',
-                'note'
-            )->withTimestamps();
+            ->withPivot('rank', 'deduction_points', 'deduction_goals', 'withdrawal', 'note')
+            ->withTimestamps();
 
     }
 }

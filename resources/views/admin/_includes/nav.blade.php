@@ -30,11 +30,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-soccer-ball-o"></span> Clubs & Leute</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown02">
+                        <a class="dropdown-item {{ Route::is('people.*') ? 'active' : null }}" href="{{ route('people.index') }}">Personen</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item {{ Route::is('clubs.*') ? 'active' : null }}" href="{{ route('clubs.index') }}">Mannschaften</a>
                         <a class="dropdown-item {{ Route::is('positions.*') ? 'active' : null }}" href="{{ route('positions.index') }}">Positionen</a>
                         <a class="dropdown-item {{ Route::is('referees.*') ? 'active' : null }}" href="{{ route('referees.index') }}">Schiedsrichter</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item {{ Route::is('people.*') ? 'active' : null }}" href="{{ route('people.index') }}">Personen</a>
                     </div>
                 </li>
             </ul>

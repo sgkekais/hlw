@@ -36,8 +36,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::resource('competitions', 'CompetitionController');
     Route::resource('divisions', 'DivisionController');
     Route::resource('seasons', 'SeasonController');
-    // all matchweek routes are handled with a specific season
-    Route::resource('seasons.matchweeks', 'MatchweekController');
+        // matchweek crud, all matchweek routes are handled with a specific season
+        Route::resource('seasons.matchweeks', 'MatchweekController');
+        // assigning clubs to seasons
+        Route::get('seasons/{season}/clubs/create', 'SeasonController@createClubAssignment')->name('createClubAssignment');
+        Route::post('seasons/{season}/clubs', 'SeasonController@storeClubAssignment')->name('storeClubAssignment');
+
+
     Route::resource('fixtures', 'FixtureController');
     Route::resource('stadiums', 'StadiumController');
 
