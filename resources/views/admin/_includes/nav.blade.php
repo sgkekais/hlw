@@ -23,7 +23,6 @@
                         <a class="dropdown-item {{ Route::is('competitions.*') ? 'active' : null }}" href="{{ route('competitions.index') }}">Wettbewerbe</a>
                         <a class="dropdown-item {{ Route::is('divisions.*') ? 'active' : null }}" href="{{ route('divisions.index') }}">Spielklassen</a>
                         <a class="dropdown-item {{ Route::is('seasons.*') ? 'active' : null }}" href="{{ route('seasons.index') }}">Saisons</a>
-                        <a class="dropdown-item {{ Route::is('fixtures.*') ? 'active' : null }}" href="{{ route('fixtures.index') }}">Paarungen</a>
                         <a class="dropdown-item {{ Route::is('stadiums.*') ? 'active' : null }}" href="{{ route('stadiums.index') }}">Spielorte</a>
                     </div>
                 </li>

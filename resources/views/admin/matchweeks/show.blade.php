@@ -12,7 +12,7 @@
                 <a class="btn btn-primary mb-4" href="{{ route('seasons.matchweeks.edit', [$matchweek->season,$matchweek]) }}" title="Spielwoche bearbeiten">
                     <span class="fa fa-pencil"></span> Bearbeiten
                 </a>
-                <a class="btn btn-primary mb-4" href="{{ route('fixtures.create') }}" title="Paarung hinzufügen">
+                <a class="btn btn-primary mb-4" href="{{ route('matchweeks.fixtures.create', $matchweek) }}" title="Paarung hinzufügen">
                     <span class="fa fa-pencil"></span> Paarung hinzufügen
                 </a>
             </div>
@@ -57,9 +57,12 @@
                         <thead class="thead-default">
                         <tr>
                             <th class="">ID</th>
-                            <th class="">Jahr</th>
+                            <th class="">Datum</th>
+                            <th class="">Paarung</th>
+                            <th class="">Ergebnis</th>
+                            <th class="">Ann.?</th>
                             <th class="">Veröffentlicht?</th>
-                            <th class="">Aktionen</th>
+                            <th>Aktionen</th>
                             <th class="">Änderungen</th>
                         </tr>
                         </thead>
@@ -68,26 +71,24 @@
                             <tr>
                                 <td><b>{{ $fixture->id }}</b></td>
                                 <td>
-                                    <a href="{{ route('fixtures.show', $fixture ) }}" title="Anzeigen">
-                                        @if($fixture->year_begin == $fixture->year_end)
-                                            {{ $fixture->year_begin }}
-                                        @else
-                                            {{ $fixture->year_begin }} / {{ $fixture->year_end }}
-                                        @endif
-                                    </a>
-                                    <br>
-                                    <span class="text-muted">{{ $fixture->matchweek->name }}</span>
-                                    <br>
-                                    Spielwochen: {{ $fixture->matchweeks()->get()->count() }}
+                                    @if($fixture->date)
+                                        {{ $fixture->date->format('d.m.Y') }}
+                                    @endif
+                                    @if($fixture->time)
+                                        - {{ $fixture->time }}
+                                    @endif
                                 </td>
+                                <td>{{ $fixture->club_id_home }} : {{ $fixture->club_id_away }}</td>
+                                <td>
+                                    {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
+                                    ({{ $fixture->goals_home_11m }}:{{ $fixture->goals_away_11m }})
+                                    - {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
+                                </td>
+                                <td>{{ $fixture->cancelled ? "X" : null }}</td>
                                 <td>{{ $fixture->published ? "JA" : "NEIN" }}</td>
                                 <td>
-                                    <!-- display details -->
-                                    <a class="btn btn-secondary" href="{{ route('fixtures.show', $fixture) }}" title="Saison anzeigen">
-                                        <span class="fa fa-eye"></span>
-                                    </a>
                                     <!-- edit -->
-                                    <a class="btn btn-primary" href="{{ route('fixtures.edit', $fixture) }}" title="Saison bearbeiten">
+                                    <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
                                 </td>

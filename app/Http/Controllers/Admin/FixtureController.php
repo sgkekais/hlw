@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Fixture;
+use App\Matchweek;
+use App\Stadium;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class FixtureController extends Controller
 {
@@ -23,9 +26,14 @@ class FixtureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Matchweek $matchweek)
     {
-        //
+        // get all clubs of the season
+        $clubs = $matchweek->season->clubs;
+        // get all stadiums
+        $stadiums = Stadium::all();
+
+        return view('admin.fixtures.create', compact('matchweek','clubs', 'stadiums'));
     }
 
     /**
@@ -34,9 +42,29 @@ class FixtureController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Matchweek $matchweek)
     {
-        //
+        $this->validate($request, [
+            'date' => 'nullable|date',
+            'time' => 'nullable',
+            'stadium_id' => 'nullable',
+            'club_id_home' => 'nullable',
+            'club_id_away' => 'nullable',
+            'goals_home' => 'nullable|integer|min:0',
+            'goals_away' => 'nullable|integer|min:0',
+            'goals_home_11m' => 'nullable|integer|min:0',
+            'goals_away_11m' => 'nullable|integer|min:0',
+            'goals_home_rated' => 'nullable|integer|min:0',
+            'goals_away_rated' => 'nullable|integer|min:0'
+        ]);
+
+        $fixture = new Fixture($request->all());
+
+        $matchweek->fixtures()->save($fixture);
+
+        Session::flash('success', 'Paarung angelegt');
+
+        return redirect()->route('seasons.matchweeks.show',[$matchweek->season, $matchweek]);
     }
 
     /**
