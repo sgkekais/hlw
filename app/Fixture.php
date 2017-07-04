@@ -88,11 +88,19 @@ class Fixture extends Model
         return $this->belongsTo(Stadium::class);
     }
 
+    /**
+     * A fixture belongs to one "home" club
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function club_home()
     {
         return $this->belongsTo(Club::class, 'club_id_home');
     }
 
+    /**
+     * A fixture belongs to one "away" club
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function club_away()
     {
         return $this->belongsTo(Club::class, 'club_id_away');
