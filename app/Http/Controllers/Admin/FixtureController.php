@@ -101,7 +101,7 @@ class FixtureController extends Controller
      * @param  \App\Fixture  $fixture
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fixture $fixture)
+    public function update(Request $request, Matchweek $matchweek, Fixture $fixture)
     {
         $this->validate($request, [
             'date' => 'nullable|date',
@@ -117,11 +117,9 @@ class FixtureController extends Controller
             'goals_away_rated' => 'nullable|integer|min:0'
         ]);
 
-        $fixture = new Fixture($request->all());
+        $fixture->update($request->all());
 
-        $matchweek->fixtures()->save($fixture);
-
-        Session::flash('success', 'Paarung angelegt');
+        Session::flash('success', 'Paarung geändert');
 
         return redirect()->route('seasons.matchweeks.show',[$matchweek->season, $matchweek]);
     }
