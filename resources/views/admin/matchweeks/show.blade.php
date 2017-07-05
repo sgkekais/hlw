@@ -103,6 +103,10 @@
                                     <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
+                                    <!-- reschedule -->
+                                    <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
                                 </td>
                                 <td>
                                     angelegt am {{ $fixture->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
