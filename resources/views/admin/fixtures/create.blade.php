@@ -101,14 +101,19 @@
             </div>
             <div class="form-group row">
                 <label for="goals_home_rated" class="col-md-2 col-form-label">Wertung - Heim</label>
-                <div class="col-md-4">
+                <div class="col-md-1">
                     <input type="number" class="form-control" name="goals_home_rated" id="goals_home_rated" aria-describedby="goals_home_ratedHelp" placeholder="{{ old('goals_home_rated') }}">
                     <small id="goals_homeHelp" class="form-text text-muted">Anzahl Tore der <b>Wertung</b> - Heim</small>
                 </div>
-                <label for="goals_away_rated" class="col-md-2 col-form-label">Tore - Gast</label>
-                <div class="col-md-4">
+                <label for="goals_away_rated" class="col-md-2 col-form-label">Wertung - Gast</label>
+                <div class="col-md-1">
                     <input type="number" class="form-control" name="goals_away_rated" id="goals_away_rated" aria-describedby="goals_away_ratedHelp" placeholder="{{ old('goals_away_rated') }}">
                     <small id="goals_homeHelp" class="form-text text-muted">Anzahl Tore der <b>Wertung</b> - Heim</small>
+                </div>
+                <label for="rated_note" class="col-md-2 col-form-label">Begründung</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="rated_note" name="rated_note" rows="3" aria-describedby="rated_noteHelp">{{ old('rated_note') }}</textarea>
+                    <small id="rated_noteHelp" class="form-text text-muted">Warum wurde gewertet?</small>
                 </div>
             </div>
             <!-- note -->

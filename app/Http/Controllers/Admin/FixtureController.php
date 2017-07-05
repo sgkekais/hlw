@@ -103,7 +103,27 @@ class FixtureController extends Controller
      */
     public function update(Request $request, Fixture $fixture)
     {
-        //
+        $this->validate($request, [
+            'date' => 'nullable|date',
+            'time' => 'nullable',
+            'stadium_id' => 'nullable',
+            'club_id_home' => 'nullable',
+            'club_id_away' => 'nullable',
+            'goals_home' => 'nullable|integer|min:0',
+            'goals_away' => 'nullable|integer|min:0',
+            'goals_home_11m' => 'nullable|integer|min:0',
+            'goals_away_11m' => 'nullable|integer|min:0',
+            'goals_home_rated' => 'nullable|integer|min:0',
+            'goals_away_rated' => 'nullable|integer|min:0'
+        ]);
+
+        $fixture = new Fixture($request->all());
+
+        $matchweek->fixtures()->save($fixture);
+
+        Session::flash('success', 'Paarung angelegt');
+
+        return redirect()->route('seasons.matchweeks.show',[$matchweek->season, $matchweek]);
     }
 
     /**
