@@ -84,9 +84,14 @@ class FixtureController extends Controller
      * @param  \App\Fixture  $fixture
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fixture $fixture)
+    public function edit(Matchweek $matchweek, Fixture $fixture)
     {
-        //
+        // get all clubs of the season
+        $clubs = $matchweek->season->clubs;
+        // get all stadiums
+        $stadiums = Stadium::all();
+
+        return view('admin.fixtures.edit', compact('matchweek', 'fixture', 'clubs', 'stadiums'));
     }
 
     /**

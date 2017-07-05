@@ -78,7 +78,19 @@
                                         - {{ $fixture->time }}
                                     @endif
                                 </td>
-                                <td>{{ $fixture->club_id_home }} : {{ $fixture->club_id_away }}</td>
+                                <td>
+                                    @if($fixture->club_home)
+                                        {{ $fixture->club_home->name_short }}
+                                    @else
+                                        {{ $fixture->club_id_home }}
+                                    @endif
+                                        :
+                                    @if($fixture->club_away)
+                                        {{ $fixture->club_away->name_short }}
+                                    @else
+                                        {{ $fixture->club_id_away }}
+                                    @endif
+                                </td>
                                 <td>
                                     {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
                                     ({{ $fixture->goals_home_11m }}:{{ $fixture->goals_away_11m }})
