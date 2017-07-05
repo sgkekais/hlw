@@ -58,7 +58,6 @@
                             <th class="">Hierarchieebene</th>
                             <th class="">Öffentlich?</th>
                             <th class="">Aktionen</th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -75,9 +74,6 @@
                                     <a class="btn btn-primary" href="{{ route('divisions.edit', $division) }}" title="Spielklasse bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
-                                </td>
-                                <td>
-
                                 </td>
                             </tr>
                         @endforeach

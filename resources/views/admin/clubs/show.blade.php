@@ -88,7 +88,6 @@
                         <th class="">Nummer</th>
                         <th class="">Position</th>
                         <th class="">Aktionen</th>
-                        <th class="">Änderungen</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -122,24 +121,12 @@
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             </td>
-                            <td>
-                                angelegt am {{ $p_active->pivot->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                <br>
-                                @if($p_active->pivot->updated_at != $p_active->pivot->created_at)
-                                    geändert am {{ $p_active->pivot->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @endif
-                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 <hr>
-                <h4 class="mb-4 mt-4">Ehemalige
-                    <span class="badge badge-pill badge-default">
-                        {{ $club->players()->whereNotNull('sign_off')->get()->count() }}
-                    </span>
-                </h4>
-
+                <h4 class="mb-4 mt-4">Ehemalige</h4>
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
@@ -148,7 +135,6 @@
                         <th class="">Anmeldung</th>
                         <th class="">Abmeldung</th>
                         <th class="">Aktionen</th>
-                        <th class="">Änderungen</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -168,15 +154,7 @@
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             </td>
-                            <td>
-                                angelegt am {{ $p_inactive->pivot->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                <br>
-                                @if($p_inactive->pivot->updated_at != $p_inactive->pivot->created_at)
-                                    geändert am {{ $p_inactive->pivot->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @endif
-                            </td>
                         </tr>
-
                     @endforeach
                     </tbody>
                 </table>
@@ -191,9 +169,7 @@
                     <tr>
                         <th class="">ID</th>
                         <th class="">Name</th>
-
                         <th class="">Aktionen</th>
-                        <th class="">Änderungen</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -208,24 +184,10 @@
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             </td>
-                            <td>
-                                angelegt am {{ $stadium->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @if($causer = ModelHelper::causerOfAction($stadium,'created'))
-                                    von {{ $causer->name }}
-                                @endif
-                                <br>
-                                @if($stadium->updated_at != $stadium->created_at)
-                                    geändert am {{ $stadium->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    @if($causer = ModelHelper::causerOfAction($stadium,'updated'))
-                                        von {{ $causer->name }}
-                                    @endif
-                                @endif
-                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>

@@ -88,7 +88,6 @@
                             <th class="">Name</th>
                             <th class="">Veröffentlicht?</th>
                             <th class="">Aktionen</th>
-                            <th class="">Änderungen</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -111,19 +110,6 @@
                                     <a class="btn btn-primary" href="{{ route('seasons.matchweeks.edit', [$season, $matchweek]) }}" title="Spielwoche bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
-                                </td>
-                                <td>
-                                    angelegt am {{ $matchweek->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    @if($causer = ModelHelper::causerOfAction($matchweek,'created'))
-                                        von {{ $causer->name }}
-                                    @endif
-                                    <br>
-                                    @if($matchweek->updated_at != $matchweek->created_at)
-                                        geändert am {{ $matchweek->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                        @if($causer = ModelHelper::causerOfAction($matchweek,'updated'))
-                                            von {{ $causer->name }}
-                                        @endif
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -149,8 +135,7 @@
                             <th class="">Punktabzug</th>
                             <th class="">Torabzug</th>
                             <th class="">Ausgeschieden?</th>
-                            <th>Aktionen</th>
-                            <th>Änderungen</th>
+                            <th class="">Aktionen</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -169,13 +154,6 @@
                                     <a class="btn btn-primary" href="{{ route('editClubAssignment',[$season,$club]) }}" title="Zuordnung bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
-                                </td>
-                                <td>
-                                    zugeordnet am {{ $club->pivot->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    <br>
-                                    @if($club->pivot->updated_at != $club->pivot->created_at)
-                                        geändert am {{ $club->pivot->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach

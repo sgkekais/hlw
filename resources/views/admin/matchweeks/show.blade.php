@@ -63,7 +63,6 @@
                             <th class="">Ann.?</th>
                             <th class="">Veröffentlicht?</th>
                             <th>Aktionen</th>
-                            <th class="">Änderungen</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -108,19 +107,6 @@
                                         <span class="fa fa-clock-o" aria-hidden="true"></span>
                                         <span class="fa fa-caret-right" aria-hidden="true"></span>
                                     </a>
-                                </td>
-                                <td>
-                                    angelegt am {{ $fixture->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    @if($causer = ModelHelper::causerOfAction($fixture,'created'))
-                                        von {{ $causer->name }}
-                                    @endif
-                                    <br>
-                                    @if($fixture->updated_at != $fixture->created_at)
-                                        geändert am {{ $fixture->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                        @if($causer = ModelHelper::causerOfAction($fixture,'updated'))
-                                            von {{ $causer->name }}
-                                        @endif
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach

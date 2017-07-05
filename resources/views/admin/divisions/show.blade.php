@@ -57,7 +57,6 @@
                             <th class="">Jahr</th>
                             <th class="">Veröffentlicht?</th>
                             <th class="">Aktionen</th>
-                            <th class="">Änderungen</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -87,19 +86,6 @@
                                     <a class="btn btn-primary" href="{{ route('seasons.edit', $season) }}" title="Saison bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
-                                </td>
-                                <td>
-                                    angelegt am {{ $season->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                    @if($causer = ModelHelper::causerOfAction($season,'created'))
-                                        von {{ $causer->name }}
-                                    @endif
-                                    <br>
-                                    @if($season->updated_at != $season->created_at)
-                                        geändert am {{ $season->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                        @if($causer = ModelHelper::causerOfAction($season,'updated'))
-                                            von {{ $causer->name }}
-                                        @endif
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -25,7 +25,6 @@
                     <th class="">Name</th>
                     <th class="">Typ</th>
                     <th class="">Aktionen</th>
-                    <th class="">Änderungen</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,19 +51,6 @@
                             <a class="btn btn-primary" href="{{ route('positions.edit', $position) }}" title="Position bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                             </a>
-                        </td>
-                        <td>
-                            angelegt am {{ $position->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                            @if($causer = ModelHelper::causerOfAction($position,'created'))
-                                von {{ $causer->name }}
-                            @endif
-                            <br>
-                            @if($position->updated_at != $position->created_at)
-                                geändert am {{ $position->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @if($causer = ModelHelper::causerOfAction($position,'updated'))
-                                    von {{ $causer->name }}
-                                @endif
-                            @endif
                         </td>
                     </tr>
                 @endforeach

@@ -26,7 +26,6 @@
                 <th class="">Hierarchieebene</th>
                 <th class="">Veröffentlicht?</th>
                 <th class="">Aktionen</th>
-                <th class="">Änderungen</th>
             </tr>
             </thead>
             <tbody>
@@ -51,19 +50,6 @@
                         <a class="btn btn-primary" href="{{ route('divisions.edit', $division) }}" title="Spielklasse bearbeiten">
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                         </a>
-                    </td>
-                    <td>
-                        angelegt am {{ $division->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                        @if($causer = ModelHelper::causerOfAction($division,'created'))
-                            von {{ $causer->name }}
-                        @endif
-                        <br>
-                        @if($division->updated_at != $division->created_at)
-                            geändert am {{ $division->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                            @if($causer = ModelHelper::causerOfAction($division,'updated'))
-                                von {{ $causer->name }}
-                            @endif
-                        @endif
                     </td>
                 </tr>
             @endforeach

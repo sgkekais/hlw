@@ -27,7 +27,6 @@
                     <th class="">gmaps?</th>
                     <th class="">Veröffentlicht?</th>
                     <th class="">Aktionen</th>
-                    <th class="">Änderungen</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,19 +49,6 @@
                             <a class="btn btn-primary" href="{{ route('stadiums.edit', $stadium) }}" title="Spielort bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                             </a>
-                        </td>
-                        <td>
-                            angelegt am {{ $stadium->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                            @if($causer = ModelHelper::causerOfAction($stadium,'created'))
-                                von {{ $causer->name }}
-                            @endif
-                            <br>
-                            @if($stadium->updated_at != $stadium->created_at)
-                                geändert am {{ $stadium->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @if($causer = ModelHelper::causerOfAction($stadium,'updated'))
-                                    von {{ $causer->name }}
-                                @endif
-                            @endif
                         </td>
                     </tr>
                 @endforeach

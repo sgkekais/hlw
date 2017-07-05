@@ -27,7 +27,6 @@
                     <th class="">Foto</th>
                     <th class="">Vereinsspieler</th>
                     <th class="">Aktionen</th>
-                    <th class="">Änderungen</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -51,19 +50,6 @@
                             <a class="btn btn-primary" href="{{ route('people.edit', $person) }}" title="Person bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                             </a>
-                        </td>
-                        <td>
-                            angelegt am {{ $person->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                            @if($causer = ModelHelper::causerOfAction($person,'created'))
-                                von {{ $causer->name }}
-                            @endif
-                            <br>
-                            @if($person->updated_at != $person->created_at)
-                                geändert am {{ $person->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @if($causer = ModelHelper::causerOfAction($person,'updated'))
-                                    von {{ $causer->name }}
-                                @endif
-                            @endif
                         </td>
                     </tr>
                 @endforeach

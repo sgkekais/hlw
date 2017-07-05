@@ -26,7 +26,6 @@
                     <th class="">Echter Verein?</th>
                     <th class="">Veröffentlicht?</th>
                     <th class="">Aktionen</th>
-                    <th class="">Änderungen</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,19 +47,6 @@
                             <a class="btn btn-primary" href="{{ route('clubs.edit', $club) }}" title="Mannschaft bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                             </a>
-                        </td>
-                        <td>
-                            angelegt am {{ $club->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                            @if($causer = ModelHelper::causerOfAction($club,'created'))
-                                von {{ $causer->name }}
-                            @endif
-                            <br>
-                            @if($club->updated_at != $club->created_at)
-                                geändert am {{ $club->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @if($causer = ModelHelper::causerOfAction($club,'updated'))
-                                    von {{ $causer->name }}
-                                @endif
-                            @endif
                         </td>
                     </tr>
                 @endforeach

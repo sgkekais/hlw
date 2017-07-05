@@ -25,7 +25,6 @@
                     <th class="">Name</th>
                     <th class="">Veröffentlicht?</th>
                     <th class="">Aktionen</th>
-                    <th class="">Änderungen</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,27 +45,6 @@
                             <a class="btn btn-primary" href="{{ route('competitions.edit', $competition) }}" title="Wettbewerb bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                             </a>
-                            <!-- delete
-                            <a class="btn btn-danger" href="{{ route('competitions.destroy', $competition->id) }}" title="Wettbewerb löschen" onclick="event.preventDefault(); document.getElementById('delete-form{{ $competition->id }}').submit();">
-                                <span class="fa fa-trash"></span>
-                            </a>
-                            <form id="delete-form{{ $competition->id }}" action="{{ route('competitions.destroy', $competition->id) }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                            </form>-->
-                        </td>
-                        <td>
-                            angelegt am {{ $competition->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                            @if($causer = ModelHelper::causerOfAction($competition,'created'))
-                                von {{ $causer->name }}
-                            @endif
-                            <br>
-                            @if($competition->updated_at != $competition->created_at)
-                                geändert am {{ $competition->updated_at->format('d.m.Y \\u\\m H:i') }} Uhr
-                                @if($causer = ModelHelper::causerOfAction($competition,'updated'))
-                                    von {{ $causer->name }}
-                                @endif
-                            @endif
                         </td>
                     </tr>
                 @endforeach
