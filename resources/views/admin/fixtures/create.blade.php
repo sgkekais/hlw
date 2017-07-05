@@ -93,7 +93,7 @@
                     <input type="number" class="form-control" name="goals_home_11m" id="goals_home_11m" aria-describedby="goals_home_11mHelp" placeholder="{{ old('goals_home_11m') }}">
                     <small id="goals_homeHelp" class="form-text text-muted">Anzahl Tore der Heimmannschaft <b>im</b> Elfmeterschießen</small>
                 </div>
-                <label for="goals_away_11m" class="col-md-2 col-form-label">Tore - Gast</label>
+                <label for="goals_away_11m" class="col-md-2 col-form-label">Tore - 11m - Gast</label>
                 <div class="col-md-4">
                     <input type="number" class="form-control" name="goals_away_11m" id="goals_away_11m" aria-describedby="goals_away_11mHelp" placeholder="{{ old('goals_away_11m') }}">
                     <small id="goals_homeHelp" class="form-text text-muted">Anzahl Tore der Gastmannschaft <b>im</b> Elfmeterschießen</small>
