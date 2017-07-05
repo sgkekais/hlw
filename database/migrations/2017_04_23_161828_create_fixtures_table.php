@@ -30,8 +30,8 @@ class CreateFixturesTable extends Migration
             $table->text('note')->nullable();
             $table->boolean('cancelled')->default('0');    // complete cancellation, default: not cancelled
             $table->boolean('published')->default('0');    // publish on website?, default: not listed/published
-            $table->integer('rescheduled_from_fixtures_id')->unsigned()->nullable();    // match has been rescheduled from fixture_id
-            $table->integer('rescheduled_to_fixtures_id')->unsigned()->nullable();      // match has been rescheduled to fixture_id
+            $table->integer('rescheduled_from_fixture_id')->unsigned()->nullable();    // match has been rescheduled from fixture_id
+            // $table->integer('rescheduled_to_fixture_id')->unsigned()->nullable();      // match has been rescheduled to fixture_id
             // add a rescheduled_by column to identify the team that cancelled the match
             $table->integer('rescheduled_by_club')->nullable()->unsigned();
 
@@ -50,12 +50,12 @@ class CreateFixturesTable extends Migration
             $table->foreign('club_id_away')
                 ->references('id')->on('clubs')
                 ->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('rescheduled_from_fixtures_id')
+            $table->foreign('rescheduled_from_fixture_id')
                 ->references('id')->on('fixtures')
                 ->onUpdate('cascade')->onDelete('set null');
-            $table->foreign('rescheduled_to_fixtures_id')
+            /*$table->foreign('rescheduled_to_fixtures_id')
                 ->references('id')->on('fixtures')
-                ->onUpdate('cascade')->onDelete('set null');
+                ->onUpdate('cascade')->onDelete('set null');*/
             $table->foreign('rescheduled_by_club')
                 ->references('id')->on('clubs')
                 ->onUpdate('cascade')->onDelete('set null');
