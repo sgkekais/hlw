@@ -98,11 +98,13 @@
                             <tr>
                                 <td>{{ $season->id }}</td>
                                 <td>
-                                    @if($season->year_begin == $season->year_end)
-                                        {{ $season->year_begin }}
-                                    @else
-                                        {{ $season->year_begin }} / {{ $season->year_end }}
-                                    @endif
+                                    <a href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
+                                        @if($season->year_begin == $season->year_end)
+                                            {{ $season->year_begin }}
+                                        @else
+                                            {{ $season->year_begin }} / {{ $season->year_end }}
+                                        @endif
+                                    </a>
                                     <br>
                                     <span class="text-muted">({{ $season->division->name }})</span>
                                 </td>
