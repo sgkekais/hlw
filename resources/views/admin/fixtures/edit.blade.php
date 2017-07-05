@@ -178,6 +178,17 @@
             <button type="submit" class="btn btn-primary">Ändern</button>
             <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$matchweek->season, $matchweek]) }}">Abbrechen</a>
         </form>
+        <hr>
+        <h3 class="mt-4">Paarung löschen</h3>
+        <form method="POST" action="{{ route('matchweeks.fixtures.destroy', [$matchweek, $fixture]) }}">
+            <!-- protection against CSRF (cross-site request forgery) attacks-->
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <span class="form-text">Löscht die Paarung.</span>
+            <br>
+            <button type="submit" class="btn btn-danger">Löschen</button>
+            <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$matchweek->season, $matchweek]) }}">Abbrechen</a>
+        </form>
     </div>
 
 @endsection

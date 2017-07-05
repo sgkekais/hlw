@@ -130,8 +130,15 @@ class FixtureController extends Controller
      * @param  \App\Fixture  $fixture
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fixture $fixture)
+    public function destroy(Matchweek $matchweek, Fixture $fixture)
     {
-        //
+        $id = $fixture->id;
+
+        // TODO: consider reschedule relationships
+        $fixture->delete();
+
+        Session::flash('success', 'Paarung mit der id '.$id.' gelöscht.');
+
+        return redirect()->route('seasons.matchweeks.show', [$matchweek->season, $matchweek]);
     }
 }
