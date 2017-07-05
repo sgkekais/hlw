@@ -132,21 +132,22 @@
                     <small id="playoff_relegationHelp" class="form-text text-muted">Plätze, die in die Relegation gehen</small>
                 </div>
             </div>
-            <!-- rules -->
+            <!-- max rescheduling -->
             <div class="form-group row">
-                <div class="col-md-2">
-                    <label for="rules">Regeln</label>
+                <label class="col-md-2 form-control-label" for="max_rescheduling">Max. Spielverlegungen</label>
+                <div class="col-md-4">
+                    <input type="number" class="form-control" name="max_rescheduling" id="max_rescheduling" aria-describedby="max_reschedulingHelp" value="{{ $season->max_rescheduling}}">
+                    <small id="playoff_championHelp" class="form-text text-muted">Maximale Anzahl der Spielverlegungen in der Saison</small>
                 </div>
+            </div>
+            <!-- rules and note -->
+            <div class="form-group row">
+                <label class="col-md-2 form-control-label" for="rules">Regeln</label>
                 <div class="col-md-4">
                     <textarea class="form-control" id="rules" name="rules" rows="3" aria-describedby="rulesHelp">{{ $season->rules }}</textarea>
                     <small id="rulesHelp" class="form-text text-muted">Besondere Regeln, bspw. Anmerkungen zu Auf-/Abstieg</small>
                 </div>
-            </div>
-            <!-- note -->
-            <div class="form-group row">
-                <div class="col-md-2">
-                    <label for="note">Notiz</label>
-                </div>
+                <label class="col-md-2 form-control-label" for="note">Notiz</label>
                 <div class="col-md-4">
                     <textarea class="form-control" id="note" name="note" rows="3" aria-describedby="noteHelp">{{ $season->note }}</textarea>
                     <small id="noteHelp" class="form-text text-muted">Interne Notiz</small>

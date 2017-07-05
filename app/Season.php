@@ -17,6 +17,7 @@ class Season extends Model
         'champion',
         'ranks_champion', 'ranks_promotion', 'ranks_relegation',
         'playoff_champion', 'playoff_cup', 'playoff_relegation',
+        'max_rescheduling',
         'rules',
         'note',
         'published'
@@ -33,6 +34,7 @@ class Season extends Model
         'champion',
         'ranks_champion', 'ranks_promotion', 'ranks_relegation',
         'playoff_champion', 'playoff_cup', 'playoff_relegation',
+        'max_rescheduling',
         'rules',
         'note',
         'published'

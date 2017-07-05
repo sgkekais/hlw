@@ -23,13 +23,13 @@ class Fixture extends Model
         'goals_away',
         'goals_home_11m',
         'goals_away_11m',
-        'goals_home_rated',
-        'goals_away_rated',
+        'goals_home_rated', 'goals_away_rated', 'rated_note',
         'note',
         'cancelled',
         'published',
         'rescheduled_from_fixture_id',
-        'rescheduled_by_club'
+        'rescheduled_by_club',
+        'reschedule_reason'
     ];
 
     /**
@@ -46,13 +46,13 @@ class Fixture extends Model
         'goals_away',
         'goals_home_11m',
         'goals_away_11m',
-        'goals_home_rated',
-        'goals_away_rated',
+        'goals_home_rated', 'goals_away_rated', 'rated_note',
         'note',
         'cancelled',
         'published',
         'rescheduled_from_fixture_id',
-        'rescheduled by club'
+        'rescheduled by club',
+        'reschedule_reason'
     ];
 
     /**

@@ -45,6 +45,7 @@ class SeasonController extends Controller
         $this->validate($request, [
             'year_begin' => 'required|digits:4',
             'year_end' => 'required|digits:4|after_or_equal:year_begin',
+            'max_rescheduling' => 'nullable|integer|min:1'
         ]);
 
         // create a new object
@@ -97,6 +98,7 @@ class SeasonController extends Controller
         $this->validate($request, [
             'year_begin' => 'required|digits:4',
             'year_end' => 'required|digits:4|after_or_equal:year_begin',
+            'max_rescheduling' => 'nullable|integer|min:1'
         ]);
 
         // update the season
