@@ -46,10 +46,18 @@
         <!-- show club tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#fixtures" role="tab">
+                <a class="nav-link active" data-toggle="tab" href="#seasons" role="tab">
+                    Saisons
+                    <span class="badge badge-pill badge-default">
+                        {{ $club->seasons->count() }}
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#fixtures" role="tab">
                     Paarungen
                     <span class="badge badge-pill badge-default">
-                        0
+                        {{ $club->fixtures_home->count() + $club->fixtures_away->count() }}
                     </span>
                 </a>
             </li>
@@ -69,10 +77,123 @@
         </ul>
         <!-- show club details -->
         <div class="tab-content">
-            <div class="tab-pane active" id="fixtures" role="tabpanel">
-                Saisons: {{ $club->seasons->count() }}
-
-                + jeweilige Paarungen
+            <!-- seasons -->
+            <div class="tab-pane active" id="seasons" role="tabpanel">
+                <h4 class="mb-4 mt-4">Saisons</h4>
+                @if($club->seasons->count() != 0)
+                    <table class="table table-sm table-striped table-hover">
+                        <thead class="thead-default">
+                        <tr>
+                            <th class="">ID</th>
+                            <th class="">Jahr</th>
+                            <th class="">Rang</th>
+                            <th class="">Punktabzug</th>
+                            <th class="">Torabzug</th>
+                            <th class="">Ausgeschieden</th>
+                            <th class="">Aktionen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($club->seasons as $season)
+                            <tr>
+                                <td>{{ $season->id }}</td>
+                                <td>
+                                    @if($season->year_begin == $season->year_end)
+                                        {{ $season->year_begin }}
+                                    @else
+                                        {{ $season->year_begin }} / {{ $season->year_end }}
+                                    @endif
+                                    <br>
+                                    <span class="text-muted">({{ $season->division->name }})</span>
+                                </td>
+                                <td>{{ $season->pivot->rank }}</td>
+                                <td>{{ $season->pivot->deduction_points }}</td>
+                                <td>{{ $season->pivot->deduction_goals }}</td>
+                                <td>{{ $season->pivot->withdrawal }}</td>
+                                <td>
+                                    <!-- edit -->
+                                    <a class="btn btn-primary" href="{{ route('editClubAssignment', [$season, $club]) }}" title="Zuordnung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <i>Mannschaft ist keiner Saison zugeordnet.</i>
+                @endif
+            </div>
+            <!-- fixtures -->
+            <div class="tab-pane" id="fixtures" role="tabpanel">
+                <h4 class="mb-4 mt-4">Paarungen</h4>
+                @if($club->getFixtures()->count() != 0)
+                    <table class="table table-sm table-striped table-hover">
+                        <thead class="thead-default">
+                        <tr>
+                            <th class="">ID</th>
+                            <th class="">Datum</th>
+                            <th class="">Paarung</th>
+                            <th class="">Ergebnis</th>
+                            <th class="">Ann.?</th>
+                            <th class="">Veröffentlicht?</th>
+                            <th class="">Aktionen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($club->getFixtures() as $fixture)
+                            <tr>
+                                <td><b>{{ $fixture->id }}</b></td>
+                                <td>
+                                    @if($fixture->date)
+                                        {{ $fixture->date->format('d.m.Y') }}
+                                    @endif
+                                    @if($fixture->time)
+                                        - {{ $fixture->time }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($fixture->club_home)
+                                        <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
+                                            {{ $fixture->club_home->name_short }}
+                                        </a>
+                                    @else
+                                        -
+                                    @endif
+                                    :
+                                    @if($fixture->club_away)
+                                        <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
+                                            {{ $fixture->club_away->name_short }}
+                                        </a>
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
+                                    ({{ $fixture->goals_home_11m }}:{{ $fixture->goals_away_11m }})
+                                    - {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
+                                </td>
+                                <td>{{ $fixture->cancelled ? "X" : null }}</td>
+                                <td>{{ $fixture->published ? "JA" : "NEIN" }}</td>
+                                <td>
+                                    <!-- edit -->
+                                    <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                    <!-- reschedule -->
+                                    <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung verlegen">
+                                        <span class="fa fa-clock-o" aria-hidden="true"></span>
+                                        <span class="fa fa-caret-right" aria-hidden="true"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <i>Mannschaft ist keiner Paarung zugeordnet.</i>
+                @endif
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
                 <h4 class="mb-4 mt-4">Aktive

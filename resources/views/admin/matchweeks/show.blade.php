@@ -79,15 +79,19 @@
                                 </td>
                                 <td>
                                     @if($fixture->club_home)
-                                        {{ $fixture->club_home->name_short }}
+                                        <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
+                                            {{ $fixture->club_home->name_short }}
+                                        </a>
                                     @else
-                                        {{ $fixture->club_id_home }}
+                                        -
                                     @endif
                                         :
                                     @if($fixture->club_away)
-                                        {{ $fixture->club_away->name_short }}
+                                        <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
+                                            {{ $fixture->club_away->name_short }}
+                                        </a>
                                     @else
-                                        {{ $fixture->club_id_away }}
+                                        -
                                     @endif
                                 </td>
                                 <td>
