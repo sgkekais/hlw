@@ -28,8 +28,7 @@ class Fixture extends Model
         'note',
         'cancelled',
         'published',
-        'rescheduled_from_fixtures_id',
-        'rescheduled_to_fixtures_id',
+        'rescheduled_from_fixture_id',
         'rescheduled_by_club'
     ];
 
@@ -52,8 +51,7 @@ class Fixture extends Model
         'note',
         'cancelled',
         'published',
-        'rescheduled_from_fixtures_id',
-        'rescheduled_to_fixtures_id',
+        'rescheduled_from_fixture_id',
         'rescheduled by club'
     ];
 
