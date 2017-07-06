@@ -6,6 +6,7 @@ use App\Club;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ClubController extends Controller
 {
@@ -40,18 +41,22 @@ class ClubController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:2',
-            'name_short' => 'nullable|min:2',
-            'name_code' => 'nullable|min:2',
-            'founded' => 'nullable|date',
-            'league_entry' => 'nullable|date',
-            'league_exit' => 'nullable|date|after_or_equal:league_entry',
-            'website' => 'nullable|url',
-            'facebook' => 'nullable|url'
+            'name'          => 'required|min:2',
+            'name_short'    => 'nullable|min:2',
+            'name_code'     => 'nullable|min:2',
+            'founded'       => 'nullable|date',
+            'league_entry'  => 'nullable|date',
+            'league_exit'   => 'nullable|date|after_or_equal:league_entry',
+            'website'       => 'nullable|url',
+            'facebook'      => 'nullable|url',
+            'logo'          => 'nullable|image|mimes:png'
         ]);
 
-        // create a new object
+        // create a new object with the request data
         $club = new Club($request->all());
+
+        // store the uploaded logo and save the path to the logo in the database
+        $club->logo_url = $request->file('logo')->store('public/clublogos');
 
         // save the club
         $club->save();
@@ -98,15 +103,27 @@ class ClubController extends Controller
     public function update(Request $request, Club $club)
     {
         $this->validate($request, [
-            'name' => 'required|min:2',
-            'name_short' => 'nullable|min:2',
-            'name_code' => 'nullable|min:2',
-            'founded' => 'nullable|date',
-            'league_entry' => 'nullable|date',
-            'league_exit' => 'nullable|date|after_or_equal:league_entry',
-            'website' => 'nullable|url',
-            'facebook' => 'nullable|url'
+            'name'          => 'required|min:2',
+            'name_short'    => 'nullable|min:2',
+            'name_code'     => 'nullable|min:2',
+            'founded'       => 'nullable|date',
+            'league_entry'  => 'nullable|date',
+            'league_exit'   => 'nullable|date|after_or_equal:league_entry',
+            'website'       => 'nullable|url',
+            'facebook'      => 'nullable|url',
+            'logo'          => 'nullable|image|mimes:png'
         ]);
+
+        // is there a new logo selected?
+        if($request->hasFile('logo'))
+        {
+            // then delete the old logo
+            Storage::delete($club->logo_url);
+            // and save the new logo
+            $club->logo_url = $request->file('logo')->store('public/clublogos');
+            // save the club
+            $club->save();
+        }
 
         // save the remaining changes
         $club->update($request->all());

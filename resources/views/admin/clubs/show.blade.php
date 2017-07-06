@@ -3,9 +3,18 @@
 @section('content')
 
     <div class="container">
-        <h1 class="mt-4">Details zu Mannschaft</h1>
-        <h2 class="mt-4 text-primary">&mdash; {{ $club->name }}</h2>
-
+        <div class="row mt-4">
+            <div class="col-2">
+                @if($club->logo_url)
+                    <img src="{{ Storage::url($club->logo_url) }}" class="img-fluid " title="Vereinswappen" alt="Vereinswappen">
+                @else
+                @endif
+            </div>
+            <div class="col-10 justify-content-end">
+                <h1 class="">Details zu Mannschaft</h1>
+                <h2 class="mt-4 text-primary">&mdash; {{ $club->name }}</h2>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <h3 class="mt-4">Aktionen</h3>
@@ -16,7 +25,6 @@
                 <a class="btn btn-secondary" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
                     <span class="fa fa-plus-circle"></span> Spieler
                 </a>
-
                 <a class="btn btn-secondary" href="#" title="Spielort zuordnen">
                     <span class="fa fa-plus-circle"></span> Spielort
                 </a>

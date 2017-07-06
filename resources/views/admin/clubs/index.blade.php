@@ -18,10 +18,11 @@
         <hr>
         <!-- list all clubs -->
         <h2 class="mt-4">Angelegte Mannschaften <span class="badge badge-default">{{ $clubs->count() }}</span></h2>
-            <table class="table table-sm table-striped table-hover">
+            <table class="table table-sm table-striped table-hover ">
                 <thead class="thead-default">
                 <tr>
                     <th class="">ID</th>
+                    <th></th>
                     <th class="">Name</th>
                     <th class="">Echter Verein?</th>
                     <th class="">Veröffentlicht?</th>
@@ -32,7 +33,14 @@
                 @foreach($clubs as $club)
                     <tr>
                         <td><b>{{ $club->id }}</b></td>
-                        <td>
+                        <td class="align-middle text-center">
+                            @if($club->logo_url)
+                                <img src="{{ Storage::url($club->logo_url) }}" class="w-25 img-fluid" title="Vereinswappen" alt="Vereinswappen">
+                            @else
+                                <span class="fa fa-circle-o"></span>
+                            @endif
+                        </td>
+                        <td class="align-middle">
                             <a href="{{ route('clubs.show', $club ) }}" title="Anzeigen">{{ $club->name }}</a>
                             <br>Spieler: {{ $club->players()->get()->count() }}
                         </td>

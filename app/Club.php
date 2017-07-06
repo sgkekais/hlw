@@ -15,7 +15,6 @@ class Club extends Model
      */
     protected static $logAttributes = [
         'name', 'name_short', 'name_code',
-        'logo_url',
         'founded', 'league_entry', 'league_exit',
         'colours_club_primary', 'colours_club_secondary',
         'colours_kit_home_primary', 'colours_kit_home_secondary',
@@ -30,7 +29,6 @@ class Club extends Model
      */
     protected $fillable = [
         'name', 'name_short', 'name_code',
-        'logo_url',
         'founded', 'league_entry', 'league_exit',
         'colours_club_primary', 'colours_club_secondary',
         'colours_kit_home_primary', 'colours_kit_home_secondary',

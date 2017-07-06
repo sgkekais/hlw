@@ -6,7 +6,7 @@
         <!-- create a new club -->
         <h1 class="mt-4 mb-4">Mannschaft anlegen</h1>
 
-        <form method="POST" action="{{ route('clubs.store') }}">
+        <form method="POST" action="{{ route('clubs.store') }}" enctype="multipart/form-data" >
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
             <!-- names -->
@@ -40,11 +40,11 @@
             <!-- logo -->
             <div class="form-group row">
                 <div class="col-md-2">
-                    <label for="logo_url">Wappen</label>
+                    <label for="logo">Wappen</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="file" class="form-control-file" name="logo_url" id="logo_url" aria-describedby="logo_urlHelp" placeholder="{{ old('logo_url') }}">
-                    <small id="logo_urlHelp" class="form-text text-muted">Vereinswappen</small>
+                    <input type="file" class="form-control-file" name="logo" id="logo" aria-describedby="logoHelp" placeholder="{{ old('logo') }}">
+                    <small id="logoHelp" class="form-text text-muted">Vereinswappen</small>
                 </div>
             </div>
             <!-- founded -->

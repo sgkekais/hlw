@@ -21,7 +21,7 @@
         @endif
         <hr>
         <h3 class="mt-4 mb-4">Mannschaft ändern</h3>
-        <form method="POST" action="{{ route('clubs.update', $club) }}">
+        <form method="POST" action="{{ route('clubs.update', $club) }}" enctype="multipart/form-data">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
@@ -56,11 +56,18 @@
             <!-- logo -->
             <div class="form-group row">
                 <div class="col-md-2">
-                    <label for="logo_url">Wappen</label>
+                    <label for="logo">Wappen</label>
+                </div>
+                <div class="col-md-2">
+                    @if($club->logo_url)
+                        <img src="{{ Storage::url($club->logo_url) }}" class="img-fluid " title="Vereinswappen" alt="Vereinswappen">
+                    @else
+                        <i>Kein Vereinswappen vorhanden</i>
+                    @endif
                 </div>
                 <div class="col-md-4">
-                    <input type="file" class="form-control-file" name="logo_url" id="logo_url" aria-describedby="logo_urlHelp" placeholder="{{ old('logo_url') }}">
-                    <small id="logo_urlHelp" class="form-text text-muted">Vereinswappen</small>
+                    <input type="file" class="form-control-file" name="logo" id="logo" aria-describedby="logoHelp">
+                    <small id="logoHelp" class="form-text text-muted">Vereinswappen hochladen oder ersetzen. Muss im .png-Format mit transparentem Hintergrund vorliegen.</small>
                 </div>
             </div>
             <!-- founded -->
