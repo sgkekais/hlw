@@ -146,7 +146,7 @@ class ClubController extends Controller
             $club->save();
         }
 
-        // save the remaining changes
+        // update the remaining changes
         $club->update($request->all());
 
         // flash success message
