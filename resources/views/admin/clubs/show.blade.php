@@ -9,11 +9,16 @@
         <div class="row">
             <div class="col-md-6">
                 <h3 class="mt-4">Aktionen</h3>
-                <a class="btn btn-primary mb-4" href="{{ route('clubs.edit', $club ) }}" title="Wettbewerb bearbeiten">
+                <a class="btn btn-primary mb-2" href="{{ route('clubs.edit', $club ) }}" title="Wettbewerb bearbeiten">
                     <span class="fa fa-pencil"></span> Bearbeiten
                 </a>
-                <a class="btn btn-primary mb-4" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
-                    <span class="fa fa-pencil"></span> Spieler zuordnen
+                <br>
+                <a class="btn btn-secondary" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
+                    <span class="fa fa-plus-circle"></span> Spieler
+                </a>
+
+                <a class="btn btn-secondary" href="#" title="Spielort zuordnen">
+                    <span class="fa fa-plus-circle"></span> Spielort
                 </a>
             </div>
             <!-- dates -->
@@ -123,7 +128,7 @@
                         </tbody>
                     </table>
                 @else
-                    <i>Mannschaft ist keiner Saison zugeordnet.</i>
+                    <i>Die Mannschaft ist keiner Saison zugeordnet.</i>
                 @endif
             </div>
             <!-- fixtures -->
@@ -194,123 +199,133 @@
                         </tbody>
                     </table>
                 @else
-                    <i>Mannschaft ist keiner Paarung zugeordnet.</i>
+                    <i>Der Mannschaft ist keiner Paarung zugeordnet.</i>
                 @endif
             </div>
             <div class="tab-pane" id="players" role="tabpanel">
                 <h4 class="mb-4 mt-4">Aktive
                     <small class="text-muted">(davon <b>{{ $club->players()->whereNotNull('registered_at_club')->get()->count() }}</b> Vereinsspieler)</small>
                 </h4>
-                <table class="table table-sm table-striped table-hover">
-                    <thead class="thead-default">
-                    <tr>
-                        <th class="">ID</th>
-                        <th class="">Nachname, Vorname</th>
-                        <th class="">Anmeldung</th>
-                        <th class="">Vereinsspieler?</th>
-                        <th class="">Nummer</th>
-                        <th class="">Position</th>
-                        <th class="">Aktionen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($club->players()->whereNull('sign_off')->get() as $p_active)
+                @if($club->players()->whereNull('sign_off')->get()->count() > 0)
+                    <table class="table table-sm table-striped table-hover">
+                        <thead class="thead-default">
                         <tr>
-                            <td>{{ $p_active->id }}</td>
-                            <td>
-                                <a href="{{ route('people.edit', $p_active) }}" title="Person bearbeiten (nicht Spieler)">
-                                    {{ $p_active->last_name }}, {{ $p_active->first_name }}
-                                </a>
-                            </td>
-                            <td>{{ $p_active->pivot->sign_on->format('d.m.Y') }}</td>
-                            <td>
-                                @if($p_active->registered_at_club)
-                                    <span class='text-danger'>JA</span>
-                                @else
-                                    <span class='text-success'>NEIN</span>
-                                @endif
-                            </td>
-                            <td>{{ $p_active->pivot->number }}</td>
-                            <td>
-                                @if($p_active->pivot->position_id)
-                                    {{ $p_active->pivot->position->name }}
-                                @else
-                                    -
-                                @endif
-                            </td>
-                            <td>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('players.edit', [$club, $p_active]) }}" title="Spieler bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
-                            </td>
+                            <th class="">ID</th>
+                            <th class="">Nachname, Vorname</th>
+                            <th class="">Anmeldung</th>
+                            <th class="">Vereinsspieler?</th>
+                            <th class="">Nummer</th>
+                            <th class="">Position</th>
+                            <th class="">Aktionen</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                <hr>
-                <h4 class="mb-4 mt-4">Ehemalige</h4>
-                <table class="table table-sm table-striped table-hover">
-                    <thead class="thead-default">
-                    <tr>
-                        <th class="">ID</th>
-                        <th class="">Nachname, Vorname</th>
-                        <th class="">Anmeldung</th>
-                        <th class="">Abmeldung</th>
-                        <th class="">Aktionen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($club->players()->whereNotNull('sign_off')->get() as $p_inactive)
+                        </thead>
+                        <tbody>
+                        @foreach($club->players()->whereNull('sign_off')->get() as $p_active)
+                            <tr>
+                                <td>{{ $p_active->id }}</td>
+                                <td>
+                                    <a href="{{ route('people.edit', $p_active) }}" title="Person bearbeiten (nicht Spieler)">
+                                        {{ $p_active->last_name }}, {{ $p_active->first_name }}
+                                    </a>
+                                </td>
+                                <td>{{ $p_active->pivot->sign_on->format('d.m.Y') }}</td>
+                                <td>
+                                    @if($p_active->registered_at_club)
+                                        <span class='text-danger'>JA</span>
+                                    @else
+                                        <span class='text-success'>NEIN</span>
+                                    @endif
+                                </td>
+                                <td>{{ $p_active->pivot->number }}</td>
+                                <td>
+                                    @if($p_active->pivot->position_id)
+                                        {{ $p_active->pivot->position->name }}
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    <!-- edit -->
+                                    <a class="btn btn-primary" href="{{ route('players.edit', [$club, $p_active]) }}" title="Spieler bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <i>Der Mannschaft sind keine Spieler zugeordnet.</i>
+                @endif
+                @if($club->players()->whereNotNull('sign_off')->get()->count() > 0)
+                    <hr>
+                    <h4 class="mb-4 mt-4">Ehemalige</h4>
+                    <table class="table table-sm table-striped table-hover">
+                        <thead class="thead-default">
                         <tr>
-                            <td>{{ $p_inactive->id }}</td>
-                            <td>
-                                <a href="" title="Person bearbeiten">
-                                    {{ $p_inactive->last_name }}, {{ $p_inactive->first_name }}
-                                </a>
-                            </td>
-                            <td>{{ $p_inactive->pivot->sign_on->format('d.m.Y') }}</td>
-                            <td>{{ $p_inactive->pivot->sign_off->format('d.m.Y') }}</td>
-                            <td>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('players.edit', [$club, $p_inactive]) }}" title="Spieler bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
-                            </td>
+                            <th class="">ID</th>
+                            <th class="">Nachname, Vorname</th>
+                            <th class="">Anmeldung</th>
+                            <th class="">Abmeldung</th>
+                            <th class="">Aktionen</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($club->players()->whereNotNull('sign_off')->get() as $p_inactive)
+                            <tr>
+                                <td>{{ $p_inactive->id }}</td>
+                                <td>
+                                    <a href="" title="Person bearbeiten">
+                                        {{ $p_inactive->last_name }}, {{ $p_inactive->first_name }}
+                                    </a>
+                                </td>
+                                <td>{{ $p_inactive->pivot->sign_on->format('d.m.Y') }}</td>
+                                <td>{{ $p_inactive->pivot->sign_off->format('d.m.Y') }}</td>
+                                <td>
+                                    <!-- edit -->
+                                    <a class="btn btn-primary" href="{{ route('players.edit', [$club, $p_inactive]) }}" title="Spieler bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @endif
             </div>
             <!-- stadiums -->
             <div class="tab-pane" id="stadiums" role="tabpanel">
                 <h4 class="mb-4 mt-4">
                     Spielort(e)
                 </h4>
-                <table class="table table-sm table-striped table-hover">
-                    <thead class="thead-default">
-                    <tr>
-                        <th class="">ID</th>
-                        <th class="">Name</th>
-                        <th class="">Aktionen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($club->stadiums as $stadium)
+                @if( $club->stadiums()->count() > 0 )
+                    <table class="table table-sm table-striped table-hover">
+                        <thead class="thead-default">
                         <tr>
-                            <td>{{ $stadium->id }}</td>
-                            <td>{{ $stadium->name }}</td>
-
-                            <td>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('players.edit', $stadium) }}" title="Spieler bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
-                            </td>
+                            <th class="">ID</th>
+                            <th class="">Name</th>
+                            <th class="">Aktionen</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($club->stadiums as $stadium)
+                            <tr>
+                                <td>{{ $stadium->id }}</td>
+                                <td>{{ $stadium->name }}</td>
+
+                                <td>
+                                    <!-- edit -->
+                                    <a class="btn btn-primary" href="{{ route('players.edit', $stadium) }}" title="Spieler bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <i>Der Mannschaft sind keine Spielorte zugeordnet.</i>
+                @endif
             </div>
         </div>
     </div>

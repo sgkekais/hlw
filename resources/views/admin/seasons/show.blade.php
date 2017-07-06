@@ -19,13 +19,12 @@
                     <a class="btn btn-primary mb-2" href="{{ route('seasons.edit', $season ) }}" title="Saison bearbeiten">
                         <span class="fa fa-pencil"></span> Saison bearbeiten
                     </a>
-                    <br>
-                    <a class="btn btn-outline-success mb-2" href="{{ route('seasons.matchweeks.create', $season ) }}" title="Spielwoche hinzufügen">
-                        <span class="fa fa-plus-circle"></span> Spielwoche hinzufügen
+                <br>
+                    <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.create', $season ) }}" title="Spielwoche hinzufügen">
+                        <span class="fa fa-plus-circle"></span> Spielwoche
                     </a>
-                    <br>
-                    <a class="btn btn-outline-success" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
-                        <span class="fa fa-plus-circle"></span> Mannschaft zuordnen
+                    <a class="btn btn-secondary" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
+                        <span class="fa fa-plus-circle"></span> Mannschaft
                     </a>
             </div>
             <!-- dates -->

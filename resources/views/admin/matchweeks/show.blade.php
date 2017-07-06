@@ -9,11 +9,12 @@
         <div class="row">
             <div class="col-md-6">
                 <h3 class="mt-4">Aktionen</h3>
-                <a class="btn btn-primary mb-4" href="{{ route('seasons.matchweeks.edit', [$matchweek->season,$matchweek]) }}" title="Spielwoche bearbeiten">
+                <a class="btn btn-primary mb-2" href="{{ route('seasons.matchweeks.edit', [$matchweek->season,$matchweek]) }}" title="Spielwoche bearbeiten">
                     <span class="fa fa-pencil"></span> Bearbeiten
                 </a>
-                <a class="btn btn-primary mb-4" href="{{ route('matchweeks.fixtures.create', $matchweek) }}" title="Paarung hinzufügen">
-                    <span class="fa fa-pencil"></span> Paarung hinzufügen
+                <br>
+                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.create', $matchweek) }}" title="Paarung hinzufügen">
+                    <span class="fa fa-plus-circle"></span> Paarung
                 </a>
             </div>
             <!-- dates -->
