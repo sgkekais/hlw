@@ -55,14 +55,22 @@ class ClubController extends Controller
         // create a new object with the request data
         $club = new Club($request->all());
 
-        // store the uploaded logo and save the path to the logo in the database
-        $club->logo_url = $request->file('logo')->store('public/clublogos');
+        // is there a logo?
+        $store_message = "";
+        if($request->hasFile('logo'))
+        {
+            // store the uploaded logo and save the path to the logo in the database
+            if($club->logo_url = $request->file('logo')->store('public/clublogos'))
+            {
+                $store_message = "Vereinswappen erfoglreich hochgeladen.";
+            }
+        }
 
         // save the club
         $club->save();
 
         // flash success message and return club name as test
-        Session::flash('success', 'Mannschaft '.$club->name.' erfolgreich angelegt.');
+        Session::flash('success', 'Mannschaft '.$club->name.' erfolgreich angelegt. '.$store_message);
 
         // return to index
         return redirect()->route('clubs.index');
@@ -128,7 +136,7 @@ class ClubController extends Controller
         // save the remaining changes
         $club->update($request->all());
 
-        // flash success message and return club name as test
+        // flash success message
         Session::flash('success', 'Mannschaft '.$club->name.' erfolgreich geändert.');
 
         // return to index
@@ -147,6 +155,7 @@ class ClubController extends Controller
         $id = $club->id;
 
         // delete the club logo first
+        $delete_message = "";
         if($club->logo_url)
         {
             if(Storage::delete($club->logo_url))
@@ -158,7 +167,7 @@ class ClubController extends Controller
         // then delete the club
         $club->delete();
 
-        // flash message
+        // flash success message
         Session::flash('success', 'Mannschaft '.$name.' mit der ID '.$id.' gelöscht. '.$delete_message);
 
         // return to index
