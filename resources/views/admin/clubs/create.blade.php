@@ -80,14 +80,14 @@
                     <label for="colours_club_primary">Vereinsfarbe - Primär</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="color" class="form-control" name="colours_club_primary" id="colours_club_primary" aria-describedby="colours_club_primaryHelp" placeholder="{{ old('colours_club_primary', '#000') }}">
+                    <input type="color" class="form-control" name="colours_club_primary" id="colours_club_primary" aria-describedby="colours_club_primaryHelp" placeholder="{{ old('colours_club_primary') }}">
                     <small id="colours_club_primaryHelp" class="form-text text-muted">Primärfarbe des Vereins</small>
                 </div>
                 <div class="col-md-2">
                     <label for="colours_club_secondary">Vereinsfarbe - Sekundär</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="color" class="form-control" name="colours_club_secondary" id="colours_club_secondary" aria-describedby="colours_club_secondaryHelp" placeholder="{{ old('colours_club_secondary', '#FFF') }}">
+                    <input type="color" class="form-control" name="colours_club_secondary" id="colours_club_secondary" aria-describedby="colours_club_secondaryHelp" placeholder="{{ old('colours_club_secondary') }}">
                     <small id="colours_club_secondaryHelp" class="form-text text-muted">Sekundärfarbe des Vereins</small>
                 </div>
             </div>
@@ -97,25 +97,40 @@
                     <label for="colours_kit_home_primary">Heimtrikotfarbe - Primär</label>
                 </div>
                 <div class="col-md-1">
-                    <input type="color" class="form-control" name="colours_kit_home_primary" id="colours_kit_home_primary" aria-describedby="colours_kit_home_primaryHelp" placeholder="{{ old('colours_kit_home_primary', '#000') }}">
+                    <input type="color" class="form-control" name="colours_kit_home_primary" id="colours_kit_home_primary" aria-describedby="colours_kit_home_primaryHelp" placeholder="{{ old('colours_kit_home_primary') }}">
                 </div>
                 <div class="col-md-2">
                     <label for="colours_kit_home_secondary">Heimtrikotfarbe - Sekundär</label>
                 </div>
                 <div class="col-md-1">
-                    <input type="color" class="form-control" name="colours_kit_home_secondary" id="colours_kit_home_secondary" aria-describedby="colours_club_secondaryHelp" placeholder="{{ old('colours_kit_home_secondary', '#FFF') }}">
+                    <input type="color" class="form-control" name="colours_kit_home_secondary" id="colours_kit_home_secondary" aria-describedby="colours_club_secondaryHelp" placeholder="{{ old('colours_kit_home_secondary') }}">
                 </div>
                 <div class="col-md-2">
                     <label for="colours_kit_away_primary">Auswärtstrikotfarbe - Primär</label>
                 </div>
                 <div class="col-md-1">
-                    <input type="color" class="form-control" name="colours_kit_away_primary" id="colours_kit_away_primary" aria-describedby="colours_kit_home_primaryHelp" placeholder="{{ old('colours_kit_away_primary', '#000') }}">
+                    <input type="color" class="form-control" name="colours_kit_away_primary" id="colours_kit_away_primary" aria-describedby="colours_kit_home_primaryHelp" placeholder="{{ old('colours_kit_away_primary') }}">
                 </div>
                 <div class="col-md-2">
                     <label for="colours_kit_away_secondary">Auswärtstrikotfarbe - Sekundär</label>
                 </div>
                 <div class="col-md-1">
-                    <input type="color" class="form-control" name="colours_kit_away_secondary" id="colours_kit_away_secondary" aria-describedby="colours_club_secondaryHelp" placeholder="{{ old('colours_kit_away_secondary', '#FFF') }}">
+                    <input type="color" class="form-control" name="colours_kit_away_secondary" id="colours_kit_away_secondary" aria-describedby="colours_club_secondaryHelp" placeholder="{{ old('colours_kit_away_secondary') }}">
+                </div>
+            </div>
+            <!-- ignore control for kit colors -->
+            <div class="form-group row justify-content-center">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="ignore_kit_home" name="ignore_kit_home">
+                        Heimtrikotfarben ignorieren?
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="ignore_kit_away" name="ignore_kit_away">
+                        Auswärtstrikotfarben ignorieren?
+                    </label>
                 </div>
             </div>
             <!-- websites -->

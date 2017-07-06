@@ -66,6 +66,19 @@ class ClubController extends Controller
             }
         }
 
+        // ignore checkbox set?
+        if($request->has('ignore_kit_home'))
+        {
+            $club->colours_kit_home_primary     = null;
+            $club->colours_kit_home_secondary   = null;
+        }
+
+        if($request->has('ignore_kit_away'))
+        {
+            $club->colours_kit_away_primary     = null;
+            $club->colours_kit_away_secondary   = null;
+        }
+
         // save the club
         $club->save();
 

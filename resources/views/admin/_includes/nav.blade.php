@@ -1,7 +1,7 @@
 <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
     <div class="container">
         <!-- toggler -->
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse1" aria-controls="navbarCollapse1" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -12,7 +12,7 @@
         </a>
 
         <!-- toggable navigation bar -->
-        <div class="collapse navbar-collapse" id="navbarCollapse1">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item {{ Route::is('admin') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('admin') }}"><span class="fa fa-dashboard"></span> Dashboard</a>
@@ -74,7 +74,6 @@
                         </form>
                     </div>
                 </li>
-
             </ul>
         </div>
     </div>
