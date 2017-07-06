@@ -146,11 +146,20 @@ class ClubController extends Controller
         $name = $club->name;
         $id = $club->id;
 
-        // delete the model
+        // delete the club logo first
+        if($club->logo_url)
+        {
+            if(Storage::delete($club->logo_url))
+            {
+                $delete_message = "Vereinswappen vom Dateiserver gelöscht.";
+            }
+        }
+
+        // then delete the club
         $club->delete();
 
         // flash message
-        Session::flash('success', 'Mannschaft '.$name.' mit der ID '.$id.' gelöscht.');
+        Session::flash('success', 'Mannschaft '.$name.' mit der ID '.$id.' gelöscht. '.$delete_message);
 
         // return to index
         return redirect()->route('clubs.index');
