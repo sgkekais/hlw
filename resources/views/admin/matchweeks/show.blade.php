@@ -51,7 +51,6 @@
         <div class="row">
             <div class="col-md-12">
                 @if($matchweek->fixtures->count() == 0)
-                    <br>
                     <i>Keine Paarungen zugeordnet</i>
                 @else
                     <table class="table table-sm table-striped table-hover">
@@ -60,6 +59,7 @@
                             <th class="">ID</th>
                             <th class="">Datum</th>
                             <th class="">Paarung</th>
+                            <th>Spielort</th>
                             <th class="">Ergebnis</th>
                             <th class="">Ann.?</th>
                             <th class="">Veröffentlicht?</th>
@@ -93,6 +93,13 @@
                                         </a>
                                     @else
                                         -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($fixture->stadium)
+                                        <a href="{{ route('stadiums.show', $fixture->stadium) }}">
+                                            {{ $fixture->stadium->name_short }}
+                                        </a>
                                     @endif
                                 </td>
                                 <td>

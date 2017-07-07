@@ -59,7 +59,11 @@
                     <select class="form-control" aria-describedby="stadium_idHelp" name="stadium_id" id="stadium_id">
                         <option></option>
                         @foreach($stadiums as $stadium)
-                            <option value="{{ $stadium->id }}" {{ $fixture->stadium->id == $stadium->id ? "selected" : null }}>
+                            <option value="{{ $stadium->id }}"
+                                    @if($fixture->stadium)
+                                        {{ $fixture->stadium->id == $stadium->id ? "selected" : null }}
+                                    @endif
+                            >
                                 {{ $stadium->name }}
                             </option>
                         @endforeach
