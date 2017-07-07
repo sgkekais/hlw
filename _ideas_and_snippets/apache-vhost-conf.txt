@@ -1,0 +1,32 @@
+Which address were you using?
+
+I had the same problem today.
+
+I was accessing it using the url http://localhost/lumen.api/public/ and I think that was the cause of the error.
+
+To get around it, this is what I did:
+
+First I configured a new VirtualHost entry on Xampp, located in "C:\xampp\apache\conf\extra\httpd-vhosts.conf" in my case:
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/lumen.api/public"
+    ServerName lumen.api
+    ServerAlias www.lumen.api
+    ErrorLog "logs/lumen.api-error.log"
+    CustomLog "logs/lumen.api-access.log" common
+    <Directory "C:/xampp/htdocs/lumen.api/public">
+        AllowOverride All
+        Require all Granted
+    </Directory>
+</VirtualHost>
+
+and restarted Apache on Xampp.
+
+Then I edited my hosts file (c:\windows\system32\drivers\etc\hosts) to map a new address to my localhost.
+
+# localhost name resolution is handled within DNS itself.
+#   127.0.0.1       localhost
+#   ::1             localhost   
+    127.0.0.1       lumen.api
+
+I tried again using the new URL http://lumen.api and the error was gone.
