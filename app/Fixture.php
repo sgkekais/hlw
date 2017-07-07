@@ -51,7 +51,7 @@ class Fixture extends Model
         'cancelled',
         'published',
         'rescheduled_from_fixture_id',
-        'rescheduled by club',
+        'rescheduled_by_club',
         'reschedule_reason'
     ];
 

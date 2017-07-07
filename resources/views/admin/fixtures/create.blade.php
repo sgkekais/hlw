@@ -9,6 +9,39 @@
         <form method="POST" action="{{ route('matchweeks.fixtures.store', $matchweek) }}">
             <!-- protection against CSRF (cross-site request forgery) attacks-->
             {{ csrf_field() }}
+            <!-- only show if rescheduling -->
+            @if($fixture->id)
+                <h2 class="mb-4">Spiel wird verlegt</h2>
+                <div class="form-group row">
+                    <label for="rescheduled_fixture" class="form-control-label col-md-2">Verlegt von Paarung</label>
+                    <div class="col-md-10">
+                        <input type="hidden" name="rescheduled_from_fixture_id" id="rescheduled_from_fixture_id" value="{{ $fixture->id }}">
+                        <input type="text" class="form-control" name="rescheduled_fixture" id="rescheduled_fixture" value="{{ $fixture->date }} | {{ $fixture->club_home->name_short }} : {{ $fixture->club_away->name_short }} (ID: {{ $fixture->id }})" disabled>
+                        <small id="rescheduled_fixtureHelp" class="form-text text-muted">Verlegt von Paarung</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="rescheduled_by_club" class="form-control-label col-md-2">Verlegt von Mannschaft</label>
+                    <div class="col-md-4">
+                        <select class="form-control" name="rescheduled_by_club" id="rescheduled_by_club" aria-describedby="rescheduled_by_clubHelp">
+                            <option></option>
+                            @if($fixture->club_id_home)
+                                <option value="{{ $fixture->club_id_home }}">{{ $fixture->club_home->name }}</option>
+                            @endif
+                            @if($fixture->club_id_away)
+                                <option value="{{ $fixture->club_id_away }}">{{ $fixture->club_away->name }}</option>
+                            @endif
+                        </select>
+                        <small id="rescheduled_by_clubHelp" class="form-text text-muted">Verlegende Mannschaft</small>
+                    </div>
+                    <label for="reschedule_reason" class="form-control-label col-md-2">Grund für Verlegung</label>
+                    <div class="col-md-4">
+                        <textarea class="form-control" id="reschedule_reason" name="reschedule_reason" rows="3" aria-describedby="noteHelp">{{ old('reschedule_reason') }}</textarea>
+                    </div>
+                </div>
+                <hr>
+                <h2 class="mb-4">Neue Paarung</h2>
+        @endif
             <!-- matchweek -->
             <div class="form-group row">
                 <div class="col-md-2">

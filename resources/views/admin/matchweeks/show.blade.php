@@ -115,7 +115,7 @@
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
                                     <!-- reschedule -->
-                                    <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung verlegen">
+                                    <a class="btn btn-primary" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
                                         <span class="fa fa-clock-o" aria-hidden="true"></span>
                                         <span class="fa fa-caret-right" aria-hidden="true"></span>
                                     </a>

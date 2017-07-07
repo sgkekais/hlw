@@ -45,10 +45,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     // matchweek crud, all matchweek routes are handled with a specific season
     Route::resource('seasons.matchweeks', 'MatchweekController');
+    // rescheduling of matches
+    Route::get('matchweeks/{matchweek}/fixtures/{fixture}/create', 'FixtureController@create')->name('reschedule.create');
     // fixtures crud, all fixtures routes are handled with a specific matchweek
     Route::resource('matchweeks.fixtures', 'FixtureController');
-        // rescheduling of matches
-        Route::get('reschedule/create', 'FixtureController@rescheduleCreate')->name('reschedule.create');
+
 
     Route::resource('stadiums', 'StadiumController');
     Route::resource('clubs', 'ClubController');

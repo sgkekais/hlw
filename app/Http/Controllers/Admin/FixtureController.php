@@ -26,14 +26,15 @@ class FixtureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Matchweek $matchweek)
+    public function create(Matchweek $matchweek, Fixture $fixture)
     {
         // get all clubs of the season
         $clubs = $matchweek->season->clubs;
         // get all stadiums
         $stadiums = Stadium::all();
 
-        return view('admin.fixtures.create', compact('matchweek','clubs', 'stadiums'));
+        return view('admin.fixtures.create', compact('matchweek','clubs', 'stadiums', 'fixture'));
+
     }
 
     /**
