@@ -25,6 +25,9 @@
                 <a class="btn btn-secondary" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
                     <span class="fa fa-plus-circle"></span> Spieler
                 </a>
+                <a class="btn btn-secondary" href="" title="Ansprechpartner zuordnen">
+                    <span class="fa fa-plus-circle"></span> Kontakt
+                </a>
                 <a class="btn btn-secondary" href="#" title="Spielort zuordnen">
                     <span class="fa fa-plus-circle"></span> Spielort
                 </a>
@@ -79,6 +82,13 @@
                     Kader
                     <span class="badge badge-pill badge-default">
                         {{ $club->players()->whereNull('sign_off')->get()->count() }}
+                    </span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#contacts" role="tab">
+                    Kontakte
+                    <span class="badge badge-pill badge-default">
+
                     </span></a>
             </li>
             <li class="nav-item">
