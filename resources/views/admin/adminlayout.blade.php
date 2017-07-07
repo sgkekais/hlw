@@ -5,21 +5,25 @@
     @include('admin._partials.nav')
     <div class="container">
         <!-- breadcrumbs -->
-        <div class="row no-gutters">
-            <ol class="breadcrumb mt-4">
-                @foreach(Request::segments() as $segment)
-                    <li class="breadcrumb-item {{ $loop->last ? "active" : null }}">
-                        @if($loop->first)
-                            <span class="fa fa-home"></span>
-                        @endif
-                        {{ $segment }}
-                    </li>
-                @endforeach
-            </ol>
+        <div class="row">
+            <div class="col-12">
+                <ol class="breadcrumb mt-4">
+                    @foreach(Request::segments() as $segment)
+                        <li class="breadcrumb-item {{ $loop->last ? "active" : null }}">
+                            @if($loop->first)
+                                <span class="fa fa-home"></span>
+                            @endif
+                            {{ $segment }}
+                        </li>
+                    @endforeach
+                </ol>
+            </div>
         </div>
         <!-- alerts -->
         <div class="row">
-            @include('admin.alerts')
+            <div class="col-12">
+                @include('admin.alerts')
+            </div>
         </div>
         <!-- validation errors -->
         @if (count($errors) > 0)
