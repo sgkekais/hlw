@@ -67,7 +67,7 @@ class MatchweekController extends Controller
      */
     public function show(Season $season, Matchweek $matchweek)
     {
-        $matchweek->load('fixtures');
+        $matchweek->load('fixtures.club_home','fixtures.club_away','fixtures.stadium');
 
         return view('admin.matchweeks.show', compact('season', 'matchweek'));
     }
