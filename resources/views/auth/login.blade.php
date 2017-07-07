@@ -1,4 +1,4 @@
-@include('admin._includes.head')
+@include('admin._partials.head')
 
 <div id="app">
     <div class="container mt-4 pt-4">
@@ -71,4 +71,4 @@
         </div>
     </div>
 </div>
-@include('admin._includes.footer')
+@include('admin._partials.footer')
