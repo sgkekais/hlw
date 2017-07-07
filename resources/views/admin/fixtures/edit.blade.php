@@ -138,9 +138,7 @@
                 </div>
                 <label for="rated_note" class="col-md-2 col-form-label">Begründung</label>
                 <div class="col-md-4">
-                    <textarea class="form-control" id="rated_note" name="rated_note" rows="3" aria-describedby="rated_noteHelp">
-                        {{ $fixture->rated_note }}
-                    </textarea>
+                    <textarea class="form-control" id="rated_note" name="rated_note" rows="3" aria-describedby="rated_noteHelp">{{ $fixture->rated_note }}</textarea>
                     <small id="rated_noteHelp" class="form-text text-muted">Warum wurde gewertet?</small>
                 </div>
             </div>
@@ -150,9 +148,7 @@
                     <label for="note">Notiz</label>
                 </div>
                 <div class="col-md-4">
-                    <textarea class="form-control" id="note" name="note" rows="3" aria-describedby="noteHelp">
-                        {{ $fixture->note }}
-                    </textarea>
+                    <textarea class="form-control" id="note" name="note" rows="3" aria-describedby="noteHelp">{{ $fixture->note }}</textarea>
                     <small id="noteHelp" class="form-text text-muted">Interne Notiz</small>
                 </div>
             </div>
