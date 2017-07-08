@@ -7,7 +7,7 @@
         <!-- breadcrumbs -->
         <div class="row">
             <div class="col-12">
-                <ol class="breadcrumb mt-4">
+                <ol class="breadcrumb">
                     @foreach(Request::segments() as $segment)
                         <li class="breadcrumb-item {{ $loop->last ? "active" : null }}">
                             @if($loop->first)
@@ -27,8 +27,8 @@
         </div>
         <!-- validation errors -->
         @if (count($errors) > 0)
-            <div class="row">
-                <div class="alert alert-danger alert-dismissible fade show mt-4 " role="alert">
+            <div class="row mt-4">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -46,10 +46,12 @@
                 </div>
             </div>
         @endif
-    </div>
+        <!-- ./navigation -->
 
-    <!-- ./Navigation -->
-    @yield('content')
+        <!-- content -->
+        @yield('content')
+        <!-- ./content -->
+    </div>
 </div>
 
 @include('admin._partials.footer')
