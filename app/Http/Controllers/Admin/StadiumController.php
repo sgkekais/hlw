@@ -73,7 +73,7 @@ class StadiumController extends Controller
      */
     public function edit(Stadium $stadium)
     {
-        //
+        return view('admin.stadiums.edit', compact('stadium'));
     }
 
     /**
@@ -85,7 +85,17 @@ class StadiumController extends Controller
      */
     public function update(Request $request, Stadium $stadium)
     {
-        //
+        $this->validate($request, [
+            'name'          => 'required|min:2',
+            'name_short'    => 'required|min:2',
+            'gmaps'         => 'nullable|url'
+        ]);
+
+        $stadium->update($request->all());
+
+        Session::flash('success', 'Spielort '.$stadium->name_short.' erfolgreich geändert.');
+
+        return redirect()->route('stadiums.index');
     }
 
     /**
