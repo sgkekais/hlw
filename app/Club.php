@@ -132,5 +132,8 @@ class Club extends Model
         return $this->hasMany(Fixture::class, 'club_id_away');
     }
 
-    // TODO: rescheduled by club
+    public function reschedulings()
+    {
+        return $this->hasMany(Fixture::class, 'rescheduled_by_club');
+    }
 }

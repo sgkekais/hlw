@@ -98,7 +98,7 @@ class ClubController extends Controller
     public function show(Club $club)
     {
         // lazy eager load relationships
-        $club->load('players','stadiums');
+        $club->load('seasons','players','stadiums');
 
         return view('admin.clubs.show', compact('club'));
     }
