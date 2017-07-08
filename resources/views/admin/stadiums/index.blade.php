@@ -34,7 +34,7 @@
                     <td><b>{{ $stadium->id }}</b></td>
                     <td>
                         <a href="{{ route('stadiums.show', $stadium ) }}" title="Anzeigen">{{ $stadium->name }}</a>
-                        <br>Mannschaften: {{ $stadium->clubs()->get()->count() }}
+                        <br>Mannschaften: {{ $stadium->clubs->count() }}
                     </td>
                     <td>{{ $stadium->name_short }}</td>
                     <td>{{ $stadium->gmaps ? "JA" : "NEIN" }}</td>
