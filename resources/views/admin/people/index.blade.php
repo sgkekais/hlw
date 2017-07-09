@@ -43,7 +43,7 @@
                     <td>
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('people.show', $person) }}" title="Person anzeigen">
-                            <span class="fa fa-eye"></span>
+                            <span class="fa fa-search-plus"></span>
                         </a>
                         <!-- edit -->
                         <a class="btn btn-primary" href="{{ route('people.edit', $person) }}" title="Person bearbeiten">
