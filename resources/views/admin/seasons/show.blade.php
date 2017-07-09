@@ -134,6 +134,7 @@
                     <tr>
                         <th class="">ID</th>
                         <th class="">Name</th>
+                        <th class=""><span class="fa fa-calendar-plus-o" title="Spielverlegungen"></span> </th>
                         <th class="">Rang</th>
                         <th class="">Punktabzug</th>
                         <th class="">Torabzug</th>
@@ -147,6 +148,9 @@
                             <td><b>{{ $club->id }}</b></td>
                             <td>
                                 <a href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">{{ $club->name }}</a>
+                            </td>
+                            <td>
+                                {{ $club->reschedulings->count() }}
                             </td>
                             <td>{{ $club->pivot->rank }}</td>
                             <td>{{ $club->pivot->deduction_points }}</td>
