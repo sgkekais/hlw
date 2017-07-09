@@ -61,11 +61,11 @@
                     <thead class="thead-default">
                     <tr>
                         <th class="">ID</th>
+                        <th></th>
                         <th class="">Datum</th>
                         <th class="">Paarung</th>
                         <th>Spielort</th>
                         <th class="">Ergebnis</th>
-                        <th class=""></th>
                         <th class=""></th>
                         <th>Aktionen</th>
                     </tr>
@@ -74,6 +74,13 @@
                     @foreach($matchweek->fixtures as $fixture)
                         <tr>
                             <td><b>{{ $fixture->id }}</b></td>
+                            <td>
+                                @if($fixture->published)
+                                    <span class="fa fa-eye" title="Öffentlich"></span>
+                                @else
+                                    <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                                @endif
+                            </td>
                             <td>
                                 @if($fixture->date)
                                     {{ $fixture->date->format('d.m.Y') }}
@@ -113,21 +120,16 @@
                             </td>
                             <td>{{ $fixture->cancelled ? "Ann." : null }}</td>
                             <td>
-                                @if($fixture->published)
-                                    <span class="fa fa-eye" title="Öffentlich"></span>
-                                    @else
-                                    <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
-                                @endif
-                            </td>
-                            <td>
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
-                                <!-- reschedule -->
-                                <a class="btn btn-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
-                                    <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
-                                </a>
+                                <!-- reschedule, only once -->
+                                @unless($fixture->rescheduled_to)
+                                    <a class="btn btn-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
+                                        <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
+                                    </a>
+                                @endunless
                             </td>
                         </tr>
                     @endforeach

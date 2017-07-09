@@ -108,25 +108,25 @@ class Fixture extends Model
      * A fixture can have one parent fixture it has been rescheduled from
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function fixture_rescheduled_from()
+    public function rescheduled_from()
     {
-        return $this->belongsTo(Fixture::class, 'rescheduled_from_fixtures_id');
+        return $this->belongsTo(Fixture::class, 'rescheduled_from_fixture_id');
     }
 
     /**
      * A fixture can have one child fixture it has been rescheduled to
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function fixture_rescheduled_to()
+    public function rescheduled_to()
     {
-        return $this->hasOne(Fixture::class, 'rescheduled_from_fixtures_id');
+        return $this->hasOne(Fixture::class, 'rescheduled_from_fixture_id');
     }
 
     /**
      * The club that cancelled the match
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function fixture_rescheduled_by()
+    public function rescheduled_by()
     {
         return $this->belongsTo(Club::class, 'rescheduled_by_club');
     }
