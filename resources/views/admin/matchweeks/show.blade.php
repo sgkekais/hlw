@@ -3,7 +3,13 @@
 @section('content')
 
     <h1 class="">Details zu Spielwoche</h1>
-    <h2 class="mt-4 text-primary">&mdash; {{ $matchweek->number_consecutive }} {{ $matchweek->name ? '- '.$matchweek->name : null }}</h2>
+    <h2 class="mt-4 text-primary">
+        &mdash; {{ $matchweek->number_consecutive }} {{ $matchweek->name ? '- '.$matchweek->name : null }}
+    </h2>
+    <h3 class="mt-2 text-muted">
+        {{ $matchweek->begin ? $matchweek->begin->format('d.m.Y') : null }}
+        {{ $matchweek->end ? "- ".$matchweek->end->format('d.m.Y') : null }}
+    </h3>
     <div class="row">
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
@@ -119,7 +125,7 @@
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                                 <!-- reschedule -->
-                                <a class="btn btn-outline-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
+                                <a class="btn btn-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
                                     <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
                                 </a>
                             </td>

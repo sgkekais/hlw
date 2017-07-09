@@ -21,8 +21,8 @@
         <thead class="thead-default">
         <tr>
             <th class="">ID</th>
+            <th></th>
             <th class="">Jahr</th>
-            <th class="">Veröffentlicht?</th>
             <th class="">Aktionen</th>
         </tr>
         </thead>
@@ -30,6 +30,13 @@
         @foreach($seasons as $season)
             <tr>
                 <td><b>{{ $season->id }}</b></td>
+                <td>
+                    @if($season->published)
+                        <span class="fa fa-eye" title="Öffentlich"></span>
+                    @else
+                        <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('seasons.show', $season ) }}" title="Anzeigen">
                         @if($season->year_begin == $season->year_end)
@@ -43,11 +50,10 @@
                     <br>
                     Spielwochen: {{ $season->matchweeks()->get()->count() }}
                 </td>
-                <td>{{ $season->published ? "JA" : "NEIN" }}</td>
                 <td>
                     <!-- display details -->
                     <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
-                        <span class="fa fa-eye"></span>
+                        <span class="fa fa-search-plus"></span>
                     </a>
                     <!-- edit -->
                     <a class="btn btn-primary" href="{{ route('seasons.edit', $season) }}" title="Saison bearbeiten">

@@ -81,9 +81,9 @@
                     <thead class="thead-default">
                     <tr>
                         <th class="">ID</th>
+                        <th></th>
                         <th class="">Nummer</th>
                         <th class="">Name</th>
-                        <th class="">Veröffentlicht?</th>
                         <th class="">Aktionen</th>
                     </tr>
                     </thead>
@@ -92,16 +92,22 @@
                         <tr>
                             <td><b>{{ $matchweek->id }}</b></td>
                             <td>
+                                @if($matchweek->published)
+                                    <span class="fa fa-eye" title="Öffentlich"></span>
+                                @else
+                                    <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                                @endif
+                            </td>
+                            <td>
                                 <a href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Anzeigen">{{ $matchweek->number_consecutive }}</a>
                                 <br>
                                 Paarungen: {{ $matchweek->fixtures()->get()->count() }}
                             </td>
                             <td>{{ $matchweek->name }}</td>
-                            <td>{{ $matchweek->published ? "JA" : "NEIN" }}</td>
                             <td>
                                 <!-- display details -->
                                 <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Spielwoche anzeigen">
-                                    <span class="fa fa-eye"></span>
+                                    <span class="fa fa-search-plus"></span>
                                 </a>
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('seasons.matchweeks.edit', [$season, $matchweek]) }}" title="Spielwoche bearbeiten">

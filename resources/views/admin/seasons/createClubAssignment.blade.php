@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Anlegen</button>
+            <button type="submit" class="btn btn-primary">Zuordnen</button>
             <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}">Abbrechen</a>
         </div>
     </form>

@@ -21,9 +21,9 @@
         <thead class="thead-default">
         <tr>
             <th class="">ID</th>
+            <th></th>
             <th class="">Name</th>
             <th class="">Hierarchieebene</th>
-            <th class="">Veröffentlicht?</th>
             <th class="">Aktionen</th>
         </tr>
         </thead>
@@ -32,6 +32,13 @@
             <tr>
                 <td><b>{{ $division->id }}</b></td>
                 <td>
+                    @if($division->published)
+                        <span class="fa fa-eye" title="Öffentlich"></span>
+                    @else
+                        <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                    @endif
+                </td>
+                <td>
                     <a href="{{ route('divisions.show', $division ) }}" title="Anzeigen">{{ $division->name }}</a>
                     <br>
                     <span class="text-muted">{{ $division->competition->name }}</span>
@@ -39,11 +46,10 @@
                     Saisons: {{ $division->seasons()->get()->count() }}
                 </td>
                 <td>{{ $division->hierarchy_level }}</td>
-                <td>{{ $division->published ? "JA" : "NEIN" }}</td>
                 <td>
                     <!-- display details -->
                     <a class="btn btn-secondary" href="{{ route('divisions.show', $division) }}" title="Spielklasse anzeigen">
-                        <span class="fa fa-eye"></span>
+                        <span class="fa fa-search-plus"></span>
                     </a>
                     <!-- edit -->
                     <a class="btn btn-primary" href="{{ route('divisions.edit', $division) }}" title="Spielklasse bearbeiten">

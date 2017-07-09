@@ -21,8 +21,8 @@
             <thead class="thead-default">
             <tr>
                 <th class="">ID</th>
+                <th class=""></th>
                 <th class="">Name</th>
-                <th class="">Veröffentlicht?</th>
                 <th class="">Aktionen</th>
             </tr>
             </thead>
@@ -31,14 +31,20 @@
                 <tr>
                     <td><b>{{ $competition->id }}</b></td>
                     <td>
+                        @if($competition->published)
+                            <span class="fa fa-eye" title="Öffentlich"></span>
+                        @else
+                            <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                        @endif
+                    </td>
+                    <td>
                         <a href="{{ route('competitions.show', $competition ) }}" title="Anzeigen">{{ $competition->name }}</a>
                         <br>Spielklassen: {{ $competition->divisions()->get()->count() }}
                     </td>
-                    <td>{{ $competition->published ? "JA" : "NEIN" }}</td>
                     <td>
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('competitions.show', $competition) }}" title="Wettbewerb anzeigen">
-                            <span class="fa fa-eye"></span>
+                            <span class="fa fa-search-plus"></span>
                         </a>
                         <!-- edit -->
                         <a class="btn btn-primary" href="{{ route('competitions.edit', $competition) }}" title="Wettbewerb bearbeiten">
