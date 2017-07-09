@@ -59,8 +59,8 @@
                         <th class="">Paarung</th>
                         <th>Spielort</th>
                         <th class="">Ergebnis</th>
-                        <th class="">Ann.?</th>
-                        <th class="">Veröffentlicht?</th>
+                        <th class=""></th>
+                        <th class=""></th>
                         <th>Aktionen</th>
                     </tr>
                     </thead>
@@ -105,17 +105,22 @@
                                 ({{ $fixture->goals_home_11m }}:{{ $fixture->goals_away_11m }})
                                 - {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
                             </td>
-                            <td>{{ $fixture->cancelled ? "X" : null }}</td>
-                            <td>{{ $fixture->published ? "JA" : "NEIN" }}</td>
+                            <td>{{ $fixture->cancelled ? "Ann." : null }}</td>
+                            <td>
+                                @if($fixture->published)
+                                    <span class="fa fa-eye" title="Öffentlich"></span>
+                                    @else
+                                    <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                                @endif
+                            </td>
                             <td>
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                                 <!-- reschedule -->
-                                <a class="btn btn-primary" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
-                                    <span class="fa fa-clock-o" aria-hidden="true"></span>
-                                    <span class="fa fa-caret-right" aria-hidden="true"></span>
+                                <a class="btn btn-outline-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
+                                    <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
                                 </a>
                             </td>
                         </tr>
