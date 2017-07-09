@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-4">
                 <input type="file" class="form-control-file" name="logo" id="logo" aria-describedby="logoHelp" placeholder="{{ old('logo') }}">
-                <small id="logoHelp" class="form-text text-muted">Vereinswappen</small>
+                <small id="logoHelp" class="form-text text-muted">Vereinswappen. Muss im .png-Format mit transparentem Hintergrund mit den Abmessungen 200x200px vorliegen.</small>
             </div>
         </div>
         <!-- founded -->

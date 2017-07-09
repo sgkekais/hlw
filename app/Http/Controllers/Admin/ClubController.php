@@ -49,7 +49,7 @@ class ClubController extends Controller
             'league_exit'   => 'nullable|date|after_or_equal:league_entry',
             'website'       => 'nullable|url',
             'facebook'      => 'nullable|url',
-            'logo'          => 'nullable|image|mimes:png'
+            'logo'          => 'nullable|image|mimes:png|dimensions:width=200,height=200'
         ]);
 
         // create a new object with the request data
@@ -132,7 +132,7 @@ class ClubController extends Controller
             'league_exit'   => 'nullable|date|after_or_equal:league_entry',
             'website'       => 'nullable|url',
             'facebook'      => 'nullable|url',
-            'logo'          => 'nullable|image|mimes:png'
+            'logo'          => 'nullable|image|mimes:png|dimensions:width=200,height=200'
         ]);
 
         // is there a new logo selected?
