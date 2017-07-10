@@ -73,9 +73,11 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contact $contact)
+    public function edit(Club $club, Contact $contact)
     {
-        //
+        $people = Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get();
+
+        return view('admin.contacts.edit', compact('club', 'contact', 'people'));
     }
 
     /**
@@ -85,9 +87,19 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Club $club, Contact $contact)
     {
-        //
+        $this->validate($request, [
+            'hierarchy_level'   => 'nullable|integer|min:1',
+            'mail'              => 'nullable|email',
+            'mobile'            => 'nullable'
+        ]);
+
+        $contact->update($request->all());
+
+        Session::flash('success', 'Kontakt geändert.');
+
+        return redirect()->route('clubs.show', $club);
     }
 
     /**
@@ -96,8 +108,12 @@ class ContactController extends Controller
      * @param  \App\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy(Club $club, Contact $contact)
     {
-        //
+        $contact->delete();
+
+        Session::flash('success', 'Kontakt gelöscht.');
+
+        return redirect()->route('clubs.show', $club);
     }
 }

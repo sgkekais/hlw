@@ -2,85 +2,75 @@
 
 @section('content')
 
-    <!-- edit the player -->
-    <h1 class="">Spielerzuordnung</h1>
-    <h2 class="mt-4 text-primary">&mdash; {{ $club->name }} / {{ $player->last_name }}, {{ $player->first_name }}</h2>
+    <!-- edit the contact -->
+    <h1 class="">Kontakt</h1>
+    <h2 class="mt-4 text-primary">&mdash; {{ $contact->person->last_name }}, {{ $contact->person->first_name }}</h2>
     <!-- created at -->
-    Angelegt: {{ $player->pivot->created_at->format('d.m.Y H:i') }} Uhr
+    Angelegt: {{ $contact->created_at->format('d.m.Y H:i') }} Uhr
+    @if($causer = ModelHelper::causerOfAction($contact,'created'))
+        von {{ $causer->name }}
+    @endif
     <br>
     <!-- updated at -->
-    @if($player->pivot->updated_at != $player->pivot->created_at)
-        Geändert: {{ $club->updated_at->format('d.m.Y H:i') }} Uhr
+    @if($contact->updated_at != $contact->created_at)
+        Geändert: {{ $contact->updated_at->format('d.m.Y H:i') }} Uhr
+        @if($causer = ModelHelper::causerOfAction($contact,'updated'))
+            von {{ $causer->name }}
+        @endif
     @endif
     <hr>
-    <h3 class="mb-4">Spielerzuordnung bearbeiten</h3>
-    <form method="POST" action="{{ route('players.update', [$club, $player]) }}">
+    <h3 class="mt-4 mb-4">Kontakt ändern</h3>
+    <form method="POST" action="{{ route('clubs.contacts.update', [ $club, $contact ]) }}">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}
         {{ method_field('PATCH') }}
+        <!-- contact -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="contact_id">Mannschaft</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="contact_id" aria-describedby="contact_idHelp" value="{{ $club->name }}" disabled>
+                <small id="contact_idHelp" class="form-text text-muted">Welcher Mannschaft soll der Kontakt zugeordnet werden?</small>
+            </div>
+        </div>
         <!-- which person is this? -->
         <div class="form-group row">
             <div class="col-md-2">
                 <label for="person_id">Person</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="person_id" aria-describedby="person_idHelp" value="{{ $player->last_name }}, {{ $player->first_name }}" disabled>
-                <small id="person_idHelp" class="form-text text-muted">Um welche Person handelt es sich?</small>
-            </div>
-        </div>
-        <!-- club -->
-        <div class="form-group row">
-            <div class="col-md-2">
-                <label for="club_id">Mannschaft</label>
-            </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="club_id" aria-describedby="club_idHelp" value="{{ $club->name }}" disabled>
-                <small id="club_idHelp" class="form-text text-muted">Welcher Mannschaft soll der Spieler zugeordnet werden?</small>
-            </div>
-        </div>
-        <!-- sign on and off -->
-        <div class="form-group row">
-            <div class="col-md-2">
-                <label for="sign_on">Anmeldung</label>
-            </div>
-            <div class="col-md-4">
-                <input type="date" class="form-control" name="sign_on" id="sign_on" aria-describedby="sign_onHelp" value="{{ $player->pivot->sign_on->format('Y-m-d') }}">
-                <small id="sign_onHelp" class="form-text text-muted">JJJJ-MM-TT</small>
-            </div>
-            <div class="col-md-2">
-                <label for="sign_off">Abmeldung</label>
-            </div>
-            <div class="col-md-4">
-                @if($player->pivot->sign_off)
-                    <input type="date" class="form-control" name="sign_off" id="sign_off" aria-describedby="sign_offHelp" value="{{ $player->pivot->sign_off->format('Y-m-d') }}">
-                @else
-                    <input type="date" class="form-control" name="sign_off" id="sign_off" aria-describedby="sign_offHelp" >
-                @endif
-                <small id="sign_offHelp" class="form-text text-muted">JJJJ-MM-TT</small>
-            </div>
-        </div>
-        <!-- number -->
-        <div class="form-group row">
-            <div class="col-md-2">
-                <label for="number">Rückennummer</label>
-            </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="number" id="number" aria-describedby="numberHelp" value="{{ $player->pivot->number }}">
-                <small id="numberHelp" class="form-text text-muted">Alphanumerisch (alles erlaubt...)</small>
-            </div>
-            <div class="col-md-2">
-                <label for="positions_id">Position</label>
-            </div>
-            <div class="col-md-4">
-                <select class="form-control" id="position_id" name="position_id" aria-describedby="position_idHelp">
-                    <option></option>
-                    @foreach($positions as $position)
-                        <option value="{{ $position->id }}" {{ $player->pivot->position_id == $position->id ? "selected" : null }}>
-                            {{ $position->name }}
+                <select class="form-control" id="person_id" name="person_id" aria-describedby="person_idHelp">
+                    @foreach($people as $person)
+                        <option value="{{ $person->id }}" {{ $contact->person->id == $person->id ? "selected" : null }}>
+                            {{ $person->last_name }}, {{ $person->first_name }}
                         </option>
                     @endforeach
                 </select>
-                <small id="positions_idHelp" class="form-text text-muted">Welche Position hat der Spieler?</small>
+                <small id="person_idHelp" class="form-text text-muted">Um welche Person handelt es sich?</small>
+            </div>
+            <!-- hierarchy level -->
+            <label for="hierarchy_level" class="col-md-2 form-control-label">Nummer</label>
+            <div class="col-md-4">
+                <input type="number" class="form-control" id="hierarchy_level" name="hierarchy_level" aria-describedby="hierarchy_levelHelp" value="{{ $contact->hierarchy_level }}">
+                <small id="hierarchy_levelHelp" class="form-text text-muted">Bspw. "1" für 1. Ansprechpartner</small>
+            </div>
+        </div>
+        <!-- mail and mobile -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="mail">E-Mail</label>
+            </div>
+            <div class="col-md-4">
+                <input type="email" class="form-control" name="mail" id="mail" aria-describedby="mailHelp" value="{{ $contact->mail }}">
+                <small id="mailHelp" class="form-text text-muted">E-Mail-Adresse</small>
+            </div>
+            <div class="col-md-2">
+                <label for="mobile">Mobilnr.</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="mobile" id="mobile" aria-describedby="mobileHelp" value="{{ $contact->mobile }}">
+                <small id="mobileHelp" class="form-text text-muted">Mobilfunknummer</small>
             </div>
         </div>
         <div class="form-group">
@@ -89,12 +79,12 @@
         </div>
     </form>
     <hr>
-    <h3 class="mt-4">Spielerzuordnung löschen</h3>
-    <form method="POST" action="{{ route('players.destroy', [$club, $player]) }}">
+    <h3 class="mt-4">Kontakt löschen</h3>
+    <form method="POST" action="{{ route('clubs.contacts.destroy', [ $club, $contact ]) }}">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
-        <span class="form-text">Löscht die Spieler<b>zuordnung</b>. Mannschaft und Person bleiben erhalten.</span>
+        <span class="form-text">Löscht den Ansprechpartner.</span>
         <br>
         <button type="submit" class="btn btn-danger">Löschen</button>
         <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}">Abbrechen</a>
