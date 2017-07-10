@@ -33,6 +33,17 @@
                 <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
             </div>
         </div>
+        <!-- type of competition / championship -->
+        <div class="form-group row">
+            <label for="type" class="form-control-label col-md-2">Art des Wettbewerbs</label>
+            <div class="col-md-4">
+                <select name="type" id="type" class="form-control">
+                    <option value="league" {{ $competition->type == "league" ? "selected" : null }}>Liga</option>
+                    <option value="knockout" {{ $competition->type == "knockout" ? "selected" : null }}>Turnier - K.O.</option>
+                    <option value="tournament" {{ $competition->type == "tournament" ? "selected" : null }}>Turnier - Gruppe+K.O.</option>
+                </select>
+            </div>
+        </div>
         <!-- published -->
         <div class="form-group row">
             <div class="col-md-2">

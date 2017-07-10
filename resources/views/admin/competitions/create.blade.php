@@ -16,6 +16,17 @@
                 <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
             </div>
         </div>
+        <!-- type of competition / championship -->
+        <div class="form-group row">
+            <label for="type" class="form-control-label col-md-2">Art des Wettbewerbs</label>
+            <div class="col-md-4">
+                <select name="type" id="type" class="form-control">
+                    <option value="league">Liga</option>
+                    <option value="knockout">Turnier - K.O.</option>
+                    <option value="tournament">Turnier - Gruppe+K.O.</option>
+                </select>
+            </div>
+        </div>
         <!-- published -->
         <div class="form-group row">
             <div class="col-md-2">
