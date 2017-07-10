@@ -23,6 +23,7 @@
                 <th class="">ID</th>
                 <th class=""></th>
                 <th class="">Name</th>
+                <th class="">Art</th>
                 <th class="">Aktionen</th>
             </tr>
             </thead>
@@ -40,6 +41,15 @@
                     <td>
                         <a href="{{ route('competitions.show', $competition ) }}" title="Anzeigen">{{ $competition->name }}</a>
                         <br>Spielklassen: {{ $competition->divisions()->get()->count() }}
+                    </td>
+                    <td>
+                        @if($competition->type == "league")
+                            <span class="fa fa-star"></span> Liga
+                        @elseif($competition->type == "knockout")
+                            <span class="fa fa-trophy"></span> Turnier (K.O.-Modus / Pokal)
+                        @elseif($competition->type == "tournament")
+                            Turnier Gruppe + K.O.
+                        @endif
                     </td>
                     <td>
                         <!-- display details -->

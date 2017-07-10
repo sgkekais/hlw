@@ -4,6 +4,15 @@
 
     <h1 class="">Details zu Wettbewerb</h1>
     <h2 class="mt-4 text-primary">&mdash; {{ $competition->name }}</h2>
+    <h3 class="text-muted">
+        @if($competition->type == "league")
+            <span class="fa fa-star"></span> Liga
+        @elseif($competition->type == "knockout")
+            <span class="fa fa-trophy"></span> Turnier (K.O.-Modus / Pokal)
+        @elseif($competition->type == "tournament")
+            Turnier Gruppe + K.O.
+        @endif
+    </h3>
     <div class="row">
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
