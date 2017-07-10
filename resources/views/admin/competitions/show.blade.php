@@ -10,7 +10,7 @@
         @elseif($competition->type == "knockout")
             <span class="fa fa-trophy"></span> Turnier (K.O.-Modus / Pokal)
         @elseif($competition->type == "tournament")
-            Turnier Gruppe + K.O.
+            <span class="fa fa-trophy"></span> Turnier Gruppe + K.O.
         @endif
     </h3>
     <div class="row">
