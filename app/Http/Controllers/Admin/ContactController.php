@@ -23,8 +23,8 @@ class ContactController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Club $club
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Club $club)
     {
@@ -35,9 +35,9 @@ class ContactController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Club $club
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, Club $club)
     {
