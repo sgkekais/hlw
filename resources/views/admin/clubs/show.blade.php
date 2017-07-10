@@ -321,16 +321,18 @@
                     <tr>
                         <th class="">ID</th>
                         <th class="">Name</th>
+                        <th>#</th>
                         <th>E-Mail</th>
                         <th>Mobil</th>
                         <th class="">Aktionen</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($club->contacts as $contact)
+                    @foreach($club->contacts()->orderBy('hierarchy_level')->get() as $contact)
                         <tr>
                             <td>{{ $contact->id }}</td>
                             <td>{{ $contact->person->last_name }}, {{ $contact->person->first_name }}</td>
+                            <td>{{ $contact->hierarchy_level }}.</td>
                             <td>{{ $contact->mail }}</td>
                             <td>{{ $contact->mobile }}</td>
                             <td>
