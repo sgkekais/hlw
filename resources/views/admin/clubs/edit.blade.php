@@ -39,7 +39,7 @@
                 <label for="name_short">Name</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="name_short" id="name_short" aria-describedby="name_shortHelp" value="{{ $club->name_short }}" ">
+                <input type="text" class="form-control" name="name_short" id="name_short" aria-describedby="name_shortHelp" value="{{ $club->name_short }}">
                 <small id="name_shortHelp" class="form-text text-muted">Abgekürzter Name der Mannschaft, bspw. SW Bilk</small>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <label for="name_code">Abkürzung</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="name_code" id="name_code" aria-describedby="name_codeHelp" value="{{ $club->name_code }}"">
+                <input type="text" class="form-control" name="name_code" id="name_code" aria-describedby="name_codeHelp" value="{{ $club->name_code }}">
                 <small id="name_shortHelp" class="form-text text-muted">"Code" für Manschaft, bspw. SWB</small>
             </div>
         </div>
