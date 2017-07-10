@@ -33,6 +33,12 @@ class Fixture extends Model
     ];
 
     /**
+     * Only the changed attributes should be logged
+     * @var bool
+     */
+    protected static $logOnlyDirty = true;
+
+    /**
      * The attributes that can be mass assigned
      * @var array
      */

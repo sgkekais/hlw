@@ -20,6 +20,12 @@ class Position extends Model
     ];
 
     /**
+     * Only the changed attributes should be logged
+     * @var bool
+     */
+    protected static $logOnlyDirty = true;
+
+    /**
      * The attributes that are mass assignable.
      * @var array
      */
