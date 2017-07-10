@@ -17,7 +17,7 @@ class CreateContactsTable extends Migration
             $table->increments('id');
             $table->integer('club_id')->unsigned();
             $table->integer('person_id')->unsigned();
-            $table->integer('hierachy_level')->nullable()->unsigned(); // "ranking" of contacts
+            $table->integer('hierarchy_level')->nullable()->unsigned(); // "ranking" of contacts
             $table->string('mail')->nullable();
             $table->string('mobile')->nullable();
 

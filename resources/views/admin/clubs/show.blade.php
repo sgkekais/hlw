@@ -24,7 +24,7 @@
             <a class="btn btn-secondary" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
                 <span class="fa fa-plus-circle"></span> Spieler
             </a>
-            <a class="btn btn-secondary" href="" title="Ansprechpartner zuordnen">
+            <a class="btn btn-secondary" href="{{ route('clubs.contacts.create', $club) }}" title="Ansprechpartner zuordnen">
                 <span class="fa fa-plus-circle"></span> Kontakt
             </a>
             <a class="btn btn-secondary" href="#" title="Spielort zuordnen">
@@ -86,14 +86,13 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#contacts" role="tab">
                 Kontakte
-                <span class="badge badge-pill badge-default">
-
-                </span></a>
+                <span class="badge badge-pill badge-default">{{ $club->contacts->count() }}</span>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#stadiums" role="tab">
                 Spielort(e)
-                <span class="badge badge-pill badge-default">{{ $club->stadiums()->count() }}</span>
+                <span class="badge badge-pill badge-default">{{ $club->stadiums->count() }}</span>
             </a>
         </li>
     </ul>
@@ -219,6 +218,7 @@
                 <i>Der Mannschaft ist keiner Paarung zugeordnet.</i>
             @endif
         </div>
+        <!-- players -->
         <div class="tab-pane" id="players" role="tabpanel">
             <h4 class="mb-4 mt-4">Aktive
                 <small class="text-muted">(davon <b>{{ $club->players()->whereNotNull('registered_at_club')->get()->count() }}</b> Vereinsspieler)</small>
@@ -310,12 +310,49 @@
                 </table>
             @endif
         </div>
+        <!-- contacts -->
+        <div class="tab-pane" id="contacts" role="tabpanel">
+            <h4 class="mb-4 mt-4">
+                Ansprechpartner
+            </h4>
+            @if( $club->contacts->count() > 0 )
+                <table class="table table-sm table-striped table-hover">
+                    <thead class="thead-default">
+                    <tr>
+                        <th class="">ID</th>
+                        <th class="">Name</th>
+                        <th>E-Mail</th>
+                        <th>Mobil</th>
+                        <th class="">Aktionen</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($club->contacts as $contact)
+                        <tr>
+                            <td>{{ $contact->id }}</td>
+                            <td>{{ $contact->person->last_name }}, {{ $contact->person->first_name }}</td>
+                            <td>{{ $contact->mail }}</td>
+                            <td>{{ $contact->mobile }}</td>
+                            <td>
+                                <!-- edit -->
+                                <a class="btn btn-primary" href="{{ route('clubs.contacts.edit', [ $club, $contact ]) }}" title="Kontakt bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <i>Der Mannschaft sind keine Ansprechpartner zugeordnet.</i>
+            @endif
+        </div>
         <!-- stadiums -->
         <div class="tab-pane" id="stadiums" role="tabpanel">
             <h4 class="mb-4 mt-4">
                 Spielort(e)
             </h4>
-            @if( $club->stadiums()->count() > 0 )
+            @if( $club->stadiums->count() > 0 )
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>

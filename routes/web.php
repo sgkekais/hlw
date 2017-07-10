@@ -61,6 +61,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         Route::patch('clubs/{club}/players/{person}', 'PlayerController@update')->name('players.update');
         Route::delete('clubs/{club}/players/{person}', 'PlayerController@destroy')->name('players.destroy');
 
+        // assigning and managing contacts
+        Route::resource('clubs.contacts', 'ContactController');
+
     Route::resource('positions', 'PositionController');
     Route::resource('referees', 'RefereeController');
     Route::resource('people', 'PersonController');

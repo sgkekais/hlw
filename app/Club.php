@@ -98,6 +98,11 @@ class Club extends Model
             ->using(Player::class);
     }
 
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
     /**
      * A club is related to many seasons
      * A season is related to many clubs
