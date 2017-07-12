@@ -22,3 +22,24 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+/**
+ * Competition
+ */
+$factory->define(App\Competition::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'type' => $faker->randomElement(['league', 'knockout', 'tournament']),
+        'published' => $faker->numberBetween(0,1)
+    ];
+});
+/**
+ * Division
+ */
+$factory->define(App\Division::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'hierarchy_level' => $faker->numberBetween(1,5),
+        'published' =>  $faker->numberBetween(0,1)
+    ];
+});
