@@ -19,10 +19,10 @@
                 </a>
             <br>
                 <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.create', $season ) }}" title="Spielwoche hinzufügen">
-                    <span class="fa fa-plus-circle"></span> Spielwoche
+                    <span class="fa fa-plus-square"></span> Spielwoche
                 </a>
                 <a class="btn btn-secondary" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
-                    <span class="fa fa-plus-circle"></span> Mannschaft
+                    <span class="fa fa-plus-square"></span> Mannschaft
                 </a>
         </div>
         <!-- dates -->

@@ -40,8 +40,8 @@
                 <small id="publishedHelp" class="form-text text-muted">Wettbewerb auf Seite veröffentlichen?</small>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Anlegen</button>
-        <a class="btn btn-secondary" href="{{ route('competitions.index') }}">Abbrechen</a>
+        <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Anlegen</button>
+        <a class="btn btn-secondary" href="{{ route('competitions.index') }}"><span class="fa fa-ban"></span> Abbrechen</a>
     </form>
 
 @endsection

@@ -9,8 +9,8 @@
     <div class="row">
         <div class="col-md-3">
             <!-- controls -->
-            <a class="btn btn-primary" href="{{ route('divisions.create') }}" title="Spielklasse anlegen">
-                <span class="fa fa-plus-circle"></span> Spielklasse anlegen
+            <a class="btn btn-success" href="{{ route('divisions.create') }}" title="Spielklasse anlegen">
+                <span class="fa fa-plus-square"></span> Spielklasse anlegen
             </a>
         </div>
     </div>

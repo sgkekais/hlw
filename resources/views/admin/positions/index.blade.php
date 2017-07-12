@@ -9,8 +9,8 @@
     <div class="row">
         <div class="col-md-3">
             <!-- controls -->
-            <a class="btn btn-primary" href="{{ route('positions.create') }}" title="Position anlegen">
-                <span class="fa fa-plus-circle"></span> Position anlegen
+            <a class="btn btn-success" href="{{ route('positions.create') }}" title="Position anlegen">
+                <span class="fa fa-plus-square"></span> Position anlegen
             </a>
         </div>
     </div>
@@ -44,7 +44,7 @@
                     <td>
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('positions.show', $position) }}" title="Position anzeigen">
-                            <span class="fa fa-eye"></span>
+                            <span class="fa fa-search-plus"></span>
                         </a>
                         <!-- edit -->
                         <a class="btn btn-primary" href="{{ route('positions.edit', $position) }}" title="Position bearbeiten">

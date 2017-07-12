@@ -9,8 +9,8 @@
     <div class="row">
         <div class="col-md-3">
             <!-- controls -->
-            <a class="btn btn-primary" href="{{ route('people.create') }}" title="Person anlegen">
-                <span class="fa fa-plus-circle"></span> Person anlegen
+            <a class="btn btn-success" href="{{ route('people.create') }}" title="Person anlegen">
+                <span class="fa fa-plus-square"></span> Person anlegen
             </a>
         </div>
     </div>

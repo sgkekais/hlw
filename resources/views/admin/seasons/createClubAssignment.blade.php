@@ -72,8 +72,8 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Zuordnen</button>
-            <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}">Abbrechen</a>
+            <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Zuordnen</button>
+            <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}"><span class="fa fa-ban"></span> Abbrechen</a>
         </div>
     </form>
 

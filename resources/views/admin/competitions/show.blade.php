@@ -71,12 +71,16 @@
                     @foreach($competition->divisions as $division)
                         <tr>
                             <td><b>{{ $division->id }}</b></td>
-                            <td>{{ $division->name }}</td>
+                            <td>
+                                <a href="{{ route('divisions.show', $division) }}">
+                                    {{ $division->name }}
+                                </a>
+                            </td>
                             <td>{{ $division->hierarchy_level }}</td>
                             <td>{{ $division->published ? "Ja" : "Nein" }}</td>
                             <td>
                                 <a class="btn btn-secondary" href="{{ route('divisions.show', $division) }}" title="Spielklasse anzeigen">
-                                    <span class="fa fa-eye"></span>
+                                    <span class="fa fa-search-plus"></span>
                                 </a>
                                 <a class="btn btn-primary" href="{{ route('divisions.edit', $division) }}" title="Spielklasse bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>

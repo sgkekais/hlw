@@ -9,8 +9,8 @@
     <div class="row">
         <div class="col-md-3">
             <!-- controls -->
-            <a class="btn btn-primary" href="{{ route('clubs.create') }}" title="Mannschaft anlegen">
-                <span class="fa fa-plus-circle"></span> Mannschaft anlegen
+            <a class="btn btn-success" href="{{ route('clubs.create') }}" title="Mannschaft anlegen">
+                <span class="fa fa-plus-square"></span> Mannschaft anlegen
             </a>
         </div>
     </div>
@@ -48,7 +48,7 @@
                     <td>
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">
-                            <span class="fa fa-eye"></span>
+                            <span class="fa fa-search-plus"></span>
                         </a>
                         <!-- edit -->
                         <a class="btn btn-primary" href="{{ route('clubs.edit', $club) }}" title="Mannschaft bearbeiten">

@@ -22,13 +22,13 @@
             </a>
             <br>
             <a class="btn btn-secondary" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
-                <span class="fa fa-plus-circle"></span> Spieler
+                <span class="fa fa-plus-square"></span> Spieler
             </a>
             <a class="btn btn-secondary" href="{{ route('clubs.contacts.create', $club) }}" title="Ansprechpartner zuordnen">
-                <span class="fa fa-plus-circle"></span> Kontakt
+                <span class="fa fa-plus-square"></span> Kontakt
             </a>
             <a class="btn btn-secondary" href="#" title="Spielort zuordnen">
-                <span class="fa fa-plus-circle"></span> Spielort
+                <span class="fa fa-plus-square"></span> Spielort
             </a>
         </div>
         <!-- dates -->

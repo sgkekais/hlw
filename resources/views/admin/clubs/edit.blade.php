@@ -192,8 +192,8 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Ändern</button>
-            <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>
+            <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Ändern</button>
+            <a class="btn btn-secondary" href="{{ url()->previous() }}"><span class="fa fa-ban"></span> Abbrechen</a>
         </div>
     </form>
     <hr>
@@ -204,8 +204,8 @@
         {{ method_field('DELETE') }}
         <span class="form-text">Löscht den Verein und <b>alle zugeordneten Objekte <span class="text-danger">unwiderruflich</span></b>.</span>
         <br>
-        <button type="submit" class="btn btn-danger">Löschen</button>
-        <a class="btn btn-secondary" href="{{ url()->previous() }}">Abbrechen</a>
+        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
+        <a class="btn btn-secondary" href="{{ url()->previous() }}"><span class="fa fa-ban"></span> Abbrechen</a>
     </form>
 
 @endsection

@@ -79,7 +79,7 @@
                             <td>
                                 <!-- display details -->
                                 <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
-                                    <span class="fa fa-eye"></span>
+                                    <span class="fa fa-search-plus"></span>
                                 </a>
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('seasons.edit', $season) }}" title="Saison bearbeiten">

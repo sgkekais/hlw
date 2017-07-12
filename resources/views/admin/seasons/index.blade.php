@@ -9,8 +9,8 @@
     <div class="row">
         <div class="col-md-3">
             <!-- controls -->
-            <a class="btn btn-primary" href="{{ route('seasons.create') }}" title="Saison anlegen">
-                <span class="fa fa-plus-circle"></span> Saison anlegen
+            <a class="btn btn-success" href="{{ route('seasons.create') }}" title="Saison anlegen">
+                <span class="fa fa-plus-square"></span> Saison anlegen
             </a>
         </div>
     </div>
