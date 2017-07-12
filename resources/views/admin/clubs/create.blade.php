@@ -183,8 +183,8 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Anlegen</button>
-            <a class="btn btn-secondary" href="{{ route('clubs.index') }}">Abbrechen</a>
+            <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Anlegen</button>
+            <a class="btn btn-secondary" href="{{ route('clubs.index') }}"><span class="fa fa-ban"></span> Abbrechen</a>
         </div>
     </form>
 
