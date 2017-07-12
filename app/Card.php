@@ -33,6 +33,11 @@ class Card extends Model
 
     public function player()
     {
-        return $this->belongsTo(Player::class);
+        return $this->belongsTo(Player::class,'id');
+    }
+
+    public function fixture()
+    {
+        return $this->belongsTo(Fixture::class);
     }
 }

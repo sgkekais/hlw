@@ -7,6 +7,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Player extends Pivot
 {
+    /**
+     * The table associated with the model
+     * @var string
+     */
+    protected $table = 'clubs_people';
+
    use LogsActivity;
 
     /**
@@ -65,11 +71,9 @@ class Player extends Pivot
      * RELATIONSHIPS
      * ******************************************************/
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function position(){
-        return $this->belongsTo(Position::class);
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 
     /**
@@ -79,8 +83,15 @@ class Player extends Pivot
         return $this->belongsTo(Person::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function position(){
+        return $this->belongsTo(Position::class);
+    }
+
     public function cards()
     {
-        return $this->hasMany(Card::class);
+        return $this->hasMany(Card::class, 'player_id');
     }
 }
