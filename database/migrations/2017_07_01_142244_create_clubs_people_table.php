@@ -14,6 +14,7 @@ class CreateClubsPeopleTable extends Migration
     public function up()
     {
         Schema::create('clubs_people', function (Blueprint $table) {
+            $table->increments('id'); // id so we can reference a "player" later
             $table->integer('club_id')->unsigned();
             $table->integer('person_id')->unsigned();
             $table->date('sign_on');                    // signed with club
@@ -33,8 +34,7 @@ class CreateClubsPeopleTable extends Migration
             $table->foreign('position_id')
                 ->references('id')->on('positions')
                 ->onUpdate('cascade')->onDelete('set null');
-            // combine foreign keys to composite primary key
-            $table->primary(['club_id','person_id'], 'id');
+
         });
     }
 

@@ -78,4 +78,9 @@ class Player extends Pivot
     public function person(){
         return $this->belongsTo(Person::class);
     }
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
 }

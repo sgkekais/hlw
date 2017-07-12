@@ -16,6 +16,7 @@ class CreateCompetitionsTable extends Migration
         Schema::create('competitions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('type'); // type of competition, e.g. tournament (cup) or league
             $table->boolean('published')->default('0');
 
             $table->timestamps();

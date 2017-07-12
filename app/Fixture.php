@@ -136,4 +136,13 @@ class Fixture extends Model
     {
         return $this->belongsTo(Club::class, 'rescheduled_by_club');
     }
+
+    /**
+     * Cards of a match
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
 }

@@ -26,6 +26,7 @@ class CreateSeasonsTable extends Migration
             $table->string('playoff_champion')->nullable();         // championship-playoff -> serialize ranks 1,2,3,4,etc.
             $table->string('playoff_cup')->nullable();              // cup-playoff
             $table->string('playoff_relegation')->nullable();       // relegation-playoff
+            $table->integer('max_rescheduling')->nullable()->unsigned();
             $table->text('rules')->nullable();  // describe relegation / promotion rules etc., display below table
             $table->text('note')->nullable();
             $table->boolean('published')->default('0');

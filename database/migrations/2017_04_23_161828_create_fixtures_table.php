@@ -27,6 +27,7 @@ class CreateFixturesTable extends Migration
             $table->integer('goals_away_11m')->unsigned()->nullable();
             $table->integer('goals_home_rated')->unsigned()->nullable();    // if match result has been rated (due to ruling or other)
             $table->integer('goals_away_rated')->unsigned()->nullable();    // if match result has been rated (due to ruling or other)
+            $table->text('rated_note')->nullable();
             $table->text('note')->nullable();
             $table->boolean('cancelled')->default('0');    // complete cancellation, default: not cancelled
             $table->boolean('published')->default('0');    // publish on website?, default: not listed/published
@@ -34,6 +35,7 @@ class CreateFixturesTable extends Migration
             // $table->integer('rescheduled_to_fixture_id')->unsigned()->nullable();      // match has been rescheduled to fixture_id
             // add a rescheduled_by column to identify the team that cancelled the match
             $table->integer('rescheduled_by_club')->nullable()->unsigned();
+            $table->text('reschedule_reason')->nullable();
 
             $table->timestamps();
 
