@@ -90,8 +90,19 @@ class Player extends Pivot
         return $this->belongsTo(Position::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function cards()
     {
         return $this->hasMany(Card::class, 'player_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function goals()
+    {
+        return $this->hasMany(Goal::class, 'player_id');
     }
 }
