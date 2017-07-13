@@ -36,5 +36,8 @@ class Goal extends Model
         return $this->belongsTo(Fixture::class);
     }
 
-
+    public function player()
+    {
+        return $this->belongsTo(Player::class); // doesn't work
+    }
 }

@@ -33,7 +33,7 @@ class Card extends Model
 
     public function player()
     {
-        return $this->belongsTo(Player::class,'id');
+        return $this->belongsTo(Player::class,'id'); // TODO: doesn't work
     }
 
     public function fixture()
