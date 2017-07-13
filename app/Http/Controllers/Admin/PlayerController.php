@@ -19,7 +19,9 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        //
+        $players = Player::with('person')->get();
+
+        return $players;
     }
 
     /**
