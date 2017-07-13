@@ -42,23 +42,11 @@ class Person extends Model
     ];
 
     /**
-     * A person can be one or many players at one or more clubs
-     * A player is always one specific person
+     * A person can be many players for different clubs
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
-
+     */
     public function players(){
         return $this->hasMany(Player::class);
-    }*/
-
-    /**
-     * A player is a person related to a club
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function clubs(){
-        return $this->belongsToMany(Club::class, 'clubs_people')
-            ->withPivot('id','sign_on','sign_off','number','position_id')
-            ->withTimestamps()
-            ->using(Player::class);
     }
 
     /**

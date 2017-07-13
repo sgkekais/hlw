@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Club;
 use App\Person;
+use App\Player;
 use App\Position;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,12 +13,22 @@ use Illuminate\Support\Facades\Session;
 class PlayerController extends Controller
 {
     /**
-     * Show the form for creating a new player (in pivot table clubs_people) for the given club
-     * @param Club $club
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function create(Club $club){
+    public function index()
+    {
+        //
+    }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Club $club)
+    {
         $people     = Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get();
         $positions  = Position::all();
 
@@ -25,84 +36,85 @@ class PlayerController extends Controller
     }
 
     /**
-     * Store the newly created player for the club in the pivot table
-     * @param Request $request
-     * @param Club $club
-     * @return \Illuminate\Http\RedirectResponse
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Club $club){
-
+    public function store(Request $request, Club $club)
+    {
         $this->validate($request, [
             'sign_on' => 'required|date',
             'sign_off'=> 'nullable|date|after_or_equal:sign_on',
             'number'  => 'nullable|max:4'
         ]);
 
-        $person = Person::find($request->person_id);
+        $player = new Player($request->all());
 
-        // attach to pivot table by accessing relationship on the club
-        $club->players()->attach($person, [
-            'sign_on'       => $request->sign_on,
-            'sign_off'      => $request->sign_off,
-            'number'        => $request->number,
-            'position_id'   => $request->position_id
-        ]);
+        $club->players()->save($player);
 
-        Session::flash('success', 'Spieler '.$person->first_name.' '.$person->last_name.' erfolgreich Mannschaft '.$club->name.' zugeordnet.');
+        Session::flash('success', 'Spieler '.$player->person->last_name.', '.$player->person->first_name.' erfolgreich Mannschaft '.$club->name.' zugeordnet.');
 
         return redirect()->route('clubs.show', compact('club'));
     }
 
     /**
-     * Show the edit form for a given club/player relationship
-     * @param Club $club
-     * @param Person $person
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Display the specified resource.
+     *
+     * @param  \App\Player  $player
+     * @return \Illuminate\Http\Response
      */
-    public function edit(Club $club, Person $person){
+    public function show(Player $player)
+    {
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Player  $player
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Club $club, Player $player)
+    {
         $positions = Position::all();
-        $player    = $club->players->find($person);
 
         return view('admin.players.edit', compact('club', 'player','positions'));
     }
 
     /**
-     * Update the relationship
-     * @param Request $request
-     * @param Club $club
-     * @param Person $person
-     * @return \Illuminate\Http\RedirectResponse
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Club $club
+     * @param  \App\Player  $player
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Club $club, Person $person){
-
+    public function update(Request $request, Club $club, Player $player)
+    {
         $this->validate($request, [
             'sign_on' => 'required|date',
             'sign_off'=> 'nullable|date|after_or_equal:sign_on',
             'number'  => 'nullable|max:4'
         ]);
 
-        $sign_on = $request->sign_on;
-        $sign_off = $request->sign_off;
-        $number = $request->number;
-        $position_id = $request->position_id;
+        $player->update($request->all());
 
-        // sync with existing pivot entry
-        $club->players()->updateExistingPivot($person->id, [
-            'sign_on'       => $sign_on,
-            'sign_off'      => $sign_off,
-            'number'        => $number,
-            'position_id'   => $position_id
-        ]);
-
-        Session::flash('success', 'Spieler '.$person->first_name.' '.$person->last_name.' erfolgreich geändert.');
+        Session::flash('success', 'Spieler '.$player->person->first_name.' '.$player->person->last_name.' erfolgreich geändert.');
 
         return redirect()->route('clubs.show', compact('club'));
     }
 
-    public function destroy(Club $club, Person $person){
-
-        $club->players()->detach($person->id);
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Club $club
+     * @param Player $player
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Club $club, Player $player)
+    {
+        $player->delete();
 
         Session::flash('success', 'Zuordnung gelöscht.');
 

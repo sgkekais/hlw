@@ -21,7 +21,7 @@
                 <span class="fa fa-pencil"></span> Bearbeiten
             </a>
             <br>
-            <a class="btn btn-secondary" href="{{ route('players.create', $club ) }}" title="Spieler zuordnen">
+            <a class="btn btn-secondary" href="{{ route('clubs.players.create', $club ) }}" title="Spieler zuordnen">
                 <span class="fa fa-plus-square"></span> Spieler
             </a>
             <a class="btn btn-secondary" href="{{ route('clubs.contacts.create', $club) }}" title="Ansprechpartner zuordnen">
@@ -221,7 +221,7 @@
         <!-- players -->
         <div class="tab-pane" id="players" role="tabpanel">
             <h4 class="mb-4 mt-4">Aktive
-                <small class="text-muted">(davon <b>{{ $club->players()->whereNotNull('registered_at_club')->get()->count() }}</b> Vereinsspieler)</small>
+                <small class="text-muted">(davon <b>{{ $club->players()->whereHas('person', function ($query) { $query->whereNotNull('registered_at_club'); })->get()->count() }}</b> Vereinsspieler)</small>
             </h4>
             @if($club->players()->whereNull('sign_off')->get()->count() > 0)
                 <table class="table table-sm table-striped table-hover">
@@ -242,28 +242,28 @@
                             <td>{{ $p_active->id }}</td>
                             <td>
                                 <a href="{{ route('people.edit', $p_active) }}" title="Person bearbeiten (nicht Spieler)">
-                                    {{ $p_active->last_name }}, {{ $p_active->first_name }}
+                                    {{ $p_active->person->last_name }}, {{ $p_active->person->first_name }}
                                 </a>
                             </td>
-                            <td>{{ $p_active->pivot->sign_on->format('d.m.Y') }}</td>
+                            <td>{{ $p_active->sign_on->format('d.m.Y') }}</td>
                             <td>
-                                @if($p_active->registered_at_club)
+                                @if($p_active->person->registered_at_club)
                                     <span class='text-danger'>JA</span>
                                 @else
                                     <span class='text-success'>NEIN</span>
                                 @endif
                             </td>
-                            <td>{{ $p_active->pivot->number }}</td>
+                            <td>{{ $p_active->number }}</td>
                             <td>
-                                @if($p_active->pivot->position_id)
-                                    {{ $p_active->pivot->position->name }}
+                                @if($p_active->position_id)
+                                    {{ $p_active->position->name }}
                                 @else
                                     -
                                 @endif
                             </td>
                             <td>
                                 <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('players.edit', [$club, $p_active]) }}" title="Spieler bearbeiten">
+                                <a class="btn btn-primary" href="{{ route('clubs.players.edit', [$club, $p_active]) }}" title="Spieler bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             </td>
@@ -293,14 +293,14 @@
                             <td>{{ $p_inactive->id }}</td>
                             <td>
                                 <a href="" title="Person bearbeiten">
-                                    {{ $p_inactive->last_name }}, {{ $p_inactive->first_name }}
+                                    {{ $p_inactive->person->last_name }}, {{ $p_inactive->person->first_name }}
                                 </a>
                             </td>
-                            <td>{{ $p_inactive->pivot->sign_on->format('d.m.Y') }}</td>
-                            <td>{{ $p_inactive->pivot->sign_off->format('d.m.Y') }}</td>
+                            <td>{{ $p_inactive->sign_on->format('d.m.Y') }}</td>
+                            <td>{{ $p_inactive->sign_off->format('d.m.Y') }}</td>
                             <td>
                                 <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('players.edit', [$club, $p_inactive]) }}" title="Spieler bearbeiten">
+                                <a class="btn btn-primary" href="{{ route('clubs.players.edit', [$club, $p_inactive]) }}" title="Spieler bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             </td>

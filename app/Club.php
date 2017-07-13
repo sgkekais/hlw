@@ -87,15 +87,11 @@ class Club extends Model
 
     /**
      * A club has many players
-     * A player can be related to many clubs (though not at the same time)
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function players()
     {
-        return $this->belongsToMany(Person::class, 'clubs_people')
-            ->withPivot('sign_on','sign_off','number','position_id')
-            ->withTimestamps()
-            ->using(Player::class);
+        return $this->hasMany(Player::class);
     }
 
     public function contacts()

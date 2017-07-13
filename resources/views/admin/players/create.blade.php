@@ -7,7 +7,7 @@
     <p>
         Ein Spieler ist eine Person, die in einem bestimmten Zeitraum für eine Mannschaft spielt. Die Person muss zuvor angelegt werden. Sollte eine Person den Verein wechseln, so ist hier das Austrittsdatum zu vermerken und anschließend ein neuer Spieler anzulegen.
     </p>
-    <form method="POST" action="{{ route('players.store', $club) }}">
+    <form method="POST" action="{{ route('clubs.players.store', $club) }}">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}
         <!-- which person is this? -->

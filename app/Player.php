@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Player extends Pivot
+class Player extends Model
 {
     /**
      * The table associated with the model
@@ -20,7 +20,7 @@ class Player extends Pivot
      * @var array
      */
     protected static $logAttributes = [
-        'sign_on', 'sign_off', 'number', 'position_id'
+        'person_id', 'sign_on', 'sign_off', 'number', 'position_id'
     ];
 
     /**
@@ -34,7 +34,7 @@ class Player extends Pivot
      * @var array
      */
     protected $fillable = [
-        'sign_on', 'sign_off', 'number', 'position_id'
+        'person_id', 'sign_on', 'sign_off', 'number', 'position_id'
     ];
 
     /**
