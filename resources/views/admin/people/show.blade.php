@@ -91,6 +91,10 @@
             @else
                 <i>Person spielt für keine Mannschaft.</i>
             @endif
+            <br>
+            Karten, die Person als Spieler bekommen hat
+            <br>
+            Tore, die Person als Spieler geschossen hat
         </div>
         <div class="col-md-12">
             <h4>Ansprechpartner</h4>
