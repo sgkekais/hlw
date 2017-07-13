@@ -73,15 +73,21 @@
                     <tbody>
                     @foreach($matchweek->fixtures as $fixture)
                         <tr>
-                            <td><b>{{ $fixture->id }}</b></td>
                             <td>
+                                @if($fixture->rescheduled_from_fixture_id)
+                                    <b>{{ $fixture->rescheduled_from->id }}</b>
+                                    <br>
+                                    <span class="fa fa-level-up fa-rotate-90"></span>
+                                @endif
+                                <b>{{ $fixture->id }}</b></td>
+                            <td class="align-middle">
                                 @if($fixture->published)
                                     <span class="fa fa-eye" title="Öffentlich"></span>
                                 @else
                                     <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
                                 @endif
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 @if($fixture->date)
                                     {{ $fixture->date->format('d.m.Y') }}
                                 @endif
@@ -89,7 +95,7 @@
                                     - {{ $fixture->time }}
                                 @endif
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 @if($fixture->club_home)
                                     <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
                                         {{ $fixture->club_home->name_short }}
@@ -106,30 +112,50 @@
                                     -
                                 @endif
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 @if($fixture->stadium)
                                     <a href="{{ route('stadiums.show', $fixture->stadium) }}">
                                         {{ $fixture->stadium->name_short }}
                                     </a>
                                 @endif
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
-                                ({{ $fixture->goals_home_11m }}:{{ $fixture->goals_away_11m }})
+                                ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
                                 - {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
                             </td>
-                            <td>{{ $fixture->cancelled ? "Ann." : null }}</td>
-                            <td>
+                            <td class="align-middle">{{ $fixture->cancelled ? "Ann." : null }}</td>
+                            <td class="align-middle">
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
+                                <!-- add goals, if goals_home or goals_away not null -->
+                                @if($fixture->goals_home || $fixture->goals_away )
+                                    <a class="btn btn-outline-success" href="#" title="Tore pflegen">
+                                        <span class="fa fa-soccer-ball-o" aria-hidden="true"></span>
+                                    </a>
+                                @else
+                                    Kein Tor
+                                @endif
+                                <!-- add cards, if goals_home or goals_away not null -->
+                                @if($fixture->goals_home || $fixture->goals_away )
+                                    <a class="btn btn-outline-warning" href="#" title="Karten pflegen">
+                                        <span class="fa fa-clone" aria-hidden="true"></span>
+                                    </a>
+                                @else
+                                    Kein Tor
+                                @endif
                                 <!-- reschedule, only once -->
-                                @unless($fixture->rescheduled_to)
+                                @if(!$fixture->rescheduled_to)
                                     <a class="btn btn-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
                                         <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
                                     </a>
-                                @endunless
+                                @else
+                                    <button class="btn btn-outline-danger" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
+                                @endif
+
+
                             </td>
                         </tr>
                     @endforeach
