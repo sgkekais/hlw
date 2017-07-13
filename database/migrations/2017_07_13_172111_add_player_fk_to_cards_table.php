@@ -28,7 +28,7 @@ class AddPlayerFkToCardsTable extends Migration
     public function down()
     {
         Schema::table('cards', function (Blueprint $table) {
-            $table->dropForeign('player_id'); // test
+            $table->dropForeign('player_id');
         });
     }
 }
