@@ -241,7 +241,7 @@
                         <tr>
                             <td>{{ $p_active->id }}</td>
                             <td>
-                                <a href="{{ route('people.edit', $p_active) }}" title="Person bearbeiten (nicht Spieler)">
+                                <a href="{{ route('people.show', $p_active->person->id) }}" title="Person bearbeiten (nicht Spieler)">
                                     {{ $p_active->person->last_name }}, {{ $p_active->person->first_name }}
                                 </a>
                             </td>

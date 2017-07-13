@@ -45,7 +45,8 @@ class Person extends Model
      * A person can be many players for different clubs
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function players(){
+    public function players()
+    {
         return $this->hasMany(Player::class);
     }
 
@@ -53,7 +54,8 @@ class Person extends Model
      * Same as players relationship
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function referees(){
+    public function referees()
+    {
         return $this->hasMany(Referee::class);
     }
 
@@ -61,7 +63,16 @@ class Person extends Model
      * Same as players relationship
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function contacts(){
+    public function contacts()
+    {
         return $this->hasMany(Contact::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function realClub()
+    {
+        return $this->belongsTo(Club::class, 'registered_at_club');
     }
 }

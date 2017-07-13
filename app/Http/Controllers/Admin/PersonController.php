@@ -65,7 +65,9 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        //
+        $person->load('players','referees','contacts');
+
+        return view('admin.people.show', compact('person'));
     }
 
     /**
