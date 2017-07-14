@@ -36,7 +36,7 @@
         </div>
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="name_short">Name</label>
+                <label for="name_short">Name verkürzt</label>
             </div>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="name_short" id="name_short" aria-describedby="name_shortHelp" value="{{ $club->name_short }}">
