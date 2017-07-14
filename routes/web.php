@@ -50,9 +50,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     // fixtures crud, all fixtures routes are handled with a specific matchweek
     Route::resource('matchweeks.fixtures', 'FixtureController');
 
-        Route::get('cards', function(){
-
-        });
+        // managing cards of a match
+        Route::resource('fixtures.cards', 'CardController');
 
     Route::resource('stadiums', 'StadiumController');
     Route::resource('clubs', 'ClubController');

@@ -74,9 +74,9 @@ class FixtureController extends Controller
      * @param  \App\Fixture  $fixture
      * @return \Illuminate\Http\Response
      */
-    public function show(Fixture $fixture)
+    public function show(Matchweek $matchweek, Fixture $fixture)
     {
-        //
+        return view('admin.fixtures.show', compact('matchweek', 'fixture'));
     }
 
     /**

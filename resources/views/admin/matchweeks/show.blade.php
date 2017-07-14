@@ -126,6 +126,10 @@
                             </td>
                             <td class="align-middle">{{ $fixture->cancelled ? "Ann." : null }}</td>
                             <td class="align-middle">
+                                <!-- show -->
+                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$matchweek, $fixture]) }}" title="Paarung anzeigen">
+                                    <span class="fa fa-search-plus" aria-hidden="true"></span>
+                                </a>
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
