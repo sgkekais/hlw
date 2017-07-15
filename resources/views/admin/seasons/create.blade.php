@@ -28,10 +28,10 @@
                 <label for="year_end"> &dash; bis</label>
             </div>
             <div class="col-md-2">
-                <input type="number" class="form-control" name="year_begin" id="year_begin" placeholder="{{ old('year_begin', date('Y')) }}">
+                <input type="number" class="form-control" name="year_begin" id="year_begin" placeholder="{{ old('year_begin') }}">
             </div>
             <div class="col-md-2">
-                <input type="number" class="form-control" name="year_end" id="year_end" placeholder="{{ old('year_end', date('Y')) }}">
+                <input type="number" class="form-control" name="year_end" id="year_end" placeholder="{{ old('year_end') }}">
             </div>
         </div>
         <!-- season nr -->

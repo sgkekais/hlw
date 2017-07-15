@@ -4,13 +4,7 @@
 
     <!-- edit the season -->
     <h1 class="">Saison</h1>
-    <h2 class="mt-4 text-primary">&mdash;
-        @if($season->year_begin == $season->year_end)
-            {{ $season->year_begin }}
-        @else
-            {{ $season->year_begin }} / {{ $season->year_end }}
-        @endif
-    </h2>
+    <h2 class="mt-4 text-primary">&mdash; {{ $season->year_begin }} / {{ $season->year_end }}</h2>
     <!-- created at -->
     Angelegt: {{ $season->created_at->format('d.m.Y H:i') }} Uhr
     @if($causer = ModelHelper::causerOfAction($season,'created'))
