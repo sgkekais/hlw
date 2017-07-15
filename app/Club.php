@@ -43,6 +43,15 @@ class Club extends Model
         'note', 'is_real_club', 'published'
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     * @var array
+     */
+    protected $dates = [
+        'founded', 'league_entry', 'league_exit'
+    ];
+
+
     /***********************************************************
      * SCOPES
      ************************************************************/
