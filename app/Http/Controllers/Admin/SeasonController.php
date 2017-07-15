@@ -43,8 +43,8 @@ class SeasonController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'year_begin' => 'required|date',
-            'year_end' => 'required|date|after_or_equal:year_begin',
+            'begin' => 'required|date',
+            'end' => 'required|date|after_or_equal:year_begin',
             'max_rescheduling' => 'nullable|integer|min:1'
         ]);
 
@@ -96,8 +96,8 @@ class SeasonController extends Controller
     public function update(Request $request, Season $season)
     {
         $this->validate($request, [
-            'year_begin' => 'required|digits:4',
-            'year_end' => 'required|digits:4|after_or_equal:year_begin',
+            'begin' => 'required|digits:4',
+            'end' => 'required|digits:4|after_or_equal:year_begin',
             'max_rescheduling' => 'nullable|integer|min:1'
         ]);
 

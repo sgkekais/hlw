@@ -24,14 +24,14 @@
         <!-- year -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="year_begin">Jahr von</label>
-                <label for="year_end"> &dash; bis</label>
+                <label for="begin">Zeitraum von</label>
+                <label for="end"> &dash; bis</label>
             </div>
             <div class="col-md-2">
-                <input type="number" class="form-control" name="year_begin" id="year_begin" placeholder="{{ old('year_begin') }}">
+                <input type="date" class="form-control" name="begin" id="begin" placeholder="{{ old('begin') }}">
             </div>
             <div class="col-md-2">
-                <input type="number" class="form-control" name="year_end" id="year_end" placeholder="{{ old('year_end') }}">
+                <input type="date" class="form-control" name="end" id="end" placeholder="{{ old('end') }}">
             </div>
         </div>
         <!-- season nr -->
@@ -40,7 +40,7 @@
                 <label for="season_nr">Saison Nr.</label>
             </div>
             <div class="col-md-4">
-                <input type="number" class="form-control" name="season_nr" id="season_nr" aria-describedby="season_nrHelp" placeholder="{{ old('season_nr', '1') }}">
+                <input type="number" class="form-control" name="season_nr" id="season_nr" aria-describedby="season_nrHelp" placeholder="{{ old('season_nr') }}">
                 <small id="season_nrHelp" class="form-text text-muted">Spielzeit, bspw. 24. Es wird automatisch die nächsthöchste festgelegt.</small>
             </div>
         </div>
@@ -63,22 +63,22 @@
                 <label for="ranks_champion">Meisterplätze</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="ranks_champion" id="ranks_champion" aria-describedby="ranks_championHelp" placeholder="{{ old('ranks_champion', '1') }}">
-                <small id="ranks_championHelp" class="form-text text-muted">Plätze, die Meister werden</small>
+                <input type="text" class="form-control" name="ranks_champion" id="ranks_champion" aria-describedby="ranks_championHelp" placeholder="{{ old('ranks_champion') }}">
+                <small id="ranks_championHelp" class="form-text text-muted">Plätze, die Meister werden (1)</small>
             </div>
             <div class="col-md-2">
                 <label for="ranks_promotion">Aufstiegsplätze</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="ranks_promotion" id="ranks_promotion" aria-describedby="ranks_promotionHelp" placeholder="{{ old('ranks_promotion', '1,2') }}">
-                <small id="ranks_promotionHelp" class="form-text text-muted">Plätze, die aufsteigen</small>
+                <input type="text" class="form-control" name="ranks_promotion" id="ranks_promotion" aria-describedby="ranks_promotionHelp" placeholder="{{ old('ranks_promotion') }}">
+                <small id="ranks_promotionHelp" class="form-text text-muted">Plätze, die aufsteigen (1,2)</small>
             </div>
             <div class="col-md-2">
                 <label for="ranks_relegation">Abstiegsplätze</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="ranks_relegation" id="ranks_relegation" aria-describedby="ranks_relegationHelp" placeholder="{{ old('ranks_relegation', '11,12') }}">
-                <small id="ranks_relegationHelp" class="form-text text-muted">Plätze, die absteigen</small>
+                <input type="text" class="form-control" name="ranks_relegation" id="ranks_relegation" aria-describedby="ranks_relegationHelp" placeholder="{{ old('ranks_relegation') }}">
+                <small id="ranks_relegationHelp" class="form-text text-muted">Plätze, die absteigen (11,12)</small>
             </div>
         </div>
         <!-- playoffs -->
@@ -87,22 +87,22 @@
                 <label for="playoff_champion">Meisterschafts-Playoff</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="playoff_champion" id="playoff_champion" aria-describedby="playoff_championHelp" placeholder="{{ old('playoff_champion', '1,2,3,4') }}">
-                <small id="playoff_championHelp" class="form-text text-muted">Playoff-Plätze um die Meisterschaft</small>
+                <input type="text" class="form-control" name="playoff_champion" id="playoff_champion" aria-describedby="playoff_championHelp" placeholder="{{ old('playoff_champion') }}">
+                <small id="playoff_championHelp" class="form-text text-muted">Playoff-Plätze um die Meisterschaft (1,2,3,4)</small>
             </div>
             <div class="col-md-2">
                 <label for="playoff_cup">Pokal-Playoff</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="playoff_cup" id="playoff_cup" aria-describedby="playoff_cupHelp" placeholder="{{ old('playoff_cup', '5,6,7,8') }}">
-                <small id="playoff_cupHelp" class="form-text text-muted">Playoff-Plätze für Pokal</small>
+                <input type="text" class="form-control" name="playoff_cup" id="playoff_cup" aria-describedby="playoff_cupHelp" placeholder="{{ old('playoff_cup') }}">
+                <small id="playoff_cupHelp" class="form-text text-muted">Playoff-Plätze für Pokal (5,6,7,8)</small>
             </div>
             <div class="col-md-2">
                 <label for="playoff_relegation">Relegation</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="playoff_relegation" id="playoff_relegation" aria-describedby="playoff_relegationHelp" placeholder="{{ old('playoff_relegation', '10') }}">
-                <small id="playoff_relegationHelp" class="form-text text-muted">Plätze, die in die Relegation gehen</small>
+                <input type="text" class="form-control" name="playoff_relegation" id="playoff_relegation" aria-describedby="playoff_relegationHelp" placeholder="{{ old('playoff_relegation') }}">
+                <small id="playoff_relegationHelp" class="form-text text-muted">Plätze, die in die Relegation gehen (10)</small>
             </div>
         </div>
         <!-- max rescheduling -->
