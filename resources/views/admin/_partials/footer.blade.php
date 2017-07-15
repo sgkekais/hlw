@@ -8,5 +8,9 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<!-- daterangepicker -->
+<script>
+    $('input[name="datetime"]').daterangepicker();
+</script>
 </body>
 </html>
