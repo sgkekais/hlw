@@ -16,8 +16,8 @@ class CreateSeasonsTable extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('division_id')->unsigned();
-            $table->integer('year_begin')->unsigned();
-            $table->integer('year_end')->unsigned();
+            $table->date('begin')->unsigned();
+            $table->date('end')->unsigned();
             $table->integer('season_nr')->unsigned()->nullable();
             $table->integer('champion')->unsigned()->nullable();    // season champion
             $table->string('ranks_champion')->nullable();

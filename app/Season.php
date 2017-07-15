@@ -47,6 +47,14 @@ class Season extends Model
     ];
 
     /**
+     * The attributes that should be mutated to dates
+     * @var array
+     */
+    protected $dates = [
+        'year_begin', 'year_end'
+    ];
+
+    /**
      * Relationship
      * 1. One-to-Many
      * - a division has many seasons

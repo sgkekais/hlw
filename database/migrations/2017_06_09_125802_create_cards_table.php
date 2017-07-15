@@ -29,7 +29,9 @@ class CreateCardsTable extends Migration
             $table->foreign('fixture_id')
                 ->references('id')->on('fixtures')
                 ->onUpdate('cascade')->onDelete('cascade');
-
+            $table->foreign('player_id')
+                ->references('id')->on('clubs_people')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -16,8 +16,7 @@ class CreateFixturesTable extends Migration
         Schema::create('fixtures', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('matchweek_id')->unsigned();
-            $table->date('date')->nullable();
-            $table->time('time')->nullable();
+            $table->dateTime('datetime')->nullable();
             $table->integer('stadium_id')->unsigned()->nullable();     // foreign key relationship to stadium_id
             $table->integer('club_id_home')->unsigned()->nullable();   // foreign key relationship to club_id
             $table->integer('club_id_away')->unsigned()->nullable();   // foreign key relationship to club_id
