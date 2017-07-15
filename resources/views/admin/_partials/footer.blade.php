@@ -11,9 +11,13 @@
 <!-- daterangepicker -->
 <script type="text/javascript">
     $(function() {
+        var beginDate = $("input[name=begin]").val();
+
         $('input[id="singledatepicker"]').daterangepicker({
-            "singleDatePicker": true,
-            "locale": {
+            singleDatePicker: true,
+            showDropdowns: true,
+            startDate: beginDate,
+            locale: {
                 "format": "YYYY-MM-DD",
                 "separator": " - ",
                 "applyLabel": "Anwenden",
@@ -46,7 +50,7 @@
                     "Dezember"
                 ],
                 "firstDay": 1
-            },
+            }
         });
     });
 </script>

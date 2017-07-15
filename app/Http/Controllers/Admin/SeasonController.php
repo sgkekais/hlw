@@ -55,7 +55,7 @@ class SeasonController extends Controller
         $season->save();
 
         // flash success message and return competition name as test
-        Session::flash('success', 'Saison '.$season->begin.' / '.$season->end.' erfolgreich angelegt und Wettbewerb '.$season->division->name.' zugeordnet.');
+        Session::flash('success', 'Saison '.$season->begin->format('d.m.Y').' / '.$season->end->format('d.m.Y').' erfolgreich angelegt und Wettbewerb '.$season->division->name.' zugeordnet.');
 
         // return to index
         return redirect()->route('seasons.index');
