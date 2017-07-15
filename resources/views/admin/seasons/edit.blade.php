@@ -4,7 +4,7 @@
 
     <!-- edit the season -->
     <h1 class="">Saison</h1>
-    <h2 class="mt-4 text-primary">&mdash; {{ $season->year_begin }} / {{ $season->year_end }}</h2>
+    <h2 class="mt-4 text-primary">&mdash; {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}</h2>
     <!-- created at -->
     Angelegt: {{ $season->created_at->format('d.m.Y H:i') }} Uhr
     @if($causer = ModelHelper::causerOfAction($season,'created'))
@@ -40,18 +40,17 @@
                 <small id="season_idHelp" class="form-text text-muted">Zuordnung zu welcher Spielklasse?</small>
             </div>
         </div>
-        <!-- year -->
+        <!-- timeframe -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="year_begin">Jahr von</label>
-                <label for="year_end"> &dash; bis</label>
+                <label for="begin">Zeitraum von</label>
+                <label for="end"> &dash; bis</label>
             </div>
             <div class="col-md-2">
-                <input type="number" class="form-control" name="year_begin" id="year_begin" aria-describedby="year_beginHelp" value="{{ $season->year_begin }}">
-                <small id="year_beginHelp" class="form-text text-muted">JJJJ</small>
+                <input type="date" class="form-control" name="begin" id="begin" value="{{ $season->begin->toDateString() }}">
             </div>
             <div class="col-md-2">
-                <input type="number" class="form-control" name="year_end" id="year_end" value="{{ $season->year_end }}">
+                <input type="date" class="form-control" name="end" id="end" value="{{ $season->end->toDateString() }}">
             </div>
         </div>
         <!-- season nr -->

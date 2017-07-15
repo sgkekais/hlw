@@ -21,7 +21,7 @@
                 <small id="division_idHelp" class="form-text text-muted">Zuordnung zu welcher Spielklasse?</small>
             </div>
         </div>
-        <!-- year -->
+        <!-- timeframe -->
         <div class="form-group row">
             <div class="col-md-2">
                 <label for="begin">Zeitraum von</label>

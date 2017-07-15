@@ -39,16 +39,10 @@
                 </td>
                 <td>
                     <a href="{{ route('seasons.show', $season ) }}" title="Anzeigen">
-                        @if($season->year_begin == $season->year_end)
-                            {{ $season->year_begin }}
-                        @else
-                            {{ $season->year_begin }} / {{ $season->year_end }}
-                        @endif
+                        {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}
                     </a>
                     <br>
-                    <span class="text-muted">{{ $season->division->name }}</span>
-                    <br>
-                    Spielwochen: {{ $season->matchweeks()->get()->count() }}
+                    <span class="text-muted">{{ $season->division->name }}</span> | Spielwochen: {{ $season->matchweeks()->get()->count() }}
                 </td>
                 <td>
                     <!-- display details -->

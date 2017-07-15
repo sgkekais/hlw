@@ -3,7 +3,7 @@
 @section('content')
 
     <h1 class="">Details zu Saison</h1>
-    <h2 class="mt-4 text-primary">&mdash; {{ $season->year_begin }} / {{ $season->year_end }} <span class="text-muted">({{ $season->division->name }})</span>
+    <h2 class="mt-4 text-primary">&mdash; {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }} <span class="text-muted">({{ $season->division->name }})</span>
     </h2>
     <div class="row">
         <div class="col-md-6">
