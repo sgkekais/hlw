@@ -12,7 +12,7 @@ class Season extends Model
     // log attributes
     protected static $logAttributes = [
         'division_id',
-        'year_begin', 'year_end',
+        'begin', 'end',
         'season_nr',
         'champion',
         'ranks_champion', 'ranks_promotion', 'ranks_relegation',
@@ -35,7 +35,7 @@ class Season extends Model
      */
     protected $fillable = [
         'division_id',
-        'year_begin', 'year_end',
+        'begin', 'end',
         'season_nr',
         'champion',
         'ranks_champion', 'ranks_promotion', 'ranks_relegation',
@@ -51,7 +51,7 @@ class Season extends Model
      * @var array
      */
     protected $dates = [
-        'year_begin', 'year_end'
+        'begin', 'end'
     ];
 
     /**
