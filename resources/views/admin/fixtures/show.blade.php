@@ -10,11 +10,18 @@
             @endif
             @if($fixture->time)
                 <br>
-                <span class="fa fa-clock-o"></span> {{ $fixture->time }}
+                <span class="fa fa-clock-o"></span> {{ $fixture->time }} Uhr
             @endif
             @if($fixture->stadium)
                 <br>
-                <span class="fa fa-map-marker"></span> {{ $fixture->stadium->name }}
+                <span class="fa fa-map-marker"></span>
+                    @if($fixture->stadium->gmaps)
+                        <a href="{{ $fixture->stadium->gmaps }}" target="_blank">
+                    @endif
+                        {{ $fixture->stadium->name }}
+                    @if($fixture->stadium->gmaps)
+                        </a>
+                    @endif
             @endif
         </div>
     </div>
