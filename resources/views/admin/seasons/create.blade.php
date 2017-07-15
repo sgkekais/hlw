@@ -21,15 +21,6 @@
                 <small id="division_idHelp" class="form-text text-muted">Zuordnung zu welcher Spielklasse?</small>
             </div>
         </div>
-        <!-- datetime picker test -->
-        <div class="form-group row">
-            <div class="col-md-2">
-                <label for="datetime">Zeitraum</label>
-            </div>
-            <div class="col-md-4">
-                <input type="date" class="form-control" name="datetime" id="datetime">
-            </div>
-        </div>
         <!-- timeframe -->
         <div class="form-group row">
             <div class="col-md-2">
@@ -37,10 +28,10 @@
                 <label for="end"> &dash; bis</label>
             </div>
             <div class="col-md-2">
-                <input type="date" class="form-control" name="begin" id="begin" placeholder="{{ old('begin') }}">
+                <input type="date" class="form-control" name="begin" id="singledatepicker" placeholder="{{ old('begin') }}">
             </div>
             <div class="col-md-2">
-                <input type="date" class="form-control" name="end" id="end" placeholder="{{ old('end') }}">
+                <input type="date" class="form-control" name="end" id="singledatepicker" placeholder="{{ old('end') }}">
             </div>
         </div>
         <!-- season nr -->
