@@ -27,10 +27,12 @@
                 <label for="begin">Zeitraum von</label>
                 <label for="end"> &dash; bis</label>
             </div>
-            <div class="col-md-2">
+            <div class="input-group col-md-2">
+                <div class="input-group-addon"><span class="fa fa-calendar"></span> </div>
                 <input type="date" class="form-control" name="begin" id="singledatepickerfrom" placeholder="{{ old('begin') }}">
             </div>
-            <div class="col-md-2">
+            <div class="input-group col-md-2">
+                <div class="input-group-addon"><span class="fa fa-calendar"></span> </div>
                 <input type="date" class="form-control" name="end" id="singledatepickerto" placeholder="{{ old('end') }}">
             </div>
         </div>
