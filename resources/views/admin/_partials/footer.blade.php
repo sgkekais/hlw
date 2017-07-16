@@ -103,7 +103,7 @@
         });
     </script>
 @endif
-@if ( Route::is('matchweeks.fixtures.create') || Route::is('matchweeks.fixtures.edit') )
+@if ( Route::is('matchweeks.fixtures.create') || Route::is('matchweeks.fixtures.edit') || Route::is('reschedule.create') )
     <script type="text/javascript">
         $(function() {
             var beginDate = $("input[name=datetime]").val();
