@@ -88,11 +88,8 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                @if($fixture->date)
-                                    {{ $fixture->date->format('d.m.Y') }}
-                                @endif
-                                @if($fixture->time)
-                                    - {{ $fixture->time }}
+                                @if($fixture->datetime)
+                                    {{ $fixture->datetime->format('d.m.Y H:i') }}
                                 @endif
                             </td>
                             <td class="align-middle">

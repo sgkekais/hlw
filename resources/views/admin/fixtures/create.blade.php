@@ -54,7 +54,7 @@
         <div class="form-group row">
             <label for="datetime" class="col-md-2 col-form-label">Datum und Uhrzeit</label>
             <div class="col-md-4">
-                <input type="datetime" class="form-control" name="datetime" id="singledatetimepicker" aria-describedby="datetimeHelp" placeholder="{{ old('date') }}">
+                <input type="datetime-local" class="form-control" name="datetime" id="singledatetimepicker" aria-describedby="datetimeHelp" placeholder="{{ old('date') }}">
                 <small id="datetimeHelp" class="form-text text-muted">Datum und Uhrzeit der Paarung</small>
             </div>
         </div>

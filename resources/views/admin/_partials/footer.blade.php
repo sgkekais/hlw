@@ -1,10 +1,10 @@
-<footer class="footer bg-faded">
+<!-- TODO: blocks view <footer class="footer bg-faded">
     <div class="container">
         <div class="row justify-content-end no-gutters">
             <span class="text-muted">&copy; {{ date('Y') }} - Zeitzone: {{ config('app.timezone') }}, Autor: Kevin Kaiser</span>
         </div>
     </div>
-</footer>
+</footer>-->
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
@@ -119,7 +119,7 @@
                 timePicker24Hour: true,
                 timePickerSeconds: true,
                 locale: {
-                    "format": "YYYY-MM-DD",
+                    "format": "YYYY-MM-DD HH:mm:ss",
                     "separator": " - ",
                     "applyLabel": "Anwenden",
                     "cancelLabel": "Abbrechen",

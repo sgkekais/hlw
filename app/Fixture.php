@@ -14,8 +14,7 @@ class Fixture extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'date',
-        'time',
+        'datetime',
         'stadium_id',
         'club_id_home',
         'club_id_away',
@@ -43,8 +42,7 @@ class Fixture extends Model
      * @var array
      */
     protected $fillable = [
-        'date',
-        'time',
+        'datetime',
         'stadium_id',
         'club_id_home',
         'club_id_away',
@@ -66,7 +64,7 @@ class Fixture extends Model
      * @var array
      */
     protected $dates = [
-        'date'
+        'datetime'
     ];
 
     /**

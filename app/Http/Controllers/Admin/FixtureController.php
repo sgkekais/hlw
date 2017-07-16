@@ -46,8 +46,7 @@ class FixtureController extends Controller
     public function store(Request $request, Matchweek $matchweek)
     {
         $this->validate($request, [
-            'date' => 'nullable|date',
-            'time' => 'nullable',
+            'datetime' => 'nullable|date',
             'stadium_id' => 'nullable',
             'club_id_home' => 'nullable',
             'club_id_away' => 'nullable',
@@ -105,8 +104,7 @@ class FixtureController extends Controller
     public function update(Request $request, Matchweek $matchweek, Fixture $fixture)
     {
         $this->validate($request, [
-            'date'              => 'nullable|date',
-            'time'              => 'nullable',
+            'datetime'          => 'nullable|date',
             'stadium_id'        => 'nullable',
             'club_id_home'      => 'nullable',
             'club_id_away'      => 'nullable',
