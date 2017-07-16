@@ -27711,7 +27711,10 @@ window.$ = window.jQuery = __webpack_require__(3);
 
 window.Tether = __webpack_require__(153);
 __webpack_require__(149);
+
 __webpack_require__(150);
+
+window.moment = __webpack_require__(0);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces

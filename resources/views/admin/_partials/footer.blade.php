@@ -108,7 +108,7 @@
         $(function() {
             var beginDate = $("input[name=datetime]").val();
             if ( !beginDate ) {
-                beginDate = new Date();
+                beginDate = moment().format("YYYY-MM-DD HH:mm:ss");
             }
 
             $('input[id="singledatetimepicker"]').daterangepicker({
@@ -153,8 +153,16 @@
                     "firstDay": 1
                 }
             });
+            $('#datetimenull').click(function (){
+                if ( this.checked ){
+                    $('#singledatetimepicker').val(null);
+                }else{
+                    $('#singledatetimepicker').val(beginDate);
+                }
+            });
         });
     </script>
 @endif
+
 </body>
 </html>

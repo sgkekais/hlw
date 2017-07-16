@@ -11,7 +11,10 @@ window.$ = window.jQuery = require('jquery');
 
 window.Tether = require('tether');
 require('bootstrap');
+
 require('daterangepicker');
+
+window.moment = require('moment');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces

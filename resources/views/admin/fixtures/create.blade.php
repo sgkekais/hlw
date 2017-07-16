@@ -57,6 +57,12 @@
                 <input type="datetime-local" class="form-control" name="datetime" id="singledatetimepicker" aria-describedby="datetimeHelp" placeholder="{{ old('date') }}">
                 <small id="datetimeHelp" class="form-text text-muted">Datum und Uhrzeit der Paarung</small>
             </div>
+            <div class="form-check col-md-2">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="datetimenull">
+                    Leer lassen
+                </label>
+            </div>
         </div>
         <!-- stadium -->
         <div class="form-group row">
