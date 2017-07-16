@@ -13,7 +13,7 @@
                 <label for="season_id">Saison</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="season_id" id="season_id" value="({{ $season->id }}) {{ $season->year_begin }} / {{ $season->year_end }} | {{ $season->division->name }}" disabled>
+                <input type="text" class="form-control" name="season_id" id="season_id" value="({{ $season->id }}) {{ $season->begin->toDateString() }} / {{ $season->end->toDateString() }} | {{ $season->division->name }}" disabled>
                 <small id="season_idHelp" class="form-text text-muted">Zuordnung zu welcher Saison?</small>
             </div>
         </div>
@@ -42,16 +42,16 @@
             <div class="col-md-2">
                 <label for="begin">Beginn</label>
             </div>
-            <div class="col-md-4">
-                <input type="date" class="form-control" name="begin" id="singledatepickerfrom" aria-describedby="beginHelp" placeholder="{{ old('begin') }}">
-                <small id="nameHelp" class="form-text text-muted">Beginn der Spielwoche im Format JJJJ-MM-TT</small>
+            <div class="input-group col-md-4">
+                <div class="input-group-addon"><span class="fa fa-calendar"></span> </div>
+                <input type="date" class="form-control" name="begin" id="singledatepickerfrom" placeholder="{{ old('begin') }}">
             </div>
             <div class="col-md-2">
                 <label for="end">Ende</label>
             </div>
-            <div class="col-md-4">
-                <input type="date" class="form-control" name="end" id="singledatepickerto" aria-describedby="endHelp" placeholder="{{ old('end') }}">
-                <small id="nameHelp" class="form-text text-muted">Ende der Spielwoche im Format JJJJ-MM-TT</small>
+            <div class="input-group col-md-4">
+                <div class="input-group-addon"><span class="fa fa-calendar"></span> </div>
+                <input type="date" class="form-control" name="end" id="singledatepickerto" placeholder="{{ old('end') }}">
             </div>
         </div>
         <!-- published -->
