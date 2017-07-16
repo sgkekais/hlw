@@ -23,6 +23,7 @@
             <th class="">ID</th>
             <th></th>
             <th class="">Jahr</th>
+            <th>Nr.</th>
             <th class="">Aktionen</th>
         </tr>
         </thead>
@@ -44,6 +45,7 @@
                     <br>
                     <span class="text-muted">{{ $season->division->name }} - {{ $season->division->competition->name }}</span> | Spielwochen: {{ $season->matchweeks()->get()->count() }}
                 </td>
+                <td># {{ $season->season_nr }}</td>
                 <td>
                     <!-- display details -->
                     <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
