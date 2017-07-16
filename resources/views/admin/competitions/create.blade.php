@@ -12,7 +12,7 @@
                 <label for="name">Name</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="{{ old('name', 'Hobbyliga-West') }}">
+                <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="{{ old('name') }}">
                 <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
             </div>
         </div>
