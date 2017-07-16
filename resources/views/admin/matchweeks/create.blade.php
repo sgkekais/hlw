@@ -43,14 +43,14 @@
                 <label for="begin">Beginn</label>
             </div>
             <div class="col-md-4">
-                <input type="date" class="form-control" name="begin" id="begin" aria-describedby="beginHelp" placeholder="{{ old('begin') }}">
+                <input type="date" class="form-control" name="begin" id="singledatepickerfrom" aria-describedby="beginHelp" placeholder="{{ old('begin') }}">
                 <small id="nameHelp" class="form-text text-muted">Beginn der Spielwoche im Format JJJJ-MM-TT</small>
             </div>
             <div class="col-md-2">
                 <label for="end">Ende</label>
             </div>
             <div class="col-md-4">
-                <input type="date" class="form-control" name="end" id="end" aria-describedby="endHelp" placeholder="{{ old('end') }}">
+                <input type="date" class="form-control" name="end" id="singledatepickerto" aria-describedby="endHelp" placeholder="{{ old('end') }}">
                 <small id="nameHelp" class="form-text text-muted">Ende der Spielwoche im Format JJJJ-MM-TT</small>
             </div>
         </div>

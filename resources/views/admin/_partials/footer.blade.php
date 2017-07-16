@@ -9,50 +9,99 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- daterangepicker -->
-<script type="text/javascript">
-    $(function() {
-        var beginDate = $("input[name=begin]").val();
-
-        $('input[id="singledatepicker"]').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            startDate: beginDate,
-            locale: {
-                "format": "YYYY-MM-DD",
-                "separator": " - ",
-                "applyLabel": "Anwenden",
-                "cancelLabel": "Abbrechen",
-                "fromLabel": "Von",
-                "toLabel": "Bis",
-                "customRangeLabel": "Custom",
-                "weekLabel": "W",
-                "daysOfWeek": [
-                    "So",
-                    "Mo",
-                    "Di",
-                    "Mi",
-                    "Do",
-                    "Fr",
-                    "Sa"
-                ],
-                "monthNames": [
-                    "Januar",
-                    "Februar",
-                    "März",
-                    "April",
-                    "Mai",
-                    "Juni",
-                    "Juli",
-                    "August",
-                    "September",
-                    "Oktober",
-                    "November",
-                    "Dezember"
-                ],
-                "firstDay": 1
+@if( Route::is('seasons.create') || Route::is('seasons.edit') || Route::is('seasons.matchweeks.create') || Route::is('seasons.matchweeks.edit') )
+    <script type="text/javascript">
+        $(function() {
+            var beginDate = $("input[name=begin]").val();
+            if ( !beginDate ) {
+                beginDate = new Date().getDate();
             }
+
+            var endDate   = $("input[name=end]").val();
+            if ( !endDate ) {
+                endDate = new Date().getDate();
+            }
+
+            $('input[id="singledatepickerfrom"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                startDate: beginDate,
+                locale: {
+                    "format": "YYYY-MM-DD",
+                    "separator": " - ",
+                    "applyLabel": "Anwenden",
+                    "cancelLabel": "Abbrechen",
+                    "fromLabel": "Von",
+                    "toLabel": "Bis",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "So",
+                        "Mo",
+                        "Di",
+                        "Mi",
+                        "Do",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "Januar",
+                        "Februar",
+                        "März",
+                        "April",
+                        "Mai",
+                        "Juni",
+                        "Juli",
+                        "August",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Dezember"
+                    ],
+                    "firstDay": 1
+                }
+            });
+            $('input[id="singledatepickerto"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                startDate: endDate,
+                locale: {
+                    "format": "YYYY-MM-DD",
+                    "separator": " - ",
+                    "applyLabel": "Anwenden",
+                    "cancelLabel": "Abbrechen",
+                    "fromLabel": "Von",
+                    "toLabel": "Bis",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "So",
+                        "Mo",
+                        "Di",
+                        "Mi",
+                        "Do",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "Januar",
+                        "Februar",
+                        "März",
+                        "April",
+                        "Mai",
+                        "Juni",
+                        "Juli",
+                        "August",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Dezember"
+                    ],
+                    "firstDay": 1
+                }
+            });
         });
-    });
-</script>
+    </script>
+@endif
 </body>
 </html>

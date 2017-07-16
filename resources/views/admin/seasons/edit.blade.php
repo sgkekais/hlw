@@ -47,10 +47,10 @@
                 <label for="end"> &dash; bis</label>
             </div>
             <div class="col-md-2">
-                <input type="date" class="form-control" name="begin" id="singledatepicker" value="{{ $season->begin->toDateString() }}">
+                <input type="date" class="form-control" name="begin" id="singledatepickerfrom" value="{{ $season->begin->toDateString() }}">
             </div>
             <div class="col-md-2">
-                <input type="date" class="form-control" name="end" id="singledatepicker" value="{{ $season->end->toDateString() }}">
+                <input type="date" class="form-control" name="end" id="singledatepickerto" value="{{ $season->end->toDateString() }}">
             </div>
         </div>
         <!-- season nr -->

@@ -42,7 +42,7 @@
                         {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}
                     </a>
                     <br>
-                    <span class="text-muted">{{ $season->division->name }}</span> | Spielwochen: {{ $season->matchweeks()->get()->count() }}
+                    <span class="text-muted">{{ $season->division->name }} - {{ $season->division->competition->name }}</span> | Spielwochen: {{ $season->matchweeks()->get()->count() }}
                 </td>
                 <td>
                     <!-- display details -->

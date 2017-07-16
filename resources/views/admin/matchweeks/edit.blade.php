@@ -60,14 +60,14 @@
                 <label for="begin">Beginn</label>
             </div>
             <div class="col-md-4">
-                <input type="date" class="form-control" name="begin" id="begin" aria-describedby="beginHelp" value="{{ $matchweek->begin }}">
+                <input type="date" class="form-control" name="begin" id="singledatepickerfrom" aria-describedby="beginHelp" value="{{ $matchweek->begin ? $matchweek->begin->format('Y-m-d') : null }}">
                 <small id="nameHelp" class="form-text text-muted">Beginn der Spielwoche im Format JJJJ-MM-TT</small>
             </div>
             <div class="col-md-2">
                 <label for="end">Ende</label>
             </div>
             <div class="col-md-4">
-                <input type="date" class="form-control" name="end" id="end" aria-describedby="endHelp" value="{{ $matchweek->end }}">
+                <input type="date" class="form-control" name="end" id="singledatepickerto" aria-describedby="endHelp" value="{{ $matchweek->end ? $matchweek->end->format('Y-m-d') : null }}">
                 <small id="nameHelp" class="form-text text-muted">Ende der Spielwoche im Format JJJJ-MM-TT</small>
             </div>
         </div>
