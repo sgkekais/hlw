@@ -52,17 +52,10 @@
         </div>
         <!-- date and time -->
         <div class="form-group row">
-            <label for="date" class="col-md-2 col-form-label">Datum</label>
+            <label for="datetime" class="col-md-2 col-form-label">Datum und Uhrzeit</label>
             <div class="col-md-4">
-                <input type="date" class="form-control" name="date" id="date" aria-describedby="dateHelp" placeholder="{{ old('date') }}">
-                <small id="dateHelp" class="form-text text-muted">im Format JJJJ-MM-TT</small>
-            </div>
-            <div class="col-md-2">
-                <label for="time">Uhrzeit</label>
-            </div>
-            <div class="col-md-4">
-                <input type="time" class="form-control" name="time" id="time" aria-describedby="timeHelp" placeholder="{{ old('time') }}">
-                <small id="timeHelp" class="form-text text-muted">im Format HH:MM:SS</small>
+                <input type="datetime" class="form-control" name="datetime" id="singledatetimepicker" aria-describedby="datetimeHelp" placeholder="{{ old('date') }}">
+                <small id="datetimeHelp" class="form-text text-muted">Datum und Uhrzeit der Paarung</small>
             </div>
         </div>
         <!-- stadium -->

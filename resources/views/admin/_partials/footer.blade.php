@@ -103,5 +103,58 @@
         });
     </script>
 @endif
+@if ( Route::is('matchweeks.fixtures.create') || Route::is('matchweeks.fixtures.edit') )
+    <script type="text/javascript">
+        $(function() {
+            var beginDate = $("input[name=datetime]").val();
+            if ( !beginDate ) {
+                beginDate = new Date();
+            }
+
+            $('input[id="singledatetimepicker"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                startDate: beginDate,
+                timePicker: true,
+                timePicker24Hour: true,
+                timePickerSeconds: true,
+                locale: {
+                    "format": "YYYY-MM-DD",
+                    "separator": " - ",
+                    "applyLabel": "Anwenden",
+                    "cancelLabel": "Abbrechen",
+                    "fromLabel": "Von",
+                    "toLabel": "Bis",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "So",
+                        "Mo",
+                        "Di",
+                        "Mi",
+                        "Do",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "Januar",
+                        "Februar",
+                        "März",
+                        "April",
+                        "Mai",
+                        "Juni",
+                        "Juli",
+                        "August",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Dezember"
+                    ],
+                    "firstDay": 1
+                }
+            });
+        });
+    </script>
+@endif
 </body>
 </html>
