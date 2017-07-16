@@ -5,12 +5,8 @@
     <h1 class="">Details zu Paarung</h1>
     <div class="row justify-content-center mt-4 mb-4">
         <div class="col-md-12 text-center">
-            @if($fixture->date)
-                <span class="fa fa-calendar"></span> {{ $fixture->date->format('d.m.Y') }}
-            @endif
-            @if($fixture->time)
-                <br>
-                <span class="fa fa-clock-o"></span> {{ $fixture->time }} Uhr
+            @if($fixture->datetime)
+                <span class="fa fa-calendar"></span> {{ $fixture->datetime->format('d.m.Y H:i:s') }}
             @endif
             @if($fixture->stadium)
                 <br>
