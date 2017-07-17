@@ -3,37 +3,44 @@
 @section('content')
 
     <h1 class="">Details zu Paarung</h1>
-    <div class="row justify-content-center mt-4 mb-4">
-        <div class="col-md-12 text-center">
+    <div class="row mt-4 mb-4">
+        <div class="col-md-12">
+            <span class="fa fa-calendar fa-fw"></span>
             @if($fixture->datetime)
-                <span class="fa fa-calendar"></span> {{ $fixture->datetime->format('d.m.Y H:i:s') }}
+                {{ $fixture->datetime->format('d.m.Y H:i:s') }}
+            @else
+                <i>Kein Termin angegeben.</i>
             @endif
+            <br>
+            <span class="fa fa-map-marker fa-fw"></span>
             @if($fixture->stadium)
-                <br>
-                <span class="fa fa-map-marker"></span>
-                    @if($fixture->stadium->gmaps)
-                        <a href="{{ $fixture->stadium->gmaps }}" target="_blank">
-                    @endif
-                        {{ $fixture->stadium->name }}
-                    @if($fixture->stadium->gmaps)
-                        </a>
-                    @endif
+                @if($fixture->stadium->gmaps)
+                    <a href="{{ $fixture->stadium->gmaps }}" target="_blank">
+                @endif
+                    {{ $fixture->stadium->name }}
+                @if($fixture->stadium->gmaps)
+                    </a>
+                @endif
+            @else
+                <i>Kein Spielort angegeben.</i>
             @endif
+
+            @if($fixture->club_home)
+                <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">{{ $fixture->club_home->name }}</a>
+            @endif
+             vs.
+            @if($fixture->club_away)
+                <a href="{{ route('clubs.show', $fixture->club_away) }}" title="Mannschaft anzeigen">{{ $fixture->club_away->name }}</a>
+            @endif
+            <br>
+            Ergebnis: {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-5 text-right">
-            @if($fixture->club_home)
-                <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">{{ $fixture->club_home->name }}<img src="{{ $fixture->club_home->logo_url ? Storage::url($fixture->club_home->logo_url) : null }}" height="100" class="pl-2"></a>
-            @endif
-        </div>
-        <div class="col-md-1 text-center">
-            <h3 class="text-muted text-center">{{ $fixture->goals_home }} : {{ $fixture->goals_away }}</h3>
-        </div>
-        <div class="col-md-5 text-left">
-            @if($fixture->club_away)
-                <a href="{{ route('clubs.show', $fixture->club_away) }}" title="Mannschaft anzeigen"><img src="{{ $fixture->club_away->logo_url ? Storage::url($fixture->club_away->logo_url) : null}}" height="100" class="pr-2">{{ $fixture->club_away->name }}</a>
-            @endif
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
+                <span class="fa fa-pencil-square-o" aria-hidden="true"></span> Paarung bearbeiten
+            </a>
         </div>
     </div>
     <hr>
@@ -48,7 +55,7 @@
                         <span class="fa fa-soccer-ball-o" aria-hidden="true"></span>
                     </a>
                 @else
-                    Kein Tor
+                <i>Noch kein Ergebnis eingetragen.</i>
                 @endif
 
         </div>
@@ -58,7 +65,7 @@
                 <a class="btn btn-outline-warning" href="#" title="Karten pflegen">
                     <span class="fa fa-clone" aria-hidden="true"></span> Karten eintragen
                 </a>
-                Liste der Karten...
+
         </div>
         <div class="col-md-4">
 
