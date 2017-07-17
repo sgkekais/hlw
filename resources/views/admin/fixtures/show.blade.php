@@ -38,13 +38,32 @@
     </div>
     <hr>
     <!-- show fixture details -->
-    <h3 class="mt-4">
-        Karten, Tore, Verlegungen
-    </h3>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
+            <h3 class="mt-4">Tore</h3>
+
+                <!-- add goals, if goals_home or goals_away not null -->
+                @if($fixture->goals_home || $fixture->goals_away )
+                    <a class="btn btn-outline-success" href="#" title="Tore pflegen">
+                        <span class="fa fa-soccer-ball-o" aria-hidden="true"></span>
+                    </a>
+                @else
+                    Kein Tor
+                @endif
 
         </div>
-    </div> <!-- ./details -->
+        <div class="col-md-4">
+            <h3 class="mt-4">Karten</h3>
+            <!-- add cards -->
+                <a class="btn btn-outline-warning" href="#" title="Karten pflegen">
+                    <span class="fa fa-clone" aria-hidden="true"></span> Karten eintragen
+                </a>
+                Liste der Karten...
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+
 
 @endsection

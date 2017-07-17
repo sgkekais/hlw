@@ -131,22 +131,6 @@
                                 <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
-                                <!-- add goals, if goals_home or goals_away not null -->
-                                @if($fixture->goals_home || $fixture->goals_away )
-                                    <a class="btn btn-outline-success" href="#" title="Tore pflegen">
-                                        <span class="fa fa-soccer-ball-o" aria-hidden="true"></span>
-                                    </a>
-                                @else
-                                    Kein Tor
-                                @endif
-                                <!-- add cards, if goals_home or goals_away not null -->
-                                @if($fixture->goals_home || $fixture->goals_away )
-                                    <a class="btn btn-outline-warning" href="#" title="Karten pflegen">
-                                        <span class="fa fa-clone" aria-hidden="true"></span>
-                                    </a>
-                                @else
-                                    Kein Tor
-                                @endif
                                 <!-- reschedule, only once -->
                                 @if(!$fixture->rescheduled_to)
                                     <a class="btn btn-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
