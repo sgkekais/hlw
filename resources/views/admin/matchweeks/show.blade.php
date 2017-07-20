@@ -100,7 +100,7 @@
                                 @else
                                     -
                                 @endif
-                                    :
+                                    vs.
                                 @if($fixture->club_away)
                                     <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
                                         {{ $fixture->club_away->name_short }}
