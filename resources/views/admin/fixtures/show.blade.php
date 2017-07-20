@@ -24,7 +24,7 @@
             @else
                 <i>Kein Spielort angegeben.</i>
             @endif
-
+            <br>
             @if($fixture->club_home)
                 <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">{{ $fixture->club_home->name }}</a>
             @endif
