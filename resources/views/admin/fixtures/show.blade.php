@@ -5,6 +5,16 @@
     <h1 class="">Details zu Paarung</h1>
     <div class="row mt-4 mb-4">
         <div class="col-md-12">
+            <p class="h3">
+               @if($fixture->club_home)
+                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">{{ $fixture->club_home->name }}</a>
+                @endif
+                <span class="text-muted">vs.</span>
+                @if($fixture->club_away)
+                    <a href="{{ route('clubs.show', $fixture->club_away) }}" title="Mannschaft anzeigen">{{ $fixture->club_away->name }}</a>
+                @endif
+            </p>
+            <br>
             <span class="fa fa-calendar fa-fw"></span>
             @if($fixture->datetime)
                 {{ $fixture->datetime->format('d.m.Y H:i:s') }}
@@ -23,14 +33,6 @@
                 @endif
             @else
                 <i>Kein Spielort angegeben.</i>
-            @endif
-            <br>
-            @if($fixture->club_home)
-                <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">{{ $fixture->club_home->name }}</a>
-            @endif
-             vs.
-            @if($fixture->club_away)
-                <a href="{{ route('clubs.show', $fixture->club_away) }}" title="Mannschaft anzeigen">{{ $fixture->club_away->name }}</a>
             @endif
             <br>
             Ergebnis: {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
@@ -62,8 +64,8 @@
         <div class="col-md-4">
             <h3 class="mt-4">Karten</h3>
             <!-- add cards -->
-                <a class="btn btn-outline-warning" href="#" title="Karten pflegen">
-                    <span class="fa fa-clone" aria-hidden="true"></span> Karten eintragen
+                <a class="btn btn-outline-warning" href="{{ route('fixtures.cards.create', $fixture ) }}" title="Karte eintragen">
+                    <span class="fa fa-clone" aria-hidden="true"></span> Karte eintragen
                 </a>
 
         </div>
