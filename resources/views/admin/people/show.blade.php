@@ -91,10 +91,13 @@
             @else
                 <i>Person spielt für keine Mannschaft.</i>
             @endif
-            <br>
-            Karten, die Person als Spieler bekommen hat
-            <br>
-            Tore, die Person als Spieler geschossen hat
+            <h4>Karten, die Person als Spieler erhalten hat</h4>
+            @foreach($person->players as $player)
+                @foreach($player->cards as $card)
+                    {{ $card }}
+                @endforeach
+            @endforeach
+            <h4>Tore, die Person als Spieler geschossen hat</h4>
         </div>
         <div class="col-md-12">
             <h4>Ansprechpartner</h4>

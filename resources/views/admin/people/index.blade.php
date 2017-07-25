@@ -23,24 +23,47 @@
                 <th class="">ID</th>
                 <th class="">Nachname, Vorname</th>
                 <th class="">Geb.datum</th>
-                <th class="">Foto</th>
-                <th class="">Vereinsspieler</th>
+                <th class="">Daten</th>
                 <th class="">Aktionen</th>
             </tr>
             </thead>
             <tbody>
             @foreach($people as $person)
                 <tr>
-                    <td><b>{{ $person->id }}</b></td>
-                    <td>
+                    <td class="align-middle"><b>{{ $person->id }}</b></td>
+                    <td class="align-middle">
                         <a href="{{ route('people.show', $person ) }}" title="Anzeigen">
                             {{ $person->last_name }}, {{ $person->first_name }}
                         </a>
                     </td>
-                    <td>{{ $person->date_of_birth->format('d.m.Y') }}</td>
-                    <td>{{ $person->photo ? "X" : null }}</td>
-                    <td>{{ $person->registered_at_club ? "X" : null }}</td>
-                    <td>
+                    <td class="align-middle">{{ $person->date_of_birth->format('d.m.Y') }}</td>
+                    <td class="align-middle">
+                        @if($person->photo)
+                            <span class="fa fa-photo fa-fw" title="Passfoto vorhanden"></span>
+                            @else
+                            <span class="fa fa-fw"></span>
+                        @endif
+                        @if($person->players->count() > 0)
+                            <span class="fa fa-shield fa-fw" title="HLW-Spieler"></span>
+                            @else
+                            <span class="fa fa-fw"></span>
+                        @endif
+                        @if($person->registered_at_club)
+                            <span class="fa fa-shield text-warning fa-fw" title="Vereinsspieler"></span>
+                            @else
+                            <span class="fa fa-fw"></span>
+                        @endif
+                        @if($person->contacts->count() > 0)
+                            <span class="fa fa-phone fa-fw" title="Ansprechpartner"></span>
+                            @else
+                            <span class="fa fa-fw"></span>
+                        @endif
+                        @if($person->referees->count() > 0)
+                            <span class="fa fa-hand-stop-o fa-fw" title="Schiedsrichter"></span>
+                            @else
+                            <span class="fa fa-fw"></span>
+                        @endif
+                    <td class="align-middle">
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('people.show', $person) }}" title="Person anzeigen">
                             <span class="fa fa-search-plus"></span>

@@ -52,6 +52,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
         // managing cards of a match
         Route::resource('fixtures.cards', 'CardController');
+        // managing goals of a match
+        Route::resource('fixtures.goals', 'GoalController');
 
     Route::resource('stadiums', 'StadiumController');
     Route::resource('clubs', 'ClubController');

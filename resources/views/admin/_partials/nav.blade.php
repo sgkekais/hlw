@@ -24,7 +24,7 @@
                             <span class="fa fa-trophy fa-fw"></span> Wettbewerbe
                         </a>
                         <a class="dropdown-item {{ Route::is('divisions.*') ? 'active' : null }}" href="{{ route('divisions.index') }}">
-                            <span class="fa fa-exchange fa-fw"></span> Spielklassen
+                            <span class="fa fa-exchange fa-rotate-90 fa-fw"></span> Spielklassen
                         </a>
                         <a class="dropdown-item {{ Route::is('seasons.*') ? 'active' : null }}" href="{{ route('seasons.index') }}">
                             <span class="fa fa-line-chart fa-fw"></span> Saisons
@@ -43,7 +43,7 @@
                             <span class="fa fa-hand-o-down fa-fw"></span> Positionen
                         </a>
                         <a class="dropdown-item {{ Route::is('referees.*') ? 'active' : null }}" href="{{ route('referees.index') }}">
-                            <span class="fa fa-gavel fa-fw"></span> Schiedsrichter
+                            <span class="fa fa-hand-stop-o fa-fw"></span> Schiedsrichter
                         </a>
                     </div>
                 </li>

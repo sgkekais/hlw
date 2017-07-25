@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Card;
 use App\Fixture;
+use App\Goal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
-class CardController extends Controller
+class GoalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,8 @@ class CardController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Fixture $fixture
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Fixture $fixture)
     {
@@ -34,26 +35,27 @@ class CardController extends Controller
         $players_away = $fixture->club_away->players->load('person');
         $players      = $players_home->sortBy('person.last_name')->merge($players_away->sortBy('person.last_name'));
 
-        return view('admin.cards.create', compact('fixture', 'players'));
+        return view('admin.goals.create', compact('fixture', 'players'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Fixture $fixture
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, Fixture $fixture)
     {
-        $this->validate($request, [
-           'ban_matches' => 'nullable|integer|min:0'
-        ]);
+        foreach ($request->entities as $entity)
+        {
+            if(!array_key_exists('ignore', $entity))
+            {
+                $goal = new Goal($entity);
 
-        $card = new Card($request->all());
-
-        $fixture->cards()->save($card);
-
-        Session::flash('success', $card->color.'e Karte mit '.$card->ban_matches.' Spiel(en) Sperre gepflegt.');
+                $fixture->goals()->save($goal);
+            }
+        }
 
         return redirect()->route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]);
     }
@@ -61,10 +63,10 @@ class CardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Card  $card
+     * @param  \App\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function show(Card $card)
+    public function show(Goal $goal)
     {
         //
     }
@@ -72,51 +74,49 @@ class CardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Card  $card
+     * @param  \App\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fixture $fixture, Card $card)
+    public function edit(Fixture $fixture, Goal $goal)
     {
+        $fixture->load('club_home','club_away');
+
         // get the players of both teams and merge them into a single collection
         $players_home = $fixture->club_home->players->load('person');
         $players_away = $fixture->club_away->players->load('person');
         $players      = $players_home->sortBy('person.last_name')->merge($players_away->sortBy('person.last_name'));
 
-        return view('admin.cards.edit', compact('fixture', 'card', 'players'));
+        return view('admin.goals.edit', compact('fixture', 'goal', 'players'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Card  $card
+     * @param  \App\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fixture $fixture, Card $card)
+    public function update(Request $request, Fixture $fixture, Goal $goal)
     {
-        $this->validate($request, [
-            'ban_matches' => 'nullable|integer|min:0'
-        ]);
+        $goal->update($request->all());
 
-        $card->update($request->all());
+        Session::flash('success', 'Torschütze erfolgreich geändert.');
 
-        Session::flash('success', 'Karte erfolgreich geändert.');
-
-        return redirect()->route('matchweeks.fixtures.show', [ $fixture->matchweek, $fixture ]);
+        return redirect()->route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Card  $card
+     * @param  \App\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fixture $fixture, Card $card)
+    public function destroy(Fixture $fixture, Goal $goal)
     {
-        $card->delete();
+        $goal->delete();
 
-        Session::flash('success', 'Karte erfolgreich gelöscht');
+        Session::flash('success', 'Torschützen-Eintrag erfolgreich gelöscht.');
 
-        return redirect()->route('matchweeks.fixtures.show', [ $fixture->matchweek, $fixture ] );
+        return redirect()->route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]);
     }
 }

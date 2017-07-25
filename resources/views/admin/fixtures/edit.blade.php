@@ -30,7 +30,7 @@
                 <label for="matchweek_id">Spielwoche</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="matchweek_id" aria-describedby="matchweek_idHelp" value="({{ $matchweek->id }}) Nr. {{ $matchweek->number_consecutive }} | {{ $matchweek->begin }} - {{ $matchweek->end }}" disabled>
+                <input type="text" class="form-control" name="matchweek_id" aria-describedby="matchweek_idHelp" value="({{ $matchweek->id }}) Nr. {{ $matchweek->number_consecutive }} | {{ $matchweek->begin->format('d.m.Y') }} - {{ $matchweek->end->format('d.m.Y') }}" disabled>
                 <small id="matchweek_idHelp" class="form-text text-muted">Zuordnung zu welcher Spielwoche?</small>
             </div>
         </div>

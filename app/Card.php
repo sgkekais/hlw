@@ -14,7 +14,7 @@ class Card extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'fixture_id', 'color', 'ban_matches', 'ban_season', 'ban_lifetime', 'note'
+        'fixture_id', 'player_id', 'color', 'ban_matches', 'ban_season', 'ban_lifetime', 'ban_reason', 'note'
     ];
 
     /**
@@ -28,12 +28,12 @@ class Card extends Model
      * @var array
      */
     protected $fillable = [
-        'color', 'ban_matches', 'ban_season', 'ban_lifetime', 'note'
+        'player_id', 'color', 'ban_matches', 'ban_season', 'ban_lifetime', 'ban_reason', 'note'
     ];
 
     public function player()
     {
-        return $this->belongsTo(Player::class,'id'); // TODO: doesn't work
+        return $this->belongsTo(Player::class);
     }
 
     public function fixture()

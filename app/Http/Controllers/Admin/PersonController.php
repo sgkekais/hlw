@@ -17,7 +17,7 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $people = Person::all();
+        $people = Person::orderBy('last_name')->orderBy('first_name')->get();
 
         return view('admin.people.index', compact('people'));
     }

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Person;
 use App\Referee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+
+// TODO: Schiedsrichter evtl. nur änder-/löschbar machen, wenn keinem Spiel zugeordnet
 
 class RefereeController extends Controller
 {
@@ -15,7 +19,9 @@ class RefereeController extends Controller
      */
     public function index()
     {
-        //
+        $referees = Referee::all();
+
+        return view('admin.referees.index', compact('referees'));
     }
 
     /**
@@ -25,7 +31,9 @@ class RefereeController extends Controller
      */
     public function create()
     {
-        //
+        $people = Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get();
+
+        return view('admin.referees.create', compact('people'));
     }
 
     /**
@@ -36,7 +44,13 @@ class RefereeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ref = new Referee($request->all());
+
+        $ref->save();
+
+        Session::flash('success', 'Schiedsrichter erfolgreich angelegt.');
+
+        return redirect()->route('referees.index');
     }
 
     /**
@@ -58,7 +72,9 @@ class RefereeController extends Controller
      */
     public function edit(Referee $referee)
     {
-        //
+        $people = Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get();
+
+        return view('admin.referees.edit', compact('referee', 'people'));
     }
 
     /**
@@ -70,7 +86,11 @@ class RefereeController extends Controller
      */
     public function update(Request $request, Referee $referee)
     {
-        //
+        $referee->update($request->all());
+
+        Session::flash('success', 'Schiedsrichter erfolgreich geändert.');
+
+        return redirect()->route('referees.index');
     }
 
     /**
@@ -81,6 +101,10 @@ class RefereeController extends Controller
      */
     public function destroy(Referee $referee)
     {
-        //
+        $referee->delete();
+
+        Session::flash('success', 'Schiedsrichter erfolgreich gelöscht.');
+
+        return redirect()->route('referees.index');
     }
 }

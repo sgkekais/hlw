@@ -28,7 +28,7 @@ class Goal extends Model
      * @var array
      */
     protected $fillable = [
-        'score'
+        'player_id', 'score'
     ];
 
     public function fixture()

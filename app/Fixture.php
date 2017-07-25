@@ -143,4 +143,17 @@ class Fixture extends Model
     {
         return $this->hasMany(Card::class);
     }
+
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function referees()
+    {
+        return $this->belongsToMany(Referee::class, 'fixtures_referees')->withTimestamps();
+    }
 }
