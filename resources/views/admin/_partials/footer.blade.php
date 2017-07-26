@@ -163,6 +163,49 @@
         });
     </script>
 @endif
-
+@if( Route::is('people.create') || Route::is('people.edit') )
+    <script type="text/javascript">
+        $(function() {
+            $('input[id="singledatepicker"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                locale: {
+                    "format": "YYYY-MM-DD",
+                    "separator": " - ",
+                    "applyLabel": "Anwenden",
+                    "cancelLabel": "Abbrechen",
+                    "fromLabel": "Von",
+                    "toLabel": "Bis",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "So",
+                        "Mo",
+                        "Di",
+                        "Mi",
+                        "Do",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "Januar",
+                        "Februar",
+                        "März",
+                        "April",
+                        "Mai",
+                        "Juni",
+                        "Juli",
+                        "August",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Dezember"
+                    ],
+                    "firstDay": 1
+                }
+            });
+        });
+    </script>
+    @endif
 </body>
 </html>

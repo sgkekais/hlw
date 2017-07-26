@@ -28,7 +28,7 @@
                 <label for="date_of_birth">Geburtsdatum</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="date_of_birth" id="date_of_birth" aria-describedby="date_of_birthHelp" value="{{ old('date_of_birth') }}">
+                <input type="text" class="form-control" name="date_of_birth" id="singledatepicker" aria-describedby="date_of_birthHelp" value="{{ old('date_of_birth') }}">
                 <small id="date_of_birthHelp" class="form-text text-muted">JJJJ-MM-TT</small>
             </div>
         </div>
