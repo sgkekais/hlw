@@ -22,16 +22,23 @@
             <tr>
                 <th class="">ID</th>
                 <th></th>
+                <th></th>
                 <th class="">Name</th>
-                <th class="">Echter Verein?</th>
-                <th class="">Veröffentlicht?</th>
+                <th class=""></th>
                 <th class="">Aktionen</th>
             </tr>
             </thead>
             <tbody>
             @foreach($clubs as $club)
                 <tr>
-                    <td><b>{{ $club->id }}</b></td>
+                    <td class="align-middle"><b>{{ $club->id }}</b></td>
+                    <td class="align-middle">
+                        @if($club->published)
+                            <span class="fa fa-eye" title="Öffentlich"></span>
+                        @else
+                            <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                        @endif
+                    </td>
                     <td class="align-middle text-center">
                         @if($club->logo_url)
                             <img src="{{ Storage::url($club->logo_url) }}" class="w-25 img-fluid" title="Vereinswappen" alt="Vereinswappen">
@@ -43,9 +50,12 @@
                         <a href="{{ route('clubs.show', $club ) }}" title="Anzeigen">{{ $club->name }}</a>
                         <br>Spieler: {{ $club->players()->get()->count() }}
                     </td>
-                    <td>{{ $club->is_real_club ? "JA" : null }}</td>
-                    <td>{{ $club->published ? "JA" : "NEIN" }}</td>
-                    <td>
+                    <td class="align-middle">
+                        @if($club->is_real_club)
+                            <span class="fa fa-shield text-danger fa-fw" title="Echter Verein"></span>
+                        @endif
+                    </td>
+                    <td class="align-middle">
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">
                             <span class="fa fa-search-plus"></span>
