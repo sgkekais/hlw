@@ -17,7 +17,7 @@ class ClubController extends Controller
      */
     public function index()
     {
-        $clubs = Club::all();
+        $clubs = Club::orderBy('name')->get();
 
         return view('admin.clubs.index',compact('clubs'));
     }
