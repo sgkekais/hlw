@@ -35,7 +35,16 @@
                     <textarea class="form-control" id="reschedule_reason" name="reschedule_reason" rows="3">{{ old('reschedule_reason') }}</textarea>
                 </div>
             </div>
-            <mark>Zählt als Spielverlegung implementieren</mark>
+            <div class="form-group row">
+                <label for="reschedule_count" class="form-control-label col-md-2">Verlegung zählen</label>
+                <div class="col-md-4">
+                    <select class="form-control" name="reschedule_count" id="reschedule_count" aria-describedby="reschedule_countHelp">
+                        <option value="1">Ja</option>
+                        <option value="0">Nein</option>
+                    </select>
+                    <small id="reschedule_countHelp" class="form-text text-muted">Zählt die Spielverlegung für die verlegende Mannschaft?</small>
+                </div>
+            </div>
             <hr>
             <h2 class="mb-4">Neue Paarung</h2>
         @endif

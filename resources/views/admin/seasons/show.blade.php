@@ -128,7 +128,7 @@
                     <tr>
                         <th class="">ID</th>
                         <th class="">Name</th>
-                        <th class=""><span class="fa fa-calendar-plus-o" title="Spielverlegungen"></span> </th>
+                        <th class="text-center"><span class="fa fa-calendar-plus-o" title="Spielverlegungen"></span> </th>
                         <th class="">Rang</th>
                         <th class="">Punktabzug</th>
                         <th class="">Torabzug</th>
@@ -139,18 +139,18 @@
                     <tbody>
                     @foreach($season->clubs as $club)
                         <tr>
-                            <td><b>{{ $club->id }}</b></td>
-                            <td>
+                            <td class="align-middle"><b>{{ $club->id }}</b></td>
+                            <td class="align-middle">
                                 <a href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">{{ $club->name }}</a>
                             </td>
-                            <td>
-                                {{ $club->reschedulings->count() }}
+                            <td class="align-middle text-center">
+                                {{ $club->reschedulings()->where('reschedule_count','1')->get()->count() }}
                             </td>
-                            <td>{{ $club->pivot->rank }}</td>
-                            <td>{{ $club->pivot->deduction_points }}</td>
-                            <td>{{ $club->pivot->deduction_goals }}</td>
-                            <td>{{ $club->pivot->withdrawal }}</td>
-                            <td>
+                            <td class="align-middle">{{ $club->pivot->rank }}</td>
+                            <td class="align-middle">{{ $club->pivot->deduction_points }}</td>
+                            <td class="align-middle">{{ $club->pivot->deduction_goals }}</td>
+                            <td class="align-middle">{{ $club->pivot->withdrawal }}</td>
+                            <td class="align-middle">
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('editClubAssignment',[$season,$club]) }}" title="Zuordnung bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
