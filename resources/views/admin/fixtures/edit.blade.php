@@ -24,6 +24,46 @@
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}
         {{ method_field('PATCH') }}
+        <!-- rescheduled match? -->
+        @if($fixture->rescheduled_from_fixture_id)
+            <h4 class="mb-4">Spiel wurde verlegt</h4>
+            <div class="form-group row">
+                <label for="rescheduled_fixture" class="form-control-label col-md-2">Verlegt von Paarung</label>
+                <div class="col-md-10">
+                    <input type="hidden" name="rescheduled_from_fixture_id" id="rescheduled_from_fixture_id" value="{{ $fixture->rescheduled_from->id }}">
+                    <input type="text" class="form-control" name="rescheduled_fixture" id="rescheduled_fixture" value="{{ $fixture->rescheduled_from->id  }} | {{ $fixture->rescheduled_from->club_home->name_short }} : {{ $fixture->rescheduled_from->club_away->name_short }} (ID: {{ $fixture->rescheduled_from->id }})" disabled>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rescheduled_by_club" class="form-control-label col-md-2">Verlegt von Mannschaft</label>
+                <div class="col-md-4">
+                    <select class="form-control" name="rescheduled_by_club" id="rescheduled_by_club">
+                        <option></option>
+                        @if($fixture->rescheduled_from->club_id_home)
+                            <option value="{{ $fixture->rescheduled_from->club_id_home }}" {{ $fixture->rescheduled_from->club_id_home === $fixture->rescheduled_by_club ? "selected" : null }}>{{ $fixture->rescheduled_from->club_home->name }}</option>
+                        @endif
+                        @if($fixture->rescheduled_from->club_id_away)
+                            <option value="{{ $fixture->rescheduled_from->club_id_away }}" {{ $fixture->rescheduled_from->club_id_away === $fixture->rescheduled_by_club ? "selected" : null }}>{{ $fixture->rescheduled_from->club_away->name }}</option>
+                        @endif
+                    </select>
+                </div>
+                <label for="reschedule_reason" class="form-control-label col-md-2">Grund für Verlegung</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="reschedule_reason" name="reschedule_reason" rows="3">{{ $fixture->reschedule_reason }}</textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="reschedule_count" class="form-control-label col-md-2">Verlegung zählen</label>
+                <div class="col-md-4">
+                    <select class="form-control" name="reschedule_count" id="reschedule_count" aria-describedby="reschedule_countHelp">
+                        <option value="1">Ja</option>
+                        <option value="0" {{ !$fixture->reschedule_count ? "selected" : null }}>Nein</option>
+                    </select>
+                    <small id="reschedule_countHelp" class="form-text text-muted">Zählt die Spielverlegung für die verlegende Mannschaft?</small>
+                </div>
+            </div>
+            <hr>
+        @endif
         <!-- matchweek -->
         <div class="form-group row">
             <div class="col-md-2">
