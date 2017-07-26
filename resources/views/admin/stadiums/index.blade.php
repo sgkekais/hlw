@@ -24,28 +24,37 @@
                 <th></th>
                 <th class="">Name</th>
                 <th class="">Name - kurz</th>
-                <th class="">gmaps?</th>
+                <th></th>
                 <th class="">Aktionen</th>
             </tr>
             </thead>
             <tbody>
             @foreach($stadiums as $stadium)
                 <tr>
-                    <td><b>{{ $stadium->id }}</b></td>
-                    <td>
+                    <td class="align-middle"><b>{{ $stadium->id }}</b></td>
+                    <td class="align-middle">
                         @if($stadium->published)
                             <span class="fa fa-eye" title="Öffentlich"></span>
                         @else
                             <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
                         @endif
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <a href="{{ route('stadiums.show', $stadium ) }}" title="Anzeigen">{{ $stadium->name }}</a>
                         <br>Mannschaften: {{ $stadium->clubs->count() }}
                     </td>
-                    <td>{{ $stadium->name_short }}</td>
-                    <td>{{ $stadium->gmaps ? "JA" : "NEIN" }}</td>
-                    <td>
+                    <td class="align-middle">{{ $stadium->name_short }}</td>
+                    <td class="align-middle">
+                        @if($stadium->gmaps)
+                            <span class="fa fa-map-marker fa-fw" title="Google Maps Link vorhanden"></span>
+                            @else
+                            <span class="fa fa-fw"></span>
+                        @endif
+                        @if($stadium->note)
+                            <span class="fa fa-file-text fa-fw" title="Notiz vorhanden"></span>
+                        @endif
+                    </td>
+                    <td class="align-middle">
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('stadiums.show', $stadium) }}" title="Spielort anzeigen">
                             <span class="fa fa-search-plus"></span>

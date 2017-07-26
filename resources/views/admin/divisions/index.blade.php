@@ -30,23 +30,23 @@
         <tbody>
         @foreach($divisions as $division)
             <tr>
-                <td><b>{{ $division->id }}</b></td>
-                <td>
+                <td class="align-middle"><b>{{ $division->id }}</b></td>
+                <td class="align-middle">
                     @if($division->published)
                         <span class="fa fa-eye" title="Öffentlich"></span>
                     @else
                         <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
                     @endif
                 </td>
-                <td>
+                <td class="align-middle">
                     <a href="{{ route('divisions.show', $division ) }}" title="Anzeigen">{{ $division->name }}</a>
                     <br>
                     <span class="text-muted">{{ $division->competition->name }}</span>
                     <br>
                     Saisons: {{ $division->seasons()->get()->count() }}
                 </td>
-                <td>{{ $division->hierarchy_level }}</td>
-                <td>
+                <td class="align-middle">{{ $division->hierarchy_level }}</td>
+                <td class="align-middle">
                     <!-- display details -->
                     <a class="btn btn-secondary" href="{{ route('divisions.show', $division) }}" title="Spielklasse anzeigen">
                         <span class="fa fa-search-plus"></span>

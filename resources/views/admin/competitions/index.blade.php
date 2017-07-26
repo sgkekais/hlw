@@ -30,19 +30,19 @@
             <tbody>
             @foreach($competitions as $competition)
                 <tr>
-                    <td><b>{{ $competition->id }}</b></td>
-                    <td>
+                    <td class="align-middle"><b>{{ $competition->id }}</b></td>
+                    <td class="align-middle">
                         @if($competition->published)
                             <span class="fa fa-eye" title="Öffentlich"></span>
                         @else
                             <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
                         @endif
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <a href="{{ route('competitions.show', $competition ) }}" title="Anzeigen">{{ $competition->name }}</a>
                         <br>Spielklassen: {{ $competition->divisions()->get()->count() }}
                     </td>
-                    <td>
+                    <td class="align-middle">
                         @if($competition->type == "league")
                             <span class="fa fa-star"></span> Liga
                         @elseif($competition->type == "knockout")
@@ -51,7 +51,7 @@
                             Turnier Gruppe + K.O.
                         @endif
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('competitions.show', $competition) }}" title="Wettbewerb anzeigen">
                             <span class="fa fa-search-plus"></span>

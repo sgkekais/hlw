@@ -84,21 +84,21 @@
                     <tbody>
                     @foreach($season->matchweeks as $matchweek)
                         <tr>
-                            <td><b>{{ $matchweek->id }}</b></td>
-                            <td>
+                            <td class="align-middle"><b>{{ $matchweek->id }}</b></td>
+                            <td class="align-middle">
                                 @if($matchweek->published)
                                     <span class="fa fa-eye" title="Öffentlich"></span>
                                 @else
                                     <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
                                 @endif
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <a href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Anzeigen">{{ $matchweek->number_consecutive }}</a>
                                 <br>
                                 Paarungen: {{ $matchweek->fixtures()->get()->count() }}
                             </td>
-                            <td>{{ $matchweek->name }}</td>
-                            <td>
+                            <td class="align-middle">{{ $matchweek->name }}</td>
+                            <td class="align-middle">
                                 <!-- display details -->
                                 <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Spielwoche anzeigen">
                                     <span class="fa fa-search-plus"></span>
@@ -132,7 +132,8 @@
                         <th class="">Rang</th>
                         <th class="">Punktabzug</th>
                         <th class="">Torabzug</th>
-                        <th class="">Ausgeschieden?</th>
+                        <th class="">Ausgeschieden</th>
+                        <th></th>
                         <th class="">Aktionen</th>
                     </tr>
                     </thead>
@@ -150,6 +151,11 @@
                             <td class="align-middle">{{ $club->pivot->deduction_points }}</td>
                             <td class="align-middle">{{ $club->pivot->deduction_goals }}</td>
                             <td class="align-middle">{{ $club->pivot->withdrawal }}</td>
+                            <td class="align-middle">
+                                @if($club->pivot->note)
+                                    <span class="fa fa-file-text" title="Notiz vorhanden"></span>
+                                @endif
+                            </td>
                             <td class="align-middle">
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('editClubAssignment',[$season,$club]) }}" title="Zuordnung bearbeiten">

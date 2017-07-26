@@ -24,29 +24,35 @@
             <th></th>
             <th class="">Jahr</th>
             <th>Nr.</th>
+            <th></th>
             <th class="">Aktionen</th>
         </tr>
         </thead>
         <tbody>
         @foreach($seasons as $season)
             <tr>
-                <td><b>{{ $season->id }}</b></td>
-                <td>
+                <td class="align-middle"><b>{{ $season->id }}</b></td>
+                <td class="align-middle">
                     @if($season->published)
                         <span class="fa fa-eye" title="Öffentlich"></span>
                     @else
                         <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
                     @endif
                 </td>
-                <td>
+                <td class="align-middle">
                     <a href="{{ route('seasons.show', $season ) }}" title="Anzeigen">
                         {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}
                     </a>
                     <br>
                     <span class="text-muted">{{ $season->division->name }} - {{ $season->division->competition->name }}</span> | Spielwochen: {{ $season->matchweeks()->get()->count() }}
                 </td>
-                <td># {{ $season->season_nr }}</td>
-                <td>
+                <td class="align-middle"># {{ $season->season_nr }}</td>
+                <td class="align-middle">
+                    @if($season->note)
+                        <span class="fa fa-file-text" title="Notiz vorhanden"></span>
+                    @endif
+                </td>
+                <td class="align-middle">
                     <!-- display details -->
                     <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
                         <span class="fa fa-search-plus"></span>

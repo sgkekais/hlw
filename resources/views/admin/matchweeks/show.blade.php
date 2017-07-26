@@ -67,6 +67,7 @@
                         <th>Spielort</th>
                         <th class="">Ergebnis</th>
                         <th class=""></th>
+                        <th></th>
                         <th>Aktionen</th>
                     </tr>
                     </thead>
@@ -122,6 +123,11 @@
                                 - {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
                             </td>
                             <td class="align-middle">{{ $fixture->cancelled ? "Ann." : null }}</td>
+                            <td class="align-middle">
+                                @if($fixture->note)
+                                    <span class="fa fa-file-text" title="Notiz vorhanden"></span>
+                                @endif
+                            </td>
                             <td class="align-middle">
                                 <!-- show -->
                                 <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$matchweek, $fixture]) }}" title="Paarung anzeigen">

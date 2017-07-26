@@ -61,24 +61,30 @@
                     <thead class="thead-default">
                     <tr>
                         <th class="">ID</th>
+                        <th></th>
                         <th class="">Name</th>
                         <th class="">Hierarchieebene</th>
-                        <th class="">Öffentlich?</th>
                         <th class="">Aktionen</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($competition->divisions as $division)
                         <tr>
-                            <td><b>{{ $division->id }}</b></td>
-                            <td>
+                            <td class="align-middle"><b>{{ $division->id }}</b></td>
+                            <td class="align-middle">
+                                @if($division->published)
+                                    <span class="fa fa-eye" title="Öffentlich"></span>
+                                @else
+                                    <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                                @endif
+                            </td>
+                            <td class="align-middle">
                                 <a href="{{ route('divisions.show', $division) }}">
                                     {{ $division->name }}
                                 </a>
                             </td>
-                            <td>{{ $division->hierarchy_level }}</td>
-                            <td>{{ $division->published ? "Ja" : "Nein" }}</td>
-                            <td>
+                            <td class="align-middle">{{ $division->hierarchy_level }}</td>
+                            <td class="align-middle">
                                 <a class="btn btn-secondary" href="{{ route('divisions.show', $division) }}" title="Spielklasse anzeigen">
                                     <span class="fa fa-search-plus"></span>
                                 </a>
