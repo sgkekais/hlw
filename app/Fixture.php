@@ -7,6 +7,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Fixture extends Model
 {
+    /*
+     * TODO fixture ended in penalty shoot-out?
+     * TODO fixture was rated?
+     */
+
     use LogsActivity;
 
     /**

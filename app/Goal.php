@@ -38,6 +38,6 @@ class Goal extends Model
 
     public function player()
     {
-        return $this->belongsTo(Player::class); // TODO: doesn't work
+        return $this->belongsTo(Player::class);
     }
 }

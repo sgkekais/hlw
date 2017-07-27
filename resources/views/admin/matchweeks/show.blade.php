@@ -67,6 +67,7 @@
                         <th>Spielort</th>
                         <th class="">Ergebnis</th>
                         <th class=""></th>
+                        <th class=""></th>
                         <th></th>
                         <th>Aktionen</th>
                     </tr>
@@ -118,9 +119,41 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
-                                ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
-                                - {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
+                                <!-- TODO replace with proper methods to test fixture -->
+                                @if($fixture->goals_home && $fixture->goals_away)
+                                    {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
+                                @else
+                                    <i>-:-</i>
+                                @endif
+                                @if($fixture->goals_home_11m && $fixture->goals_away_11m)
+                                    ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
+                                @endif
+                                @if($fixture->goals_home_rated && $fixture->goals_away_rated)
+                                    {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
+                                @endif
+                            </td>
+                            <td class="align-middle">
+                                @if($fixture->goals_home && $fixture->goals_away)
+                                    @if($fixture->goals->count() === 0 && $fixture->goals_home + $fixture->goals_away > 0)
+                                        <span class="fa fa-soccer-ball-o fa-fw text-danger" title="Torschützen noch nicht gepflegt"></span>
+                                    @elseif($fixture->goals->count() < $fixture->goals_home + $fixture->goals_away)
+                                        <span class="fa fa-soccer-ball-o fa-fw text-warning" title="Torschützen evtl. nicht vollständig gepflegt"></span>
+                                    @elseif($fixture->goals->count() === $fixture->goals_home + $fixture->goals_away)
+                                        <span class="fa fa-soccer-ball-o fa-fw text-success" title="Torschützen gepflegt"></span>
+                                    @endif
+                                @else
+                                    <span class="fa fa-fw"></span>
+                                @endif
+                                @if($fixture->cards->count() > 0)
+                                    <span class="fa fa-clone fa-fw" title="Karte(n) gepflegt"></span>
+                                @else
+                                    <span class="fa fa-fw"></span>
+                                @endif
+                                @if($fixture->referees->count() === 0)
+                                    <span class="fa fa-hand-stop-o fa-fw text-danger" title="Kein Schiedsrichter"></span>
+                                @else
+                                    <span class="fa fa-hand-stop-o fa-fw text-success" title="Schiedsrichter zugewiesen"></span>
+                                @endif
                             </td>
                             <td class="align-middle">{{ $fixture->cancelled ? "Ann." : null }}</td>
                             <td class="align-middle">

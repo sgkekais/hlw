@@ -34,7 +34,6 @@ class ClubController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * TODO: ignore checkbox for colors so that null is inserted into db
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */

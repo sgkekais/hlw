@@ -7,8 +7,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Position extends Model
 {
-    // TODO: Art der position hinzufügen (Spieler, Stab, ?)
-
     use LogsActivity;
 
     /**
