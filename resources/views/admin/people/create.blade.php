@@ -4,7 +4,7 @@
 
     <!-- create a new person -->
     <h1 class="mb-4">Person anlegen</h1>
-    <form method="POST" action="{{ route('people.store') }}">
+    <form method="POST" action="{{ route('people.store') }}" enctype="multipart/form-data">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}
         <!-- names -->
@@ -32,14 +32,14 @@
                 <small id="date_of_birthHelp" class="form-text text-muted">JJJJ-MM-TT</small>
             </div>
         </div>
-        <!-- photo TODO -->
+        <!-- photo -->
         <div class="form-group row">
             <div class="col-md-2">
                 <label for="photo">Passbild</label>
             </div>
             <div class="col-md-4">
                 <input type="file" name="photo" id="photo" aria-describedby="photoHelp">
-                <small id="photoHelp" class="form-text text-muted">zu erledigen</small>
+                <small id="photoHelp" class="form-text text-muted">Passbild</small>
             </div>
         </div>
         <!-- registered at club -->

@@ -21,6 +21,7 @@
             <thead class="thead-default">
             <tr>
                 <th class="">ID</th>
+                <th class="text-center"></th>
                 <th class="">Nachname, Vorname</th>
                 <th class="">Geb.datum</th>
                 <th class="">Daten</th>
@@ -31,6 +32,13 @@
             @foreach($people as $person)
                 <tr>
                     <td class="align-middle"><b>{{ $person->id }}</b></td>
+                    <td class="align-middle text-center">
+                        @if($person->photo)
+                            <img src="{{ Storage::url($person->photo) }}" class="rounded" title="Passbild" alt="Passbild" width="25">
+                        @else
+                            <span class="fa fa-ban fa-fw text-muted" title="Kein Passbild"></span>
+                        @endif
+                    </td>
                     <td class="align-middle">
                         <a href="{{ route('people.show', $person ) }}" title="Anzeigen">
                             {{ $person->last_name }}, {{ $person->first_name }}

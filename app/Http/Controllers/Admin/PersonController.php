@@ -7,6 +7,7 @@ use App\Person;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class PersonController extends Controller
 {
@@ -43,16 +44,32 @@ class PersonController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'first_name' => 'required|min:2',
-            'last_name' => 'required|min:2',
-            'date_of_birth' => 'nullable|date'
+            'first_name'    => 'required|min:2',
+            'last_name'     => 'required|min:2',
+            'date_of_birth' => 'nullable|date',
+            'photo'         => 'nullable|image|mimes:png,jpg,jpeg'
         ]);
 
         $person = new Person($request->all());
 
+        // save the model
         $person->save();
 
-        Session::flash('success','Person '.$person->first_name." ".$person->last_name." erfolgreich mit der ID ".$person->id." angelegt.");
+        // is there a photo?
+        $store_message = "";
+        if($request->hasFile('photo'))
+        {
+            // store the uploaded logo and save the path to the logo in the database
+            if($person->photo = $request->file('photo')->store('public/passportphotos/'.$person->id))
+            {
+                $store_message = "Passbild erfoglreich hochgeladen.";
+
+                // save the model again
+                $person->save();
+            }
+        }
+
+        Session::flash('success','Person '.$person->first_name." ".$person->last_name." erfolgreich mit der ID ".$person->id." angelegt".($store_message ? " und Passbild hochgeladen " : null).".");
 
         return redirect()->route('people.index');
     }
@@ -93,12 +110,27 @@ class PersonController extends Controller
     public function update(Request $request, Person $person)
     {
         $this->validate($request, [
-            'first_name' => 'required|min:2',
-            'last_name' => 'required|min:2',
-            'date_of_birth' => 'nullable|date'
+            'first_name'    => 'required|min:2',
+            'last_name'     => 'required|min:2',
+            'date_of_birth' => 'nullable|date',
+            'photo'         => 'nullable|image|mimes:png,jpg,jpeg'
         ]);
 
+        // update the changes
         $person->update($request->all());
+
+        // is there a new photo selected?
+        if($request->hasFile('photo'))
+        {
+            // then delete the old logo
+            Storage::delete($person->photo);#
+
+            // save the new photo
+            $person->photo  = $request->file('photo')->store('public/passportphotos/'.$person->id);
+
+            // save the person
+            $person->save();
+        }
 
         Session::flash('success','Person '.$person->first_name.' '.$person->last_name.' erfolgreich geändert.');
 

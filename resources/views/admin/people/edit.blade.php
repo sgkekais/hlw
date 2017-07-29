@@ -20,7 +20,7 @@
     @endif
     <hr>
     <h3 class="mt-4 mb-4">Person ändern</h3>
-    <form method="POST" action="{{ route('people.update', $person) }}">
+    <form method="POST" action="{{ route('people.update', $person) }}" enctype="multipart/form-data">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}
         {{ method_field('PATCH') }}
@@ -49,14 +49,21 @@
                 <small id="date_of_birthHelp" class="form-text text-muted">JJJJ-MM-TT</small>
             </div>
         </div>
-        <!-- photo TODO -->
+        <!-- photo -->
         <div class="form-group row">
             <div class="col-md-2">
                 <label for="photo">Passbild</label>
             </div>
+            <div class="col-md-2">
+                @if($person->photo)
+                    <img src="{{ Storage::url($person->photo) }}" class="img-fluid " title="Passbild" alt="Passbild">
+                @else
+                    <span class="fa fa-ban fa-4x text-muted" title="kein Passbild vorhanden"></span>
+                @endif
+            </div>
             <div class="col-md-4">
                 <input type="file" name="photo" id="photo" aria-describedby="photoHelp">
-                <small id="photoHelp" class="form-text text-muted">zu erledigen</small>
+                <small id="photoHelp" class="form-text text-muted">Passbild</small>
             </div>
         </div>
         <!-- registered at club -->

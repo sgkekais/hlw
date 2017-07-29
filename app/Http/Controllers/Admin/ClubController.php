@@ -54,17 +54,6 @@ class ClubController extends Controller
         // create a new object with the request data
         $club = new Club($request->all());
 
-        // is there a logo?
-        $store_message = "";
-        if($request->hasFile('logo'))
-        {
-            // store the uploaded logo and save the path to the logo in the database
-            if($club->logo_url = $request->file('logo')->store('public/clublogos'))
-            {
-                $store_message = "Vereinswappen erfoglreich hochgeladen.";
-            }
-        }
-
         // ignore checkbox set?
         if($request->has('ignore_kit_home'))
         {
@@ -78,8 +67,22 @@ class ClubController extends Controller
             $club->colours_kit_away_secondary   = null;
         }
 
-        // save the club
+        // save the club to get the id
         $club->save();
+
+        // is there a logo?
+        $store_message = "";
+        if($request->hasFile('logo'))
+        {
+            // store the uploaded logo and save the path to the logo in the database
+            if($club->logo_url = $request->file('logo')->store('public/clublogos/'.$club->id))
+            {
+                $store_message = "Vereinswappen erfoglreich hochgeladen.";
+
+                // save the club again
+                $club->save();
+            }
+        }
 
         // flash success message and return club name as test
         Session::flash('success', 'Mannschaft '.$club->name.' erfolgreich angelegt. '.$store_message);
@@ -140,7 +143,7 @@ class ClubController extends Controller
             // then delete the old logo
             Storage::delete($club->logo_url);
             // and save the new logo
-            $club->logo_url = $request->file('logo')->store('public/clublogos');
+            $club->logo_url = $request->file('logo')->store('public/clublogos/'.$club->id);
             // save the club
             $club->save();
         }
