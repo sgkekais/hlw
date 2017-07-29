@@ -41,7 +41,7 @@
                     </td>
                     <td class="align-middle text-center">
                         @if($club->logo_url)
-                            <img src="{{ Storage::url($club->logo_url) }}" class="w-25 img-fluid" title="Vereinswappen" alt="Vereinswappen">
+                            <img src="{{ Storage::url($club->logo_url) }}" class="img-fluid" title="Vereinswappen" alt="Vereinswappen" width="50">
                         @else
                             <span class="fa fa-circle-o"></span>
                         @endif
