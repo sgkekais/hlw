@@ -129,7 +129,7 @@ class Club extends Model
     {
         return $this->belongsToMany(Stadium::class, 'clubs_stadiums')
             ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
-            ->withTimestamps(); // TODO: CHECK, works with $club->stadiums()->save($stadium)!
+            ->withTimestamps();
     }
 
     /**

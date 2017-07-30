@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Club;
+use App\Stadium;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -187,5 +188,14 @@ class ClubController extends Controller
 
         // return to index
         return redirect()->route('clubs.index');
+    }
+
+    public function createStadiumAssignment(Club $club)
+    {
+        // determine the stadiums which are not assigned to the club, yet
+        $all_stadiums           = Stadium::orderBy('name');
+        $unassigned_stadiums    = $all_stadiums->diff($club->stadiums);
+
+        return view('admin.clubs.createStadiumAssignment', compact('club', 'unassigned_stadiums'));
     }
 }

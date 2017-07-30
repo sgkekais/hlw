@@ -58,14 +58,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
         // assigning and managing players
         Route::resource('clubs.players', 'PlayerController');
-//        Route::get('clubs/{club}/players/create', 'PlayerController@create')->name('players.create');
-//        Route::post('clubs/{club}/players', 'PlayerController@store')->name('players.store');
-//        Route::get('clubs/{club}/players/{player}/edit', 'PlayerController@edit')->name('players.edit');
-//        Route::patch('clubs/{club}/players/{player}', 'PlayerController@update')->name('players.update');
-//        Route::delete('clubs/{club}/players/{player}', 'PlayerController@destroy')->name('players.destroy');
-
         // assigning and managing contacts
         Route::resource('clubs.contacts', 'ContactController');
+        // assigning and managing stadiums
+        Route::get('clubs/{club}/stadiums/create', 'clubController@createStadiumAssignment')->name('createStadiumAssignment');
+        Route::post('clubs/{club}/stadiums', 'clubController@storeStadiumAssignment')->name('storeStadiumAssignment');
+        Route::get('clubs/{club}/stadiums/{stadium}/edit', 'clubController@editStadiumAssignment')->name('editStadiumAssignment');
+        Route::patch('clubs/{club}/stadiums/{stadium}', 'clubController@updateStadiumAssignment')->name('updateStadiumAssignment');
 
     Route::resource('positions', 'PositionController');
     Route::resource('referees', 'RefereeController');
