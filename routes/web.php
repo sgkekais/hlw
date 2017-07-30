@@ -61,10 +61,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         // assigning and managing contacts
         Route::resource('clubs.contacts', 'ContactController');
         // assigning and managing stadiums
-        Route::get('clubs/{club}/stadiums/create', 'clubController@createStadiumAssignment')->name('createStadiumAssignment');
-        Route::post('clubs/{club}/stadiums', 'clubController@storeStadiumAssignment')->name('storeStadiumAssignment');
-        Route::get('clubs/{club}/stadiums/{stadium}/edit', 'clubController@editStadiumAssignment')->name('editStadiumAssignment');
-        Route::patch('clubs/{club}/stadiums/{stadium}', 'clubController@updateStadiumAssignment')->name('updateStadiumAssignment');
+        Route::get('clubs/{club}/stadiums/create', 'ClubController@createStadiumAssignment')->name('createStadiumAssignment');
+        Route::post('clubs/{club}/stadiums', 'ClubController@storeStadiumAssignment')->name('storeStadiumAssignment');
+        Route::get('clubs/{club}/stadiums/{stadium}/edit', 'ClubController@editStadiumAssignment')->name('editStadiumAssignment');
+        Route::patch('clubs/{club}/stadiums/{stadium}', 'ClubController@updateStadiumAssignment')->name('updateStadiumAssignment');
+        Route::delete('clubs/{club}/stadiums/{stadium}', 'ClubController@destroyStadiumAssignment')->name('destroyStadiumAssignment');
 
     Route::resource('positions', 'PositionController');
     Route::resource('referees', 'RefereeController');

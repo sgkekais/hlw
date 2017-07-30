@@ -190,12 +190,88 @@ class ClubController extends Controller
         return redirect()->route('clubs.index');
     }
 
+    /**
+     * @param Club $club
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function createStadiumAssignment(Club $club)
     {
         // determine the stadiums which are not assigned to the club, yet
-        $all_stadiums           = Stadium::orderBy('name');
+        $all_stadiums           = Stadium::orderBy('name')->get();
         $unassigned_stadiums    = $all_stadiums->diff($club->stadiums);
 
         return view('admin.clubs.createStadiumAssignment', compact('club', 'unassigned_stadiums'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Club $club
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeStadiumAssignment(Request $request, Club $club)
+    {
+        // get the stadium
+        $stadium = Stadium::find($request->stadium_id);
+
+        // store the assignment in the pivot table
+        $club->stadiums()->attach($stadium, [
+            'regular_home_day'      => $request->regular_home_day,
+            'regular_home_time'     => $request->regular_home_time,
+            'is_regular_stadium'    => $request->is_regular_stadium,
+            'note'                  => $request->note
+        ]);
+
+        Session::flash('success', 'Stadion '.$stadium->name.'erfolgreich zugeordnet.');
+
+        return redirect()->route('clubs.show', $club);
+    }
+
+    /**
+     * @param Club $club
+     * @param Stadium $stadium
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editStadiumAssignment(Club $club, Stadium $stadium)
+    {
+        // get the pivot values
+        $stadium = $club->stadiums->find($stadium);
+
+        return view('admin.clubs.editStadiumAssignment', compact('club', 'stadium'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Club $club
+     * @param Stadium $stadium
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateStadiumAssignment(Request $request, Club $club, Stadium $stadium)
+    {
+        // sync with existing pivot entry
+        $club->stadiums()->updateExistingPivot($stadium->id, [
+            'regular_home_day'      => $request->regular_home_day,
+            'regular_home_time'     => $request->regular_home_time,
+            'is_regular_stadium'    => $request->is_regular_stadium,
+            'note'                  => $request->note
+        ]);
+
+        Session::flash('success', 'Zuordnung erfolgreich geändert.');
+
+        return redirect()->route('clubs.show', $club);
+    }
+
+    /**
+     * @param Club $club
+     * @param Stadium $stadium
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroyStadiumAssignment(Club $club, Stadium $stadium)
+    {
+        // detach the stadium from the club
+        $club->stadiums()->detach($stadium);
+
+        Session::flash('success', 'Stadionzuordnung '.$stadium->name.'erfolgreich entfernt.');
+
+        return redirect()->route('clubs.show', $club);
     }
 }

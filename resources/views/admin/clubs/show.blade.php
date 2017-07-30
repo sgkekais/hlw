@@ -27,7 +27,7 @@
             <a class="btn btn-secondary" href="{{ route('clubs.contacts.create', $club) }}" title="Ansprechpartner zuordnen">
                 <span class="fa fa-plus-square"></span> Kontakt
             </a>
-            <a class="btn btn-secondary" href="#" title="Spielort zuordnen">
+            <a class="btn btn-secondary" href="{{ route('createStadiumAssignment', $club) }}" title="Spielort zuordnen">
                 <span class="fa fa-plus-square"></span> Spielort
             </a>
         </div>
@@ -419,18 +419,32 @@
                     <tr>
                         <th class="">ID</th>
                         <th class="">Name</th>
+                        <th class="">Anstoß</th>
+                        <th class=""></th>
                         <th class="">Aktionen</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($club->stadiums as $stadium)
                         <tr>
-                            <td>{{ $stadium->id }}</td>
-                            <td>{{ $stadium->name }}</td>
-
-                            <td>
+                            <td class="align-middle">{{ $stadium->id }}</td>
+                            <td class="align-middle">
+                                <a href="{{ route('stadiums.show', $stadium) }}" title="Spielort anzeigen">
+                                    {{ $stadium->name }}
+                                </a>
+                            </td>
+                            <td class="align-middle">{{ $stadium->pivot->regular_home_day }} {{ $stadium->pivot->regular_home_time }}</td>
+                            <td class="align-middle">
+                                @if($stadium->pivot->is_regular_stadium)
+                                    <span class="fa fa-star fa-fw" title="Hauptspielort"></span>
+                                @endif
+                                @if($stadium->pivot->note)
+                                    <span class="fa fa-file-text fa-fw" title="Notiz vorhanden"></span>
+                                @endif
+                            </td>
+                            <td class="align-middle">
                                 <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('players.edit', $stadium) }}" title="Spieler bearbeiten">
+                                <a class="btn btn-primary" href="{{ route('editStadiumAssignment', [$club,$stadium]) }}" title="Spielort-Zuordnung bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             </td>

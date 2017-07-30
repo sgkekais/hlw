@@ -10,7 +10,7 @@
     <br>
     <!-- updated at -->
     @if($club->pivot->updated_at != $club->pivot->created_at)
-        Geändert: {{ $club->updated_at->format('d.m.Y H:i') }} Uhr
+        Geändert: {{ $club->pivot->updated_at->format('d.m.Y H:i') }} Uhr
     @endif
     <hr>
     <h3 class="mb-4">Mannschaftszuordnung bearbeiten</h3>

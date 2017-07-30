@@ -149,6 +149,11 @@ class SeasonController extends Controller
         return view('admin.seasons.createClubAssignment', compact('season', 'unassigned_clubs'));
     }
 
+    /**
+     * @param Request $request
+     * @param Season $season
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function storeClubAssignment(Request $request, Season $season)
     {
         $this->validate($request, [
@@ -175,6 +180,11 @@ class SeasonController extends Controller
         return redirect()->route('seasons.show', $season);
     }
 
+    /**
+     * @param Season $season
+     * @param Club $club
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function editClubAssignment(Season $season, Club $club)
     {
         // get the pivot values
@@ -183,6 +193,12 @@ class SeasonController extends Controller
         return view('admin.seasons.editClubAssignment', compact('season','club'));
     }
 
+    /**
+     * @param Request $request
+     * @param Season $season
+     * @param Club $club
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateClubAssignment(Request $request, Season $season, Club $club)
     {
         $this->validate($request, [
