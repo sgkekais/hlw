@@ -61,7 +61,9 @@ class RefereeController extends Controller
      */
     public function show(Referee $referee)
     {
-        //
+        $referee->load('fixtures');
+
+        return view('admin.referees.show', compact('referee'));
     }
 
     /**
