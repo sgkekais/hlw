@@ -35,6 +35,11 @@
                     <td class="align-middle text-center">
                         @if($person->photo)
                             <img src="{{ Storage::url($person->photo) }}" class="rounded" title="Passbild" alt="Passbild" width="25">
+                            @if($person->photo_public)
+                                <span class="fa fa-eye fa-fw" title="Passbild öffentlich"></span>
+                            @else
+                                <span class="fa fa-eye-slash fa-fw" title="Passbild nicht öffentlich"></span>
+                            @endif
                         @else
                             <span class="fa fa-ban fa-fw text-muted" title="Kein Passbild"></span>
                         @endif
@@ -47,8 +52,8 @@
                     <td class="align-middle">{{ $person->date_of_birth->format('d.m.Y') }}</td>
                     <td class="align-middle">
                         @if($person->photo)
-                            <span class="fa fa-photo fa-fw" title="Passfoto vorhanden"></span>
-                            @else
+                            <span class="fa fa-photo fa-fw" title="Passbild vorhanden"></span>
+                        @else
                             <span class="fa fa-fw"></span>
                         @endif
                         @if($person->players->count() > 0)

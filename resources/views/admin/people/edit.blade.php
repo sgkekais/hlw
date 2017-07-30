@@ -69,6 +69,16 @@
         <!-- registered at club -->
         <div class="form-group row">
             <div class="col-md-2">
+                <label for="photo_public">Passbild öffentlich?</label>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" id="photo_public" name="photo_public" aria-describedby="photo_publicHelp">
+                    <option value="0">Nein</option>
+                    <option value="1" {{ $person->photo_public ? "selected" : null }}>Ja</option>
+                </select>
+                <small id="photo_publicHelp" class="form-text text-muted">Darf das Passbild auf der Mannschaftsseite angezeigt werden?</small>
+            </div>
+            <div class="col-md-2">
                 <label for="registered_at_club">Vereinsspieler?</label>
             </div>
             <div class="col-md-4">
