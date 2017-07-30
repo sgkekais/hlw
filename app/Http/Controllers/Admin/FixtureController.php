@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Fixture;
 use App\Matchweek;
+use App\Referee;
 use App\Stadium;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -139,5 +140,84 @@ class FixtureController extends Controller
         Session::flash('success', 'Paarung mit der id '.$id.' gelöscht.');
 
         return redirect()->route('seasons.matchweeks.show', [$matchweek->season, $matchweek]);
+    }
+
+    /**
+     * @param Fixture $fixture
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createRefereeAssignment(Fixture $fixture)
+    {
+        // determine the referees which are not assigned to the fixture, yet
+        $all_referees           = Referee::all();
+        $unassigned_referees    = $all_referees->diff($fixture->referees);
+
+        return view('admin.fixtures.createRefereeAssignment', compact('fixture', 'unassigned_referees'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Fixture $fixture
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeRefereeAssignment(Request $request, Fixture $fixture)
+    {
+        // get the referee
+        $referee = Referee::find($request->referee_id);
+
+        // store the assignment in the pivot table
+        $fixture->referees()->attach($referee, [
+            'note' => $request->note
+        ]);
+
+        Session::flash('success', 'Schiedsrichter '.$referee->person->last_name.', '.$referee->person->first_name.'erfolgreich zugeordnet.');
+
+        return redirect()->route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]);
+    }
+
+    /**
+     * @param Fixture $fixture
+     * @param Referee $referee
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editRefereeAssignment(Fixture $fixture, Referee $referee)
+    {
+        // get the pivot values
+        $referee = $fixture->referees->find($referee);
+
+        return view('admin.fixtures.editRefereeAssignment', compact('fixture', 'referee'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Fixture $fixture
+     * @param Referee $referee
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateRefereeAssignment(Request $request, Fixture $fixture, Referee $referee)
+    {
+        // sync with existing pivot entry
+        $fixture->referees()->updateExistingPivot($referee->id, [
+            'note' => $request->note
+        ]);
+
+        Session::flash('success', 'Zuordnung erfolgreich geändert.');
+
+        return redirect()->route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]);
+    }
+
+    /**
+     * @param Fixture $fixture
+     * @param Referee $referee
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroyRefereeAssignment(Fixture $fixture, Referee $referee)
+    {
+        // detach the stadium from the club
+        $fixture->referees()->detach($referee);
+
+        Session::flash('success', 'Schiedsrichterzuordnung erfolgreich entfernt.');
+
+        return redirect()->route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]);
     }
 }

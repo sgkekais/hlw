@@ -41,7 +41,9 @@ class Referee extends Model
 
     public function fixtures()
     {
-        return $this->belongsToMany(Fixture::class, 'fixtures_referees')->withTimestamps();
+        return $this->belongsToMany(Fixture::class, 'fixtures_referees')
+            ->withPivot('note')
+            ->withTimestamps();
     }
 
 }

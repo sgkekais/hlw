@@ -258,8 +258,40 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="mt-4">Schiedsrichter</h3>
-                    Button
+                <!-- add referee -->
+                <a class="btn btn-success mb-4" href="{{ route('createRefereeAssignment', $fixture ) }}" title="Schiedsrichter zuordnen">
+                    <span class="fa fa-clone" aria-hidden="true"></span> Schiedsrichter zuordnen
+                </a>
                 @if($fixture->referees->count() > 0)
+                    <table class="table table-sm table-striped table-hover">
+                        <thead class="thead-default">
+                        <tr>
+                            <th class="">ID</th>
+                            <th class="">Schiedsrichter</th>
+                            <th class="">Notiz</th>
+                            <th class="">Aktionen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($fixture->referees as $referee)
+                            <tr>
+                                <td class="align-middle">{{ $referee->id }}</td>
+                                <td class="align-middle">
+                                    <a href="{{ route('referees.show', $referee) }}" title="Schiedsricher anzeigen">
+                                        {{ $referee->person->last_name }}, {{ $referee->person->first_name }}
+                                    </a>
+                                </td>
+                                <td class="align-middle"><i>{{ $referee->pivot->note }}</i></td>
+                                <td class="align-middle">
+                                    <!-- edit -->
+                                    <a class="btn btn-primary" href="{{ route('editRefereeAssignment', [ $fixture, $referee ]) }}" title="Schiedsrichterzuordnung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 @else
                     <div class="alert alert-info" role="alert">
                         <span class="fa fa-info"></span> Keine Schiedsrichter zugeordnet.
