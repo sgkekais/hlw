@@ -14,3 +14,19 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts" !default;
 
 // date range picker
 @import "node_modules/daterangepicker/daterangepicker.scss";
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 56px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 15px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  border-right: 1px solid #eee;
+}
