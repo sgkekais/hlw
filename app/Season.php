@@ -55,10 +55,18 @@ class Season extends Model
     ];
 
     /**
-     * Relationship
-     * 1. One-to-Many
-     * - a division has many seasons
-     * - a season belongs to one division
+     * scope the query to the current season
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeCurrent($query)
+    {
+        return $query->where('begin', '<', date('Y-m-d'))
+            ->where('end', '>', date('Y-m-d'));
+    }
+
+    /**
+     * A season belongs to one division
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function division(){
@@ -66,10 +74,7 @@ class Season extends Model
     }
 
     /**
-     * Relationship
-     * 2. One-to-Many
-     * - a season has many matchweeks
-     * - a matchweek belongs to one season
+     * A season has one or many matchweeks
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function matchweeks(){
@@ -77,6 +82,7 @@ class Season extends Model
     }
 
     /**
+     * A season is related to many clubs, a club can be related to many seasons
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function clubs(){

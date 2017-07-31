@@ -32,10 +32,7 @@ class Division extends Model
     ];
 
     /**
-     * Relationship
-     * 1. Inverse One-to-Many
-     * - a division belongs to one competition
-     * - many divisions belong to one competition
+     * A division belongs to one competition
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function competition(){
@@ -43,10 +40,7 @@ class Division extends Model
     }
 
     /**
-     * Relationship
-     * 2. One-to-Many
-     * - a division has many seasons
-     * - (many) seasons belong to one division
+     * A division has many seasons
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function seasons(){
