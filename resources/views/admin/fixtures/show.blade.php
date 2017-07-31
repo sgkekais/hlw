@@ -1,5 +1,9 @@
 @extends('admin.adminlayout')
 
+@section('sidebar')
+    <a href="{{ Route('seasons.matchweeks.show', [$matchweek->season, $matchweek]) }}">Spielwoche</a>
+@endsection
+
 @section('content')
 
     <h1 class="">Details zu Paarung</h1>
@@ -171,7 +175,7 @@
                         </a>
                     @elseif($fixture->goals->count() === $fixture->goals_home + $fixture->goals_away)
                         <div class="alert alert-success" role="alert">
-                            Alle Torschützen eingetragen.
+                            <span class="fa fa-check"></span> Alle Torschützen eingetragen.
                         </div>
                     @endif
                 @else

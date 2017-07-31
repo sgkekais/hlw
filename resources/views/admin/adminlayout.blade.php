@@ -8,7 +8,11 @@
         <div class="row">
             <!-- sidebar, hidden for smaller viewports via hidden-helper -->
             <div class="col-md-2 hidden-sm-down bg-faded sidebar">
-                Hi!
+                @if(!Route::is('admin'))
+                    @yield('sidebar')
+                @else
+                    Hi!
+                @endif
             </div>
             <!-- main content -->
             <div class="col-md-10 offset-md-2">
