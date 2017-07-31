@@ -15,10 +15,23 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts" !default;
 // date range picker
 @import "node_modules/daterangepicker/daterangepicker.scss";
 
+body { margin-bottom: 40px; margin-top: 70px; }
+
+/*
+ * Footer
+ */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  line-height: 40px; /* Vertically center the text there */
+}
+
 /*
  * Sidebar
  */
-
 .sidebar {
   position: fixed;
   top: 56px;

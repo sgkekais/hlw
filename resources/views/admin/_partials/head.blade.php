@@ -13,18 +13,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/adminapp.css') }}" rel="stylesheet">
 
-    <style>
-        body { margin-bottom: 40px; }
-        .footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            /* Set the fixed height of the footer here */
-            height: 40px;
-            line-height: 40px; /* Vertically center the text there */
-        }
-    </style>
-
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
