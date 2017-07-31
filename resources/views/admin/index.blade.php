@@ -10,27 +10,31 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                Quick-Links zu aktuellen Saisons, Spielwochen
-                <div class="list-group">
-                    <a href="#" class="list-group-item">
-                        Tiel
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                    <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                Gesperrte Spieler
-            </div>
-            <div class="col-md-4">
-                Spiele ohne Schiedsrichter
+                <ul>
+                @foreach($competitions as $competition)
+                    <li>{{ $competition->name }}</li>
+                    <ul>
+                    @foreach($competition->divisions as $division)
+                        <li>{{ $division->name }}</li>
+                        <ul>
+                            @foreach($division->seasons()->current()->get() as $season)
+                                <li>{{ $season->begin->format('d.m.Y') }} - {{ $season->end->format('d.m.Y') }}</li>
+                                <ul>
+                                    @foreach($season->matchweeks()->current()->get() as $matchweek)
+                                        <li>{{ $matchweek->begin->format('d.m.Y') }} - {{ $matchweek->end->format('d.m.Y') }}</li>
+                                        <ul>
+                                            @foreach($matchweek->fixtures as $fixture)
+                                                <li>{{ $fixture->datetime }} - {{ $fixture->club_home->name_short }} vs. {{ $fixture->club_away->name_short }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        </ul>
+                    @endforeach
+                    </ul>
+                @endforeach
+                </ul>
             </div>
         </div>
 

@@ -60,10 +60,10 @@ class Season extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeCurrent($query)
-    {
-        return $query->where('begin', '<', date('Y-m-d'))
-            ->where('end', '>', date('Y-m-d'));
-    }
+{
+    return $query->where('begin', '<=', date('Y-m-d'))
+        ->where('end', '>=', date('Y-m-d'));
+}
 
     /**
      * A season belongs to one division

@@ -40,6 +40,17 @@ class Matchweek extends Model
     ];
 
     /**
+     * Scope the query to the current matchweek
+     * @param $query
+     * @return mixed
+     */
+    public function scopeCurrent($query)
+    {
+        return $query->where('begin', '<=', date('Y-m-d'))
+            ->where('end', '>=', date('Y-m-d'));
+    }
+
+    /**
      * Relationship
      * 1. One-to-Many
      * - a matchweek belongs to one season
