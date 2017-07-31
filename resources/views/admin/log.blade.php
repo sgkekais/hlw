@@ -3,7 +3,6 @@
 @section('content')
 
     @if($log)
-        Log ist derzeit nur auf Englisch.
         <table class="table table-condensed table-hover table-striped">
             <thead>
                 <tr>
