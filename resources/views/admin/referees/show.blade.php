@@ -46,13 +46,126 @@
                     <tr>
                         <th class="">ID</th>
                         <th></th>
-                        <th class="">Name</th>
-                        <th class="">Hierarchieebene</th>
-                        <th class="">Aktionen</th>
+                        <th class="">Datum</th>
+                        <th class="">Paarung</th>
+                        <th>Spielort</th>
+                        <th class="">Ergebnis</th>
+                        <th class=""></th>
+                        <th class=""></th>
+                        <th></th>
+                        <th>Aktionen</th>
                     </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($referee->fixtures()->orderBy('datetime')->get() as $fixture)
+                        <tr>
+                            <td>
+                                @if($fixture->rescheduled_from_fixture_id)
+                                    <b>{{ $fixture->rescheduled_from->id }}</b>
+                                    <br>
+                                    <span class="fa fa-level-up fa-rotate-90"></span>
+                                @endif
+                                <b>{{ $fixture->id }}</b></td>
+                            <td class="align-middle">
+                                @if($fixture->published)
+                                    <span class="fa fa-eye" title="Öffentlich"></span>
+                                @else
+                                    <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                                @endif
+                            </td>
+                            <td class="align-middle">
+                                @if($fixture->datetime)
+                                    {{ $fixture->datetime->format('d.m.Y H:i') }}
+                                @endif
+                            </td>
+                            <td class="align-middle">
+                                @if($fixture->club_home)
+                                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
+                                        {{ $fixture->club_home->name_short }}
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                                vs.
+                                @if($fixture->club_away)
+                                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
+                                        {{ $fixture->club_away->name_short }}
+                                    </a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td class="align-middle">
+                                @if($fixture->stadium)
+                                    <a href="{{ route('stadiums.show', $fixture->stadium) }}">
+                                        {{ $fixture->stadium->name_short }}
+                                    </a>
+                                @endif
+                            </td>
+                            <td class="align-middle">
+                                <!-- TODO replace with proper methods to test fixture -->
+                                @if($fixture->goals_home && $fixture->goals_away)
+                                    {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
+                                @else
+                                    <i>-:-</i>
+                                @endif
+                                @if($fixture->goals_home_11m && $fixture->goals_away_11m)
+                                    ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
+                                @endif
+                                @if($fixture->goals_home_rated && $fixture->goals_away_rated)
+                                    {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
+                                @endif
+                            </td>
+                            <td class="align-middle">
+                                @if($fixture->goals_home && $fixture->goals_away)
+                                    @if($fixture->goals->count() === 0 && $fixture->goals_home + $fixture->goals_away > 0)
+                                        <span class="fa fa-soccer-ball-o fa-fw text-danger" title="Torschützen noch nicht gepflegt"></span>
+                                    @elseif($fixture->goals->count() < $fixture->goals_home + $fixture->goals_away)
+                                        <span class="fa fa-soccer-ball-o fa-fw text-warning" title="Torschützen evtl. nicht vollständig gepflegt"></span>
+                                    @elseif($fixture->goals->count() === $fixture->goals_home + $fixture->goals_away)
+                                        <span class="fa fa-soccer-ball-o fa-fw text-success" title="Torschützen gepflegt"></span>
+                                    @endif
+                                @else
+                                    <span class="fa fa-fw"></span>
+                                @endif
+                                @if($fixture->cards->count() > 0)
+                                    <span class="fa fa-clone fa-fw" title="Karte(n) gepflegt"></span>
+                                @else
+                                    <span class="fa fa-fw"></span>
+                                @endif
+                                @if($fixture->referees->count() === 0)
+                                    <span class="fa fa-hand-stop-o fa-fw text-danger" title="Kein Schiedsrichter"></span>
+                                @else
+                                    <span class="fa fa-hand-stop-o fa-fw text-success" title="Schiedsrichter zugewiesen"></span>
+                                @endif
+                            </td>
+                            <td class="align-middle">{{ $fixture->cancelled ? "Ann." : null }}</td>
+                            <td class="align-middle">
+                                @if($fixture->note)
+                                    <span class="fa fa-file-text" title="Notiz vorhanden"></span>
+                                @endif
+                            </td>
+                            <td class="align-middle">
+                                <!-- show -->
+                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}" title="Paarung anzeigen">
+                                    <span class="fa fa-search-plus" aria-hidden="true"></span>
+                                </a>
+                                <!-- edit -->
+                                <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
+                                <!-- reschedule, only once -->
+                                @if(!$fixture->rescheduled_to)
+                                    <a class="btn btn-warning" href="{{ route('reschedule.create', [$fixture->matchweek, $fixture]) }}" title="Paarung verlegen">
+                                        <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
+                                    </a>
+                                @else
+                                    <button class="btn btn-outline-danger" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
                 </table>
             @endif
         </div>

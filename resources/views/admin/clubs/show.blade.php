@@ -390,7 +390,11 @@
                     @foreach($club->contacts()->orderBy('hierarchy_level')->get() as $contact)
                         <tr>
                             <td>{{ $contact->id }}</td>
-                            <td>{{ $contact->person->last_name }}, {{ $contact->person->first_name }}</td>
+                            <td>
+                                <a href="{{ route('people.show', $contact->person ) }}">
+                                    {{ $contact->person->last_name }}, {{ $contact->person->first_name }}
+                                </a>
+                            </td>
                             <td>{{ $contact->hierarchy_level }}.</td>
                             <td>{{ $contact->mail }}</td>
                             <td>{{ $contact->mobile }}</td>

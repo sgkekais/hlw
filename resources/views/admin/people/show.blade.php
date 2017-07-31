@@ -48,7 +48,7 @@
     </h3>
     <div class="row">
         <div class="col-md-12">
-            <h4>Spieler</h4>
+            <h4>Ist Spieler</h4>
             @if($person->players()->count() > 0)
                 @foreach($person->players as $player)
                 <div class="row">
@@ -96,7 +96,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>Karten</h5>
+                        <h5>Erhaltene Karten</h5>
                         @if($player->cards->count() > 0)
                             <table class="table table-sm table-striped table-hover">
                                 <thead class="thead-default">
@@ -137,7 +137,7 @@
                         @endif
                     </div>
                     <div class="col-md-6">
-                        <h5>Tore</h5>
+                        <h5>Geschossene Tore</h5>
                         @if($player->goals->count() > 0)
                             <table class="table table-sm table-striped table-hover">
                                 <thead class="thead-default">
@@ -185,7 +185,7 @@
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <h4>Ansprechpartner</h4>
+            <h4>Ist Ansprechpartner</h4>
             @if($person->contacts()->count() > 0)
                 @foreach($person->contacts as $contact)
                     <table class="table table-sm table-striped table-hover">
@@ -201,12 +201,12 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $contact->id }}</td>
-                                <td>{{ $contact->club->name_short }}</td>
-                                <td>{{ $contact->hierarchy_level }}.</td>
-                                <td>{{ $contact->mail }}</td>
-                                <td>{{ $contact->mobile }}</td>
-                                <td>
+                                <td class="align-middle">{{ $contact->id }}</td>
+                                <td class="align-middle">{{ $contact->club->name_short }}</td>
+                                <td class="align-middle">{{ $contact->hierarchy_level }}.</td>
+                                <td class="align-middle">{{ $contact->mail }}</td>
+                                <td class="align-middle">{{ $contact->mobile }}</td>
+                                <td class="align-middle">
                                     <!-- edit -->
                                     <a class="btn btn-primary" href="{{ route('clubs.contacts.edit', [ $contact->club, $contact ]) }}" title="Kontakt bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>

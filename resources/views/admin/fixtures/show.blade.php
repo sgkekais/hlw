@@ -37,10 +37,17 @@
             @else
                 <i>Kein Spielort angegeben.</i>
             @endif
-            <br>
-            <a class="btn btn-primary mt-4" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
+            <a class="btn btn-primary mt-4 mb-4" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span> Paarung bearbeiten
             </a>
+            <!-- reschedule, only once -->
+            @if(!$fixture->rescheduled_to)
+                <a class="btn btn-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
+                    <span class="fa fa-calendar-plus-o" aria-hidden="true"></span> Paarung verlegen
+                </a>
+            @else
+                <button class="btn btn-outline-danger" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> Paarung wurde schon verlegt.</button>
+            @endif
         </div>
         <div class="col-md-4">
             <span class="display-4">{{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}</span>
