@@ -31,6 +31,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('log', 'LogController@index')->name('log');
 
+    Route::resource('users', 'UserController');
+
     Route::resource('competitions', 'CompetitionController');
     Route::resource('divisions', 'DivisionController');
     Route::resource('seasons', 'SeasonController');

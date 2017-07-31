@@ -49,8 +49,8 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
+                <li class="nav-item {{ Route::is('users.*') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('users.index') }}">
                         <span class="fa fa-users"></span> Users
                     </a>
                 </li>

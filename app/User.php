@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -13,6 +14,11 @@ class User extends Authenticatable
     // log all user activities, can be retrieved by Auth::user()->activity
     // TODO: USE in User overview
     use CausesActivity;
+
+    /**
+     * Permissions
+     */
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
