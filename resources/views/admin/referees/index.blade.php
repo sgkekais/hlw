@@ -37,7 +37,7 @@
                     </td>
                     <td class="align-middle">
                         @if($referee->note)
-                            <span class="fa fa-file-text text-success" title="Notiz vorhanden"></span>
+                            <span class="fa fa-file-text" title="Notiz vorhanden"></span>
                         @endif
                     </td>
                     <td class="align-middle">
