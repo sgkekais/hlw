@@ -9,8 +9,6 @@ class PortalController extends Controller
 {
     public function index()
     {
-        $clubs = Club::orderBy('name')->get();
-
-        return view('index', compact('clubs'));
+        return view('index');
     }
 }

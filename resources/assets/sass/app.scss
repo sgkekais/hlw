@@ -1,6 +1,6 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 // Variables
 @import "variables";
@@ -14,3 +14,8 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts" !default;
 
 // date range picker
 @import "node_modules/daterangepicker/daterangepicker.scss";
+
+body {
+  min-height: 75rem;
+  padding-top: 4.5rem;
+}
