@@ -47,7 +47,8 @@ class Matchweek extends Model
     public function scopeCurrent($query)
     {
         return $query->where('begin', '<=', date('Y-m-d'))
-            ->where('end', '>=', date('Y-m-d'));
+            ->where('end', '>=', date('Y-m-d'))
+            ->first();
     }
 
     /**

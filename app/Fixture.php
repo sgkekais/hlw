@@ -69,21 +69,16 @@ class Fixture extends Model
     ];
 
     /**
-     * Relationship
-     * 1. One-to-Many
-     * - a fixture / match belongs to one matchweek
-     * - a matchweek has many fixtures
+     * a fixture belongs to one matchweek
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function matchweek(){
+    public function matchweek()
+    {
        return $this->belongsTo(Matchweek::class);
     }
 
     /**
-     * Relationship
-     * 2. One-to-Many
-     * - a fixture has one stadium
-     * - a stadium has many fixtures
+     * a fixture has a stadium, a stadium is related to many fixtures
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function stadium()
@@ -145,12 +140,17 @@ class Fixture extends Model
         return $this->hasMany(Card::class);
     }
 
+    /**
+     * Goals of a match
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function goals()
     {
         return $this->hasMany(Goal::class);
     }
 
     /**
+     * Referees assigned to a match
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function referees()
