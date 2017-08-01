@@ -19,8 +19,6 @@ Auth::routes();
 
 Route::get('/', 'PortalController@index')->name('home');
 
-Route::get('/home', 'HomeController@index');
-
 /**
  * Admin Routes
  */
