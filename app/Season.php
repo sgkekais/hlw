@@ -84,6 +84,14 @@ class Season extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function fixtures()
+    {
+        return $this->hasManyThrough(Fixture::class, Matchweek::class);
+    }
+
+    /**
      * A season is related to many clubs, a club can be related to many seasons
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
