@@ -60,16 +60,17 @@ class Season extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeCurrent($query)
-{
+    {
     return $query->where('begin', '<=', date('Y-m-d'))
         ->where('end', '>=', date('Y-m-d'));
-}
+    }
 
     /**
      * A season belongs to one division
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function division(){
+    public function division()
+    {
         return $this->belongsTo(Division::class);
     }
 
@@ -77,7 +78,8 @@ class Season extends Model
      * A season has one or many matchweeks
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function matchweeks(){
+    public function matchweeks()
+    {
         return $this->hasMany(Matchweek::class);
     }
 
@@ -85,7 +87,8 @@ class Season extends Model
      * A season is related to many clubs, a club can be related to many seasons
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function clubs(){
+    public function clubs()
+    {
         return $this->belongsToMany(Club::class, 'clubs_seasons')
             ->withPivot('rank', 'deduction_points', 'deduction_goals', 'withdrawal', 'note')
             ->withTimestamps();
