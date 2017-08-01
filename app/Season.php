@@ -84,6 +84,7 @@ class Season extends Model
     }
 
     /**
+     * A season has many fixtures through its matchweeks
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function fixtures()
