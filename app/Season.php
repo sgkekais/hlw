@@ -66,6 +66,30 @@ class Season extends Model
         ->first();
     }
 
+    public function generateTable(Matchweek $matchweek = null)
+    {
+        $clubs = $this->clubs;
+
+        if (!$matchweek) {
+            $matchweek = $this->matchweeks()->current();
+        }
+
+        // data collection
+        $table = collect($clubs);
+
+        /*
+         * Table:
+         * Rank    Played Won Drawn Loss GF GA GD Points Form
+         */
+        foreach ($this->matchweeks()->orderBy('number_consecutive')->get() as $matchweek) {
+            // $table->push($matchweek);
+        }
+
+        return $table;
+
+        // sorting
+    }
+
     /**
      * A season belongs to one division
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

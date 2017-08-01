@@ -11,32 +11,10 @@ class PortalController extends Controller
 {
     public function index()
     {
-        return $table = $this->generateTable(Season::current());
+        // test returning the table of a season
+        // TODO "current" only works here because we have one season, needs to account for competition, remove first in scope!!
+        return $table = Season::current()->generateTable();
 
         // return view('index', compact('table'));
-    }
-
-    public function generateTable(Season $season, Matchweek $matchweek = null)
-    {
-        $clubs = $season->clubs;
-
-        if (!$matchweek) {
-            $matchweek = $season->matchweeks()->current();
-        }
-
-        // data collection
-        $table = collect();
-
-        /*
-         * Table:
-         * Rank    Played Won Drawn Loss GF GA GD Points Form
-         */
-        foreach ($season->matchweeks()->orderBy('number_consecutive')->get() as $matchweek) {
-            $table->push($matchweek);
-        }
-
-        return $table;
-
-        // sorting
     }
 }
