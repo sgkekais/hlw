@@ -31,7 +31,7 @@
                 <label for="rescheduled_fixture" class="form-control-label col-md-2">Verlegt von Paarung</label>
                 <div class="col-md-10">
                     <input type="hidden" name="rescheduled_from_fixture_id" id="rescheduled_from_fixture_id" value="{{ $fixture->rescheduledFrom->id }}">
-                    <input type="text" class="form-control" name="rescheduled_fixture" id="rescheduled_fixture" value="{{ $fixture->rescheduledFrom->id  }} | {{ $fixture->rescheduledFrom->clubHome->name_short }} : {{ $fixture->rescheduledFrom->club_away->name_short }} (ID: {{ $fixture->rescheduledFrom->id }})" disabled>
+                    <input type="text" class="form-control" name="rescheduled_fixture" id="rescheduled_fixture" value="{{ $fixture->rescheduledFrom->id  }} | {{ $fixture->rescheduledFrom->clubHome->name_short }} : {{ $fixture->rescheduledFrom->clubAway->name_short }} (ID: {{ $fixture->rescheduledFrom->id }})" disabled>
                 </div>
             </div>
             <div class="form-group row">
@@ -42,7 +42,7 @@
                         @if($fixture->rescheduledFrom->club_id_home)
                             <option value="{{ $fixture->rescheduledFrom->club_id_home }}" {{ $fixture->rescheduledFrom->club_id_home === $fixture->rescheduled_by_club ? "selected" : null }}>{{ $fixture->rescheduledFrom->clubHome->name }}</option>
                         @endif
-                        @if($fixture->rescheduled_from->club_id_away)
+                        @if($fixture->rescheduledFrom->club_id_away)
                             <option value="{{ $fixture->rescheduledFrom->club_id_away }}" {{ $fixture->rescheduledFrom->club_id_away === $fixture->rescheduled_by_club ? "selected" : null }}>{{ $fixture->rescheduledFrom->clubAway->name }}</option>
                         @endif
                     </select>
