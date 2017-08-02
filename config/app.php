@@ -240,7 +240,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         // Helper Alias
-        'ModelHelper' => App\Helpers\ModelHelper::class,
+        'ModelHelper' => HLW\Helpers\ModelHelper::class,
     ],
 
 ];

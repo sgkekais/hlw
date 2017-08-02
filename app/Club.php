@@ -94,7 +94,16 @@ class Club extends Model
      * FUNCTIONS
      ************************************************************/
 
+    // Rank    Played Won Drawn Loss GF GA GD Points Form
+    public function currentRank()
+    {
 
+    }
+
+    public function gamesPlayed(Matchweek $matchweek)
+    {
+
+    }
 
     /***********************************************************
      * RELATIONSHIPS
