@@ -77,6 +77,7 @@
                         <th class="">ID</th>
                         <th></th>
                         <th class="">Nummer</th>
+                        <th class="">Zeitraum</th>
                         <th class="">Name</th>
                         <th class="">Aktionen</th>
                     </tr>
@@ -97,6 +98,7 @@
                                 <br>
                                 Paarungen: {{ $matchweek->fixtures()->get()->count() }}
                             </td>
+                            <td class="align-middle">{{ $matchweek->begin->format('d.m.Y') ?? null }} - {{ $matchweek->end->format('d.m.Y') ?? null }}</td>
                             <td class="align-middle">{{ $matchweek->name }}</td>
                             <td class="align-middle">
                                 <!-- display details -->
