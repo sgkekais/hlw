@@ -116,7 +116,7 @@ class Season extends Model
      */
     public function matchweeks()
     {
-        return $this->hasMany(Matchweek::class);
+        return $this->hasMany(Matchweek::class)->orderBy('number_consecutive');
     }
 
     /**
