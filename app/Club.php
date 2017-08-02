@@ -160,6 +160,7 @@ class Club extends Model
         foreach ( $fixtures as $fixture ) {
 
             if ( $fixture->isFinished() ) {
+                // increment if fixture has result
                 $gamesplayed++;
             }
         }
