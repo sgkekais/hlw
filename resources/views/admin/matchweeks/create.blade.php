@@ -23,7 +23,7 @@
                 <label for="number_consecutive">Nummer</label>
             </div>
             <div class="col-md-4">
-                <input type="number" class="form-control" name="number_consecutive" id="number_consecutive" aria-describedby="number_consecutiveHelp" placeholder="{{ old('number', '1') }}">
+                <input type="number" class="form-control" name="number_consecutive" id="number_consecutive" aria-describedby="number_consecutiveHelp" placeholder="{{ old('number', $season->matchweeks()->max('number_consecutive')+1 ) }}">
                 <small id="number_consecutiveHelp" class="form-text text-muted">Nummer der Spielwoche, bspw. 1 für erste Spielwoche, etc.</small>
             </div>
         </div>
