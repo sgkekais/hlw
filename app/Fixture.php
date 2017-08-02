@@ -67,6 +67,21 @@ class Fixture extends Model
     protected $dates = [
         'datetime'
     ];
+    /***********************************************************
+     * SCOPES
+     ************************************************************/
+
+    /**
+     * Scope fixtures to a specific club
+     * @param Builder $query
+     * @param $clubid
+     * @return mixed
+     */
+    public function scopeOfClub($query, $clubid)
+    {
+        return $query->where('club_id_home', $clubid)
+            ->orWhere('club_id_away', $clubid);
+    }
 
     /***********************************************************
      * FUNCTIONS
