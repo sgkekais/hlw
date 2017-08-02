@@ -120,11 +120,7 @@
                             </td>
                             <td class="align-middle">
                                 <!-- TODO replace with proper methods to test fixture -->
-                                @if($fixture->goals_home && $fixture->goals_away)
-                                    {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
-                                @else
-                                    <i>-:-</i>
-                                @endif
+                                {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
                                 @if($fixture->goals_home_11m && $fixture->goals_away_11m)
                                     ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
                                 @endif
