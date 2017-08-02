@@ -83,6 +83,27 @@ class Fixture extends Model
             ->orWhere('club_id_away', $clubid);
     }
 
+    /**
+     * @param $query
+     * @param $clubid
+     * @return mixed
+     */
+    public function scopeOfClubHome($query, $clubid)
+    {
+        return $query->where('club_id_home', $clubid);
+    }
+
+    /**
+     * @param $query
+     * @param $clubid
+     * @return mixed
+     */
+    public function scopeOfClubAway($query, $clubid)
+    {
+        return $query->where('club_id_away', $clubid);
+    }
+
+
     /***********************************************************
      * FUNCTIONS
      ************************************************************/
