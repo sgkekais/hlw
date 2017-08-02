@@ -115,8 +115,8 @@
                                             <td class="align-middle">{{ $card->id }}</td>
                                             <td class="align-middle">{{ $card->fixture->datetime ? $card->fixture->datetime->format('d.m.Y') : null }}</td>
                                             <td class="align-middle">
-                                                {{ $card->fixture->club_home ? $card->fixture->club_home->name_code : null }}
-                                                {{ $card->fixture->club_away ? " vs. ".$card->fixture->club_away->name_code : null }}
+                                                {{ $card->fixture->clubHome ? $card->fixture->clubHome->name_code : null }}
+                                                {{ $card->fixture->clubAway ? " vs. ".$card->fixture->clubAway->name_code : null }}
                                             </td>
                                             <td class="align-middle">{{ $card->color }}</td>
                                             <td class="align-middle">{{ $card->ban_matches }}</td>
@@ -155,8 +155,8 @@
                                             <td class="align-middle">{{ $goal->id }}</td>
                                             <td class="align-middle">{{ $goal->fixture->datetime ? $goal->fixture->datetime->format('d.m.Y') : null }}</td>
                                             <td class="align-middle">
-                                                {{ $goal->fixture->club_home ? $goal->fixture->club_home->name_code : null }}
-                                                {{ $goal->fixture->club_away ? " vs. ".$goal->fixture->club_away->name_code : null }}
+                                                {{ $goal->fixture->clubHome ? $goal->fixture->clubHome->name_code : null }}
+                                                {{ $goal->fixture->clubAway ? " vs. ".$goal->fixture->clubAway->name_code : null }}
                                             </td>
                                             <td class="align-middle">{{ $goal->score }}</td>
                                             <td class="align-middle">

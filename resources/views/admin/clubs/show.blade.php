@@ -72,7 +72,7 @@
             <a class="nav-link" data-toggle="tab" href="#fixtures" role="tab">
                 Paarungen
                 <span class="badge badge-pill badge-default">
-                    {{ $club->fixtures_home->count() + $club->fixtures_away->count() }}
+                    {{ $club->fixtures()->count() }}
                 </span>
             </a>
         </li>
@@ -146,7 +146,7 @@
         <!-- fixtures -->
         <div class="tab-pane" id="fixtures" role="tabpanel">
             <h4 class="mb-4 mt-4">Paarungen</h4>
-            @if($club->getFixtures()->count() != 0)
+            @if($club->fixtures()->count() != 0)
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
@@ -163,11 +163,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($club->getFixtures()->sortByDesc('datetime') as $fixture)
+                    @foreach($club->fixtures()->sortByDesc('datetime') as $fixture)
                         <tr>
                             <td>
                                 @if($fixture->rescheduled_from_fixture_id)
-                                    <b>{{ $fixture->rescheduled_from->id }}</b>
+                                    <b>{{ $fixture->rescheduledFrom->id }}</b>
                                     <br>
                                     <span class="fa fa-level-up fa-rotate-90"></span>
                                 @endif
@@ -185,17 +185,17 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                @if($fixture->club_home)
-                                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
-                                        {{ $fixture->club_home->name_short }}
+                                @if($fixture->clubHome)
+                                    <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
+                                        {{ $fixture->clubHome->name_short }}
                                     </a>
                                 @else
                                     -
                                 @endif
                                 vs.
-                                @if($fixture->club_away)
-                                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
-                                        {{ $fixture->club_away->name_short }}
+                                @if($fixture->clubAway)
+                                    <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
+                                        {{ $fixture->clubAway->name_short }}
                                     </a>
                                 @else
                                     -
@@ -210,11 +210,7 @@
                             </td>
                             <td class="align-middle">
                                 <!-- TODO replace with proper methods to test fixture -->
-                                @if($fixture->goals_home && $fixture->goals_away)
-                                    {{ $fixture->goals_home }}:{{ $fixture->goals_away }}
-                                @else
-                                    <i>-:-</i>
-                                @endif
+                                {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
                                 @if($fixture->goals_home_11m && $fixture->goals_away_11m)
                                     ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
                                 @endif

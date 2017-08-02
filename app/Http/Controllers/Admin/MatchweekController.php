@@ -67,7 +67,7 @@ class MatchweekController extends Controller
      */
     public function show(Season $season, Matchweek $matchweek)
     {
-        $matchweek->load('fixtures.club_home','fixtures.club_away','fixtures.stadium', 'fixtures.rescheduled_from', 'fixtures.rescheduled_to', 'fixtures.rescheduled_by');
+        $matchweek->load('fixtures.clubHome','fixtures.clubAway','fixtures.stadium', 'fixtures.rescheduledFrom', 'fixtures.rescheduledTo', 'fixtures.rescheduledBy');
 
         return view('admin.matchweeks.show', compact('season', 'matchweek'));
     }

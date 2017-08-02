@@ -68,6 +68,27 @@ class Fixture extends Model
         'datetime'
     ];
 
+    /***********************************************************
+     * FUNCTIONS
+     ************************************************************/
+
+    /**
+     * Check whether a match is finished
+     * @return bool
+     */
+    public function isFinished()
+    {
+        if ( isset($this->goals_home) && isset($this->goals_away) ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
+
     /**
      * a fixture belongs to one matchweek
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -90,7 +111,7 @@ class Fixture extends Model
      * A fixture belongs to one "home" club
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function club_home()
+    public function clubHome()
     {
         return $this->belongsTo(Club::class, 'club_id_home');
     }
@@ -99,7 +120,7 @@ class Fixture extends Model
      * A fixture belongs to one "away" club
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function club_away()
+    public function clubAway()
     {
         return $this->belongsTo(Club::class, 'club_id_away');
     }
@@ -108,7 +129,7 @@ class Fixture extends Model
      * A fixture can have one parent fixture it has been rescheduled from
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function rescheduled_from()
+    public function rescheduledFrom()
     {
         return $this->belongsTo(Fixture::class, 'rescheduled_from_fixture_id');
     }
@@ -117,7 +138,7 @@ class Fixture extends Model
      * A fixture can have one child fixture it has been rescheduled to
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function rescheduled_to()
+    public function rescheduledTo()
     {
         return $this->hasOne(Fixture::class, 'rescheduled_from_fixture_id');
     }
@@ -126,7 +147,7 @@ class Fixture extends Model
      * The club that cancelled the match
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function rescheduled_by()
+    public function rescheduledBy()
     {
         return $this->belongsTo(Club::class, 'rescheduled_by_club');
     }

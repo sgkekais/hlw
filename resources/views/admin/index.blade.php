@@ -24,7 +24,7 @@
                                         <li>{{ $matchweek->begin->format('d.m.Y') }} - {{ $matchweek->end->format('d.m.Y') }}</li>
                                         <ul>
                                             @foreach($matchweek->fixtures as $fixture)
-                                                <li>{{ $fixture->datetime }} - {{ $fixture->club_home->name_short }} vs. {{ $fixture->club_away->name_short }}</li>
+                                                <li>{{ $fixture->datetime }} - {{ $fixture->clubHome->name_short }} vs. {{ $fixture->clubAway->name_short }}</li>
                                             @endforeach
                                         </ul>
                                     @endforeach

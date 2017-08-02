@@ -79,17 +79,17 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                @if($fixture->club_home)
-                                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
-                                        {{ $fixture->club_home->name_short }}
+                                @if($fixture->clubHome)
+                                    <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
+                                        {{ $fixture->clubHome->name_short }}
                                     </a>
                                 @else
                                     -
                                 @endif
                                 vs.
-                                @if($fixture->club_away)
-                                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
-                                        {{ $fixture->club_away->name_short }}
+                                @if($fixture->clubAway)
+                                    <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
+                                        {{ $fixture->clubAway->name_short }}
                                     </a>
                                 @else
                                     -

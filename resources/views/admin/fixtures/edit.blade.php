@@ -4,7 +4,7 @@
 
     <!-- edit a match -->
     <h1 class="">Paarung</h1>
-    <h2 class="mt-4 text-primary">&mdash; {{ $fixture->club_home ? $fixture->club_home->name : $fixture->club_id_home }} : {{ $fixture->club_away ? $fixture->club_away->name : $fixture->club_id_away }}</h2>
+    <h2 class="mt-4 text-primary">&mdash; {{ $fixture->clubHome ? $fixture->clubHome->name : $fixture->club_id_home }} : {{ $fixture->clubAway ? $fixture->clubAway->name : $fixture->club_id_away }}</h2>
     <!-- created at -->
     Angelegt: {{ $matchweek->created_at->format('d.m.Y H:i') }} Uhr
     @if($causer = ModelHelper::causerOfAction($matchweek,'created'))
@@ -30,8 +30,8 @@
             <div class="form-group row">
                 <label for="rescheduled_fixture" class="form-control-label col-md-2">Verlegt von Paarung</label>
                 <div class="col-md-10">
-                    <input type="hidden" name="rescheduled_from_fixture_id" id="rescheduled_from_fixture_id" value="{{ $fixture->rescheduled_from->id }}">
-                    <input type="text" class="form-control" name="rescheduled_fixture" id="rescheduled_fixture" value="{{ $fixture->rescheduled_from->id  }} | {{ $fixture->rescheduled_from->club_home->name_short }} : {{ $fixture->rescheduled_from->club_away->name_short }} (ID: {{ $fixture->rescheduled_from->id }})" disabled>
+                    <input type="hidden" name="rescheduled_from_fixture_id" id="rescheduled_from_fixture_id" value="{{ $fixture->rescheduledFrom->id }}">
+                    <input type="text" class="form-control" name="rescheduled_fixture" id="rescheduled_fixture" value="{{ $fixture->rescheduledFrom->id  }} | {{ $fixture->rescheduledFrom->clubHome->name_short }} : {{ $fixture->rescheduledFrom->club_away->name_short }} (ID: {{ $fixture->rescheduledFrom->id }})" disabled>
                 </div>
             </div>
             <div class="form-group row">
@@ -39,11 +39,11 @@
                 <div class="col-md-4">
                     <select class="form-control" name="rescheduled_by_club" id="rescheduled_by_club">
                         <option></option>
-                        @if($fixture->rescheduled_from->club_id_home)
-                            <option value="{{ $fixture->rescheduled_from->club_id_home }}" {{ $fixture->rescheduled_from->club_id_home === $fixture->rescheduled_by_club ? "selected" : null }}>{{ $fixture->rescheduled_from->club_home->name }}</option>
+                        @if($fixture->rescheduledFrom->club_id_home)
+                            <option value="{{ $fixture->rescheduledFrom->club_id_home }}" {{ $fixture->rescheduledFrom->club_id_home === $fixture->rescheduled_by_club ? "selected" : null }}>{{ $fixture->rescheduledFrom->clubHome->name }}</option>
                         @endif
                         @if($fixture->rescheduled_from->club_id_away)
-                            <option value="{{ $fixture->rescheduled_from->club_id_away }}" {{ $fixture->rescheduled_from->club_id_away === $fixture->rescheduled_by_club ? "selected" : null }}>{{ $fixture->rescheduled_from->club_away->name }}</option>
+                            <option value="{{ $fixture->rescheduledFrom->club_id_away }}" {{ $fixture->rescheduledFrom->club_id_away === $fixture->rescheduled_by_club ? "selected" : null }}>{{ $fixture->rescheduledFrom->clubAway->name }}</option>
                         @endif
                     </select>
                 </div>

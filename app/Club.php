@@ -76,33 +76,91 @@ class Club extends Model
         return $query->where('is_real_club','1');
     }
 
-    /**
-     * Get all matches the club is related to
-     * TODO: add parameters to scope query, e.g. only matches of current season
-     * @return mixed
-     */
-    public function getFixtures()
-    {
-        $fixtures = Fixture::where('club_id_home', $this->id)
-            ->orWhere('club_id_away', $this->id)
-            ->get();
-
-        return $fixtures;
-    }
-
     /***********************************************************
      * FUNCTIONS
      ************************************************************/
 
+    /**
+     * Get all matches the club is related to
+     * @param Season|null $season
+     * @return mixed
+     */
+    public function getAllFixtures(Season $season = null, $homeoraway = null)
+    {
+        // season given?
+        if ( isset($season) ) {
+            // return the club's matches of the given season
+            $fixtures = $season->fixtures()
+                ->when( isset($homeoraway) , function($query) use ($homeoraway) {
+                    if ( $homeoraway === "home" ) {
+                        return $query->where('club_id_home', $this->id);
+                    } elseif ( $homeoraway === "away" ) {
+                        return $query->where('club_id_away', $this->id);
+                    } else {
+                        return null;
+                    }
+                })
+                ->when( !isset($homeoraway) , function($query) {
+                    return $query->where('club_id_home', $this->id)
+                        ->orWhere('club_id_away', $this->id);
+                })
+                ->get();
+        } else {
+            // return all fixtures
+            $fixtures = Fixture::when( isset($homeoraway) , function($query) use ($homeoraway) {
+                    if ($homeoraway === "home") {
+                        return $query->where('club_id_home', $this->id);
+                    } elseif ($homeoraway === "away") {
+                        return $query->where('club_id_away', $this->id);
+                    } else {
+                        return null;
+                    }
+                })
+                ->when( !isset($homeoraway) , function($query) {
+                    return $query->where('club_id_home', $this->id)
+                        ->orWhere('club_id_away', $this->id);
+                })
+                ->get();
+        }
+
+        return $fixtures;
+    }
+
     // Rank    Played Won Drawn Loss GF GA GD Points Form
-    public function currentRank()
+
+    public function currentRank(Season $season, Matchweek $matchweek = null)
     {
 
     }
 
-    public function gamesPlayed(Matchweek $matchweek)
+    /**
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek (null -> all matchweeks, else games played until matchweek)
+     * @param null $homeoraway (null, "home", or "away")
+     * @return int number of games played
+     */
+    public function gamesPlayed(Season $season = null, Matchweek $matchweek = null, $homeoraway = null)
     {
+        /*if ( !isset($matchweek) ) {
+            $matchweek = $season->matchweeks()->current()->first();
+        }*/
 
+        // get the fixtures of the club
+        $fixtures = $this->getAllFixtures($season, $homeoraway);
+
+        $gamesplayed = 0;
+
+        foreach ( $fixtures as $fixture ) {
+            // increment gamesplayed if fixture has result
+            if ( isset($matchweek) ) {
+
+            }
+            if ( $fixture->isFinished() ) {
+                $gamesplayed++;
+            }
+        }
+
+        return $gamesplayed;
     }
 
     /***********************************************************
@@ -148,19 +206,32 @@ class Club extends Model
     }
 
     /**
+     * Return all home fixtures
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function fixtures_home()
+    public function fixturesHome()
     {
         return $this->hasMany(Fixture::class, 'club_id_home');
     }
 
     /**
+     * Return all away fixtures
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function fixtures_away()
+    public function fixturesAway()
     {
         return $this->hasMany(Fixture::class, 'club_id_away');
+    }
+
+    /**
+     * Return all fixtures the club is related to
+     * @return mixed
+     */
+    public function fixtures()
+    {
+        $fixtures = $this->fixturesHome()->get()->merge($this->fixturesAway()->get());
+
+        return $fixtures;
     }
 
     public function reschedulings()

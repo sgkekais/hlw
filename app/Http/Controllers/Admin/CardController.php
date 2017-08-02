@@ -27,11 +27,11 @@ class CardController extends Controller
      */
     public function create(Fixture $fixture)
     {
-        $fixture->load('club_home','club_away');
+        $fixture->load('clubHome','clubAway');
 
         // get the players of both teams and merge them into a single collection
-        $players_home = $fixture->club_home->players->load('person');
-        $players_away = $fixture->club_away->players->load('person');
+        $players_home = $fixture->clubHome->players->load('person');
+        $players_away = $fixture->clubAway->players->load('person');
         $players      = $players_home->sortBy('person.last_name')->merge($players_away->sortBy('person.last_name'));
 
         return view('admin.cards.create', compact('fixture', 'players'));
@@ -78,8 +78,8 @@ class CardController extends Controller
     public function edit(Fixture $fixture, Card $card)
     {
         // get the players of both teams and merge them into a single collection
-        $players_home = $fixture->club_home->players->load('person');
-        $players_away = $fixture->club_away->players->load('person');
+        $players_home = $fixture->clubHome->players->load('person');
+        $players_away = $fixture->clubAway->players->load('person');
         $players      = $players_home->sortBy('person.last_name')->merge($players_away->sortBy('person.last_name'));
 
         return view('admin.cards.edit', compact('fixture', 'card', 'players'));

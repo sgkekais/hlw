@@ -77,7 +77,7 @@
                         <tr>
                             <td>
                                 @if($fixture->rescheduled_from_fixture_id)
-                                    <b>{{ $fixture->rescheduled_from->id }}</b>
+                                    <b>{{ $fixture->rescheduledFrom->id }}</b>
                                     <br>
                                     <span class="fa fa-level-up fa-rotate-90"></span>
                                 @endif
@@ -95,17 +95,17 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                @if($fixture->club_home)
-                                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
-                                        {{ $fixture->club_home->name_short }}
+                                @if($fixture->clubHome)
+                                    <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
+                                        {{ $fixture->clubHome->name_short }}
                                     </a>
                                 @else
                                     -
                                 @endif
                                     vs.
-                                @if($fixture->club_away)
-                                    <a href="{{ route('clubs.show', $fixture->club_home) }}" title="Mannschaft anzeigen">
-                                        {{ $fixture->club_away->name_short }}
+                                @if($fixture->clubAway)
+                                    <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
+                                        {{ $fixture->clubAway->name_short }}
                                     </a>
                                 @else
                                     -
@@ -167,7 +167,7 @@
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                                 <!-- reschedule, only once -->
-                                @if(!$fixture->rescheduled_to)
+                                @if(!$fixture->rescheduledTo)
                                     <a class="btn btn-warning" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
                                         <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
                                     </a>
