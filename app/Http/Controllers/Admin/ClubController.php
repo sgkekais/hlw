@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Club;
-use App\Stadium;
+use HLW\Club;
+use HLW\Stadium;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -95,7 +95,7 @@ class ClubController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Club  $club
+     * @param  \HLW\Club  $club
      * @return \Illuminate\Http\Response
      */
     public function show(Club $club)
@@ -109,7 +109,7 @@ class ClubController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Club  $club
+     * @param  \HLW\Club  $club
      * @return \Illuminate\Http\Response
      */
     public function edit(Club $club)
@@ -121,7 +121,7 @@ class ClubController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Club  $club
+     * @param  \HLW\Club  $club
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Club $club)
@@ -162,7 +162,7 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Club  $club
+     * @param  \HLW\Club  $club
      * @return \Illuminate\Http\Response
      */
     public function destroy(Club $club)

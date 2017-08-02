@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -89,6 +89,12 @@ class Club extends Model
 
         return $fixtures;
     }
+
+    /***********************************************************
+     * FUNCTIONS
+     ************************************************************/
+
+
 
     /***********************************************************
      * RELATIONSHIPS

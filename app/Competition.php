@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
 // use Spatie\Activitylog\Models\Activity;

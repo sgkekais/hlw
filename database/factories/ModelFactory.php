@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(HLW\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -26,7 +26,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 /**
  * Competition
  */
-$factory->define(App\Competition::class, function (Faker\Generator $faker) {
+$factory->define(HLW\Competition::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'type' => $faker->randomElement(['league', 'knockout', 'tournament']),
@@ -36,7 +36,7 @@ $factory->define(App\Competition::class, function (Faker\Generator $faker) {
 /**
  * Division
  */
-$factory->define(App\Division::class, function (Faker\Generator $faker) {
+$factory->define(HLW\Division::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'hierarchy_level' => $faker->numberBetween(1,5),

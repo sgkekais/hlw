@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace HLW\Http\Controllers;
 
-use App\Club;
-use App\Matchweek;
-use App\Season;
+use HLW\Club;
+use HLW\Competition;
+use HLW\Matchweek;
+use HLW\Season;
 use Illuminate\Http\Request;
 
 class PortalController extends Controller
@@ -13,7 +14,11 @@ class PortalController extends Controller
     {
         // test returning the table of a season
         // TODO "current" only works here because we have one season, needs to account for competition, remove first in scope!!
-        return $table = Season::current()->generateTable();
+
+        $competition = Competition::find(1);
+        $division    = $competition->divisions()->find(1);
+        $season      = $division->seasons()->current()->get()->first();
+        return $table = $season->generateTable();
 
         // return view('index', compact('table'));
     }

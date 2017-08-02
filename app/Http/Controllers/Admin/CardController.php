@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Card;
-use App\Fixture;
+use HLW\Card;
+use HLW\Fixture;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class CardController extends Controller
@@ -61,7 +61,7 @@ class CardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Card  $card
+     * @param  \HLW\Card  $card
      * @return \Illuminate\Http\Response
      */
     public function show(Card $card)
@@ -72,7 +72,7 @@ class CardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Card  $card
+     * @param  \HLW\Card  $card
      * @return \Illuminate\Http\Response
      */
     public function edit(Fixture $fixture, Card $card)
@@ -89,7 +89,7 @@ class CardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Card  $card
+     * @param  \HLW\Card  $card
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Fixture $fixture, Card $card)
@@ -108,7 +108,7 @@ class CardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Card  $card
+     * @param  \HLW\Card  $card
      * @return \Illuminate\Http\Response
      */
     public function destroy(Fixture $fixture, Card $card)

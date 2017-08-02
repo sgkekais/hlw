@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        HLW\Providers\AppServiceProvider::class,
+        HLW\Providers\AuthServiceProvider::class,
+        // HLW\Providers\BroadcastServiceProvider::class,
+        HLW\Providers\EventServiceProvider::class,
+        HLW\Providers\RouteServiceProvider::class,
 
         /*
          * Laravel-Permission

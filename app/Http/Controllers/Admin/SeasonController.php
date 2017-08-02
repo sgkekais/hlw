@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Club;
-use App\Season;
+use HLW\Club;
+use HLW\Season;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class SeasonController extends Controller
@@ -64,7 +64,7 @@ class SeasonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Season  $season
+     * @param  \HLW\Season  $season
      * @return \Illuminate\Http\Response
      */
     public function show(Season $season)
@@ -78,7 +78,7 @@ class SeasonController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Season  $season
+     * @param  \HLW\Season  $season
      * @return \Illuminate\Http\Response
      */
     public function edit(Season $season)
@@ -90,7 +90,7 @@ class SeasonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Season  $season
+     * @param  \HLW\Season  $season
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Season $season)
@@ -114,7 +114,7 @@ class SeasonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Season  $season
+     * @param  \HLW\Season  $season
      * @return \Illuminate\Http\Response
      */
     public function destroy(Season $season)

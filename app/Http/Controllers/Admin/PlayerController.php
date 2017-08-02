@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Club;
-use App\Person;
-use App\Player;
-use App\Position;
+use HLW\Club;
+use HLW\Person;
+use HLW\Player;
+use HLW\Position;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class PlayerController extends Controller
@@ -63,7 +63,7 @@ class PlayerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Player  $player
+     * @param  \HLW\Player  $player
      * @return \Illuminate\Http\Response
      */
     public function show(Player $player)
@@ -74,7 +74,7 @@ class PlayerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Player  $player
+     * @param  \HLW\Player  $player
      * @return \Illuminate\Http\Response
      */
     public function edit(Club $club, Player $player)
@@ -88,8 +88,8 @@ class PlayerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Club $club
-     * @param  \App\Player  $player
+     * @param  \HLW\Club $club
+     * @param  \HLW\Player  $player
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Club $club, Player $player)

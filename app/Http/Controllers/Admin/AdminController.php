@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Competition;
+use HLW\Competition;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {

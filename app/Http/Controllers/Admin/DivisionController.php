@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Competition;
-use App\Division;
+use HLW\Competition;
+use HLW\Division;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class DivisionController extends Controller
@@ -61,7 +61,7 @@ class DivisionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Division  $division
+     * @param  \HLW\Division  $division
      * @return \Illuminate\Http\Response
      */
     public function show(Division $division)
@@ -75,7 +75,7 @@ class DivisionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Division  $division
+     * @param  \HLW\Division  $division
      * @return \Illuminate\Http\Response
      */
     public function edit(Division $division)
@@ -87,7 +87,7 @@ class DivisionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Division  $division
+     * @param  \HLW\Division  $division
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Division $division)
@@ -111,7 +111,7 @@ class DivisionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Division  $division
+     * @param  \HLW\Division  $division
      * @return \Illuminate\Http\Response
      */
     public function destroy(Division $division)

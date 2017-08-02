@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Fixture;
-use App\Goal;
+use HLW\Fixture;
+use HLW\Goal;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class GoalController extends Controller
@@ -63,7 +63,7 @@ class GoalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Goal  $goal
+     * @param  \HLW\Goal  $goal
      * @return \Illuminate\Http\Response
      */
     public function show(Goal $goal)
@@ -74,7 +74,7 @@ class GoalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Goal  $goal
+     * @param  \HLW\Goal  $goal
      * @return \Illuminate\Http\Response
      */
     public function edit(Fixture $fixture, Goal $goal)
@@ -93,7 +93,7 @@ class GoalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Goal  $goal
+     * @param  \HLW\Goal  $goal
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Fixture $fixture, Goal $goal)
@@ -108,7 +108,7 @@ class GoalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Goal  $goal
+     * @param  \HLW\Goal  $goal
      * @return \Illuminate\Http\Response
      */
     public function destroy(Fixture $fixture, Goal $goal)

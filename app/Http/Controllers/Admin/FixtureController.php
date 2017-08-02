@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Fixture;
-use App\Matchweek;
-use App\Referee;
-use App\Stadium;
+use HLW\Fixture;
+use HLW\Matchweek;
+use HLW\Referee;
+use HLW\Stadium;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class FixtureController extends Controller
@@ -71,7 +71,7 @@ class FixtureController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Fixture  $fixture
+     * @param  \HLW\Fixture  $fixture
      * @return \Illuminate\Http\Response
      */
     public function show(Matchweek $matchweek, Fixture $fixture)
@@ -82,7 +82,7 @@ class FixtureController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Fixture  $fixture
+     * @param  \HLW\Fixture  $fixture
      * @return \Illuminate\Http\Response
      */
     public function edit(Matchweek $matchweek, Fixture $fixture)
@@ -99,7 +99,7 @@ class FixtureController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Fixture  $fixture
+     * @param  \HLW\Fixture  $fixture
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Matchweek $matchweek, Fixture $fixture)
@@ -127,7 +127,7 @@ class FixtureController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Fixture  $fixture
+     * @param  \HLW\Fixture  $fixture
      * @return \Illuminate\Http\Response
      */
     public function destroy(Matchweek $matchweek, Fixture $fixture)

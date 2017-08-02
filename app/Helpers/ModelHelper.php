@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace HLW\Helpers;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Models\Activity;
@@ -17,7 +17,7 @@ class ModelHelper{
         $causer = Activity::where([
             ['description', $description],
             ['subject_id', $model->id],
-            ['subject_type', 'App\\' . class_basename($model)],
+            ['subject_type', 'HLW\\' . class_basename($model)],
         ])->orderBy('updated_at','desc')->first();
 
         // did we find a log entry?

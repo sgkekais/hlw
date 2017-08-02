@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Person;
-use App\Referee;
+use HLW\Person;
+use HLW\Referee;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 // TODO: Schiedsrichter evtl. nur änder-/löschbar machen, wenn keinem Spiel zugeordnet
@@ -56,7 +56,7 @@ class RefereeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Referee  $referee
+     * @param  \HLW\Referee  $referee
      * @return \Illuminate\Http\Response
      */
     public function show(Referee $referee)
@@ -69,7 +69,7 @@ class RefereeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Referee  $referee
+     * @param  \HLW\Referee  $referee
      * @return \Illuminate\Http\Response
      */
     public function edit(Referee $referee)
@@ -83,7 +83,7 @@ class RefereeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Referee  $referee
+     * @param  \HLW\Referee  $referee
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Referee $referee)
@@ -98,7 +98,7 @@ class RefereeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Referee  $referee
+     * @param  \HLW\Referee  $referee
      * @return \Illuminate\Http\Response
      */
     public function destroy(Referee $referee)

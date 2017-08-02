@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -54,6 +54,10 @@ class Season extends Model
         'begin', 'end'
     ];
 
+    /***********************************************************
+     * SCOPES
+     ************************************************************/
+
     /**
      * scope the query to the current season
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -62,9 +66,12 @@ class Season extends Model
     public function scopeCurrent($query)
     {
     return $query->where('begin', '<=', date('Y-m-d'))
-        ->where('end', '>=', date('Y-m-d'))
-        ->first();
+        ->where('end', '>=', date('Y-m-d'));
     }
+
+    /***********************************************************
+     * FUNCTIONS
+     ************************************************************/
 
     public function generateTable(Matchweek $matchweek = null)
     {
@@ -89,6 +96,10 @@ class Season extends Model
 
         // sorting
     }
+
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
 
     /**
      * A season belongs to one division

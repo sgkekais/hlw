@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Competition;
+use HLW\Competition;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class CompetitionController extends Controller
@@ -59,7 +59,7 @@ class CompetitionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Competition  $competition
+     * @param  \HLW\Competition  $competition
      * @return \Illuminate\Http\Response
      */
     public function show(Competition $competition)
@@ -73,7 +73,7 @@ class CompetitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Competition  $competition
+     * @param  \HLW\Competition  $competition
      * @return \Illuminate\Http\Response
      */
     public function edit(Competition $competition)
@@ -85,7 +85,7 @@ class CompetitionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Competition  $competition
+     * @param  \HLW\Competition  $competition
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Competition $competition)
@@ -108,7 +108,7 @@ class CompetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Competition  $competition
+     * @param  \HLW\Competition  $competition
      * @return \Illuminate\Http\Response
      */
     public function destroy(Competition $competition)

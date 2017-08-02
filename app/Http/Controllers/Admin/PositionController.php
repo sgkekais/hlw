@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Position;
+use HLW\Position;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class PositionController extends Controller
@@ -55,7 +55,7 @@ class PositionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Position  $position
+     * @param  \HLW\Position  $position
      * @return \Illuminate\Http\Response
      */
     public function show(Position $position)
@@ -66,7 +66,7 @@ class PositionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Position  $position
+     * @param  \HLW\Position  $position
      * @return \Illuminate\Http\Response
      */
     public function edit(Position $position)
@@ -78,7 +78,7 @@ class PositionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Position  $position
+     * @param  \HLW\Position  $position
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Position $position)
@@ -97,7 +97,7 @@ class PositionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Position  $position
+     * @param  \HLW\Position  $position
      * @return \Illuminate\Http\Response
      */
     public function destroy(Position $position)

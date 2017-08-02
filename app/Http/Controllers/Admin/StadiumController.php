@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Stadium;
+use HLW\Stadium;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class StadiumController extends Controller
@@ -57,7 +57,7 @@ class StadiumController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Stadium  $stadium
+     * @param  \HLW\Stadium  $stadium
      * @return \Illuminate\Http\Response
      */
     public function show(Stadium $stadium)
@@ -68,7 +68,7 @@ class StadiumController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Stadium  $stadium
+     * @param  \HLW\Stadium  $stadium
      * @return \Illuminate\Http\Response
      */
     public function edit(Stadium $stadium)
@@ -80,7 +80,7 @@ class StadiumController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Stadium  $stadium
+     * @param  \HLW\Stadium  $stadium
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Stadium $stadium)
@@ -101,7 +101,7 @@ class StadiumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Stadium  $stadium
+     * @param  \HLW\Stadium  $stadium
      * @return \Illuminate\Http\Response
      */
     public function destroy(Stadium $stadium)

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Club;
-use App\Person;
-use App\Player;
-use App\Position;
+use HLW\Club;
+use HLW\Person;
+use HLW\Player;
+use HLW\Position;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class PlayerController extends Controller

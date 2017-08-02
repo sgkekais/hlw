@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Club;
-use App\Person;
+use HLW\Club;
+use HLW\Person;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -77,7 +77,7 @@ class PersonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Person  $person
+     * @param  \HLW\Person  $person
      * @return \Illuminate\Http\Response
      */
     public function show(Person $person)
@@ -90,7 +90,7 @@ class PersonController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Person  $person
+     * @param  \HLW\Person  $person
      * @return \Illuminate\Http\Response
      */
     public function edit(Person $person)
@@ -104,7 +104,7 @@ class PersonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Person  $person
+     * @param  \HLW\Person  $person
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Person $person)
@@ -140,7 +140,7 @@ class PersonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Person  $person
+     * @param  \HLW\Person  $person
      * @return \Illuminate\Http\Response
      */
     public function destroy(Person $person)

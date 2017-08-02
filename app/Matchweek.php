@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -47,8 +47,7 @@ class Matchweek extends Model
     public function scopeCurrent($query)
     {
         return $query->where('begin', '<=', date('Y-m-d'))
-            ->where('end', '>=', date('Y-m-d'))
-            ->first();
+            ->where('end', '>=', date('Y-m-d'));
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace HLW\Http\Controllers\Admin;
 
-use App\Matchweek;
-use App\Season;
+use HLW\Matchweek;
+use HLW\Season;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class MatchweekController extends Controller
@@ -62,7 +62,7 @@ class MatchweekController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Matchweek  $matchweek
+     * @param  \HLW\Matchweek  $matchweek
      * @return \Illuminate\Http\Response
      */
     public function show(Season $season, Matchweek $matchweek)
@@ -75,7 +75,7 @@ class MatchweekController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Matchweek  $matchweek
+     * @param  \HLW\Matchweek  $matchweek
      * @return \Illuminate\Http\Response
      */
     public function edit(Season $season, Matchweek $matchweek)
@@ -87,7 +87,7 @@ class MatchweekController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Matchweek  $matchweek
+     * @param  \HLW\Matchweek  $matchweek
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Season $season, Matchweek $matchweek)
@@ -108,7 +108,7 @@ class MatchweekController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Matchweek  $matchweek
+     * @param  \HLW\Matchweek  $matchweek
      * @return \Illuminate\Http\Response
      */
     public function destroy(Matchweek $matchweek)
