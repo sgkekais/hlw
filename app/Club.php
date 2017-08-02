@@ -81,6 +81,7 @@ class Club extends Model
      ************************************************************/
 
     /**
+     * TODO revision and delete! fixtures relationship is working, use scope to scope query!!
      * Get all matches the club is related to
      * @param Season|null $season
      * @return mixed
@@ -146,15 +147,18 @@ class Club extends Model
         }*/
 
         // get the fixtures of the club
-        $fixtures = $this->getAllFixtures($season, $homeoraway);
+        if ( isset($season) ) {
+            // only get the fixtures of the given season
+            $fixtures = $season->fixtures()->ofClub($this->id)->get();
+        } else {
+            // get all fixtures
+            $fixtures = $this->fixtures();
+        }
 
         $gamesplayed = 0;
 
         foreach ( $fixtures as $fixture ) {
-            // increment gamesplayed if fixture has result
-            if ( isset($matchweek) ) {
 
-            }
             if ( $fixture->isFinished() ) {
                 $gamesplayed++;
             }
@@ -229,7 +233,7 @@ class Club extends Model
      */
     public function fixtures()
     {
-        $fixtures = $this->fixturesHome()->get()->merge($this->fixturesAway()->get());
+        $fixtures = $this->fixturesHome->merge($this->fixturesAway);
 
         return $fixtures;
     }
