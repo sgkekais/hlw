@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Season extends Model
@@ -75,6 +76,7 @@ class Season extends Model
 
     public function generateTable(Matchweek $matchweek = null)
     {
+        // TODO: change current scope so that it also returns the first, next or the last matchweek depending on the current date
         if (!$matchweek) {
             $matchweek = $this->matchweeks()->current()->first();
         }
@@ -92,47 +94,58 @@ class Season extends Model
             $club['t_won']          = 0;
             $club['t_drawn']        = 0;
             $club['t_lost']         = 0;
-            $club['t_goalsfor']     = 0;
-            $club['t_goalsagainst'] = 0;
-            $club['t_goaldiff']     = 0;
+            $club['t_goals_for']     = 0;
+            $club['t_goals_against'] = 0;
+            $club['t_goals_diff']    = 0;
             $club['t_points']       = 0;
 
             return $club;
         });
 
-        // collect data
+        // #1 Collect the data
         foreach ($table as $club) {
             // only clubs that have not withdrawn from the competition
             if (!$club->pivot->withdrawal) {
-                // get all fixtures of the current club of this season
-                foreach ($this->fixtures()->ofClub($club->id)->get()->sortBy('matchweek.number_consecutive') as $fixture) {
+                // get all played fixtures of the current club of this season
+                foreach ($this->fixtures()->finished()->ofClub($club->id)->get()->sortBy('matchweek.number_consecutive') as $fixture) {
+                    // count only fixtures where related clubs have not withdrawn from the competition
+
                     // aggregate values only until current matchweek
                     if ($fixture->matchweek->number_consecutive <= $matchweek->number_consecutive) {
                         // increment games played
-                        if ($fixture->isFinished()) {
-                            $club->t_played++;
+                        $club->t_played++;
+                        // won, drawn, loss, points
+                        if ($club->id == $fixture->club_id_home && ($fixture->goals_home > $fixture->goals_away)
+                            || $club->id == $fixture->club_id_away && ($fixture->goals_home < $fixture->goals_away)) {
+                            $club->t_won++;
+                            $club->t_points += 3;
+                        } elseif ($fixture->goals_home == $fixture->goals_away) {
+                            $club->t_drawn++;
+                            $club->t_points += 1;
+                        } else {
+                            $club->t_lost++;
+                            Log::info($club == $fixture->clubHome);
+                        }
+                        // goals for and against
+                        if ($club->id == $fixture->club_id_home) {
+                            $club->t_goals_for += $fixture->goals_home;
+                            $club->t_goals_against += $fixture->goals_away;
+                        } elseif ($club->id == $fixture->club_id_away) {
+                            $club->t_goals_for += $fixture->goals_away;
+                            $club->t_goals_against += $fixture->goals_home;
                         }
                     }
                 }
+                // goals difference
+                $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
             }
         }
 
+        // #2 Apply season parameters contained in pivot
 
-        // how to modify a value
-        // $table->map(function($club){ if($club->id == 3) {$club->t_pl = 22;} return $club; });
-
-        // cumulate table values until current matchweek is reached
-        /*foreach ($this->matchweeks()->orderBy('number_consecutive')->get() as $matchweek) {
-            // $table->push($matchweek);
-
-            /*
-             * für jeden Club, der nicht abgemeldet ist
-             */
-        //}
+        // #3 Sort the table
 
         return $table;
-
-        // sorting
     }
 
     /***********************************************************

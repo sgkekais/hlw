@@ -81,60 +81,6 @@ class Club extends Model
      ************************************************************/
 
     /**
-     * TODO revision and delete! fixtures relationship is working, use scope to scope query!!
-     * Get all matches the club is related to
-     * @param Season|null $season
-     * @return mixed
-     */
-    public function getAllFixtures(Season $season = null, $homeoraway = null)
-    {
-        // season given?
-        if ( isset($season) ) {
-            // return the club's matches of the given season
-            $fixtures = $season->fixtures()
-                ->when( isset($homeoraway) , function($query) use ($homeoraway) {
-                    if ( $homeoraway === "home" ) {
-                        return $query->where('club_id_home', $this->id);
-                    } elseif ( $homeoraway === "away" ) {
-                        return $query->where('club_id_away', $this->id);
-                    } else {
-                        return null;
-                    }
-                })
-                ->when( !isset($homeoraway) , function($query) {
-                    return $query->where('club_id_home', $this->id)
-                        ->orWhere('club_id_away', $this->id);
-                })
-                ->get();
-        } else {
-            // return all fixtures
-            $fixtures = Fixture::when( isset($homeoraway) , function($query) use ($homeoraway) {
-                    if ($homeoraway === "home") {
-                        return $query->where('club_id_home', $this->id);
-                    } elseif ($homeoraway === "away") {
-                        return $query->where('club_id_away', $this->id);
-                    } else {
-                        return null;
-                    }
-                })
-                ->when( !isset($homeoraway) , function($query) {
-                    return $query->where('club_id_home', $this->id)
-                        ->orWhere('club_id_away', $this->id);
-                })
-                ->get();
-        }
-
-        return $fixtures;
-    }
-
-    // Rank    Played Won Drawn Loss GF GA GD Points Form
-
-    public function currentRank(Season $season, Matchweek $matchweek = null)
-    {
-
-    }
-
-    /**
      * @param $fixtures
      * @return int
      */
