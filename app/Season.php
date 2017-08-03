@@ -65,8 +65,8 @@ class Season extends Model
      */
     public function scopeCurrent($query)
     {
-    return $query->where('begin', '<=', date('Y-m-d'))
-        ->where('end', '>=', date('Y-m-d'));
+        return $query->where('begin', '<=', date('Y-m-d'))
+            ->where('end', '>=', date('Y-m-d'));
     }
 
     /***********************************************************
@@ -75,22 +75,60 @@ class Season extends Model
 
     public function generateTable(Matchweek $matchweek = null)
     {
+        if (!$matchweek) {
+            $matchweek = $this->matchweeks()->current()->first();
+        }
+
+        // get all clubs assigned to this season
         $clubs = $this->clubs;
 
-        if (!$matchweek) {
-            $matchweek = $this->matchweeks()->current();
-        }
-
-        // data collection
-        $table = collect($clubs);
-
         /*
-         * Table:
-         * Rank    Played Won Drawn Loss GF GA GD Points Form
+         * Create initial table
+         * Rank Played Won Drawn Loss GoalsFor GoalsAgainst GoalDifference Points Form...
          */
-        foreach ($this->matchweeks()->orderBy('number_consecutive')->get() as $matchweek) {
-            // $table->push($matchweek);
+        $table = $clubs->map(function ($club) {
+            $club['t_rank']         = 0;
+            $club['t_played']       = 0;
+            $club['t_won']          = 0;
+            $club['t_drawn']        = 0;
+            $club['t_lost']         = 0;
+            $club['t_goalsfor']     = 0;
+            $club['t_goalsagainst'] = 0;
+            $club['t_goaldiff']     = 0;
+            $club['t_points']       = 0;
+
+            return $club;
+        });
+
+        // collect data
+        foreach ($table as $club) {
+            // only clubs that have not withdrawn from the competition
+            if (!$club->pivot->withdrawal) {
+                // get all fixtures of the current club of this season
+                foreach ($this->fixtures()->ofClub($club->id)->get()->sortBy('matchweek.number_consecutive') as $fixture) {
+                    // aggregate values only until current matchweek
+                    if ($fixture->matchweek->number_consecutive <= $matchweek->number_consecutive) {
+                        // increment games played
+                        if ($fixture->isFinished()) {
+                            $club->t_played++;
+                        }
+                    }
+                }
+            }
         }
+
+
+        // how to modify a value
+        // $table->map(function($club){ if($club->id == 3) {$club->t_pl = 22;} return $club; });
+
+        // cumulate table values until current matchweek is reached
+        /*foreach ($this->matchweeks()->orderBy('number_consecutive')->get() as $matchweek) {
+            // $table->push($matchweek);
+
+            /*
+             * für jeden Club, der nicht abgemeldet ist
+             */
+        //}
 
         return $table;
 
@@ -111,7 +149,7 @@ class Season extends Model
     }
 
     /**
-     * A season has one or many matchweeks
+     * A season has one or many matchweeks, always order by number_consecutive
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function matchweeks()
