@@ -1,0 +1,14 @@
+// get fixtures of a season
+
+    $season->fixtures()
+
+// scope to specific club
+
+    $season->fixtures()->ofClub($club->id)->get()
+    $season->fixtures()->ofClubHome($club->id)->get()
+    $season->fixtures()->ofClubAway($club->id)->get()
+
+// scope to only finished games
+
+    $season->fixtures()->finished()->get()
+    $season->fixtures()->finished()->count() --> number of games played
