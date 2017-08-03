@@ -142,8 +142,8 @@ class Club extends Model
     {
         $gamesplayed = 0;
 
-        foreach ( $fixtures as $fixture ) {
-            if ( $fixture->isFinished() ) {
+        foreach ($fixtures as $fixture) {
+            if ($fixture->isFinished()) {
                 // increment if fixture has result
                 $gamesplayed++;
             }

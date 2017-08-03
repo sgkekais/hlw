@@ -11,4 +11,5 @@
 // scope to only finished games
 
     $season->fixtures()->finished()->get()
-    $season->fixtures()->finished()->count() --> number of games played
+    $season->fixtures()->finished()->count()                    --> number of games played
+    $season->fixtures()->ofClub($club->id)->finished()->count() --> number of games a club has played
