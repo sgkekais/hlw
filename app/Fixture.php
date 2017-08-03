@@ -115,6 +115,11 @@ class Fixture extends Model
         return $query->whereNotNull('goals_home')->whereNotNull('goals_away');
     }
 
+    public function scopeNotCancelled($query)
+    {
+        return $query->where('cancelled', '0');
+    }
+
     /***********************************************************
      * FUNCTIONS
      ************************************************************/
