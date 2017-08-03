@@ -107,10 +107,8 @@ class Season extends Model
             // only clubs that have not withdrawn from the competition
             if (!$club->pivot->withdrawal) {
                 // get all played fixtures of the current club of this season
+                // count only fixtures where related clubs have not withdrawn from the competition
                 foreach ($this->fixtures()->finished()->notCancelled()->ofClub($club->id)->get()->sortBy('matchweek.number_consecutive') as $fixture) {
-                    // count only fixtures where related clubs have not withdrawn from the competition
-                    // fixture not cancelled (a withdrawal leads to the cancellation of all related matches
-
                     // aggregate values only until current matchweek
                     if ($fixture->matchweek->number_consecutive <= $matchweek->number_consecutive) {
                         // increment games played
