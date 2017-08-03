@@ -84,6 +84,7 @@ class Fixture extends Model
     }
 
     /**
+     * Scope fixtures to a specific club, where club is home team
      * @param $query
      * @param $clubid
      * @return mixed
@@ -94,6 +95,7 @@ class Fixture extends Model
     }
 
     /**
+     * Scope fixtures to a specific club, where club is away team
      * @param $query
      * @param $clubid
      * @return mixed
@@ -103,6 +105,15 @@ class Fixture extends Model
         return $query->where('club_id_away', $clubid);
     }
 
+    /**
+     * Scope a query of fixtures to only finished matches
+     * @param $query
+     * @return mixed
+     */
+    public function scopeFinished($query)
+    {
+        return $query->whereNotNull('goals_home')->whereNotNull('goals_away');
+    }
 
     /***********************************************************
      * FUNCTIONS
