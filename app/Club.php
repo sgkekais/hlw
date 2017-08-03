@@ -135,30 +135,14 @@ class Club extends Model
     }
 
     /**
-     * @param Season|null $season
-     * @param Matchweek|null $matchweek (null -> all matchweeks, else games played until matchweek)
-     * @param null $homeoraway (null, "home", or "away")
-     * @return int number of games played
+     * @param $fixtures
+     * @return int
      */
-    public function gamesPlayed(Season $season = null, Matchweek $matchweek = null, $homeoraway = null)
+    public function gamesPlayed($fixtures)
     {
-        /*if ( !isset($matchweek) ) {
-            $matchweek = $season->matchweeks()->current()->first();
-        }*/
-
-        // get the fixtures of the club
-        if ( isset($season) ) {
-            // only get the fixtures of the given season
-            $fixtures = $season->fixtures()->ofClub($this->id)->get();
-        } else {
-            // get all fixtures
-            $fixtures = $this->fixtures();
-        }
-
         $gamesplayed = 0;
 
         foreach ( $fixtures as $fixture ) {
-
             if ( $fixture->isFinished() ) {
                 // increment if fixture has result
                 $gamesplayed++;
