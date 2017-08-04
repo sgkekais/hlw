@@ -145,9 +145,57 @@ class Season extends Model
             }
         }
 
-        // #3 Sort the table
+        // #3 Sort the table, use values() on collection
+        $table_sorted = $table->sort( function($a, $b) {
+            // sort by points
+            return strcmp($b->t_points, $a->t_points)
+                // sort by goal difference
+                ?: strcmp($b->t_goals_diff, $a->t_goals_diff)
+                // sort by goals for
+                ?: strcmp($b->t_goals_for, $a->t_goals_for);
+        })->values();
 
-        return $table;
+        // #4 calculate the rank
+        $rank = 1;
+        foreach ($table_sorted as $index => $club) {
+            // first iteration
+            if ($index === 0) {
+                $club->t_rank = $rank;
+                continue;
+            }
+
+            // break if only one item
+            if ($table_sorted->count() == 1) {
+                break;
+            }
+
+            // compare with previous club
+            $club_previous = $table_sorted->get(--$index);
+            // points
+            if ($club->t_points < $club_previous->t_points) {
+                $rank++;
+                $club->t_rank = $rank;
+                continue;
+            } elseif ($club->t_points == $club_previous->t_points) {
+                // equal points, then compare if goals difference smaller
+                // equal goals diff, then compare goals for
+                if ($club->t_goals_diff < $club_previous->t_goals_diff) {
+                    $rank++;
+                    $club->t_rank = $rank;
+                    continue;
+                } elseif (($club->t_goals_diff == $club_previous->t_goals_diff)
+                    && ($club->t_goals_for < $club_previous->t_goals_for)) {
+                        $rank++;
+                        $club->t_rank = $rank;
+                        continue;
+                } else {
+                    $club->t_rank = $rank;
+                    continue;
+                }
+            }
+        }
+
+        return $table_sorted;
     }
 
     /***********************************************************
