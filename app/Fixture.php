@@ -115,9 +115,25 @@ class Fixture extends Model
         return $query->whereNotNull('goals_home')->whereNotNull('goals_away');
     }
 
+    /**
+     * Scope the query to uncancelled fixtures, i.e. none of the related clubs has withdrawn from the competition
+     * @param $query
+     * @return mixed
+     */
     public function scopeNotCancelled($query)
     {
         return $query->where('cancelled', '0');
+    }
+
+    /**
+     * Scope the fixtures to matches rescheduled by the specified club
+     * @param $query
+     * @param $clubid
+     * @return mixed
+     */
+    public function scopeRescheduledByClub($query, $clubid)
+    {
+        return $query->where('rescheduled_by_club', $clubid);
     }
 
     /***********************************************************

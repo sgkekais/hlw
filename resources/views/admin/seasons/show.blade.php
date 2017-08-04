@@ -147,6 +147,7 @@
                                 <a href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">{{ $club->name }}</a>
                             </td>
                             <td class="align-middle text-center">
+                                <!-- TODO counts ALL rescheduled matches! Should only count the fixtures of the current season! -->
                                 {{ $club->reschedulings()->where('reschedule_count','1')->get()->count() }}
                             </td>
                             <td class="align-middle">{{ $club->pivot->rank }}</td>
