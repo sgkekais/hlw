@@ -33,6 +33,7 @@ $factory->define(HLW\Competition::class, function (Faker\Generator $faker) {
         'published' => $faker->numberBetween(0,1)
     ];
 });
+
 /**
  * Division
  */

@@ -11,8 +11,8 @@ class CompetitionsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Competition::class, 10)->create()->each(function ($c){
-            $c->divisions()->save(factory(App\Division::class)->make());
+        factory(HLW\Competition::class, 10)->create()->each(function ($c){
+            $c->divisions()->save(factory(HLW\Division::class)->make());
         });
     }
 }
