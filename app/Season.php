@@ -74,6 +74,13 @@ class Season extends Model
      * FUNCTIONS
      ************************************************************/
 
+    /**
+     * Generate the table for the current season and until the given matchweek
+     * TODO: how to get the rank of the previous matchweek?
+     * TODO: form of club (last 5 results or so)
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
     public function generateTable(Matchweek $matchweek = null)
     {
         // TODO: change current scope so that it also returns the first, next or the last matchweek depending on the current date
