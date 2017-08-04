@@ -32,7 +32,7 @@
                     </a>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav mr-auto">
-                            @foreach(\App\Division::all() as $division)
+                            @foreach(\HLW\Division::all() as $division)
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">{{ $division->name }}</a>
                                 </li>

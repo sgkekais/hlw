@@ -18,8 +18,8 @@ class PortalController extends Controller
         $competition = Competition::find(1);
         $division    = $competition->divisions()->find(1);
         $season      = $division->seasons()->current()->get()->first();
-        return $table = $season->generateTable();
+        $table       = $season->generateTable();
 
-        // return view('index', compact('table'));
+        return view('index', compact('table'));
     }
 }
