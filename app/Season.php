@@ -94,9 +94,9 @@ class Season extends Model
             $club['t_won']          = 0;
             $club['t_drawn']        = 0;
             $club['t_lost']         = 0;
-            $club['t_goals_for']     = 0;
-            $club['t_goals_against'] = 0;
-            $club['t_goals_diff']    = 0;
+            $club['t_goals_for']    = 0;
+            $club['t_goals_against']= 0;
+            $club['t_goals_diff']   = 0;
             $club['t_points']       = 0;
 
             return $club;
@@ -136,10 +136,14 @@ class Season extends Model
                 }
                 // goals difference
                 $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
+                // #2 Apply season parameters contained in pivot
+                    // points deduction
+                    $club->t_points -= $club->pivot->deduction_points;
+                    // goals deduction
+                    $club->t_goals_for -= $club->pivot->deduction_goals;
+
             }
         }
-
-        // #2 Apply season parameters contained in pivot
 
         // #3 Sort the table
 
