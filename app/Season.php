@@ -123,7 +123,6 @@ class Season extends Model
                             $club->t_points += 1;
                         } else {
                             $club->t_lost++;
-                            Log::info($club == $fixture->clubHome);
                         }
                         // goals for and against
                         if ($club->id == $fixture->club_id_home) {
