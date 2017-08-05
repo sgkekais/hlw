@@ -191,7 +191,11 @@ class ClubController extends Controller
         return redirect()->route('clubs.index');
     }
 
-
+    /**
+     * Import clubs via .csv-files
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function importCSV(Request $request)
     {
         $this->validate($request, [
