@@ -41,12 +41,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <!-- controls -->
             <a class="btn btn-success" href="{{ route('clubs.create') }}" title="Mannschaft anlegen">
                 <span class="fa fa-plus-square"></span> Mannschaft anlegen
             </a>
-            |
             <a class="btn btn-secondary" data-toggle="modal" data-target="#csvImport">
                 <span class="fa fa-file-excel-o"></span> Import
             </a>
