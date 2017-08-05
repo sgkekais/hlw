@@ -191,6 +191,11 @@ return [
          * Laravel-debugbar
          */
         Barryvdh\Debugbar\ServiceProvider::class,
+
+        /*
+         * Laravel Excel
+         */
+        Maatwebsite\Excel\ExcelServiceProvider::class
     ],
 
     /*
@@ -239,10 +244,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        //
+        // Carbon
         'Carbon' => Carbon\Carbon::class,
         // Helper Alias
         'ModelHelper' => HLW\Helpers\ModelHelper::class,
+        // Laravel Excel
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
