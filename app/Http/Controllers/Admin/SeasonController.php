@@ -221,4 +221,19 @@ class SeasonController extends Controller
 
         return redirect()->route('seasons.show', $season);
     }
+
+    /**
+     * @param Season $season
+     * @param Club $club
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroyClubAssignment(Season $season, Club $club)
+    {
+        // detach the club from the season
+        $season->clubs()->detach($club);
+
+        Session::flash('success', 'Mannschaftszuordnung '.$club->name.'erfolgreich entfernt.');
+
+        return redirect()->route('seasons.show', $season);
+    }
 }

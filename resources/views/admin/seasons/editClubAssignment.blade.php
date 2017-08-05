@@ -80,5 +80,16 @@
             <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}">Abbrechen</a>
         </div>
     </form>
+    <hr>
+    <h3 class="mt-4">Zuordnung löschen</h3>
+    <form method="POST" action="{{ route('destroyClubAssignment', [$season, $club]) }}">
+        <!-- protection against CSRF (cross-site request forgery) attacks-->
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+        <span class="form-text">Löscht die Zuordnung der Mannschaft zur Saison.</span>
+        <br>
+        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
+        <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}"><span class="fa fa-ban"></span> Abbrechen</a>
+    </form>
 
 @endsection

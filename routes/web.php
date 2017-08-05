@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
         Route::post('seasons/{season}/clubs', 'SeasonController@storeClubAssignment')->name('storeClubAssignment');
         Route::get('seasons/{season}/clubs/{club}/edit', 'SeasonController@editClubAssignment')->name('editClubAssignment');
         Route::patch('seasons/{season}/clubs/{club}', 'SeasonController@updateClubAssignment')->name('updateClubAssignment');
+        Route::delete('seasons/{season}/clubs/{club}', 'SeasonController@destroyClubAssignment')->name('destroyClubAssignment');
 
     // matchweek crud, all matchweek routes are handled with a specific season
     Route::resource('seasons.matchweeks', 'MatchweekController');
