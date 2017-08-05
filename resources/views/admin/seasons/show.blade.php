@@ -178,7 +178,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($season->clubs as $club)
+                    @foreach($season->clubs()->orderBy('name')->get() as $club)
                         <tr>
                             <td class="align-middle"><b>{{ $club->id }}</b></td>
                             <td class="align-middle">

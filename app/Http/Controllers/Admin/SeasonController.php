@@ -175,7 +175,7 @@ class SeasonController extends Controller
             'note'              => $request->note
         ]);
 
-        Session::flash('success', 'Mannschaft '.$club->name.'erfolgreich zugeordnet.');
+        Session::flash('success', 'Mannschaft '.$club->name.' erfolgreich zugeordnet.');
 
         return redirect()->route('seasons.show', $season);
     }
