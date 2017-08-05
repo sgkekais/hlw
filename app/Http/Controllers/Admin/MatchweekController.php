@@ -124,18 +124,26 @@ class MatchweekController extends Controller
 
     public function importCSV(Request $request, Season $season)
     {
+        $this->validate($request, [
+            'csvfile' => 'required|file|mimes:csv'
+        ]);
+
         $importData = Excel::load($request->csvfile, function ($reader) {} )->get();
 
-        foreach ($importData as $csvLine) {
-            $season->matchweeks()->create([
-                    'number_consecutive'    => $csvLine->number_consecutive,
-                    'name'                  => $csvLine->name,
-                    'begin'                 => $csvLine->begin,
-                    'end'                   => $csvLine->end,
-                    'published'             => $csvLine->published ?? '0'
-                ]
-            );
+        if ($importData->count()) {
+            foreach ($importData as $csvLine) {
+                $season->matchweeks()->create([
+                        'number_consecutive'    => $csvLine->number_consecutive,
+                        'name'                  => $csvLine->name,
+                        'begin'                 => $csvLine->begin,
+                        'end'                   => $csvLine->end,
+                        'published'             => $csvLine->published ?? '0'
+                    ]
+                );
+            }
         }
+
+        Session::flash('success', 'Spielwochen erfolreich importiert.');
 
         return redirect()->route('seasons.show', $season);
     }
