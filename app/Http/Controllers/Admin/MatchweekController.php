@@ -111,8 +111,12 @@ class MatchweekController extends Controller
      * @param  \HLW\Matchweek  $matchweek
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Matchweek $matchweek)
+    public function destroy(Season $season, Matchweek $matchweek)
     {
-        //
+        $matchweek->delete();
+
+        Session::flash('success', 'Spielwoche erfolgreich gelöscht.');
+
+        return redirect()->route('seasons.show', $season);
     }
 }
