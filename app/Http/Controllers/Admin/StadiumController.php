@@ -106,6 +106,12 @@ class StadiumController extends Controller
      */
     public function destroy(Stadium $stadium)
     {
-        //
+        $stadium->delete();
+
+        Session::flash('message', 'Spielort erfolgreich gelöscht.');
+
+        return redirect()->route('stadiums.index');
     }
+
+
 }
