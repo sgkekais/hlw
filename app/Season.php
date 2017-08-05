@@ -117,7 +117,6 @@ class Season extends Model
      */
     public function generateTable(Matchweek $matchweek = null)
     {
-        // TODO: change current scope so that it also returns the first, next or the last matchweek depending on the current date
         if (!$matchweek) {
             $matchweek = $this->currentMatchweek();
         }
