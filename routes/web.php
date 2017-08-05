@@ -19,6 +19,11 @@ Auth::routes();
 
 Route::get('/', 'PortalController@index')->name('home');
 
+// clubs
+Route::get('/clubs/{club}', function(HLW\Club $club) {
+    return $club;
+});
+
 /**
  * Admin Routes
  */
