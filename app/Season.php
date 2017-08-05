@@ -2,6 +2,7 @@
 
 namespace HLW;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -74,6 +75,34 @@ class Season extends Model
      * FUNCTIONS
      ************************************************************/
 
+    public function currentMatchweek()
+    {
+        $matchweeks             = $this->matchweeks;
+        $end_of_last_matchweek  = $matchweeks->max('end');
+        $current_date           = Carbon::now()->toDateString();
+        $yesterday              = Carbon::now()->subDay(1)->toDateString();
+        $current_matchweek      = null;
+
+        foreach ($matchweeks as $matchweek) {
+            // is there a matchweek for the current date?
+            if ($matchweek->begin <= $current_date && $matchweek->end >= $current_date) {
+                $current_matchweek = $matchweek;
+                break;
+            } elseif ($matchweek->end == $yesterday) { // was there a matchweek yesterday?
+                $current_matchweek = $matchweek;
+                break;
+            } elseif ($current_date < $matchweek->begin) { // else give me the next matchweek
+                $current_matchweek = $matchweek;
+                break;
+            } elseif ($current_date > $matchweek->end && $matchweek->end == $end_of_last_matchweek) { // else give me the last matchweek
+                $current_matchweek = $matchweek;
+                break;
+            }
+        }
+
+        return $current_matchweek;
+    }
+
     /**
      * Generate the table for the current season and until the given matchweek
      * TODO: how to get the rank of the previous matchweek?
@@ -85,7 +114,7 @@ class Season extends Model
     {
         // TODO: change current scope so that it also returns the first, next or the last matchweek depending on the current date
         if (!$matchweek) {
-            $matchweek = $this->matchweeks()->current()->first();
+            $matchweek = $this->currentMatchweek();
         }
 
         // get all clubs assigned to this season
