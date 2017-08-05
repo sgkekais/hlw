@@ -130,9 +130,12 @@ class MatchweekController extends Controller
 
         $importData = Excel::load($request->csvfile, function ($reader) {} )->get();
 
-        if ($importData->count()) {
+        if ($number_of_records = $importData->count()) {
+            // temporarily unguard the model to set id
+            Matchweek::unguard();
             foreach ($importData as $csvLine) {
                 $season->matchweeks()->create([
+                        'id'                    => $csvLine->id,
                         'number_consecutive'    => $csvLine->number_consecutive,
                         'name'                  => $csvLine->name,
                         'begin'                 => $csvLine->begin,
@@ -141,9 +144,11 @@ class MatchweekController extends Controller
                     ]
                 );
             }
+            // reguard the model
+            Matchweek::reguard();
         }
 
-        Session::flash('success', 'Spielwochen erfolreich importiert.');
+        Session::flash('success', $number_of_records.' Spielwoch(en) erfolreich importiert.');
 
         return redirect()->route('seasons.show', $season);
     }
