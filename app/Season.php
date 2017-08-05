@@ -75,6 +75,11 @@ class Season extends Model
      * FUNCTIONS
      ************************************************************/
 
+    /**
+     * Get the current matchweek (based on the current date) of the season
+     *
+     * @return Matchweek
+     */
     public function currentMatchweek()
     {
         $matchweeks             = $this->matchweeks;
