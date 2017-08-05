@@ -123,7 +123,7 @@ class Season extends Model
         }
 
         // get all clubs assigned to this season
-        $clubs = $this->clubs;
+        $clubs = $this->clubs->sortBy('name');
 
         /*
          * Create initial table
