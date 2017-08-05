@@ -204,9 +204,12 @@ class ClubController extends Controller
 
         $importData = Excel::load($request->csvfile, function ($reader) {} )->get();
 
-        if ($importData->count()) {
+        if ($num_of_records = $importData->count()) {
+            // temporarily unguard the model to be able to manually set the id
+            Club::unguard();
             foreach ($importData as $csvLine) {
                 $club = new Club([
+                    'id'                        => $csvLine->id,
                     'name'                      => $csvLine->name,
                     'name_short'                => $csvLine->name_short,
                     'name_code'                 => $csvLine->name_code,
@@ -228,9 +231,11 @@ class ClubController extends Controller
 
                 $club->save();
             }
+            // reguard the model
+            Club::reguard();
         }
 
-        Session::flash('success', 'Mannschaft(en) erfolreich importiert.');
+        Session::flash('success', $num_of_records.' Mannschaft(en) erfolreich importiert.');
 
         return redirect()->route('clubs.index');
     }

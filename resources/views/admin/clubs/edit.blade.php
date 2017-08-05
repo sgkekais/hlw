@@ -75,7 +75,7 @@
                 <label for="founded">Gründungsdatum</label>
             </div>
             <div class="col-md-4">
-                <input type="date" class="form-control" name="founded" id="founded" aria-describedby="foundedHelp" value="{{ $club->founded }}">
+                <input type="date" class="form-control" name="founded" id="founded" aria-describedby="foundedHelp" value="{{ $club->founded ? $club->founded->format('Y-m-d') : null }}">
                 <small id="foundedHelp" class="form-text text-muted">Gründungsdatum im Format JJJJ-MM-TT</small>
             </div>
         </div>
@@ -85,14 +85,14 @@
                 <label for="league_entry">Eintritt in HLW</label>
             </div>
             <div class="col-md-4">
-                <input type="date" class="form-control" name="league_entry" id="league_entry" aria-describedby="league_entryHelp" value="{{ $club->league_entry }}">
+                <input type="date" class="form-control" name="league_entry" id="league_entry" aria-describedby="league_entryHelp" value="{{ $club->league_entry ? $club->league_entry->format('Y-m-d') : null }}">
                 <small id="league_entryHelp" class="form-text text-muted">Eintrittsdatum</small>
             </div>
             <div class="col-md-2">
                 <label for="league_exit">Austritt aus HLW</label>
             </div>
             <div class="col-md-4">
-                <input type="date" class="form-control" name="league_exit" id="league_exit" aria-describedby="league_exitHelp" value="{{ $club->league_exit }}">
+                <input type="date" class="form-control" name="league_exit" id="league_exit" aria-describedby="league_exitHelp" value="{{ $club->league_exit ? $club->league_exit->format('Y-m-d') : null }}">
                 <small id="league_exitHelp" class="form-text text-muted">Austrittsdatum</small>
             </div>
         </div>
