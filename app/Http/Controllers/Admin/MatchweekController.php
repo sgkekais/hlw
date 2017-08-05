@@ -125,7 +125,7 @@ class MatchweekController extends Controller
     public function importCSV(Request $request, Season $season)
     {
         $this->validate($request, [
-            'csvfile' => 'required|file|mimes:csv'
+            'csvfile' => 'required|file'
         ]);
 
         $importData = Excel::load($request->csvfile, function ($reader) {} )->get();
