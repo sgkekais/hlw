@@ -71,6 +71,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
 
     Route::resource('stadiums', 'StadiumController');
+    Route::post('stadiums/import', 'StadiumController@importCSV')->name('stadiums.import');
+
     Route::resource('clubs', 'ClubController');
 
         // csv import of clubs

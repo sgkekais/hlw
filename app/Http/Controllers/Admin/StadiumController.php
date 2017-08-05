@@ -6,6 +6,7 @@ use HLW\Stadium;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Excel;
 
 class StadiumController extends Controller
 {
@@ -113,5 +114,35 @@ class StadiumController extends Controller
         return redirect()->route('stadiums.index');
     }
 
+    public function importCSV(Request $request)
+    {
+        $this->validate($request, [
+            'csvfile' => 'required|file'
+        ]);
 
+        $importData = Excel::load($request->csvfile, function ($reader) {} )->get();
+
+        if ($num_of_records = $importData->count()) {
+            // temporarily unguard the model to be able to manually set the id
+            Stadium::unguard();
+            foreach ($importData as $csvLine) {
+                $stadium = new Stadium([
+                    'id'            => $csvLine->id,
+                    'name'          => $csvLine->name,
+                    'name_short'    => $csvLine->name_short,
+                    'gmaps'         => $csvLine->gmaps,
+                    'note'          => $csvLine->note,
+                    'published'     => $csvLine->published ?? "0"
+                ]);
+
+                $stadium->save();
+            }
+            // reguard the model
+            Stadium::reguard();
+        }
+
+        Session::flash('success', $num_of_records.' Spielort(e) erfolreich importiert.');
+
+        return redirect()->route('stadiums.index');
+    }
 }

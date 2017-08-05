@@ -6,11 +6,48 @@
     <p>
         Verwaltung der Spielorte.
     </p>
+    <!-- CSV Modal -->
+    <div class="modal fade" id="csvImport" tabindex="-1" role="dialog" aria-labelledby="csvImportLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Spielort(e) importieren</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="csvupload" class="" method="POST" action="{{ route('stadiums.import') }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label for="csvfile">CSV-Datei</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="file" class="form-control-file" name="csvfile" id="csvfile" aria-describedby="csvfileHelp">
+                                <small id="csvfileHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="fa fa-ban"></span> Schließen</button>
+                    <button type="button" class="btn btn-success" onclick="event.preventDefault();
+                                             document.getElementById('csvupload').submit();">
+                        <span class="fa fa-upload"></span> Hochladen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-3">
             <!-- controls -->
             <a class="btn btn-success" href="{{ route('stadiums.create') }}" title="Spielort anlegen">
                 <span class="fa fa-plus-square"></span> Spielort anlegen
+            </a>
+            <a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#csvImport">
+                <span class="fa fa-file-excel-o"></span> Spielort-Import
             </a>
         </div>
     </div>
