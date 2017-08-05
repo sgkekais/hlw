@@ -11,9 +11,9 @@
 |
 */
 
-/**
+/*******************************************************
  * Frontend routes
- */
+ ******************************************************/
 
 Auth::routes();
 
@@ -22,11 +22,11 @@ Route::get('/', 'PortalController@index')->name('home');
 // clubs
 Route::get('/clubs/{club}', function(HLW\Club $club) {
     return $club;
-});
+})->name('frontend.clubs.show');
 
-/**
+/*******************************************************
  * Admin Routes
- */
+ ******************************************************/
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
     // Show Admin Dashboard after login into admin panel
