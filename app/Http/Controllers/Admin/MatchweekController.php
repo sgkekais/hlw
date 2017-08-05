@@ -6,7 +6,9 @@ use HLW\Matchweek;
 use HLW\Season;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
+use Excel;
 
 class MatchweekController extends Controller
 {
@@ -116,6 +118,24 @@ class MatchweekController extends Controller
         $matchweek->delete();
 
         Session::flash('success', 'Spielwoche erfolgreich gelöscht.');
+
+        return redirect()->route('seasons.show', $season);
+    }
+
+    public function importCSV(Request $request, Season $season)
+    {
+        $importData = Excel::load($request->csvfile, function ($reader) {} )->get();
+
+        foreach ($importData as $csvLine) {
+            $season->matchweeks()->create([
+                    'number_consecutive'    => $csvLine->number_consecutive,
+                    'name'                  => $csvLine->name,
+                    'begin'                 => $csvLine->begin,
+                    'end'                   => $csvLine->end,
+                    'published'             => $csvLine->published ?? '0'
+                ]
+            );
+        }
 
         return redirect()->route('seasons.show', $season);
     }

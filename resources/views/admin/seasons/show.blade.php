@@ -6,6 +6,40 @@
     <h2 class="mt-4 text-primary">&mdash; {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }} <span class="text-muted">({{ $season->division->name }} - {{ $season->division->competition->name }})</span>
     </h2>
     <div class="row">
+        <!-- CSV Modal -->
+        <div class="modal fade" id="csvImport" tabindex="-1" role="dialog" aria-labelledby="csvImportLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Spielwochen importieren</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="csvupload" class="" method="POST" action="{{ route('seasons.matchweeks.import', $season) }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label for="csvfile">CSV-Datei</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" class="form-control-file" name="csvfile" id="csvfile" aria-describedby="csvfileHelp">
+                                    <small id="csvfileHelp" class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="fa fa-ban"></span> Schließen</button>
+                        <button type="button" class="btn btn-success" onclick="event.preventDefault();
+                                             document.getElementById('csvupload').submit();">
+                            <span class="fa fa-upload"></span> Hochladen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
                 <a class="btn btn-primary mb-2" href="{{ route('seasons.edit', $season ) }}" title="Saison bearbeiten">
@@ -18,6 +52,10 @@
                 <a class="btn btn-secondary" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
                     <span class="fa fa-plus-square"></span> Mannschaft
                 </a>
+                |
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#csvImport">
+                    <span class="fa fa-file-excel-o"></span> Spielwochen-Import
+                </button>
         </div>
         <!-- dates -->
         <div class="col-md-6">
@@ -98,7 +136,7 @@
                                 <br>
                                 Paarungen: {{ $matchweek->fixtures()->get()->count() }}
                             </td>
-                            <td class="align-middle">{{ $matchweek->begin->format('d.m.Y') ?? null }} - {{ $matchweek->end->format('d.m.Y') ?? null }}</td>
+                            <td class="align-middle">{{ $matchweek->begin ? $matchweek->begin->format('d.m.Y') : null }} - {{ $matchweek->end ? $matchweek->end->format('d.m.Y') : null }}</td>
                             <td class="align-middle">{{ $matchweek->name }}</td>
                             <td class="align-middle">
                                 <!-- display details -->

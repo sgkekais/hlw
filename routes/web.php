@@ -49,6 +49,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     // matchweek crud, all matchweek routes are handled with a specific season
     Route::resource('seasons.matchweeks', 'MatchweekController');
+        // csv import
+        Route::post('seasons/{season}/matchweeks/import', 'MatchweekController@importCSV')->name('seasons.matchweeks.import');
+
     // rescheduling of matches
     Route::get('matchweeks/{matchweek}/fixtures/{fixture}/create', 'FixtureController@create')->name('reschedule.create');
     // fixtures crud, all fixtures routes are handled with a specific matchweek
