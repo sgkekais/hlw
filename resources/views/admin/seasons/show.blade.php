@@ -53,9 +53,9 @@
                     <span class="fa fa-plus-square"></span> Mannschaft
                 </a>
                 |
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#csvImport">
+                <a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#csvImport">
                     <span class="fa fa-file-excel-o"></span> Spielwochen-Import
-                </button>
+                </a>
         </div>
         <!-- dates -->
         <div class="col-md-6">

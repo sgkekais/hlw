@@ -49,7 +49,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     // matchweek crud, all matchweek routes are handled with a specific season
     Route::resource('seasons.matchweeks', 'MatchweekController');
-        // csv import
+
+        // csv import of matchweeks
         Route::post('seasons/{season}/matchweeks/import', 'MatchweekController@importCSV')->name('seasons.matchweeks.import');
 
     // rescheduling of matches
@@ -71,6 +72,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::resource('stadiums', 'StadiumController');
     Route::resource('clubs', 'ClubController');
+
+        // csv import of clubs
+        Route::post('clubs/import', 'ClubController@importCSV')->name('clubs.import');
 
         // assigning and managing players
         Route::resource('clubs.players', 'PlayerController');
