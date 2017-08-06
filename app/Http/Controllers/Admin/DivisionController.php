@@ -29,7 +29,9 @@ class DivisionController extends Controller
      */
     public function create()
     {
-        return view('admin.divisions.create');
+        $competitions = Competition::all();
+
+        return view('admin.divisions.create', compact('competitions'));
     }
 
     /**
@@ -80,7 +82,9 @@ class DivisionController extends Controller
      */
     public function edit(Division $division)
     {
-        return view('admin.divisions.edit', compact('division'));
+        $competitions = Competition::all();
+
+        return view('admin.divisions.edit', compact('division','competitions'));
     }
 
     /**

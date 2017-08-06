@@ -50,7 +50,7 @@
             </div>
             <div class="col-md-4">
                 <select class="form-control" id="competition_id" name="competition_id" aria-describedby="competition_idHelp">
-                    @foreach($competitions = \App\Competition::all() as $competition)
+                    @foreach($competitions as $competition)
                         <option value="{{ $competition->id }}" {{ $division->competition_id == $competition->id ? "selected" : "" }}>{{ $competition->name }}</option>
                     @endforeach
                 </select>
