@@ -231,7 +231,7 @@ class FixtureController extends Controller
 
         $importData = Excel::load($request->csvfile, function ($reader) {
         })->get();
-
+        // TODO: number format -> string in csv?
         if ($number_of_records = $importData->count()) {
             // temporarily unguard the model to set id
             Fixture::unguard();
