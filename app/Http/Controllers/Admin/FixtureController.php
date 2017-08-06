@@ -237,12 +237,12 @@ class FixtureController extends Controller
             Fixture::unguard();
             foreach ($importData as $csvLine) {
                 $fixture = new Fixture([
-                    'id'                => $csvLine->id,
-                    'matchweek_id'      => $csvLine->matchweek_id,
+                    'id'                => intval($csvLine->id),
+                    'matchweek_id'      => intval($csvLine->matchweek_id),
                     'datetime'          => $csvLine->datetime,
-                    'stadium_id'        => $csvLine->stadium_id,
-                    'club_id_home'      => $csvLine->club_id_home,
-                    'club_id_away'      => $csvLine->club_id_away,
+                    'stadium_id'        => intval($csvLine->stadium_id),
+                    'club_id_home'      => intval($csvLine->club_id_home),
+                    'club_id_away'      => intval($csvLine->club_id_away),
                     'goals_home'        => $csvLine->goals_home,
                     'goals_away'        => $csvLine->goals_away,
                     'goals_home_11m'    => $csvLine->goals_home_11m,
