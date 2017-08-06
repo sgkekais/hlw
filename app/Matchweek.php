@@ -57,7 +57,8 @@ class Matchweek extends Model
      * - a season has many matchweeks
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function season(){
+    public function season()
+    {
         return $this->belongsTo(Season::class);
     }
 
@@ -68,7 +69,8 @@ class Matchweek extends Model
      * - a fixture / match belongs to one matchweek
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function fixtures(){
+    public function fixtures()
+    {
         return $this->hasMany(Fixture::class);
     }
 }
