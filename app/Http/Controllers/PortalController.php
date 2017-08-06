@@ -18,8 +18,12 @@ class PortalController extends Controller
         $competition = Competition::find(1);
         $division    = $competition->divisions()->find(1);
         $season      = $division->seasons()->current()->get()->first();
-        $table       = $season->generateTable();
+        $season->load('matchweeks');
+        $current_matchweek   = $season->currentMatchweek();
+        $previous_matchweek   = $current_matchweek->getPreviousMatchweek()->first();
+        $table              = $season->generateTable($current_matchweek);
+        $table_previous_mw  = $season->generateTable($previous_matchweek);
 
-        return view('index', compact('table'));
+        return view('index', compact('table','table_previous_mw' ));
     }
 }
