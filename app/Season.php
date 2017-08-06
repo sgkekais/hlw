@@ -80,7 +80,7 @@ class Season extends Model
      *
      * @return Matchweek
      */
-    public function currentMatchweek()
+    public function getCurrentMatchweek()
     {
         $matchweeks             = $this->matchweeks;
         $end_of_last_matchweek  = $matchweeks->max('end');
@@ -118,7 +118,7 @@ class Season extends Model
     public function generateTable(Matchweek $matchweek = null)
     {
         if (!$matchweek) {
-            $matchweek = $this->currentMatchweek();
+            $matchweek = $this->getCurrentMatchweek();
         }
 
         // get all clubs assigned to this season
