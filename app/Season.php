@@ -234,7 +234,7 @@ class Season extends Model
 
         })->values();
 
-        /*// #4 calculate the rank
+        // #4 calculate the rank
         $rank = 1;
         foreach ($table_sorted as $index => $club) {
             // first iteration
@@ -272,7 +272,7 @@ class Season extends Model
                     continue;
                 }
             }
-        }*/
+        }
 
         return $table_sorted;
     }
