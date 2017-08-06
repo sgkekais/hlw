@@ -39,6 +39,10 @@ class Matchweek extends Model
         'begin', 'end'
     ];
 
+    /***********************************************************
+     * SCOPES
+     ************************************************************/
+
     /**
      * Scope the query to the current matchweek
      * @param $query
@@ -50,9 +54,45 @@ class Matchweek extends Model
             ->where('end', '>=', date('Y-m-d'));
     }
 
+    /***********************************************************
+     * FUNCTIONS
+     ************************************************************/
+
     /**
-     * Relationship
-     * 1. One-to-Many
+     * Find the previous matchweek or return null
+     * @return Matchweek $previous_mw|null
+     */
+    public function getPreviousMatchweek()
+    {
+        $previous_mw = $this->season->matchweeks->where('number_consecutive', $this->number_consecutive - 1);
+
+        if ($previous_mw->count()) {
+           return $previous_mw;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Find the next matchweek or return null
+     * @return Matchweek $next_mw|null
+     */
+    public function getNextMatchweek()
+    {
+        $next_mw = $this->season->matchweeks->where('number_consecutive', $this->number_consecutive + 1);
+
+        if ($next_mw->count()) {
+            return $next_mw;
+        } else {
+            return null;
+        }
+    }
+
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
+
+    /**
      * - a matchweek belongs to one season
      * - a season has many matchweeks
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -63,8 +103,6 @@ class Matchweek extends Model
     }
 
     /**
-     * Relationship
-     * 2. One-to-Many
      * - a matchweek has many fixtures
      * - a fixture / match belongs to one matchweek
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
