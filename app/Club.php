@@ -100,7 +100,7 @@ class Club extends Model
     /**
      * Get the club's rank of a given matchweek
      * @param Matchweek $matchweek
-     * @return mixed
+     * @return int rank
      */
     public function getRankOfMatchweek(Matchweek $matchweek)
     {
