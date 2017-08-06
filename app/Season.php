@@ -215,15 +215,26 @@ class Season extends Model
 
         // #3 Sort the table, use values() on collection
         $table_sorted = $table->sort( function($a, $b) {
-            // sort by points
-            return strcmp($b->t_points, $a->t_points)
-                // sort by goal difference
-                ?: strcmp($b->t_goals_diff, $a->t_goals_diff)
-                // sort by goals for
-                ?: strcmp($b->t_goals_for, $a->t_goals_for);
+            $result = false;
+
+            // compare points
+            if ($b->t_points > $a->t_points) {
+                $result = true;
+            } elseif ($b->t_points == $a->t_points) {               // if points are equal
+                if ($b->t_goals_diff > $a->t_goals_diff) {          // compare goal difference
+                    $result = true;
+                } elseif ($b->t_goals_diff == $a->t_goals_diff) {   // if goal difference is equal
+                    if ($b->t_goals_for > $a->t_goals_for) {        // compare goals for
+                        $result = true;
+                    }
+                }
+            }
+
+            return $result;
+
         })->values();
 
-        // #4 calculate the rank
+        /*// #4 calculate the rank
         $rank = 1;
         foreach ($table_sorted as $index => $club) {
             // first iteration
@@ -261,7 +272,7 @@ class Season extends Model
                     continue;
                 }
             }
-        }
+        }*/
 
         return $table_sorted;
     }
