@@ -83,7 +83,7 @@ class Club extends Model
      * @param $fixtures
      * @return int
      */
-    public function gamesPlayed($fixtures)
+    public function getGamesPlayed($fixtures)
     {
         $gamesplayed = 0;
 
@@ -95,6 +95,20 @@ class Club extends Model
         }
 
         return $gamesplayed;
+    }
+
+    /**
+     * Get the club's rank of a given matchweek
+     * @param Matchweek $matchweek
+     * @return mixed
+     */
+    public function getRankOfMatchweek(Matchweek $matchweek)
+    {
+        $season = $matchweek->season;
+
+        $rank = $season->generateTable($matchweek)->where("id", $this->id)->pluck('t_rank')->first();
+
+        return $rank;
     }
 
     /***********************************************************
