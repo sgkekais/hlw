@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <!-- controls -->
             <a class="btn btn-success" href="{{ route('stadiums.create') }}" title="Spielort anlegen">
                 <span class="fa fa-plus-square"></span> Spielort anlegen
