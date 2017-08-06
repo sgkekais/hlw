@@ -147,41 +147,69 @@ class Season extends Model
             // only clubs that have not withdrawn from the competition
             if (!$club->pivot->withdrawal) {
                 // get all played fixtures of the current club of this season
-                // count only fixtures where related clubs have not withdrawn from the competition
-                foreach ($this->fixtures()->finished()->notCancelled()->ofClub($club->id)->get()->sortBy('matchweek.number_consecutive') as $fixture) {
+                // count only fixtures where related clubs have not withdrawn from the competition -> notCancelled
+                $club_fixtures_played = $this->fixtures()->finishedReal()->notCancelled()->ofClub($club->id)->get();
+                // get all rated fixtures ""
+                $club_fixtures_rated  = $this->fixtures()->finishedRated()->notCancelled()->ofClub($club->id)->get();
+                // merge
+                $club_fixtures = $club_fixtures_played->merge($club_fixtures_rated)->sortBy('matchweek.number_consecutive');
+
+                foreach ($club_fixtures as $fixture) {
                     // aggregate values only until current matchweek
                     if ($fixture->matchweek->number_consecutive <= $matchweek->number_consecutive) {
                         // increment games played
                         $club->t_played++;
                         // won, drawn, loss, points
-                        if ($club->id == $fixture->club_id_home && ($fixture->goals_home > $fixture->goals_away)
-                            || $club->id == $fixture->club_id_away && ($fixture->goals_home < $fixture->goals_away)) {
-                            $club->t_won++;
-                            $club->t_points += 3;
-                        } elseif ($fixture->goals_home == $fixture->goals_away) {
-                            $club->t_drawn++;
-                            $club->t_points += 1;
-                        } else {
-                            $club->t_lost++;
+                        // not rated
+                        if($fixture->isFinished() && !$fixture->isRated()){
+                            if ($club->id == $fixture->club_id_home && ($fixture->goals_home > $fixture->goals_away)
+                                || $club->id == $fixture->club_id_away && ($fixture->goals_home < $fixture->goals_away)) {
+                                $club->t_won++;
+                                $club->t_points += 3;
+                            } elseif ($fixture->goals_home == $fixture->goals_away) {
+                                $club->t_drawn++;
+                                $club->t_points += 1;
+                            } else {
+                                $club->t_lost++;
+                            }
+                            // goals for and against
+                            if ($club->id == $fixture->club_id_home) {
+                                $club->t_goals_for += $fixture->goals_home;
+                                $club->t_goals_against += $fixture->goals_away;
+                            } elseif ($club->id == $fixture->club_id_away) {
+                                $club->t_goals_for += $fixture->goals_away;
+                                $club->t_goals_against += $fixture->goals_home;
+                            }
+                        } elseif ($fixture->isRated()) { // rated match
+                            if ($club->id == $fixture->club_id_home && ($fixture->goals_home_rated > $fixture->goals_away_rated)
+                                || $club->id == $fixture->club_id_away && ($fixture->goals_home_rated < $fixture->goals_away_rated)) {
+                                $club->t_won++;
+                                $club->t_points += 3;
+                            } elseif ($fixture->goals_home_rated == $fixture->goals_away_rated) {
+                                $club->t_drawn++;
+                                $club->t_points += 1;
+                            } else {
+                                $club->t_lost++;
+                            }
+                            // goals for and against
+                            if ($club->id == $fixture->club_id_home) {
+                                $club->t_goals_for += $fixture->goals_home_rated;
+                                $club->t_goals_against += $fixture->goals_away_rated;
+                            } elseif ($club->id == $fixture->club_id_away) {
+                                $club->t_goals_for += $fixture->goals_away_rated;
+                                $club->t_goals_against += $fixture->goals_home_rated;
+                            }
                         }
-                        // goals for and against
-                        if ($club->id == $fixture->club_id_home) {
-                            $club->t_goals_for += $fixture->goals_home;
-                            $club->t_goals_against += $fixture->goals_away;
-                        } elseif ($club->id == $fixture->club_id_away) {
-                            $club->t_goals_for += $fixture->goals_away;
-                            $club->t_goals_against += $fixture->goals_home;
-                        }
+
                     }
                 }
                 // goals difference
                 $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
                 // #2 Apply season parameters contained in pivot
-                    // points deduction
-                    $club->t_points -= $club->pivot->deduction_points;
-                    // goals deduction
-                    $club->t_goals_for -= $club->pivot->deduction_goals;
-
+                // points deduction
+                $club->t_points -= $club->pivot->deduction_points;
+                // goals deduction
+                $club->t_goals_for -= $club->pivot->deduction_goals;
             }
         }
 

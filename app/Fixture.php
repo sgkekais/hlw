@@ -106,13 +106,23 @@ class Fixture extends Model
     }
 
     /**
-     * Scope a query of fixtures to only finished matches
+     * Scope a query of fixtures to only finished matches with a real result
      * @param $query
      * @return mixed
      */
-    public function scopeFinished($query)
+    public function scopeFinishedReal($query)
     {
         return $query->whereNotNull('goals_home')->whereNotNull('goals_away');
+    }
+
+    /**
+     * Scope to rated matches
+     * @param $query
+     * @return mixed
+     */
+    public function scopeFinishedRated($query)
+    {
+        return $query->whereNotNull('goals_home_rated')->whereNotNull('goals_away_rated');
     }
 
     /**
@@ -141,12 +151,25 @@ class Fixture extends Model
      ************************************************************/
 
     /**
-     * Check whether a match is finished
+     * Check whether the match is finished and has a real result
      * @return bool
      */
     public function isFinished()
     {
-        if ( isset($this->goals_home) && isset($this->goals_away) ) {
+        if (isset($this->goals_home) && isset($this->goals_away)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check wether the match has been rated
+     * @return bool
+     */
+    public function isRated()
+    {
+        if (isset($this->goals_home_rated) && isset($this->goals_away_rated)) {
             return true;
         } else {
             return false;
