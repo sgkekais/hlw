@@ -64,8 +64,10 @@
                         <th></th>
                         <th class="">Datum</th>
                         <th class="">Paarung</th>
-                        <th>Spielort</th>
-                        <th class="">Ergebnis</th>
+                        <th class="">Spielort</th>
+                        <th class="">Erg.</th>
+                        <th class="">11m</th>
+                        <th class="">Wert.</th>
                         <th class=""></th>
                         <th class=""></th>
                         <th></th>
@@ -121,11 +123,15 @@
                             <td class="align-middle">
                                 <!-- TODO replace with proper methods to test fixture -->
                                 {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
-                                @if($fixture->goals_home_11m && $fixture->goals_away_11m)
+                            </td>
+                            <td class="align-middle">
+                                @if(isset($fixture->goals_home_11m) && isset($fixture->goals_away_11m))
                                     ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
                                 @endif
-                                @if($fixture->goals_home_rated && $fixture->goals_away_rated)
-                                    {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
+                            </td>
+                            <td class="align-middle">
+                                @if(isset($fixture->goals_home_rated) && isset($fixture->goals_away_rated))
+                                    {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
                                 @endif
                             </td>
                             <td class="align-middle">
