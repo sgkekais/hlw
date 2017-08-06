@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-4">
                 <select class="form-control" id="competition_id" name="competition_id" aria-describedby="competition_idHelp">
-                    @foreach($competitions = \App\Competition::all() as $competition)
+                    @foreach($competitions = Competition::all() as $competition)
                         <option value="{{ $competition->id }}">{{ $competition->name }}</option>
                     @endforeach
                 </select>
