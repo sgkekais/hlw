@@ -23,22 +23,20 @@
     <div id="app">
 
             <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top">
-                <div class="container" style="background: transparent">
-                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ route('home') }}">
-                        <img src="/images/hlwlogo.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">
-                    </a>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav mr-auto">
-                            @foreach(\HLW\Division::all() as $division)
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">{{ $division->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    <img src="/images/hlwlogo.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">
+                </a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        @foreach(\HLW\Division::all() as $division)
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{ $division->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </nav>
 
