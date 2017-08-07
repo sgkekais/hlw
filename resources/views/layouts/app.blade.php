@@ -22,8 +22,8 @@
 <body>
     <div id="app">
 
-            <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-                <div class="container">
+            <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top">
+                <div class="container" style="background: transparent">
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
