@@ -22,16 +22,20 @@
                 <tr>
                     <td class="align-middle text-center">{{ $club->t_rank }}</td>
                     <td class="align-middle text-center">
-                        @if($table_previous_mw->count() > 0)
-                            @if($previous_rank = $table_previous_mw->where('id', $club->id)->first()->t_rank)
+                        @if($ptable->count() > 0)
+                            @if($previous_rank = $ptable->where('id', $club->id)->first()->t_rank)
                                 @if ($previous_rank < $club->t_rank)
-                                    <span class="fa fa-fw fa-arrow-circle-down"></span>
+                                    <span class="fa fa-fw fa-arrow-circle-down text-warning"></span>
                                 @elseif ($previous_rank == $club->t_rank)
-                                    <span class="fa fa-fw fa-minus-circle"></span>
+                                    <span class="fa fa-fw "></span>
                                 @else
-                                    <span class="fa fa-fw fa-arrow-circle-up"></span>
+                                    <span class="fa fa-fw fa-arrow-circle-up text-success"></span>
                                 @endif
-                                {{ $previous_rank }}
+                                <small>
+                                    @if(abs($previous_rank-$club->t_rank) > 0)
+                                        {{ abs($previous_rank-$club->t_rank) }}
+                                    @endif
+                                </small>
                             @endif
                         @endif
                     </td>
@@ -56,5 +60,4 @@
             @endforeach
         </tbody>
     </table>
-
 @endsection

@@ -27,10 +27,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="/images/hlwlogo.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">
+                    <img src="/images/hlwlogo_w.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">
                 </a>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active">Home</a>
+                        </li>
                         @foreach(\HLW\Division::all() as $division)
                             <li class="nav-item">
                                 <a class="nav-link" href="#">{{ $division->name }}</a>
