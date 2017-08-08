@@ -76,6 +76,22 @@ class Club extends Model
     }
 
     /***********************************************************
+     * ACCESSORS
+     ************************************************************/
+
+    // TODO: USE THESE TO BUILD THE TABLE LATER!
+    // USE SCOPES FOR FIXTURES AND PARAMETERS FOR SEASON OR MATCHWEEK?
+    public function getTRankAttribute()
+    {
+        return 0;
+    }
+
+    public function getTGamesPlayedAttribute()
+    {
+        return $this->fixtures()->finishedRated()->get()->merge($this->fixtures()->finishedReal()->get())->count();
+    }
+
+    /***********************************************************
      * FUNCTIONS
      ************************************************************/
 
@@ -99,6 +115,7 @@ class Club extends Model
 
     /**
      * Get the club's rank of a given matchweek
+     * TODO: Shit! use proper accessors!!
      * @param Matchweek $matchweek
      * @return int rank
      */

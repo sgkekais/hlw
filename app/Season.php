@@ -80,7 +80,7 @@ class Season extends Model
      *
      * @return Matchweek
      */
-    public function getCurrentMatchweek()
+    public function currentMatchweek()
     {
         $matchweeks             = $this->matchweeks;
         $end_of_last_matchweek  = $matchweeks->max('end');
@@ -110,15 +110,14 @@ class Season extends Model
 
     /**
      * Generate the table for the current season and until the given matchweek
-     * TODO: how to get the rank of the previous matchweek?
-     * TODO: form of club (last 5 results or so)
+     * TODO: this is shit!
      * @param Matchweek|null $matchweek
      * @return mixed
      */
     public function generateTable(Matchweek $matchweek = null)
     {
-        if (!$matchweek) {
-            $matchweek = $this->getCurrentMatchweek();
+        if (is_null($matchweek)) {
+            $matchweek = $this->currentMatchweek();
         }
 
         // get all clubs assigned to this season

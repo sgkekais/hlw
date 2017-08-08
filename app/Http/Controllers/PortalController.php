@@ -2,9 +2,6 @@
 
 namespace HLW\Http\Controllers;
 
-use HLW\Club;
-use HLW\Competition;
-use HLW\Matchweek;
 use HLW\Season;
 use Illuminate\Http\Request;
 
@@ -18,12 +15,12 @@ class PortalController extends Controller
         $s1 = Season::find(1);
         $s2 = Season::find(1);
 
-        $matchweek = $s1->getCurrentMatchweek();
-        $pmatchweek = $matchweek->getPreviousMatchweek()->first();
+        $c_matchweek = $s1->currentMatchweek();
+        $p_matchweek = $c_matchweek->previousMatchweek();
 
-        $table  = $s1->generateTable();
-        $ptable = $s2->generateTable($pmatchweek);
+        $table_current = $s1->generateTable();
+        $table_previous = $s2->generateTable($p_matchweek);
 
-        return view('index', compact('table', 'ptable'));
+        return view('index', compact('table_current', 'table_previous'));
     }
 }

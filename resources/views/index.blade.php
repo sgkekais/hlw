@@ -18,12 +18,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($table as $club)
+            @foreach ($table_current as $club)
                 <tr>
                     <td class="align-middle text-center">{{ $club->t_rank }}</td>
                     <td class="align-middle text-center">
-                        @if($ptable->count() > 0)
-                            @if($previous_rank = $ptable->where('id', $club->id)->first()->t_rank)
+                        @if($table_previous->count() > 0)
+                            @if($previous_rank = $table_previous->where('id', $club->id)->first()->t_rank)
                                 @if ($previous_rank < $club->t_rank)
                                     <span class="fa fa-fw fa-arrow-circle-down text-warning"></span>
                                 @elseif ($previous_rank == $club->t_rank)
