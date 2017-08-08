@@ -224,6 +224,7 @@ class FixtureController extends Controller
     }
 
     /**
+     * TODO: messages, record number, progress
      * Import fixtures from csv-files
      * @param Request $request
      * @param Season $season
@@ -242,13 +243,13 @@ class FixtureController extends Controller
             // temporarily unguard the model to set id
             Fixture::unguard();
             foreach ($importData as $csvLine) {
-                $fixture = new Fixture([
+                $fixture = Fixture::create([
                     'id'                => intval($csvLine->id),
-                    'matchweek_id'      => intval($csvLine->matchweek_id),
+                    'matchweek_id'      => $csvLine->matchweek_id ? intval($csvLine->matchweek_id) : null,
                     'datetime'          => $csvLine->datetime,
-                    'stadium_id'        => intval($csvLine->stadium_id),
-                    'club_id_home'      => intval($csvLine->club_id_home),
-                    'club_id_away'      => intval($csvLine->club_id_away),
+                    'stadium_id'        => $csvLine->stadium_id ? intval($csvLine->stadium_id) : null,
+                    'club_id_home'      => $csvLine->club_id_home,
+                    'club_id_away'      => $csvLine->club_id_away,
                     'goals_home'        => $csvLine->goals_home,
                     'goals_away'        => $csvLine->goals_away,
                     'goals_home_11m'    => $csvLine->goals_home_11m,
@@ -259,13 +260,11 @@ class FixtureController extends Controller
                     'cancelled'         => $csvLine->cancelled,
                     'note'              => $csvLine->note,
                     'published'         => $csvLine->published,
-                    'rescheduled_from_fixture_id'   => $csvLine->rescheduled_from_fixture_id,
-                    'rescheduled_by_club'   => $csvLine->rescheduled_by_club,
+                    'rescheduled_from_fixture_id'   => $csvLine->rescheduled_from_fixture_id ? intval($csvLine->rescheduled_from_fixture_id) : null,
+                    'rescheduled_by_club'   => $csvLine->rescheduled_by_club ? intval($csvLine->rescheduled_by_club) : null,
                     'reschedule_reason'     => $csvLine->reschedule_reason,
                     'reschedule_count'      => $csvLine->reschedule_count
                 ]);
-
-                $fixture->save();
             }
             // reguard the model
             Fixture::reguard();
