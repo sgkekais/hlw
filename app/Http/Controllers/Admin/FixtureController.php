@@ -223,6 +223,12 @@ class FixtureController extends Controller
         return redirect()->route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]);
     }
 
+    /**
+     * Import fixtures from csv-files
+     * @param Request $request
+     * @param Season $season
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function importCSV(Request $request, Season $season)
     {
         $this->validate($request, [
