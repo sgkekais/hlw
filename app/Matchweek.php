@@ -62,9 +62,9 @@ class Matchweek extends Model
      * Find the previous matchweek or return null
      * @return Matchweek $previous_mw|null
      */
-    public function getPreviousMatchweek()
+    public function previousMatchweek()
     {
-        $previous_mw = $this->season->matchweeks->where('number_consecutive', $this->number_consecutive - 1);
+        $previous_mw = $this->season->matchweeks->where('number_consecutive', $this->number_consecutive - 1)->first();
 
         if ($previous_mw->count()) {
            return $previous_mw;
@@ -77,9 +77,9 @@ class Matchweek extends Model
      * Find the next matchweek or return null
      * @return Matchweek $next_mw|null
      */
-    public function getNextMatchweek()
+    public function nextMatchweek()
     {
-        $next_mw = $this->season->matchweeks->where('number_consecutive', $this->number_consecutive + 1);
+        $next_mw = $this->season->matchweeks->where('number_consecutive', $this->number_consecutive + 1)->first();
 
         if ($next_mw->count()) {
             return $next_mw;
