@@ -81,6 +81,7 @@ class Club extends Model
 
     // TODO: USE THESE TO BUILD THE TABLE LATER!
     // USE SCOPES FOR FIXTURES AND PARAMETERS FOR SEASON OR MATCHWEEK?
+    // TODO: TRY  $c->fixtures()->where('matchweek.number_consecutive','<','22')->count()
     public function getRankAttribute()
     {
         return 0;
