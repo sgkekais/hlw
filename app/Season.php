@@ -117,8 +117,8 @@ class Season extends Model
      */
     public function generateTable(Matchweek $matchweek = null)
     {
-        if (!$matchweek) {
-            $matchweek = $this->getCurrentMatchweek();
+        if (is_null($matchweek)) {
+            $matchweek = $this->currentMatchweek();
         }
 
         // get all clubs assigned to this season
