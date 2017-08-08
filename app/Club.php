@@ -81,15 +81,62 @@ class Club extends Model
 
     // TODO: USE THESE TO BUILD THE TABLE LATER!
     // USE SCOPES FOR FIXTURES AND PARAMETERS FOR SEASON OR MATCHWEEK?
-    public function getTRankAttribute()
+    public function getRankAttribute()
     {
         return 0;
     }
 
-    public function getTGamesPlayedAttribute()
+    public function getGamesPlayedAttribute(Season $season, Matchweek $matchweek)
     {
-        return $this->fixtures()->finishedRated()->get()->merge($this->fixtures()->finishedReal()->get())->count();
+        if (is_null($matchweek)) {
+            $matchweek = $season->currentMatchweek();
+        }
+
+        // TODO unnessecary to get all fixtures, try getting via club relationship and only until matchweek! and maybe use scope on fixture "until matchweek"
+        $result_played = $season->fixtures()->played()->ofClub($this->id)->count();
+
+        return $result_played;
     }
+
+    // TODO funktioniert nicht mit Parameter
+    public function getGamesRatedAttribute(Season $season, Matchweek $matchweek)
+    {
+        // TODO unnessecary to get all fixtures, try getting via club relationship and only until matchweek! and maybe use scope on fixture "until matchweek"
+        $result_rated = $season->fixtures()->rated()->ofClub($this->id)->count();
+
+        return $result_rated;
+    }
+
+    public function getGamesWonAttribute()
+    {
+        return 0;
+    }
+
+    public function getGamesDrawnAttribute()
+    {
+        return 0;
+    }
+
+    public function getGamesLostAttribute()
+    {
+        return 0;
+    }
+
+    public function getGoalsForAttribute()
+    {
+        return 0;
+    }
+
+    public function getGoalsAgainstAttribute()
+    {
+        return 0;
+    }
+
+    public function getGoalsDiffAttribute()
+    {
+        return $this->getGoalsForAttribute()-$this->getGoalsAgainstAttribute();
+    }
+
 
     /***********************************************************
      * FUNCTIONS

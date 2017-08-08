@@ -110,7 +110,7 @@ class Fixture extends Model
      * @param $query
      * @return mixed
      */
-    public function scopeFinishedReal($query)
+    public function scopePlayed($query)
     {
         return $query->whereNotNull('goals_home')->whereNotNull('goals_away');
     }
@@ -120,9 +120,14 @@ class Fixture extends Model
      * @param $query
      * @return mixed
      */
-    public function scopeFinishedRated($query)
+    public function scopeRated($query)
     {
         return $query->whereNotNull('goals_home_rated')->whereNotNull('goals_away_rated');
+    }
+
+    public function scopePlayerOrRated($query)
+    {
+       // return $query->where()
     }
 
     /**

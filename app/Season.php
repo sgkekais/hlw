@@ -147,9 +147,9 @@ class Season extends Model
             if (!$club->pivot->withdrawal) {
                 // get all played fixtures of the current club of this season
                 // count only fixtures where related clubs have not withdrawn from the competition -> notCancelled
-                $club_fixtures_played = $this->fixtures()->finishedReal()->notCancelled()->ofClub($club->id)->get();
+                $club_fixtures_played = $this->fixtures()->played()->notCancelled()->ofClub($club->id)->get();
                 // get all rated fixtures ""
-                $club_fixtures_rated  = $this->fixtures()->finishedRated()->notCancelled()->ofClub($club->id)->get();
+                $club_fixtures_rated  = $this->fixtures()->rated()->notCancelled()->ofClub($club->id)->get();
                 // merge
                 $club_fixtures = $club_fixtures_played->merge($club_fixtures_rated)->sortBy('matchweek.number_consecutive');
 
