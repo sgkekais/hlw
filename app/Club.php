@@ -99,6 +99,7 @@ class Club extends Model
 
     /**
      * Get the club's rank of a given matchweek
+     * TODO: Shit! use proper accessors!!
      * @param Matchweek $matchweek
      * @return int rank
      */

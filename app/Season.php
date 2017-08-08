@@ -110,8 +110,7 @@ class Season extends Model
 
     /**
      * Generate the table for the current season and until the given matchweek
-     * TODO: how to get the rank of the previous matchweek?
-     * TODO: form of club (last 5 results or so)
+     * TODO: this is shit!
      * @param Matchweek|null $matchweek
      * @return mixed
      */
