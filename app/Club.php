@@ -99,6 +99,7 @@ class Club extends Model
     }
 
     // TODO funktioniert nicht mit Parameter
+    // Könnte als Methode mit wherehas funktionieren?
     public function getGamesRatedAttribute(Season $season, Matchweek $matchweek)
     {
         // TODO unnessecary to get all fixtures, try getting via club relationship and only until matchweek! and maybe use scope on fixture "until matchweek"
