@@ -130,24 +130,58 @@ class Club extends Model
      ************************************************************/
 
     /**
-     * Get the number of games played
-     * Optionally counted for a given season
-     * Optionally counted for a given season until a given matchweek
+     * Get the games this club has played
+     * Optionally for a given season
+     * Optionally for a given season until a given matchweek
      * @param Season|null $season
      * @param Matchweek|null $matchweek
      * @return int
      */
     public function getGamesPlayed(Season $season = null, Matchweek $matchweek = null)
     {
-        return Fixture::played()->notCancelled()->ofClub($this->id)
+        $played_games = Fixture::played()->notCancelled()->ofClub($this->id)
             ->get()
             ->when($season, function ($query) use ($season) {
                 return $query->where('matchweek.season_id', $season->id);
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
                 return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
+            });
+
+        return $played_games;
+    }
+
+    /**
+     * Get the games that were rated
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRated(Season $season = null, Matchweek $matchweek = null)
+    {
+        $rated_games = Fixture::rated()->notCancelled()->ofClub($this->id)
+            ->get()
+            ->when($season, function ($query) use ($season) {
+                return $query->where('matchweek.season_id', $season->id);
             })
-            ->count();
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
+            });
+
+        return $rated_games;
+    }
+
+    public function getGamesWon($fixtures)
+    {
+        // $played_and_rated_games = $this->getGamesPlayed($season, $matchweek)
+        //    ->merge($this->getGamesRated($season, $matchweek));
+
+        $won_games = $fixtures->where('club_id_home', $this->id)
+            ->where('goals_home', '>', 'goals_away')
+            ->orWhere('club_id_away', $this->id)
+            ->where('goals_home', '<', 'goals_away');
+
+        return $won_games;
     }
 
     /***********************************************************
