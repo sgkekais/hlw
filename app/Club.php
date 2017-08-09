@@ -87,26 +87,16 @@ class Club extends Model
         return 0;
     }
 
-    public function getGamesPlayedAttribute(Season $season, Matchweek $matchweek)
+    public function getGamesPlayedAttribute()
     {
-        if (is_null($matchweek)) {
-            $matchweek = $season->currentMatchweek();
-        }
-
-        // TODO unnessecary to get all fixtures, try getting via club relationship and only until matchweek! and maybe use scope on fixture "until matchweek"
-        $result_played = $season->fixtures()->played()->ofClub($this->id)->count();
-
-        return $result_played;
+        return 0;
     }
 
     // TODO funktioniert nicht mit Parameter
     // Könnte als Methode mit wherehas funktionieren?
-    public function getGamesRatedAttribute(Season $season, Matchweek $matchweek)
+    public function getGamesRatedAttribute()
     {
-        // TODO unnessecary to get all fixtures, try getting via club relationship and only until matchweek! and maybe use scope on fixture "until matchweek"
-        $result_rated = $season->fixtures()->rated()->ofClub($this->id)->count();
-
-        return $result_rated;
+        return 0;
     }
 
     public function getGamesWonAttribute()
