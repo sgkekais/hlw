@@ -162,7 +162,7 @@ class Club extends Model
                 return $query->where('matchweek.season_id', $season->id);
             })
             ->when($matchweek, function ($query) use ($matchweek) {
-                return $query->where('matchweek.number_consecutive', '<=', $matchweek);
+                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
             })
             ->count();
     }
