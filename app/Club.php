@@ -130,30 +130,13 @@ class Club extends Model
      ************************************************************/
 
     /**
-     * @param $fixtures
+     * Get the number of games played
+     * Optionally counted for a given season
+     * Optionally counted for a given season until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
      * @return int
      */
-    /*public function getGamesPlayed($fixtures)
-    {
-        $gamesplayed = 0;
-
-        foreach ($fixtures as $fixture) {
-            if ($fixture->isFinished()) {
-                // increment if fixture has result
-                $gamesplayed++;
-            }
-        }
-
-        return $gamesplayed;
-    }*/
-
-
-    //  Fixture::played()
-    //      ->notCancelled()
-    //      ->ofClub(4)
-    //      ->get()
-    //      ->when($s, function ($query) use ($s) { return $query->where('matchweek.season',$s); })
-    //      ->count()
     public function getGamesPlayed(Season $season = null, Matchweek $matchweek = null)
     {
         return Fixture::played()->notCancelled()->ofClub($this->id)
@@ -161,7 +144,7 @@ class Club extends Model
             ->when($season, function ($query) use ($season) {
                 return $query->where('matchweek.season_id', $season->id);
             })
-            ->when($matchweek, function ($query) use ($matchweek) {
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
                 return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
             })
             ->count();
