@@ -125,9 +125,12 @@ class Fixture extends Model
         return $query->whereNotNull('goals_home_rated')->whereNotNull('goals_away_rated');
     }
 
-    public function scopePlayerOrRated($query)
+    public function scopePlayedOrRated($query)
     {
-       // return $query->where()
+       return $query->whereNotNull('goals_home')->whereNotNull('goals_away')
+           ->orWhere( function ($query) {
+               return $query->whereNotNull('goals_home_rated')->whereNotNull('goals_away_rated');
+           });
     }
 
     /**
