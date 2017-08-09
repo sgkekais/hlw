@@ -110,7 +110,7 @@ class Season extends Model
 
     /**
      * Generate the table for the current season and until the given matchweek
-     * TODO: this is shit!
+     * TODO: this is shit! use accessors!
      * @param Matchweek|null $matchweek
      * @return mixed
      */
