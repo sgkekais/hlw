@@ -159,7 +159,7 @@ class Fixture extends Model
      * Check whether the match is finished and has a real result
      * @return bool
      */
-    public function isFinished()
+    public function isPlayed()
     {
         if (isset($this->goals_home) && isset($this->goals_away)) {
             return true;

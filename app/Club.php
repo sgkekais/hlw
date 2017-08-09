@@ -87,11 +87,6 @@ class Club extends Model
         return 0;
     }
 
-    public function getGamesPlayedAttribute()
-    {
-        return 0;
-    }
-
     // TODO funktioniert nicht mit Parameter
     // Könnte als Methode mit wherehas funktionieren?
     public function getGamesRatedAttribute()
@@ -138,7 +133,7 @@ class Club extends Model
      * @param $fixtures
      * @return int
      */
-    public function getGamesPlayed($fixtures)
+    /*public function getGamesPlayed($fixtures)
     {
         $gamesplayed = 0;
 
@@ -150,21 +145,26 @@ class Club extends Model
         }
 
         return $gamesplayed;
-    }
+    }*/
 
-    /**
-     * Get the club's rank of a given matchweek
-     * TODO: Shit! use proper accessors!!
-     * @param Matchweek $matchweek
-     * @return int rank
-     */
-    public function getRankOfMatchweek(Matchweek $matchweek)
+
+    //  Fixture::played()
+    //      ->notCancelled()
+    //      ->ofClub(4)
+    //      ->get()
+    //      ->when($s, function ($query) use ($s) { return $query->where('matchweek.season',$s); })
+    //      ->count()
+    public function getGamesPlayed(Season $season = null, Matchweek $matchweek = null)
     {
-        $season = $matchweek->season;
-
-        $rank = $season->generateTable($matchweek)->where("id", $this->id)->pluck('t_rank')->first();
-
-        return $rank;
+        return Fixture::played()->notCancelled()->ofClub($this->id)
+            ->get()
+            ->when($season, function ($query) use ($season) {
+                return $query->where('matchweek.season_id', $season->id);
+            })
+            ->when($matchweek, function ($query) use ($matchweek) {
+                return $query->where('matchweek.number_consecutive', '<=', $matchweek);
+            })
+            ->count();
     }
 
     /***********************************************************
