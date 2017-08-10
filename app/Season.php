@@ -160,7 +160,7 @@ class Season extends Model
                         $club->t_played++;
                         // won, drawn, loss, points
                         // not rated
-                        if($fixture->isFinished() && !$fixture->isRated()){
+                        if($fixture->isPlayed() && !$fixture->isRated()){
                             if ($club->id == $fixture->club_id_home && ($fixture->goals_home > $fixture->goals_away)
                                 || $club->id == $fixture->club_id_away && ($fixture->goals_home < $fixture->goals_away)) {
                                 $club->t_won++;
