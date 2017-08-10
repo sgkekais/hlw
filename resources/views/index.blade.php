@@ -91,7 +91,6 @@
                                 <div class="d-flex align-items-center">
                                     @foreach ($club->getLastGames(5) as $lastGame)
                                         <span class="fa-stack fa-lg">
-
                                         @if ($club->hasWon($lastGame))
                                             <i class="fa fa-circle fa-stack-2x text-success"></i>
                                             <strong class="fa-stack-1x" style="color:#ffffff">S</strong>
