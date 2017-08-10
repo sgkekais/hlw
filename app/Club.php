@@ -2,6 +2,7 @@
 
 namespace HLW;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -180,6 +181,18 @@ class Club extends Model
             ->where('goals_home', '<', 'goals_away');
 
         return $played_and_rated_games;
+    }
+
+    public function getLastGames()
+    {
+        return Fixture::ofClub($this->id)->orderby('datetime')
+            ->where('datetime','<=',Carbon::now())->first();
+    }
+
+    public function getNextGame()
+    {
+        return Fixture::ofClub($this->id)->orderby('datetime')
+            ->where('datetime','>=',Carbon::now())->first();
     }
 
     /***********************************************************
