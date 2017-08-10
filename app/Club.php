@@ -267,6 +267,14 @@ class Club extends Model
         return $games_lost;
     }
 
+    /**
+     * Get the number of goals that were scored by the club
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return int
+     */
     public function getGoalsFor(Season $season = null, Matchweek $matchweek = null)
     {
         $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->get()
@@ -298,6 +306,14 @@ class Club extends Model
         return $goals_for;
     }
 
+    /**
+     * Get the number of goals that were scored against the club
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return int
+     */
     public function getGoalsAgainst(Season $season = null, Matchweek $matchweek = null)
     {
         $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->get()
@@ -329,6 +345,14 @@ class Club extends Model
         return $goals_against;
     }
 
+    /**
+     * Get the number of points for the club
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
     public function getPoints(Season $season = null, Matchweek $matchweek = null)
     {
         $points = $this->getGamesWon($season, $matchweek)->count() * 3
@@ -364,6 +388,38 @@ class Club extends Model
                 return $query->take($numberofgames);
             })
             ->get();;
+    }
+
+    /**
+     * Check whether the clubs has won the specified fixture
+     * @param Fixture $fixture
+     * @return bool
+     */
+    public function hasWon(Fixture $fixture)
+    {
+        $won = false;
+
+        if (!$fixture->isRated()) {
+            if ($fixture->club_id_home == $this->id &&
+                ($fixture->goals_home > $fixture->goals_away
+                || $fixture->goals_home_11m > $fixture->goals_away_11m )) {
+                $won = true;
+            } elseif ($fixture->club_id_away == $this->id &&
+                ($fixture->goals_home < $fixture->goals_away
+                    || $fixture->goals_home_11m < $fixture->goals_away_11m )) {
+                $won = true;
+            }
+        } elseif ($fixture->isRated()) {
+            if ($fixture->club_id_home == $this->id &&
+                $fixture->goals_home_rated > $fixtuer->goals_away_rated) {
+                $won = true;
+            } elseif ($fixture->club_id_away == $this->id &&
+                $fixture->goals_home_rated < $fixture->goals_away_rated) {
+                $won = true;
+            }
+        }
+
+        return $won;
     }
 
     /***********************************************************
