@@ -121,7 +121,10 @@ class Season extends Model
         }
 
         foreach ($this->clubs->sortBy('name') as $club) {
+            // only clubs that have not withdrawn from the competition
+            if (!$club->pivot->withdrawal) {
 
+            }
         }
     }
 
