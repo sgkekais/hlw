@@ -183,6 +183,12 @@ class Club extends Model
         return $played_and_rated_games;
     }
 
+    /**
+     * Get the specified number of last games
+     * @param $numberofgames
+     * @return mixed
+     */
+
     public function getLastGames($numberofgames)
     {
         return Fixture::ofClub($this->id)->orderBy('datetime', 'desc')
@@ -193,10 +199,18 @@ class Club extends Model
             ->get();
     }
 
-    public function getNextGame()
+    /**
+     * Get the specified number of next games
+     * @return mixed
+     */
+    public function getNextGames($numberofgames)
     {
         return Fixture::ofClub($this->id)->orderBy('datetime')
-            ->where('datetime','>=',Carbon::now())->first();
+            ->where('datetime','>=',Carbon::now())
+            ->when($numberofgames, function ($query) use ($numberofgames){
+                return $query->take($numberofgames);
+            })
+            ->get();;
     }
 
     /***********************************************************

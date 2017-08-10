@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-md-4">
                                 @php
-                                    $nextgame = $club->getNextGame()
+                                    $nextgame = $club->getNextGames(1)->first()
                                 @endphp
                                 @if ($nextgame)
                                     <div class="row">
