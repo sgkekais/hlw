@@ -80,53 +80,6 @@ class Club extends Model
      * ACCESSORS
      ************************************************************/
 
-    // TODO: USE THESE TO BUILD THE TABLE LATER!
-    // USE SCOPES FOR FIXTURES AND PARAMETERS FOR SEASON OR MATCHWEEK?
-    public function getRankAttribute()
-    {
-        return 0;
-    }
-
-    public function getGamesPlayedAttribute()
-    {
-        return 0;
-    }
-
-    // Könnte als Methode mit wherehas funktionieren?
-    public function getGamesRatedAttribute()
-    {
-        return 0;
-    }
-
-    public function getGamesWonAttribute()
-    {
-        return 0;
-    }
-
-    public function getGamesDrawnAttribute()
-    {
-        return 0;
-    }
-
-    public function getGamesLostAttribute()
-    {
-        return 0;
-    }
-
-    public function getGoalsForAttribute()
-    {
-        return 0;
-    }
-
-    public function getGoalsAgainstAttribute()
-    {
-        return 0;
-    }
-
-    public function getGoalsDiffAttribute()
-    {
-        return $this->getGoalsForAttribute()-$this->getGoalsAgainstAttribute();
-    }
 
 
     /***********************************************************
