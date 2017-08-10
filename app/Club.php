@@ -82,13 +82,16 @@ class Club extends Model
 
     // TODO: USE THESE TO BUILD THE TABLE LATER!
     // USE SCOPES FOR FIXTURES AND PARAMETERS FOR SEASON OR MATCHWEEK?
-    // TODO: TRY  $c->fixtures()->where('matchweek.number_consecutive','<','22')->count()
     public function getRankAttribute()
     {
         return 0;
     }
 
-    // TODO funktioniert nicht mit Parameter
+    public function getGamesPlayedAttribute()
+    {
+
+    }
+
     // Könnte als Methode mit wherehas funktionieren?
     public function getGamesRatedAttribute()
     {
@@ -132,8 +135,8 @@ class Club extends Model
 
     /**
      * Get the games this club has played
-     * Optionally for a given season
-     * Optionally for a given season until a given matchweek
+     * Optional: for a given season
+     * Optional: for a given season until a given matchweek
      * @param Season|null $season
      * @param Matchweek|null $matchweek
      * @return int
@@ -154,6 +157,8 @@ class Club extends Model
 
     /**
      * Get the games that were rated
+     * Optional: for a given season
+     * Optional: until a given matchweek
      * @param Season|null $season
      * @param Matchweek|null $matchweek
      * @return mixed
@@ -172,13 +177,29 @@ class Club extends Model
         return $rated_games;
     }
 
+    /**
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
     public function getGamesWon(Season $season = null, Matchweek $matchweek = null)
     {
         $played_and_rated_games = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
             ->where('club_id_home', $this->id)
-            ->where('goals_home', '>', 'goals_away')
+            ->whereColumn('goals_home', '>', 'goals_away')
+            ->orWhere('club_id_home', $this->id)
+            ->whereColumn('goals_home_rated', '>', 'goals_away_rated')
             ->orWhere('club_id_away', $this->id)
-            ->where('goals_home', '<', 'goals_away');
+            ->whereColumn('goals_home', '<', 'goals_away')
+            ->orWhere('club_id_away', $this->id)
+            ->whereColumn('goals_home_rated', '<', 'goals_away_rated')
+        ->get()
+            ->when($season, function ($query) use ($season) {
+                return $query->where('matchweek.season_id', $season->id);
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
+            });;
 
         return $played_and_rated_games;
     }
