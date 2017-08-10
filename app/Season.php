@@ -120,12 +120,105 @@ class Season extends Model
             $matchweek = $this->currentMatchweek();
         }
 
-        foreach ($this->clubs->sortBy('name') as $club) {
+        $clubs = $this->clubs()->orderBy('name')->get()->map(function ($club) {
+            $club['t_rank']         = 0;
+            $club['t_played']       = 0;
+            $club['t_won']          = 0;
+            $club['t_drawn']        = 0;
+            $club['t_lost']         = 0;
+            $club['t_goals_for']    = 0;
+            $club['t_goals_against']= 0;
+            $club['t_goals_diff']   = 0;
+            $club['t_points']       = 0;
+
+            return $club;
+        });
+
+        // collect table data
+        foreach ($clubs as $club) {
             // only clubs that have not withdrawn from the competition
             if (!$club->pivot->withdrawal) {
-
+                // played + rated games
+                $club->t_played = $club->getGamesPlayed($this, $matchweek)->count()+$club->getGamesRated($this, $matchweek)->count();
+                // won games
+                $club->t_won = $club->getGamesWon($this, $matchweek)->count();
+                // drawn games
+                $club->t_drawn = $club->getGamesDrawn($this, $matchweek)->count();
+                // lost games
+                $club->t_lost = $club->getGamesLost($this, $matchweek)->count();
+                // goals for
+                $club->t_goals_for = $club->getGoalsFor($this, $matchweek);
+                // goals against
+                $club->t_goals_against = $club->getGoalsAgainst($this, $matchweek);
+                // goals diff
+                $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
+                // points
+                $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1;
             }
         }
+
+        // #3 Sort the table, use values() on collection
+        $clubs = $clubs->sort( function($a, $b) {
+            $result = false;
+
+            // compare points
+            if ($b->t_points > $a->t_points) {
+                $result = true;
+            } elseif ($b->t_points == $a->t_points) {               // if points are equal
+                if ($b->t_goals_diff > $a->t_goals_diff) {          // compare goal difference
+                    $result = true;
+                } elseif ($b->t_goals_diff == $a->t_goals_diff) {   // if goal difference is equal
+                    if ($b->t_goals_for > $a->t_goals_for) {        // compare goals for
+                        $result = true;
+                    }
+                }
+            }
+
+            return $result;
+
+        })->values();
+
+        // #4 calculate the rank
+        $rank = 1;
+        foreach ($clubs as $index => $club) {
+            // first iteration
+            if ($index === 0) {
+                $club->t_rank = $rank;
+                continue;
+            }
+
+            // break if only one item
+            if ($clubs->count() == 1) {
+                break;
+            }
+
+            // compare with previous club
+            $club_previous = $clubs->get(--$index);
+            // points
+            if ($club->t_points < $club_previous->t_points) {
+                $rank++;
+                $club->t_rank = $rank;
+                continue;
+            } elseif ($club->t_points == $club_previous->t_points) {
+                // equal points, then compare if goals difference smaller
+                // equal goals diff, then compare goals for
+                if ($club->t_goals_diff < $club_previous->t_goals_diff) {
+                    $rank++;
+                    $club->t_rank = $rank;
+                    continue;
+                } elseif (($club->t_goals_diff == $club_previous->t_goals_diff)
+                    && ($club->t_goals_for < $club_previous->t_goals_for)) {
+                    $rank++;
+                    $club->t_rank = $rank;
+                    continue;
+                } else {
+                    $club->t_rank = $rank;
+                    continue;
+                }
+            }
+        }
+
+        return $clubs;
     }
 
     /***********************************************************

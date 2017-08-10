@@ -97,13 +97,17 @@ class Club extends Model
     public function getGamesPlayed(Season $season = null, Matchweek $matchweek = null)
     {
         $games_played = Fixture::played()->notCancelled()->ofClub($this->id)
-            ->get()
             ->when($season, function ($query) use ($season) {
-                return $query->where('matchweek.season_id', $season->id);
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
-                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
-            });
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
 
         return $games_played;
     }
@@ -119,18 +123,23 @@ class Club extends Model
     public function getGamesRated(Season $season = null, Matchweek $matchweek = null)
     {
         $games_rated = Fixture::rated()->notCancelled()->ofClub($this->id)
-            ->get()
             ->when($season, function ($query) use ($season) {
-                return $query->where('matchweek.season_id', $season->id);
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
-                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
-            });
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
 
         return $games_rated;
     }
 
     /**
+     * TODO: rework nested wheres (game lost but rated for / against)
      * Get the games that were won by the club
      * Optional: for a given season
      * Optional: until a given matchweek
@@ -149,18 +158,23 @@ class Club extends Model
             ->whereColumn('goals_home', '<', 'goals_away')
             ->orWhere('club_id_away', $this->id)
             ->whereColumn('goals_home_rated', '<', 'goals_away_rated')
-        ->get()
             ->when($season, function ($query) use ($season) {
-                return $query->where('matchweek.season_id', $season->id);
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
-                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
-            });;
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
 
         return $games_won;
     }
 
     /**
+     * TODO: rework nested wheres (game drawn but rated for / against)
      * Get the games that ended in a draw
      * Optional: for a given season
      * Optional: until a given matchweek
@@ -179,18 +193,23 @@ class Club extends Model
             ->whereColumn('goals_home', '=', 'goals_away')
             ->orWhere('club_id_away', $this->id)
             ->whereColumn('goals_home_rated', '=', 'goals_away_rated')
-            ->get()
             ->when($season, function ($query) use ($season) {
-                return $query->where('matchweek.season_id', $season->id);
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
-                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
-            });;
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
 
         return $games_drawn;
     }
 
     /**
+     * TODO: rework nested wheres (game lost but rated for)
      * Get the games that were lost by the club
      * Optional: for a given season
      * Optional: until a given matchweek
@@ -209,13 +228,17 @@ class Club extends Model
             ->whereColumn('goals_home', '>', 'goals_away')
             ->orWhere('club_id_away', $this->id)
             ->whereColumn('goals_home_rated', '>', 'goals_away_rated')
-            ->get()
             ->when($season, function ($query) use ($season) {
-                return $query->where('matchweek.season_id', $season->id);
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
-                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
-            });
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
 
         return $games_lost;
     }
@@ -230,13 +253,18 @@ class Club extends Model
      */
     public function getGoalsFor(Season $season = null, Matchweek $matchweek = null)
     {
-        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->get()
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
             ->when($season, function ($query) use ($season) {
-                return $query->where('matchweek.season_id', $season->id);
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
-                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
-            });
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
 
         $goals_for = 0;
 
@@ -269,13 +297,18 @@ class Club extends Model
      */
     public function getGoalsAgainst(Season $season = null, Matchweek $matchweek = null)
     {
-        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->get()
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
             ->when($season, function ($query) use ($season) {
-                return $query->where('matchweek.season_id', $season->id);
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
-                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
-            });
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
 
         $goals_against = 0;
 
