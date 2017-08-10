@@ -364,7 +364,7 @@ class Club extends Model
     /**
      * Get the specified number of last games
      * @param $numberofgames
-     * @return mixed
+     * @return Fixture
      */
     public function getLastGames($numberofgames)
     {
@@ -378,7 +378,7 @@ class Club extends Model
 
     /**
      * Get the specified number of next games
-     * @return mixed
+     * @return Fixture
      */
     public function getNextGames($numberofgames)
     {
