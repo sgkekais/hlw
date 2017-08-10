@@ -88,7 +88,23 @@
                                 </a>
                             </div>
                             <div class="col-md-4">
-                                Form? Tabellenplätze?
+                                <div class="d-flex align-items-center">
+                                    @foreach ($club->getLastGames(5) as $lastGame)
+                                        <span class="fa-stack fa-lg">
+
+                                        @if ($club->hasWon($lastGame))
+                                            <i class="fa fa-circle fa-stack-2x text-success"></i>
+                                            <strong class="fa-stack-1x" style="color:#ffffff">S</strong>
+                                        @elseif ($club->hasLost($lastGame))
+                                            <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                            <strong class="fa-stack-1x" style="color:#ffffff">N</strong>
+                                        @elseif ($club->hasDrawn($lastGame))
+                                            <i class="fa fa-circle fa-stack-2x text-gray-dark"></i>
+                                            <strong class="fa-stack-1x" style="color:#ffffff">U</strong>
+                                        @endif
+                                        </span>
+                                    @endforeach
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 @php
