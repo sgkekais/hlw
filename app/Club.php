@@ -89,7 +89,7 @@ class Club extends Model
 
     public function getGamesPlayedAttribute()
     {
-
+        return 0;
     }
 
     // Könnte als Methode mit wherehas funktionieren?
@@ -262,14 +262,40 @@ class Club extends Model
             })
             ->when($season && $matchweek, function ($query) use ($matchweek) {
                 return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
-            });;
+            });
 
         return $games_lost;
     }
 
     public function getGoalsFor(Season $season = null, Matchweek $matchweek = null)
     {
-        $played _and_rated_games
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->get()
+            ->when($season, function ($query) use ($season) {
+                return $query->where('matchweek.season_id', $season->id);
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
+            });
+
+        $goals_for = 0;
+
+        foreach ($fixtures as $fixture) {
+            if ($fixture->club_id_home == $this->id) {
+                if (!$fixture->isRated()) {
+                    $goals_for += $fixture->goals_home;
+                } else {
+                    $goals_for += $fixture->goals_home_rated;
+                }
+            } elseif ($fixture->club_id_away == $this->id) {
+                if (!$fixture->isRated()) {
+                    $goals_for += $fixture->goals_away;
+                } else {
+                    $goals_for += $fixture->goals_away_rated;
+                }
+            }
+        }
+
+        return $goals_for;
     }
 
     public function getGoalsAgainst(Season $season = null, Matchweek $matchweek = null)
