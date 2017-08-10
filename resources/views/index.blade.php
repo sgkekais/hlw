@@ -5,6 +5,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <td></td>
                 <th class="align-middle text-center">#</th>
                 <th class="align-middle text-center">+ / -</th>
                 <th></th>
@@ -20,6 +21,9 @@
         <tbody>
             @foreach ($table_current as $club)
                 <tr>
+                    <td class="align-middle text-center">
+
+                    </td>
                     <td class="align-middle text-center">{{ $club->t_rank }}</td>
                     <td class="align-middle text-center">
                         @if($table_previous->count() > 0)
