@@ -143,7 +143,7 @@ class Club extends Model
      */
     public function getGamesPlayed(Season $season = null, Matchweek $matchweek = null)
     {
-        $played_games = Fixture::played()->notCancelled()->ofClub($this->id)
+        $games_played = Fixture::played()->notCancelled()->ofClub($this->id)
             ->get()
             ->when($season, function ($query) use ($season) {
                 return $query->where('matchweek.season_id', $season->id);
@@ -152,7 +152,7 @@ class Club extends Model
                 return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
             });
 
-        return $played_games;
+        return $games_played;
     }
 
     /**
@@ -165,7 +165,7 @@ class Club extends Model
      */
     public function getGamesRated(Season $season = null, Matchweek $matchweek = null)
     {
-        $rated_games = Fixture::rated()->notCancelled()->ofClub($this->id)
+        $games_rated = Fixture::rated()->notCancelled()->ofClub($this->id)
             ->get()
             ->when($season, function ($query) use ($season) {
                 return $query->where('matchweek.season_id', $season->id);
@@ -174,7 +174,7 @@ class Club extends Model
                 return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
             });
 
-        return $rated_games;
+        return $games_rated;
     }
 
     /**
@@ -187,7 +187,7 @@ class Club extends Model
      */
     public function getGamesWon(Season $season = null, Matchweek $matchweek = null)
     {
-        $played_and_rated_games = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
+        $games_won = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
             ->where('club_id_home', $this->id)
             ->whereColumn('goals_home', '>', 'goals_away')
             ->orWhere('club_id_home', $this->id)
@@ -204,7 +204,7 @@ class Club extends Model
                 return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
             });;
 
-        return $played_and_rated_games;
+        return $games_won;
     }
 
     /**
@@ -217,7 +217,7 @@ class Club extends Model
      */
     public function getGamesDrawn(Season $season = null, Matchweek $matchweek = null)
     {
-        $played_and_rated_games = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
+        $games_drawn = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
             ->where('club_id_home', $this->id)
             ->whereColumn('goals_home', '=', 'goals_away')
             ->orWhere('club_id_home', $this->id)
@@ -234,7 +234,7 @@ class Club extends Model
                 return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
             });;
 
-        return $played_and_rated_games;
+        return $games_drawn;
     }
 
     /**
@@ -247,7 +247,7 @@ class Club extends Model
      */
     public function getGamesLost(Season $season = null, Matchweek $matchweek = null)
     {
-        $played_and_rated_games = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
+        $games_lost = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
             ->where('club_id_home', $this->id)
             ->whereColumn('goals_home', '<', 'goals_away')
             ->orWhere('club_id_home', $this->id)
@@ -264,7 +264,25 @@ class Club extends Model
                 return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
             });;
 
-        return $played_and_rated_games;
+        return $games_lost;
+    }
+
+    public function getGoalsFor(Season $season = null, Matchweek $matchweek = null)
+    {
+        $played _and_rated_games
+    }
+
+    public function getGoalsAgainst(Season $season = null, Matchweek $matchweek = null)
+    {
+
+    }
+
+    public function getPoints(Season $season = null, Matchweek $matchweek = null)
+    {
+        $points = $this->getGamesWon($season, $matchweek)->count() * 3
+            + $this->getGamesDrawn($season, $matchweek)->count() *1;
+
+        return $points;
     }
 
     /**
