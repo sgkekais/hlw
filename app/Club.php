@@ -171,17 +171,15 @@ class Club extends Model
         return $rated_games;
     }
 
-    public function getGamesWon($fixtures)
+    public function getGamesWon(Season $season = null, Matchweek $matchweek = null)
     {
-        // $played_and_rated_games = $this->getGamesPlayed($season, $matchweek)
-        //    ->merge($this->getGamesRated($season, $matchweek));
-
-        $won_games = $fixtures->where('club_id_home', $this->id)
+        $played_and_rated_games = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
+            ->where('club_id_home', $this->id)
             ->where('goals_home', '>', 'goals_away')
             ->orWhere('club_id_away', $this->id)
             ->where('goals_home', '<', 'goals_away');
 
-        return $won_games;
+        return $played_and_rated_games;
     }
 
     /***********************************************************
