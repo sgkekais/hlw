@@ -397,7 +397,7 @@ class Club extends Model
             }
         } elseif ($fixture->isRated()) {
             if ($fixture->club_id_home == $this->id &&
-                $fixture->goals_home_rated > $fixtuer->goals_away_rated) {
+                $fixture->goals_home_rated > $fixture->goals_away_rated) {
                 $won = true;
             } elseif ($fixture->club_id_away == $this->id &&
                 $fixture->goals_home_rated < $fixture->goals_away_rated) {
@@ -406,6 +406,60 @@ class Club extends Model
         }
 
         return $won;
+    }
+
+    public function hasDrawn(Fixture $fixture)
+    {
+        $draw = false;
+
+        if (!$fixture->isRated()) {
+            if ($fixture->club_id_home == $this->id &&
+                ($fixture->goals_home == $fixture->goals_away
+                    || $fixture->goals_home_11m == $fixture->goals_away_11m )) {
+                $draw = true;
+            } elseif ($fixture->club_id_away == $this->id &&
+                ($fixture->goals_home == $fixture->goals_away
+                    || $fixture->goals_home_11m == $fixture->goals_away_11m )) {
+                $draw = true;
+            }
+        } elseif ($fixture->isRated()) {
+            if ($fixture->club_id_home == $this->id &&
+                $fixture->goals_home_rated == $fixture->goals_away_rated) {
+                $draw = true;
+            } elseif ($fixture->club_id_away == $this->id &&
+                $fixture->goals_home_rated == $fixture->goals_away_rated) {
+                $draw = true;
+            }
+        }
+
+        return $draw;
+    }
+
+    public function hasLost(Fixture $fixture)
+    {
+        $lost = false;
+
+        if (!$fixture->isRated()) {
+            if ($fixture->club_id_home == $this->id &&
+                ($fixture->goals_home < $fixture->goals_away
+                    || $fixture->goals_home_11m < $fixture->goals_away_11m )) {
+                $lost = true;
+            } elseif ($fixture->club_id_away == $this->id &&
+                ($fixture->goals_home > $fixture->goals_away
+                    || $fixture->goals_home_11m > $fixture->goals_away_11m )) {
+                $lost = true;
+            }
+        } elseif ($fixture->isRated()) {
+            if ($fixture->club_id_home == $this->id &&
+                $fixture->goals_home_rated < $fixture->goals_away_rated) {
+                $lost = true;
+            } elseif ($fixture->club_id_away == $this->id &&
+                $fixture->goals_home_rated > $fixture->goals_away_rated) {
+                $lost = true;
+            }
+        }
+
+        return $lost;
     }
 
     /***********************************************************
