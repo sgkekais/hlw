@@ -300,7 +300,33 @@ class Club extends Model
 
     public function getGoalsAgainst(Season $season = null, Matchweek $matchweek = null)
     {
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->get()
+            ->when($season, function ($query) use ($season) {
+                return $query->where('matchweek.season_id', $season->id);
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->where('matchweek.number_consecutive', '<=', $matchweek->number_consecutive);
+            });
 
+        $goals_against = 0;
+
+        foreach ($fixtures as $fixture) {
+            if ($fixture->club_id_home == $this->id) {
+                if (!$fixture->isRated()) {
+                    $goals_against += $fixture->goals_away;
+                } else {
+                    $goals_against += $fixture->goals_away_rated;
+                }
+            } elseif ($fixture->club_id_away == $this->id) {
+                if (!$fixture->isRated()) {
+                    $goals_against += $fixture->goals_home;
+                } else {
+                    $goals_against += $fixture->goals_home_rated;
+                }
+            }
+        }
+
+        return $goals_against;
     }
 
     public function getPoints(Season $season = null, Matchweek $matchweek = null)
