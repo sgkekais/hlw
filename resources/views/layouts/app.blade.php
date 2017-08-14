@@ -21,8 +21,7 @@
 </head>
 <body>
     <div id="app">
-
-            <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top">
+            <nav class="navbar navbar-toggleable-md navbar-inverse ">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -42,7 +41,6 @@
                             </li>
                         @endforeach
                     </ul>
-
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link active" href="#">Vorstand</a>
@@ -50,10 +48,20 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="">Satzung</a>
                         </li>
-
                     </ul>
                 </div>
             </nav>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tabelle & Paarungen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mannschaften</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Spieler</a>
+                </li>
+            </ul>
 
         <div class="container">
             @yield('content')
