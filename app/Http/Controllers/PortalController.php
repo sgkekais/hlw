@@ -16,7 +16,7 @@ class PortalController extends Controller
         $season = Season::find(1);
         $season->load('matchweeks','clubs');
 
-        $c_matchweek = $season->currentMatchweek();
+        $c_matchweek = $season->matchweeks()->where('number_consecutive','1')->first();
         $p_matchweek = $season->matchweeks()->where('number_consecutive','1')->first();
 
         $table_current = $season->generateTable($c_matchweek);

@@ -141,11 +141,11 @@ class Season extends Model
                 // played + rated games
                 $club->t_played = $club->getGamesPlayed($this, $matchweek)->count()+$club->getGamesRated($this, $matchweek)->count();
                 // won games
-                $club->t_won = $club->getGamesWon($this, $matchweek)->count();
+                $club->t_won = $club->getGamesPlayedWon($this, $matchweek)->count() + $club->getGamesRatedWon($this, $matchweek)->count();
                 // drawn games
-                $club->t_drawn = $club->getGamesDrawn($this, $matchweek)->count();
+                $club->t_drawn = $club->getGamesPlayedDrawn($this, $matchweek)->count() + $club->getGamesRatedDrawn($this, $matchweek)->count();
                 // lost games
-                $club->t_lost = $club->getGamesLost($this, $matchweek)->count();
+                $club->t_lost = $club->getGamesPlayedLost($this, $matchweek)->count() + $club->getGamesRatedLost($this, $matchweek)->count();
                 // goals for
                 $club->t_goals_for = $club->getGoalsFor($this, $matchweek);
                 // goals against
