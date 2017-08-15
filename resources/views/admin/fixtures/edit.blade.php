@@ -223,3 +223,66 @@
     </form>
 
 @endsection
+
+@section('pagespecificscripts')
+
+    <script type="text/javascript">
+        $(function() {
+            var beginDate = $("input[name=datetime]").val();
+            if ( !beginDate ) {
+                beginDate = moment().format("YYYY-MM-DD HH:mm:ss");
+            }
+
+            $('input[id="singledatetimepicker"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                startDate: beginDate,
+                timePicker: true,
+                timePicker24Hour: true,
+                timePickerSeconds: true,
+                locale: {
+                    "format": "YYYY-MM-DD HH:mm:ss",
+                    "separator": " - ",
+                    "applyLabel": "Anwenden",
+                    "cancelLabel": "Abbrechen",
+                    "fromLabel": "Von",
+                    "toLabel": "Bis",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "So",
+                        "Mo",
+                        "Di",
+                        "Mi",
+                        "Do",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "Januar",
+                        "Februar",
+                        "März",
+                        "April",
+                        "Mai",
+                        "Juni",
+                        "Juli",
+                        "August",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Dezember"
+                    ],
+                    "firstDay": 1
+                }
+            });
+            $('#datetimenull').click(function (){
+                if ( this.checked ){
+                    $('#singledatetimepicker').val(null);
+                }else{
+                    $('#singledatetimepicker').val(beginDate);
+                }
+            });
+        });
+    </script>
+
+@endsection

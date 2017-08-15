@@ -10,8 +10,11 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 
 window.Tether = require('tether');
+
+// bootstrap 4 alpha 6
 require('bootstrap');
 
+// daterangepicker
 require('daterangepicker');
 
 window.moment = require('moment');

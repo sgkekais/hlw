@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-4">
                 <select class="form-control" id="season_id" name="division_id" aria-describedby="season_idHelp">
-                    @foreach($divisions = \App\Division::all() as $division)
+                    @foreach($divisions = \HLW\Division::all() as $division)
                         <option value="{{ $division->id }}" {{ $division->id == $season->division_id ? "selected" : null  }}>
                             {{ $division->competition->name }} | {{ $division->name }}
                         </option>
@@ -174,5 +174,102 @@
         <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
         <a class="btn btn-secondary" href="{{ url()->previous() }}"><span class="fa fa-ban"></span> Abbrechen</a>
     </form>
+
+@endsection
+
+@section('pagespecificscripts')
+
+    <script type="text/javascript">
+        $(function() {
+            var beginDate = $("input[name=begin]").val();
+            if ( !beginDate ) {
+                beginDate = new Date().getDate();
+            }
+
+            var endDate   = $("input[name=end]").val();
+            if ( !endDate ) {
+                endDate = new Date().getDate();
+            }
+
+            $('input[id="singledatepickerfrom"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                startDate: beginDate,
+                locale: {
+                    "format": "YYYY-MM-DD",
+                    "separator": " - ",
+                    "applyLabel": "Anwenden",
+                    "cancelLabel": "Abbrechen",
+                    "fromLabel": "Von",
+                    "toLabel": "Bis",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "So",
+                        "Mo",
+                        "Di",
+                        "Mi",
+                        "Do",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "Januar",
+                        "Februar",
+                        "März",
+                        "April",
+                        "Mai",
+                        "Juni",
+                        "Juli",
+                        "August",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Dezember"
+                    ],
+                    "firstDay": 1
+                }
+            });
+            $('input[id="singledatepickerto"]').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                startDate: endDate,
+                locale: {
+                    "format": "YYYY-MM-DD",
+                    "separator": " - ",
+                    "applyLabel": "Anwenden",
+                    "cancelLabel": "Abbrechen",
+                    "fromLabel": "Von",
+                    "toLabel": "Bis",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "So",
+                        "Mo",
+                        "Di",
+                        "Mi",
+                        "Do",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "Januar",
+                        "Februar",
+                        "März",
+                        "April",
+                        "Mai",
+                        "Juni",
+                        "Juli",
+                        "August",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Dezember"
+                    ],
+                    "firstDay": 1
+                }
+            });
+        });
+    </script>
 
 @endsection
