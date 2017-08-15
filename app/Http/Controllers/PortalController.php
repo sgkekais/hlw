@@ -16,12 +16,12 @@ class PortalController extends Controller
         $season = Season::find(1);
         $season->load('matchweeks','clubs');
 
-        $c_matchweek = $season->matchweeks()->where('number_consecutive','1')->first();
-        $p_matchweek = $season->matchweeks()->where('number_consecutive','1')->first();
+        $c_matchweek = $season->currentMatchweek();
+        $p_matchweek = $c_matchweek->previousMatchweek();
 
         $table_current = $season->generateTable($c_matchweek);
         $table_previous = $season->generateTable($p_matchweek);
 
-        return view('index', compact('table_current', 'table_previous'));
+        return view('index', compact('season','table_current', 'table_previous'));
     }
 }

@@ -19,8 +19,10 @@ Auth::routes();
 
 Route::get('/', 'PortalController@index')->name('home');
 
-// clubs
-Route::get('/clubs/{club}', function(HLW\Club $club) {
+// list all clubs of a season
+Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seasons.clubs');
+
+Route::get('clubs/{club}', function(HLW\Club $club) {
     return $club;
 })->name('frontend.clubs.show');
 
