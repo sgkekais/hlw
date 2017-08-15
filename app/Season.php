@@ -197,6 +197,9 @@ class Season extends Model
             // points
             if ($club->t_points < $club_previous->t_points) {
                 $rank++;
+                if ($rank < $index+2) {
+                    $rank = $index+2;
+                }
                 $club->t_rank = $rank;
                 continue;
             } elseif ($club->t_points == $club_previous->t_points) {
@@ -204,11 +207,17 @@ class Season extends Model
                 // equal goals diff, then compare goals for
                 if ($club->t_goals_diff < $club_previous->t_goals_diff) {
                     $rank++;
+                    if ($rank < $index+2) {
+                        $rank = $index+2;
+                    }
                     $club->t_rank = $rank;
                     continue;
                 } elseif (($club->t_goals_diff == $club_previous->t_goals_diff)
                     && ($club->t_goals_for < $club_previous->t_goals_for)) {
                     $rank++;
+                    if ($rank < $index+2) {
+                        $rank = $index+2;
+                    }
                     $club->t_rank = $rank;
                     continue;
                 } else {
