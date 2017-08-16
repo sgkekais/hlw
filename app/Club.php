@@ -492,6 +492,11 @@ class Club extends Model
         return $won;
     }
 
+    /**
+     * Check whether the clubs has drawn the specified fixture
+     * @param Fixture $fixture
+     * @return bool
+     */
     public function hasDrawn(Fixture $fixture)
     {
         $draw = false;
@@ -519,6 +524,11 @@ class Club extends Model
         return $draw;
     }
 
+    /**
+     * Check whether the clubs has lost the specified fixture
+     * @param Fixture $fixture
+     * @return bool
+     */
     public function hasLost(Fixture $fixture)
     {
         $lost = false;
@@ -544,6 +554,15 @@ class Club extends Model
         }
 
         return $lost;
+    }
+
+    /**
+     * Get the regular stadium(s) of this club
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function regularStadium()
+    {
+        return $this->stadiums()->wherePivot('is_regular_stadium', '1');
     }
 
     /***********************************************************
