@@ -22,16 +22,13 @@
 <body>
     <div id="app">
 
-        <!-- navigation -->
+        <!-- yield navigation -->
         @include('_partials.nav')
 
-        <!-- center content -->
-        <div class="container">
-            @yield('content')
-        </div>
+        <!-- yield content -->
+        @yield('content')
 
     </div>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

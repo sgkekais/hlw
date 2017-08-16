@@ -21,10 +21,8 @@ Route::get('/', 'PortalController@index')->name('home');
 
 // list all clubs of a season
 Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seasons.clubs');
-
-Route::get('clubs/{club}', function(HLW\Club $club) {
-    return $club;
-})->name('frontend.clubs.show');
+// show a club
+Route::get('clubs/{club}', 'ClubController@show')->name('frontend.clubs.show');
 
 /*******************************************************
  * Admin Routes
