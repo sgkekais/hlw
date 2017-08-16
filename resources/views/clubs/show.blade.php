@@ -16,7 +16,22 @@
         </div>
     </div>
     <!-- tabs -->
-
+    <div class="row mx-auto" style="width: 1140px;">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Resultate</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Kader</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Bla</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Bla</a>
+            </li>
+        </ul>
+    </div>
 </div>
     <!-- content -->
 <div class="container">
