@@ -52,6 +52,15 @@ class Club extends Model
         'founded', 'league_entry', 'league_exit'
     ];
 
+    /**
+     * The attributes that should be casted to native types.
+     * @var array
+     */
+    protected $casts = [
+        'is_real_club'  => 'boolean',
+        'published'     => 'boolean'
+    ];
+
     /***********************************************************
      * SCOPES
      ************************************************************/
