@@ -133,6 +133,11 @@ class Fixture extends Model
            });
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('published', '1');
+    }
+
     /**
      * Scope the query to uncancelled fixtures, i.e. none of the related clubs has withdrawn from the competition
      * @param $query

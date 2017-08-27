@@ -35,7 +35,7 @@
                 <small id="name_shortHelp" class="form-text text-muted">"Code" für Manschaft, bspw. SWB</small>
             </div>
         </div>
-        <!-- logo -->
+        <!-- logo and cover image -->
         <div class="form-group row">
             <div class="col-md-2">
                 <label for="logo">Wappen</label>
@@ -43,6 +43,13 @@
             <div class="col-md-4">
                 <input type="file" class="form-control-file" name="logo" id="logo" aria-describedby="logoHelp" placeholder="{{ old('logo') }}">
                 <small id="logoHelp" class="form-text text-muted">Vereinswappen. Muss im .png-Format mit transparentem Hintergrund mit den Abmessungen 200x200px vorliegen.</small>
+            </div>
+            <div class="col-md-2">
+                <label for="cover">Cover</label>
+            </div>
+            <div class="col-md-4">
+                <input type="file" class="form-control-file" name="cover" id="cover" aria-describedby="coverHelp" placeholder="{{ old('cover') }}">
+                <small id="coverHelp" class="form-text text-muted">Cover, das auf der Mannschaftsseite angezeigt werden soll.</small>
             </div>
         </div>
         <!-- founded -->

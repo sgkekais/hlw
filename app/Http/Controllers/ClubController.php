@@ -29,7 +29,10 @@ class ClubController extends Controller
     {
         $club->load('players');
 
-        return view('clubs.show', compact('club'));
+        $season = Season::current()->first();
+        $season->load('matchweeks.fixtures');
+
+        return view('clubs.show', compact('club', 'season'));
     }
 
 }

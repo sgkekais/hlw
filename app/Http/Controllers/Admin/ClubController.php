@@ -74,14 +74,21 @@ class ClubController extends Controller
 
         // is there a logo?
         $store_message = "";
-        if($request->hasFile('logo'))
-        {
+        if ($request->hasFile('logo')) {
             // store the uploaded logo and save the path to the logo in the database
-            if($club->logo_url = $request->file('logo')->store('public/clublogos/'.$club->id))
-            {
-                $store_message = "Vereinswappen erfoglreich hochgeladen.";
+            if ($club->logo_url = $request->file('logo')->store('public/clublogos/'.$club->id)) {
+                $store_message = "Vereinswappen erfoglreich hochgeladen. ";
 
                 // save the club again
+                $club->save();
+            }
+        }
+
+        // is there a cover image?
+        if ($request->hasFile('cover')) {
+            if ($club->cover_url = $request->file('cover')->store('public/clubcovers/'.$club->id)) {
+                $store_message .= " Cover erfolgreich hochgeladen.";
+
                 $club->save();
             }
         }
@@ -140,12 +147,21 @@ class ClubController extends Controller
         ]);
 
         // is there a new logo selected?
-        if($request->hasFile('logo'))
-        {
+        if ($request->hasFile('logo')) {
             // then delete the old logo
             Storage::delete($club->logo_url);
             // and save the new logo
             $club->logo_url = $request->file('logo')->store('public/clublogos/'.$club->id);
+            // save the club
+            $club->save();
+        }
+
+        // is there a new cover selected?
+        if ($request->hasFile('cover')) {
+            // then delete the old logo
+            Storage::delete($club->cover_url);
+            // and save the new cover
+            $club->cover_url = $request->file('cover')->store('public/clubcovers/'.$club->id);
             // save the club
             $club->save();
         }
@@ -173,11 +189,16 @@ class ClubController extends Controller
 
         // delete the club logo first
         $delete_message = "";
-        if($club->logo_url)
-        {
-            if(Storage::delete($club->logo_url))
-            {
+        if ($club->logo_url) {
+            if (Storage::delete($club->logo_url)) {
                 $delete_message = "Vereinswappen vom Dateiserver gelöscht.";
+            }
+        }
+
+        // delete the cover
+        if ($club->cover_url) {
+            if (Storage::delete($club->cover_url)) {
+                $delete_message .= "Cover vom Dateiserver gelöscht.";
             }
         }
 

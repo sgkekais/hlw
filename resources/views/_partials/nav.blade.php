@@ -28,14 +28,5 @@
         </ul>
     </div>
 </nav>
-<ul class="nav">
-    <li class="nav-item">
-        <a class="nav-link" href="#">Tabelle & Paarungen</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('frontend.seasons.clubs', HLW\Season::find(1)) }}">Mannschaften</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Spieler</a>
-    </li>
-</ul>
+
+@yield('subnav')

@@ -69,6 +69,22 @@
                 <small id="logoHelp" class="form-text text-muted">Vereinswappen hochladen oder ersetzen. Muss im .png-Format mit transparentem Hintergrund mit den Abmessungen 200x200px vorliegen.</small>
             </div>
         </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="cover">Wappen</label>
+            </div>
+            <div class="col-md-2">
+                @if($club->cover_url)
+                    <img src="{{ Storage::url($club->cover_url) }}" class="img-fluid " title="Vereinswappen" alt="Vereinswappen">
+                @else
+                    <i>Kein Vereinswappen vorhanden</i>
+                @endif
+            </div>
+            <div class="col-md-4">
+                <input type="file" class="form-control-file" name="cover" id="cover" aria-describedby="coverHelp">
+                <small id="coverHelp" class="form-text text-muted">Cover hochladen oder ersetzen.</small>
+            </div>
+        </div>
         <!-- founded -->
         <div class="form-group row">
             <div class="col-md-2">
