@@ -71,7 +71,7 @@
         </div>
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="cover">Wappen</label>
+                <label for="cover">Cover</label>
             </div>
             <div class="col-md-2">
                 @if($club->cover_url)
@@ -82,7 +82,7 @@
             </div>
             <div class="col-md-4">
                 <input type="file" class="form-control-file" name="cover" id="cover" aria-describedby="coverHelp">
-                <small id="coverHelp" class="form-text text-muted">Cover hochladen oder ersetzen.</small>
+                <small id="coverHelp" class="form-text text-muted">Cover für Mannschaftsseite hochladen oder ersetzen.</small>
             </div>
         </div>
         <!-- founded -->

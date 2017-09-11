@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="container-fluid pt-4" style="background: url({{ $club->cover_url ? Storage::url($club->cover_url) : Storage::url('public/clubcovers/_default.jpg') }}) no-repeat">
+<div class="container-fluid pt-4" style="background: url({{ $club->cover_url ? Storage::url($club->cover_url) : Storage::url('public/clubcovers/_default.jpg') }}) repeat-x">
     <!-- cover -->
     <div class="row mx-auto" style="width: 1140px;">
         <div class="col-md-auto" style="min-width: 200px">
