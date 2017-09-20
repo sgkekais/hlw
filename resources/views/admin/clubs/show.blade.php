@@ -11,7 +11,7 @@
         </div>
         <div class="col-10 justify-content-end">
             <h1 class="">Details zu Mannschaft</h1>
-            <h2 class="mt-4 text-primary">&mdash; {{ $club->name }}</h2>
+            <h2 class="mt-4 text-info">&mdash; {{ $club->name }}</h2>
         </div>
     </div>
     <div class="row">
@@ -63,7 +63,7 @@
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#seasons" role="tab">
                 Saisons
-                <span class="badge badge-pill badge-default">
+                <span class="badge badge-pill badge-secondary">
                     {{ $club->seasons->count() }}
                 </span>
             </a>
@@ -71,7 +71,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#fixtures" role="tab">
                 Paarungen
-                <span class="badge badge-pill badge-default">
+                <span class="badge badge-pill badge-secondary">
                     {{ $club->fixtures()->count() }}
                 </span>
             </a>
@@ -79,20 +79,20 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#players" role="tab">
                 Kader
-                <span class="badge badge-pill badge-default">
+                <span class="badge badge-pill badge-secondary">
                     {{ $club->players()->whereNull('sign_off')->get()->count() }}
                 </span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#contacts" role="tab">
                 Kontakte
-                <span class="badge badge-pill badge-default">{{ $club->contacts->count() }}</span>
+                <span class="badge badge-pill badge-secondary">{{ $club->contacts->count() }}</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#stadiums" role="tab">
                 Spielort(e)
-                <span class="badge badge-pill badge-default">{{ $club->stadiums->count() }}</span>
+                <span class="badge badge-pill badge-secondary">{{ $club->stadiums->count() }}</span>
             </a>
         </li>
     </ul>

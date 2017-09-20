@@ -125,13 +125,13 @@
         <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#matchweeks" role="tab">
                 Spielwochen
-                <span class="badge badge-pill badge-default">{{ $season->matchweeks->count() }}</span>
+                <span class="badge badge-pill badge-secondary">{{ $season->matchweeks->count() }}</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#clubs" role="tab">
                 Mannschaften
-                <span class="badge badge-pill badge-default">{{ $season->clubs->count() }}</span></a>
+                <span class="badge badge-pill badge-secondary">{{ $season->clubs->count() }}</span></a>
         </li>
     </ul>
     <!-- show club details -->

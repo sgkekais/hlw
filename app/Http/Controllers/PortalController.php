@@ -10,18 +10,6 @@ class PortalController extends Controller
 {
     public function index()
     {
-        // test returning the table of a season
-        // TODO "current" only works here because we have one season, needs to account for competition, remove first in scope!!
-
-        $season = Season::find(1);
-        $season->load('matchweeks','clubs');
-
-        $c_matchweek = $season->currentMatchweek();
-        $p_matchweek = $c_matchweek->previousMatchweek();
-
-        $table_current = $season->generateTable($c_matchweek);
-        $table_previous = $season->generateTable($p_matchweek);
-
-        return view('index', compact('season','table_current', 'table_previous'));
+        return view('index');
     }
 }

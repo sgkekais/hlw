@@ -13,7 +13,7 @@
             </li>
             @foreach(\HLW\Division::all() as $division)
                 <li class="nav-item">
-                    <a class="nav-link" href="#">{{ $division->name }}</a>
+                    <a class="nav-link" href="{{ route('frontend.divisions.show', $division ) }}">{{ $division->name }}</a>
                 </li>
             @endforeach
         </ul>

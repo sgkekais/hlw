@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/', 'PortalController@index')->name('home');
 
+// division details
+Route::get('division/{division}', 'DivisionController@index')->name('frontend.divisions.show');
+
 // list all clubs of a season
 Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seasons.clubs');
 // show a club
