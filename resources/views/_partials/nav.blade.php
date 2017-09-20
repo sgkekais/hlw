@@ -8,11 +8,11 @@
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item {{ Route::is('home') ? "active" : null }}">
                 <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             @foreach(\HLW\Division::all() as $division)
-                <li class="nav-item">
+                <li class="nav-item {{ Route::is('frontend.divisions.show') && Request::segment(2) == $division->id ? "active" : null }}">
                     <a class="nav-link" href="{{ route('frontend.divisions.show', $division ) }}">{{ $division->name }}</a>
                 </li>
             @endforeach

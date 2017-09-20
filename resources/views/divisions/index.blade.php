@@ -1,5 +1,26 @@
 @extends('layouts.app')
 
+@section('subnav')
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Tabelle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Paarungen</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sünderkarte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Teams</a>
+            </li>
+        </ul>
+    </nav>
+
+@endsection
+
 @section('content')
 
     <div class="container">
