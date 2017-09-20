@@ -7,11 +7,18 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-require('bootstrap');
+try {
+    window.$ = window.jQuery = require('jquery');
 
-require('daterangepicker');
+    // bootstrap
+    require('bootstrap');
 
-window.moment = require('moment');
+    // daterangepicker
+    require('daterangepicker');
+    // moment for daterangepicker
+    window.moment = require('moment');
+
+} catch (e) {}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

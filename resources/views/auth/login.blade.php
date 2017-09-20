@@ -2,7 +2,7 @@
 
 <div id="app">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-4">
             <img src="/images/hlwlogo.png" class="" height="" alt="HLW-Logo">
         </div>
         <div class="row mt-4 mb-4 justify-content-center">
