@@ -1,65 +1,28 @@
 @extends('layouts.app')
 
-@section('subnav')
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-    <!--<ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Tabelle & Paarungen</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('frontend.seasons.clubs', HLW\Season::find(1)) }}">Mannschaften</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Spieler</a>
-        </li>
-    </ul>-->
-@endsection
-
 @section('content')
-<div class="container">
-    <table class="table table-hover">
-        <thead>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
             <tr>
                 <td></td>
-                <th class="align-middle text-center hidden-xs-down">#</th>
+                <th class="align-middle text-center d-none d-sm-table-cell">#</th>
                 <th class="align-middle text-center">+/-</th>
                 <th></th>
                 <th class="align-middle text-center">Sp</th>
-                <th class="align-middle text-center hidden-sm-down">S</th>
-                <th class="align-middle text-center hidden-sm-down">U</th>
-                <th class="align-middle text-center hidden-sm-down">N</th>
-                <th class="align-middle text-center hidden-sm-down">Tore</th>
+                <th class="align-middle text-center d-none d-md-table-cell">S</th>
+                <th class="align-middle text-center d-none d-md-table-cell">U</th>
+                <th class="align-middle text-center d-none d-md-table-cell">N</th>
+                <th class="align-middle text-center d-none d-md-table-cell">Tore</th>
                 <th class="align-middle text-center">Diff.</th>
                 <th class="align-middle text-center">Pkt.</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach ($table_current as $club)
                 <tr>
-                    <td class="align-middle text-center hidden-xs-down ">
+                    <td class="align-middle text-center d-none d-sm-table-cell ">
                         <a data-toggle="collapse" href="#collapsedetails{{ $loop->iteration }}" aria-expanded="false" title="Expandieren">
                             <span class="fa fa-angle-down"></span>
                         </a>
@@ -83,17 +46,17 @@
                             @endif
                         @endif
                     </td>
-                    <td class="align-middle hidden-xs-down">
+                    <td class="align-middle d-none d-sm-table-cell">
                         @if($club->logo_url)
                             <img src="{{ Storage::url($club->logo_url) }}" width="30" class="pr-1">
                         @else
                             <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                         @endif
-                            <a href="{{ route('frontend.clubs.show', $club) }}">
-                                {{ $club->name }}
-                            </a>
+                        <a href="{{ route('frontend.clubs.show', $club) }}">
+                            {{ $club->name }}
+                        </a>
                     </td>
-                    <td class="align-middle hidden-sm-up p-2">
+                    <td class="align-middle d-sm-none p-2">
                         @if($club->logo_url)
                             <img src="{{ Storage::url($club->logo_url) }}" width="30" class="pr-1">
                         @else
@@ -105,14 +68,14 @@
                     </td>
 
                     <td class="align-middle text-center p-2 p-md-2">{{ $club->t_played }}</td>
-                    <td class="align-middle text-center hidden-sm-down">{{ $club->t_won }}</td>
-                    <td class="align-middle text-center hidden-sm-down">{{ $club->t_drawn }}</td>
-                    <td class="align-middle text-center hidden-sm-down">{{ $club->t_lost }}</td>
-                    <td class="align-middle text-center hidden-sm-down">{{ $club->t_goals_for }} : {{ $club->t_goals_against }}</td>
+                    <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_won }}</td>
+                    <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_drawn }}</td>
+                    <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_lost }}</td>
+                    <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_goals_for }} : {{ $club->t_goals_against }}</td>
                     <td class="align-middle text-center p-2 p-md-2">{{ $club->t_goals_diff }}</td>
                     <td class="align-middle text-center p-2 p-md-2">{{ $club->t_points }}</td>
                 </tr>
-                <tr class="collapse bg-faded hidden-xs-down" id="collapsedetails{{ $loop->iteration }}">
+                <tr class="collapse bg-light" id="collapsedetails{{ $loop->iteration }}">
                     <td class="" colspan="11" style="border-top: none">
                         <div class="row">
                             <div class="col-md-4">
@@ -130,15 +93,15 @@
                                     @foreach ($club->getLastGames(5) as $lastGame)
                                         <span class="fa-stack fa-lg">
                                         @if ($club->hasWon($lastGame))
-                                            <i class="fa fa-circle fa-stack-2x text-success"></i>
-                                            <strong class="fa-stack-1x" style="color:#ffffff">S</strong>
-                                        @elseif ($club->hasLost($lastGame))
-                                            <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                                            <strong class="fa-stack-1x" style="color:#ffffff">N</strong>
-                                        @elseif ($club->hasDrawn($lastGame))
-                                            <i class="fa fa-circle fa-stack-2x text-gray-dark"></i>
-                                            <strong class="fa-stack-1x" style="color:#ffffff">U</strong>
-                                        @endif
+                                                <i class="fa fa-circle fa-stack-2x text-success"></i>
+                                                <strong class="fa-stack-1x" style="color:#ffffff">S</strong>
+                                            @elseif ($club->hasLost($lastGame))
+                                                <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                                <strong class="fa-stack-1x" style="color:#ffffff">N</strong>
+                                            @elseif ($club->hasDrawn($lastGame))
+                                                <i class="fa fa-circle fa-stack-2x text-dark"></i>
+                                                <strong class="fa-stack-1x" style="color:#ffffff">U</strong>
+                                            @endif
                                         </span>
                                     @endforeach
                                 </div>
@@ -193,7 +156,8 @@
                     </td>
                 </tr>
             @endforeach
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+
 @endsection

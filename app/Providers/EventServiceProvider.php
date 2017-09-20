@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'HLW\Events\SomeEvent' => [
+        'HLW\Events\Event' => [
             'HLW\Listeners\EventListener',
         ],
     ];

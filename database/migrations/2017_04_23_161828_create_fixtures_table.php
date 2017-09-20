@@ -35,6 +35,7 @@ class CreateFixturesTable extends Migration
             // add a rescheduled_by column to identify the team that cancelled the match
             $table->integer('rescheduled_by_club')->nullable()->unsigned();
             $table->text('reschedule_reason')->nullable();
+            $table->boolean('reschedule_count')->default('0');
 
             $table->timestamps();
 

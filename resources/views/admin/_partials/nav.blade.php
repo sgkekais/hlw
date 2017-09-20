@@ -1,14 +1,11 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top mb-4">
-    <!-- toggler -->
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="toggle navigation">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+    <a class="navbar-brand" href="{{ route('home') }}">
+        <img src="/images/hlwlogo_w.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <!-- brand image and text -->
-    <a class="navbar-brand" href="{{ route('admin') }}">
-        <img src="/images/hlwlogo.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">
-        Admin
-    </a>
 
     <!-- toggable navigation bar -->
     <div class="collapse navbar-collapse" id="navbarCollapse">

@@ -16,6 +16,7 @@ class CreateFixturesRefereesTable extends Migration
         Schema::create('fixtures_referees', function (Blueprint $table) {
             $table->integer('fixture_id')->unsigned();
             $table->integer('referee_id')->unsigned();
+            $table->text('note')->nullable();
 
             $table->timestamps();
 

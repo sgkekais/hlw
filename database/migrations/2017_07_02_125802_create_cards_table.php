@@ -21,6 +21,7 @@ class CreateCardsTable extends Migration
             $table->integer('ban_matches')->unsigned()->nullable(); // number of matches banned
             $table->boolean('ban_season')->default('0');    // banned for this season?
             $table->boolean('ban_lifetime')->default('0');  // banned for life?
+            $table->text('ban_reason')->nullable();
             $table->text('note')->nullable();
 
             $table->timestamps();

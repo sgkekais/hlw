@@ -20,6 +20,7 @@ class CreateClubsTable extends Migration
             $table->string('name_short')->nullable();
             $table->string('name_code')->nullable();        // code for club, e.g. SWB for SW Bilk
             $table->text('logo_url')->nullable();           // URL to logo on file server
+            $table->text('cover_url')->nullable();
             $table->date('founded')->nullable();
             $table->date('league_entry')->nullable();       // entry into HLW
             $table->date('league_exit')->nullable();        // exit from HLW

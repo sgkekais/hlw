@@ -10,9 +10,10 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
+    |
     */
 
-    'name' => 'Hobbyliga-West Düsseldorf',
+    'name' => env('APP_NAME', 'Hobbyliga-West Düsseldorf'),
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +167,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -177,25 +177,6 @@ return [
         HLW\Providers\EventServiceProvider::class,
         HLW\Providers\RouteServiceProvider::class,
 
-        /*
-         * Laravel-Permission
-         */
-        Spatie\Permission\PermissionServiceProvider::class,
-
-        /*
-         * Laravel-Activitylog
-         */
-        Spatie\Activitylog\ActivitylogServiceProvider::class,
-
-        /*
-         * Laravel-debugbar
-         */
-        Barryvdh\Debugbar\ServiceProvider::class,
-
-        /*
-         * Laravel Excel
-         */
-        Maatwebsite\Excel\ExcelServiceProvider::class
     ],
 
     /*
@@ -244,12 +225,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        // Carbon
+
         'Carbon' => Carbon\Carbon::class,
-        // Helper Alias
+
         'ModelHelper' => HLW\Helpers\ModelHelper::class,
-        // Laravel Excel
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
+
     ],
 
 ];

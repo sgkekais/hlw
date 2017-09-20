@@ -19,6 +19,7 @@ class CreatePeopleTable extends Migration
             $table->string('last_name');
             $table->date('date_of_birth')->nullable();
             $table->string('photo')->nullable();        // passport photograph
+            $table->boolean('photo_public')->default('0');
             $table->integer('registered_at_club')->unsigned()->nullable();  // Official (non HLW) club the person is currently playing for
 
             $table->timestamps();
