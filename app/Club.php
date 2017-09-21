@@ -478,7 +478,7 @@ class Club extends Model
     {
         $won = false;
 
-        if (!$fixture->isRated()) {
+        if (!$fixture->isRated() && $fixture->isPlayed()) {
             if ($fixture->club_id_home == $this->id &&
                 ($fixture->goals_home > $fixture->goals_away
                 || $fixture->goals_home_11m > $fixture->goals_away_11m )) {
@@ -510,7 +510,7 @@ class Club extends Model
     {
         $draw = false;
 
-        if (!$fixture->isRated()) {
+        if (!$fixture->isRated() && $fixture->isPlayed()) {
             if ($fixture->club_id_home == $this->id &&
                 ($fixture->goals_home == $fixture->goals_away
                     || $fixture->goals_home_11m == $fixture->goals_away_11m )) {
@@ -542,7 +542,7 @@ class Club extends Model
     {
         $lost = false;
 
-        if (!$fixture->isRated()) {
+        if (!$fixture->isRated() && $fixture->isPlayed()) {
             if ($fixture->club_id_home == $this->id &&
                 ($fixture->goals_home < $fixture->goals_away
                     || $fixture->goals_home_11m < $fixture->goals_away_11m )) {

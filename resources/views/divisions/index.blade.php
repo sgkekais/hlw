@@ -2,35 +2,27 @@
 
 @section('subnav')
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Tabelle</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Paarungen</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Sünderkarte</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Teams</a>
-            </li>
-        </ul>
-    </nav>
+    @include('_partials.subnav_divisions')
 
 @endsection
 
 @section('content')
 
-    <div class="container">
+    <div class="container pt-4">
+
+        <h2 style="font-weight: bold">Tabelle</h2>
+        <p>
+            Datum, Spielwoche, etc.?
+
+            Details nur "on click" laden
+        </p>
         <table class="table table-hover">
             <thead>
             <tr>
-                <td></td>
-                <th class="align-middle text-center d-none d-sm-table-cell">#</th>
+                <th class="align-middle text-center d-none d-md-table-cell"></th>
+                <th class="align-middle text-center">#</th>
                 <th class="align-middle text-center">+/-</th>
-                <th></th>
+                <th class="align-middle text-center"></th>
                 <th class="align-middle text-center">Sp</th>
                 <th class="align-middle text-center d-none d-md-table-cell">S</th>
                 <th class="align-middle text-center d-none d-md-table-cell">U</th>
@@ -38,6 +30,8 @@
                 <th class="align-middle text-center d-none d-md-table-cell">Tore</th>
                 <th class="align-middle text-center">Diff.</th>
                 <th class="align-middle text-center">Pkt.</th>
+                <th class="align-middle text-center d-none d-lg-table-cell">Form</th>
+                <th class="align-middle text-center">Next</th>
             </tr>
             </thead>
             <tbody>
@@ -95,9 +89,49 @@
                     <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_goals_for }} : {{ $club->t_goals_against }}</td>
                     <td class="align-middle text-center p-2 p-md-2">{{ $club->t_goals_diff }}</td>
                     <td class="align-middle text-center p-2 p-md-2">{{ $club->t_points }}</td>
+                    <!-- Form -->
+                    <td class="align-middle text-left d-none d-lg-table-cell">
+                        @foreach ($club->getLastGames(5) as $lastGame)
+                            @if($lastGame->isPlayed() || $lastGame->isRated())
+                                <span class="fa-stack">
+                                    @if ($club->hasWon($lastGame))
+                                        <i class="fa fa-circle fa-stack-2x text-success"></i>
+                                        <strong class="fa-stack-1x" style="color:#ffffff">S</strong>
+                                    @elseif ($club->hasLost($lastGame))
+                                        <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                        <strong class="fa-stack-1x" style="color:#ffffff">N</strong>
+                                    @elseif ($club->hasDrawn($lastGame))
+                                        <i class="fa fa-circle fa-stack-2x text-dark"></i>
+                                        <strong class="fa-stack-1x" style="color:#ffffff">U</strong>
+                                    @endif
+                                </span>
+                            @endif
+                        @endforeach
+                    </td>
+                    <!-- next -->
+                    <td class="align-middle text-center">
+                        @php
+                            $nextgame = $club->getNextGames(1)->first()
+                        @endphp
+                        @if($nextgame)
+                            @php
+                                $logo = null;
+                                if($nextgame->clubHome && $nextgame->clubHome->id == $club->id )
+                                    $logo = $nextgame->clubAway->logo_url;
+                                elseif($nextgame->clubAway && $nextgame->clubAway->id == $club->id)
+                                    $logo = $nextgame->clubHome->logo_url;
+                            @endphp
+                            @if($logo)
+                                <img src="{{ Storage::url($logo) }}" width="30" class="pr-1">
+                            @else
+                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                            @endif
+                        @endif
+
+                    </td>
                 </tr>
                 <tr class="collapse bg-light" id="collapsedetails{{ $loop->iteration }}">
-                    <td class="" colspan="11" style="border-top: none">
+                    <td class="" colspan="13" style="border-top: none">
                         <div class="row">
                             <div class="col-md-4">
                                 @if($club->logo_url)
@@ -128,9 +162,6 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                @php
-                                    $nextgame = $club->getNextGames(1)->first()
-                                @endphp
                                 @if ($nextgame)
                                     <div class="row">
                                         <div class="col-md-12">

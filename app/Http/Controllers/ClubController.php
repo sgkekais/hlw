@@ -14,9 +14,11 @@ class ClubController extends Controller
      */
     public function index(Season $season = null)
     {
+        // TODO: if no season, display all clubs?
+
         $clubs = $season->clubs()->orderBy('name')->get();
 
-        return $clubs;
+        return view('clubs.index', compact('season', 'clubs'));
     }
 
     /**

@@ -5,6 +5,8 @@
 
         <!-- navigation -->
         @include('_partials.nav')
+        <!-- subnavigation -->
+        @yield('subnav')
 
         <!-- content -->
         @yield('content')

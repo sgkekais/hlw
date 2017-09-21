@@ -27,5 +27,3 @@
         </ul>
     </div>
 </nav>
-
-@yield('subnav')

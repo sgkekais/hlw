@@ -26646,7 +26646,6 @@ try {
 
   // bootstrap
   __webpack_require__(130);
-  // popper for bootstrap
 
   // daterangepicker
   __webpack_require__(132);

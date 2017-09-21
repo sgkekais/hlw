@@ -24,7 +24,8 @@ Route::get('division/{division}', 'DivisionController@index')->name('frontend.di
 
 // list all clubs of a season
 Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seasons.clubs');
-// show a club
+
+// clubs
 Route::get('clubs/{club}', 'ClubController@show')->name('frontend.clubs.show');
 
 /*******************************************************

@@ -4,7 +4,7 @@
 @import "~bootstrap/scss/bootstrap";
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,900,900i');
 
 // Font-Awesome
 $fa-font-path: "../../../node_modules/font-awesome/fonts" !default;
@@ -23,6 +23,7 @@ body {
   // background-color: #ffffff;
 }
 
+// nav
 nav {
   background-color: $primary-color;
 }
