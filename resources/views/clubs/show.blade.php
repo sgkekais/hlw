@@ -112,6 +112,9 @@
                             </div>
                             <div class="col-5">
                                 @if ($fixture->clubAway)
+                                    @if ($fixture->clubHome->logo_url)
+                                        <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" height="25">
+                                    @endif
                                     {{ $fixture->clubAway->name }}
                                 @endif
                             </div>
