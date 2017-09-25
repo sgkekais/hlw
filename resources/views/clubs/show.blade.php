@@ -14,7 +14,7 @@
             @endif
         </div>
         <div class="col-md-8 text-white">
-            <h1>{{ $club->name }}</h1>
+            <h1 style="font-weight: bold">{{ $club->name }}</h1>
             <ul class="list-unstyled">
                 <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : "Kein Stadion" }}</li>
             </ul>

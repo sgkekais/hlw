@@ -2,10 +2,10 @@
     <div class="container">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link pl-0" href="#">Tabelle</a>
+                <a class="nav-link pl-0" href="{{ route('frontend.divisions.tables', $division) }}">Tabelle</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Paarungen</a>
+                <a class="nav-link" href="{{ route('frontend.divisions.fixtures', $division) }}">Paarungen</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Sünderkartei</a>

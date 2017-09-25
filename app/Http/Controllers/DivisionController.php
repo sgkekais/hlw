@@ -10,7 +10,14 @@ class DivisionController extends Controller
     public function index(Division $division)
     {
         $season = $division->seasons()->current()->first();
-        $season->load('matchweeks','clubs');
+
+        return view('divisions.index', compact('division', 'season'));
+    }
+
+    public function tables(Division $division)
+    {
+        $season = $division->seasons()->current()->first();
+        $season->load('matchweeks', 'clubs');
 
         $c_matchweek = $season->currentMatchweek();
         $p_matchweek = $c_matchweek->previousMatchweek();
@@ -18,6 +25,19 @@ class DivisionController extends Controller
         $table_current = $season->generateTable($c_matchweek);
         $table_previous = $season->generateTable($p_matchweek);
 
-        return view('divisions.index', compact('season','table_current', 'table_previous'));
+        return view('divisions.tables', compact(
+            'division',
+            'season',
+            'table_current',
+            'table_previous',
+            'c_matchweek',
+            'p_matchweek'));
+    }
+
+    public function fixtures(Division $division)
+    {
+        $season = $division->seasons()->current()->first();
+
+        return view('divisions.fixtures', compact('division', 'season'));
     }
 }
