@@ -65,7 +65,7 @@
 <div class="container">
     <div class="row mt-2">
         <div class="col-12">
-            @foreach ($season->fixtures()->ofClub($club->id) ->orderBy('datetime')->get() as $fixture)
+            @foreach ($season->fixtures()->ofClub($club->id)->orderBy('datetime')->get() as $fixture)
                 <div class="row" style="border-bottom: gray 1px">
                     <h5 class="pt-2">Spielwoche {{ $fixture->matchweek->number_consecutive }}</h5>
                 </div>
@@ -91,8 +91,11 @@
                     </div>
                     <div class="col-3">
                         @if ( $fixture->datetime )
-                            <span class="fa fa-calendar"></span> {{ $fixture->datetime->format('d.m.Y') }}
-                            <span class="fa fa-clock-o"></span> {{ $fixture->datetime->format('H:i') }}
+                            <span class="fa fa-calendar"></span>
+                                {{ $fixture->datetime->formatLocalized('%a') }},
+                                {{ $fixture->datetime->format('d.m.Y') }}
+                            <span class="fa fa-clock-o"></span>
+                                {{ $fixture->datetime->format('H:i') }} Uhr
                         @else
                             TBD
                         @endif
