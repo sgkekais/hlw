@@ -38,6 +38,8 @@ class DivisionController extends Controller
     {
         $season = $division->seasons()->current()->first();
 
+        $season->load('clubs', 'matchweeks', 'matchweeks.fixtures');
+
         return view('divisions.fixtures', compact('division', 'season'));
     }
 }

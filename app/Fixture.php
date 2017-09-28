@@ -189,6 +189,15 @@ class Fixture extends Model
         }
     }
 
+    public function isCancelled()
+    {
+        if (isset($this->cancelled)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /***********************************************************
      * RELATIONSHIPS
      ************************************************************/
