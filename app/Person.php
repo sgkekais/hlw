@@ -15,7 +15,7 @@ class Person extends Model
      */
     protected static $logAttributes = [
         'first_name', 'last_name',
-        'date_of_birth', 'photo', 'photo_public', 'registered_at_club'
+        'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'note'
     ];
 
     /**
@@ -30,7 +30,7 @@ class Person extends Model
      */
     protected $fillable = [
         'first_name', 'last_name',
-        'date_of_birth', 'photo', 'photo_public', 'registered_at_club'
+        'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'note'
     ];
 
     /**

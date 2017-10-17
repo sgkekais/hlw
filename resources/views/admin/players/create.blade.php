@@ -75,6 +75,17 @@
                 <small id="positions_idHelp" class="form-text text-muted">Welche Position hat der Spieler?</small>
             </div>
         </div>
+        <!-- published -->
+        <div class="form-group row">
+            <div class="form-group col-md-6">
+                <label for="public">Öffentlich?</label>
+                <select class="form-control" id="public" name="public" aria-describedby="publicHelp">
+                    <option value="0">Nein</option>
+                    <option value="1">Ja</option>
+                </select>
+                <small id="publicHelp" class="form-text text-muted">Spieler auf Seite veröffentlichen?</small>
+            </div>
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success"><span class="fa fa-save"></span> Anlegen</button>
             <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}"><span class="fa fa-ban"></span> Abbrechen</a>

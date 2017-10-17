@@ -66,6 +66,16 @@
                 <small id="photoHelp" class="form-text text-muted">Passbild</small>
             </div>
         </div>
+        <!-- note -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="note">Notiz</label>
+            </div>
+            <div class="col-md-4">
+                <textarea class="form-control" id="note" name="note" rows="3" aria-describedby="noteHelp">{{ $person->note }}</textarea>
+                <small id="noteHelp" class="form-text text-muted">Interne Notiz</small>
+            </div>
+        </div>
         <!-- registered at club -->
         <div class="form-group row">
             <div class="col-md-2">

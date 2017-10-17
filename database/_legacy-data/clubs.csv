@@ -1,76 +1,76 @@
-﻿id;name;name_short;name_code;logo_url;founded;league_entry;league_exit;colours_club_primary;colours_club_secondary;colours_kit_home_primary;colours_kit_home_secondary;colours_kit_away_primary;colours_kit_away_secondary;website;facebook;note;is_real_club;published;created_at;updated_at
-1;Dritte III;Dritte;DIII;;;2011-01-01;;;;;;;;;;;;0;;
-2;HFC Heine '97;Heine;HFC97;;1997-10-24;2004-01-01;;;;;;;;;;H(ochschul) F(ussball) C(lub) Heine '97<br /><br />Erfolge auÃŸerhalb der HLW:<br/>Bunteliga D:<br/>Pokalsieger 2002 & 2004<br/>F.I. SÃ¼d:<br />Meister 1998 & 1999,<br/> Pokalsieger 1998;;0;;
-3;Bierfreunde Mett;Bierfreunde;BM;;2005-12-14;2010-01-01;2015-01-01;;;;;;;http://unserteam.de/teams/show/278;https://www.facebook.com/pages/Bierfreunde-Mett/128905943822901?ref=pb;Abmeldung aus dem laufenden Spielbetrieb in der Saison 2015.;;0;;
-4;Schwarz-Weiß Bilk '79;SW Bilk;SWB79;;1979-11-25;1999-01-01;;;;;;;;http://www.swbilk79.de/;https://www.facebook.com/pages/Schwarz-Weiss-Bilk-79/175477382466028;;;0;;
-5;Dynamo Unterbach;Unterbach;DU;;;2008-01-01;2013-01-01;;;;;;;http://www.dynamo-unterbach.de/;;Meldete sich Ende 2013 wÃ¤hrend der Saison vom Spielbetrieb ab.;;0;;
-6;SG United Ratingen 05;Ratingen;SGU05;;;2008-01-01;;;;;;;;http://www.united-ratingen-05.de/;https://www.facebook.com/pages/United-Ratingen-05/110745998959560?ref=pb;;;0;;
-7;Harbour Pirates FC;Pirates;HP;;;2010-01-01;2016-01-01;;;;;;;;http://de-de.facebook.com/pages/Harbour-Pirates-FC/134015799980388;Die Pirates haben sich Anfang 2016 mangels Spielern aus der HLW zurÃ¼ckgezogen.;;0;;
-8;FC Lot jonn;Lot jonn;LJ;;;2009-01-01;;;;;;;;http://www.lotjonn.com/;;;;0;;
-9;Hammer SV '99;Hamm;HSV99;;;1999-01-01;;;;;;;;;;ehemal. SG Bruderhaus von 1996-1998;;0;;
-10;Altbier Rangers;Rangers;AR;;;2011-01-01;2015-01-01;;;;;;;http://www.altbier-rangers.de/;https://www.facebook.com/AltbierRangers;;;0;;
-11;Kaiserkicker;Kaiserkicker;KK;;1986-06-21;1996-01-01;2014-01-01;;;;;;;http://www.kaiserkicker.de/;;;;0;;
-12;United '08;United;UTD08;;2007-11-11;2008-01-01;;;;;;;;;;;;0;;
-13;Team Postwirtschaft;Post;TP;;;2005-01-01;2012-01-01;;;;;;;http://www.teampostwirtschaft.de/;;2011 zog sich Team Postwirtschaft wÃ¤hrend der Saison zurÃ¼ck. Alle Spiele der Saison wurden annulliert. <br/>2012 wagte die Mannschaft einen neuen Versuch in Liga 2.<br/>2013 nimmt Team Postwirtschaft nicht mehr am Spielbetrieb teil.;;0;;
-14;Buga United;Buga;BU;;2002-01-01;2010-01-01;;;;;;;;http://buga-united.de/;;;;0;;
-15;Rakete Rheinpark 04;Rakete;RR;;;2012-01-01;;;;;;;;http://www.rakete04.de/;https://www.facebook.com/pages/Rakete-Rheinpark-04/258035732443?ref=pb;;;0;;
-16;Cosmos Düssel '77;Cosmos;CD77;;;1995-01-01;;;;;;;;http://www.cosmos77.de/;https://www.facebook.com/pages/Cosmos-D%C3%BCssel-77-D%C3%BCsseldorf/123063004385584;;;0;;
-18;Ice Devils Duisburg;Devils;ID;;;2012-01-01;;;;;;;;http://www.ice-devils-duisburg.de.tl/;;;;0;;
-19;Hong Kong Stars;Stars;HKS;;;2012-01-01;2015-01-01;;;;;;;;https://www.facebook.com/pages/HONG-KONG-STARS/119373727309;Die Hong Kong Stars wurden zum 25.11.15 aus dem Spielbetrieb der HLW ausgeschlossen.;;0;;
-20;SG Garather Füchse '83;Füchse;GF;;1983-01-01;2012-01-01;2014-01-01;;;;;;;;;;;0;;
-21;FC Kneipe;Kneipe;FCKN;;;1996-01-01;2005-01-01;;;;;;;;;;;0;;
-22;Fränki's Team;Fränkis;FT;;;1996-01-01;2003-01-01;;;;;;;;;;;0;;
-23;HSC Stockum;Stockum;HSC;;;1998-01-01;2007-01-01;;;;;;;;;Hat sich 2007 nach der Hinrunde aufgrund von Spielermangel abgemeldet.;;0;;
-24;FC Manuele;Manuele;FCM;;;1996-01-01;1997-01-01;;;;;;;;;;;0;;
-25;FC Düsseldorf 2010;FCD 2010;FCD;;;;;;;;;;;http://fcduesseldorf.blog.de/;https://www.facebook.com/group.php?gid=108432365856065&v=info;Spielte als Gastmannschaft in der Pokalrunde 2011 mit.;;0;;
-26;FC International;International;FCI;;2002-01-01;2005-01-01;2006-01-01;;;;;;;http://kanakistanfootballclub.de/;;ehemals Kanakistan FC;;0;;
-27;Nicht bekannt;Unbekannt;NB;;;;;;;;;;;;;;;0;;
-28;Widex Peters;Widex;WP;;;1995-01-01;2000-01-01;;;;;;;;;;;0;;
-29;Bilker Galerie;Galerie;BG;;;1995-01-01;2010-01-01;;;;;;;;https://www.facebook.com/pages/Bilker-Galerie/123190067732896;Zog sich Ende 2011 aufgrund von Spielermangel aus der HLW zÃ¼ruck.;;0;;
-30;Wild Boys '06;Wild Boys;WB06;;2006-01-01;2007-01-01;2009-01-01;;;;;;;;;;;0;;
-31;Schüssler United;Schüssler;SU;;;2007-01-01;2007-12-31;;;;;;;;;;;0;;
-32;1. FC Klähr;Klähr;FCKL;;;2006-01-01;2007-01-01;;;;;;;;;Hat sich 2007 nach der Hinrunde aufgrund von Spielermangel abgemeldet.;;0;;
-33;VfB Hasseler Stuben;Stuben;VFB;;;2006-01-01;2007-01-01;;;;;;;;;Hat sich 2007 nach der Hinrunde aufgrund von Spielermangel abgemeldet.;;0;;
-34;Team Telekom;Telekom;TT;;;2007-01-01;2007-06-30;;;;;;;;;Hat sich 2007 nach der Hinrunde aufgrund von Spielermangel abgemeldet.;;0;;
-35;Southside Düsseldorf;Southside;SD;;;2002-01-01;2005-01-01;;;;;;;;;;;0;;
-36;Rot-Weiß Eller 1994;Eller;RWE;;;1998-01-01;2005-01-01;;;;;;;http://www.bab5club.de/RWE/intro.htm;;;;0;;
-37;SG Weseler Hof;Weseler;SGWH;;;2001-01-01;2004-01-01;;;;;;;;;;;0;;
-38;Rot-Weiß Heerdt;Heerdt;RWH;;;1995-01-01;2003-01-01;;;;;;;http://www.rot-weiss-heerdt.de/;;;;0;;
-39;Torpedo Jägerklause;Torpedo;TJ;;;1995-01-01;2001-01-01;;;;;;;;;;;0;;
-40;FC Ortmann Kicker;Ortmann;OK;;;1995-01-01;1998-01-01;;;;;;;;;;;0;;
-41;SG Bruderhaus;Bruderhaus;SGB;;;1995-01-01;1998-01-01;;;;;;;;;;;0;;
-42;Rückwärts Kaarst;Rückwärts;RK;;;1997-01-01;1997-01-01;;;;;;;;;;;0;;
-43;SG Mettmann '90;Mettmann;SGM90;;;1996-01-01;1996-01-01;;;;;;;;;;;0;;
-44;Zenit Unterbach;Zenit;ZU;;;2012-01-01;;;;;;;;;;;;0;;
-45;JFC Düsseldorf;JFC;JFC;;2005-05-17;2012-01-01;2013-01-01;;;;;;;http://jfcduesseldorf.web.fc2.com/index.html;;(J)apan (F)ootball (C)lub DÃ¼sseldorf;;0;;
-46;Blau Blau Brause;Brause;BBB;;;2013-01-01;;;;;;;;;;;;0;;
-47;A-Team reloaded;A-Team;AT;;;2013-01-01;;;;;;;;;;;;0;;
-48;MonCity;MonCity;MC;;;2013-01-01;2015-01-01;;;;;;;http://www.moncity.de;;Abmeldung aus dem laufenden Spielbetrieb der Saison 2015.;;0;;
-49;Eleven FC 2012;Eleven;EFC;;;2013-01-01;;;;;;;;http://www.fc-eleven.de/;http://www.facebook.com/pages/Eleven-FC-2012/452602661456107;;;0;;
-50;Hochdahler SV;Hochdahl;HoSV;;;2013-01-01;;;;;;;;http://www.hochdahlersv.de.to/;;;;0;;
-51;Freilos;Freilos;Freilos;;;;;;;;;;;;;;;0;;
-52;JFE Bilk ev. 2013;JFE;JFE;;2013-01-01;2014-01-01;2015-01-01;;;;;;;http://www.flora2.de/jfe-bilk-ev;https://de-de.facebook.com/pages/JFE-Bilk-ev/352816478168617;;;0;;
-53;Lokomotive Rheinwiese;Lok;LR;;1984-01-01;2014-01-01;;;;;;;;;;;;0;;
-54;CfR Links AH;Links;CFRAH;;2013-03-01;2014-01-01;;;;;;;;http://www.bootsmann.info;;;;0;;
-55;TFC Hennekamp '67;Hennekamp;TFC67;;;;;;;;;;;;;;;0;;
-56;FC Büderich Hobbyelf;Büderich;FCBHO;;;;;;;;;;;;;;;0;;
-57;FC Büderich Blau-Weiß Büderich;FCBBW;;;;2014-01-01;;;;;;;;;Meldete sich im Okt. 2014 wÃ¤hrend der Saison vom Spielbetrieb ab.;;0;;;
-58;FC Büderich AH;Büderich;FCBAH;;;;;;;;;;;;;;;0;;
-59;Papa Kowolls letzter Wille;Kowoll;PKLW;;;2014-01-01;;;;;;;;;;;;0;;
-60;Cosmos Düssel '77 AH;Cosmos AH;CD77AH;;;;;;;;;;;http://www.cosmos77.de;;;;0;;
-61;DJK Rheinland '05 AH;Rheinland;DJKR;;;;;;;;;;;;;;;0;;
-62;Schwarz-Weiß Bilk '79 AH;SWBilk AH;SWBAH;;2010-01-01;;;;;;;;;http://www.swbilk79.de/;https://www.facebook.com/pages/Schwarz-Weiss-Bilk-79/175477382466028;Altherren-Mannschaft von Schwarz-WeiÃŸ Bilk '79;;0;;
-63;Schlosspark United 04;Schlosspark;SU04;;2014-01-01;2015-01-01;2017-01-01;;;;;;;;;Schlosspark hat sich vor Beginn der Saison 2017 vom Spielbetrieb der HLW zurÃ¼ckgezogen.;;0;;
-64;SG Cosmos/Hennekamp;Cosmos/Hennekamp;SGCH;;;2015-01-01;;;;;;;;;;;;0;;
-65;Klümpkes Stockum;Klümpkes;KS;;;;;;;;;;;;;Gast im Pokal 2015;;0;;
-66;Rather Fa?(Cocomo Soccer);Cocomo;RF;;;;;;;;;;;;;;;0;;
-67;FF Düsseldorf 2015;FFD;FFD;;2015-08-01;2016-01-01;;;;;;;;http://www.ffd?sseldorf.de/;https://www.facebook.com/FF-D%C3%BCsseldorf-2015-419387204934832/?fref=ts;;;0;;
-68;FC Bootsmann;Bootsmann;FCB;;2013-01-01;2014-01-01;;;;;;;;http://bootsmann.info/;;In der AH-Liga vertreten als CfR Links AH. Seit 2016 auch mit einer HLW-Mannschaft. ;;0;;
-69;Monday Kickers;Monday;MK;;;2016-01-01;;;;;;;;;;;;0;;
-70;MonUnited;MonUnited;MU;;;2016-01-01;;;;;;;;;;;;0;;
-71;A-Team reloaded AH;A-Team AH;ATAH;;;2016-01-01;;;;;;;;;;;;0;;
-72;Fit In Düsseldorf United;Fit In;FIDU;;;2017-01-01;;;;;;;;;;;;0;;
-73;Sparta Erkrath;Sparta;SE;;2016-09-04;2017-01-01;;;;;;;;;https://www.facebook.com/spartaerkrath/;;;0;;
-74;Superkickers 2016;Superkickers;SK;;;2017-01-01;;;;;;;;;;;;0;;
-75;SC Ratingen 2016;Ratingen;SCR;;;2017-01-01;;;;;;;;;;;;0;;
-76;Dynamo Düsseldorf;Dynamo;DD;;;2017-01-01;;;;;;;;;;;;0;;
+id	name	name_short	name_code	logo_url	founded	league_entry	league_exit	colours_club_primary	colours_club_secondary	colours_kit_home_primary	colours_kit_home_secondary	colours_kit_away_primary	colours_kit_away_secondary	website	facebook	note	is_real_club	published	created_at	updated_at
+1	Dritte III	Dritte	DIII			01.01.2011											0	1		
+2	HFC Heine '97	Heine	HFC97		24.10.1997	01.01.2004										H(ochschul) F(ussball) C(lub) Heine '97<br /><br />Erfolge außerhalb der HLW:<br/>Bunteliga D:<br/>Pokalsieger 2002 & 2004<br/>F.I. Süd:<br />Meister 1998 & 1999,<br/> Pokalsieger 1998	0	1		
+3	Bierfreunde Mett	Bierfreunde	BM		14.12.2005	01.01.2010	01.01.2015							http://unserteam.de/teams/show/278	https://www.facebook.com/pages/Bierfreunde-Mett/128905943822901?ref=pb	Abmeldung aus dem laufenden Spielbetrieb in der Saison 2015.	0	1		
+4	Schwarz-Wei� Bilk '79	SW Bilk	SWB79		25.11.1979	01.01.1999								http://www.swbilk79.de/	https://www.facebook.com/pages/Schwarz-Weiss-Bilk-79/175477382466028		0	1		
+5	Dynamo Unterbach	Unterbach	DU			01.01.2008	01.01.2013							http://www.dynamo-unterbach.de/		Meldete sich Ende 2013 während der Saison vom Spielbetrieb ab.	0	1		
+6	SG United Ratingen 05	Ratingen	SGU05			01.01.2008								http://www.united-ratingen-05.de/	https://www.facebook.com/pages/United-Ratingen-05/110745998959560?ref=pb		0	1		
+7	Harbour Pirates FC	Pirates	HP			01.01.2010	01.01.2016								http://de-de.facebook.com/pages/Harbour-Pirates-FC/134015799980388	Die Pirates haben sich Anfang 2016 mangels Spielern aus der HLW zurückgezogen.	0	1		
+8	FC Lot jonn	Lot jonn	LJ			01.01.2009								http://www.lotjonn.com/			0	1		
+9	Hammer SV '99	Hamm	HSV99			01.01.1999										ehemal. SG Bruderhaus von 1996-1998	0	1		
+10	Altbier Rangers	Rangers	AR			01.01.2011	01.01.2015							http://www.altbier-rangers.de/	https://www.facebook.com/AltbierRangers		0	1		
+11	Kaiserkicker	Kaiserkicker	KK		21.06.1986	01.01.1996	01.01.2014							http://www.kaiserkicker.de/			0	1		
+12	United '08	United	UTD08		11.11.2007	01.01.2008											0	1		
+13	Team Postwirtschaft	Post	TP			01.01.2005	01.01.2012							http://www.teampostwirtschaft.de/		2011 zog sich Team Postwirtschaft während der Saison zurück. Alle Spiele der Saison wurden annulliert. <br/>2012 wagte die Mannschaft einen neuen Versuch in Liga 2.<br/>2013 nimmt Team Postwirtschaft nicht mehr am Spielbetrieb teil.	0	1		
+14	Buga United	Buga	BU		01.01.2002	01.01.2010								http://buga-united.de/			0	1		
+15	Rakete Rheinpark 04	Rakete	RR			01.01.2012								http://www.rakete04.de/	https://www.facebook.com/pages/Rakete-Rheinpark-04/258035732443?ref=pb		0	1		
+16	Cosmos D�ssel '77	Cosmos	CD77			01.01.1995								http://www.cosmos77.de/	https://www.facebook.com/pages/Cosmos-D%C3%BCssel-77-D%C3%BCsseldorf/123063004385584		0	1		
+18	Ice Devils Duisburg	Devils	ID			01.01.2012								http://www.ice-devils-duisburg.de.tl/			0	1		
+19	Hong Kong Stars	Stars	HKS			01.01.2012	01.01.2015								https://www.facebook.com/pages/HONG-KONG-STARS/119373727309	Die Hong Kong Stars wurden zum 25.11.15 aus dem Spielbetrieb der HLW ausgeschlossen.	0	1		
+20	SG Garather F�chse '83	F�chse	GF		01.01.1983	01.01.2012	01.01.2014										0	1		
+21	FC Kneipe	Kneipe	FCKN			01.01.1996	01.01.2005										0	1		
+22	Fr�nki's Team	Fr�nkis	FT			01.01.1996	01.01.2003										0	1		
+23	HSC Stockum	Stockum	HSC			01.01.1998	01.01.2007									Hat sich 2007 nach der Hinrunde aufgrund von Spielermangel abgemeldet.	0	1		
+24	FC Manuele	Manuele	FCM			01.01.1996	01.01.1997										0	1		
+25	FC D�sseldorf 2010	FCD 2010	FCD											http://fcduesseldorf.blog.de/	https://www.facebook.com/group.php?gid=108432365856065&v=info	Spielte als Gastmannschaft in der Pokalrunde 2011 mit.	0	1		
+26	FC International	International	FCI		01.01.2002	01.01.2005	01.01.2006							http://kanakistanfootballclub.de/		ehemals Kanakistan FC	0	1		
+27	Nicht bekannt	Unbekannt	NB														0	1		
+28	Widex Peters	Widex	WP			01.01.1995	01.01.2000										0	1		
+29	Bilker Galerie	Galerie	BG			01.01.1995	01.01.2010								https://www.facebook.com/pages/Bilker-Galerie/123190067732896	Zog sich Ende 2011 aufgrund von Spielermangel aus der HLW züruck.	0	1		
+30	Wild Boys '06	Wild Boys	WB06		01.01.2006	01.01.2007	01.01.2009										0	1		
+31	Sch�ssler United	Sch�ssler	SU			01.01.2007	31.12.2007										0	1		
+32	1. FC Kl�hr	Kl�hr	FCKL			01.01.2006	01.01.2007									Hat sich 2007 nach der Hinrunde aufgrund von Spielermangel abgemeldet.	0	1		
+33	VfB Hasseler Stuben	Stuben	VFB			01.01.2006	01.01.2007									Hat sich 2007 nach der Hinrunde aufgrund von Spielermangel abgemeldet.	0	1		
+34	Team Telekom	Telekom	TT			01.01.2007	30.06.2007									Hat sich 2007 nach der Hinrunde aufgrund von Spielermangel abgemeldet.	0	1		
+35	Southside D�sseldorf	Southside	SD			01.01.2002	01.01.2005										0	1		
+36	Rot-Wei� Eller 1994	Eller	RWE			01.01.1998	01.01.2005							http://www.bab5club.de/RWE/intro.htm			0	1		
+37	SG Weseler Hof	Weseler	SGWH			01.01.2001	01.01.2004										0	1		
+38	Rot-Wei� Heerdt	Heerdt	RWH			01.01.1995	01.01.2003							http://www.rot-weiss-heerdt.de/			0	1		
+39	Torpedo J�gerklause	Torpedo	TJ			01.01.1995	01.01.2001										0	1		
+40	FC Ortmann Kicker	Ortmann	OK			01.01.1995	01.01.1998										0	1		
+41	SG Bruderhaus	Bruderhaus	SGB			01.01.1995	01.01.1998										0	1		
+42	R�ckw�rts Kaarst	R�ckw�rts	RK			01.01.1997	01.01.1997										0	1		
+43	SG Mettmann '90	Mettmann	SGM90			01.01.1996	01.01.1996										0	1		
+44	Zenit Unterbach	Zenit	ZU			01.01.2012											0	1		
+45	JFC D�sseldorf	JFC	JFC		17.05.2005	01.01.2012	01.01.2013							http://jfcduesseldorf.web.fc2.com/index.html		(J)apan (F)ootball (C)lub Düsseldorf	0	1		
+46	Blau Blau Brause	Brause	BBB			01.01.2013											0	1		
+47	A-Team reloaded	A-Team	AT			01.01.2013											0	1		
+48	MonCity	MonCity	MC			01.01.2013	01.01.2015							http://www.moncity.de		Abmeldung aus dem laufenden Spielbetrieb der Saison 2015.	0	1		
+49	Eleven FC 2012	Eleven	EFC			01.01.2013								http://www.fc-eleven.de/	http://www.facebook.com/pages/Eleven-FC-2012/452602661456107		0	1		
+50	Hochdahler SV	Hochdahl	HoSV			01.01.2013								http://www.hochdahlersv.de.to/			0	1		
+51	Freilos	Freilos	Freilos														0	1		
+52	JFE Bilk ev. 2013	JFE	JFE		01.01.2013	01.01.2014	01.01.2015							http://www.flora2.de/jfe-bilk-ev	https://de-de.facebook.com/pages/JFE-Bilk-ev/352816478168617		0	1		
+53	Lokomotive Rheinwiese	Lok	LR		01.01.1984	01.01.2014											0	1		
+54	CfR Links AH	Links	CFRAH		01.03.2013	01.01.2014								http://www.bootsmann.info			0	1		
+55	TFC Hennekamp '67	Hennekamp	TFC67														0	1		
+56	FC B�derich Hobbyelf	B�derich	FCBHO														0	1		
+57	FC B�derich Blau-Wei� B�derich	FCBBW				01.01.2014									Meldete sich im Okt. 2014 während der Saison vom Spielbetrieb ab.		0	1		
+58	FC B�derich AH	B�derich	FCBAH														0	1		
+59	Papa Kowolls letzter Wille	Kowoll	PKLW			01.01.2014											0	1		
+60	Cosmos D�ssel '77 AH	Cosmos AH	CD77AH											http://www.cosmos77.de			0	1		
+61	DJK Rheinland '05 AH	Rheinland	DJKR														0	1		
+62	Schwarz-Wei� Bilk '79 AH	SWBilk AH	SWBAH		01.01.2010									http://www.swbilk79.de/	https://www.facebook.com/pages/Schwarz-Weiss-Bilk-79/175477382466028	Altherren-Mannschaft von Schwarz-Weiß Bilk '79	0	1		
+63	Schlosspark United 04	Schlosspark	SU04		01.01.2014	01.01.2015	01.01.2017									Schlosspark hat sich vor Beginn der Saison 2017 vom Spielbetrieb der HLW zurückgezogen.	0	1		
+64	SG Cosmos/Hennekamp	Cosmos/Hennekamp	SGCH			01.01.2015											0	1		
+65	Kl�mpkes Stockum	Kl�mpkes	KS													Gast im Pokal 2015	0	1		
+66	Rather Fa?(Cocomo Soccer)	Cocomo	RF														0	1		
+67	FF D�sseldorf 2015	FFD	FFD		01.08.2015	01.01.2016								http://www.ffd?sseldorf.de/	https://www.facebook.com/FF-D%C3%BCsseldorf-2015-419387204934832/?fref=ts		0	1		
+68	FC Bootsmann	Bootsmann	FCB		01.01.2013	01.01.2014								http://bootsmann.info/		In der AH-Liga vertreten als CfR Links AH. Seit 2016 auch mit einer HLW-Mannschaft. 	0	1		
+69	Monday Kickers	Monday	MK			01.01.2016											0	1		
+70	MonUnited	MonUnited	MU			01.01.2016											0	1		
+71	A-Team reloaded AH	A-Team AH	ATAH			01.01.2016											0	1		
+72	Fit In D�sseldorf United	Fit In	FIDU			01.01.2017											0	1		
+73	Sparta Erkrath	Sparta	SE		04.09.2016	01.01.2017									https://www.facebook.com/spartaerkrath/		0	1		
+74	Superkickers 2016	Superkickers	SK			01.01.2017											0	1		
+75	SC Ratingen 2016	Ratingen	SCR			01.01.2017											0	1		
+76	Dynamo D�sseldorf	Dynamo	DD			01.01.2017											0	1		

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark">
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #4CAF50">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="/images/hlwlogo_w.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">

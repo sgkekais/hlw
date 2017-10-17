@@ -76,6 +76,11 @@
                             @else
                             <span class="fa fa-fw"></span>
                         @endif
+                        @if($person->note)
+                            <span class="fa fa-file-text" title="Notiz vorhanden"></span>
+                            @else
+                            <span class="fa fa-fw"></span>
+                        @endif
                     <td class="align-middle">
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('people.show', $person) }}" title="Person anzeigen">

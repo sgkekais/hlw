@@ -191,7 +191,7 @@ class Fixture extends Model
 
     public function isCancelled()
     {
-        if (isset($this->cancelled)) {
+        if ($this->cancelled) {
             return true;
         } else {
             return false;

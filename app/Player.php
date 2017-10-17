@@ -20,7 +20,7 @@ class Player extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'person_id', 'sign_on', 'sign_off', 'number', 'position_id'
+        'person_id', 'sign_on', 'sign_off', 'number', 'position_id', 'public'
     ];
 
     /**
@@ -34,7 +34,7 @@ class Player extends Model
      * @var array
      */
     protected $fillable = [
-        'person_id', 'sign_on', 'sign_off', 'number', 'position_id'
+        'person_id', 'sign_on', 'sign_off', 'number', 'position_id', 'public'
     ];
 
     /**

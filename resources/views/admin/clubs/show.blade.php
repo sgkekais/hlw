@@ -276,6 +276,7 @@
                     <tr>
                         <th class="">ID</th>
                         <th class=""></th>
+                        <th class=""></th>
                         <th class="">Nachname, Vorname</th>
                         <th class="">Anmeldung</th>
                         <th class="">Nummer</th>
@@ -288,6 +289,13 @@
                     @foreach($club->players()->whereNull('sign_off')->get() as $p_active)
                         <tr>
                             <td class="align-middle">{{ $p_active->id }}</td>
+                            <td class="align-middle">
+                                @if($p_active->public)
+                                    <span class="fa fa-eye" title="Öffentlich"></span>
+                                @else
+                                    <span class="fa fa-eye-slash" title="Nicht öffentlich"></span>
+                                @endif
+                            </td>
                             <td class="align-middle text-center">
                                 @if($p_active->person->photo)
                                     <img src="{{ Storage::url($p_active->person->photo) }}" class="rounded" title="Passbild" alt="Passbild" width="25">

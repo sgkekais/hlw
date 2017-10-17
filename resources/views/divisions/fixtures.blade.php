@@ -13,6 +13,13 @@
             <div class="col-12">
                 <h1 class="pt-4"><b>Spielplan</b> der {{ $season->season_nr ? $season->season_nr."." : null }} Saison</h1>
                 <h2 class="text-muted">{{ $season->begin ? $season->begin->format('Y') : null }} / {{ $season->end ? $season->end->format('Y') : null }}</h2>
+                <nav aria-label="pagination">
+                    <ul class="pagination">
+                        @foreach($season->matchweeks as $matchweek)
+                            <li class="page-item"><a class="page-link" href="#">{{ $matchweek->number_consecutive ?? "null" }}</a></li>
+                        @endforeach
+                    </ul>
+                </nav>
             </div>
         </div>
         @foreach($season->matchweeks as $matchweek)
@@ -29,28 +36,63 @@
                         <tbody>
                         @foreach($matchweek->fixtures as $fixture)
                             <tr>
-                                <td>
+                                <td class="align-middle text-right">
                                     {{ $fixture->datetime ? $fixture->datetime->formatLocalized('%a') : "&nbsp;" }}
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     @if($fixture->datetime)
                                         {{ $fixture->datetime->format('d.m.') }}
                                         -
                                         {{ $fixture->datetime->format('H:i') }}
                                     @else
-                                    TBD
+                                    <span class="text-muted">TBD</span>
                                     @endif
                                 </td>
-                                <td class="text-right">{{ $fixture->clubHome ? $fixture->clubHome->name : $fixture->club_home }}</td>
-                                <td>
-                                    <!-- cancelled? -->
-
-                                    <!-- rated? -->
-
-                                    <!-- result -->
-
+                                <td class="align-middle text-right">
+                                    @if($fixture->clubHome)
+                                        {{ $fixture->clubHome->name }}
+                                        @if($fixture->clubHome->logo_url)
+                                            <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
+                                        @else
+                                            <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                        @endif
+                                    @else
+                                        {{ $fixture->club_home }}
+                                    @endif
                                 </td>
-                                <td class="">{{ $fixture->clubAway ? $fixture->clubAway->name : $fixture->club_away }}</td>
+                                <td class="align-middle text-center">
+                                    <!-- cancelled? -->
+                                    @if($fixture->isCancelled())
+                                        Ann.
+                                    @endif
+                                    <!-- rated? -->
+                                    @if($fixture->isRated())
+                                        {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
+                                        <span class="fa fa-gavel" title="Gewertet"></span>
+                                    @endif
+                                    <!-- result -->
+                                    @if($fixture->isPlayed())
+                                        {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                                        @else
+                                        - : -
+                                    @endif
+                                </td>
+                                <td class="align-middle">
+                                    @if($fixture->clubAway)
+                                        @if($fixture->clubAway->logo_url)
+                                            <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
+                                        @else
+                                            <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                        @endif
+                                        {{ $fixture->clubAway->name }}
+                                    @else
+                                        {{ $fixture->club_away }}
+                                    @endif
+                                </td>
+                                <td class="align-middle">
+                                    <span class="fa fa-location-arrow"></span>
+                                    {{ $fixture->stadium ? $fixture->stadium->name_short : "-" }}
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
