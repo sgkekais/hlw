@@ -22,7 +22,7 @@
             <div class="col-md-6 pt-4 text-white">
                 <h1 style="font-weight: bold">{{ $club->name }}</h1>
                 <ul class="list-unstyled">
-                    <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : "Kein Stadion" }}</li>
+                    <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : null }}</li>
                 </ul>
                 @foreach ($club->getLastGames(5) as $lastGame)
                     <span class="fa-stack fa-lg">
@@ -36,7 +36,7 @@
                             <i class="fa fa-circle fa-stack-2x text-gray-dark"></i>
                             <strong class="fa-stack-1x" style="color:#ffffff">U</strong>
                         @endif
-                </span>
+                    </span>
                 @endforeach
             </div>
             <div class="col-md-4">
@@ -174,7 +174,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">
                                             {{ $player->person->full_name_shortened }}
-                                            <span class="pull-right">{{ $player->number ? "#".$player->number : null }}</span>
+                                            <span class="pull-right" style="color: {{ $club->colours_club_primary }}">{{ $player->number ? "#".$player->number : null }}</span>
                                         </h4>
                                         <h6 class="card-subtitle mb-2" style="color: red">
                                             TODO: Gesperrt
