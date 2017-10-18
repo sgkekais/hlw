@@ -11,7 +11,7 @@
                 <a class="nav-link" href="#">Sünderkartei</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('frontend.seasons.clubs') ? "active" : null }}" href="{{ route('frontend.seasons.clubs', $season ) }}">Teams</a>
+                <a class="nav-link {{ Route::is('frontend.seasons.clubs') || Route::is('frontend.clubs.show') ? "active" : null }}" href="{{ route('frontend.seasons.clubs', $season ) }}">Teams</a>
             </li>
         </ul>
     </div>

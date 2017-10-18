@@ -75,31 +75,55 @@ class Season extends Model
      * ACCESSORS
      ************************************************************/
 
+    /**
+     * @param $value
+     * @return array
+     */
     public function getRanksChampionAttribute($value)
     {
         return explode(',', $value);
     }
 
+    /**
+     * @param $value
+     * @return array
+     */
     public function getRanksPromotionAttribute($value)
     {
         return explode(',', $value);
     }
 
+    /**
+     * @param $value
+     * @return array
+     */
     public function getRanksRelegationAttribute($value)
     {
         return explode(',', $value);
     }
 
+    /**
+     * @param $value
+     * @return array
+     */
     public function getPlayoffChampion($value)
     {
         return explode(',', $value);
     }
 
+    /**
+     * @param $value
+     * @return array
+     */
     public function getPlayoffCup($value)
     {
         return explode(',', $value);
     }
 
+    /**
+     * @param $value
+     * @return array
+     */
     public function getPlayoffRelegation($value)
     {
         return explode(',', $value);
@@ -143,8 +167,7 @@ class Season extends Model
     }
 
     /**
-     * Generate the table for the current season and until the given matchweek
-     * TODO: this is shit! use accessors!
+     * Generate the table for the current season and until the given matchweek     *
      * @param Matchweek|null $matchweek
      * @return mixed
      */

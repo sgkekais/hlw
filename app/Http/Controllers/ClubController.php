@@ -34,8 +34,9 @@ class ClubController extends Controller
 
         $season = Season::current()->first();
         $season->load('matchweeks.fixtures');
+        $division = $season->division;
 
-        return view('clubs.show', compact('club', 'season'));
+        return view('clubs.show', compact('club', 'season', 'division'));
     }
 
 }

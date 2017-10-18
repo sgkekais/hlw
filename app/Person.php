@@ -41,6 +41,31 @@ class Person extends Model
         'date_of_birth'
     ];
 
+    /*******************************************************
+     * ACCESSORS
+     * ******************************************************/
+
+    /**
+     * Combine last und first name with comma
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return $this->last_name.", ".$this->first_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullNameShortenedAttribute()
+    {
+        return $this->last_name.", ".str_limit($this->first_name, 1, '.');
+    }
+
+    /*******************************************************
+     * RELATIONSHIPS
+     * ******************************************************/
+
     /**
      * A person can be many players for different clubs
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
