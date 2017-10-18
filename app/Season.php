@@ -72,6 +72,40 @@ class Season extends Model
     }
 
     /***********************************************************
+     * ACCESSORS
+     ************************************************************/
+
+    public function getRanksChampionAttribute($value)
+    {
+        return explode(',', $value);
+    }
+
+    public function getRanksPromotionAttribute($value)
+    {
+        return explode(',', $value);
+    }
+
+    public function getRanksRelegationAttribute($value)
+    {
+        return explode(',', $value);
+    }
+
+    public function getPlayoffChampion($value)
+    {
+        return explode(',', $value);
+    }
+
+    public function getPlayoffCup($value)
+    {
+        return explode(',', $value);
+    }
+
+    public function getPlayoffRelegation($value)
+    {
+        return explode(',', $value);
+    }
+
+    /***********************************************************
      * FUNCTIONS
      ************************************************************/
 

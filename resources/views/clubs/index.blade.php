@@ -33,7 +33,7 @@
                                 </a>
                             </div>
                             <div class="card-footer">
-                                <span class="fa fa-star" style="color: orange"></span>
+                                2 <span class="fa fa-star" style="color: orange"></span>
                                 <span class="fa fa-star-half-full"></span>
                                 <span class="fa fa-trophy"></span>
                             </div>

@@ -34,7 +34,28 @@
             </thead>
             <tbody>
             @foreach ($table_current as $club)
-                <tr>
+                @php
+                    $rankcolor = "";
+                @endphp
+                <!-- ranks_champion OR ranks_promotion -->
+                @if(in_array($club->t_rank, $season->ranks_champion) || in_array($club->t_rank, $season->ranks_promotion))
+                    @php
+                        $rankcolor = "#F9D67C";
+                    @endphp
+                @endif
+                <!-- ranks_relegation -->
+                @if(in_array($club->t_rank, $season->ranks_relegation))
+                    @php
+                        $rankcolor = "#FF9D7F";
+                    @endphp
+                @endif
+                <!-- playoff_champion -->
+
+                <!-- playoff_cup -->
+
+                <!-- playoff_relegation -->
+
+                <tr style="background-color: {{ $rankcolor }}">
                     <td class="align-middle text-center d-none d-sm-table-cell ">
                         <a data-toggle="collapse" href="#collapsedetails{{ $loop->iteration }}" aria-expanded="false" title="Expandieren">
                             <span class="fa fa-angle-down"></span>
