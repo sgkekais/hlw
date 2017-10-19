@@ -54,7 +54,8 @@ class Player extends Model
      * @param $query
      * @return mixed
      */
-    public function scopeActive($query){
+    public function scopeActive($query)
+    {
         return $query->whereNull('sign_off');
     }
 
@@ -63,8 +64,19 @@ class Player extends Model
      * @param $query
      * @return mixed
      */
-    public function scopeInactive($query){
+    public function scopeInactive($query)
+    {
         return $query->whereNotNull('sign_off');
+    }
+
+    /**
+     * Scope a query to only include public players
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublic($query)
+    {
+        return $query->where('public', 1);
     }
 
     /*******************************************************

@@ -19,7 +19,7 @@
                     <span class="fa fa-ban text-muted fa-5x"></span>
                 @endif
             </div>
-            <div class="col-md-6 pt-4 text-white">
+            <div class="col-md-6 pt-4 {{ $club->colours_club_primary == "#ffffff" ? "text-dark" : "text-white" }}">
                 <h1 style="font-weight: bold">{{ $club->name }}</h1>
                 <ul class="list-unstyled">
                     <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : null }}</li>
@@ -46,7 +46,7 @@
         <div class="row pt-4">
             <div class="col-md-6">
                 <!-- tabs -->
-                <nav class="nav nav-tabs" id="tab" role="tablist" style="background-color: #f5f5f5; border-top-left-radius: 5px; border-top-right-radius: 5px">
+                <nav class="nav nav-tabs" id="tab" role="tablist"> <!--style="background-color: #f5f5f5; border-top-left-radius: 5px; border-top-right-radius: 5px"-->
                     <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
                         Übersicht
                     </a>
@@ -168,91 +168,117 @@
                     <div class="col-12">
                         <h2 style="color: {{ $club->colours_club_primary }}"><b>Aktive</b></h2>
                         <div class="card-deck">
-                            @foreach($club->players()->active()->with('person')->get()->sortBy('person.last_name') as $player)
+                            @foreach($club->players()->active()->public()->with('person')->get()->sortBy('person.last_name') as $player)
                                 <div class="card">
-
-                                    <div class="card-body">
-                                        <h4 class="card-title">
-                                            {{ $player->person->full_name_shortened }}
-                                            <span class="pull-right" style="color: {{ $club->colours_club_primary }}">{{ $player->number ? "#".$player->number : null }}</span>
-                                        </h4>
-                                        <h6 class="card-subtitle mb-2" style="color: red">
-                                            TODO: Gesperrt
-                                        </h6>
-                                        <p class="card-text">
-                                            <span class="fa fa-calendar-o fa-fw"></span>
-                                            @if($player->sign_on)
-                                                {{ $player->sign_on->format('d.m.Y') }}
-                                                @if( Carbon::now()->diffInYears($player->sign_on) > 0 )
-                                                    <span class="text-muted"><i>{{ Carbon::now()->diffInYears($player->sign_on) }} Jahre dabei</i></span>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <h4 class="card-title">
+                                                {{ $player->person->full_name_shortened }}
+                                                <span class="pull-right" style="color: {{ $club->colours_club_primary }}">{{ $player->number ? "#".$player->number : null }}</span>
+                                            </h4>
+                                            <h6 class="card-subtitle mb-2" style="color: red">
+                                                TODO: Gesperrt
+                                            </h6>
+                                            <p class="card-text">
+                                                <span class="fa fa-calendar-o fa-fw"></span>
+                                                @if($player->sign_on)
+                                                    {{ $player->sign_on->format('d.m.Y') }}
+                                                    @if( Carbon::now()->diffInYears($player->sign_on) > 0 )
+                                                        <span class="text-muted"><i>{{ Carbon::now()->diffInYears($player->sign_on) }} Jahre dabei</i></span>
                                                     @else
-                                                    <span class="text-muted"><i>{{ Carbon::now()->diffInDays($player->sign_on)}} Tage dabei</i></span>
+                                                        <span class="text-muted"><i>{{ Carbon::now()->diffInDays($player->sign_on)}} Tage dabei</i></span>
+                                                    @endif
                                                 @endif
-                                            @endif
-                                        </p>
-                                        <p class="card-text">
-                                            <span class="fa fa-soccer-ball-o fa-fw"></span>
-                                                @php
-                                                    $goals_season = $player->goals()->get()->where('fixture.matchweek.season.id', $season->id )->count();
-                                                @endphp
-                                                <b>{{ $goals_season }}</b>
-                                                <i>
-                                                    @if($goals_season != 1)
-                                                        Tore
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    Saison
+                                                    @if($season->begin)
+                                                        <b>{{ $season->begin->format('y') }}</b>
+                                                    @endif
+                                                    @if($season->end)
+                                                        / <b>{{ $season->end->format('y') }}</b>
+                                                    @endif
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-soccer-ball-o fa-fw"></span>
+                                                    @php
+                                                        $goals_season = $player->goals()->get()->where('fixture.matchweek.season.id', $season->id )->count();
+                                                    @endphp
+                                                    <b>{{ $goals_season }}</b>
+                                                    <i>
+                                                        @if($goals_season != 1)
+                                                            Tore
                                                         @else
                                                             Tor
-                                                    @endif
-                                                </i> in Saison
-                                                @if($season->begin)
-                                                    <b>{{ $season->begin->format('y') }}</b>
-                                                @endif
-                                                @if($season->end)
-                                                    / <b>{{ $season->end->format('y') }}</b>
-                                                @endif
-                                        </p>
-                                        <p class="card-text">
-                                            <span class="fa fa-soccer-ball-o fa-fw"></span> <b>{{ $player->goals->count() }}</b> <i>Tore</i> insg.
-                                        </p>
-                                        <p class="card-text">
-                                            <span class="fa fa-clone fa-fw" style="color: orange"></span> <b>{{ $player->cards->count() }}</b> <i>gelb-rote Karten</i>
-                                        </p>
-                                        <p class="card-text">
-                                            <span class="fa fa-clone fa-fw" style="color: red"></span> <b>{{ $player->cards->count() }}</b> <i>rote Karten</i>
-                                        </p>
-                                    </div>
-
+                                                        @endif
+                                                    </i>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-clone fa-fw" style="color: orange"></span>
+                                                    @php
+                                                        $cards_yr = $player->cards()->yellowReds()->get()->where('fixture.matchweek.season.id', $season->id)->count();
+                                                    @endphp
+                                                    <b>{{ $cards_yr }}</b>
+                                                    <i>{{ $cards_yr != 1 ? "Gelb-rote Karten" : "Gelb-rote Karte" }}</i>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-clone fa-fw" style="color: red"></span>
+                                                    @php
+                                                        $cards_r = $player->cards()->reds()->get()->where('fixture.matchweek.season.id', $season->id)->count();
+                                                    @endphp
+                                                    <b>{{ $cards_r }}</b>
+                                                    <i>{{ $cards_r != 1 ? "Rote Karten" : "Rote Karte" }}</i>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">Insgesamt</li>
+                                                <li class="list-inline-item"><span class="fa fa-soccer-ball-o fa-fw"></span> <b>{{ $player->goals->count() }}</b></li>
+                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: orange;"></span> <b>{{ $player->cards()->yellowReds()->count() }}</b></li>
+                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: red"></span> <b>{{ $player->cards()->reds()->count() }}</b></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="row pt-4">
-                    <div class="col-12">
-                        <h2 style="color: {{ $club->colours_club_primary }}"><b>Ehemalige</b></h2>
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>Eintritt</th>
-                                <th>Austritt</th>
-                                <th>Tore</th>
-                                <th>Gelb-Rot</th>
-                                <th>Rot</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                @if($club->players()->inactive()->count() > 0)
+                    <div class="row pt-4">
+                        <div class="col-12">
+                            <h2 style="color: {{ $club->colours_club_primary }}"><b>Ehemalige</b></h2>
+                            <table class="table table-hover table-sm">
+                                <thead>
+                                <tr>
+                                    <th class=""></th>
+                                    <th class="">Eintritt</th>
+                                    <th class="">Austritt</th>
+                                    <th class="text-center"><span class="fa fa-soccer-ball-o fa-fw"></span></th>
+                                    <th class="text-center"><span class="fa fa-clone fa-fw" style="color: orange"></span></th>
+                                    <th class="text-center"><span class="fa fa-clone fa-fw" style="color: red"></span></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($club->players()->inactive()->get() as $player_inactive)
+                                    <tr>
+                                        <td class="align-middle">{{ $player_inactive->person->full_name_shortened }}</td>
+                                        <td class="align-middle">{{ $player_inactive->sign_on ? $player_inactive->sign_on->format('d.m.Y') : null }}</td>
+                                        <td class="align-middle">{{ $player_inactive->sign_off ? $player_inactive->sign_off->format('d.m.Y') : null}}</td>
+                                        <td class="align-middle text-center">{{ $player_inactive->goals->count() }}</td>
+                                        <td class="align-middle text-center">{{ $player_inactive->cards()->yellowReds()->count() }}</td>
+                                        <td class="align-middle text-center">{{ $player_inactive->cards()->reds()->count() }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
