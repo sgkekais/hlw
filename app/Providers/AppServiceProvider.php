@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
         // set German locale for php date time and Carbon
         setlocale(LC_TIME, 'German');
         Carbon::setLocale('de');
+        // mock date TODO: remove
+        $mockdate = Carbon::create(2017,6,30);
+        Carbon::setTestNow($mockdate);
     }
 
     /**

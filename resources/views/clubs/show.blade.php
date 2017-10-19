@@ -22,22 +22,30 @@
             <div class="col-md-6 pt-4 {{ $club->colours_club_primary == "#ffffff" ? "text-dark" : "text-white" }}">
                 <h1 style="font-weight: bold">{{ $club->name }}</h1>
                 <ul class="list-unstyled">
+                    <li class="pt-2 pb-2">
+                        @foreach ($club->getLastGames(5) as $lastGame)
+                            <span class="fa-stack fa-lg">
+                            @if ($club->hasWon($lastGame))
+                                    <i class="fa fa-circle fa-stack-2x text-success"></i>
+                                    <strong class="fa-stack-1x text-white">S</strong>
+                                @elseif ($club->hasLost($lastGame))
+                                    <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                    <strong class="fa-stack-1x text-white">N</strong>
+                                @elseif ($club->hasDrawn($lastGame))
+                                    <i class="fa fa-circle fa-stack-2x text-dark"></i>
+                                    <strong class="fa-stack-1x text-white">U</strong>
+                                @endif
+                            </span>
+                        @endforeach
+                    </li>
                     <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : null }}</li>
+                    @if($club->website)
+                        <li><span class="fa fa-home"></span> <a href="{{ $club->website }}" target="_blank">Offizielle Website</a> </li>
+                    @endif
+                    <li><span class="fa fa-facebook"></span> </li>
+
                 </ul>
-                @foreach ($club->getLastGames(5) as $lastGame)
-                    <span class="fa-stack fa-lg">
-                    @if ($club->hasWon($lastGame))
-                            <i class="fa fa-circle fa-stack-2x text-success"></i>
-                            <strong class="fa-stack-1x" style="color:#ffffff">S</strong>
-                        @elseif ($club->hasLost($lastGame))
-                            <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                            <strong class="fa-stack-1x" style="color:#ffffff">N</strong>
-                        @elseif ($club->hasDrawn($lastGame))
-                            <i class="fa fa-circle fa-stack-2x text-gray-dark"></i>
-                            <strong class="fa-stack-1x" style="color:#ffffff">U</strong>
-                        @endif
-                    </span>
-                @endforeach
+
             </div>
             <div class="col-md-4">
                 <!--<img src="{{ $club->cover_url ? Storage::url($club->cover_url) : Storage::url('public/clubcovers/_default.jpg') }}" height="200">-->
@@ -47,16 +55,16 @@
             <div class="col-md-6">
                 <!-- tabs -->
                 <nav class="nav nav-tabs" id="tab" role="tablist"> <!--style="background-color: #f5f5f5; border-top-left-radius: 5px; border-top-right-radius: 5px"-->
-                    <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
+                    <a class="nav-item nav-link active text-dark" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
                         Übersicht
                     </a>
-                    <a class="nav-item nav-link" id="results-tab" data-toggle="tab" role="tab" aria-controls="results" href="#results">
+                    <a class="nav-item nav-link text-dark" id="results-tab" data-toggle="tab" role="tab" aria-controls="results" href="#results">
                         Resultate
                     </a>
-                    <a class="nav-item nav-link" id="players-tab" data-toggle="tab" role="tab" aria-controls="players" href="#players">
+                    <a class="nav-item nav-link text-dark" id="players-tab" data-toggle="tab" role="tab" aria-controls="players" href="#players">
                         Kader
                     </a>
-                    <a class="nav-item nav-link" href="#">
+                    <a class="nav-item nav-link text-dark" href="#">
                         Erfolge
                     </a>
                 </nav>
@@ -103,13 +111,13 @@
                                         @if ($fixture->isPlayed())
                                             @if ($club->hasWon($fixture))
                                                 <i class="fa fa-circle fa-stack-2x text-success"></i>
-                                                <strong class="fa-stack-1x" style="color:#ffffff">S</strong>
+                                                <strong class="fa-stack-1x text-white">S</strong>
                                             @elseif ($club->hasLost($fixture))
                                                 <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                                                <strong class="fa-stack-1x" style="color:#ffffff">N</strong>
+                                                <strong class="fa-stack-1x text-white">N</strong>
                                             @elseif ($club->hasDrawn($fixture))
-                                                <i class="fa fa-circle fa-stack-2x text-gray-dark"></i>
-                                                <strong class="fa-stack-1x" style="color:#ffffff">U</strong>
+                                                <i class="fa fa-circle fa-stack-2x text-dark"></i>
+                                                <strong class="fa-stack-1x text-white">U</strong>
                                             @endif
                                         @endif
                                     </span>

@@ -84,6 +84,7 @@ class Player extends Model
      * ******************************************************/
 
     /**
+     * Is this an active player?
      * @return bool
      */
     public function isActive()
@@ -93,6 +94,14 @@ class Player extends Model
         } else {
             return false;
         }
+    }
+
+    /**
+     * TODO
+     */
+    public function isSuspended()
+    {
+        $current_suspension = $this->cards()->get()->where();
     }
 
     /*******************************************************
