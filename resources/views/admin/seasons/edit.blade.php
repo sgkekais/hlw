@@ -84,21 +84,21 @@
                 <label for="ranks_champion">Meisterplätze</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="ranks_champion" id="ranks_champion" aria-describedby="ranks_championHelp" value="{{ $season->ranks_champion }}" >
+                <input type="text" class="form-control" name="ranks_champion" id="ranks_champion" aria-describedby="ranks_championHelp" value="{{ $season->ranks_champion ? implode(",", $season->ranks_champion) : null}}" >
                 <small id="ranks_championHelp" class="form-text text-muted">Plätze, die Meister werden</small>
             </div>
             <div class="col-md-2">
                 <label for="ranks_promotion">Aufstiegsplätze</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="ranks_promotion" id="ranks_promotion" aria-describedby="ranks_promotionHelp" value="{{ $season->ranks_promotion }}" >
+                <input type="text" class="form-control" name="ranks_promotion" id="ranks_promotion" aria-describedby="ranks_promotionHelp" value="{{ $season->ranks_promotion ? implode(",", $season->ranks_promotion) : null}}" >
                 <small id="ranks_promotionHelp" class="form-text text-muted">Plätze, die aufsteigen</small>
             </div>
             <div class="col-md-2">
                 <label for="ranks_relegation">Abstiegsplätze</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="ranks_relegation" id="ranks_relegation" aria-describedby="ranks_relegationHelp" value="{{ $season->ranks_relegation }}" >
+                <input type="text" class="form-control" name="ranks_relegation" id="ranks_relegation" aria-describedby="ranks_relegationHelp" value="{{ $season->ranks_relegation ? implode(",", $season->ranks_relegation) : null}}" >
                 <small id="ranks_relegationHelp" class="form-text text-muted">Plätze, die absteigen</small>
             </div>
         </div>
@@ -108,21 +108,21 @@
                 <label for="playoff_champion">Meisterschafts-Playoff</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="playoff_champion" id="playoff_champion" aria-describedby="playoff_championHelp" value="{{ $season->playoff_champion }}">
+                <input type="text" class="form-control" name="playoff_champion" id="playoff_champion" aria-describedby="playoff_championHelp" value="{{ $season->playoff_champion ? implode(",", $season->playoff_champion): null }}">
                 <small id="playoff_championHelp" class="form-text text-muted">Playoff-Plätze um die Meisterschaft</small>
             </div>
             <div class="col-md-2">
                 <label for="playoff_cup">Pokal-Playoff</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="playoff_cup" id="playoff_cup" aria-describedby="playoff_cupHelp" value="{{ $season->playoff_cup }}">
+                <input type="text" class="form-control" name="playoff_cup" id="playoff_cup" aria-describedby="playoff_cupHelp" value="{{ $season->playoff_cup ? implode(",", $season->playoff_cup): null }}">
                 <small id="playoff_cupHelp" class="form-text text-muted">Playoff-Plätze für Pokal</small>
             </div>
             <div class="col-md-2">
                 <label for="playoff_relegation">Relegation</label>
             </div>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="playoff_relegation" id="playoff_relegation" aria-describedby="playoff_relegationHelp" value="{{ $season->playoff_relegation }}">
+                <input type="text" class="form-control" name="playoff_relegation" id="playoff_relegation" aria-describedby="playoff_relegationHelp" value="{{ $season->playoff_relegation ? implode(",", $season->playoff_relegation): null }}">
                 <small id="playoff_relegationHelp" class="form-text text-muted">Plätze, die in die Relegation gehen</small>
             </div>
         </div>
