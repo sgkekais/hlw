@@ -106,7 +106,7 @@ class Season extends Model
      * @param $value
      * @return array
      */
-    public function getPlayoffChampion($value)
+    public function getPlayoffChampionAttribute($value)
     {
         return explode(',', $value);
     }
@@ -115,7 +115,7 @@ class Season extends Model
      * @param $value
      * @return array
      */
-    public function getPlayoffCup($value)
+    public function getPlayoffCupAttribute($value)
     {
         return explode(',', $value);
     }
@@ -124,7 +124,7 @@ class Season extends Model
      * @param $value
      * @return array
      */
-    public function getPlayoffRelegation($value)
+    public function getPlayoffRelegationAttribute($value)
     {
         return explode(',', $value);
     }
