@@ -23,7 +23,7 @@
                 <h1 style="font-weight: bold">{{ $club->name }}</h1>
                 <ul class="list-unstyled">
                     <li class="pt-2 pb-2">
-                        @foreach ($club->getLastGames(5) as $lastGame)
+                        @foreach ($club->getLastPlayedOrRatedGames(5) as $lastGame)
                             <span class="fa-stack fa-lg">
                             @if ($club->hasWon($lastGame))
                                     <i class="fa fa-circle fa-stack-2x text-success"></i>
@@ -174,7 +174,7 @@
             <div class="tab-pane fade" id="players" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row">
                     <div class="col-12">
-                        <h2 style="color: {{ $club->colours_club_primary }}"><b>Aktive</b></h2>
+                        <h2 style="color: {{ $club->colours_club_primary }}"><b>Aktive</b> <span class="badge badge-secondary">{{ $club->players()->active()->count() }}</span></h2>
                         <div class="card-deck">
                             @foreach($club->players()->active()->public()->with('person')->get()->sortBy('person.last_name') as $player)
                                 <div class="card">
