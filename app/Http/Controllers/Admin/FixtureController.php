@@ -92,7 +92,7 @@ class FixtureController extends Controller
         // get all clubs of the season
         $clubs = $matchweek->season->clubs;
         // get all stadiums
-        $stadiums = Stadium::all();
+        $stadiums = Stadium::orderBy('name')->get();
 
         return view('admin.fixtures.edit', compact('matchweek', 'fixture', 'clubs', 'stadiums'));
     }
