@@ -38,6 +38,23 @@ class Stadium extends Model
         'name', 'name_short', 'gmaps', 'note', 'published'
     ];
 
+    /***********************************************************
+     * SCOPES
+     ************************************************************/
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('published', 1);
+    }
+
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
+
     /**
      * A stadium can be related to many clubs
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
