@@ -23,7 +23,7 @@
                 <h1 style="font-weight: bold">{{ $club->name }}</h1>
                 <ul class="list-unstyled">
                     <li class="pt-2 pb-2">
-                        @foreach ($club->getLastPlayedOrRatedGames(5) as $lastGame)
+                        @foreach ($club->getLastGamesPlayedOrRated(5) as $lastGame)
                             <span class="fa-stack fa-lg">
                             @if ($club->hasWon($lastGame))
                                     <i class="fa fa-circle fa-stack-2x text-success"></i>
@@ -77,36 +77,29 @@
     <div class="row">
         <div class="tab-content col-12" id="tabcontent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                Home
-            </div>
-            <div class="tab-pane fade" id="results" role="tabpanel" aria-labelledby="">
-                <h2 style="color: {{ $club->colours_club_primary }}"><b>Resultate</b></h2>
-                <form class="form-inline pb-2">
-                    <label class="pr-4" for=""><b>Saison</b></label>
-                    <select id="" name="" class="form-control" aria-labelledby="">
-                        <option>{{ $season->begin->format('Y') }} - {{ $season->end->format('Y') }}</option>
-                        <option></option>
-                    </select>
-                </form>
-                <!-- results -->
-                <div class="col-12">
-                    <table class="table table-sm table-hover">
-                        <thead>
-                        <tr>
-                            <th class="text-right">SW</th>
-                            <th class=""></th>
-                            <th colspan="2" class="">Datum</th>
-                            <th colspan="3" class="text-center">Paarung</th>
-                            <th class=""></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($season->fixtures()->ofClub($club->id)->orderBy('datetime')->get() as $fixture)
-                            <tr>
-                                <td class="align-middle text-right">
-                                    {{ $fixture->matchweek->number_consecutive }}
-                                </td>
-                                <td class="align-middle text-center">
+                <h2 style="color: {{ $club->colours_club_primary }}"><b>Übersicht</b></h2>
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-muted">
+                            {{ $club->getGamesPlayedWon($season)->count() + $club->getGamesRatedWon($season)->count() }}
+                            -
+                            {{ $club->getGamesPlayedDrawn($season)->count() + $club->getGamesRatedDrawn($season)->count() }}
+                            -
+                            {{ $club->getGamesPlayedLost($season)->count() + $club->getGamesRatedLost($season)->count() }}
+                        </h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 style="color: {{ $club->colours_club_primary }}">Die letzten Spiele</h3>
+                        <table class="table table-striped">
+                            <thead>
+
+                            </thead>
+                            <tbody>
+                                @foreach($club->getLastGamesPlayedOrRated(5) as $fixture)
+                                    <tr>
+                                        <td class="align-middle">
                                     <span class="fa-stack">
                                         @if ($fixture->isPlayed())
                                             @if ($club->hasWon($fixture))
@@ -119,6 +112,100 @@
                                                 <i class="fa fa-circle fa-stack-2x text-dark"></i>
                                                 <strong class="fa-stack-1x text-white">U</strong>
                                             @endif
+                                        @endif
+                                    </span>
+                                        </td>
+                                        <td class="align-middle">{{ $fixture->datetime ? $fixture->datetime->format('d.m.y') : null }}</td>
+                                        <td class="align-middle text-right">{{ $fixture->clubHome ? $fixture->clubHome->name_short : null }}</td>
+                                        <td class="align-middle text-center">
+                                            @if($fixture->isPlayed())
+                                                {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                                            @elseif($fixture->isRated())
+                                                {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
+                                            @endif
+                                        </td>
+                                        <td class="align-middle text-left">{{ $fixture->clubAway ? $fixture->clubAway->name_short : null }}</td>
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 style="color: {{ $club->colours_club_primary }}">Die nächsten Spiele</h3>
+                        <table class="table table-striped">
+                            <thead>
+
+                            </thead>
+                            <tbody>
+                            @foreach($club->getNextGames(5) as $fixture)
+                                <tr>
+                                    <td class="align-middle">{{ $fixture->datetime ? $fixture->datetime->format('d.m.y') : null }}</td>
+                                    <td class="align-middle text-right">{{ $fixture->clubHome ? $fixture->clubHome->name_short : null }}</td>
+                                    <td class="align-middle text-center">
+                                        @if($fixture->isPlayed())
+                                            {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                                        @elseif($fixture->isRated())
+                                            {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
+                                        @else
+                                            - : -
+                                        @endif
+                                    </td>
+                                    <td class="align-middle text-left">{{ $fixture->clubAway ? $fixture->clubAway->name_short : null }}</td>
+
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="results" role="tabpanel" aria-labelledby="">
+                <h2 style="color: {{ $club->colours_club_primary }}"><b>Resultate</b></h2>
+                <form class="form-inline pb-2">
+                    <label class="pr-4" for=""><b>Saison</b></label>
+                    <select id="" name="" class="form-control" aria-labelledby="">
+                        <option>{{ $season->begin->format('Y') }} - {{ $season->end->format('Y') }}</option>
+                        <option></option>
+                    </select>
+                </form>
+                <!-- results -->
+                <div class="col-12">
+                    <table class="table table-sm table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-right">SW</th>
+                            <th class=""></th>
+                            <th colspan="2" class="">Datum</th>
+                            <th colspan="3" class="text-center">Paarung</th>
+                            <th class=""></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($season->fixtures()->ofClub($club->id)->where('fixtures.published',1)->orderBy('datetime')->get() as $fixture)
+                            <tr>
+                                <td class="align-middle text-right">
+                                    {{ $fixture->matchweek->number_consecutive }}
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="fa-stack">
+                                        @if ($fixture->isPlayed() && !$fixture->isRated())
+                                            @if ($club->hasWon($fixture))
+                                                <i class="fa fa-circle fa-stack-2x text-success"></i>
+                                                <strong class="fa-stack-1x text-white" title="Sieg">S</strong>
+                                            @elseif ($club->hasLost($fixture))
+                                                <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                                <strong class="fa-stack-1x text-white" title="Niederlage">N</strong>
+                                            @elseif ($club->hasDrawn($fixture))
+                                                <i class="fa fa-circle fa-stack-2x text-dark"></i>
+                                                <strong class="fa-stack-1x text-white" title="Unentschieden">U</strong>
+                                            @endif
+                                        @elseif ($fixture->isRated())
+                                            <i class="fa fa-circle fa-stack-2x text-warning"></i>
+                                            <strong class="fa-stack-1x text-white" title="Gewertet">R</strong>
                                         @endif
                                     </span>
                                 </td>
@@ -146,7 +233,11 @@
                                     @endif
                                 </td>
                                 <td class="align-middle text-center">
-                                    {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
+                                    @if($fixture->isPlayed() && !$fixture->isRated())
+                                        {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
+                                    @elseif($fixture->isRated())
+                                        {{ $fixture->goals_home_rated ?? "-" }} : {{ $fixture->goals_away_rated }}
+                                    @endif
                                 </td>
                                 <td class="align-middle text-left">
                                     @if ($fixture->clubAway)

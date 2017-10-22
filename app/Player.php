@@ -101,6 +101,9 @@ class Player extends Model
      */
     public function isSuspended()
     {
+
+
+
         $current_suspension = $this->cards()->get()->where();
     }
 
