@@ -33,6 +33,22 @@
                 <small id="nameHelp" class="form-text text-muted">Über das Teilen-Menü auf Google Maps ermittelte Kurz-URL hier eintragen.</small>
             </div>
         </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="lat">Breitengrad</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="lat" id="lat" aria-describedby="latHelp" placeholder="{{ old('lat') }}">
+                <small id="latHelp" class="form-text text-muted">Breitengrad der Adresse</small>
+            </div>
+            <div class="col-md-2">
+                <label for="long">Längengrad</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="long" id="long" aria-describedby="longHelp" placeholder="{{ old('long') }}">
+                <small id="longHelp" class="form-text text-muted">Längengrad der Adresse</small>
+            </div>
+        </div>
         <!-- note -->
         <div class="form-group row">
             <div class="col-md-2">
