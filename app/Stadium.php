@@ -21,7 +21,7 @@ class Stadium extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name', 'name_short', 'gmaps', 'note', 'published'
+        'name', 'name_short', 'gmaps', 'lat', 'long', 'note', 'published'
     ];
 
     /**
@@ -35,7 +35,7 @@ class Stadium extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'name_short', 'gmaps', 'note', 'published'
+        'name', 'name_short', 'gmaps', 'lat', 'long', 'note', 'published'
     ];
 
     /***********************************************************
