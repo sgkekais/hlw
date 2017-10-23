@@ -17,6 +17,9 @@
                         <a class="nav-link" href="{{ route('frontend.divisions.show', $division ) }}">{{ $division->name }}</a>
                     </li>
                 @endforeach
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ruhmeshalle</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">

@@ -2,16 +2,19 @@
     <div class="container">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link pl-0 {{ Route::is('frontend.divisions.tables') ? "active" : null }}" href="{{ route('frontend.divisions.tables', $division) }}">Tabelle</a>
+                <a class="nav-link pl-0 {{ Route::is('frontend.divisions.show') ? "active" : null }}" href="{{ route('frontend.divisions.show', $division) }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('frontend.divisions.tables') ? "active" : null }}" href="{{ route('frontend.divisions.tables', $division) }}">Tabelle</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::is('frontend.divisions.fixtures') ? "active" : null }}" href="{{ route('frontend.divisions.fixtures', $division) }}">Spielplan</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Sünderkartei</a>
+                <a class="nav-link {{ Route::is('frontend.seasons.clubs') || Route::is('frontend.clubs.show') ? "active" : null }}" href="{{ route('frontend.seasons.clubs', $season ) }}">Teams</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('frontend.seasons.clubs') || Route::is('frontend.clubs.show') ? "active" : null }}" href="{{ route('frontend.seasons.clubs', $season ) }}">Teams</a>
+                <a class="nav-link" href="#">Stat-Center</a>
             </li>
         </ul>
     </div>
