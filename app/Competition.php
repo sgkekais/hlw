@@ -32,6 +32,24 @@ class Competition extends Model
         'name', 'type', 'published'
     ];
 
+    /***********************************************************
+     * SCOPES
+     ************************************************************/
+
+    /**
+     * Scope a query to return only published competitions
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished ($query)
+    {
+        return $query->where('published', '1');
+    }
+
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
+
     /**
      * Relationships
      * 1. One-to-Many
