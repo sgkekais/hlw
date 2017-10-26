@@ -130,6 +130,20 @@ class Season extends Model
     }
 
     /***********************************************************
+     * SCOPES
+     ************************************************************/
+
+    /**
+     * Scope a query to only return published seasons
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished ($query)
+    {
+        return $query->where('published', 1);
+    }
+
+    /***********************************************************
      * FUNCTIONS
      ************************************************************/
 
