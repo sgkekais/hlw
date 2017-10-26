@@ -65,6 +65,14 @@
                 <small id="ban_lifetimeHelp" class="form-text text-muted">Spieler auf Lebenszeit gesperrt?</small>
             </div>
         </div>
+        <!-- reduce ban by number of games -->
+        <div class="form-group row">
+            <label for="ban_reduced_by" class="col-md-2 col-form-label">Sperre reduzieren</label>
+            <div class="col-md-2">
+                <input type="number" class="form-control" aria-describedby="ban_reduced_byHelp" name="ban_reduced_by" id="ban_reduced_by" value="{{ $card->ban_reduced_by }}">
+                <small id="ban_reduced_byHelp" class="form-text text-muted">Länge der Sperre reduzieren</small>
+            </div>
+        </div>
         <!-- ban reason and note -->
         <div class="form-group row">
             <label for="ban_reason" class="col-md-2 col-form-label">Grund</label>

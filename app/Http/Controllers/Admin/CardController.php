@@ -23,7 +23,8 @@ class CardController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Fixture $fixture
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Fixture $fixture)
     {
@@ -40,13 +41,15 @@ class CardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Fixture $fixture
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, Fixture $fixture)
     {
         $this->validate($request, [
-           'ban_matches' => 'nullable|integer|min:0'
+            'ban_matches' => 'nullable|integer|min:0',
+            'ban_reduced_by' => 'nullable|integer|min:0|'
         ]);
 
         $card = new Card($request->all());
