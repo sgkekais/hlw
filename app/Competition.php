@@ -37,13 +37,33 @@ class Competition extends Model
      ************************************************************/
 
     /**
-     * Scope a query to return only published competitions
+     * Scope the query to published competitions
      * @param $query
      * @return mixed
      */
     public function scopePublished ($query)
     {
         return $query->where('published', '1');
+    }
+
+    /**
+     * Scope the query to leagues
+     * @param $query
+     * @return mixed
+     */
+    public function scopeLeagues ($query)
+    {
+        return $query->where('type', 'league');
+    }
+
+    /**
+     * Scope the query to knockout tournaments / 'cups'
+     * @param $query
+     * @return mixed
+     */
+    public function scopeKnockouts ($query)
+    {
+        return $query->where('type', 'knockout');
     }
 
     /***********************************************************
