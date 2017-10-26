@@ -31,6 +31,24 @@ class Division extends Model
         'name', 'competition_id', 'hierarchy_level', 'published'
     ];
 
+    /***********************************************************
+     * SCOPES
+     ************************************************************/
+
+    /**
+     * Scope a query to only published divisions
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished ($query)
+    {
+        return $query->where('published', 1);
+    }
+
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
+
     /**
      * A division belongs to one competition
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
