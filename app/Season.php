@@ -151,13 +151,19 @@ class Season extends Model
             if ($matchweek->begin <= $current_date && $matchweek->end >= $current_date) {
                 $current_matchweek = $matchweek;
                 break;
-            } elseif ($matchweek->end == $yesterday) { // was there a matchweek yesterday?
+            }
+            // was there a matchweek yesterday?
+            elseif ($matchweek->end == $yesterday) {
                 $current_matchweek = $matchweek;
                 break;
-            } elseif ($current_date < $matchweek->begin) { // else give me the next matchweek
+            }
+            // else give me the next matchweek
+            elseif ($current_date < $matchweek->begin) {
                 $current_matchweek = $matchweek;
                 break;
-            } elseif ($current_date > $matchweek->end && $matchweek->end == $end_of_last_matchweek) { // else give me the last matchweek
+            }
+            // else give me the last matchweek
+            elseif ($current_date > $matchweek->end && $matchweek->end == $end_of_last_matchweek) {
                 $current_matchweek = $matchweek;
                 break;
             }
@@ -167,26 +173,44 @@ class Season extends Model
     }
 
     /**
-     * Generate the table for the current season and until the given matchweek     *
      * @param Matchweek|null $matchweek
-     * @return mixed
+     * @param bool $rank
+     * @param bool $played
+     * @param bool $won
+     * @param bool $drawn
+     * @param bool $lost
+     * @param bool $gf
+     * @param bool $ga
+     * @param bool $gd
+     * @param bool $points
+     * @return \Illuminate\Support\Collection|static
      */
-    public function generateTable(Matchweek $matchweek = null)
-    {
+    public function generateTable (
+        Matchweek $matchweek = null,
+        $rank   = true,
+        $played = true,
+        $won    = true,
+        $drawn  = true,
+        $lost   = true,
+        $gf     = true,
+        $ga     = true,
+        $gd     = true,
+        $points = true
+    ) {
         if (is_null($matchweek)) {
             $matchweek = $this->currentMatchweek();
         }
 
-        $clubs = $this->clubs()->orderBy('name')->get()->map(function ($club) {
-            $club['t_rank']         = 0;
-            $club['t_played']       = 0;
-            $club['t_won']          = 0;
-            $club['t_drawn']        = 0;
-            $club['t_lost']         = 0;
-            $club['t_goals_for']    = 0;
-            $club['t_goals_against']= 0;
-            $club['t_goals_diff']   = 0;
-            $club['t_points']       = 0;
+        $clubs = $this->clubs()->orderBy('name')->get()->map(function ($club) use ($rank, $played, $won, $drawn, $lost, $gf, $ga, $gd, $points) {
+            if ($rank)      $club['t_rank']         = 0;
+            if ($played)    $club['t_played']       = 0;
+            if ($won)       $club['t_won']          = 0;
+            if ($drawn)     $club['t_drawn']        = 0;
+            if ($lost)      $club['t_lost']         = 0;
+            if ($gf)        $club['t_goals_for']    = 0;
+            if ($ga)        $club['t_goals_against']= 0;
+            if ($gd)        $club['t_goals_diff']   = 0;
+            if ($points)    $club['t_points']       = 0;
 
             return $club;
         });
@@ -196,21 +220,37 @@ class Season extends Model
             // only clubs that have not withdrawn from the competition
             if (!$club->pivot->withdrawal) {
                 // played + rated games
-                $club->t_played = $club->getGamesPlayed($this, $matchweek)->count()+$club->getGamesRated($this, $matchweek)->count();
+                if ($played) {
+                    $club->t_played = $club->getGamesPlayed($this, $matchweek)->count()+$club->getGamesRated($this, $matchweek)->count();
+                }
                 // won games
-                $club->t_won = $club->getGamesPlayedWon($this, $matchweek)->count() + $club->getGamesRatedWon($this, $matchweek)->count();
+                if ($won) {
+                    $club->t_won = $club->getGamesPlayedWon($this, $matchweek)->count() + $club->getGamesRatedWon($this, $matchweek)->count();
+                }
                 // drawn games
-                $club->t_drawn = $club->getGamesPlayedDrawn($this, $matchweek)->count() + $club->getGamesRatedDrawn($this, $matchweek)->count();
+                if ($drawn) {
+                    $club->t_drawn = $club->getGamesPlayedDrawn($this, $matchweek)->count() + $club->getGamesRatedDrawn($this, $matchweek)->count();
+                }
                 // lost games
-                $club->t_lost = $club->getGamesPlayedLost($this, $matchweek)->count() + $club->getGamesRatedLost($this, $matchweek)->count();
+                if ($lost) {
+                    $club->t_lost = $club->getGamesPlayedLost($this, $matchweek)->count() + $club->getGamesRatedLost($this, $matchweek)->count();
+                }
                 // goals for
-                $club->t_goals_for = $club->getGoalsFor($this, $matchweek);
+                if ($gf) {
+                    $club->t_goals_for = $club->getGoalsFor($this, $matchweek);
+                }
                 // goals against
-                $club->t_goals_against = $club->getGoalsAgainst($this, $matchweek);
+                if ($ga) {
+                    $club->t_goals_against = $club->getGoalsAgainst($this, $matchweek);
+                }
                 // goals diff
-                $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
+                if ($gd) {
+                    $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
+                }
                 // points
-                $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1;
+                if ($points) {
+                    $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1;
+                }
             }
         }
 
