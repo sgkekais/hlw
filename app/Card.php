@@ -14,7 +14,7 @@ class Card extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'fixture_id', 'player_id', 'color', 'ban_matches', 'ban_season', 'ban_lifetime', 'ban_reason', 'note'
+        'fixture_id', 'player_id', 'color', 'ban_matches', 'ban_reduced_by', 'ban_season', 'ban_lifetime', 'ban_reason', 'note'
     ];
 
     /**
@@ -28,7 +28,7 @@ class Card extends Model
      * @var array
      */
     protected $fillable = [
-        'player_id', 'color', 'ban_matches', 'ban_season', 'ban_lifetime', 'ban_reason', 'note'
+        'player_id', 'color', 'ban_matches', 'ban_reduced_by', 'ban_season', 'ban_lifetime', 'ban_reason', 'note'
     ];
 
     /***********************************************************
