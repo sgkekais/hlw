@@ -22,8 +22,7 @@
             <div class="col-md-4">
                 <select name="type" id="type" class="form-control">
                     <option value="league">Liga</option>
-                    <option value="knockout">Turnier - K.O.</option>
-                    <option value="tournament">Turnier - Gruppe+K.O.</option>
+                    <option value="knockout">Turnier - K.O. (Pokal)</option>
                 </select>
             </div>
         </div>

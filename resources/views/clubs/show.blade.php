@@ -20,7 +20,7 @@
                 @endif
             </div>
             <div class="col-md-6 pt-4 {{ $club->colours_club_primary == "#ffffff" ? "text-dark" : "text-white" }}">
-                <h1 style="font-weight: bold">{{ $club->name }}</h1>
+                <h1 class="font-weight-bold">{{ $club->name }}</h1>
                 <ul class="list-unstyled">
                     <li class="pt-2 pb-2">
                         Irgendwas
@@ -41,14 +41,14 @@
         <div class="row pt-4">
             <div class="col-md-6">
                 <!-- tabs -->
-                <nav class="nav nav-tabs" id="tab" role="tablist"> <!--style="background-color: #f5f5f5; border-top-left-radius: 5px; border-top-right-radius: 5px"-->
-                    <a class="nav-item nav-link active text-dark" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
+                <nav class="nav nav-tabs" id="tab" role="tablist">
+                    <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
                         Übersicht
                     </a>
-                    <a class="nav-item nav-link text-dark" id="results-tab" data-toggle="tab" role="tab" aria-controls="results" href="#results">
+                    <a class="nav-item nav-link " id="results-tab" data-toggle="tab" role="tab" aria-controls="results" href="#results">
                         Resultate
                     </a>
-                    <a class="nav-item nav-link text-dark" id="players-tab" data-toggle="tab" role="tab" aria-controls="players" href="#players">
+                    <a class="nav-item nav-link <!--text-dark-->" id="players-tab" data-toggle="tab" role="tab" aria-controls="players" href="#players">
                         Kader
                     </a>
                 </nav>
@@ -61,11 +61,11 @@
     <div class="row">
         <div class="tab-content col-12" id="tabcontent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <h2 style="color: {{ $club->colours_club_primary }}"><b>Übersicht</b></h2>
+                <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}"><b>Übersicht</b></h2>
                 <div class="row">
                     <div class="col-12">
                         <h3 class="text-muted">
-                            <span class="font-weight-bold">Saison {{ $season->begin ? $season->begin->format('Y') : '-' }} / {{ $season->end ? $season->end->format('Y') : '-' }}</span>:
+                            <span>Saison {{ $season->begin ? $season->begin->format('Y') : '-' }} / {{ $season->end ? $season->end->format('Y') : '-' }}</span>:
                             {{ $club->getGamesPlayedWon($season)->count() + $club->getGamesRatedWon($season)->count() }}
                             S -
                             {{ $club->getGamesPlayedDrawn($season)->count() + $club->getGamesRatedDrawn($season)->count() }}
@@ -78,7 +78,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h4 style="color: {{ $club->colours_club_primary }}">Die letzten Spiele</h4>
-                        <table class="table table-striped">
+                        <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -106,7 +106,18 @@
                                     </span>
                                         </td>
                                         <td class="align-middle">{{ $fixture->datetime ? $fixture->datetime->format('d.m.y') : null }}</td>
-                                        <td class="align-middle text-right">{{ $fixture->clubHome ? $fixture->clubHome->name_short : null }}</td>
+                                        <td class="align-middle text-right">
+                                            @if($fixture->clubHome)
+                                                {{ $fixture->clubHome->name_short }}
+                                                @if($fixture->clubHome->logo_url)
+                                                    <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
+                                                @else
+                                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                @endif
+                                            @else
+                                                {{ $fixture->club_home }}
+                                            @endif
+                                        </td>
                                         <td class="align-middle text-center">
                                             @if($fixture->isPlayed())
                                                 {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
@@ -114,8 +125,18 @@
                                                 {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
                                             @endif
                                         </td>
-                                        <td class="align-middle text-left">{{ $fixture->clubAway ? $fixture->clubAway->name_short : null }}</td>
-
+                                        <td class="align-middle text-left">
+                                            @if($fixture->clubAway)
+                                                @if($fixture->clubAway->logo_url)
+                                                    <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
+                                                @else
+                                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                @endif
+                                                {{ $fixture->clubAway->name_short }}
+                                            @else
+                                                {{ $fixture->club_away }}
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -123,7 +144,7 @@
                     </div>
                     <div class="col-md-6">
                         <h4 style="color: {{ $club->colours_club_primary }}">Die nächsten Spiele</h4>
-                        <table class="table table-striped">
+                        <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>Datum</th>
@@ -134,7 +155,18 @@
                             @foreach($club->getNextGames(5) as $fixture)
                                 <tr>
                                     <td class="align-middle">{{ $fixture->datetime ? $fixture->datetime->format('d.m.y') : null }}</td>
-                                    <td class="align-middle text-right">{{ $fixture->clubHome ? $fixture->clubHome->name_short : null }}</td>
+                                    <td class="align-middle text-right">
+                                        @if($fixture->clubHome)
+                                            {{ $fixture->clubHome->name_short }}
+                                            @if($fixture->clubHome->logo_url)
+                                                <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
+                                            @else
+                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                            @endif
+                                        @else
+                                            {{ $fixture->club_home }}
+                                        @endif
+                                    </td>
                                     <td class="align-middle text-center">
                                         @if($fixture->isPlayed())
                                             {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
@@ -144,14 +176,25 @@
                                             - : -
                                         @endif
                                     </td>
-                                    <td class="align-middle text-left">{{ $fixture->clubAway ? $fixture->clubAway->name_short : null }}</td>
+                                    <td class="align-middle text-left">
+                                        @if($fixture->clubAway)
+                                            @if($fixture->clubAway->logo_url)
+                                                <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
+                                            @else
+                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                            @endif
+                                            {{ $fixture->clubAway->name_short }}
+                                        @else
+                                            {{ $fixture->club_away }}
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="row mt-4 mb-4 ">
+                <div class="row mt-4 mb-4 no-gutters">
                     <div class="col-12 bg-secondary">
                         Test
                     </div>
@@ -161,7 +204,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <h4 style="color: {{ $club->colours_club_primary }}">Spielstätte</h4>
-                                <div id="map" style="width: 100%; height: 450px "></div>
+                                <div id="map" style="width: 100%; height: 450px;"></div>
                                 <script>
                                     function initMap() {
                                         var uluru = {lat: {{ $club->regularStadium()->first()->lat }}, lng: {{ $club->regularStadium()->first()->long }}};
@@ -175,8 +218,7 @@
                                         });
                                     }
                                 </script>
-                                <script async defer
-                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBKAZ6Ay4GdEqmP3gG6Zpp3kOyBSSa-Lc&callback=initMap">
+                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBKAZ6Ay4GdEqmP3gG6Zpp3kOyBSSa-Lc&callback=initMap">
                                 </script>
                             </div>
                         </div>

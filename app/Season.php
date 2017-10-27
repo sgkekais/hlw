@@ -223,7 +223,7 @@ class Season extends Model
             if ($lost)      $club['t_lost']         = 0;
             if ($gf)        $club['t_goals_for']    = 0;
             if ($ga)        $club['t_goals_against']= 0;
-            if ($gd)        $club['t_goals_diff']   = 0;
+            if ($gf && $ga && $gd) $club['t_goals_diff']   = 0;
             if ($points)    $club['t_points']       = 0;
 
             return $club;
@@ -258,7 +258,7 @@ class Season extends Model
                     $club->t_goals_against = $club->getGoalsAgainst($this, $matchweek);
                 }
                 // goals diff
-                if ($gd) {
+                if ($gf && $ga && $gd) {
                     $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
                 }
                 // points

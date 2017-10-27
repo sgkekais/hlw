@@ -9,11 +9,8 @@
 @section('content')
 
     <div class="container">
-        <h2 class="mt-4">
-            <b>Aktuelle Teams der {{ $season->division->name }}</b>
-        </h2>
-        <hr>
-        <h3>Saison {{ $season->begin ? $season->begin->format('Y') : null }} {{ $season->end ? "/ ".$season->end->format('Y') : null }}</h3>
+        <h2 class="mt-4 font-weight-bold">Aktuelle Teams der {{ $season->division->name }}</h2>
+        <h3 class="text-muted">Saison {{ $season->begin ? $season->begin->format('Y') : null }} {{ $season->end ? "/ ".$season->end->format('Y') : null }}</h3>
         @foreach($clubs->chunk(4) as $chunk)
 
             <div class="row mt-4 p-0 justify-content-center">
@@ -43,9 +40,7 @@
             </div>
 
         @endforeach
-
-        <hr>
-        <h3>Alle Teams der {{ $season->division->name }}</h3>
+        <h2 class="mt-4 font-weight-bold">Alle Teams der {{ $season->division->name }}</h2>
 
     </div>
 

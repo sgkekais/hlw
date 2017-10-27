@@ -12,9 +12,11 @@
         <div class="row">
             <div class="col-12">
                 <h2 style="font-weight: bold">Tabelle</h2>
-                <h4 class="text-muted">
-                    Spielwoche {{ $c_matchweek->number_consecutive ?: null }} | {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.') : null }} - {{ $c_matchweek->end ? $c_matchweek->end->format('d.m.') : null }}
-                </h4>
+                <h3 class="text-muted">
+                    Spielwoche {{ $c_matchweek->number_consecutive ?: null }}
+                    | {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.') : null }} - {{ $c_matchweek->end ? $c_matchweek->end->format('d.m.') : null }}
+                    {{ $c_matchweek->name ? "| ".$c_matchweek->name : null }}
+                </h3>
             </div>
         </div>
         <div class="row">
@@ -166,7 +168,7 @@
                             </td>
                         </tr>
                         <tr class="collapse bg-light" id="collapsedetails{{ $loop->iteration }}">
-                            <td class="" colspan="13" style="border-top: none">
+                            <td class="" colspan="14" style="border-top: none">
                                 <div class="row">
                                     <div class="col-md-4">
                                         @if($club->logo_url)

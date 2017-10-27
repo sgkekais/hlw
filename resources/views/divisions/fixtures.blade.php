@@ -12,8 +12,8 @@
         <a name="top"></a>
         <div class="row">
             <div class="col-12">
-                <h1 class="pt-4"><b>Spielplan</b> der {{ $season->season_nr ? $season->season_nr."." : null }} Saison</h1>
-                <h2 class="text-muted">{{ $season->begin ? $season->begin->format('Y') : null }} / {{ $season->end ? $season->end->format('Y') : null }}</h2>
+                <h2 class="pt-4 font-weight-bold">Spielplan</h2>
+                <h3 class="text-muted">{{ $season->season_nr ? $season->season_nr."." : null }} Saison - {{ $season->begin ? $season->begin->format('Y') : null }} / {{ $season->end ? $season->end->format('Y') : null }}</h3>
                 <nav aria-label="pagination">
                     <ul class="pagination">
                         @foreach($season->matchweeks as $matchweek)

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class DivisionController extends Controller
 {
+    /**
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Division $division)
     {
         $season = $division->seasons()->current()->first();
@@ -14,6 +18,10 @@ class DivisionController extends Controller
         return view('divisions.index', compact('division', 'season'));
     }
 
+    /**
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function tables(Division $division)
     {
         $season = $division->seasons()->current()->first();
@@ -34,6 +42,10 @@ class DivisionController extends Controller
             'p_matchweek'));
     }
 
+    /**
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function fixtures(Division $division)
     {
         $season = $division->seasons()->current()->first();
