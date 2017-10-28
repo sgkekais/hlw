@@ -21,7 +21,8 @@
                 <div class="col-md-4">
                     <h3 class="font-weight-bold">{{ $division->name }}</h3>
                     @php
-                        $c_season = $division->seasons()->published()->current()->first();
+                        // $c_season = $division->seasons()->published()->current()->first();
+                        $c_season = $division->currentSeason();
                         if ($c_season) {
                             $c_matchweek = $c_season->currentMatchweek();
                         }

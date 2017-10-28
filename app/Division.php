@@ -46,6 +46,19 @@ class Division extends Model
     }
 
     /***********************************************************
+     * FUNCTIONS
+     ************************************************************/
+
+    /**
+     * Return the current published season for the division
+     * @return mixed
+     */
+    public function currentSeason ()
+    {
+        return $this->seasons()->published()->current()->first();
+    }
+
+    /***********************************************************
      * RELATIONSHIPS
      ************************************************************/
 
@@ -53,7 +66,8 @@ class Division extends Model
      * A division belongs to one competition
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function competition(){
+    public function competition ()
+    {
         return $this->belongsTo(Competition::class);
     }
 
@@ -61,7 +75,8 @@ class Division extends Model
      * A division has many seasons
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function seasons(){
+    public function seasons ()
+    {
         return $this->hasMany(Season::class);
     }
 }
