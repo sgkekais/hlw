@@ -50,10 +50,28 @@ class Division extends Model
      ************************************************************/
 
     /**
+     * Return all divisions above the current one
+     * @return mixed
+     */
+    public function higherDivisions()
+    {
+        return $this->competition->divisions->where('hierarchy_level', $this->hierarchy_level - 1);
+    }
+
+    /**
+     * Return all divisions below the current one
+     * @return mixed
+     */
+    public function lowerDivisions()
+    {
+        return $this->competition->divisions->where('hierarchy_level', $this->hierarchy_level + 1);
+    }
+
+    /**
      * Return the current published season for the division
      * @return mixed
      */
-    public function currentSeason ()
+    public function currentSeason()
     {
         return $this->seasons()->published()->current()->first();
     }
@@ -66,7 +84,7 @@ class Division extends Model
      * A division belongs to one competition
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function competition ()
+    public function competition()
     {
         return $this->belongsTo(Competition::class);
     }
@@ -75,7 +93,7 @@ class Division extends Model
      * A division has many seasons
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function seasons ()
+    public function seasons()
     {
         return $this->hasMany(Season::class);
     }
