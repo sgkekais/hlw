@@ -16,7 +16,7 @@
     </div>
     <hr>
     <!-- list all positions -->
-    <h2 class="mt-4">Angelegte Positionen <span class="badge badge-default">{{ $positions->count() }}</span></h2>
+    <h2 class="mt-4">Angelegte Positionen <span class="badge badge-secondary">{{ $positions->count() }}</span></h2>
         <table class="table table-sm table-striped table-hover">
             <thead class="thead-default">
             <tr>

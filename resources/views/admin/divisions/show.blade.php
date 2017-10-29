@@ -41,7 +41,7 @@
     <!-- show division details -->
     <h3 class="mt-4">
         Zugeordnete Saisons
-        <span class="badge badge-default">{{ $division->seasons->count() }}</span>
+        <span class="badge badge-secondary">{{ $division->seasons->count() }}</span>
     </h3>
     <div class="row">
         <div class="col-md-12">

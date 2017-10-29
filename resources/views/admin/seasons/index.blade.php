@@ -16,7 +16,7 @@
     </div>
     <hr>
     <!-- list all seasons -->
-    <h2 class="mt-4">Angelegte Saisons <span class="badge badge-default">{{ $seasons->count() }}</span></h2>
+    <h2 class="mt-4">Angelegte Saisons <span class="badge badge-secondary">{{ $seasons->count() }}</span></h2>
     <table class="table table-sm table-striped table-hover">
         <thead class="thead-default">
         <tr>

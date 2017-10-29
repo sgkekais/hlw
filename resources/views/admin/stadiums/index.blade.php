@@ -53,7 +53,7 @@
     </div>
     <hr>
     <!-- list all stadiums -->
-    <h2 class="mt-4">Angelegte Spielorte <span class="badge badge-default">{{ $stadiums->count() }}</span></h2>
+    <h2 class="mt-4">Angelegte Spielorte <span class="badge badge-secondary">{{ $stadiums->count() }}</span></h2>
         <table class="table table-sm table-striped table-hover">
             <thead class="thead-default">
             <tr>

@@ -16,7 +16,7 @@
     </div>
     <hr>
     <!-- list all referees -->
-    <h2 class="mt-4">Angelegte Schiedsrichter <span class="badge badge-default">{{ $referees->count() }}</span></h2>
+    <h2 class="mt-4">Angelegte Schiedsrichter <span class="badge badge-secondary">{{ $referees->count() }}</span></h2>
         <table class="table table-sm table-striped table-hover">
             <thead class="thead-default">
             <tr>

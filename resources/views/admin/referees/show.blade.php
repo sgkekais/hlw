@@ -33,7 +33,7 @@
     <!-- show referee details -->
     <h3 class="mt-4">
         Zugeordnete Paarungen
-        <span class="badge badge-default">{{ $referee->fixtures->count() }}</span>
+        <span class="badge badge-secondary">{{ $referee->fixtures->count() }}</span>
     </h3>
     <div class="row">
         <div class="col-md-12">

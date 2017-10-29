@@ -16,7 +16,7 @@
     </div>
     <hr>
     <!-- list all people -->
-    <h2 class="mt-4">Angelegte Personen <span class="badge badge-default">{{ $people->count() }}</span></h2>
+    <h2 class="mt-4">Angelegte Personen <span class="badge badge-secondary">{{ $people->count() }}</span></h2>
         <table class="table table-sm table-striped table-hover">
             <thead class="thead-default">
             <tr>
