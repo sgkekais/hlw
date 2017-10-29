@@ -3,6 +3,7 @@
 namespace HLW\Http\Controllers\Admin;
 
 use HLW\Club;
+use HLW\DivisionOfficial;
 use HLW\Person;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
@@ -30,9 +31,10 @@ class PersonController extends Controller
      */
     public function create()
     {
-        $real_clubs = Club::where('is_real_club', true)->get();
+        $real_clubs = Club::where('is_real_club', true)->orderBy('name')->get();
+        $official_divisions = DivisionOfficial::orderBy('name')->get();
 
-        return view('admin.people.create', compact('real_clubs'));
+        return view('admin.people.create', compact('real_clubs', 'official_divisions'));
     }
 
     /**

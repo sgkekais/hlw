@@ -97,6 +97,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::delete('clubs/{club}/stadiums/{stadium}', 'ClubController@destroyStadiumAssignment')->name('destroyStadiumAssignment');
 
     Route::resource('positions', 'PositionController');
+    Route::resource('divisions-official', 'DivisionOfficialController');
     Route::resource('referees', 'RefereeController');
     Route::resource('people', 'PersonController');
 

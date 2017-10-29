@@ -63,6 +63,9 @@
                         @endif
                         @if($person->registered_at_club)
                             <span class="fa fa-shield text-warning fa-fw" title="Vereinsspieler"></span>
+                            @if($person->realDivision)
+                                {{ $person->realDivision->name_short }}
+                            @endif
                             @else
                             <span class="fa fa-fw"></span>
                         @endif

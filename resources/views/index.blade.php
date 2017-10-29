@@ -27,14 +27,14 @@
                             $c_matchweek = $c_season->currentMatchweek();
                         }
                     @endphp
-                    <h4 class="text-muted">
-                        SW {{ $c_matchweek->number_consecutive ?? null }}
-                        <small class="text-muted">
-                            {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.y') : null }}
-                            {{ $c_matchweek->end ? "bis ".$c_matchweek->end->format('d.m.y') : null }}
-                        </small>
-                    </h4>
-                    @if ($c_season)
+                    @if ($c_season && $c_matchweek)
+                        <h4 class="text-muted">
+                            SW {{ $c_matchweek->number_consecutive ?? null }}
+                            <small class="text-muted">
+                                {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.y') : null }}
+                                {{ $c_matchweek->end ? "bis ".$c_matchweek->end->format('d.m.y') : null }}
+                            </small>
+                        </h4>
 
                         <table class="table table-hover table-striped table-sm">
                             <thead>

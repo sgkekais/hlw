@@ -13,7 +13,12 @@
         <div class="col-md-10">
             <h1 class="">Details zu Person</h1>
             <h2 class="mt-4 text-primary">&mdash; {{ $person->last_name }}, {{ $person->first_name }}</h2>
-            <h3 class="text-muted">{{ $person->registered_at_club ? "Vereinsspieler bei ".$person->realClub->name : null }}</h3>
+            <h3 class="text-muted">
+                @if($person->realClub)
+                    Vereinsspieler bei {{ $person->realClub->name  }} <br>
+                    &ndash; {{ $person->realDivision ? $person->realDivision->name : null }}
+                @endif
+            </h3>
         </div>
     </div>
     <div class="row">

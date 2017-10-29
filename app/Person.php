@@ -15,7 +15,7 @@ class Person extends Model
      */
     protected static $logAttributes = [
         'first_name', 'last_name',
-        'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'note'
+        'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'official_division_id', 'note'
     ];
 
     /**
@@ -30,7 +30,7 @@ class Person extends Model
      */
     protected $fillable = [
         'first_name', 'last_name',
-        'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'note'
+        'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'official_division_id', 'note'
     ];
 
     /**
@@ -99,5 +99,13 @@ class Person extends Model
     public function realClub()
     {
         return $this->belongsTo(Club::class, 'registered_at_club');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function realDivision()
+    {
+        return $this->belongsTo(DivisionOfficial::class, 'official_division_id');
     }
 }

@@ -41,6 +41,16 @@
                 <input type="file" name="photo" id="photo" aria-describedby="photoHelp">
                 <small id="photoHelp" class="form-text text-muted">Passbild</small>
             </div>
+            <div class="col-md-2">
+                <label for="photo_public">Passbild öffentlich?</label>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" id="photo_public" name="photo_public" aria-describedby="photo_publicHelp">
+                    <option value="0">Nein</option>
+                    <option value="1">Ja</option>
+                </select>
+                <small id="photo_publicHelp" class="form-text text-muted">Darf das Passbild auf der Mannschaftsseite angezeigt werden?</small>
+            </div>
         </div>
         <!-- note -->
         <div class="form-group row">
@@ -55,16 +65,6 @@
         <!-- photo is public and person is registered at club -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="photo_public">Passbild öffentlich?</label>
-            </div>
-            <div class="col-md-4">
-                <select class="form-control" id="photo_public" name="photo_public" aria-describedby="photo_publicHelp">
-                    <option value="0">Nein</option>
-                    <option value="1">Ja</option>
-                </select>
-                <small id="photo_publicHelp" class="form-text text-muted">Darf das Passbild auf der Mannschaftsseite angezeigt werden?</small>
-            </div>
-            <div class="col-md-2">
                 <label for="registered_at_club">Vereinsspieler?</label>
             </div>
             <div class="col-md-4">
@@ -75,6 +75,18 @@
                     @endforeach
                 </select>
                 <small id="registered_at_clubHelp" class="form-text text-muted">Verein des Spielers auswählen</small>
+            </div>
+            <div class="col-md-2">
+                <label for="registered_at_club">Klasse?</label>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" id="official_division_id" name="official_division_id" aria-describedby="official_division_idHelp">
+                    <option></option>
+                    @foreach($official_divisions as $official_division)
+                        <option value="{{ $official_division->id }}">{{ $official_division->name }}</option>
+                    @endforeach
+                </select>
+                <small id="official_division_idHelp" class="form-text text-muted">Offizielle Spielklasse des Spielers auswählen</small>
             </div>
         </div>
         <div class="form-group">
