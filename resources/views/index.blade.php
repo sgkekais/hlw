@@ -92,7 +92,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-
+                        <div class="text-right">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><a href="{{ route('frontend.divisions.fixtures', $division) }}">Spielplan</a></li>
+                                <li class="list-inline-item"><a href="{{ route('frontend.divisions.tables', $division) }}">Tabelle</a></li>
+                            </ul>
+                        </div>
                     @endif
                 </div>
             @endforeach
