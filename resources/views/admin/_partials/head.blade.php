@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Hobbyliga-West Admin') }}</title>
+    <title>HLW-Admin | {{ Route::currentRouteName() }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/adminapp.css') }}" rel="stylesheet">
