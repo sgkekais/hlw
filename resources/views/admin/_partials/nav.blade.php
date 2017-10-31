@@ -30,14 +30,17 @@
                             <span class="fa fa-map-marker fa-fw"></span> Spielorte
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item {{ Route::is('people.*') ? 'active' : null }}" href="{{ route('people.index') }}">
-                            <span class="fa fa-id-badge fa-fw"></span> Personen
-                        </a>
                         <a class="dropdown-item {{ Route::is('clubs.*') ? 'active' : null }}" href="{{ route('clubs.index') }}">
                             <span class="fa fa-shield fa-fw"></span> Mannschaften
                         </a>
+                        <a class="dropdown-item {{ Route::is('people.*') ? 'active' : null }}" href="{{ route('people.index') }}">
+                            <span class="fa fa-id-badge fa-fw"></span> Personen
+                        </a>
                         <a class="dropdown-item {{ Route::is('positions.*') ? 'active' : null }}" href="{{ route('positions.index') }}">
                             <span class="fa fa-hand-o-down fa-fw"></span> Positionen
+                        </a>
+                        <a class="dropdown-item {{ Route::is('divisions-official.*') ? 'active' : null }}" href="{{ route('divisions-official.index') }}">
+                            <span class="fa fa-certificate fa-fw"></span> Offizielle Spielklassen
                         </a>
                         <a class="dropdown-item {{ Route::is('referees.*') ? 'active' : null }}" href="{{ route('referees.index') }}">
                             <span class="fa fa-hand-stop-o fa-fw"></span> Schiedsrichter

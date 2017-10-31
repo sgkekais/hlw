@@ -57,7 +57,7 @@
                             <span class="fa fa-fw"></span>
                         @endif
                         @if($person->players->count() > 0)
-                            <span class="fa fa-shield fa-fw" title="HLW-Spieler"></span>
+                            <img src="/images/hlwlogo.png" class="d-inline-block align-middle" height="15" alt="HLW-Spieler" title="HLW-Spieler">
                             @else
                             <span class="fa fa-fw"></span>
                         @endif
