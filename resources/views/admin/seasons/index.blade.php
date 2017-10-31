@@ -22,8 +22,11 @@
         <tr>
             <th class="">ID</th>
             <th></th>
-            <th class="">Jahr</th>
+            <th class="">Zeitraum</th>
             <th>Nr.</th>
+            <th>Wettbewerb</th>
+            <th>Spielklasse</th>
+            <th>Spielwochen</th>
             <th></th>
             <th class="">Aktionen</th>
         </tr>
@@ -43,10 +46,11 @@
                     <a href="{{ route('seasons.show', $season ) }}" title="Anzeigen">
                         {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}
                     </a>
-                    <br>
-                    <span class="text-muted">{{ $season->division->name }} - {{ $season->division->competition->name }}</span> | Spielwochen: {{ $season->matchweeks()->get()->count() }}
                 </td>
-                <td class="align-middle"># {{ $season->season_nr }}</td>
+                <td class="align-middle">{{ $season->season_nr }}</td>
+                <td class="align-middle">{{ $season->division->competition->name }}</td>
+                <td class="align-middle">{{ $season->division->name }}</td>
+                <td class="align-middle">{{ $season->matchweeks()->get()->count() }}</td>
                 <td class="align-middle">
                     @if($season->note)
                         <span class="fa fa-file-text" title="Notiz vorhanden"></span>
