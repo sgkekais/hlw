@@ -277,6 +277,7 @@
                         <th class="">ID</th>
                         <th class=""></th>
                         <th class=""></th>
+                        <th class=""></th>
                         <th class="">Nachname, Vorname</th>
                         <th class="">Anmeldung</th>
                         <th class="">Nummer</th>
@@ -304,12 +305,22 @@
                                 @endif
                             </td>
                             <td class="align-middle">
+                                @if($p_active->person->registered_at_club)
+                                    <span class="fa fa-shield text-warning fa-fw" title="Vereinsspieler"></span>
+                                    @if($p_active->person->realDivision)
+                                        {{ $p_active->person->realDivision->name_short }}
+                                    @endif
+                                @else
+                                    <span class="fa fa-fw"></span>
+                                @endif
+                            </td>
+                            <td class="align-middle">
                                 <a href="{{ route('people.show', $p_active->person->id) }}" title="Person bearbeiten (nicht Spieler)">
-                                    {{ $p_active->person->last_name }}, {{ $p_active->person->first_name }}
+                                    {{ $p_active->person->full_name ?? "-" }}
                                 </a>
                             </td>
                             <td class="align-middle">{{ $p_active->sign_on->format('d.m.Y') }}</td>
-                            <td class="align-middle">{{ $p_active->number }}</td>
+                            <td class="align-middle">{{ $p_active->number ?? "-" }}</td>
                             <td class="align-middle">
                                 @if($p_active->position_id)
                                     {{ $p_active->position->name }}

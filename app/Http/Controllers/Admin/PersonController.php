@@ -97,9 +97,10 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        $real_clubs = Club::where('is_real_club', true)->get();
+        $real_clubs = Club::where('is_real_club', true)->orderBy('name')->get();
+        $official_divisions = DivisionOfficial::orderBy('name')->get();
 
-        return view('admin.people.edit', compact('person', 'real_clubs'));
+        return view('admin.people.edit', compact('person', 'real_clubs', 'official_divisions'));
     }
 
     /**
