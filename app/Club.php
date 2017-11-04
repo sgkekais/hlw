@@ -6,6 +6,64 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\Club
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $name_short
+ * @property string|null $name_code
+ * @property string|null $logo_url
+ * @property string|null $cover_url
+ * @property \Carbon\Carbon|null $founded
+ * @property \Carbon\Carbon|null $league_entry
+ * @property \Carbon\Carbon|null $league_exit
+ * @property string|null $colours_club_primary
+ * @property string|null $colours_club_secondary
+ * @property string|null $colours_kit_home_primary
+ * @property string|null $colours_kit_home_secondary
+ * @property string|null $colours_kit_away_primary
+ * @property string|null $colours_kit_away_secondary
+ * @property string|null $website
+ * @property string|null $facebook
+ * @property string|null $note
+ * @property bool $is_real_club
+ * @property bool $published
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Contact[] $contacts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Fixture[] $fixturesAway
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Fixture[] $fixturesHome
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Player[] $players
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Fixture[] $reschedulings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Season[] $seasons
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Stadium[] $stadiums
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club isNotRealClub()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club isRealClub()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereColoursClubPrimary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereColoursClubSecondary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereColoursKitAwayPrimary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereColoursKitAwaySecondary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereColoursKitHomePrimary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereColoursKitHomeSecondary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereCoverUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereFacebook($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereFounded($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereIsRealClub($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereLeagueEntry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereLeagueExit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereLogoUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereNameCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereNameShort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Club whereWebsite($value)
+ */
 class Club extends Model
 {
     use LogsActivity;
