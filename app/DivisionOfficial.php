@@ -5,6 +5,23 @@ namespace HLW;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\DivisionOfficial
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $name_short
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Person[] $people
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\DivisionOfficial whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\DivisionOfficial whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\DivisionOfficial whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\DivisionOfficial whereNameShort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\DivisionOfficial whereUpdatedAt($value)
+ */
+
 class DivisionOfficial extends Model
 {
     use LogsActivity;
@@ -38,11 +55,15 @@ class DivisionOfficial extends Model
         'name', 'name_short'
     ];
 
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
+
     /**
-     * A position has many players who have that position
+     * A official division has many players
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function players(){
-        return $this->hasMany(Player::class);
+    public function people(){
+        return $this->hasMany(Person::class, 'official_division_id');
     }
 }
