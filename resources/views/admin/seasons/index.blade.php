@@ -25,8 +25,10 @@
             <th class="">Zeitraum</th>
             <th>Nr.</th>
             <th>Wettbewerb</th>
-            <th>Spielklasse</th>
-            <th>Spielwochen</th>
+            <th>Spielkl.</th>
+            <th>Clubs</th>
+            <th>Spielw.</th>
+            <th>Spiele</th>
             <th></th>
             <th class="">Aktionen</th>
         </tr>
@@ -50,7 +52,9 @@
                 <td class="align-middle">{{ $season->season_nr }}</td>
                 <td class="align-middle">{{ $season->division->competition->name }}</td>
                 <td class="align-middle">{{ $season->division->name }}</td>
-                <td class="align-middle">{{ $season->matchweeks()->get()->count() }}</td>
+                <td class="align-middle">{{ $season->clubs->count() }}</td>
+                <td class="align-middle">{{ $season->matchweeks->count() }}</td>
+                <td class="align-middle">{{ $season->fixtures->count() }}</td>
                 <td class="align-middle">
                     @if($season->note)
                         <span class="fa fa-file-text" title="Notiz vorhanden"></span>
