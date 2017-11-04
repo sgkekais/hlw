@@ -5,6 +5,29 @@ namespace HLW;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\Division
+ *
+ * @property int $id
+ * @property int $competition_id
+ * @property string $name
+ * @property int $hierarchy_level
+ * @property bool $published
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \HLW\Competition $competition
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Season[] $seasons
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Division published()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Division whereCompetitionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Division whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Division whereHierarchyLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Division whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Division whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Division wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Division whereUpdatedAt($value)
+ */
+
 class Division extends Model
 {
     use LogsActivity;
@@ -36,7 +59,7 @@ class Division extends Model
      * @var array
      */
     protected $casts = [
-        'published'     => 'boolean'
+        'published' => 'boolean'
     ];
 
     /***********************************************************
