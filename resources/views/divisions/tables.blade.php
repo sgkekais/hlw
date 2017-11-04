@@ -67,7 +67,7 @@
                         <!-- playoff_relegation -->
                         @if(in_array($club->t_rank, $season->playoff_relegation))
                             @php
-                                $rank_color = "#F44336";
+                                $rank_color = "#FF9800";
                                 $rank_icon  = "fa-circle-o";
                             @endphp
                         @endif

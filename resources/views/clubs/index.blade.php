@@ -30,9 +30,13 @@
                                 </a>
                             </div>
                             <div class="card-footer">
-                                2 <span class="fa fa-star" style="color: orange"></span>
-                                <span class="fa fa-star-half-full"></span>
-                                <span class="fa fa-trophy"></span>
+                                @if($club->championships()->count() > 0)
+                                    @foreach($club->championships as $championship)
+                                        <span class="fa fa-star" style="color: orange"></span>
+                                    @endforeach
+                                @else
+                                    &nbsp;
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -40,7 +44,6 @@
             </div>
 
         @endforeach
-        <h2 class="mt-4 font-weight-bold">Alle Teams der {{ $season->division->name }}</h2>
 
     </div>
 

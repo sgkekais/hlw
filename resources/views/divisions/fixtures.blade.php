@@ -11,7 +11,7 @@
     <div class="container">
         <a name="top"></a>
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-12">
                 <h2 class="pt-4 font-weight-bold">Spielplan</h2>
                 <h3 class="text-muted">{{ $season->season_nr ? $season->season_nr."." : null }} Saison - {{ $season->begin ? $season->begin->format('Y') : null }} / {{ $season->end ? $season->end->format('Y') : null }}</h3>
                 <nav aria-label="pagination">
@@ -19,7 +19,7 @@
                         @foreach($season->matchweeks as $matchweek)
                             <li class="page-item">
                                 <a class="page-link" href="#matchweek{{ $matchweek->number_consecutive }}">
-                                    {{ $matchweek->name ?? $matchweek->number_consecutive }}
+                                    {{ $matchweek->name && strlen($matchweek->name) > 0 ? $matchweek->name : $matchweek->number_consecutive }}
                                 </a>
                             </li>
                         @endforeach

@@ -738,8 +738,19 @@ class Club extends Model
         return $fixtures;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function reschedulings()
     {
         return $this->hasMany(Fixture::class, 'rescheduled_by_club');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function championships()
+    {
+        return $this->hasMany(Season::class, 'champion');
     }
 }

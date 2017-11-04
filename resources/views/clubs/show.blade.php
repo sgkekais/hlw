@@ -23,13 +23,21 @@
                 <h1 class="font-weight-bold">{{ $club->name }}</h1>
                 <ul class="list-unstyled">
                     <li class="pt-2 pb-2">
-                        Irgendwas
+                        @if($club->championships()->count() > 0)
+                            @foreach($club->championships as $championship)
+                                <span class="fa fa-fw fa-star" style="color: orange"></span>
+                            @endforeach
+                        @else
+                            &nbsp;
+                        @endif
                     </li>
                     <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : null }}</li>
                     @if($club->website)
-                        <li><span class="fa fa-home"></span> <a href="{{ $club->website }}" target="_blank">Offizielle Website</a> </li>
+                        <li><span class="fa fa-fw fa-home"></span> <a href="{{ $club->website }}" target="_blank">Offizielle Website</a> </li>
                     @endif
-                    <li><span class="fa fa-facebook"></span> </li>
+                    @if($club->facebook)
+                        <li><span class="fa fa-fw fa-facebook"></span> <a href="{{ $club->facebook }}" target="_blank">Facebook</a> </li>
+                    @endif
 
                 </ul>
 
@@ -91,7 +99,7 @@
                                     <tr>
                                         <td class="align-middle">
                                     <span class="fa-stack">
-                                        @if ($fixture->isPlayed())
+                                        @if ($fixture->isPlayed() && !$fixture->isRated())
                                             @if ($club->hasWon($fixture))
                                                 <i class="fa fa-circle fa-stack-2x text-success"></i>
                                                 <strong class="fa-stack-1x text-white">S</strong>
@@ -102,6 +110,9 @@
                                                 <i class="fa fa-circle fa-stack-2x text-dark"></i>
                                                 <strong class="fa-stack-1x text-white">U</strong>
                                             @endif
+                                        @elseif ($fixture->isRated())
+                                            <i class="fa fa-circle fa-stack-2x text-warning"></i>
+                                            <strong class="fa-stack-1x text-white">R</strong>
                                         @endif
                                     </span>
                                         </td>
@@ -143,7 +154,7 @@
                         </table>
                     </div>
                     <div class="col-md-6">
-                        <h4 style="color: {{ $club->colours_club_primary }}">Die nächsten Spiele</h4>
+                        <h4 style="color: {{ $club->colours_club_primary }}">Die nächsten 5 Spiele</h4>
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
@@ -234,8 +245,9 @@
                         <form class="form-inline pb-2">
                             <label class="pr-4" for=""><b>Saison</b></label>
                             <select id="" name="" class="form-control" aria-labelledby="">
-                                <option>{{ $season->begin->format('Y') }} - {{ $season->end->format('Y') }}</option>
-                                <option></option>
+                                @foreach($club->seasons()->orderBy('end', 'desc')->get() as $club_season)
+                                    <option {{ $club_season->id == $season->id ? "selected" : null }}>{{ $club_season->begin->format('Y') }} - {{ $club_season->end->format('Y') }}</option>
+                                @endforeach
                             </select>
                         </form>
                     </div>
@@ -307,6 +319,8 @@
                                             {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
                                         @elseif($fixture->isRated())
                                             {{ $fixture->goals_home_rated ?? "-" }} : {{ $fixture->goals_away_rated }}
+                                        @else
+                                            - : -
                                         @endif
                                     </td>
                                     <td class="align-middle text-left">

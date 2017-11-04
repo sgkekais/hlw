@@ -422,4 +422,9 @@ class Season extends Model
             ->withTimestamps();
 
     }
+
+    public function champion()
+    {
+        return $this->belongsTo(Club::class, 'champion');
+    }
 }

@@ -8,16 +8,15 @@ use HLW\Season;
 class ClubController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Season $season
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Season $season = null)
+    public function index(Season $season)
     {
-        // TODO: if no season, display all clubs?
         $division = $season->division;
 
         $clubs = $season->clubs()->orderBy('name')->get();
+        $clubs->load('championships');
 
         return view('clubs.index', compact('season', 'division', 'clubs'));
     }
@@ -30,7 +29,7 @@ class ClubController extends Controller
      */
     public function show(Club $club)
     {
-        $club->load('players');
+        $club->load('players', 'seasons');
 
         $season = Season::current()->first();
         $season->load('matchweeks.fixtures');
