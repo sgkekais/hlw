@@ -6,6 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 // use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\Competition
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $type
+ * @property bool $published
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Division[] $divisions
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition knockouts()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition leagues()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition published()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Competition whereUpdatedAt($value)
+ */
+
 class Competition extends Model
 {
     use LogsActivity;
