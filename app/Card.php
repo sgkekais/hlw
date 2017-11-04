@@ -50,7 +50,14 @@ class Card extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'fixture_id', 'player_id', 'color', 'ban_matches', 'ban_reduced_by', 'ban_season', 'ban_lifetime', 'ban_reason',
+        'fixture_id',
+        'player_id',
+        'color',
+        'ban_matches',
+        'ban_reduced_by',
+        'ban_season',
+        'ban_lifetime',
+        'ban_reason',
         'note'
     ];
 

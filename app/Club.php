@@ -73,13 +73,23 @@ class Club extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name', 'name_short', 'name_code',
-        'founded', 'league_entry', 'league_exit',
-        'colours_club_primary', 'colours_club_secondary',
-        'colours_kit_home_primary', 'colours_kit_home_secondary',
-        'colours_kit_away_primary', 'colours_kit_away_secondary',
-        'website', 'facebook',
-        'note', 'is_real_club', 'published'
+        'name',
+        'name_short',
+        'name_code',
+        'founded',
+        'league_entry',
+        'league_exit',
+        'colours_club_primary',
+        'colours_club_secondary',
+        'colours_kit_home_primary',
+        'colours_kit_home_secondary',
+        'colours_kit_away_primary',
+        'colours_kit_away_secondary',
+        'website',
+        'facebook',
+        'note',
+        'is_real_club',
+        'published'
     ];
 
     /**
@@ -93,13 +103,23 @@ class Club extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'name_short', 'name_code',
-        'founded', 'league_entry', 'league_exit',
-        'colours_club_primary', 'colours_club_secondary',
-        'colours_kit_home_primary', 'colours_kit_home_secondary',
-        'colours_kit_away_primary', 'colours_kit_away_secondary',
-        'website', 'facebook',
-        'note', 'is_real_club', 'published'
+        'name',
+        'name_short',
+        'name_code',
+        'founded',
+        'league_entry',
+        'league_exit',
+        'colours_club_primary',
+        'colours_club_secondary',
+        'colours_kit_home_primary',
+        'colours_kit_home_secondary',
+        'colours_kit_away_primary',
+        'colours_kit_away_secondary',
+        'website',
+        'facebook',
+        'note',
+        'is_real_club',
+        'published'
     ];
 
     /**

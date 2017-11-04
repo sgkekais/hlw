@@ -13,16 +13,8 @@ class Season extends Model
 
     // log attributes
     protected static $logAttributes = [
-        'division_id',
-        'begin', 'end',
-        'season_nr',
-        'champion',
-        'ranks_champion', 'ranks_promotion', 'ranks_relegation',
-        'playoff_champion', 'playoff_cup', 'playoff_relegation',
-        'max_rescheduling',
-        'rules',
-        'note',
-        'published'
+        'division_id', 'begin', 'end', 'season_nr', 'champion', 'ranks_champion', 'ranks_promotion', 'ranks_relegation',
+        'playoff_champion', 'playoff_cup', 'playoff_relegation', 'max_rescheduling', 'rules', 'note', 'published'
     ];
 
     /**
@@ -36,16 +28,8 @@ class Season extends Model
      * @var array
      */
     protected $fillable = [
-        'division_id',
-        'begin', 'end',
-        'season_nr',
-        'champion',
-        'ranks_champion', 'ranks_promotion', 'ranks_relegation',
-        'playoff_champion', 'playoff_cup', 'playoff_relegation',
-        'max_rescheduling',
-        'rules',
-        'note',
-        'published'
+        'division_id', 'begin', 'end', 'season_nr', 'champion', 'ranks_champion', 'ranks_promotion', 'ranks_relegation',
+        'playoff_champion', 'playoff_cup', 'playoff_relegation', 'max_rescheduling', 'rules', 'note', 'published'
     ];
 
     /**
