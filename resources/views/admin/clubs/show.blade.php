@@ -151,21 +151,23 @@
                     <thead class="thead-default">
                     <tr>
                         <th class="">ID</th>
-                        <th></th>
+                        <th class=""></th>
                         <th class="">Datum</th>
                         <th class="">Paarung</th>
-                        <th>Spielort</th>
-                        <th class="">Ergebnis</th>
+                        <th class="">Spielort</th>
+                        <th class="text-center">Erg</th>
+                        <th class="text-center">11m</th>
+                        <th class="text-center">Wert</th>
                         <th class=""></th>
                         <th class=""></th>
-                        <th></th>
-                        <th>Aktionen</th>
+                        <th class=""></th>
+                        <th class="">Aktionen</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($club->fixtures()->sortByDesc('datetime') as $fixture)
                         <tr>
-                            <td>
+                            <td class="align-middle">
                                 @if($fixture->rescheduled_from_fixture_id)
                                     <b>{{ $fixture->rescheduledFrom->id }}</b>
                                     <br>
@@ -208,23 +210,22 @@
                                     </a>
                                 @endif
                             </td>
-                            <td class="align-middle">
-                                <!-- TODO replace with proper methods to test fixture -->
-                                {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
-                                @if($fixture->goals_home_11m && $fixture->goals_away_11m)
-                                    ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
-                                @endif
-                                @if($fixture->goals_home_rated && $fixture->goals_away_rated)
-                                    {{ $fixture->goals_home_rated }}:{{ $fixture->goals_away_rated }}
-                                @endif
+                            <td class="align-middle text-center">
+                                {{ $fixture->goals_home ?? "-" }}:{{ $fixture->goals_away ?? "-" }}
+                            </td>
+                            <td class="align-middle text-center">
+                                {{ $fixture->goals_home_11m ?? "-" }}:{{ $fixture->goals_away_11m ?? "-" }}
+                            </td>
+                            <td class="align-middle text-center">
+                                {{ $fixture->goals_home_rated ?? "-" }}:{{ $fixture->goals_away_rated ?? "-" }}
                             </td>
                             <td class="align-middle">
-                                @if($fixture->goals_home && $fixture->goals_away)
-                                    @if($fixture->goals->count() === 0 && $fixture->goals_home + $fixture->goals_away > 0)
+                                @if($fixture->isPlayed())
+                                    @if($fixture->goals->count() == 0 && ($fixture->goals_home + $fixture->goals_away) > 0)
                                         <span class="fa fa-soccer-ball-o fa-fw text-danger" title="Torschützen noch nicht gepflegt"></span>
-                                    @elseif($fixture->goals->count() < $fixture->goals_home + $fixture->goals_away)
+                                    @elseif($fixture->goals->count() < ($fixture->goals_home + $fixture->goals_away))
                                         <span class="fa fa-soccer-ball-o fa-fw text-warning" title="Torschützen evtl. nicht vollständig gepflegt"></span>
-                                    @elseif($fixture->goals->count() === $fixture->goals_home + $fixture->goals_away)
+                                    @elseif($fixture->goals->count() == ($fixture->goals_home + $fixture->goals_away))
                                         <span class="fa fa-soccer-ball-o fa-fw text-success" title="Torschützen gepflegt"></span>
                                     @endif
                                 @else
@@ -404,16 +405,16 @@
                     <tbody>
                     @foreach($club->contacts()->orderBy('hierarchy_level')->get() as $contact)
                         <tr>
-                            <td>{{ $contact->id }}</td>
-                            <td>
+                            <td class="align-middle">{{ $contact->id }}</td>
+                            <td class="align-middle">
                                 <a href="{{ route('people.show', $contact->person ) }}">
                                     {{ $contact->person->last_name }}, {{ $contact->person->first_name }}
                                 </a>
                             </td>
-                            <td>{{ $contact->hierarchy_level }}.</td>
-                            <td>{{ $contact->mail }}</td>
-                            <td>{{ $contact->mobile }}</td>
-                            <td>
+                            <td class="align-middle">{{ $contact->hierarchy_level }}.</td>
+                            <td class="align-middle">{{ $contact->mail }}</td>
+                            <td class="align-middle">{{ $contact->mobile }}</td>
+                            <td class="align-middle">
                                 <!-- edit -->
                                 <a class="btn btn-primary" href="{{ route('clubs.contacts.edit', [ $club, $contact ]) }}" title="Kontakt bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
