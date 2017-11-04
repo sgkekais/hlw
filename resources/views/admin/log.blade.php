@@ -3,6 +3,7 @@
 @section('content')
 
     @if($log)
+        {{ $log->links('vendor.pagination.bootstrap-4') }}
         <table class="table table-condensed table-hover table-striped">
             <thead>
                 <tr>
@@ -28,17 +29,17 @@
                                 {{ $entry->subject_type }} (ID: {{ $entry->subject_id }})
                             <br>
                             @if($entry->description == "updated")
-                                @if($entry->changes)
+                                @if($entry->changes())
                                     Neu:
                                     <ul>
-                                        @foreach($entry->changes->get('attributes') as $key => $value)
-                                            <li>{{ $key.": ".$value }}</li>
+                                        @foreach($entry->changes()->get('attributes') as $key => $value)
+                                            <li>{{ $key ?? null }}: {{ $value ?? null }}</li>
                                         @endforeach
                                     </ul>
                                     Alt:
                                     <ul>
-                                        @foreach($entry->changes->get('old') as $key => $value)
-                                            <li>{{ $key.": ".$value }}</li>
+                                        @foreach($entry->changes()->get('old') as $key => $value)
+                                            <li>{{ $key ?? null }}: {{ is_array($value) ? implode($value) : $value }}</li>
                                         @endforeach
                                     </ul>
                                 @endif
