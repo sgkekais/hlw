@@ -67,6 +67,16 @@ class Fixture extends Model
     protected $dates = [
         'datetime'
     ];
+
+    /**
+     * The attributes that should be casted to native types.
+     * @var array
+     */
+    protected $casts = [
+        'cancelled' => 'boolean',
+        'published' => 'boolean'
+    ];
+
     /***********************************************************
      * SCOPES
      ************************************************************/

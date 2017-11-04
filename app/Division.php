@@ -31,6 +31,14 @@ class Division extends Model
         'name', 'competition_id', 'hierarchy_level', 'published'
     ];
 
+    /**
+     * The attributes that should be casted to native types.
+     * @var array
+     */
+    protected $casts = [
+        'published'     => 'boolean'
+    ];
+
     /***********************************************************
      * SCOPES
      ************************************************************/

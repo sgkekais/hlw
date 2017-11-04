@@ -39,6 +39,14 @@ class Matchweek extends Model
         'begin', 'end'
     ];
 
+    /**
+     * The attributes that should be casted to native types.
+     * @var array
+     */
+    protected $casts = [
+        'published'     => 'boolean'
+    ];
+
     /***********************************************************
      * SCOPES
      ************************************************************/
@@ -52,6 +60,17 @@ class Matchweek extends Model
     {
         return $query->where('begin', '<=', date('Y-m-d'))
             ->where('end', '>=', date('Y-m-d'));
+    }
+
+    /**
+     * Scope the query to published matchweeks
+     * @param $query
+     * @return mixed
+     *
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('published', '1');
     }
 
     /***********************************************************

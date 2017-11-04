@@ -32,6 +32,14 @@ class Competition extends Model
         'name', 'type', 'published'
     ];
 
+    /**
+     * The attributes that should be casted to native types.
+     * @var array
+     */
+    protected $casts = [
+        'published'     => 'boolean'
+    ];
+
     /***********************************************************
      * SCOPES
      ************************************************************/
