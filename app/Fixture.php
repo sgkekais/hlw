@@ -5,6 +5,75 @@ namespace HLW;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\Fixture
+ *
+ * @property int $id
+ * @property int $matchweek_id
+ * @property \Carbon\Carbon|null $datetime
+ * @property int|null $stadium_id
+ * @property int|null $club_id_home
+ * @property int|null $club_id_away
+ * @property int|null $goals_home
+ * @property int|null $goals_away
+ * @property int|null $goals_home_11m
+ * @property int|null $goals_away_11m
+ * @property int|null $goals_home_rated
+ * @property int|null $goals_away_rated
+ * @property string|null $rated_note
+ * @property string|null $note
+ * @property bool $cancelled
+ * @property bool $published
+ * @property int|null $rescheduled_from_fixture_id
+ * @property int|null $rescheduled_by_club
+ * @property string|null $reschedule_reason
+ * @property int $reschedule_count
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Card[] $cards
+ * @property-read \HLW\Club|null $clubAway
+ * @property-read \HLW\Club|null $clubHome
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Goal[] $goals
+ * @property-read \HLW\Matchweek $matchweek
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Referee[] $referees
+ * @property-read \HLW\Club|null $rescheduledBy
+ * @property-read \HLW\Fixture|null $rescheduledFrom
+ * @property-read \HLW\Fixture $rescheduledTo
+ * @property-read \HLW\Stadium|null $stadium
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture notCancelled()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture ofClub($clubid)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture ofClubAway($clubid)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture ofClubHome($clubid)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture played()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture playedOrRated()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture published()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture rated()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture rescheduledByClub($clubid)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereCancelled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereClubIdAway($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereClubIdHome($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereDatetime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereGoalsAway($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereGoalsAway11m($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereGoalsAwayRated($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereGoalsHome($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereGoalsHome11m($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereGoalsHomeRated($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereMatchweekId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereRatedNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereRescheduleCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereRescheduleReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereRescheduledByClub($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereRescheduledFromFixtureId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereStadiumId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Fixture whereUpdatedAt($value)
+ */
+
 class Fixture extends Model
 {
     /*
@@ -143,6 +212,10 @@ class Fixture extends Model
            });
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopePublished($query)
     {
         return $query->where('published', '1');

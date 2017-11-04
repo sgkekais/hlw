@@ -5,6 +5,34 @@ namespace HLW;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\Matchweek
+ *
+ * @property int $id
+ * @property int $season_id
+ * @property int|null $number_consecutive
+ * @property string|null $name
+ * @property \Carbon\Carbon|null $begin
+ * @property \Carbon\Carbon|null $end
+ * @property bool $published
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Fixture[] $fixtures
+ * @property-read \HLW\Season $season
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek current()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek published()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek whereBegin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek whereEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek whereNumberConsecutive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek whereSeasonId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Matchweek whereUpdatedAt($value)
+ */
+
 class Matchweek extends Model
 {
     use LogsActivity;

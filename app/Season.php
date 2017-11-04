@@ -7,6 +7,54 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\Season
+ *
+ * @property int $id
+ * @property int $division_id
+ * @property \Carbon\Carbon $begin
+ * @property \Carbon\Carbon $end
+ * @property int|null $season_nr
+ * @property int|null $champion
+ * @property array $ranks_champion
+ * @property array $ranks_promotion
+ * @property array $ranks_relegation
+ * @property array $playoff_champion
+ * @property array $playoff_cup
+ * @property array $playoff_relegation
+ * @property int|null $max_rescheduling
+ * @property string|null $rules
+ * @property string|null $note
+ * @property bool $published
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Club[] $clubs
+ * @property-read \HLW\Division $division
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Fixture[] $fixtures
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Matchweek[] $matchweeks
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season current()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season published()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereBegin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereChampion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereDivisionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereMaxRescheduling($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season wherePlayoffChampion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season wherePlayoffCup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season wherePlayoffRelegation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season wherePublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereRanksChampion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereRanksPromotion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereRanksRelegation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereRules($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereSeasonNr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Season whereUpdatedAt($value)
+ */
+
 class Season extends Model
 {
     use LogsActivity;
@@ -38,6 +86,13 @@ class Season extends Model
      */
     protected $dates = [
         'begin', 'end'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'published' => 'boolean'
     ];
 
     /***********************************************************

@@ -5,6 +5,40 @@ namespace HLW;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\Player
+ *
+ * @property int $id
+ * @property int $club_id
+ * @property int $person_id
+ * @property \Carbon\Carbon $sign_on
+ * @property \Carbon\Carbon|null $sign_off
+ * @property string|null $number
+ * @property int|null $position_id
+ * @property bool $public
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Card[] $cards
+ * @property-read \HLW\Club $club
+ * @property-read \Illuminate\Database\Eloquent\Collection|\HLW\Goal[] $goals
+ * @property-read \HLW\Person $person
+ * @property-read \HLW\Position|null $position
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player active()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player public()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player wherePersonId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player wherePositionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player wherePublic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player whereSignOff($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player whereSignOn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Player whereUpdatedAt($value)
+ */
+
 class Player extends Model
 {
     /**
@@ -43,6 +77,10 @@ class Player extends Model
      */
     protected $dates = [
         'sign_on', 'sign_off'
+    ];
+
+    protected $casts = [
+        'public' => 'boolean'
     ];
 
     /*******************************************************
@@ -111,12 +149,17 @@ class Player extends Model
      * RELATIONSHIPS
      * ******************************************************/
 
+    /**
+     * A player belongs to a club
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function club()
     {
         return $this->belongsTo(Club::class);
     }
 
     /**
+     * A player is a person
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function person(){
@@ -124,6 +167,7 @@ class Player extends Model
     }
 
     /**
+     * A player has a position
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function position(){
@@ -131,6 +175,7 @@ class Player extends Model
     }
 
     /**
+     * A player has many cards
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function cards()
@@ -139,6 +184,7 @@ class Player extends Model
     }
 
     /**
+     * A player has many goals
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function goals()
