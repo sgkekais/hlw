@@ -5,6 +5,42 @@ namespace HLW;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * HLW\Card
+ *
+ * @property int $id
+ * @property int $fixture_id
+ * @property int $player_id
+ * @property string $color
+ * @property int|null $ban_matches
+ * @property int|null $ban_reduced_by
+ * @property bool $ban_season
+ * @property bool $ban_lifetime
+ * @property string|null $ban_reason
+ * @property string|null $note
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activity
+ * @property-read \HLW\Fixture $fixture
+ * @property-read \HLW\Player $player
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card ofSeason($season)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card reds()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereBanLifetime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereBanMatches($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereBanReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereBanReducedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereBanSeason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereFixtureId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card wherePlayerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card yellowReds()
+ * @method static \Illuminate\Database\Eloquent\Builder|\HLW\Card yellows()
+ */
+
 class Card extends Model
 {
     use LogsActivity;
@@ -14,7 +50,8 @@ class Card extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'fixture_id', 'player_id', 'color', 'ban_matches', 'ban_reduced_by', 'ban_season', 'ban_lifetime', 'ban_reason', 'note'
+        'fixture_id', 'player_id', 'color', 'ban_matches', 'ban_reduced_by', 'ban_season', 'ban_lifetime', 'ban_reason',
+        'note'
     ];
 
     /**
@@ -29,6 +66,11 @@ class Card extends Model
      */
     protected $fillable = [
         'player_id', 'color', 'ban_matches', 'ban_reduced_by', 'ban_season', 'ban_lifetime', 'ban_reason', 'note'
+    ];
+
+    protected $casts = [
+        'ban_season'    => 'boolean',
+        'ban_lifetime'  => 'boolean'
     ];
 
     /***********************************************************
