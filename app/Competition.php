@@ -37,7 +37,7 @@ class Competition extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name', 'type', 'published'
+        'name', 'name_short', 'type', 'published'
     ];
 
     /**
@@ -51,7 +51,7 @@ class Competition extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'type', 'published'
+        'name', 'name_short', 'type', 'published'
     ];
 
     /**
@@ -59,7 +59,7 @@ class Competition extends Model
      * @var array
      */
     protected $casts = [
-        'published'     => 'boolean'
+        'published' => 'boolean'
     ];
 
     /***********************************************************

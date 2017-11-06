@@ -15,6 +15,13 @@
                 <input type="text" class="form-control" name="name" id="name" aria-describedby="nameHelp" placeholder="{{ old('name') }}">
                 <small id="nameHelp" class="form-text text-muted">Bezeichnung des Wettbewerbs</small>
             </div>
+            <div class="col-md-2">
+                <label for="name_short">Name - kurz</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="name_short" id="name_short" aria-describedby="name_shortHelp" placeholder="{{ old('name_short') }}">
+                <small id="name_shortHelp" class="form-text text-muted">Abkürzung des Namens (bspw. "HLW")</small>
+            </div>
         </div>
         <!-- type of competition / championship -->
         <div class="form-group row">
