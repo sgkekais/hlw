@@ -110,6 +110,16 @@ class Season extends Model
             ->where('end', '>=', date('Y-m-d'));
     }
 
+    /**
+     * Scope a query to only return published seasons
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished ($query)
+    {
+        return $query->where('published', 1);
+    }
+
     /***********************************************************
      * ACCESSORS
      ************************************************************/
@@ -166,20 +176,6 @@ class Season extends Model
     public function getPlayoffRelegationAttribute($value)
     {
         return explode(',', $value);
-    }
-
-    /***********************************************************
-     * SCOPES
-     ************************************************************/
-
-    /**
-     * Scope a query to only return published seasons
-     * @param $query
-     * @return mixed
-     */
-    public function scopePublished ($query)
-    {
-        return $query->where('published', 1);
     }
 
     /***********************************************************
@@ -378,6 +374,14 @@ class Season extends Model
         }
 
         return $clubs;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFinished()
+    {
+       return $this->champion ? true : false;
     }
 
     /***********************************************************
