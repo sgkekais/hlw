@@ -4,6 +4,7 @@ namespace HLW\Http\Controllers;
 
 use HLW\Club;
 use HLW\Season;
+use Symfony\Component\HttpFoundation\Request;
 
 class ClubController extends Controller
 {
@@ -37,5 +38,23 @@ class ClubController extends Controller
 
         return view('clubs.show', compact('club', 'season', 'division'));
     }
+
+    /**
+     * @param Request $request
+     * @param Club $club
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function ajaxGetClubResults(Request $request, Club $club)
+    {
+        if (!$request->filled('season_id')) {
+            $season = $club->seasons()->current()->first();
+        } else {
+            $season = Season::findOrFail($request->season_id);
+        }
+
+        $fixtures = $season->fixtures()->ofClub($club->id)->orderBy('datetime')->get();
+
+        return view('clubs.response_results', compact('club', 'fixtures', 'season'));
+}
 
 }

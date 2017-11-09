@@ -29,6 +29,7 @@ Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seas
 
 // clubs
 Route::get('clubs/{club}', 'ClubController@show')->name('frontend.clubs.show');
+Route::get('clubs/{club}/ajax-club-results', 'ClubController@ajaxGetClubResults');
 
 /*******************************************************
  * Admin Routes
