@@ -23,9 +23,9 @@
                 <h1 class="font-weight-bold">{{ $club->name }}</h1>
                 <ul class="list-unstyled">
                     <li class="pt-2 pb-2">
-                        @if($club->championships()->count() > 0)
-                            @foreach($club->championships as $championship)
-                                <span class="fa fa-fw fa-star" style="color: orange"></span>
+                        @if($club->championships->count() > 0)
+                            @foreach($club->championships->sortByDesc('end') as $championship)
+                                <span class="fa fa-fw fa-star" style="color: orange" title="{{ $championship->begin ? $championship->begin->format('Y') : null }}/{{ $championship->end ? $championship->end->format('Y') : null }}"></span>
                             @endforeach
                         @else
                             &nbsp;
@@ -38,13 +38,13 @@
                     @if($club->facebook)
                         <li><span class="fa fa-fw fa-facebook"></span> <a href="{{ $club->facebook }}" target="_blank">Facebook</a> </li>
                     @endif
-
                 </ul>
-
             </div>
+            {{-- TODO Cover?
             <div class="col-md-4">
-                <!--<img src="{{ $club->cover_url ? Storage::url($club->cover_url) : Storage::url('public/clubcovers/_default.jpg') }}" height="200">-->
+                <img src="{{ $club->cover_url ? Storage::url($club->cover_url) : Storage::url('public/clubcovers/_default.jpg') }}" height="200">
             </div>
+            --}}
         </div>
         <div class="row pt-4">
             <div class="col-md-6">
@@ -56,7 +56,7 @@
                     <a class="nav-item nav-link " id="results-tab" data-toggle="tab" role="tab" aria-controls="results" href="#results">
                         Resultate
                     </a>
-                    <a class="nav-item nav-link <!--text-dark-->" id="players-tab" data-toggle="tab" role="tab" aria-controls="players" href="#players">
+                    <a class="nav-item nav-link" id="players-tab" data-toggle="tab" role="tab" aria-controls="players" href="#players">
                         Kader
                     </a>
                 </nav>
@@ -243,117 +243,19 @@
                     <div class="col-12">
                         <h2 style="color: {{ $club->colours_club_primary }}"><b>Resultate</b></h2>
                         <form class="form-inline pb-2">
-                            <label class="pr-4" for=""><b>Saison</b></label>
-                            <select id="" name="" class="form-control" aria-labelledby="">
+                            <label class="pr-4" for="season-selection"><b>Saison</b></label>
+                            <select id="season-selection" name="season-selection" class="form-control" aria-labelledby="">
                                 @foreach($club->seasons()->orderBy('end', 'desc')->get() as $club_season)
-                                    <option {{ $club_season->id == $season->id ? "selected" : null }}>{{ $club_season->begin->format('Y') }} - {{ $club_season->end->format('Y') }}</option>
+                                    <option {{ $club_season->id == $season->id ? "selected" : null }} value="{{ $club_season->id }}">{{ $club_season->begin->format('Y') }} / {{ $club_season->end->format('Y') }}</option>
                                 @endforeach
                             </select>
                         </form>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <table class="table table-sm table-hover table-striped">
-                            <thead>
-                            <tr>
-                                <th class="text-right">SW</th>
-                                <th class=""></th>
-                                <th colspan="3" class="">Datum</th>
-                                <th colspan="3" class="text-center">Paarung</th>
-                                <th colspan="2" class=""></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($season->fixtures()->ofClub($club->id)->where('fixtures.published',1)->orderBy('datetime')->get() as $fixture)
-                                <tr>
-                                    <td class="align-middle text-right">
-                                        {{ $fixture->matchweek->number_consecutive }}
-                                    </td>
-                                    <td class="align-middle text-center">
-                                    <span class="fa-stack">
-                                        @if ($fixture->isPlayed() && !$fixture->isRated())
-                                            @if ($club->hasWon($fixture))
-                                                <i class="fa fa-circle fa-stack-2x text-success"></i>
-                                                <strong class="fa-stack-1x text-white" title="Sieg">S</strong>
-                                            @elseif ($club->hasLost($fixture))
-                                                <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                                                <strong class="fa-stack-1x text-white" title="Niederlage">N</strong>
-                                            @elseif ($club->hasDrawn($fixture))
-                                                <i class="fa fa-circle fa-stack-2x text-dark"></i>
-                                                <strong class="fa-stack-1x text-white" title="Unentschieden">U</strong>
-                                            @endif
-                                        @elseif ($fixture->isRated())
-                                            <i class="fa fa-circle fa-stack-2x text-warning"></i>
-                                            <strong class="fa-stack-1x text-white" title="Gewertet">R</strong>
-                                        @endif
-                                    </span>
-                                    </td>
-                                    @if ( $fixture->datetime )
-                                        <td class="align-middle text-left">
-                                            <span class="fa fa-calendar"></span>
-                                            {{ $fixture->datetime->formatLocalized('%a') }}
-                                        </td>
-                                        <td class="align-middle text-left">
-                                            {{ $fixture->datetime->format('d.m.y') }}
-                                        </td>
-                                        <td class="align-middle text-left">
-                                            <span class="fa fa-clock-o"></span>
-                                            {{ $fixture->datetime->format('H:i') }} Uhr
-                                        </td>
-                                    @else
-                                        <td colspan="3" class="align-middle text-left">
-                                            <span class="fa fa-calendar-times-o"></span> TBD
-                                        </td>
-                                    @endif
-                                    <td class="align-middle text-right">
-                                        @if ($fixture->clubHome)
-                                            {{ $fixture->clubHome->name }}
-                                            @if ($fixture->clubHome->logo_url)
-                                                <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" height="25">
-                                            @endif
-                                        @endif
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        @if($fixture->isPlayed() && !$fixture->isRated())
-                                            {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
-                                        @elseif($fixture->isRated())
-                                            {{ $fixture->goals_home_rated ?? "-" }} : {{ $fixture->goals_away_rated }}
-                                        @else
-                                            - : -
-                                        @endif
-                                    </td>
-                                    <td class="align-middle text-left">
-                                        @if ($fixture->clubAway)
-                                            @if ($fixture->clubHome->logo_url)
-                                                <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" height="25">
-                                            @endif
-                                            {{ $fixture->clubAway->name }}
-                                        @endif
-                                    </td>
-                                    <td class="align-middle text-left">
-                                        @if($fixture->stadium)
-                                            <img src="{{ url('images/stadium.png') }}" height="20">&nbsp;
-                                            {{ $fixture->stadium->name_short}}
-                                        @else                                        &nbsp;
-                                        @endif
-                                    </td>
-                                    <td class="align-middle">
-                                        @if ($fixture->cards()->count() > 0)
-                                            <span class="fa fa-fw fa-clone"></span>
-                                            x {{ $fixture->cards()->count() }}
-                                        @endif
-                                    </td>
-                                    <td class="align-middle">
-                                        @if ($fixture->goals()->count() > 0)
-                                            <span class="fa fa-fw fa-soccer-ball-o"></span>
-                                            x {{ $fixture->goals()->count() }}
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                    <div class="col-12" id="response">
+                        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
                     </div>
                 </div>
             </div>
@@ -480,5 +382,43 @@
     </div>
 </div>
 
+@endsection
+
+@section('js-footer')
+
+    <script>
+
+        // get the results of a club for the specified season
+        function getResults(season){
+            $.ajax({
+                method:     'GET',
+                url:        '/clubs/{{ $club->id }}/ajax-club-results',
+                data:       {'season_id' : season},
+
+                success: function(response){
+                    $('#response').html(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+        }
+
+        //
+        $(function() {
+            // get the results for the current season
+            getResults();
+
+            $('#season-selection').change(function () {
+                // add loading indicator back
+                $('#response').html("<i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>");
+                // get results of selected season
+                getResults($(this).val());
+
+            });
+        });
+
+    </script>
 
 @endsection
