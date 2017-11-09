@@ -1,41 +1,34 @@
 @if ($season->isFinished())
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-success" role="alert">
-                <span class="fa fa-check-circle-o" style="color: darkgreen"></span> Saison ist abgeschlossen.
-            </div>
-        </div>
-    </div>
     <div class="row bg-secondary text-white m-0">
-        <div class="col-2 text-center">
+        <div class="col text-center">
             <span class="display-4 font-italic">
-                {{ $season->clubs->find($club->id)->pivot->rank }}.
+                {{ $season->clubs->find($club->id)->pivot->rank ?? "-" }}.
             </span>
             <span class="font-weight-light font-italic">Platz</span>
         </div>
-        <div class="col-2 text-center">
+        <div class="col text-center">
             <span class="display-4 font-italic">
                 {{ $club->getGamesPlayedWon($season)->count() + $club->getGamesRatedWon($season)->count() }}
             </span>
             <span class="font-weight-light font-italic">Siege</span>
         </div>
-        <div class="col-2 text-center">
+        <div class="col text-center">
             <span class="display-4 font-italic">
                 {{ $club->getGamesPlayedDrawn($season)->count() + $club->getGamesRatedDrawn($season)->count() }}
             </span>
             <span class="font-weight-light font-italic">Unentschieden</span>
         </div>
-        <div class="col-2 text-center">
+        <div class="col text-center">
             <span class="display-4 font-italic">
                 {{ $club->getGamesPlayedLost($season)->count() + $club->getGamesRatedLost($season)->count() }}
             </span>
             <span class="font-weight-light font-italic">Niederlagen</span>
         </div>
-        <div class="col-2 text-center">
-            Tore
-        </div>
-        <div class="col-2 text-center">
-            Karten
+        <div class="col text-center">
+            <span class="display-4 font-italic">
+                {{ $club->getGoalsFor($season).":".$club->getGoalsAgainst($season) }}
+            </span>
+            <span class="font-weight-light font-italic">Tore</span>
         </div>
     </div>
 @endif
