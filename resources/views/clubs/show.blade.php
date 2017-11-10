@@ -70,22 +70,35 @@
         <div class="tab-content col-12" id="tabcontent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}"><b>Übersicht</b></h2>
-                <div class="row">
-                    <div class="col-12">
-                        <h3 class="text-muted">
-                            <span>Saison {{ $season->begin ? $season->begin->format('Y') : '-' }} / {{ $season->end ? $season->end->format('Y') : '-' }}</span>:
+                <div class="row bg-secondary text-white ml-0 mr-0 mb-4">
+                    <div class="col text-center">
+                        <span class="display-4 font-italic">
                             {{ $club->getGamesPlayedWon($season)->count() + $club->getGamesRatedWon($season)->count() }}
-                            S -
+                        </span>
+                        <span class="font-weight-light font-italic">Siege</span>
+                    </div>
+                    <div class="col text-center">
+                        <span class="display-4 font-italic">
                             {{ $club->getGamesPlayedDrawn($season)->count() + $club->getGamesRatedDrawn($season)->count() }}
-                            U -
+                        </span>
+                        <span class="font-weight-light font-italic">Unentschieden</span>
+                    </div>
+                    <div class="col text-center">
+                        <span class="display-4 font-italic">
                             {{ $club->getGamesPlayedLost($season)->count() + $club->getGamesRatedLost($season)->count() }}
-                            N
-                        </h3>
+                        </span>
+                        <span class="font-weight-light font-italic">Niederlagen</span>
+                    </div>
+                    <div class="col text-center">
+                        <span class="display-4 font-italic">
+                            {{ $club->getGoalsFor($season).":".$club->getGoalsAgainst($season) }}
+                        </span>
+                        <span class="font-weight-light font-italic">Tore</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <h4 style="color: {{ $club->colours_club_primary }}">Die letzten Spiele</h4>
+                        <h4 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Zuletzt</h4>
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
@@ -154,12 +167,13 @@
                         </table>
                     </div>
                     <div class="col-md-6">
-                        <h4 style="color: {{ $club->colours_club_primary }}">Die nächsten 5 Spiele</h4>
+                        <h4 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Demnächst</h4>
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>Datum</th>
                                     <th colspan="3" class="text-center">Paarung</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -198,6 +212,9 @@
                                         @else
                                             {{ $fixture->club_away }}
                                         @endif
+                                    </td>
+                                    <td>
+
                                     </td>
                                 </tr>
                             @endforeach
