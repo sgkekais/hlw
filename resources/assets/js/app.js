@@ -6,3 +6,12 @@
  */
 
 require('./bootstrap');
+
+// daterangepicker
+require('daterangepicker');
+
+// moment for daterangepicker
+window.moment = require('moment');
+
+// full calendar
+require('fullcalendar');

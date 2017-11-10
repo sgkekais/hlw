@@ -41,6 +41,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 
     Route::get('log', 'LogController@index')->name('log');
 
+    //
+    Route::get('calendar', 'CalendarController@index')->name('calendar');
+
     Route::resource('users', 'UserController');
 
     Route::resource('competitions', 'CompetitionController');
@@ -76,7 +79,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('fixtures/{fixture}/referees/{referee}/edit', 'FixtureController@editRefereeAssignment')->name('editRefereeAssignment');
     Route::patch('fixtures/{fixture}/referees/{referee}', 'FixtureController@updateRefereeAssignment')->name('updateRefereeAssignment');
     Route::delete('fixtures/{fixture}/referees/{referee}', 'FixtureController@destroyRefereeAssignment')->name('destroyRefereeAssignment');
-
 
     Route::resource('stadiums', 'StadiumController');
     Route::post('stadiums/import', 'StadiumController@importCSV')->name('stadiums.import');

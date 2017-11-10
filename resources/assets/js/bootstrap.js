@@ -13,11 +13,6 @@ try {
     // bootstrap
     require('bootstrap');
 
-    // daterangepicker
-    require('daterangepicker');
-    // moment for daterangepicker
-    window.moment = require('moment');
-
 } catch (e) {}
 
 /**
