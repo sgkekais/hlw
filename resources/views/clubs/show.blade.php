@@ -69,7 +69,7 @@
     <div class="row">
         <div class="tab-content col-12" id="tabcontent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}"><b>Übersicht</b></h2>
+                <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Übersicht</h2>
                 <div class="row bg-secondary text-white ml-0 mr-0 mb-4">
                     <div class="col text-center">
                         <span class="display-4 font-italic">
@@ -258,7 +258,7 @@
             <div class="tab-pane fade" id="results" role="tabpanel" aria-labelledby="">
                 <div class="row">
                     <div class="col-12">
-                        <h2 style="color: {{ $club->colours_club_primary }}"><b>Resultate</b></h2>
+                        <h2 style="color: {{ $club->colours_club_primary }}">Resultate</h2>
                         <form class="form-inline pb-2">
                             <label class="pr-4" for="season-selection"><b>Saison</b></label>
                             <select id="season-selection" name="season-selection" class="form-control" aria-labelledby="">
@@ -281,7 +281,7 @@
             <div class="tab-pane fade" id="players" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row">
                     <div class="col-12">
-                        <h2 style="color: {{ $club->colours_club_primary }}"><b>Aktive</b> <span class="badge badge-secondary">{{ $club->players()->active()->count() }}</span></h2>
+                        <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Aktive <span class="badge badge-secondary">{{ $club->players()->active()->count() }}</span></h2>
                         <div class="card-deck">
                             @foreach($club->players()->active()->public()->with('person')->get()->sortBy('person.last_name') as $player)
                                 <div class="card">
