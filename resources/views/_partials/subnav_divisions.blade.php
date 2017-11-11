@@ -13,9 +13,10 @@
             <li class="nav-item">
                 <a class="nav-link {{ Route::is('frontend.seasons.clubs') || Route::is('frontend.clubs.show') ? "active" : null }}" href="{{ route('frontend.seasons.clubs', $season ) }}">Teams</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#">Stat-Center</a>
             </li>
+            --}}
         </ul>
     </div>
 </nav>

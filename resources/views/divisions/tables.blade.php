@@ -290,8 +290,9 @@
 
 @section('js-footer')
 
-    {{-- change the arrow's orientation on click --}}
+
     <script type="text/javascript">
+        //  change the arrow's orientation on click
         $('.table-entry-details').click(function(){
            $(this).find('span').toggleClass('fa-angle-down fa-angle-up');
         });
