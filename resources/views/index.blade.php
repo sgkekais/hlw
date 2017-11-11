@@ -18,7 +18,6 @@
         </div>
     </div>
     <div class="container">
-
         <div class="row">
             <div class="col-12">
                 <h3 class="font-weight-bold">News</h3>
@@ -93,7 +92,7 @@
         <hr>
         <div class="row">
             @foreach ($divisions as $division)
-                <div class="col-md-4">
+                <div class="col-md-4 {{ !$loop->last ? "border border-left-0 border-top-0 border-bottom-0" : null }}">
                     <h3 class="font-weight-bold">{{ $division->competition->name_short." | ".$division->name }}</h3>
                     @php
                         // $c_season = $division->seasons()->published()->current()->first();
@@ -115,8 +114,8 @@
                         <table class="table table-hover table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th class="" colspan="2">Pos</th>
-                                    <th class="" colspan="2">Club</th>
+                                    <th class="">Pos</th>
+                                    <th class="">Club</th>
                                     <th class=" text-center">Sp</th>
                                     <th class=" text-center">TD</th>
                                     <th class=" text-center">Pkt</th>
@@ -125,8 +124,8 @@
                             <tbody>
                                 @foreach ($c_season->generateTable($c_matchweek, true, true, true, true, false, true, true, true, true) as $club)
                                     @php
-                                        $rank_color = "";
-                                        $rank_icon  = "";
+                                        $rank_color = null;
+                                        $rank_icon  = null;
                                     @endphp
                                     @if(in_array($club->t_rank, $c_season->ranks_champion) || in_array($club->t_rank, $c_season->ranks_promotion))
                                         @php
@@ -146,18 +145,20 @@
                                     @endif
                                     <tr>
                                         <td class="align-middle">
-                                            <span class="fa fa-fw {{ $rank_icon }}" style="color: {{ $rank_color }};"></span>
+                                            @if($rank_icon)
+                                                <span class="fa fa-fw {{ $rank_icon }}" style="color: {{ $rank_color }};"></span>
+                                            @else
+                                                <span class="fa fa-fw"></span>
+                                            @endif
+                                            {{ $club->t_rank }}
                                         </td>
-                                        <td class="align-middle">{{ $club->t_rank }}</td>
                                         <td class="align-middle">
                                             @if($club->logo_url)
                                                 <img src="{{ Storage::url($club->logo_url) }}" width="30" class="pr-1">
                                             @else
                                                 <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                             @endif
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="{{ route('frontend.clubs.show', $club) }}">
+                                            <a href="{{ route('frontend.clubs.show', $club) }}" title="{{ $club->name }}">
                                                 {{ $club->name_code }}
                                             </a>
                                         </td>
@@ -179,6 +180,4 @@
             @endforeach
         </div>
     </div>
-
-
 @endsection
