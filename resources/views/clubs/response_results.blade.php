@@ -65,7 +65,7 @@
                         @endif
                     @elseif ($fixture->isRated())
                         <i class="fa fa-circle fa-stack-2x text-warning"></i>
-                        <strong class="fa-stack-1x text-white" title="Gewertet">R</strong>
+                        <strong class="fa-stack-1x text-white" title="Gewertet">W</strong>
                     @endif
                 </span>
                     </td>
