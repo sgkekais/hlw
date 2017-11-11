@@ -17,6 +17,13 @@
                     | {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.') : null }} - {{ $c_matchweek->end ? $c_matchweek->end->format('d.m.') : null }}
                     {{ $c_matchweek->name ? "| ".$c_matchweek->name : null }}
                 </h3>
+                {{-- TODO: links for home, away, tables, do via ajax--}}
+                <nav class="nav nav-pills nav-justified mb-4">
+                    <a class="nav-item nav-link active" href="#">Tabelle</a>
+                    <a class="nav-item nav-link" href="#">Heim</a>
+                    <a class="nav-item nav-link" href="#">Auswärts</a>
+                    <a class="nav-item nav-link" href="#">Kreuztabelle</a>
+                </nav>
             </div>
         </div>
         <div class="row">
