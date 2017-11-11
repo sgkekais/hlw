@@ -2,6 +2,8 @@
 
 <body>
     <div id="app">
+        <!-- top anchor -->
+        <a name="top"></a>
         <!-- navigation -->
         @include('_partials.nav')
         <!-- subnavigation -->

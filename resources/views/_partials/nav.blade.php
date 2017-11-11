@@ -17,7 +17,7 @@
                     <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 @foreach(\HLW\Division::published()->orderBy('name')->get() as $division)
-                    <li class="nav-item {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }}">
+                    <li class="nav-item {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
                         <a class="nav-link" href="{{ route('frontend.divisions.show', $division ) }}">{{ $division->name }}</a>
                     </li>
                 @endforeach

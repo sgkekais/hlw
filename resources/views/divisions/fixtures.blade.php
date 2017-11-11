@@ -9,7 +9,6 @@
 @section('content')
 
     <div class="container">
-        <a name="top"></a>
         <div class="row">
             <div class="col-md-12">
                 <h2 class="pt-4 font-weight-bold">Spielplan</h2>
