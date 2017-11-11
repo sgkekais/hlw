@@ -189,9 +189,10 @@ class Fixture extends Model
      * @param $query
      * @return mixed
      */
-    public function scopePlayed($query)
+    public function scopePlayed($query, $played = true)
     {
-        return $query->whereNotNull('goals_home')->whereNotNull('goals_away');
+        // if played is set to false, then return fixtures that are note played
+        return ($played ? $query->whereNotNull('goals_home')->whereNotNull('goals_away') : $query->whereNull('goals_home')->whereNull('goals_away'));
     }
 
     /**
@@ -204,6 +205,10 @@ class Fixture extends Model
         return $query->whereNotNull('goals_home_rated')->whereNotNull('goals_away_rated');
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopePlayedOrRated($query)
     {
        return $query->whereNotNull('goals_home')->whereNotNull('goals_away')
@@ -216,9 +221,18 @@ class Fixture extends Model
      * @param $query
      * @return mixed
      */
-    public function scopePublished($query)
+    public function scopeNotPlayedOrRated($query)
     {
-        return $query->where('published', '1');
+        return $query->whereNull('goals_home')->whereNull('goals_away')->whereNull('goals_home_rated')->whereNull('goals_away_rated');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished($query, $published = true)
+    {
+        return $query->where('published', $published);
     }
 
     /**
@@ -226,9 +240,9 @@ class Fixture extends Model
      * @param $query
      * @return mixed
      */
-    public function scopeNotCancelled($query)
+    public function scopeNotCancelled($query, $cancelled = false)
     {
-        return $query->where('cancelled', '0');
+        return $query->where('cancelled', $cancelled);
     }
 
     /**
