@@ -12,7 +12,6 @@
         <h2 class="mt-4 font-weight-bold">Aktuelle Teams der {{ $season->division->name }}</h2>
         <h3 class="text-muted">Saison {{ $season->begin ? $season->begin->format('Y') : null }} {{ $season->end ? "/ ".$season->end->format('Y') : null }}</h3>
         @foreach($clubs->chunk(4) as $chunk)
-
             <div class="row mt-4 p-0 justify-content-center">
                 <div class="card-deck w-100">
                     @foreach($chunk as $club)
@@ -31,8 +30,17 @@
                             </div>
                             <div class="card-footer">
                                 @if($club->championships()->count() > 0)
-                                    @foreach($club->championships as $championship)
-                                        <span class="fa fa-star" style="color: orange"></span>
+                                    @foreach($club->championships()->orderBy('end','desc')->get() as $championship)
+                                        @php
+                                            if ($championship->division->hierarchy_level == 1) {
+                                                $class = "fa-star";
+                                                $color = "orange";
+                                            } else {
+                                                $class = "fa-star-half-o";
+                                                $color = "grey";
+                                            }
+                                        @endphp
+                                        <span class="fa fa-lg {{ $class }}" style="color: {{ $color }}" title="{{ $championship->begin && $championship->end ? $championship->begin->format('Y')." / ".$championship->end->format('Y') : null }} {{ $championship->division->name }}"></span>
                                     @endforeach
                                 @else
                                     &nbsp;
@@ -42,11 +50,7 @@
                     @endforeach
                 </div>
             </div>
-
         @endforeach
-
     </div>
-
-
 
 @endsection
