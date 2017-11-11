@@ -24,16 +24,15 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th class="align-middle text-center d-none d-md-table-cell"></th>
-                        <th></th>
-                        <th class="align-middle text-center">#</th>
+                        <th class="align-middle text-center d-none d-lg-table-cell"></th>
+                        <th class="align-middle "><span class="fa fa-fw"></span>#</th>
                         <th class="align-middle text-center">+/-</th>
                         <th class="align-middle text-center"></th>
                         <th class="align-middle text-center">Sp</th>
                         <th class="align-middle text-center d-none d-md-table-cell">S</th>
                         <th class="align-middle text-center d-none d-md-table-cell">U</th>
                         <th class="align-middle text-center d-none d-md-table-cell">N</th>
-                        <th class="align-middle text-center d-none d-md-table-cell">Tore</th>
+                        <th class="align-middle text-center d-none d-lg-table-cell">Tore</th>
                         <th class="align-middle text-center">Diff.</th>
                         <th class="align-middle text-center">Pkt.</th>
                         <th class="align-middle text-center d-none d-lg-table-cell">Form</th>
@@ -44,7 +43,7 @@
                     @foreach ($table_current as $club)
                         @php
                             $rank_color = "";
-                            $rank_icon  = "";
+                            $rank_icon  = null;
                         @endphp
                         <!-- ranks_champion OR ranks_promotion -->
                         @if(in_array($club->t_rank, $season->ranks_champion) || in_array($club->t_rank, $season->ranks_promotion))
@@ -72,15 +71,15 @@
                             @endphp
                         @endif
                         <tr>
-                            <td class="align-middle text-center d-none d-md-table-cell ">
+                            <td class="align-middle text-center d-none d-lg-table-cell ">
                                 <a class="table-entry-details" data-toggle="collapse" href="#collapsedetails{{ $loop->iteration }}" aria-expanded="false" title="Expandieren">
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                             </td>
                             <td class="align-middle">
-                                <span class="fa fa-fw {{ $rank_icon }}" style="color: {{ $rank_color }};"></span>
+                                <span class="fa fa-fw {{ $rank_icon ?? null }}" style="color: {{ $rank_color }};"></span>
+                                {{ $club->t_rank }}
                             </td>
-                            <td class="align-middle text-center p-2 p-md-2" >{{ $club->t_rank }}</td>
                             <td class="align-middle text-center p-2 p-md-2">
                                 @if($table_previous->count() > 0)
                                     @if($previous_rank = $table_previous->where('id', $club->id)->first()->t_rank)
@@ -123,7 +122,7 @@
                             <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_won }}</td>
                             <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_drawn }}</td>
                             <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_lost }}</td>
-                            <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_goals_for }} : {{ $club->t_goals_against }}</td>
+                            <td class="align-middle text-center d-none d-lg-table-cell">{{ $club->t_goals_for }} : {{ $club->t_goals_against }}</td>
                             <td class="align-middle text-center p-2 p-md-2">{{ $club->t_goals_diff }}</td>
                             <td class="align-middle text-center p-2 p-md-2">{{ $club->t_points }}</td>
                             <!-- Form -->
