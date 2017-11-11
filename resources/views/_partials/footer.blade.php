@@ -27,8 +27,8 @@
             <div class="col-md-4">
                 <h5 class="font-weight-bold">Social Media</h5>
                 <ul class="list-unstyled">
-                    <li><span class="fa fa-fw fa-facebook"></span> HLW auf Facebook</li>
-                    <li><span class="fa fa-fw fa-twitter"></span> HLW auf Twitter</li>
+                    <li><span class="fa fa-fw fa-facebook"></span> <a href="https://www.facebook.com/HobbyligaWest/" title="Facebook" target="_blank">HLW auf Facebook</a></li>
+                    <li><span class="fa fa-fw fa-twitter"></span> <a href="https://twitter.com/HobbyligaWest" title="Twitter" target="_blank">HLW auf Twitter</a></li>
                     <li><span class="fa fa-fw fa-envelope"></span> Mail an HLW</li>
                 </ul>
             </div>
