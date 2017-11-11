@@ -15,7 +15,6 @@ class PortalController extends Controller
 {
     public function index()
     {
-
         $divisions = Division::published()->get()->where('competition.type', 'league');
         $divisions->load(['seasons' => function ($query) {
             $query->published()->current();
