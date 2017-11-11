@@ -37,7 +37,7 @@
                         <th class="align-middle text-center">Diff.</th>
                         <th class="align-middle text-center">Pkt.</th>
                         <th class="align-middle text-center d-none d-lg-table-cell">Form</th>
-                        <th class="align-middle text-center">Next</th>
+                        <th class="align-middle text-center d-none d-md-table-cell">Next</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -72,8 +72,8 @@
                             @endphp
                         @endif
                         <tr>
-                            <td class="align-middle text-center d-none d-sm-table-cell ">
-                                <a data-toggle="collapse" href="#collapsedetails{{ $loop->iteration }}" aria-expanded="false" title="Expandieren">
+                            <td class="align-middle text-center d-none d-md-table-cell ">
+                                <a class="table-entry-details" data-toggle="collapse" href="#collapsedetails{{ $loop->iteration }}" aria-expanded="false" title="Expandieren">
                                     <span class="fa fa-angle-down"></span>
                                 </a>
                             </td>
@@ -146,7 +146,7 @@
                                 @endforeach
                             </td>
                             <!-- next -->
-                            <td class="align-middle text-center">
+                            <td class="align-middle text-center d-none d-md-table-cell">
                                 @php
                                     $nextgame = $club->getNextGames(1)->first()
                                 @endphp
@@ -286,5 +286,16 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('js-footer')
+
+    {{-- change the arrow's orientation on click --}}
+    <script type="text/javascript">
+        $('.table-entry-details').click(function(){
+           $(this).find('span').toggleClass('fa-angle-down fa-angle-up');
+        });
+    </script>
 
 @endsection
