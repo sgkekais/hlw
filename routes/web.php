@@ -22,6 +22,10 @@ Route::get('/', 'PortalController@index')->name('home');
 // division details
 Route::get('division/{division}', 'DivisionController@index')->name('frontend.divisions.show');
 Route::get('division/{division}/tables', 'DivisionController@tables')->name('frontend.divisions.tables');
+Route::get('division/{division}/tables/ajax-full-table', 'DivisionController@ajaxGetFullTable');
+Route::get('division/{division}/tables/ajax-home-table', 'DivisionController@ajaxGetHomeTable');
+Route::get('division/{division}/tables/ajax-away-table', 'DivisionController@ajaxGetAwayTable');
+Route::get('division/{division}/tables/ajax-cross-table', 'DivisionController@ajaxGetCrossTable');
 Route::get('division/{division}/fixtures', 'DivisionController@fixtures')->name('frontend.divisions.fixtures');
 
 // list all clubs of a season

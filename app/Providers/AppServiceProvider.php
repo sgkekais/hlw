@@ -15,14 +15,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // necessary for mysql compatibility
         Schema::defaultStringLength(191);
         // set German locale for php date time and Carbon
         setlocale(LC_TIME, 'German');
         Carbon::setLocale('de');
         // mock date TODO: remove
-        /*$mockdate = Carbon::create(2017,6,30);
-        Carbon::setTestNow($mockdate);*/
+        $mockdate = Carbon::create(2017,6,30);
+        Carbon::setTestNow($mockdate);
     }
 
     /**

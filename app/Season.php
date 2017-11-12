@@ -234,32 +234,21 @@ class Season extends Model
      * @param bool $points
      * @return \Illuminate\Support\Collection|static
      */
-    public function generateTable (
-        Matchweek $matchweek = null,
-        $rank   = true,
-        $played = true,
-        $won    = true,
-        $drawn  = true,
-        $lost   = true,
-        $gf     = true,
-        $ga     = true,
-        $gd     = true,
-        $points = true
-    ) {
+    public function generateTable (Matchweek $matchweek = null, $scope = 0) {
         if (is_null($matchweek)) {
             $matchweek = $this->currentMatchweek();
         }
 
-        $clubs = $this->clubs()->orderBy('name')->get()->map(function ($club) use ($rank, $played, $won, $drawn, $lost, $gf, $ga, $gd, $points) {
-            if ($rank)      $club['t_rank']         = 0;
-            if ($played)    $club['t_played']       = 0;
-            if ($won)       $club['t_won']          = 0;
-            if ($drawn)     $club['t_drawn']        = 0;
-            if ($lost)      $club['t_lost']         = 0;
-            if ($gf)        $club['t_goals_for']    = 0;
-            if ($ga)        $club['t_goals_against']= 0;
-            if ($gf && $ga && $gd) $club['t_goals_diff']   = 0;
-            if ($points)    $club['t_points']       = 0;
+        $clubs = $this->clubs()->orderBy('name')->get()->map(function ($club) {
+            $club['t_rank']         = 0;
+            $club['t_played']       = 0;
+            $club['t_won']          = 0;
+            $club['t_drawn']        = 0;
+            $club['t_lost']         = 0;
+            $club['t_goals_for']    = 0;
+            $club['t_goals_against']= 0;
+            $club['t_goals_diff']   = 0;
+            $club['t_points']       = 0;
 
             return $club;
         });
@@ -268,37 +257,68 @@ class Season extends Model
         foreach ($clubs as $club) {
             // only clubs that have not withdrawn from the competition
             if (!$club->pivot->withdrawal) {
-                // played + rated games
-                if ($played) {
-                    $club->t_played = $club->getGamesPlayed($this, $matchweek)->count()+$club->getGamesRated($this, $matchweek)->count();
-                }
-                // won games
-                if ($won) {
-                    $club->t_won = $club->getGamesPlayedWon($this, $matchweek)->count() + $club->getGamesRatedWon($this, $matchweek)->count();
-                }
-                // drawn games
-                if ($drawn) {
-                    $club->t_drawn = $club->getGamesPlayedDrawn($this, $matchweek)->count() + $club->getGamesRatedDrawn($this, $matchweek)->count();
-                }
-                // lost games
-                if ($lost) {
-                    $club->t_lost = $club->getGamesPlayedLost($this, $matchweek)->count() + $club->getGamesRatedLost($this, $matchweek)->count();
-                }
-                // goals for
-                if ($gf) {
-                    $club->t_goals_for = $club->getGoalsFor($this, $matchweek);
-                }
-                // goals against
-                if ($ga) {
-                    $club->t_goals_against = $club->getGoalsAgainst($this, $matchweek);
-                }
-                // goals diff
-                if ($gf && $ga && $gd) {
-                    $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
-                }
-                // points
-                if ($points) {
-                    $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1;
+
+                switch ($scope) {
+                    // Full table
+                    case 0:
+                        // played + rated games
+                        $club->t_played = $club->getGamesPlayed($this, $matchweek)->count()+$club->getGamesRated($this, $matchweek)->count();
+                        // won games
+                        $club->t_won = $club->getGamesPlayedWon($this, $matchweek)->count() + $club->getGamesRatedWon($this, $matchweek)->count();
+                        // drawn games
+                        $club->t_drawn = $club->getGamesPlayedDrawn($this, $matchweek)->count() + $club->getGamesRatedDrawn($this, $matchweek)->count();
+                        // lost games
+                        $club->t_lost = $club->getGamesPlayedLost($this, $matchweek)->count() + $club->getGamesRatedLost($this, $matchweek)->count();
+                        // goals for
+                        $club->t_goals_for = $club->getGoalsFor($this, $matchweek);
+                        // goals against
+                        $club->t_goals_against = $club->getGoalsAgainst($this, $matchweek);
+                        // goals diff
+                        $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
+                        // points
+                        $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1;
+
+                        break;
+                    // Home table
+                    case 1:
+                        // played + rated games
+                        $club->t_played = $club->getGamesPlayedHome($this, $matchweek)->count()+$club->getGamesRatedHome($this, $matchweek)->count();
+                        // won games
+                        $club->t_won = $club->getGamesPlayedWonHome($this, $matchweek)->count() + $club->getGamesRatedWonHome($this, $matchweek)->count();
+                        // drawn games
+                        $club->t_drawn = $club->getGamesPlayedDrawnHome($this, $matchweek)->count() + $club->getGamesRatedDrawnHome($this, $matchweek)->count();
+                        // lost games
+                        $club->t_lost = $club->getGamesPlayedLostHome($this, $matchweek)->count() + $club->getGamesRatedLostHome($this, $matchweek)->count();
+                        // goals for
+                        $club->t_goals_for = $club->getGoalsForHome($this, $matchweek);
+                        // goals against
+                        $club->t_goals_against = $club->getGoalsAgainstHome($this, $matchweek);
+                        // goals diff
+                        $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
+                        // points
+                        $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1;
+
+                        break;
+                    // Away table
+                    case 2:
+                        // played + rated games
+                        $club->t_played = $club->getGamesPlayedAway($this, $matchweek)->count()+$club->getGamesRatedAway($this, $matchweek)->count();
+                        // won games
+                        $club->t_won = $club->getGamesPlayedWonAway($this, $matchweek)->count() + $club->getGamesRatedWonAway($this, $matchweek)->count();
+                        // drawn games
+                        $club->t_drawn = $club->getGamesPlayedDrawnAway($this, $matchweek)->count() + $club->getGamesRatedDrawnAway($this, $matchweek)->count();
+                        // lost games
+                        $club->t_lost = $club->getGamesPlayedLostAway($this, $matchweek)->count() + $club->getGamesRatedLostAway($this, $matchweek)->count();
+                        // goals for
+                        $club->t_goals_for = $club->getGoalsForAway($this, $matchweek);
+                        // goals against
+                        $club->t_goals_against = $club->getGoalsAgainstAway($this, $matchweek);
+                        // goals diff
+                        $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
+                        // points
+                        $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1;
+
+                        break;
                 }
             }
         }

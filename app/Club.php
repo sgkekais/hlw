@@ -487,7 +487,7 @@ class Club extends Model
      */
     public function getGamesRatedWonAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_won = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+        $games_rated_won = Fixture::rated()->notCancelled()->ofClubAway($this->id)
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -499,8 +499,8 @@ class Club extends Model
                 });
             })
             ->where( function($query) {
-                return $query->where('club_id_home', $this->id)
-                    ->whereColumn('goals_home_rated', '>', 'goals_away_rated');
+                return $query->where('club_id_away', $this->id)
+                    ->whereColumn('goals_away_rated', '>', 'goals_home_rated');
             })
             ->get();
 
