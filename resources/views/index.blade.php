@@ -31,60 +31,69 @@
                     <h3 class="font-weight-bold">In dieser Woche</h3>
                 </div>
             </div>
-            <div class="row mt-4 mb-4">
-                @foreach ($fixtures as $fixture)
-                    <div class="col {{ !$loop->last ? "border border-left-0 border-top-0 border-bottom-0" : null }}">
-                        {{-- details --}}
+            <div class="row">
+                <div class="col-12">
+                    @foreach ($fixtures->chunk(6) as $chunk)
                         <div class="row">
-                            <div class="col-6 pr-0 text-muted">
-                                <small>{{ $fixture->datetime ? $fixture->datetime->format('d.m.') : "-" }}</small>
-                            </div>
-                            <div class="col-6 pl-0 text-muted text-right">
-                                <small>{{ $fixture->datetime ? $fixture->datetime->format('H:i') : "-" }}</small>
-                            </div>
+                            @foreach($chunk as $fixture)
+                                <div class="col {{ !$loop->last ? "border border-left-0 border-top-0 border-bottom-0" : null }} mt-2 mb-2">
+                                    {{-- details --}}
+                                    <div class="row">
+                                        <div class="col-6 pr-0 text-muted">
+                                            <small>{{ $fixture->datetime ? $fixture->datetime->format('d.m.') : "-" }}</small>
+                                        </div>
+                                        <div class="col-6 pl-0 text-muted text-right">
+                                            <small>{{ $fixture->datetime ? $fixture->datetime->format('H:i') : "-" }}</small>
+                                        </div>
+                                    </div>
+                                    {{-- top row --}}
+                                    <div class="row">
+                                        <div class="col-8 pr-0">
+                                            @if($fixture->clubHome->logo_url)
+                                                <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
+                                            @else
+                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                            @endif
+                                            {{ $fixture->clubHome ? $fixture->clubHome->name_code : "-" }}
+                                        </div>
+                                        <div class="col pl-0 text-right">
+                                            @if($fixture->isPlayed() && !$fixture->isRated())
+                                                {{ $fixture->goals_home ?? "-" }}
+                                            @elseif($fixture->isRated())
+                                                {{ $fixture->goals_home_rated ?? "-" }}
+                                            @else
+                                                -
+                                            @endif
+                                        </div>
+                                    </div>
+                                    {{-- bottom row --}}
+                                    <div class="row">
+                                        <div class="col-8 pr-0">
+                                            @if($fixture->clubAway->logo_url)
+                                                <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
+                                            @else
+                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                            @endif
+                                            {{ $fixture->clubAway ? $fixture->clubAway->name_code : "-" }}
+                                        </div>
+                                        <div class="col pl-0 text-right">
+                                            @if($fixture->isPlayed() && !$fixture->isRated())
+                                                {{ $fixture->goals_away ?? "-" }}
+                                            @elseif($fixture->isRated())
+                                                {{ $fixture->goals_away_rated ?? "-" }}
+                                            @else
+                                                -
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        {{-- top row --}}
-                        <div class="row">
-                            <div class="col-8 pr-0">
-                                @if($fixture->clubHome->logo_url)
-                                    <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
-                                @else
-                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
-                                @endif
-                                {{ $fixture->clubHome ? $fixture->clubHome->name_code : "-" }}
-                            </div>
-                            <div class="col pl-0 text-right">
-                                @if($fixture->isPlayed() && !$fixture->isRated())
-                                    {{ $fixture->goals_home ?? "-" }}
-                                @elseif($fixture->isRated())
-                                    {{ $fixture->goals_home_rated ?? "-" }}
-                                @else
-                                    -
-                                @endif
-                            </div>
-                        </div>
-                        {{-- bottom row --}}
-                        <div class="row">
-                            <div class="col-8 pr-0">
-                                @if($fixture->clubAway->logo_url)
-                                    <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
-                                @else
-                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
-                                @endif
-                                {{ $fixture->clubAway ? $fixture->clubAway->name_code : "-" }}
-                            </div>
-                            <div class="col pl-0 text-right">
-                                @if($fixture->isPlayed() && !$fixture->isRated())
-                                    {{ $fixture->goals_away ?? "-" }}
-                                @elseif($fixture->isRated())
-                                    {{ $fixture->goals_away_rated ?? "-" }}
-                                @else
-                                    -
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                        @unless ($loop->last)
+                            <hr>
+                        @endunless
+                    @endforeach
+                </div>
             </div>
         @endif
         <!-- end fixtures of the current week -->
