@@ -200,6 +200,58 @@ class Club extends Model
     }
 
     /**
+     * Get the games this club has played at home
+     * Optional: for a given season
+     * Optional: for a given season until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesPlayedHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_played = Fixture::played()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
+
+        return $games_played;
+    }
+
+    /**
+     * Get the games this club has played at home
+     * Optional: for a given season
+     * Optional: for a given season until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesPlayedAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_played = Fixture::played()->notCancelled()->ofClubAway($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
+
+        return $games_played;
+    }
+
+    /**
      * Get the games that were rated
      * Optional: for a given season
      * Optional: until a given matchweek
@@ -210,6 +262,58 @@ class Club extends Model
     public function getGamesRated(Season $season = null, Matchweek $matchweek = null)
     {
         $games_rated = Fixture::rated()->notCancelled()->ofClub($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
+
+        return $games_rated;
+    }
+
+    /**
+     * Get the home games that were rated
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRatedHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_rated = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
+
+        return $games_rated;
+    }
+
+    /**
+     * Get the away games that were rated
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRatedAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_rated = Fixture::rated()->notCancelled()->ofClubAway($this->id)
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -258,7 +362,67 @@ class Club extends Model
     }
 
     /**
-     * Get the games that were rated and won the by club in this way
+     * Get the games that were played (not rated) and won at home by the club
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesPlayedWonHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_won = Fixture::played()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->where('club_id_home', $this->id)
+                    ->whereColumn('goals_home', '>', 'goals_away');
+            })
+            ->get();
+
+        return $games_won;
+    }
+
+    /**
+     * Get the games that were played (not rated) and won at home by the club
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesPlayedWonAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_won = Fixture::played()->notCancelled()->ofClubAway($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->where('club_id_away', $this->id)
+                    ->whereColumn('goals_away', '>', 'goals_home');
+            })
+            ->get();
+
+        return $games_won;
+    }
+
+    /**
+     * Get the games that were rated and won by club in this way
      * @param Season|null $season
      * @param Matchweek|null $matchweek
      * @return mixed
@@ -286,6 +450,63 @@ class Club extends Model
 
         return $games_rated_won;
     }
+
+    /**
+     * Get the games that were rated and won at home by club in this way
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRatedWonHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_rated_won = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->where('club_id_home', $this->id)
+                    ->whereColumn('goals_home_rated', '>', 'goals_away_rated');
+            })
+            ->get();
+
+        return $games_rated_won;
+    }
+
+    /**
+     *  Get the games that were rated and won away by club in this way
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRatedWonAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_rated_won = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->where('club_id_home', $this->id)
+                    ->whereColumn('goals_home_rated', '>', 'goals_away_rated');
+            })
+            ->get();
+
+        return $games_rated_won;
+    }
+
 
     /**
      * Get the games that were played (not rated) and ended in a draw
@@ -320,6 +541,66 @@ class Club extends Model
     }
 
     /**
+     * Get the games that were played (not rated) and ended in a draw at home
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesPlayedDrawnHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_played_drawn = Fixture::played()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->where('club_id_home', $this->id)
+                    ->whereColumn('goals_home', '=', 'goals_away');
+            })
+            ->get();
+
+        return $games_played_drawn;
+    }
+
+    /**
+     * Get the games that were played (not rated) and ended in a draw away
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesPlayedDrawnAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_played_drawn = Fixture::played()->notCancelled()->ofClubAway($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->where('club_id_away', $this->id)
+                    ->whereColumn('goals_home', '=', 'goals_away');
+            })
+            ->get();
+
+        return $games_played_drawn;
+    }
+
+    /**
      * Get the games that were rated as a draw
      * @param Season|null $season
      * @param Matchweek|null $matchweek
@@ -342,6 +623,62 @@ class Club extends Model
                 return $query->orWhere('club_id_home', $this->id)
                     ->whereColumn('goals_home_rated', '=', 'goals_away_rated')
                     ->orWhere('club_id_away', $this->id)
+                    ->whereColumn('goals_home_rated', '=', 'goals_away_rated');
+            })
+            ->get();
+
+        return $games_rated_drawn;
+    }
+
+    /**
+     * Get the games that were rated as a draw at home
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRatedDrawnHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_rated_drawn = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->orWhere('club_id_home', $this->id)
+                    ->whereColumn('goals_home_rated', '=', 'goals_away_rated');
+            })
+            ->get();
+
+        return $games_rated_drawn;
+    }
+
+    /**
+     * Get the games that were rated as a draw away
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRatedDrawnAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_rated_drawn = Fixture::rated()->notCancelled()->ofClubAway($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->orWhere('club_id_home', $this->id)
                     ->whereColumn('goals_home_rated', '=', 'goals_away_rated');
             })
             ->get();
@@ -383,7 +720,69 @@ class Club extends Model
     }
 
     /**
-     *
+     * Get the games that were lost by the club at home
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesPlayedLostHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_played_lost = Fixture::played()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->where('club_id_home', $this->id)
+                    ->whereColumn('goals_home', '<', 'goals_away');
+            })
+            ->get();
+
+        return $games_played_lost;
+    }
+
+    /**
+     * Get the games that were lost by the club away
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesPlayedLostAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_played_lost = Fixture::played()->notCancelled()->ofClubAway($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->where('club_id_away', $this->id)
+                    ->whereColumn('goals_away', '<', 'goals_home');
+            })
+            ->get();
+
+        return $games_played_lost;
+    }
+
+    /**
+     * Get the games that were lost by rating
+     * Optional: for a given season
+     * Optional: until a given matchweek
      * @param Season|null $season
      * @param Matchweek|null $matchweek
      * @return mixed
@@ -406,6 +805,60 @@ class Club extends Model
                     ->whereColumn('goals_home_rated', '<', 'goals_away_rated')
                     ->orWhere('club_id_away', $this->id)
                     ->whereColumn('goals_home_rated', '>', 'goals_away_rated');
+            })
+            ->get();
+
+        return $games_rated_lost;
+    }
+
+    /**
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRatedLostHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_rated_lost = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->orWhere('club_id_home', $this->id)
+                    ->whereColumn('goals_home_rated', '<', 'goals_away_rated');
+            })
+            ->get();
+
+        return $games_rated_lost;
+    }
+
+    /**
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return mixed
+     */
+    public function getGamesRatedLostAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $games_rated_lost = Fixture::rated()->notCancelled()->ofClubAway($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->where( function($query) {
+                return $query->orWhere('club_id_away', $this->id)
+                    ->whereColumn('goals_away_rated', '<', 'goals_home_rated');
             })
             ->get();
 
@@ -445,6 +898,82 @@ class Club extends Model
                     $goals_for += $fixture->goals_home_rated;
                 }
             } elseif ($fixture->club_id_away == $this->id) {
+                if (!$fixture->isRated()) {
+                    $goals_for += $fixture->goals_away;
+                } else {
+                    $goals_for += $fixture->goals_away_rated;
+                }
+            }
+        }
+
+        return $goals_for;
+    }
+
+    /**
+     * Get the number of goals that were scored by the club at home
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return int
+     */
+    public function getGoalsForHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
+
+        $goals_for = 0;
+
+        foreach ($fixtures as $fixture) {
+            if ($fixture->club_id_home == $this->id) {
+                if (!$fixture->isRated()) {
+                    $goals_for += $fixture->goals_home;
+                } else {
+                    $goals_for += $fixture->goals_home_rated;
+                }
+            }
+        }
+
+        return $goals_for;
+    }
+
+    /**
+     * Get the number of goals that were scored by the club away
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return int
+     */
+    public function getGoalsForAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubAway($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
+
+        $goals_for = 0;
+
+        foreach ($fixtures as $fixture) {
+            if ($fixture->club_id_away == $this->id) {
                 if (!$fixture->isRated()) {
                     $goals_for += $fixture->goals_away;
                 } else {
@@ -501,6 +1030,82 @@ class Club extends Model
     }
 
     /**
+     * Get the number of goals that were scored against the club at home
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return int
+     */
+    public function getGoalsAgainstHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubHome($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
+
+        $goals_against = 0;
+
+        foreach ($fixtures as $fixture) {
+            if ($fixture->club_id_home == $this->id) {
+                if (!$fixture->isRated()) {
+                    $goals_against += $fixture->goals_away;
+                } else {
+                    $goals_against += $fixture->goals_away_rated;
+                }
+            }
+        }
+
+        return $goals_against;
+    }
+
+    /**
+     * Get the number of goals that were scored against the club away
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return int
+     */
+    public function getGoalsAgainstAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubAway($this->id)
+            ->when($season, function ($query) use ($season) {
+                return $query->whereHas('matchweek', function ($query2) use ($season) {
+                    return $query2->where('season_id', $season->id);
+                });
+            })
+            ->when($season && $matchweek, function ($query) use ($matchweek) {
+                return $query->whereHas('matchweek', function ($query3) use ($matchweek) {
+                    return $query3->where('number_consecutive', '<=', $matchweek->number_consecutive);
+                });
+            })
+            ->get();
+
+        $goals_against = 0;
+
+        foreach ($fixtures as $fixture) {
+            if ($fixture->club_id_away == $this->id) {
+                if (!$fixture->isRated()) {
+                    $goals_against += $fixture->goals_home;
+                } else {
+                    $goals_against += $fixture->goals_home_rated;
+                }
+            }
+        }
+
+        return $goals_against;
+    }
+
+    /**
      * Get the number of points for the club
      * Optional: for a given season
      * Optional: until a given matchweek
@@ -514,6 +1119,42 @@ class Club extends Model
             + $this->getGamesRatedWon($season, $matchweek)->count() * 3
             + $this->getGamesPlayedDrawn($season, $matchweek)->count() * 1
             + $this->getGamesRatedDrawn($season, $matchweek)->count() * 1;
+
+        return $points;
+    }
+
+    /**
+     * Get the number of points for the club at home
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return int
+     */
+    public function getPointsHome(Season $season = null, Matchweek $matchweek = null)
+    {
+        $points = $this->getGamesPlayedWonHome($season, $matchweek)->count() * 3
+            + $this->getGamesRatedWonHome($season, $matchweek)->count() * 3
+            + $this->getGamesPlayedDrawnHome($season, $matchweek)->count() * 1
+            + $this->getGamesRatedDrawnHome($season, $matchweek)->count() * 1;
+
+        return $points;
+    }
+
+    /**
+     * Get the number of points for the club at home
+     * Optional: for a given season
+     * Optional: until a given matchweek
+     * @param Season|null $season
+     * @param Matchweek|null $matchweek
+     * @return int
+     */
+    public function getPointsAway(Season $season = null, Matchweek $matchweek = null)
+    {
+        $points = $this->getGamesPlayedWonAway($season, $matchweek)->count() * 3
+            + $this->getGamesRatedWonAway($season, $matchweek)->count() * 3
+            + $this->getGamesPlayedDrawnAway($season, $matchweek)->count() * 1
+            + $this->getGamesRatedDrawnAway($season, $matchweek)->count() * 1;
 
         return $points;
     }
@@ -658,15 +1299,6 @@ class Club extends Model
         return $lost;
     }
 
-    /**
-     * Get the regular stadium(s) of this club
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function regularStadium()
-    {
-        return $this->stadiums()->wherePivot('is_regular_stadium', '1');
-    }
-
     /***********************************************************
      * RELATIONSHIPS
      ************************************************************/
@@ -707,6 +1339,15 @@ class Club extends Model
         return $this->belongsToMany(Stadium::class, 'clubs_stadiums')
             ->withPivot('regular_home_day', 'regular_home_time', 'note', 'is_regular_stadium')
             ->withTimestamps();
+    }
+
+    /**
+     * Get the regular stadium(s) of this club
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function regularStadium()
+    {
+        return $this->stadiums()->wherePivot('is_regular_stadium', '1');
     }
 
     /**
