@@ -28,7 +28,7 @@
         </div>
         <div class="row">
             <div id="tables-container" class="col-12">
-                <i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></i><span class='sr-only'>Loading...</span>
+
             </div>
         </div>
         <div class="row">
@@ -80,6 +80,7 @@
 
         $(function() {
             // Get the full table content when the page is loaded for the first time
+            $('#tables-container').html(@include('loader'));
             getTable('full');
 
             //  change the arrow's orientation on click
@@ -90,8 +91,7 @@
             // Click on full table link
             $('#full-table').click(function () {
                 // Add loading indicator back
-                $('#tables-container').html("<span class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></span><span class='sr-only'>Loading...</span>");
-
+                $('#tables-container').html(@include('loader'));
                 // Get the table content
                 getTable('full');
             });
@@ -99,8 +99,7 @@
             // Click on home table link
             $('#home-table').click(function () {
                 // Add loading indicator back
-                $('#tables-container').html("<span class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></span><span class='sr-only'>Loading...</span>");
-
+                $('#tables-container').html(@include('loader'));
                 // Get the table content
                 getTable('home');
             });
@@ -108,8 +107,7 @@
             // Click on away table link
             $('#away-table').click(function () {
                 // Add loading indicator back
-                $('#tables-container').html("<span class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></span><span class='sr-only'>Loading...</span>");
-
+                $('#tables-container').html(@include('loader'));
                 // Get the table content
                 getTable('away');
             });
@@ -117,8 +115,7 @@
             // Click on cross table link
             $('#cross-table').click(function () {
                 // add loading indicator back
-                $('#tables-container').html("<span class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></span><span class='sr-only'>Loading...</span>");
-
+                $('#tables-container').html(@include('loader'));
                 // Get the table content
                 getCrossTable();
             });
