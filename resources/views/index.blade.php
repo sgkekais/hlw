@@ -48,15 +48,18 @@
                                     </div>
                                     {{-- top row --}}
                                     <div class="row">
-                                        <div class="col-8 pr-0">
+                                        <div class="col-9 pr-0">
                                             @if($fixture->clubHome->logo_url)
                                                 <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
                                             @else
                                                 <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                             @endif
-                                            {{ $fixture->clubHome ? $fixture->clubHome->name_code : "-" }}
+                                            @if($fixture->clubHome)
+                                                <span class="d-none d-lg-inline">{{ $fixture->clubHome->name_short }}</span>
+                                                <span class="d-lg-none">{{ $fixture->clubHome->name_code }}</span>
+                                            @endif
                                         </div>
-                                        <div class="col pl-0 text-right">
+                                        <div class="col-3 pl-0 text-right">
                                             @if($fixture->isPlayed() && !$fixture->isRated())
                                                 {{ $fixture->goals_home ?? "-" }}
                                             @elseif($fixture->isRated())
@@ -67,16 +70,19 @@
                                         </div>
                                     </div>
                                     {{-- bottom row --}}
-                                    <div class="row">
-                                        <div class="col-8 pr-0">
+                                    <div class="row pt-1">
+                                        <div class="col-9 pr-0">
                                             @if($fixture->clubAway->logo_url)
                                                 <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
                                             @else
                                                 <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                             @endif
-                                            {{ $fixture->clubAway ? $fixture->clubAway->name_code : "-" }}
+                                            @if($fixture->clubAway)
+                                                <span class="d-none d-lg-inline align-middle">{{ $fixture->clubAway->name_short }}</span>
+                                                <span class="d-lg-none align-middle">{{ $fixture->clubAway->name_code }}</span>
+                                            @endif
                                         </div>
-                                        <div class="col pl-0 text-right">
+                                        <div class="col-3 pl-0 text-right">
                                             @if($fixture->isPlayed() && !$fixture->isRated())
                                                 {{ $fixture->goals_away ?? "-" }}
                                             @elseif($fixture->isRated())

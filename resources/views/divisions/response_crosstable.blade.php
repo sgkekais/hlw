@@ -26,7 +26,7 @@
                 </td>
                 @foreach($season->clubs->sortBy('name') as $club_b)
                     @if($club_b->id == $club_a->id)
-                        <td class="align-middle text-center bg-secondary">&nbsp;</td>
+                        <td class="align-middle text-center">&nbsp;</td>
                     @else
                         <td class="align-middle text-center">
                             @php

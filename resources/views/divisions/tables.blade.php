@@ -90,7 +90,7 @@
             // Click on full table link
             $('#full-table').click(function () {
                 // Add loading indicator back
-                $('#tables-container').html("<i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></i><span class='sr-only'>Loading...</span>");
+                $('#tables-container').html("<span class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></span><span class='sr-only'>Loading...</span>");
 
                 // Get the table content
                 getTable('full');
@@ -99,7 +99,7 @@
             // Click on home table link
             $('#home-table').click(function () {
                 // Add loading indicator back
-                $('#tables-container').html("<i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></i><span class='sr-only'>Loading...</span>");
+                $('#tables-container').html("<span class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></span><span class='sr-only'>Loading...</span>");
 
                 // Get the table content
                 getTable('home');
@@ -108,7 +108,7 @@
             // Click on away table link
             $('#away-table').click(function () {
                 // Add loading indicator back
-                $('#tables-container').html("<i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></i><span class='sr-only'>Loading...</span>");
+                $('#tables-container').html("<span class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></span><span class='sr-only'>Loading...</span>");
 
                 // Get the table content
                 getTable('away');
@@ -117,7 +117,7 @@
             // Click on cross table link
             $('#cross-table').click(function () {
                 // add loading indicator back
-                $('#tables-container').html("<i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></i><span class='sr-only'>Loading...</span>");
+                $('#tables-container').html("<span class='fa fa-circle-o-notch fa-spin fa-3x fa-fw text-success'></span><span class='sr-only'>Loading...</span>");
 
                 // Get the table content
                 getCrossTable();
