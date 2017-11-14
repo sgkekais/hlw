@@ -271,8 +271,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12" id="response">
-                        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-                        <span class="sr-only">Loading...</span>
+                        @include('loader')
                     </div>
                 </div>
             </div>
@@ -429,7 +428,7 @@
 
             $('#season-selection').change(function () {
                 // add loading indicator back
-                $('#response').html("<i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>");
+                $('#response').html(@include('loader'));
                 // get results of selected season
                 getResults($(this).val());
 
