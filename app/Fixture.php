@@ -286,6 +286,9 @@ class Fixture extends Model
         }
     }
 
+    /**
+     * @return bool
+     */
     public function isCancelled()
     {
         if ($this->cancelled) {

@@ -9,7 +9,14 @@
 @section('content')
 
     <div class="container">
-        Hallo
+        In dieser Woche gleich wie Portal
+        <br>
+        Kurztabelle
+        <br>
+        Torschützen
+
     </div>
+
+
 
 @endsection
