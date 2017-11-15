@@ -52,13 +52,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($matchweek->fixtures()->orderBy('datetime')->get() as $fixture)
+                        @foreach($matchweek->fixtures()->published()->orderBy('datetime')->get() as $fixture)
                             <tr class="">
                                 <td class="align-middle text-center">
-                                    @if($fixture->isRated())
+                                    @if($fixture->isCancelled())
+                                        <span class="fa fa-fw fa-ban text-danger"></span>
+                                    @elseif($fixture->isRated())
                                         <span class="fa fa-fw fa-gavel text-warning"></span>
                                     @elseif($fixture->rescheduledTo)
-                                        <span class="fa fa-fw fa-level-up fa-rotate-90"></span>
+                                        <span class="fa fa-fw fa-calendar-times-o"></span>
+                                    @elseif($fixture->rescheduledFrom)
+                                        <span class="fa fa-fw fa-calendar-plus-o"></span>
+                                    @else
+                                        <span class="fa fa-fw"></span>
                                     @endif
                                 </td>
                                 {{-- date - day of week --}}
@@ -97,7 +103,7 @@
                                     <div class="text-white rounded bg-dark d-inline-block p-1" style="word-break: keep-all">
                                         {{-- cancelled? --}}
                                         @if($fixture->isCancelled())
-                                            Ann.
+                                            <span class="text-danger">Ann.</span>
                                         @elseif($fixture->isPlayed() && !$fixture->isRated())
                                             {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
                                         {{-- rated? --}}

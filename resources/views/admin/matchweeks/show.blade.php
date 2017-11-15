@@ -79,7 +79,7 @@
                         <tr>
                             <td>
                                 @if($fixture->rescheduled_from_fixture_id)
-                                    <b>{{ $fixture->rescheduledFrom->id }}</b>
+                                    {{ $fixture->rescheduledFrom->id }}
                                     <br>
                                     <span class="fa fa-level-up fa-rotate-90"></span>
                                 @endif

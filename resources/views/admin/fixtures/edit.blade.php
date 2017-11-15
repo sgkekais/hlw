@@ -198,7 +198,7 @@
             <div class="col-md-4">
                 <select class="form-control" id="cancelled" name="cancelled" aria-describedby="cancelledHelp">
                     <option value="0">Nein</option>
-                    <option value="1">Ja</option>
+                    <option value="1" {{ $fixture->cancelled ? "selected" : null }}>Ja</option>
                 </select>
                 <small id="publishedHelp" class="form-text text-muted">Wurde das Spiel annulliert?</small>
             </div>
@@ -208,7 +208,7 @@
             <div class="col-md-4">
                 <select class="form-control" id="published" name="published" aria-describedby="publishedHelp">
                     <option value="0">Nein</option>
-                    <option value="1">Ja</option>
+                    <option value="1" {{ $fixture->published ? "selected" : null }}>Ja</option>
                 </select>
                 <small id="publishedHelp" class="form-text text-muted">Spielklasse auf Seite veröffentlichen?</small>
             </div>
