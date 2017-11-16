@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="container">
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12">
                 <h2 class="pt-4 font-weight-bold">Spielplan</h2>
                 <h3 class="text-muted">{{ $season->season_nr ? $season->season_nr."." : null }} Saison - {{ $season->begin ? $season->begin->format('Y') : null }} / {{ $season->end ? $season->end->format('Y') : null }}</h3>
@@ -28,13 +28,12 @@
             </div>
         </div>
         @foreach($season->matchweeks as $matchweek)
-            <hr>
             <div class="row">
                 <a name="matchweek{{ $matchweek->number_consecutive }}"></a>
                 <div class="col-12">
-                    <h4>Spielwoche {{ $matchweek->number_consecutive }}
-                        <small>{{ $matchweek->name ?? null }}</small>
+                    <h4>Spielwoche <b>{{ $matchweek->number_consecutive }}</b>
                         <small class="text-muted d-inline-block">
+                            {{ $matchweek->name ? $matchweek->name." | " : null }}
                             {{ $matchweek->begin ? $matchweek->begin->format('d.m.Y') : null }}
                             {{ $matchweek->end ? " bis ".$matchweek->end->format('d.m.Y') : null }}
                         </small>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light" style="box-shadow: inset 0px 5px 5px 0px rgba(173,173,173,0.5);">
+<nav class="navbar navbar-expand-sm navbar-light bg-light" style="box-shadow: inset 0px 5px 5px 0px rgba(173,173,173,0.5);">
     <div class="container">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
