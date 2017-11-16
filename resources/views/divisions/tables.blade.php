@@ -12,21 +12,30 @@
         <div class="row">
             <div class="col-12">
                 <h2 style="font-weight: bold">Tabelle</h2>
-                <h3 class="text-muted">
-                    Spielwoche {{ $c_matchweek->number_consecutive ?: null }}
-                    | {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.') : null }} - {{ $c_matchweek->end ? $c_matchweek->end->format('d.m.') : null }}
-                    {{ $c_matchweek->name ? "| ".$c_matchweek->name : null }}
-                </h3>
-                {{-- TODO: links for home, away, tables, do via ajax--}}
-                <nav class="nav nav-pills nav-justified mb-4">
-                    <a id="full-table" class="nav-item nav-link active" href="#" data-toggle="pill">Tabelle</a>
-                    <a id="home-table" class="nav-item nav-link" href="#" data-toggle="pill">Heim</a>
-                    <a id="away-table" class="nav-item nav-link" href="#" data-toggle="pill">Auswärts</a>
-                    <a id="cross-table" class="nav-item nav-link" href="#" data-toggle="pill">Kreuztabelle</a>
-                </nav>
+                <ul class="nav nav-pills">
+                    <li class="nav-item dropdown pr-2">
+                        <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Saison: {{ $season->end ? $season->end->format('Y') :null }}</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Test</a>
+                            <a class="dropdown-item" href="#">Test</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a id="full-table" href="#" class="nav-link active" data-toggle="pill">Tabelle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="home-table" href="#" class="nav-link" data-toggle="pill">Heim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="away-table" href="#" class="nav-link" data-toggle="pill">Auswärts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="cross-table" href="#" class="nav-link" data-toggle="pill">Kreuztabelle</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-4">
             <div id="tables-container" class="col-12">
 
             </div>

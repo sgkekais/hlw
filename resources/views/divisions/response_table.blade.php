@@ -1,3 +1,8 @@
+<h4 class="text-muted">
+    Spielwoche {{ $c_matchweek->number_consecutive ?: null }}
+    | {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.') : null }} - {{ $c_matchweek->end ? $c_matchweek->end->format('d.m.') : null }}
+    {{ $c_matchweek->name ? "| ".$c_matchweek->name : null }}
+</h4>
 <table class="table table-hover">
     <thead>
     <tr>

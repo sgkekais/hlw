@@ -107,7 +107,8 @@ class DivisionController extends Controller
         $season = $division->seasons()->current()->first();
 
         $season->load('clubs', 'matchweeks', 'matchweeks.fixtures');
+        $c_matchweek = $season->currentMatchweek();
 
-        return view('divisions.fixtures', compact('division', 'season'));
+        return view('divisions.fixtures', compact('division', 'season', 'c_matchweek'));
     }
 }
