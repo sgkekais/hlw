@@ -24,6 +24,7 @@ class DivisionController extends Controller
      */
     public function tables(Division $division)
     {
+        $division->load('seasons');
         $season = $division->seasons()->current()->first();
         $season->load('matchweeks', 'clubs');
         $c_matchweek = $season->currentMatchweek();

@@ -49,14 +49,16 @@
                                     {{-- top row --}}
                                     <div class="row">
                                         <div class="col-9 pr-0">
-                                            @if($fixture->clubHome->logo_url)
-                                                <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
-                                            @else
-                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
-                                            @endif
                                             @if($fixture->clubHome)
+                                                @if($fixture->clubHome->logo_url)
+                                                    <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
+                                                @else
+                                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                @endif
                                                 <span class="d-none d-lg-inline">{{ $fixture->clubHome->name_short }}</span>
                                                 <span class="d-lg-none">{{ $fixture->clubHome->name_code }}</span>
+                                            @else
+                                                -
                                             @endif
                                         </div>
                                         <div class="col-3 pl-0 text-right">
@@ -72,14 +74,16 @@
                                     {{-- bottom row --}}
                                     <div class="row pt-1">
                                         <div class="col-9 pr-0">
-                                            @if($fixture->clubAway->logo_url)
-                                                <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
-                                            @else
-                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
-                                            @endif
                                             @if($fixture->clubAway)
+                                                @if($fixture->clubAway->logo_url)
+                                                    <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
+                                                @else
+                                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                @endif
                                                 <span class="d-none d-lg-inline align-middle">{{ $fixture->clubAway->name_short }}</span>
                                                 <span class="d-lg-none align-middle">{{ $fixture->clubAway->name_code }}</span>
+                                            @else
+                                                -
                                             @endif
                                         </div>
                                         <div class="col-3 pl-0 text-right">

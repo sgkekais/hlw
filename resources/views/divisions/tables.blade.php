@@ -16,8 +16,9 @@
                     <li class="nav-item dropdown pr-2">
                         <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Saison: {{ $season->end ? $season->end->format('Y') :null }}</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Test</a>
-                            <a class="dropdown-item" href="#">Test</a>
+                            @foreach($division->seasons->sortBy('end') as $s)
+                                <a class="dropdown-item" href="#">{{ $s->begin ?? $s->begin->format('Y') }} / {{ $s->end ?? $s->end->format('Y') }}</a>
+                            @endforeach
                         </div>
                     </li>
                     <li class="nav-item">
