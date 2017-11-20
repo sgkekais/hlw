@@ -19,6 +19,7 @@
         "popper.js": "^1.12.5",
         "daterangepicker": "^2.1.25",
         "moment": "^2.18.1",
-        "font-awesome": "^4.7.0"
+        "font-awesome": "^4.7.0",
+        "fullcalendar": "^3.7.0"
     }
 }
