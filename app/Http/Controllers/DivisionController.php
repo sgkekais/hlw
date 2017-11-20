@@ -3,6 +3,7 @@
 namespace HLW\Http\Controllers;
 
 use HLW\Division;
+use HLW\Season;
 use Illuminate\Http\Request;
 
 class DivisionController extends Controller
@@ -24,26 +25,40 @@ class DivisionController extends Controller
      */
     public function tables(Division $division)
     {
+        // eager load seasons for season selector
         $division->load('seasons');
+        // also get the current season
         $season = $division->seasons()->current()->first();
+        // eager load the current season's matchweeks and clubs
         $season->load('matchweeks', 'clubs');
+        // also get the current matchweek of the current season
         $c_matchweek = $season->currentMatchweek();
 
         return view('divisions.tables', compact('division', 'season', 'c_matchweek'));
     }
 
     /**
+     * @param Request $request
      * @param Division $division
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function ajaxGetFullTable(Division $division)
+    public function ajaxGetFullTable(Request $request, Division $division)
     {
-        $season = $division->seasons()->current()->first();
+        // check whether a season id is in the request
+        if (!$request->filled('season_id')) {
+            $season = $division->seasons()->current()->first();
+        } else {
+            $season = Season::findOrFail($request->season_id);
+        }
+
+        // eager load matchweeks and clubs
         $season->load('matchweeks', 'clubs');
 
+        // get the current and previous matchweek
         $c_matchweek = $season->currentMatchweek();
         $p_matchweek = $c_matchweek->previousMatchweek();
 
+        // generate the tables for the current and previous matchweek
         $table_current = $season->generateTable($c_matchweek);
         $table_previous = $season->generateTable($p_matchweek);
 
@@ -51,12 +66,19 @@ class DivisionController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param Division $division
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function ajaxGetHomeTable(Division $division)
+    public function ajaxGetHomeTable(Request $request, Division $division)
     {
-        $season = $division->seasons()->current()->first();
+        // check whether a season id is in the request
+        if (!$request->filled('season_id')) {
+            $season = $division->seasons()->current()->first();
+        } else {
+            $season = Season::findOrFail($request->season_id);
+        }
+
         $season->load('matchweeks', 'clubs');
 
         $c_matchweek = $season->currentMatchweek();
@@ -69,12 +91,19 @@ class DivisionController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param Division $division
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function ajaxGetAwayTable(Division $division)
+    public function ajaxGetAwayTable(Request $request, Division $division)
     {
-        $season = $division->seasons()->current()->first();
+        // check whether a season id is in the request
+        if (!$request->filled('season_id')) {
+            $season = $division->seasons()->current()->first();
+        } else {
+            $season = Season::findOrFail($request->season_id);
+        }
+
         $season->load('matchweeks', 'clubs');
 
         $c_matchweek = $season->currentMatchweek();
@@ -87,13 +116,19 @@ class DivisionController extends Controller
     }
 
     /**
-     * Display a cross table for the given division
+     * @param Request $request
      * @param Division $division
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function ajaxGetCrossTable(Division $division)
+    public function ajaxGetCrossTable(Request $request, Division $division)
     {
-        $season = $division->seasons()->current()->first();
+        // check whether a season id is in the request
+        if (!$request->filled('season_id')) {
+            $season = $division->seasons()->current()->first();
+        } else {
+            $season = Season::findOrFail($request->season_id);
+        }
+
         $season->load(['clubs','fixtures']);
 
         return view('divisions.response_crosstable', compact('season'));

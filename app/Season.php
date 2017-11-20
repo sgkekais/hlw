@@ -96,6 +96,38 @@ class Season extends Model
     ];
 
     /***********************************************************
+     * ACCESSORS
+     ************************************************************/
+
+    /**
+     * Combine begin and end date into a pre-formatted 'name' attribute for the season
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        // format the begin date if it is not null
+        if ($this->begin) {
+            $begin = $this->begin->format('Y');
+        } else {
+            $begin = null;
+        }
+
+        // format the end date if it is not null
+        if ($this->end) {
+            $end = $this->end->format('Y');
+        } else {
+            $end = null;
+        }
+
+        // return only one date if the formatted dates are equal
+        if ($begin == $end) {
+            return $begin;
+        } else {
+            return $begin . ($end ? " / " . $end : null);
+        }
+    }
+
+    /***********************************************************
      * SCOPES
      ************************************************************/
 
