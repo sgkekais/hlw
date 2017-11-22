@@ -112,10 +112,10 @@
             <td class="align-middle text-center p-2 p-md-2">{{ $club->t_points }}</td>
             <!-- Form -->
             <td class="align-middle text-center d-none d-lg-table-cell">
-                @foreach ($club->getLastGames(5) as $lastGame)
-                    @if($lastGame->isPlayed() || $lastGame->isRated())
-                        <span class="fa-stack">
-                                    @if ($club->hasWon($lastGame))
+                @foreach ($club->getLastGamesPlayedOrRated(5, $season->isFinished() ? $season->end : null) as $lastGame)
+                    <span class="fa-stack" data-toggle="tooltip" data-html="true" title="{{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
+                        @if ($lastGame->isPlayed() && !$lastGame->isRated())
+                            @if ($club->hasWon($lastGame))
                                 <i class="fa fa-circle fa-stack-2x text-success"></i>
                                 <strong class="fa-stack-1x" style="color:#ffffff">S</strong>
                             @elseif ($club->hasLost($lastGame))
@@ -125,8 +125,11 @@
                                 <i class="fa fa-circle fa-stack-2x text-dark"></i>
                                 <strong class="fa-stack-1x" style="color:#ffffff">U</strong>
                             @endif
-                                </span>
-                    @endif
+                        @elseif ($lastGame->isRated())
+                            <i class="fa fa-circle fa-stack-2x text-warning"></i>
+                            <strong class="fa-stack-1x" style="color:#ffffff">W</strong>
+                        @endif
+                    </span>
                 @endforeach
             </td>
             <!-- next -->

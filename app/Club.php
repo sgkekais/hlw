@@ -1179,10 +1179,15 @@ class Club extends Model
      * @param $numberofgames
      * @return mixed
      */
-    public function getLastGamesPlayedOrRated($numberofgames)
+    public function getLastGamesPlayedOrRated($numberofgames, $date = null)
     {
         return Fixture::ofClub($this->id)->playedOrRated()->orderBy('datetime', 'desc')
-            ->where('datetime', '<=', Carbon::now())
+            // if a date is given, then return the last games before that date
+            ->when($date, function ($query) use ($date){
+                return $query->where('datetime', '<=', $date);
+            }, function ($query) {
+                return $query->where('datetime', '<=', Carbon::now());
+            })
             ->when($numberofgames, function ($query) use ($numberofgames){
                 return $query->take($numberofgames);
             })

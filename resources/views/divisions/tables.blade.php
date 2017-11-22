@@ -52,7 +52,7 @@
         function getTable(scope, season){
             // Add loading indicator back
             $('#tables-container').html(@include('loader'));
-
+            // get content via ajax
             $.ajax({
                 method:     'GET',
                 url:        '/division/{{ $division->id }}/tables/ajax-'+scope+'-table',
@@ -89,6 +89,7 @@
         }
 
         $(function() {
+
             // set the season id to the initial value and get the full table content when the page is loaded for the first time
             var season_id = {{ $season->id }};
             getTable('full', season_id);
@@ -132,6 +133,11 @@
             $('#cross-table').click(function () {
                 // Get the table content
                 getCrossTable(season_id);
+            });
+
+            // activate tooltips for this page
+            $("body").tooltip({
+                selector: '[data-toggle="tooltip"]'
             });
         });
 
