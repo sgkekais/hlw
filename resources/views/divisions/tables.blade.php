@@ -14,10 +14,10 @@
                 <h2 style="font-weight: bold">Tabelle</h2>
                 <ul class="nav nav-pills">
                     <li class="nav-item dropdown pr-2">
-                        <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="season_selector_title">Saison: {{ $season->name }}</a>
+                        <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="season_selector_title">Saison: {{ $season->name }} (#{{ $season->season_nr }})</a>
                         <div class="dropdown-menu season_selector">
                             @foreach($division->seasons()->published()->orderBy('end','desc')->get() as $s)
-                                <a class="dropdown-item" href="#" id="{{ $s->id }}">{{ $s->name }}</a>
+                                <a class="dropdown-item" href="#" id="{{ $s->id }}">{{ $s->name }} (#{{ $s->season_nr }})</a>
                             @endforeach
                         </div>
                     </li>
