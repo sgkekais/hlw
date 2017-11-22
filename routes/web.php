@@ -27,6 +27,7 @@ Route::get('division/{division}/tables/ajax-home-table', 'DivisionController@aja
 Route::get('division/{division}/tables/ajax-away-table', 'DivisionController@ajaxGetAwayTable');
 Route::get('division/{division}/tables/ajax-cross-table', 'DivisionController@ajaxGetCrossTable');
 Route::get('division/{division}/fixtures', 'DivisionController@fixtures')->name('frontend.divisions.fixtures');
+Route::get('division/{division}/fixtures/ajax-fixtures', 'DivisionController@ajaxGetFixtures');
 
 // list all clubs of a season
 Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seasons.clubs');

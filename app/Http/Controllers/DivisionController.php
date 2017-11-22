@@ -147,4 +147,25 @@ class DivisionController extends Controller
 
         return view('divisions.fixtures', compact('division', 'season', 'c_matchweek'));
     }
+
+    /**
+     * @param Request $request
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function ajaxGetFixtures(Request $request, Division $division)
+    {
+        // check whether a season id is in the request
+        if (!$request->filled('season_id')) {
+            $season = $division->seasons()->current()->first();
+        } else {
+            $season = Season::findOrFail($request->season_id);
+        }
+
+        $season->load([
+            'clubs', 'matchweeks', 'matchweeks.fixtures'
+        ]);
+
+        return view('divisions.response_fixtures', compact('season'));
+    }
 }
