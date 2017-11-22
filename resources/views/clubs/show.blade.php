@@ -258,7 +258,7 @@
             <div class="tab-pane fade" id="results" role="tabpanel" aria-labelledby="">
                 <div class="row">
                     <div class="col-12">
-                        <h2 style="color: {{ $club->colours_club_primary }}">Resultate</h2>
+                        <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Resultate</h2>
                         <form class="form-inline pb-2">
                             <label class="pr-4" for="season-selection"><b>Saison</b></label>
                             <select id="season-selection" name="season-selection" class="form-control" aria-labelledby="">

@@ -41,7 +41,7 @@
                 <th class=""></th>
                 <th colspan="3" class="">Datum</th>
                 <th colspan="3" class="text-center">Paarung</th>
-                <th colspan="2" class=""></th>
+                <th colspan="2" class="">@svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '30', 'height' => '30'])</th>
             </tr>
             </thead>
             <tbody>
@@ -95,13 +95,20 @@
                         @endif
                     </td>
                     <td class="align-middle text-center">
-                        @if($fixture->isPlayed() && !$fixture->isRated())
-                            {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
-                        @elseif($fixture->isRated())
-                            {{ $fixture->goals_home_rated ?? "-" }} : {{ $fixture->goals_away_rated }}
-                        @else
-                            - : -
-                        @endif
+                        <div class="text-white rounded bg-dark d-inline-block p-1" style="word-break: keep-all">
+                            {{-- cancelled? --}}
+                            @if($fixture->isCancelled())
+                                <span class="text-danger">Ann.</span>
+                                {{-- played and *not* rated? --}}
+                            @elseif($fixture->isPlayed() && !$fixture->isRated())
+                                {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                                {{-- rated? --}}
+                            @elseif($fixture->isRated())
+                                <span class="text-warning">{{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}</span>
+                            @else
+                                -&nbsp;:&nbsp;-
+                            @endif
+                        </div>
                     </td>
                     <td class="align-middle text-left">
                         @if ($fixture->clubAway)
@@ -113,7 +120,6 @@
                     </td>
                     <td class="align-middle text-left">
                         @if($fixture->stadium)
-                            <img src="{{ url('images/stadium.png') }}" height="20">&nbsp;
                             {{ $fixture->stadium->name_short}}
                         @else                                        &nbsp;
                         @endif
