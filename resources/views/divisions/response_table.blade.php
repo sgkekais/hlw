@@ -258,5 +258,12 @@
             </td>
         </tr>
     @endforeach
+    <tr>
+        <td colspan="14">
+            <span class="text-secondary">
+                {{ $season->rules }}
+            </span>
+        </td>
+    </tr>
     </tbody>
 </table>
