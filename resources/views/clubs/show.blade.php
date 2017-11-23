@@ -8,64 +8,62 @@
 
 @section('content')
 
-<div class="jumbotron jumbotron-fluid p-0" style="background-color: {{ $club->colours_club_primary }}">
-    <!-- cover -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-auto pt-4" style="min-width: 200px">
-                @if($club->logo_url)
-                    <img src="{{ Storage::url($club->logo_url) }}" title="{{ $club->name }}" alt="Vereinswappen">
-                @else
-                    <span class="fa fa-ban text-muted fa-5x"></span>
-                @endif
-            </div>
-            <div class="col-md-6 pt-4 {{ $club->colours_club_primary == "#ffffff" ? "text-dark" : "text-white" }}">
-                <h1 class="font-weight-bold">{{ $club->name }}</h1>
-                <ul class="list-unstyled">
-                    <li class="pt-2 pb-2">
-                        @if($club->championships->count() > 0)
-                            @foreach($club->championships->sortByDesc('end') as $championship)
-                                <span class="fa fa-fw fa-star" style="color: orange" title="{{ $championship->begin ? $championship->begin->format('Y') : null }}/{{ $championship->end ? $championship->end->format('Y') : null }}"></span>
-                            @endforeach
-                        @else
-                            &nbsp;
-                        @endif
-                    </li>
-                    <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : null }}</li>
-                    @if($club->website)
-                        <li><span class="fa fa-fw fa-home"></span> <a href="{{ $club->website }}" target="_blank">Offizielle Website</a> </li>
-                    @endif
-                    @if($club->facebook)
-                        <li><span class="fa fa-fw fa-facebook"></span> <a href="{{ $club->facebook }}" target="_blank">Facebook</a> </li>
-                    @endif
-                </ul>
-            </div>
-            {{-- TODO Cover?
-            <div class="col-md-4">
-                <img src="{{ $club->cover_url ? Storage::url($club->cover_url) : Storage::url('public/clubcovers/_default.jpg') }}" height="200">
-            </div>
-            --}}
+<!-- cover -->
+<div class="container-fluid" style="background-color: {{ $club->colours_club_primary }}">
+    <div class="row m-auto pt-4" style="max-width: 1140px">
+        <div class="col-3">
+            @if($club->logo_url)
+                <img src="{{ Storage::url($club->logo_url) }}" class="img-fluid" title="{{ $club->name }}" alt="Vereinswappen">
+            @else
+                <span class="fa fa-ban text-muted fa-5x"></span>
+            @endif
         </div>
-        <div class="row pt-4">
-            <div class="col-md-6">
-                <!-- tabs -->
-                <nav class="nav nav-tabs" id="tab" role="tablist">
-                    <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
-                        Übersicht
-                    </a>
-                    <a class="nav-item nav-link " id="results-tab" data-toggle="tab" role="tab" aria-controls="results" href="#results">
-                        Resultate
-                    </a>
-                    <a class="nav-item nav-link" id="players-tab" data-toggle="tab" role="tab" aria-controls="players" href="#players">
-                        Kader
-                    </a>
-                </nav>
-            </div>
+        <div class="col {{ $club->colours_club_primary == "#ffffff" ? "text-dark" : "text-white" }}">
+            <h1 class="font-weight-bold">{{ $club->name }}</h1>
+            <ul class="list-unstyled">
+                <li class="pt-2 pb-2">
+                    @if($club->championships->count() > 0)
+                        @foreach($club->championships->sortByDesc('end') as $championship)
+                            <span class="fa fa-fw fa-star" style="color: orange" title="{{ $championship->begin ? $championship->begin->format('Y') : null }}/{{ $championship->end ? $championship->end->format('Y') : null }}"></span>
+                        @endforeach
+                    @else
+                        &nbsp;
+                    @endif
+                </li>
+                <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : null }}</li>
+                @if($club->website)
+                    <li><span class="fa fa-fw fa-home"></span> <a href="{{ $club->website }}" target="_blank">Offizielle Website</a> </li>
+                @endif
+                @if($club->facebook)
+                    <li><span class="fa fa-fw fa-facebook"></span> <a href="{{ $club->facebook }}" target="_blank">Facebook</a> </li>
+                @endif
+            </ul>
+        </div>
+        {{-- TODO Cover?
+        <div class="col-md-4">
+            <img src="{{ $club->cover_url ? Storage::url($club->cover_url) : Storage::url('public/clubcovers/_default.jpg') }}" height="200">
+        </div>
+        --}}
+    </div>
+    <div class="row m-auto pt-4" style="max-width: 1140px">
+        <div class="col">
+            <!-- tabs -->
+            <nav class="nav nav-tabs" id="tab" role="tablist">
+                <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
+                    Übersicht
+                </a>
+                <a class="nav-item nav-link " id="results-tab" data-toggle="tab" href="#results" role="tab" aria-controls="results" >
+                    Resultate
+                </a>
+                <a class="nav-item nav-link" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" >
+                    Kader
+                </a>
+            </nav>
         </div>
     </div>
 </div>
 <!-- content -->
-<div class="container">
+<div class="container mt-4">
     <div class="row">
         <div class="tab-content col-12" id="tabcontent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -143,11 +141,20 @@
                                             @endif
                                         </td>
                                         <td class="align-middle text-center">
-                                            @if($fixture->isPlayed())
-                                                {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
-                                            @elseif($fixture->isRated())
-                                                {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
-                                            @endif
+                                            <div class="text-white rounded bg-dark d-inline-block p-1" style="word-break: keep-all">
+                                                {{-- cancelled? --}}
+                                                @if($fixture->isCancelled())
+                                                    <span class="text-danger">Ann.</span>
+                                                    {{-- played and *not* rated? --}}
+                                                @elseif($fixture->isPlayed() && !$fixture->isRated())
+                                                    {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                                                    {{-- rated? --}}
+                                                @elseif($fixture->isRated())
+                                                    <span class="text-warning">{{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}</span>
+                                                @else
+                                                    -&nbsp;:&nbsp;-
+                                                @endif
+                                            </div>
                                         </td>
                                         <td class="align-middle text-left">
                                             @if($fixture->clubAway)
@@ -228,29 +235,29 @@
                     </div>
                 </div>
                 @if($club->regularStadium()->first())
-                    @if($club->regularStadium()->first()->lat && $club->regularStadium()->first()->long)
-                        <div class="row">
-                            <div class="col-12">
-                                <h4 style="color: {{ $club->colours_club_primary }}">Spielstätte</h4>
-                                <div id="map" style="width: 100%; height: 450px;"></div>
-                                <script>
-                                    function initMap() {
-                                        var uluru = {lat: {{ $club->regularStadium()->first()->lat }}, lng: {{ $club->regularStadium()->first()->long }}};
-                                        var map = new google.maps.Map(document.getElementById('map'), {
-                                            zoom: 18,
-                                            center: uluru
-                                        });
-                                        var marker = new google.maps.Marker({
-                                            position: uluru,
-                                            map: map
-                                        });
-                                    }
-                                </script>
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBKAZ6Ay4GdEqmP3gG6Zpp3kOyBSSa-Lc&callback=initMap">
-                                </script>
-                            </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Spielstätte</h4>
+                                @if($club->regularStadium()->first()->lat && $club->regularStadium()->first()->long)
+                                    <div id="map" style="width: 100%; height: 450px;"></div>
+                                    <script>
+                                        function initMap() {
+                                            var uluru = {lat: {{ $club->regularStadium()->first()->lat }}, lng: {{ $club->regularStadium()->first()->long }}};
+                                            var map = new google.maps.Map(document.getElementById('map'), {
+                                                zoom: 18,
+                                                center: uluru
+                                            });
+                                            var marker = new google.maps.Marker({
+                                                position: uluru,
+                                                map: map
+                                            });
+                                        }
+                                    </script>
+                                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBKAZ6Ay4GdEqmP3gG6Zpp3kOyBSSa-Lc&callback=initMap">
+                                    </script>
+                                @endif
                         </div>
-                    @endif
+                    </div>
                 @endif
             </div>
             <!-- end home tab -->
