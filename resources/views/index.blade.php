@@ -173,7 +173,7 @@
                                         </td>
                                         <td class="align-middle">
                                             @if($club->logo_url)
-                                                <img src="{{ Storage::url($club->logo_url) }}" width="30" class="pr-1">
+                                                <img src="{{ asset('storage/'.$club->logo_url) }}" width="30" class="pr-1">
                                             @else
                                                 <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                             @endif

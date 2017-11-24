@@ -6,7 +6,7 @@
             @foreach($season->clubs->sortBy('name') as $club)
                 <th class="text-center">
                     @if($club->logo_url)
-                        <a href="{{ route('frontend.clubs.show', $club->id) }}" title="Zur Teamseite"><img src="{{ Storage::url($club->logo_url) }}" width="30" title="{{ $club->name }}"></a>
+                        <a href="{{ route('frontend.clubs.show', $club->id) }}" title="Zur Teamseite"><img src="{{ asset('storage/'.$club->logo_url) }}" width="30" title="{{ $club->name }}"></a>
                     @else
                         <span class="fa fa-fw fa-ban text-secondary"></span>
                     @endif
@@ -19,7 +19,7 @@
             <tr>
                 <td class="align-middle text-left">
                     @if($club_a->logo_url)
-                        <a href="{{ route('frontend.clubs.show', $club_a->id) }}" title="Zur Teamseite"><img src="{{ Storage::url($club_a->logo_url) }}" width="30" title="{{ $club_a->name }}"></a>
+                        <a href="{{ route('frontend.clubs.show', $club_a->id) }}" title="Zur Teamseite"><img src="{{ asset('storage/'.$club->logo_url) }}" width="30" title="{{ $club_a->name }}"></a>
                     @else
                         <span class="fa fa-fw fa-ban text-secondary"></span>
                     @endif

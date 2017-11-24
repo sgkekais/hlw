@@ -85,7 +85,7 @@
             </td>
             <td class="align-middle d-none d-sm-table-cell">
                 @if($club->logo_url)
-                    <img src="{{ Storage::url($club->logo_url) }}" width="30" class="pr-1">
+                    <img src="{{ asset('storage/'.$club->logo_url) }}" width="30" class="pr-1">
                 @else
                     <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                 @endif
@@ -95,7 +95,7 @@
             </td>
             <td class="align-middle d-sm-none p-2">
                 @if($club->logo_url)
-                    <img src="{{ Storage::url($club->logo_url) }}" width="30" class="pr-1">
+                    <img src="{{ asset('storage/'.$club->logo_url) }}" width="30" class="pr-1">
                 @else
                     <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                 @endif
