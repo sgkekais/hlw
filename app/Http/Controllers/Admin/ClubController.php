@@ -76,9 +76,10 @@ class ClubController extends Controller
         $store_message = "";
         if ($request->hasFile('logo')) {
             // store the uploaded logo and save the path to the logo in the database
-            if ($club->logo_url = $request->file('logo')->store('public/clublogos/'.$club->id)) {
+            if ($request->file('logo')->store('public/clublogos/'.$club->id)) {
+                $logo_path = 'clublogos/'.$club->id.'/'.$request->file('logo')->hashName();
+                $club->logo_url = $logo_path;
                 $store_message = "Vereinswappen erfoglreich hochgeladen. ";
-
                 // save the club again
                 $club->save();
             }
@@ -86,9 +87,10 @@ class ClubController extends Controller
 
         // is there a cover image?
         if ($request->hasFile('cover')) {
-            if ($club->cover_url = $request->file('cover')->store('public/clubcovers/'.$club->id)) {
+            if ($request->file('cover')->store('public/clubcovers/'.$club->id)) {
+                $cover_path = 'clubcovers/'.$club->id.'/'.$request->file('cover')->hashName();
+                $club->cover_url = $cover_path;
                 $store_message .= " Cover erfolgreich hochgeladen.";
-
                 $club->save();
             }
         }
@@ -151,7 +153,9 @@ class ClubController extends Controller
             // then delete the old logo
             Storage::delete($club->logo_url);
             // and save the new logo
-            $club->logo_url = $request->file('logo')->store('public/clublogos/'.$club->id);
+            $request->file('logo')->store('public/clublogos/'.$club->id);
+            $logo_path = 'clublogos/'.$club->id.'/'.$request->file('logo')->hashName();
+            $club->logo_url = $logo_path;
             // save the club
             $club->save();
         }
@@ -161,7 +165,9 @@ class ClubController extends Controller
             // then delete the old logo
             Storage::delete($club->cover_url);
             // and save the new cover
-            $club->cover_url = $request->file('cover')->store('public/clubcovers/'.$club->id);
+            $request->file('cover')->store('public/clubcovers/'.$club->id);
+            $cover_path = 'clubcovers/'.$club->id.'/'.$request->file('cover')->hashName();
+            $club->cover_url = $cover_path;
             // save the club
             $club->save();
         }
