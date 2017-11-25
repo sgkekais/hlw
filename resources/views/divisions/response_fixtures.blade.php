@@ -11,14 +11,21 @@
             </h4>
             <table class="table table-hover table-striped table-sm">
                 <thead>
-                    <tr class="">
-                        <th class="text-center" style="width: 5%"></th>
-                        <th class="text-right" style="width: 10%"><span class="fa fa-fw fa-calendar"></span></th>
-                        <th class="text-left" style="width: 10%"></th>
+                    <tr class="align-middle">
+                        <th class="text-center" style="width: 5%">
+                            <span class="fa fa-info"></span>
+                        </th>
+                        <th class="text-right" style="width: 20%">
+                            <span class="fa fa-calendar"></span>
+                        </th>
                         <th class="" style="width: 25%">&nbsp;</th>
-                        <th class="text-center" style="width: 10%"><span class="fa fa-fw fa-handshake-o"></span></th>
-                        <th class="" style="width: 25%">&nbsp;</th>
-                        <th class="text-left" style="width: 15%">@svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '30', 'height' => '30'])</th>
+                        <th class="text-center" style="width: 10%">
+                            <span class="fa fa-fw fa-handshake-o"></span>
+                        </th>
+                        <th class="" style="width: 25%"></th>
+                        <th class="text-left" style="width: 15%">
+                            @svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '30', 'height' => '30'])
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,18 +44,14 @@
                                 <span class="fa fa-fw"></span>
                             @endif
                         </td>
-                        {{-- date - day of week --}}
+                        {{-- date - day of week, date, time --}}
                         <td class="align-middle text-right">
-                            {{ $fixture->datetime ? $fixture->datetime->formatLocalized('%a').", " : "&nbsp;" }}
+                            {{ $fixture->datetime ? $fixture->datetime->formatLocalized('%a').", " : null }}
                             @if($fixture->datetime)
-                                {{ $fixture->datetime->format('d.m.') }}
+                                {{ $fixture->datetime->format('d.m. H:i') }}
                             @else
                                 <span class="text-muted">o. D.</span>
                             @endif
-                        </td>
-                        {{-- date - date and time --}}
-                        <td class="align-middle">
-                            {{ $fixture->datetime ? $fixture->datetime->format('H:i') : null }}
                         </td>
                         {{-- home team --}}
                         <td class="align-middle text-right">

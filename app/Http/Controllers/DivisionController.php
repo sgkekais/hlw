@@ -163,7 +163,7 @@ class DivisionController extends Controller
         }
 
         $season->load([
-            'clubs', 'matchweeks', 'matchweeks.fixtures'
+            'clubs', 'matchweeks', 'matchweeks.fixtures', 'matchweeks.fixtures.clubHome', 'matchweeks.fixtures.clubAway'
         ]);
 
         return view('divisions.response_fixtures', compact('season'));
