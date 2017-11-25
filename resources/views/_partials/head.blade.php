@@ -14,6 +14,11 @@
     <meta name="description" content="Hobbyliga-West Düsseldorf. Die Fußballliga für Hobby- und Freizeitmannschaften aus Düsseldorf und Umgebung." />
     <meta name="keywords" content="Hobbyliga-West, Düsseldorf, Hobbyliga, Freizeitliga, Freizeitfußballliga, Fußballliga, Thekenmannschaft, Hobbyfußball, Freizeitfußball, Fußball, Liga" />
 
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" sizes="32x32">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+
     <title>{{ config('app.name') }} | </title>
 
     <!-- Styles -->

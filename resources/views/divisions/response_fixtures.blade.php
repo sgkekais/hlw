@@ -9,21 +9,21 @@
                     {{ $matchweek->end ? " bis ".$matchweek->end->format('d.m.Y') : null }}
                 </small>
             </h4>
-            <table class="table table-striped table-sm">
+            <table class="table table-hover table-striped table-sm">
                 <thead>
-                <tr class="">
-                    <th class="text-center" style="width: 5%"></th>
-                    <th class="text-right" style="width: 10%"><span class="fa fa-fw fa-calendar"></span></th>
-                    <th class="text-left" style="width: 10%"></th>
-                    <th class="" style="width: 25%">&nbsp;</th>
-                    <th class="text-center" style="width: 10%"><span class="fa fa-fw fa-handshake-o"></span></th>
-                    <th class="" style="width: 25%">&nbsp;</th>
-                    <th class="text-left" style="width: 15%">@svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '30', 'height' => '30'])</th>
-                </tr>
+                    <tr class="">
+                        <th class="text-center" style="width: 5%"></th>
+                        <th class="text-right" style="width: 10%"><span class="fa fa-fw fa-calendar"></span></th>
+                        <th class="text-left" style="width: 10%"></th>
+                        <th class="" style="width: 25%">&nbsp;</th>
+                        <th class="text-center" style="width: 10%"><span class="fa fa-fw fa-handshake-o"></span></th>
+                        <th class="" style="width: 25%">&nbsp;</th>
+                        <th class="text-left" style="width: 15%">@svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '30', 'height' => '30'])</th>
+                    </tr>
                 </thead>
                 <tbody>
                 @foreach($matchweek->fixtures()->published()->orderBy('datetime')->get() as $fixture)
-                    <tr class="" style="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-decoration: line-through" : null }}">
+                    <tr class="clickable-row" style="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-decoration: line-through" : null }}">
                         <td class="align-middle text-center">
                             @if($fixture->isCancelled())
                                 <span class="fa fa-fw fa-ban text-danger" title="Annulliert"></span>
