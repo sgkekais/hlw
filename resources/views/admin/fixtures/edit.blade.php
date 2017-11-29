@@ -190,12 +190,12 @@
                 <small id="noteHelp" class="form-text text-muted">Interne Notiz</small>
             </div>
         </div>
-        <!-- cancelled and published -->
+        <!-- cancelled, published, counts in tables? -->
         <div class="form-group row">
             <div class="col-md-2">
                 <label for="cancelled">Annullierung?</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <select class="form-control" id="cancelled" name="cancelled" aria-describedby="cancelledHelp">
                     <option value="0">Nein</option>
                     <option value="1" {{ $fixture->cancelled ? "selected" : null }}>Ja</option>
@@ -205,12 +205,22 @@
             <div class="col-md-2">
                 <label for="published">Veröffentlichen?</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <select class="form-control" id="published" name="published" aria-describedby="publishedHelp">
                     <option value="0">Nein</option>
                     <option value="1" {{ $fixture->published ? "selected" : null }}>Ja</option>
                 </select>
                 <small id="publishedHelp" class="form-text text-muted">Spielklasse auf Seite veröffentlichen?</small>
+            </div>
+            <div class="col-md-2">
+                <label for="counts_in_tables">Berücksichtigung in Tabelle(n)?</label>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" id="counts_in_tables" name="counts_in_tables" aria-describedby="counts_in_tablesHelp">
+                    <option value="1">Ja</option>
+                    <option value="0" {{ $fixture->counts_in_table ? "selected" : null }}>Nein</option>
+                </select>
+                <small id="counts_in_tablesHelp" class="form-text text-muted">Wird diese Paarung in der Berechnung der Tabelle berücksichtigt ("Nein", bspw. bei Relegationsspielen)?</small>
             </div>
         </div>
         <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Ändern</button>
