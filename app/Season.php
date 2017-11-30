@@ -255,15 +255,7 @@ class Season extends Model
 
     /**
      * @param Matchweek|null $matchweek
-     * @param bool $rank
-     * @param bool $played
-     * @param bool $won
-     * @param bool $drawn
-     * @param bool $lost
-     * @param bool $gf
-     * @param bool $ga
-     * @param bool $gd
-     * @param bool $points
+     * @param int $scope
      * @return \Illuminate\Support\Collection|static
      */
     public function generateTable (Matchweek $matchweek = null, $scope = 0) {
@@ -294,7 +286,7 @@ class Season extends Model
                     // Full table
                     case 0:
                         // played + rated games
-                        $club->t_played = $club->getGamesPlayed($this, $matchweek)->count()+$club->getGamesRated($this, $matchweek)->count();
+                        $club->t_played = $club->getGamesPlayed($this, $matchweek)->count() + $club->getGamesRated($this, $matchweek)->count();
                         // won games
                         $club->t_won = $club->getGamesPlayedWon($this, $matchweek)->count() + $club->getGamesRatedWon($this, $matchweek)->count();
                         // drawn games

@@ -256,6 +256,17 @@ class Fixture extends Model
         return $query->where('rescheduled_by_club', $clubid);
     }
 
+    /**
+     * Scope the query to fixtures that count for the table calculation
+     * @param $query
+     * @param bool $counts
+     * @return mixed
+     */
+    public function scopeCountsInTables($query, $counts = true)
+    {
+        return $query->where('counts_in_tables', $counts);
+    }
+
     /***********************************************************
      * FUNCTIONS
      ************************************************************/

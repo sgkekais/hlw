@@ -30,14 +30,14 @@
                 </thead>
                 <tbody>
                 @foreach($matchweek->fixtures()->published()->orderBy('datetime')->get() as $fixture)
-                    <tr class="clickable-row" style="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-decoration: line-through" : null }}">
+                    <tr class="" style="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-decoration: line-through" : null }}">
                         <td class="align-middle text-center">
                             @if($fixture->isCancelled())
                                 <span class="fa fa-fw fa-ban text-danger" title="Annulliert"></span>
                             @elseif($fixture->isRated())
-                                <span class="fa fa-fw fa-gavel text-warning"title="Gewertet"></span>
+                                <span class="fa fa-fw fa-gavel text-warning" title="Gewertet"></span>
                             @elseif($fixture->rescheduledTo)
-                                <span class="fa fa-fw fa-calendar-plus-o text-danger" title="Verlegt"></span>
+                                <span class="fa fa-fw fa-calendar-times-o text-danger" title="Verlegt"></span>
                             @elseif($fixture->rescheduledFrom)
                                 <span class="fa fa-fw fa-calendar-plus-o" title="Verlegte Begegnung"></span>
                             @else

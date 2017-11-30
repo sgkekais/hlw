@@ -183,7 +183,7 @@ class Club extends Model
      */
     public function getGamesPlayed(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played = Fixture::played()->notCancelled()->ofClub($this->id)
+        $games_played = Fixture::played()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -209,7 +209,7 @@ class Club extends Model
      */
     public function getGamesPlayedHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played = Fixture::played()->notCancelled()->ofClubHome($this->id)
+        $games_played = Fixture::played()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -235,7 +235,7 @@ class Club extends Model
      */
     public function getGamesPlayedAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played = Fixture::played()->notCancelled()->ofClubAway($this->id)
+        $games_played = Fixture::played()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -261,7 +261,7 @@ class Club extends Model
      */
     public function getGamesRated(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated = Fixture::rated()->notCancelled()->ofClub($this->id)
+        $games_rated = Fixture::rated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -287,7 +287,7 @@ class Club extends Model
      */
     public function getGamesRatedHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+        $games_rated = Fixture::rated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -313,7 +313,7 @@ class Club extends Model
      */
     public function getGamesRatedAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated = Fixture::rated()->notCancelled()->ofClubAway($this->id)
+        $games_rated = Fixture::rated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -339,7 +339,7 @@ class Club extends Model
      */
     public function getGamesPlayedWon(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_won = Fixture::played()->notCancelled()->ofClub($this->id)
+        $games_won = Fixture::played()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -371,7 +371,7 @@ class Club extends Model
      */
     public function getGamesPlayedWonHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_won = Fixture::played()->notCancelled()->ofClubHome($this->id)
+        $games_won = Fixture::played()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -401,7 +401,7 @@ class Club extends Model
      */
     public function getGamesPlayedWonAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_won = Fixture::played()->notCancelled()->ofClubAway($this->id)
+        $games_won = Fixture::played()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -429,7 +429,7 @@ class Club extends Model
      */
     public function getGamesRatedWon(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_won = Fixture::rated()->notCancelled()->ofClub($this->id)
+        $games_rated_won = Fixture::rated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -459,7 +459,7 @@ class Club extends Model
      */
     public function getGamesRatedWonHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_won = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+        $games_rated_won = Fixture::rated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -487,7 +487,7 @@ class Club extends Model
      */
     public function getGamesRatedWonAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_won = Fixture::rated()->notCancelled()->ofClubAway($this->id)
+        $games_rated_won = Fixture::rated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -518,7 +518,7 @@ class Club extends Model
      */
     public function getGamesPlayedDrawn(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played_drawn = Fixture::played()->notCancelled()->ofClub($this->id)
+        $games_played_drawn = Fixture::played()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -550,7 +550,7 @@ class Club extends Model
      */
     public function getGamesPlayedDrawnHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played_drawn = Fixture::played()->notCancelled()->ofClubHome($this->id)
+        $games_played_drawn = Fixture::played()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -580,7 +580,7 @@ class Club extends Model
      */
     public function getGamesPlayedDrawnAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played_drawn = Fixture::played()->notCancelled()->ofClubAway($this->id)
+        $games_played_drawn = Fixture::played()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -608,7 +608,7 @@ class Club extends Model
      */
     public function getGamesRatedDrawn(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_drawn = Fixture::rated()->notCancelled()->ofClub($this->id)
+        $games_rated_drawn = Fixture::rated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -638,7 +638,7 @@ class Club extends Model
      */
     public function getGamesRatedDrawnHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_drawn = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+        $games_rated_drawn = Fixture::rated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -666,7 +666,7 @@ class Club extends Model
      */
     public function getGamesRatedDrawnAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_drawn = Fixture::rated()->notCancelled()->ofClubAway($this->id)
+        $games_rated_drawn = Fixture::rated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -697,7 +697,7 @@ class Club extends Model
      */
     public function getGamesPlayedLost(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played_lost = Fixture::played()->notCancelled()->ofClub($this->id)
+        $games_played_lost = Fixture::played()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -729,7 +729,7 @@ class Club extends Model
      */
     public function getGamesPlayedLostHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played_lost = Fixture::played()->notCancelled()->ofClubHome($this->id)
+        $games_played_lost = Fixture::played()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -759,7 +759,7 @@ class Club extends Model
      */
     public function getGamesPlayedLostAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_played_lost = Fixture::played()->notCancelled()->ofClubAway($this->id)
+        $games_played_lost = Fixture::played()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -789,7 +789,7 @@ class Club extends Model
      */
     public function getGamesRatedLost(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_lost = Fixture::rated()->notCancelled()->ofClub($this->id)
+        $games_rated_lost = Fixture::rated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -818,7 +818,7 @@ class Club extends Model
      */
     public function getGamesRatedLostHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_lost = Fixture::rated()->notCancelled()->ofClubHome($this->id)
+        $games_rated_lost = Fixture::rated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -845,7 +845,7 @@ class Club extends Model
      */
     public function getGamesRatedLostAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $games_rated_lost = Fixture::rated()->notCancelled()->ofClubAway($this->id)
+        $games_rated_lost = Fixture::rated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -875,7 +875,7 @@ class Club extends Model
      */
     public function getGoalsFor(Season $season = null, Matchweek $matchweek = null)
     {
-        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -919,7 +919,7 @@ class Club extends Model
      */
     public function getGoalsForHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubHome($this->id)
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -957,7 +957,7 @@ class Club extends Model
      */
     public function getGoalsForAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubAway($this->id)
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -995,7 +995,7 @@ class Club extends Model
      */
     public function getGoalsAgainst(Season $season = null, Matchweek $matchweek = null)
     {
-        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -1039,7 +1039,7 @@ class Club extends Model
      */
     public function getGoalsAgainstHome(Season $season = null, Matchweek $matchweek = null)
     {
-        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubHome($this->id)
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -1077,7 +1077,7 @@ class Club extends Model
      */
     public function getGoalsAgainstAway(Season $season = null, Matchweek $matchweek = null)
     {
-        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubAway($this->id)
+        $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
                 return $query->whereHas('matchweek', function ($query2) use ($season) {
                     return $query2->where('season_id', $season->id);
@@ -1176,6 +1176,7 @@ class Club extends Model
 
     /**
      * Get the specified number of last games that are played or rated
+     * If a date is specified, return the specified number of games before that date
      * @param $numberOfGames
      * @param null $date
      * @return mixed
@@ -1197,9 +1198,10 @@ class Club extends Model
 
     /**
      * Get the specified number of next games
-     * @return Fixture
+     * @param null $numberofgames
+     * @return mixed
      */
-    public function getNextGames($numberofgames)
+    public function getNextGames($numberofgames = null)
     {
         return Fixture::ofClub($this->id)->orderBy('datetime')
             ->where('datetime','>=',Carbon::now())
