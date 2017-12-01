@@ -20,15 +20,15 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h3 class="font-weight-bold">News</h3>
+                <h1 class="font-weight-bold font-italic">SCHÄNKE</h1>
             </div>
         </div>
-        <hr>
         <!-- fixtures of the current week -->
-        @if($fixtures)
+        @if($fixtures->count() > 0)
+            <hr>
             <div class="row">
                 <div class="col">
-                    <h3 class="font-weight-bold">In dieser Woche</h3>
+                    <h1 class="font-weight-bold font-italic">In dieser Woche</h1>
                 </div>
             </div>
             <div class="row">
@@ -112,7 +112,7 @@
         <div class="row">
             @foreach ($divisions as $division)
                 <div class="col-md-4 {{ !$loop->last ? "border border-left-0 border-top-0 border-bottom-0" : null }}">
-                    <h3 class="font-weight-bold">{{ $division->competition->name_short." | ".$division->name }}</h3>
+                    <h3 class="font-weight-bold font-italic">{{ $division->competition->name_short." &ndash; ".$division->name }}</h3>
                     @php
                         // $c_season = $division->seasons()->published()->current()->first();
                         $c_season = $division->currentSeason();

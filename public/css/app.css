@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,400i,900,900i);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto);@import url(https://fonts.googleapis.com/css?family=Barlow+Condensed:400,400i,700,700i,800,800i,900,900i);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.0.0-beta.2 (https://getbootstrap.com)
@@ -477,7 +477,7 @@ h6,
 .h5,
 .h6 {
   margin-bottom: 0.5rem;
-  font-family: inherit;
+  font-family: "Barlow Condensed", sans-serif;
   font-weight: 500;
   line-height: 1.2;
   color: inherit;

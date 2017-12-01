@@ -11,7 +11,7 @@
     <div class="container pt-4">
         <div class="row">
             <div class="col-12">
-                <h2 style="font-weight: bold">Tabelle</h2>
+                <h2 class="font-weight-bold">Tabelle</h2>
                 <ul class="nav nav-pills">
                     <li class="nav-item dropdown pr-2">
                         <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="season_selector_title">Saison: {{ $season->name }} (#{{ $season->season_nr }})</a>
