@@ -14,6 +14,7 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts" !default;
 // date range picker
 @import "~daterangepicker/daterangepicker.scss";
 
+// sticky footer
 html, body {
   height: 100%;
 }
@@ -25,6 +26,16 @@ body {
 
 .app {
   flex: 1 0 auto;
+}
+
+// table padding for standings
+.standings> tbody > tr > td, .standings > tbody > tr > th, .standings > tfoot > tr > td, .standings > tfoot > tr > th, .standings > thead > tr > td, .standings > thead > tr > th {
+  padding: 0.75rem 0.5rem 0.75rem 0.5rem;
+}
+
+// display font
+.display-4 {
+  font-family: "Barlow Condensed", sans-serif;
 }
 
 // HLW logo loader
