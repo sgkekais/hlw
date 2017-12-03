@@ -1,5 +1,5 @@
 
-<div class="jumbotron jumbotron-fluid p-0 mt-4">
+<footer class="bg-dark text-white">
     <div class="container">
         <div class="row pt-4 pb-4">
             <div class="col-md-2">
@@ -39,5 +39,7 @@
             </div>
         </div>
     </div>
-</div>
+</footer>
+
+
 

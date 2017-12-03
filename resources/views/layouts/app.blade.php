@@ -1,7 +1,7 @@
 @include('_partials.head')
 
 <body>
-    <div id="app">
+    <div id="app" class="app">
         <!-- top anchor -->
         <a name="top"></a>
         <!-- navigation -->
@@ -10,11 +10,14 @@
         @yield('subnav')
         <!-- content -->
         @yield('content')
-        <!-- footer -->
-        @include('_partials.footer')
+
     </div>
+    <!-- footer -->
+    @include('_partials.footer')
     <!-- scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    {{-- chatter js --}}
+    @yield('js')
     {{-- section for side-specific scripts --}}
     @yield('js-footer')
 </body>

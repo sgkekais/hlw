@@ -14,8 +14,17 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts" !default;
 // date range picker
 @import "~daterangepicker/daterangepicker.scss";
 
+html, body {
+  height: 100%;
+}
+
 body {
-  min-height: 75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  flex: 1 0 auto;
 }
 
 // HLW logo loader
