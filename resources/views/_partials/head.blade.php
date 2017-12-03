@@ -19,6 +19,9 @@
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
 
+    {{-- chatter css --}}
+    @yield('css')
+
     <title>{{ config('app.name') }} | </title>
 
     <!-- Styles -->

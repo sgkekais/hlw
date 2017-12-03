@@ -15,20 +15,61 @@
             <ul class="navbar-nav mr-auto">
                 @foreach(\HLW\Division::published()->orderBy('name')->get() as $division)
                     <li class="nav-item {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
-                        <a class="nav-link" href="{{ route('frontend.divisions.show', $division ) }}">{{ $division->name }}</a>
+                        <a class="nav-link" href="{{ route('frontend.divisions.show', $division ) }}"> <span class="fa {{ $division->competition->isLeague() ? "fa-star" : null }} {{ $division->competition->isKnockout() ? "fa-trophy" : null }}"></span> {{ $division->name }}</a>
                     </li>
                 @endforeach
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="#">Ruhmeshalle</a>
                 </li>
                 --}}
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}"><span class="fa fa-comments"></span> Schänke</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Vorstand</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Satzung</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="login-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-2x fa-user-circle"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @guest
+                            <div class="dropdown-item">Hallo, Gast!</div>
+                            <form class="px-4 py-3" role="form" method="POST" action="{{ route('login') }}">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="email@beispiel.de">
+                                </div>
+                                @if ($errors->has('email'))
+                                    <div class="form-control-feedback">
+                                        {{ $errors->first('email') }}
+                                    </div>
+                                @endif
+                                <div class="form-group">
+                                    <label for="password">Passwort</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Passwort eingeben">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="remember">
+                                        Merken
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Anmelden</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Neu hier? Registrier dich!</a>
+                            <a class="dropdown-item" href="{{ route('password.request') }}">Passwort vergessen?</a>
+                        @endguest
+
+                        @auth
+                            <div class="dropdown-item">Hallo, {{ Auth::user()->name }}!</div>
+                            <form class="px-4 py-3" role="form" id="logout-form" action="{{ route('logout') }}" method="POST">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-danger">Abmelden</button>
+                            </form>
+                        @endauth
+                    </div>
                 </li>
             </ul>
         </div>

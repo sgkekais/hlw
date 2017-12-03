@@ -1,31 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="jumbotron jumbotron-fluid" style="color: yellow; background: url('/images/duesseldorf.jpg'); background-size: cover">
-        <div class="container">
-            <div class="col-10 p-0">
-                <div class="display-4 font-weight-bold">
-                    Hobbyliga-West<br>
-                    Düsseldorf
+    <div class="jumbotron jumbotron-fluid p-0" style="color: #fff9c4; background: url('/images/duesseldorf.jpg'); background-size: cover">
+        <div class="pt-4 pb-4" style="box-shadow: inset 0px 5px 5px 0px rgba(173,173,173,0.5); width: 100%; height: 100%">
+            <div class="container pt-4 pb-4">
+                <div class="col-12 p-0">
+                    <div class="display-4 font-weight-bold">
+                        Hobbyliga-West Düsseldorf
+                    </div>
+                    <h1>
+                        Die Fußballliga für Hobby- und Freizeitmannschaften aus Düsseldorf und Umgebung.
+                    </h1>
                 </div>
-                <div>
-
-                </div>
-            </div>
-            <div class="col-2">
-
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="font-weight-bold font-italic">SCHÄNKE</h1>
-            </div>
-        </div>
         <!-- fixtures of the current week -->
         @if($fixtures->count() > 0)
-            <hr>
             <div class="row">
                 <div class="col">
                     <h1 class="font-weight-bold font-italic">In dieser Woche</h1>

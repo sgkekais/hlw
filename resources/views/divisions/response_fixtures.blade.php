@@ -2,13 +2,23 @@
     <div class="row">
         <a name="matchweek{{ $matchweek->number_consecutive }}"></a>
         <div class="col-12">
-            <h4>Spielwoche <b>{{ $matchweek->number_consecutive }}</b>
-                <small class="text-muted d-inline-block">
-                    {{ $matchweek->name ? $matchweek->name." | " : null }}
-                    {{ $matchweek->begin ? $matchweek->begin->format('d.m.Y') : null }}
-                    {{ $matchweek->end ? " bis ".$matchweek->end->format('d.m.Y') : null }}
-                </small>
-            </h4>
+            @if ($season->division->competition->isLeague())
+                <h3 class=""><span class="font-weight-bold font-italic text-uppercase">SPIELWOCHE {{ $matchweek->number_consecutive }}</span>
+                    <small class="d-inline-block">
+                        {{ $matchweek->name ? $matchweek->name." | " : null }}
+                        {{ $matchweek->begin ? $matchweek->begin->format('d.m.Y') : null }}
+                        {{ $matchweek->end ? " bis ".$matchweek->end->format('d.m.Y') : null }}
+                    </small>
+                </h3>
+            @elseif ($season->division->competition->isKnockout())
+                <h3>
+                    <span class="font-weight-bold font-italic text-uppercase">{{ $matchweek->name }}</span>
+                    <small class="d-inline-block">
+                        {{ $matchweek->begin ? $matchweek->begin->format('d.m.Y') : null }}
+                        {{ $matchweek->end ? " bis ".$matchweek->end->format('d.m.Y') : null }}
+                    </small>
+                </h3>
+            @endif
             <table class="table table-hover table-striped table-sm">
                 <thead>
                     <tr class="align-middle">

@@ -21,14 +21,19 @@
         <div class="col {{ $club->colours_club_primary == "#ffffff" ? "text-dark" : "text-white" }}">
             <h1 class="font-weight-bold">{{ $club->name }}</h1>
             <ul class="list-unstyled">
-                <li class="pt-2 pb-2">
+                <li class="pb-2">
                     @if($club->championships->count() > 0)
-                        @foreach($club->championships->sortByDesc('end') as $championship)
-                            <span class="fa fa-fw fa-star" style="color: orange" title="{{ $championship->begin ? $championship->begin->format('Y') : null }}/{{ $championship->end ? $championship->end->format('Y') : null }}"></span>
+                        @foreach($club->championships()->orderBy('end', 'desc')->get()->where('division.competition.type', 'league') as $championship)
+                            <span class="fa fa-fw fa-star" style="color: orange" title="{{ $championship->name }}"></span>
                         @endforeach
                     @else
                         &nbsp;
                     @endif
+                </li>
+                <li>
+                    @foreach($club->championships()->orderBy('end', 'desc')->get()->where('division.competition.type', 'knockout') as $championship)
+                        <span class="fa fa-fw fa-trophy" style="color: orange" title="{{ $championship->name }}"></span>
+                    @endforeach
                 </li>
                 <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : null }}</li>
                 @if($club->website)
