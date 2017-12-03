@@ -1,12 +1,12 @@
 <h4 class="text-muted">
     Spielwoche
-    @if($c_matchweek->number_consecutive)
+    @if ($c_matchweek->number_consecutive)
         <b>{{ $c_matchweek->number_consecutive }}</b>
     @endif
-    | {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.') : null }} - {{ $c_matchweek->end ? $c_matchweek->end->format('d.m.') : null }}
+    | {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.y') : null }} - {{ $c_matchweek->end ? $c_matchweek->end->format('d.m.y') : null }}
     {{ $c_matchweek->name ? "| ".$c_matchweek->name : null }}
 </h4>
-<table class="table table-hover">
+<table class="table table-hover standings">
     <thead>
     <tr>
         <th class="align-middle text-center d-none d-lg-table-cell"></th>
@@ -30,26 +30,36 @@
             $rank_color = "";
             $rank_icon  = null;
         @endphp
-        <!-- ranks_champion OR ranks_promotion -->
-        @if(in_array($club->t_rank, $season->ranks_champion) || in_array($club->t_rank, $season->ranks_promotion))
+        {{-- ranks_champion OR ranks_promotion --}}
+        @if (in_array($club->t_rank, $season->ranks_champion) || in_array($club->t_rank, $season->ranks_promotion))
             @php
                 $rank_color = "#FFC107";
                 $rank_icon  = "fa-circle";
             @endphp
         @endif
-        <!-- ranks_relegation -->
-        @if(in_array($club->t_rank, $season->ranks_relegation))
+        {{-- ranks_relegation --}}
+        @if (in_array($club->t_rank, $season->ranks_relegation))
             @php
                 $rank_color = "#F44336";
                 $rank_icon  = "fa-circle";
             @endphp
         @endif
-        <!-- playoff_champion -->
-
-        <!-- playoff_cup -->
-
-        <!-- playoff_relegation -->
-        @if(in_array($club->t_rank, $season->playoff_relegation))
+        {{-- playoff_champion --}}
+        @if (in_array($club->t_rank, $season->playoff_champion))
+            @php
+                $rank_color = "#FFC107";
+                $rank_icon  = "fa-circle-o";
+            @endphp
+        @endif
+        {{-- playoff_cup --}}
+        @if (in_array($club->t_rank, $season->playoff_cup))
+            @php
+                $rank_color = "#03a9f4";
+                $rank_icon  = "fa-circle-o";
+            @endphp
+        @endif
+        {{-- playoff_relegation --}}
+        @if (in_array($club->t_rank, $season->playoff_relegation))
             @php
                 $rank_color = "#FF9800";
                 $rank_icon  = "fa-circle-o";
@@ -137,7 +147,7 @@
                 @php
                     $nextgame = $club->getNextGames(1)->first()
                 @endphp
-                @if($nextgame)
+                @if ($nextgame)
                     @php
                         $logo = null;
                         if($nextgame->clubHome && $nextgame->clubHome->id == $club->id )
@@ -151,14 +161,13 @@
                         <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                     @endif
                 @endif
-
             </td>
         </tr>
         <tr class="collapse bg-light" id="collapsedetails{{ $loop->iteration }}">
             <td class="" colspan="14" style="border-top: none">
                 <div class="row">
                     <div class="col-md-4">
-                        @if($club->logo_url)
+                        @if ($club->logo_url)
                             <img src="{{ Storage::url($club->logo_url) }}" width="100" class="pr-2">
                         @else
                             <span class="fa fa-ban text-muted fa-2x"></span>
@@ -190,16 +199,16 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 text-center bg-faded pt-2">
-                                    @if($lastgame->isPlayed() && !$lastgame->isRated())
+                                    @if ($lastgame->isPlayed() && !$lastgame->isRated())
                                         {{ $lastgame->goals_home }} : {{ $lastgame->goals_away }}
-                                    @elseif($lastgame->isRated())
+                                    @elseif ($lastgame->isRated())
                                         {{ $lastgame->goals_home_rated }} : {{ $lastgame->goals_away_rated }}
                                     @endif
                                 </div>
                                 <div class="col-md-5 pl-0">
                                     <div class="row no-gutters">
                                         <div class="col-md-4 p-2 text-center" style="background-color: {{ $lastgame->clubAway->colours_club_primary }}">
-                                            @if($lastgame->clubAway->logo_url)
+                                            @if ($lastgame->clubAway->logo_url)
                                                 <img src="{{ Storage::url($lastgame->clubAway->logo_url) }}" width="25" class="">
                                             @else
                                                 <span class="fa fa-ban text-muted fa-2x"></span>
@@ -228,7 +237,7 @@
                                             {{ $nextgame->clubHome->name_short }}
                                         </div>
                                         <div class="col-md-4 p-2 text-center" style="background-color: {{ $nextgame->clubHome->colours_club_primary }}">
-                                            @if($nextgame->clubHome->logo_url)
+                                            @if ($nextgame->clubHome->logo_url)
                                                 <img src="{{ Storage::url($nextgame->clubHome->logo_url) }}" width="25" class="">
                                             @else
                                                 <span class="fa fa-ban text-muted fa-2x"></span>
@@ -242,7 +251,7 @@
                                 <div class="col-md-5 pl-0">
                                     <div class="row no-gutters">
                                         <div class="col-md-4 p-2 text-center" style="background-color: {{ $nextgame->clubAway->colours_club_primary }}">
-                                            @if($nextgame->clubAway->logo_url)
+                                            @if ($nextgame->clubAway->logo_url)
                                                 <img src="{{ Storage::url($nextgame->clubAway->logo_url) }}" width="25" class="">
                                             @else
                                                 <span class="fa fa-ban text-muted fa-2x"></span>
@@ -262,11 +271,29 @@
         </tr>
     @endforeach
     <tr>
-        <td colspan="14">
-            <span class="text-secondary">
-                {{ $season->rules }}
-            </span>
+        <td colspan="13">
+
         </td>
     </tr>
     </tbody>
 </table>
+<div class="row">
+    <div class="col-md-6">
+        @if ($season->rules)
+            <h5 class="text-secondary">Saison-Infos</h5>
+            <p class="text-secondary">
+                {{ $season->rules }}
+            </p>
+        @endif
+    </div>
+    <div class="col-md-6">
+        @if ($season->clubs()->wherePivot('note', '!=', null)->count() > 0)
+            <h5 class="text-secondary">Team-Infos</h5>
+            <ul class="text-secondary">
+                @foreach ($season->clubs()->wherePivot('note', '!=', null)->get() as $notes)
+                    <li>{{ $notes->pivot->note }}</li>
+                @endforeach
+            </ul>
+        @endif
+    </div>
+</div>
