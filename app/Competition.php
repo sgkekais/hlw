@@ -97,6 +97,26 @@ class Competition extends Model
     }
 
     /***********************************************************
+     * FUNCTIONS
+     ************************************************************/
+
+    /**
+     * @return bool
+     */
+    public function isLeague()
+    {
+        return ($this->type == 'league') ? true : false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isKnockout()
+    {
+        return ($this->type == 'knockout') ? true : false;
+    }
+
+    /***********************************************************
      * RELATIONSHIPS
      ************************************************************/
 
