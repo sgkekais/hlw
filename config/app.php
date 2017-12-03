@@ -177,6 +177,11 @@ return [
         HLW\Providers\EventServiceProvider::class,
         HLW\Providers\RouteServiceProvider::class,
 
+        /*
+         * Chatter
+         */
+        DevDojo\Chatter\ChatterServiceProvider::class,
+
     ],
 
     /*
