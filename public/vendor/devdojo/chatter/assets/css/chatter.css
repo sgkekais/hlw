@@ -18,7 +18,7 @@ body {
 #chatter .margin-top {
   margin-top: 40px;
 }
-#chatter .btn:focus {
+/*#chatter .btn:focus {
   outline: none;
 }
 #chatter button.btn.btn-primary {
@@ -30,7 +30,7 @@ body {
 #chatter button.btn.btn-primary:active,
 #chatter button.btn.btn-primary:focus {
   outline: none;
-}
+}*/
 #chatter #chatter_hero {
   background-image: url('../images/hero_bg.jpg');
   width: 100%;
@@ -227,7 +227,7 @@ body {
   position: relative;
   left: -1px;
 }
-#chatter .btn {
+/*#chatter .btn {
   border: 0px;
   border-radius: 30px;
 }
@@ -240,7 +240,7 @@ body {
 #chatter .btn:active {
   border: 0px;
   outline: none;
-}
+}*/
 #chatter .left-column > a.btn {
   margin-bottom: 15px;
   border-radius: 30px;
@@ -376,19 +376,19 @@ body {
   margin-left: 80px;
   margin-right: 90px;
 }
-#chatter ul.discussions li a.discussion_list .chatter_middle h3.chatter_middle_title,
-#chatter ul.discussions li .chatter_posts .chatter_middle h3.chatter_middle_title {
+#chatter ul.discussions li a.discussion_list .chatter_middle h4.chatter_middle_title,
+#chatter ul.discussions li .chatter_posts .chatter_middle h4.chatter_middle_title {
   margin: 0px;
   padding: 0px;
   color: #111;
   -webkit-transition: color 0.3s ease;
   transition: color 0.3s ease;
-  font-size: 18px;
+  /*font-size: 18px;
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 5px;*/
 }
-#chatter ul.discussions li a.discussion_list .chatter_middle h3.chatter_middle_title .chatter_cat,
-#chatter ul.discussions li .chatter_posts .chatter_middle h3.chatter_middle_title .chatter_cat {
+#chatter ul.discussions li a.discussion_list .chatter_middle h4.chatter_middle_title .chatter_cat,
+#chatter ul.discussions li .chatter_posts .chatter_middle h4.chatter_middle_title .chatter_cat {
   background: #ccc;
   border-radius: 30px;
   font-weight: bold;
@@ -401,7 +401,7 @@ body {
 }
 #chatter ul.discussions li a.discussion_list .chatter_middle span.chatter_middle_details,
 #chatter ul.discussions li .chatter_posts .chatter_middle span.chatter_middle_details {
-  font-size: 10px;
+  font-size: 14px;
   color: #9DADC4;
   -webkit-transition: color 0.3s ease;
   transition: color 0.3s ease;
@@ -480,7 +480,7 @@ body {
 #chatter ul.discussions li .chatter_posts .chatter_middle > span a {
   font-weight: bold;
   color: #131619;
-  font-size: 14px;
+  font-size: 18px;
 }
 #chatter ul.discussions li .chatter_posts .chatter_middle > span .ago {
   font-size: 14px;
@@ -496,7 +496,7 @@ body {
   border-top: 0px;
 }
 #chatter ul.discussions li .chatter_posts .chatter_middle p {
-  font-size: 14px;
+  /*font-size: 14px;*/
   color: #151a1f;
 }
 #chatter ul.discussions li.editing {

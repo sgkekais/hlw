@@ -4,6 +4,7 @@ var chatter_tinymce_plugins = $('#chatter_tinymce_plugins').val();
 // Initiate the tinymce editor on any textarea with a class of richText
 tinymce.init({
 	selector:'textarea.richText',
+    language: 'de',
 	skin: 'chatter',
 	plugins: chatter_tinymce_plugins,
 	toolbar: chatter_tinymce_toolbar,
@@ -43,6 +44,7 @@ tinymce.init({
 function initializeNewTinyMCE(id){
     tinymce.init({
         selector:'#'+id,
+        language: 'de',
         skin: 'chatter',
         plugins: chatter_tinymce_plugins,
         toolbar: chatter_tinymce_toolbar,
