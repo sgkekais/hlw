@@ -2,6 +2,7 @@
 
 namespace HLW\Http\Controllers;
 
+use Carbon\Carbon;
 use HLW\Division;
 use HLW\Season;
 use Illuminate\Http\Request;
@@ -15,8 +16,17 @@ class DivisionController extends Controller
     public function index(Division $division)
     {
         $season = $division->seasons()->current()->first();
+        $season->load([
+           'clubs', 'fixtures'
+        ]);
+        $matchweek = $season->currentMatchweek();
 
-        return view('divisions.index', compact('division', 'season'));
+        // get the fixtures of the current week
+        $monday = Carbon::now()->startOfWeek();
+        $sunday = Carbon::now()->endOfWeek();
+        $fixtures = $season->fixtures()->whereBetween('datetime',[$monday,$sunday])->get();
+
+        return view('divisions.index', compact('division', 'season', 'matchweek', 'fixtures'));
     }
 
     /**
