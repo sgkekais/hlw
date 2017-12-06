@@ -46,4 +46,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /***********************************************************
+     * RELATIONSHIPS
+     ************************************************************/
+
+    /**
+     * A user has many favorite clubs
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function clubs()
+    {
+        return $this->belongsToMany(Club::class, 'users_clubs')->withTimestamps();
+    }
 }

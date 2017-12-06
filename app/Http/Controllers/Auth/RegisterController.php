@@ -2,6 +2,7 @@
 
 namespace HLW\Http\Controllers\Auth;
 
+use HLW\Club;
 use HLW\User;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -40,6 +41,18 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $clubs = Club::published()->isNotRealClub()->notResigned()->get();
+
+        return view('auth.register', compact('clubs'));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -48,9 +61,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users',
+            'password'  => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -62,10 +75,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        $user = User::create([
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'password'  => bcrypt($data['password']),
         ]);
+
+        if (isset($data['clubs']) && !empty($data['clubs'])) {
+            foreach ($data['clubs'] as $club) {
+                $user->clubs()->attach($club);
+            }
+        }
+
+        return $user;
     }
 }

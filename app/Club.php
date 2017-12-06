@@ -1432,4 +1432,13 @@ class Club extends Model
     {
         return $this->hasMany(Season::class, 'champion');
     }
+
+    /**
+     * A club can be favorited by many users
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'users_clubs')->withTimestamps();
+    }
 }
