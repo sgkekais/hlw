@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Registrieren
+@endsection
+
 @section('content')
 
     <div class="container-fluid h-100 bg-light">

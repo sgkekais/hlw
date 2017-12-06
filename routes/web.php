@@ -39,6 +39,9 @@ Route::get('clubs/{club}/ajax-club-results', 'ClubController@ajaxGetClubResults'
 // fixtures
 Route::get('fixtures/{fixture}', 'FixtureController@show')->name('frontend.fixtures.show');
 
+// user
+Route::get('profile', 'AccountController@index')->name('frontend.user.profile')->middleware('auth');
+
 /*******************************************************
  * Admin Routes
  ******************************************************/

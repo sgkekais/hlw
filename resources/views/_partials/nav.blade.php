@@ -58,16 +58,37 @@
                                 <button type="submit" class="btn btn-primary">Anmelden</button>
                             </form>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Neu hier? Registrier dich!</a>
+                            <a class="dropdown-item" href="{{ route('register') }}">Neu hier? Registrier dich!</a>
                             <a class="dropdown-item" href="{{ route('password.request') }}">Passwort vergessen?</a>
                         @endguest
 
                         @auth
-                            <div class="dropdown-item">Hallo, {{ Auth::user()->name }}!</div>
-                            <form class="px-4 py-3" role="form" id="logout-form" action="{{ route('logout') }}" method="POST">
-                                {{ csrf_field() }}
-                                <button type="submit" class="btn btn-danger">Abmelden</button>
-                            </form>
+                            <div class="dropdown-item">
+                                Hallo, {{ Auth::user()->name }}!
+                            </div>
+                            <div class="dropdown-item">
+                                @if(Auth::user()->clubs->count() > 0)
+                                    <h5 class="font-weight-bold font-italic">Meine Teams</h5>
+                                        <ul class="list-unstyled">
+                                            @foreach (Auth::user()->clubs as $club)
+                                                <li class=" pt-1 pb-1 {{ !$loop->last ? "border border-left-0 border-top-0 border-right-0" : null }} }}"><a href="{{ route('frontend.clubs.show', $club) }}"><img class="pr-1" src="{{ asset('storage/'.$club->logo_url) }}" title="Vereinswappen" width="25px">{{ $club->name_short }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                @else
+                                    Füge ein Team als Favorit hinzu!
+                                @endif
+                            </div>
+                            <div class="dropdown-item">
+                                <a class="btn btn-primary w-100" href="{{ route('frontend.user.profile') }}">
+                                    Profil
+                                </a>
+                            </div>
+                            <div class="dropdown-item">
+                                <form class="" role="form" id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-danger w-100">Abmelden</button>
+                                </form>
+                            </div>
                         @endauth
                     </div>
                 </li>
