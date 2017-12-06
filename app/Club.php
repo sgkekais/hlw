@@ -163,6 +163,36 @@ class Club extends Model
         return $query->where('is_real_club','1');
     }
 
+    /**
+     * Scope a query to published clubs
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('published', 1)
+    }
+
+    /**
+     * Scope a query to clubs that are still part of the leagues
+     * @param $query
+     * @return mixed
+     */
+    public function scopeNotResigned($query)
+    {
+        return $query->whereNull('league_exit');
+    }
+
+    /**
+     * Scope a query to resigned clubs
+     * @param $query
+     * @return mixed
+     */
+    public function scopeResigned($query)
+    {
+        return $query->whereNotNull('league_exit');
+    }
+
     /***********************************************************
      * ACCESSORS
      ************************************************************/
