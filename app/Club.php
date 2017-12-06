@@ -170,7 +170,7 @@ class Club extends Model
      */
     public function scopePublished($query)
     {
-        return $query->where('published', 1)
+        return $query->where('published', 1);
     }
 
     /**
