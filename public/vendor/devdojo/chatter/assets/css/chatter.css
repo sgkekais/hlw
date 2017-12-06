@@ -306,7 +306,7 @@ body {
   padding: 15px;
   -webkit-transition: background 0.3s ease;
   transition: background 0.3s ease;
-  border-top: 1px solid #f1fcff;
+  border-top: 1px solid #f0f0f0;
   text-decoration: none;
   display: block;
   position: relative;
@@ -435,17 +435,17 @@ body {
 #chatter ul.discussions li .chatter_posts .chatter_right .chatter_count {
   padding: 8px 20px;
   border-radius: 3px;
-  margin-top: 10px;
+  /*margin-top: 10px;*/
   font-size: 20px;
   color: #9DADB4;
   -webkit-transition: color 0.3s ease;
   transition: color 0.3s ease;
-  font-family: Arial, Helvetica, Times, Courier;
+  /*font-family: Arial, Helvetica, Times, Courier;*/
 }
 #chatter ul.discussions li a.discussion_list .chatter_right .chatter_count i,
 #chatter ul.discussions li .chatter_posts .chatter_right .chatter_count i {
-  position: relative;
-  top: 2px;
+  /*position: relative;
+  top: 2px;*/
 }
 #chatter ul.discussions li a.discussion_list .chatter_clear,
 #chatter ul.discussions li .chatter_posts .chatter_clear {
@@ -464,7 +464,7 @@ body {
 #chatter ul.discussions li a:hover .chatter_middle p {
   margin-bottom: 0px;
   padding-bottom: 0px;
-  color: #888;
+  color: #333;
 }
 #chatter ul.discussions li a:hover .chatter_right .chatter_count {
   color: #7D8D94;
@@ -540,10 +540,10 @@ body {
 #chatter.chatter_home .chatter_middle p {
   margin-bottom: 0px;
   padding-bottom: 0px;
-  color: #aaa;
+  color: #666;
   -webkit-transition: color 0.3s ease;
   transition: color 0.3s ease;
-  font-size: 12px;
+  /*font-size: 12px;*/
 }
 #chatter .conversation {
   border-bottom: 1px solid #f1fcff;
@@ -626,14 +626,14 @@ body {
   cursor: pointer;
 }
 #chatter .chatter_sidebar > a {
-  padding: 20px;
+  /*padding: 20px;*/
   display: block;
 }
 #chatter .chatter_sidebar > a:hover {
   text-decoration: none;
 }
 #chatter .chatter_sidebar ul {
-  margin-left: 10px;
+  /*margin-left: 10px;*/
 }
 #chatter.discussion #editor .mce-toolbar-grp {
   padding: 0px;

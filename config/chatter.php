@@ -55,7 +55,7 @@ return [
     */
 
     'headline'      => 'Willkommen in der Schänke',
-    'description'   => 'Diskutiert zivilisiert',
+    'description'   => 'Seid nett zueinander.',
     'headline_logo' => /*'/vendor/devdojo/chatter/assets/images/logo-light.png'*/ null,
 
     /*

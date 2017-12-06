@@ -84,17 +84,17 @@
 		                		<span class="chatter_posts">
 		                			@if(!Auth::guest() && (Auth::user()->id == $post->user->id))
 		                				<div id="delete_warning_{{ $post->id }}" class="chatter_warning_delete">
-		                					<i class="chatter-warning"></i>Are you sure you want to delete this response?
-		                					<button class="btn btn-sm btn-danger pull-right delete_response">Yes Delete It</button>
-		                					<button class="btn btn-sm btn-default pull-right">No Thanks</button>
+		                					<i class="chatter-warning"></i>Möchtest du deine Antwort wirklich löschen?
+		                					<button class="btn btn-sm btn-danger pull-right delete_response">Ja, lösch sie!</button>
+		                					<button class="mr-2 btn btn-sm btn-light pull-right">Ne, danke.</button>
 		                				</div>
 			                			<div class="chatter_post_actions">
-			                				<p class="chatter_delete_btn">
-			                					<i class="chatter-delete"></i> Delete
-			                				</p>
-			                				<p class="chatter_edit_btn">
-			                					<i class="chatter-edit"></i> Edit
-			                				</p>
+			                				<button class="btn btn-danger btn-sm chatter_delete_btn">
+			                					<i class="fa fa-fw fa-trash"></i> Löschen
+			                				</button>
+			                				<button class="btn btn-secondary btn-sm chatter_edit_btn">
+			                					<i class="fa fa-fw fa-edit"></i> Bearbeiten
+			                				</button>
 			                			</div>
 			                		@endif
 			                		<div class="chatter_avatar">
@@ -136,78 +136,76 @@
 		                	</li>
 	                	@endforeach
 
-
 	                </ul>
 	            </div>
 
 	            <div id="pagination">{{ $posts->links() }}</div>
 
-	            @if(!Auth::guest())
+			@auth
 
-	            	<div id="new_response">
+				<div id="new_response">
 
-	            		<div class="chatter_avatar">
-		        			@if(Config::get('chatter.user.avatar_image_database_field'))
+					<div class="chatter_avatar">
+						@if(Config::get('chatter.user.avatar_image_database_field'))
 
-		        				<?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
+							<?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
 
-		        				<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
-		        				@if( (substr(Auth::user()->{$db_field}, 0, 7) == 'http://') || (substr(Auth::user()->{$db_field}, 0, 8) == 'https://') )
-		        					<img src="{{ Auth::user()->{$db_field}  }}">
-		        				@else
-		        					<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . Auth::user()->{$db_field}  }}">
-		        				@endif
+							<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
+							@if( (substr(Auth::user()->{$db_field}, 0, 7) == 'http://') || (substr(Auth::user()->{$db_field}, 0, 8) == 'https://') )
+								<img src="{{ Auth::user()->{$db_field}  }}">
+							@else
+								<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . Auth::user()->{$db_field}  }}">
+							@endif
 
-		        			@else
-		        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->email) ?>">
-		        					{{ strtoupper(substr(Auth::user()->email, 0, 1)) }}
-		        				</span>
-		        			@endif
-		        		</div>
+						@else
+							<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->email) ?>">
+								{{ strtoupper(substr(Auth::user()->email, 0, 1)) }}
+							</span>
+						@endif
+					</div>
 
-			            <div id="new_discussion">
+					<div id="new_discussion">
 
+						<div class="chatter_loader dark" id="new_discussion_loader">
+							<div></div>
+						</div>
 
-					    	<div class="chatter_loader dark" id="new_discussion_loader">
-							    <div></div>
+						<form id="chatter_form_editor" action="/{{ Config::get('chatter.routes.home') }}/posts" method="POST">
+
+							<!-- BODY -->
+							<div id="editor">
+								@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
+									<label id="tinymce_placeholder">Beginne hier zu tippen...</label>
+									<textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
+								@elseif($chatter_editor == 'simplemde')
+									<textarea id="simplemde" name="body" placeholder="">{{ old('body') }}</textarea>
+								@elseif($chatter_editor == 'trumbowyg')
+									<textarea class="trumbowyg" name="body" placeholder="Beginne hier zu tippen...">{{ old('body') }}</textarea>
+								@endif
 							</div>
 
-				            <form id="chatter_form_editor" action="/{{ Config::get('chatter.routes.home') }}/posts" method="POST">
+							<input type="hidden" name="_token" id="csrf_token_field" value="{{ csrf_token() }}">
+							<input type="hidden" name="chatter_discussion_id" value="{{ $discussion->id }}">
+						</form>
 
-						        <!-- BODY -->
-						    	<div id="editor">
-									@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
-										<label id="tinymce_placeholder">Type Your Discussion Here...</label>
-					    				<textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
-					    			@elseif($chatter_editor == 'simplemde')
-					    				<textarea id="simplemde" name="body" placeholder="">{{ old('body') }}</textarea>
-									@elseif($chatter_editor == 'trumbowyg')
-										<textarea class="trumbowyg" name="body" placeholder="Type Your Discussion Here...">{{ old('body') }}</textarea>
-									@endif
-								</div>
-
-						        <input type="hidden" name="_token" id="csrf_token_field" value="{{ csrf_token() }}">
-						        <input type="hidden" name="chatter_discussion_id" value="{{ $discussion->id }}">
-						    </form>
-
-						</div><!-- #new_discussion -->
-						<div id="discussion_response_email">
-							<button id="submit_response" class="btn btn-success pull-right"><i class="chatter-new"></i> Submit Response</button>
-							@if(Config::get('chatter.email.enabled'))
-								<div id="notify_email">
-									<img src="/vendor/devdojo/chatter/assets/images/email.gif" class="chatter_email_loader">
-									<!-- Rounded toggle switch -->
-									<span>Notify me when someone replies</span>
-									<label class="switch">
-									  	<input type="checkbox" id="email_notification" name="email_notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
-									  	<span class="on">Yes</span>
-										<span class="off">No</span>
-									  	<div class="slider round"></div>
-									</label>
-								</div>
-							@endif
-						</div>
+					</div><!-- #new_discussion -->
+					<div id="discussion_response_email">
+						<button id="submit_response" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus-circle"></i> Antworten</button>
+						@if(Config::get('chatter.email.enabled'))
+							<div id="notify_email">
+								<img src="/vendor/devdojo/chatter/assets/images/email.gif" class="chatter_email_loader">
+								<!-- Rounded toggle switch -->
+								<span>Notify me when someone replies</span>
+								<label class="switch">
+									<input type="checkbox" id="email_notification" name="email_notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
+									<span class="on">Yes</span>
+									<span class="off">No</span>
+									<div class="slider round"></div>
+								</label>
+							</div>
+						@endif
 					</div>
+				</div>
 
 				@else
 
@@ -215,7 +213,7 @@
 						<p>Bitte <a href="/{{ Config::get('chatter.routes.home') }}/login">melde dich an</a> oder <a href="/{{ Config::get('chatter.routes.home') }}/register">registriere dich</a>, um antzuworten.</p>
 					</div>
 
-				@endif
+				@endauth
 
 	        </div>
 
