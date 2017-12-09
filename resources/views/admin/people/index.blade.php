@@ -23,10 +23,10 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            {{ $people->links('vendor.pagination.bootstrap-4') }}
+
         </div>
         <div class="col-md-6">
-            SEARCH
+
         </div>
     </div>
     <div class="row">
