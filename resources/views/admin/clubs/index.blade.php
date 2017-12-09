@@ -54,7 +54,7 @@
     <hr>
     <!-- list all clubs -->
     <h2 class="mt-4">Angelegte Mannschaften <span class="badge badge-secondary">{{ $clubs->count() }}</span></h2>
-        <table class="table table-sm table-striped table-hover ">
+        <table class="table table-sm table-striped table-hover " id="clubs">
             <thead class="thead-default">
             <tr>
                 <th class="">ID</th>
@@ -106,5 +106,22 @@
             @endforeach
             </tbody>
         </table>
+
+@endsection
+
+@section('pagespecificscripts')
+
+    <script type="text/javascript">
+        $(document).ready( function () {
+
+            $('#clubs').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
+                },
+                "order": [[ 3, "asc" ]]
+            });
+
+        });
+    </script>
 
 @endsection
