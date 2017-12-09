@@ -4,6 +4,7 @@ namespace HLW;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * HLW\User
@@ -28,6 +29,23 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+//    TODO: find better way to login new registered user and changed passwords
+//    use LogsActivity;
+//
+//    /**
+//     * The attributes that should be logged.
+//     * @var array
+//     */
+//    protected static $logAttributes = [
+//        'name',
+//        'email'
+//    ];
+//
+//    /**
+//     * Only the changed attributes should be logged
+//     * @var bool
+//     */
+//    protected static $logOnlyDirty = true;
 
     /**
      * The attributes that are mass assignable.

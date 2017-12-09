@@ -10,12 +10,11 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav">
                 @foreach(\HLW\Division::published()->orderBy('name')->get() as $division)
                     <li class="nav-item {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
-                        <a class="nav-link" href="{{ route('frontend.divisions.show', $division ) }}"> <span class="fa {{ $division->competition->isLeague() ? "fa-star" : null }} {{ $division->competition->isKnockout() ? "fa-trophy" : null }}"></span> {{ $division->name }}</a>
+                        <a class="nav-link" href="{{ route('frontend.divisions.show', $division ) }}"> <span class="fa"></span> {{ $division->name }}</a>
                     </li>
                 @endforeach
                 {{-- <li class="nav-item">
@@ -26,15 +25,15 @@
                     <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}"><span class="fa fa-comments"></span> Schänke</a>
                 </li>
             </ul>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="login-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="fa fa-2x fa-user-circle"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         @guest
-                            <div class="dropdown-item">Hallo, Gast!</div>
-                            <form class="px-4 py-3" role="form" method="POST" action="{{ route('login') }}">
+                            <h4 class="px-4">Hallo, Gast!</h4>
+                            <form class="px-4" role="form" method="POST" action="{{ route('login') }}">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -55,7 +54,7 @@
                                         Merken
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Anmelden</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-sign-in"></i> Anmelden</button>
                             </form>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('register') }}">Neu hier? Registrier dich!</a>
@@ -63,27 +62,27 @@
                         @endguest
 
                         @auth
-                            <div class="dropdown-item">
+                            <h4 class="px-4 py-1">
                                 Hallo, {{ Auth::user()->name }}!
-                            </div>
-                            <div class="dropdown-item">
+                            </h4>
+                            <div class="px-4 py-1">
                                 @if(Auth::user()->clubs->count() > 0)
                                     <h5 class="font-weight-bold font-italic">Meine Teams</h5>
-                                        <ul class="list-unstyled">
-                                            @foreach (Auth::user()->clubs as $club)
-                                                <li class=" pt-1 pb-1 {{ !$loop->last ? "border border-left-0 border-top-0 border-right-0" : null }} }}"><a href="{{ route('frontend.clubs.show', $club) }}"><img class="pr-1" src="{{ asset('storage/'.$club->logo_url) }}" title="Vereinswappen" width="25px">{{ $club->name_short }}</a></li>
-                                            @endforeach
-                                        </ul>
+                                    <ul class="list-unstyled">
+                                        @foreach (Auth::user()->clubs as $club)
+                                            <li class=" pt-1 pb-1 {{ !$loop->last ? "border border-left-0 border-top-0 border-right-0" : null }} }}"><a href="{{ route('frontend.clubs.show', $club) }}"><img class="pr-1" src="{{ asset('storage/'.$club->logo_url) }}" title="Vereinswappen" width="25px">{{ $club->name_short }}</a></li>
+                                        @endforeach
+                                    </ul>
                                 @else
                                     Füge ein Team als Favorit hinzu!
                                 @endif
                             </div>
-                            <div class="dropdown-item">
-                                <a class="btn btn-primary w-100" href="{{ route('frontend.user.profile') }}">
+                            <div class="px-4 py-1">
+                                <a class="btn btn-primary w-100" href="{{ route('frontend.user.profile.show') }}">
                                     Profil
                                 </a>
                             </div>
-                            <div class="dropdown-item">
+                            <div class="px-4 py-1">
                                 <form class="" role="form" id="logout-form" action="{{ route('logout') }}" method="POST">
                                     {{ csrf_field() }}
                                     <button type="submit" class="btn btn-danger w-100">Abmelden</button>
@@ -94,5 +93,7 @@
                 </li>
             </ul>
         </div>
+
+
     </div>
 </nav>

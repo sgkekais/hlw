@@ -13293,6 +13293,10 @@ body {
           flex: 1 0 auto;
 }
 
+/*.navbar-expand-md .navbar-nav .dropdown-menu {
+  position: absolute !important;
+}*/
+
 .standings > tbody > tr > td,
 .standings > tbody > tr > th,
 .standings > tfoot > tr > td,

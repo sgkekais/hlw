@@ -21,9 +21,12 @@
                                     <span class="input-group-addon"><i class="fa fa-fw fa-id-card-o"></i> </span>
                                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
                                 </div>
+                                <small id="passwordHelp" class="form-text text-muted">
+                                    Der Name muss zwischen 2 und 20 Zeichen lang sein. Such dir möglichst einen Namen aus, mit dem dich die anderen in der Liga wiedererkennen.
+                                </small>
 
                                 @if ($errors->has('name'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
@@ -33,11 +36,14 @@
                                 <label for="email" class="col-form-label">E-Mail Addresse</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-fw fa-envelope-o"></i> </span>
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required aria-describedby="emailHelp">
                                 </div>
+                                <small id="passwordHelp" class="form-text text-muted">
+                                    Bitte gib eine gültige E-Mail Adresse an. Du wirst diese anschließend bestätigen müssen. Deine E-Mail ist öffentlich nicht sichtbar.
+                                </small>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
@@ -54,7 +60,7 @@
                                 </small>
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <span class="text-danger">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
@@ -71,6 +77,7 @@
                             <div class="form-group">
                                 <label for="clubs">Lieblingsverein(e)</label>
                                 <select multiple class="form-control" id="clubs" name="clubs[]" aria-describedby="clubsHelp">
+                                    <option selected>Nö, will ich nicht auswählen.</option>
                                     @foreach ($clubs as $club)
                                         <option value="{{ $club->id }}">{{ $club->name }}</option>
                                     @endforeach

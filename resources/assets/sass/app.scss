@@ -28,6 +28,11 @@ body {
   flex: 1 0 auto;
 }
 
+// dropdown menu override
+/*.navbar-expand-md .navbar-nav .dropdown-menu {
+  position: absolute !important;
+}*/
+
 // table padding for standings
 .standings> tbody > tr > td, .standings > tbody > tr > th, .standings > tfoot > tr > td, .standings > tfoot > tr > th, .standings > thead > tr > td, .standings > thead > tr > th {
   padding: 0.75rem 0.5rem 0.75rem 0.5rem;
