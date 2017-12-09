@@ -53,7 +53,7 @@
     <div class="row m-auto pt-4" style="max-width: 1140px">
         <div class="col">
             <!-- tabs -->
-            <nav class="nav nav-tabs" id="tab" role="tablist">
+            <nav class="nav nav-tabs border-bottom-0" id="tab" role="tablist">
                 <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
                     Übersicht
                 </a>
