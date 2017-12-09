@@ -115,7 +115,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($club->seasons as $season)
+                    @foreach($club->seasons->sortByDesc('end') as $season)
                         <tr>
                             <td>{{ $season->id }}</td>
                             <td>

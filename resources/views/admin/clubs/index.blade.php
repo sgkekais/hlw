@@ -69,7 +69,7 @@
             @foreach($clubs as $club)
                 <tr>
                     <td class="align-middle"><b>{{ $club->id }}</b></td>
-                    <td class="align-middle">
+                    <td class="align-middle text-center">
                         @if($club->published)
                             <span class="fa fa-eye" title="Öffentlich"></span>
                         @else
@@ -78,16 +78,15 @@
                     </td>
                     <td class="align-middle text-center">
                         @if($club->logo_url)
-                            <img src="{{ asset('storage/'.$club->logo_url) }}" class="img-fluid" title="Vereinswappen" alt="Vereinswappen" width="50">
+                            <img src="{{ asset('storage/'.$club->logo_url) }}" class="img-fluid" title="Vereinswappen" alt="Vereinswappen" width="25">
                         @else
                             <span class="fa fa-circle-o"></span>
                         @endif
                     </td>
                     <td class="align-middle">
                         <a href="{{ route('clubs.show', $club ) }}" title="Anzeigen">{{ $club->name }}</a>
-                        <br>Spieler: {{ $club->players()->get()->count() }}
                     </td>
-                    <td class="align-middle">
+                    <td class="align-middle text-center">
                         @if($club->is_real_club)
                             <span class="fa fa-shield text-danger fa-fw" title="Echter Verein"></span>
                         @endif
