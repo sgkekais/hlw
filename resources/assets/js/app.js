@@ -15,3 +15,6 @@ window.moment = require('moment');
 
 // full calendar
 require('fullcalendar');
+
+// datatables
+require('datatables.net-bs4');
