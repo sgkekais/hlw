@@ -21,7 +21,7 @@
             <h2 class="">Angelegte Personen <span class="badge badge-secondary">{{ $people->count() }}</span></h2>
         </div>
     </div>
-    <table class="table table-striped table-sm" id="people">
+    <table class="table table-sm table-striped" id="people">
         <thead class="thead-default">
         <tr>
             <th class="">ID</th>
