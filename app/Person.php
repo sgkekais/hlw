@@ -49,7 +49,7 @@ class Person extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'first_name', 'last_name', 'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'official_division_id', 'note'
+        'first_name', 'last_name', 'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'official_division_id', 'note', 'active'
     ];
 
     /**
@@ -63,7 +63,7 @@ class Person extends Model
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'official_division_id', 'note'
+        'first_name', 'last_name', 'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'official_division_id', 'note', 'active'
     ];
 
     /**
@@ -78,7 +78,8 @@ class Person extends Model
      * @var array
      */
     protected $casts = [
-        'photo_public' => 'boolean'
+        'photo_public'  => 'boolean',
+        'active'        => 'boolean'
     ];
 
     /*******************************************************

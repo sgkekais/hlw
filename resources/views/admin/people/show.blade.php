@@ -19,6 +19,7 @@
                     &ndash; {{ $person->realDivision ? $person->realDivision->name : null }}
                 @endif
             </h3>
+            <h4 class="">{{ $person->active ? "Aktiv" : "Inaktiv" }}</h4>
         </div>
     </div>
     <div class="row">

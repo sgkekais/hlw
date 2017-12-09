@@ -24,6 +24,19 @@
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}
         {{ method_field('PATCH') }}
+        <!-- person is active -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="active">Person ist "aktiv"?</label>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" id="active" name="active" aria-describedby="activeHelp">
+                    <option value="1">Aktiv</option>
+                    <option value="0" {{ !$person->active ? "selected" : null }}>Inaktiv</option>
+                </select>
+                <small id="activeHelp" class="form-text text-muted">Standard: Aktiv. Auf inaktiv setzen für Personen, die nicht mehr in der HLW aktiv sind (zu Archivierungszwecken). Die Person kann dann bspw. keiner (neuen) Mannschaft mehr zugeordnet werden.</small>
+            </div>
+        </div>
         <!-- names -->
         <div class="form-group row">
             <div class="col-md-2">
