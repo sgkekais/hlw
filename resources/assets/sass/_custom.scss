@@ -20,5 +20,15 @@
   $light: #e9ecef;
   $primary: $primary-color;
 
-// shadows
+// Shadows
   $enable-shadows: true;
+
+// Tabs
+// change background for team detail page
+// $nav-tabs-border-color:             #ddd !default;
+// $nav-tabs-border-width:             $border-width !default;
+// $nav-tabs-border-radius:            $border-radius !default;
+// $nav-tabs-link-hover-border-color:  $gray-200 !default;
+// $nav-tabs-link-active-color:        $gray-700 !default;
+   $nav-tabs-link-active-bg:           $body-bg !important;
+// $nav-tabs-link-active-border-color: #ddd !default;

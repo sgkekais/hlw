@@ -9,99 +9,148 @@
 @section('content')
 
 <!-- cover -->
-<div class="container-fluid" style="background-color: {{ $club->colours_club_primary }}">
-    <div class="row m-auto pt-4" style="max-width: 1140px">
-        <div class="col-3">
-            @if($club->logo_url)
-                <img src="{{ Storage::url($club->logo_url) }}" class="img-fluid" title="{{ $club->name }}" alt="Vereinswappen">
-            @else
-                <span class="fa fa-ban text-muted fa-5x"></span>
-            @endif
+<div class="position-relative border border-top-0 border-left-0 border-right-0" style="background-color: {{ $club->colours_club_primary }}">
+    <div class="container">
+        {{-- TODO: cover! {{ $club->cover_url ? "background-image: url('".asset('storage/'.$club->cover_url)."'); background-size: cover; background-position: center right" :  --}}
+        <div class="position-absolute h-100" style="width: 100%; right: 0; background-image: url(' {{ asset('storage/clubcovers/default.jpg') }} '); background-size: cover; background-position: bottom right">
+            {{-- inner --}}
+            <div class="position-relative h-100" style="width: 40%; background: repeating-linear-gradient(
+                    135deg,
+                    transparent,
+                    transparent 20px,
+                    {{ $club->colours_club_primary }} 20px,
+                    {{ $club->colours_club_primary }} 40px
+                );">
+
+            </div>
         </div>
-        <div class="col {{ $club->colours_club_primary == "#ffffff" ? "text-dark" : "text-white" }}">
-            <h1 class="font-weight-bold">{{ $club->name }}</h1>
-            <ul class="list-unstyled">
-                <li class="pb-2">
-                    @if($club->championships->count() > 0)
-                        @foreach($club->championships()->orderBy('end', 'desc')->get()->where('division.competition.type', 'league') as $championship)
-                            <span class="fa fa-fw fa-star" style="color: orange" title="{{ $championship->name }}"></span>
-                        @endforeach
-                    @else
-                        &nbsp;
+        <div class="row pt-4">
+            <div class="col-3 text-center">
+                @if($club->logo_url)
+                    <img src="{{ asset('storage/'.$club->logo_url) }}" class="img-fluid" title="{{ $club->name }}" alt="Vereinswappen">
+                @else
+                    <span class="fa fa-ban text-muted fa-5x"></span>
+                @endif
+            </div>
+            <div class="col-9 text-white">
+                <h1 class="font-weight-bold"><span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">{{ $club->name }}</span></h1>
+                <ul class="list-unstyled">
+                    {{-- league championships --}}
+                    @if ($club->championships()->get()->where('division.competition.type', 'league')->count() > 0)
+                        <li class="my-1">
+                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                            @foreach ($club->championships()->orderBy('end', 'desc')->get()->where('division.competition.type', 'league') as $championship)
+                                <i class="fa fa-fw fa-star" style="color: orange" title="{{ $championship->name }}"></i>
+                            @endforeach
+                        </span>
+                        </li>
                     @endif
-                </li>
-                <li>
-                    @foreach($club->championships()->orderBy('end', 'desc')->get()->where('division.competition.type', 'knockout') as $championship)
-                        <span class="fa fa-fw fa-trophy" style="color: orange" title="{{ $championship->name }}"></span>
-                    @endforeach
-                </li>
-                <li>{{ $club->regularStadium()->first() ? $club->regularStadium()->first()->name : null }}</li>
-                @if($club->website)
-                    <li><span class="fa fa-fw fa-home"></span> <a href="{{ $club->website }}" target="_blank">Offizielle Website</a> </li>
-                @endif
-                @if($club->facebook)
-                    <li><span class="fa fa-fw fa-facebook"></span> <a href="{{ $club->facebook }}" target="_blank">Facebook</a> </li>
-                @endif
-            </ul>
+                    {{-- cup trophys --}}
+                    @if ($club->championships()->get()->where('division.competition.type', 'knockout')->count() > 0)
+                        <li class="my-1">
+                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                            @foreach ($club->championships()->orderBy('end', 'desc')->get()->where('division.competition.type', 'knockout') as $championship)
+                                <i class="fa fa-fw fa-trophy" style="color: orange" title="{{ $championship->name }}"></i>
+                            @endforeach
+                        </span>
+                        </li>
+                    @endif
+                    {{-- stadium --}}
+                    @if ($club->regularStadium()->first())
+                        <li class="my-1">
+                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                            @svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #FFF', 'width' => '30', 'height' => '30'])
+                            {{ $club->regularStadium()->first()->name }}
+                        </span>
+                        </li>
+                        <li class="my-1">
+                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <i class="fa fa-fw fa-calendar"></i> {{ $club->regularStadium()->first()->pivot->regular_home_day }}
+                            <i class="fa fa-fw fa-clock-o"></i> {{ $club->regularStadium()->first()->pivot->regular_home_time }}
+                        </span>
+                        </li>
+                    @endif
+                    {{-- website --}}
+                    @if($club->website)
+                        <li class="my-1">
+                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <i class="fa fa-fw fa-home"></i> <a href="{{ $club->website }}" target="_blank">Offizielle Website</a>
+                        </span>
+                        </li>
+                    @endif
+                    {{-- facebook --}}
+                    @if($club->facebook)
+                        <li class="my-1">
+                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                            <i class="fa fa-fw fa-facebook"></i> <a href="{{ $club->facebook }}" target="_blank">Facebook</a>
+                        </span>
+                        </li>
+                    @endif
+                </ul>
+            </div>
         </div>
-        {{-- TODO Cover?
-        <div class="col-md-4">
-            <img src="{{ $club->cover_url ? Storage::url($club->cover_url) : Storage::url('public/clubcovers/_default.jpg') }}" height="200">
+        <div class="row pt-4">
+            <div class="col">
+                <!-- tabs -->
+                <nav class="nav nav-tabs border-0" id="tab" role="tablist">
+                    <a class="nav-item nav-link active border border-white" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true" style="background-color: rgba(0, 0, 0, 0.5);">
+                        Übersicht
+                    </a>
+                    <a class="ml-1 nav-item nav-link border-white" id="results-tab" data-toggle="tab" href="#results" role="tab" aria-controls="results" style="background-color: rgba(0, 0, 0, 0.5);" >
+                        Resultate
+                    </a>
+                    <a class="ml-1 nav-item nav-link border-white" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" style="background-color: rgba(0, 0, 0, 0.5);">
+                        Kader
+                    </a>
+                </nav>
+            </div>
         </div>
-        --}}
     </div>
-    <div class="row m-auto pt-4" style="max-width: 1140px">
-        <div class="col">
-            <!-- tabs -->
-            <nav class="nav nav-tabs border-bottom-0" id="tab" role="tablist">
-                <a class="nav-item nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-expanded="true">
-                    Übersicht
-                </a>
-                <a class="nav-item nav-link " id="results-tab" data-toggle="tab" href="#results" role="tab" aria-controls="results" >
-                    Resultate
-                </a>
-                <a class="nav-item nav-link" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" >
-                    Kader
-                </a>
-            </nav>
-        </div>
-    </div>
+
 </div>
 <!-- content -->
 <div class="container mt-4">
     <div class="row">
         <div class="tab-content col-12" id="tabcontent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Übersicht</h2>
-                <div class="row bg-secondary text-white ml-0 mr-0 mb-4">
+                <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $club->colours_club_primary }}">Übersicht</h2>
+                <div class="row my-2">
                     <div class="col text-center">
-                        <span class="display-4 font-italic">
+                        <span class="h1 font-weight-bold font-italic">
                             {{ $club->getGamesPlayedWon($season)->count() + $club->getGamesRatedWon($season)->count() }}
                         </span>
-                        <span class="font-weight-light font-italic">Siege</span>
+                        <span class="h1 font-italic">
+                            S
+                        </span>
                     </div>
                     <div class="col text-center">
-                        <span class="display-4 font-italic">
+                        <span class="h1 font-weight-bold font-italic">
                             {{ $club->getGamesPlayedDrawn($season)->count() + $club->getGamesRatedDrawn($season)->count() }}
                         </span>
-                        <span class="font-weight-light font-italic">Unentschieden</span>
+                        <span class="h1 font-italic">
+                            U
+                        </span>
                     </div>
                     <div class="col text-center">
-                        <span class="display-4 font-italic">
+                        <span class="h1 font-weight-bold font-italic">
                             {{ $club->getGamesPlayedLost($season)->count() + $club->getGamesRatedLost($season)->count() }}
                         </span>
-                        <span class="font-weight-light font-italic">Niederlagen</span>
+                        <span class="h1 font-italic">
+                            N
+                        </span>
                     </div>
                     <div class="col text-center">
-                        <span class="display-4 font-italic">
+                        <span class="h1 font-weight-bold font-italic">
                             {{ $club->getGoalsFor($season).":".$club->getGoalsAgainst($season) }}
                         </span>
-                        <span class="font-weight-light font-italic">Tore</span>
+                        <span class="h1 font-italic">
+                            Tore
+                        </span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <h4 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Zuletzt</h4>
+                        <h4 class="font-weight-bold font-italic text-uppercase" style="color: {{ $club->colours_club_primary }}">Zuletzt</h4>
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
@@ -179,59 +228,65 @@
                         </table>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Demnächst</h4>
-                        <table class="table table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Datum</th>
-                                    <th colspan="3" class="text-center">Paarung</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($club->getNextGames(5) as $fixture)
-                                <tr>
-                                    <td class="align-middle">{{ $fixture->datetime ? $fixture->datetime->format('d.m.y') : null }}</td>
-                                    <td class="align-middle text-right">
-                                        @if($fixture->clubHome)
-                                            {{ $fixture->clubHome->name_short }}
-                                            @if($fixture->clubHome->logo_url)
-                                                <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
+                        @php
+                            $nextGames = $club->getNextGames(5)
+                        @endphp
+                        <h4 class="font-weight-bold font-italic text-uppercase" style="color: {{ $club->colours_club_primary }}">Demnächst</h4>
+                        @if (!$nextGames->isEmpty())
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Datum</th>
+                                        <th colspan="3" class="text-center">Paarung</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($nextGames as $fixture)
+                                    <tr>
+                                        <td class="align-middle">{{ $fixture->datetime ? $fixture->datetime->format('d.m.y') : null }}</td>
+                                        <td class="align-middle text-right">
+                                            @if($fixture->clubHome)
+                                                {{ $fixture->clubHome->name_short }}
+                                                @if($fixture->clubHome->logo_url)
+                                                    <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
+                                                @else
+                                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                @endif
                                             @else
-                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                {{ $fixture->club_home }}
                                             @endif
-                                        @else
-                                            {{ $fixture->club_home }}
-                                        @endif
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        @if($fixture->isPlayed())
-                                            {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
-                                        @elseif($fixture->isRated())
-                                            {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
-                                        @else
-                                            - : -
-                                        @endif
-                                    </td>
-                                    <td class="align-middle text-left">
-                                        @if($fixture->clubAway)
-                                            @if($fixture->clubAway->logo_url)
-                                                <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @if($fixture->isPlayed())
+                                                {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                                            @elseif($fixture->isRated())
+                                                {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
                                             @else
-                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                - : -
                                             @endif
-                                            {{ $fixture->clubAway->name_short }}
-                                        @else
-                                            {{ $fixture->club_away }}
-                                        @endif
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td class="align-middle text-left">
+                                            @if($fixture->clubAway)
+                                                @if($fixture->clubAway->logo_url)
+                                                    <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
+                                                @else
+                                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                @endif
+                                                {{ $fixture->clubAway->name_short }}
+                                            @else
+                                                {{ $fixture->club_away }}
+                                            @endif
+                                        </td>
+                                        <td>
 
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @endif
+                        <em>Keine anstehenden Spiele.</em>
                     </div>
                 </div>
                 <div class="row mt-4 mb-4 no-gutters">
@@ -242,7 +297,7 @@
                 @if($club->regularStadium()->first())
                     <div class="row">
                         <div class="col-12">
-                            <h4 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Spielstätte</h4>
+                            <h4 class="font-weight-bold font-italic text-uppercase" style="color: {{ $club->colours_club_primary }}">Spielstätte</h4>
                                 @if($club->regularStadium()->first()->lat && $club->regularStadium()->first()->long)
                                     <div id="map" style="width: 100%; height: 450px;"></div>
                                     <script>
@@ -293,85 +348,65 @@
                 <div class="row">
                     <div class="col-12">
                         <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Aktive <span class="badge badge-secondary">{{ $club->players()->active()->count() }}</span></h2>
-                        <div class="card-deck">
-                            @foreach($club->players()->active()->public()->with('person')->get()->sortBy('person.last_name') as $player)
-                                <div class="card">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <h4 class="card-title">
-                                                {{ $player->person->full_name_shortened }}
-                                                <span class="pull-right" style="color: {{ $club->colours_club_primary }}">{{ $player->number ? "#".$player->number : null }}</span>
-                                            </h4>
-                                            <h6 class="card-subtitle mb-2" style="color: red">
-                                                TODO: Gesperrt
-                                            </h6>
-                                            <p class="card-text">
-                                                <span class="fa fa-calendar-o fa-fw"></span>
-                                                @if($player->sign_on)
-                                                    {{ $player->sign_on->format('d.m.Y') }}
-                                                    @if( Carbon::now()->diffInYears($player->sign_on) > 0 )
-                                                        <span class="text-muted"><i>{{ Carbon::now()->diffInYears($player->sign_on) }} Jahre dabei</i></span>
-                                                    @else
-                                                        <span class="text-muted"><i>{{ Carbon::now()->diffInDays($player->sign_on)}} Tage dabei</i></span>
-                                                    @endif
-                                                @endif
-                                            </p>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <ul class="list-unstyled">
-                                                <li>
-                                                    Saison
-                                                    @if($season->begin)
-                                                        <b>{{ $season->begin->format('y') }}</b>
-                                                    @endif
-                                                    @if($season->end)
-                                                        / <b>{{ $season->end->format('y') }}</b>
-                                                    @endif
+                        @foreach($club->players()->active()->public()->with('person')->get()->sortBy('person.last_name')->chunk(4) as $player_chunk)
+                            <div class="row">
+                                @foreach($player_chunk as $player)
+                                    <div class="col-sm-6 col-md-3 mb-4">
+                                        <div class="card">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <h4 class="card-title font-weight-bold">
+                                                        {{ $player->person->full_name_shortened }}
+                                                        <span class="pull-right" style="color: {{ $club->colours_club_primary }}">{{ $player->number ? "#".$player->number : null }}</span>
+                                                    </h4>
+                                                    <h6 class="card-subtitle mb-2" style="color: red">
+                                                        TODO: Gesperrt
+                                                    </h6>
                                                 </li>
-                                                <li>
-                                                    <span class="fa fa-soccer-ball-o fa-fw"></span>
-                                                    @php
-                                                        $goals_season = $player->goals()->get()->where('fixture.matchweek.season.id', $season->id )->count();
-                                                    @endphp
-                                                    <b>{{ $goals_season }}</b>
-                                                    <i>
-                                                        @if($goals_season != 1)
-                                                            Tore
-                                                        @else
-                                                            Tor
+                                                <li class="list-group-item">
+                                                    <p class="card-text">
+                                                        <span class="fa fa-pencil-square-o"></span>
+                                                        @if($player->sign_on)
+                                                            {{ $player->sign_on->format('d.m.Y') }}
+                                                            @if( Carbon::now()->diffInYears($player->sign_on) > 0 )
+                                                                <br><small class="text-muted">{{ Carbon::now()->diffInYears($player->sign_on) }} Jahre dabei</small>
+                                                            @else
+                                                                <br><small class="text-muted">{{ Carbon::now()->diffInDays($player->sign_on)}} Tage dabei</small>
+                                                            @endif
                                                         @endif
-                                                    </i>
+                                                    </p>
                                                 </li>
-                                                <li>
-                                                    <span class="fa fa-clone fa-fw" style="color: orange"></span>
-                                                    @php
-                                                        $cards_yr = $player->cards()->yellowReds()->get()->where('fixture.matchweek.season.id', $season->id)->count();
-                                                    @endphp
-                                                    <b>{{ $cards_yr }}</b>
-                                                    <i>{{ $cards_yr != 1 ? "Gelb-rote Karten" : "Gelb-rote Karte" }}</i>
+                                                <li class="list-group-item">
+                                                    <ul class="list-unstyled">
+                                                        @php
+                                                            $goals_season = $player->goals()->get()->where('fixture.matchweek.season.id', $season->id )->count();
+                                                            $cards_yr = $player->cards()->yellowReds()->get()->where('fixture.matchweek.season.id', $season->id)->count();
+                                                            $cards_r = $player->cards()->reds()->get()->where('fixture.matchweek.season.id', $season->id)->count();
+                                                        @endphp
+                                                        <li>
+                                                            Saison <b>{{ $season->name }}</b>
+                                                            <ul class="list-inline">
+                                                                <li class="list-inline-item"><span class="fa fa-soccer-ball-o fa-fw"></span> {{ $goals_season }}</li>
+                                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: orange;"></span> <b> {{ $cards_yr }}</b></li>
+                                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: red"></span> <b> {{ $cards_r }}</b></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
                                                 </li>
-                                                <li>
-                                                    <span class="fa fa-clone fa-fw" style="color: red"></span>
-                                                    @php
-                                                        $cards_r = $player->cards()->reds()->get()->where('fixture.matchweek.season.id', $season->id)->count();
-                                                    @endphp
-                                                    <b>{{ $cards_r }}</b>
-                                                    <i>{{ $cards_r != 1 ? "Rote Karten" : "Rote Karte" }}</i>
+                                                <li class="list-group-item">
+                                                    Insgesamt
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><span class="fa fa-soccer-ball-o fa-fw"></span> <b>{{ $player->goals->count() }}</b></li>
+                                                        <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: orange;"></span> <b>{{ $player->cards()->yellowReds()->count() }}</b></li>
+                                                        <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: red"></span> <b>{{ $player->cards()->reds()->count() }}</b></li>
+                                                    </ul>
                                                 </li>
                                             </ul>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">Insgesamt</li>
-                                                <li class="list-inline-item"><span class="fa fa-soccer-ball-o fa-fw"></span> <b>{{ $player->goals->count() }}</b></li>
-                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: orange;"></span> <b>{{ $player->cards()->yellowReds()->count() }}</b></li>
-                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: red"></span> <b>{{ $player->cards()->reds()->count() }}</b></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            @endforeach
-                        </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 @if($club->players()->inactive()->count() > 0)
@@ -390,7 +425,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($club->players()->inactive()->get() as $player_inactive)
+                                @foreach($club->players()->inactive()->get()->sortBy('person.last_name') as $player_inactive)
                                     <tr>
                                         <td class="align-middle">{{ $player_inactive->person->full_name_shortened }}</td>
                                         <td class="align-middle">{{ $player_inactive->sign_on ? $player_inactive->sign_on->format('d.m.Y') : null }}</td>
