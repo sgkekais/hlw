@@ -114,8 +114,8 @@ class ClubController extends Controller
         $club->load([
             'seasons',
             'players',
-            'contacts'
-
+            'contacts',
+            'stadiums',
         ]);
 
         return view('admin.clubs.show', compact('club'));

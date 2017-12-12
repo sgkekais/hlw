@@ -146,7 +146,10 @@
         <!-- fixtures -->
         <div class="tab-pane" id="fixtures" role="tabpanel">
             <h4 class="mb-4 mt-4">Paarungen</h4>
-            @if($club->fixtures()->count() != 0)
+            @php
+                $fixtures = $club->fixtures()->sortByDesc('datetime')->load('clubHome', 'clubAway', 'stadium', 'goals', 'cards', 'referees');
+            @endphp
+            @if(!$fixtures->isEmpty()))
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
@@ -165,7 +168,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($club->fixtures()->sortByDesc('datetime') as $fixture)
+
+                    @foreach($fixtures as $fixture)
                         <tr>
                             <td class="align-middle">
                                 @if($fixture->rescheduled_from_fixture_id)
