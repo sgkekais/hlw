@@ -30,7 +30,13 @@ class ClubController extends Controller
      */
     public function show(Club $club)
     {
-        $club->load('players', 'seasons');
+        $club->load([
+            'championships',
+            'players',
+            'seasons',
+            'stadiums',
+            'regularStadium'
+        ]);
 
         $season = Season::current()->first();
         $season->load('matchweeks.fixtures');
@@ -53,6 +59,12 @@ class ClubController extends Controller
         }
 
         $fixtures = $season->fixtures()->ofClub($club->id)->orderBy('datetime')->get();
+        $fixtures->load([
+            'clubHome',
+            'clubAway',
+            'goals',
+            'cards'
+        ]);
 
         return view('clubs.response_results', compact('club', 'fixtures', 'season'));
 }

@@ -271,7 +271,10 @@
             <h4 class="mb-4 mt-4">Aktive
                 <small class="text-muted">(davon <b>{{ $club->players()->whereHas('person', function ($query) { $query->whereNotNull('registered_at_club'); })->get()->count() }}</b> Vereinsspieler)</small>
             </h4>
-            @if($club->players()->whereNull('sign_off')->get()->count() > 0)
+            @php
+                $active_players = $club->players()->whereNull('sign_off')->get()->sortBy('person.last_name');
+            @endphp
+            @if(!$active_players->isEmpty())
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
@@ -288,7 +291,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($club->players()->whereNull('sign_off')->get() as $p_active)
+                    @foreach($active_players as $p_active)
                         <tr>
                             <td class="align-middle">{{ $p_active->id }}</td>
                             <td class="align-middle">
