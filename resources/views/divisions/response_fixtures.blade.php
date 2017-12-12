@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($matchweek->fixtures()->published()->orderBy('datetime')->get() as $fixture)
+                @foreach($matchweek->fixtures->where('published',1)->sortBy('datetime') as $fixture)
                     <tr class="" style="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-decoration: line-through" : null }}">
                         <td class="align-middle text-center">
                             @if($fixture->isCancelled())

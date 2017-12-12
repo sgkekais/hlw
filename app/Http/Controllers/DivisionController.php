@@ -152,7 +152,14 @@ class DivisionController extends Controller
     {
         $season = $division->seasons()->current()->first();
 
-        $season->load('clubs', 'matchweeks', 'matchweeks.fixtures');
+        $season->load([
+            'clubs',
+            'matchweeks',
+            'matchweeks.fixtures',
+            'matchweeks.fixtures.clubHome',
+            'matchweeks.fixtures.clubAway',
+            'matchweeks.fixtures.stadium'
+        ]);
         $c_matchweek = $season->currentMatchweek();
 
         return view('divisions.fixtures', compact('division', 'season', 'c_matchweek'));
@@ -173,7 +180,12 @@ class DivisionController extends Controller
         }
 
         $season->load([
-            'clubs', 'matchweeks', 'matchweeks.fixtures', 'matchweeks.fixtures.clubHome', 'matchweeks.fixtures.clubAway'
+            'clubs',
+            'matchweeks',
+            'matchweeks.fixtures',
+            'matchweeks.fixtures.clubHome',
+            'matchweeks.fixtures.clubAway',
+            'matchweeks.fixtures.stadium'
         ]);
 
         return view('divisions.response_fixtures', compact('season'));
