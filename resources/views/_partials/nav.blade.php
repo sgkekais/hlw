@@ -66,26 +66,36 @@
                                 Hallo, {{ Auth::user()->name }}!
                             </h4>
                             <div class="px-4 py-1">
-                                @if(Auth::user()->clubs->count() > 0)
+                                @php
+                                    $favorite_clubs = Auth::user()->clubs;
+                                @endphp
+                                @if(!$favorite_clubs->isEmpty())
                                     <h5 class="font-weight-bold font-italic">Meine Teams</h5>
                                     <ul class="list-unstyled">
-                                        @foreach (Auth::user()->clubs as $club)
+                                        @foreach ($favorite_clubs as $club)
                                             <li class=" pt-1 pb-1 {{ !$loop->last ? "border border-left-0 border-top-0 border-right-0" : null }} }}"><a href="{{ route('frontend.clubs.show', $club) }}"><img class="pr-1" src="{{ asset('storage/'.$club->logo_url) }}" title="Vereinswappen" width="25px">{{ $club->name_short }}</a></li>
                                         @endforeach
                                     </ul>
                                 @else
-                                    Füge ein Team als Favorit hinzu!
+                                    <div class="text-muted text-center"><small>Füge ein Team als Favorit hinzu!</small></div>
                                 @endif
                             </div>
                             <div class="px-4 py-1">
                                 <a class="btn btn-primary w-100" href="{{ route('frontend.user.profile.show') }}">
-                                    Profil
+                                    <span class="fa fa-fw fa-user"></span> Profil
                                 </a>
                             </div>
+                            @hasanyrole('super_admin|admin')
+                                <div class="px-4 py-1">
+                                    <a class="btn btn-secondary w-100" href="{{ route('admin') }}">
+                                        <span class="fa fa-fw fa-cogs"></span> HLW-Admin
+                                    </a>
+                                </div>
+                            @endrole
                             <div class="px-4 py-1">
                                 <form class="" role="form" id="logout-form" action="{{ route('logout') }}" method="POST">
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-danger w-100">Abmelden</button>
+                                    <button type="submit" class="btn btn-danger w-100"><span class="fa fa-fw fa-sign-out"></span> Abmelden</button>
                                 </form>
                             </div>
                         @endauth

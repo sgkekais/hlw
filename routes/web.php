@@ -39,12 +39,13 @@ Route::get('clubs/{club}/ajax-club-results', 'ClubController@ajaxGetClubResults'
 // fixtures
 Route::get('fixtures/{fixture}', 'FixtureController@show')->name('frontend.fixtures.show');
 
-// user
+// user profile
 Route::get('profile', 'AccountController@index')->name('frontend.user.profile.show')->middleware('auth');
 Route::post('profile', 'AccountController@update')->name('frontend.user.profile.update')->middleware('auth');
 
 /*******************************************************
  * Admin Routes
+ * these routes are protected by the laravel auth and a custom isAdmin middleware
  ******************************************************/
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'isAdmin']], function(){
