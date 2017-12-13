@@ -2,6 +2,7 @@
 
 namespace HLW\Http;
 
+use HLW\Http\Middleware\VerifyAdmins;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -57,5 +58,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \HLW\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        // custom middleware to check whether user has admin role
+        'isAdmin' => \HLW\Http\Middleware\VerifyAdmins::class,
     ];
 }

@@ -47,7 +47,7 @@ Route::post('profile', 'AccountController@update')->name('frontend.user.profile.
  * Admin Routes
  ******************************************************/
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'isAdmin']], function(){
     // Show Admin Dashboard after login into admin panel
     Route::get('', 'AdminController@index')->name('admin');
     // log
