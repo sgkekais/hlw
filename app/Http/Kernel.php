@@ -58,7 +58,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \HLW\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        // custom middleware to check whether user has admin role
+        // custom middleware to check whether user has admin or visitor role
         'isAdmin' => \HLW\Http\Middleware\VerifyAdmins::class,
     ];
 }

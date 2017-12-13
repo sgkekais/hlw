@@ -16,6 +16,7 @@ class VerifyAdmins
      */
     public function handle($request, Closure $next)
     {
+        // if a user has the role 'visitor', redirect him / her to the front page
         if (Auth::user()->hasRole('visitor')) {
             return redirect('/')->with('');
         }

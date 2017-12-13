@@ -38,12 +38,10 @@
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" id="email" name="email" placeholder="email@beispiel.de">
+                                    @if ($errors->has('email'))
+                                        <small class="text-danger">{{ $errors->first('email') }}</small>
+                                    @endif
                                 </div>
-                                @if ($errors->has('email'))
-                                    <div class="form-control-feedback">
-                                        {{ $errors->first('email') }}
-                                    </div>
-                                @endif
                                 <div class="form-group">
                                     <label for="password">Passwort</label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Passwort eingeben">
