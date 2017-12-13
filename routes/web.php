@@ -50,13 +50,14 @@ Route::post('profile', 'AccountController@update')->name('frontend.user.profile.
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function(){
     // Show Admin Dashboard after login into admin panel
     Route::get('', 'AdminController@index')->name('admin');
-
+    // log
     Route::get('log', 'LogController@index')->name('log');
-
-    //
+    // calendar
     Route::get('calendar', 'CalendarController@index')->name('calendar');
-
+    // user, role and permissions management
     Route::resource('users', 'UserController');
+    Route::resource('roles', 'RoleController');
+    Route::resource('permissions', 'PermissionController');
 
     Route::resource('competitions', 'CompetitionController');
     Route::resource('divisions', 'DivisionController');

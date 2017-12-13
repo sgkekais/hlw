@@ -5,6 +5,7 @@ namespace HLW;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * HLW\User
@@ -29,7 +30,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class User extends Authenticatable
 {
     use Notifiable;
-//    TODO: find better way to login new registered user and changed passwords
+
+    /**
+     * spatie laravel-permission package
+     */
+    use HasRoles;
+
+//    TODO: find better way to log new registered user and changed passwords
 //    use LogsActivity;
 //
 //    /**

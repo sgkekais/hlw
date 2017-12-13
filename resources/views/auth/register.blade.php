@@ -77,7 +77,7 @@
                             <div class="form-group">
                                 <label for="clubs">Lieblingsverein(e)</label>
                                 <select multiple class="form-control" id="clubs" name="clubs[]" aria-describedby="clubsHelp">
-                                    <option selected>Nö, will ich nicht auswählen.</option>
+                                    <option value="" selected>Nö, will ich nicht auswählen.</option>
                                     @foreach ($clubs as $club)
                                         <option value="{{ $club->id }}">{{ $club->name }}</option>
                                     @endforeach

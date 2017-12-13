@@ -2,13 +2,12 @@
 
 namespace HLW\Http\Controllers\Admin;
 
-use HLW\User;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('name')->get();
-        $roles = Role::all();
-
-        return view('admin.users.index', compact('users', 'roles'));
+        //
     }
 
     /**
@@ -30,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
     /**
@@ -41,16 +37,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'  =>  'required|unique:roles'
+        ]);
+
+        $role = new Role([
+            'name'  =>  $request->name
+        ]);
+
+        $role->save();
+
+        return redirect()->route('users.index')->with('success', 'Rolle '.$role->name.' erfolgreich angelegt.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \HLW\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
         //
     }
@@ -58,10 +64,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \HLW\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         //
     }
@@ -70,10 +76,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \HLW\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,10 +87,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \HLW\User  $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
         //
     }

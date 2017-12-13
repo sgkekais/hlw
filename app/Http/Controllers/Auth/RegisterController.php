@@ -81,11 +81,16 @@ class RegisterController extends Controller
             'password'  => bcrypt($data['password']),
         ]);
 
+        // create club favorites, if selected
         if (isset($data['clubs']) && !empty($data['clubs'])) {
             foreach ($data['clubs'] as $club) {
                 $user->clubs()->attach($club);
             }
         }
+
+        // assign the "visitor" role
+        // TODO: write db seed
+        $user->assignRole('visitor');
 
         return $user;
     }

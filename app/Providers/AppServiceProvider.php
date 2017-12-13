@@ -21,8 +21,8 @@ class AppServiceProvider extends ServiceProvider
         setlocale(LC_TIME, 'German');
         Carbon::setLocale('de');
         // mock date TODO: remove
-        /*$mockdate = Carbon::create(2017,6,30);
-        Carbon::setTestNow($mockdate);*/
+        //$mockdate = Carbon::create(2017,11,30);
+        //Carbon::setTestNow($mockdate);
     }
 
     /**
