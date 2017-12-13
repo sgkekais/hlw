@@ -76,7 +76,7 @@
                 {{ $club->t_rank }}
             </td>
             <td class="align-middle text-center p-2 p-md-2">
-                @if($table_previous->count() > 0)
+                @if(!$table_previous->isEmpty())
                     @if($previous_rank = $table_previous->where('id', $club->id)->first()->t_rank)
                         @if ($previous_rank < $club->t_rank)
                             <span class="fa fa-fw fa-arrow-circle-down text-warning"></span>
@@ -145,7 +145,7 @@
             <!-- next -->
             <td class="align-middle text-center d-none d-md-table-cell">
                 @php
-                    $nextgame = $club->getNextGames(1)->first()
+                    $nextgame = $club->getNextGames(1)->load('clubHome', 'clubAway')->first()
                 @endphp
                 @if ($nextgame)
                     @php
@@ -168,7 +168,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         @if ($club->logo_url)
-                            <img src="{{ Storage::url($club->logo_url) }}" width="100" class="pr-2">
+                            <img src="{{ asset('storage/'.$club->logo_url) }}" width="100" class="pr-2">
                         @else
                             <span class="fa fa-ban text-muted fa-2x"></span>
                         @endif
@@ -177,7 +177,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        @if ($lastgame = $club->getLastGamesPlayedOrRated(1)->first())
+                        @if ($lastgame = $club->getLastGamesPlayedOrRated(1)->load('clubHome', 'clubAway')->first())
                             <div class="row">
                                 <div class="col-md-12">
                                     Letztes Spiel am <b>{{ $lastgame->datetime ? $lastgame->datetime->format('d.m.Y') : null }}</b>

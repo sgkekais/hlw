@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="jumbotron jumbotron-fluid p-0" style="color: #fff9c4; background: url('/images/duesseldorf.jpg'); background-size: cover">
+    <div class="jumbotron jumbotron-fluid p-0" style="color: #fff9c4; background: url({{ asset('images/duesseldorf.jpg') }}) left; background-size: cover;">
         <div class="pt-4 pb-4" style="box-shadow: inset 0px 5px 5px 0px rgba(173,173,173,0.5); width: 100%; height: 100%">
             <div class="container pt-4 pb-4">
                 <div class="col-12 p-0">
@@ -28,7 +28,7 @@
                     @foreach ($fixtures->chunk(6) as $chunk)
                         <div class="row">
                             @foreach($chunk as $fixture)
-                                <div class="col {{ !$loop->last ? "border border-left-0 border-top-0 border-bottom-0" : null }} mt-2 mb-2">
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-2 {{ !$loop->last ? "border border-left-0 border-top-0 border-bottom-0" : null }} mt-2 mb-2">
                                     {{-- details --}}
                                     <div class="row">
                                         <div class="col-6 pr-0 text-muted">
@@ -43,12 +43,12 @@
                                         <div class="col-9 pr-0">
                                             @if($fixture->clubHome)
                                                 @if($fixture->clubHome->logo_url)
-                                                    <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30" class="pr-1">
+                                                    <img src="{{ Storage::url($fixture->clubHome->logo_url) }}" width="30">
                                                 @else
                                                     <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                                 @endif
-                                                <span class="d-none d-lg-inline">{{ $fixture->clubHome->name_short }}</span>
-                                                <span class="d-lg-none">{{ $fixture->clubHome->name_code }}</span>
+                                                <span class="pl-1 d-none d-lg-inline align-middle">{{ $fixture->clubHome->name_short }}</span>
+                                                <span class="pl-1 d-lg-none align-middle">{{ $fixture->clubHome->name_code }}</span>
                                             @else
                                                 -
                                             @endif
@@ -68,12 +68,12 @@
                                         <div class="col-9 pr-0">
                                             @if($fixture->clubAway)
                                                 @if($fixture->clubAway->logo_url)
-                                                    <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30" class="pr-1">
+                                                    <img src="{{ Storage::url($fixture->clubAway->logo_url) }}" width="30">
                                                 @else
                                                     <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                                 @endif
-                                                <span class="d-none d-lg-inline align-middle">{{ $fixture->clubAway->name_short }}</span>
-                                                <span class="d-lg-none align-middle">{{ $fixture->clubAway->name_code }}</span>
+                                                <span class="pl-1 d-none d-lg-inline align-middle">{{ $fixture->clubAway->name_short }}</span>
+                                                <span class="pl-1 d-lg-none align-middle">{{ $fixture->clubAway->name_code }}</span>
                                             @else
                                                 -
                                             @endif
@@ -92,7 +92,7 @@
                             @endforeach
                         </div>
                         @unless ($loop->last)
-                            <hr>
+                            <hr class="d-none d-lg-block">
                         @endunless
                     @endforeach
                 </div>
@@ -165,11 +165,11 @@
                                         </td>
                                         <td class="align-middle">
                                             @if($club->logo_url)
-                                                <img src="{{ asset('storage/'.$club->logo_url) }}" width="30" class="pr-1">
+                                                <img src="{{ asset('storage/'.$club->logo_url) }}" width="25">
                                             @else
                                                 <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                             @endif
-                                            <a href="{{ route('frontend.clubs.show', $club) }}" title="{{ $club->name }}">
+                                            <a href="{{ route('frontend.clubs.show', $club) }}" class="pl-1 align-middle" title="{{ $club->name }}">
                                                 {{ $club->name_code }}
                                             </a>
                                         </td>

@@ -21,19 +21,19 @@
             @endif
             <table class="table table-hover table-striped table-sm">
                 <thead>
-                    <tr class="align-middle">
-                        <th class="text-center" style="width: 5%">
+                    <tr>
+                        <th class="align-middle text-center" style="width: 5%">
                             <span class="fa fa-info"></span>
                         </th>
-                        <th class="text-right" style="width: 20%">
+                        <th class="align-middle text-right" style="width: 20%">
                             <span class="fa fa-calendar"></span>
                         </th>
-                        <th class="" style="width: 25%">&nbsp;</th>
-                        <th class="text-center" style="width: 10%">
+                        <th class="align-middle " style="width: 25%">&nbsp;</th>
+                        <th class="align-middle text-center" style="width: 10%">
                             <span class="fa fa-fw fa-handshake-o"></span>
                         </th>
-                        <th class="" style="width: 25%"></th>
-                        <th class="text-left" style="width: 15%">
+                        <th class="align-middle " style="width: 25%"></th>
+                        <th class="align-middle text-left" style="width: 15%">
                             @svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '30', 'height' => '30'])
                         </th>
                     </tr>

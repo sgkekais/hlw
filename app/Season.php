@@ -263,7 +263,7 @@ class Season extends Model
             $matchweek = $this->currentMatchweek();
         }
 
-        $clubs = $this->clubs()->orderBy('name')->get()->map(function ($club) {
+        $clubs = $this->clubs->sortBy('name')->map(function ($club) {
             $club['t_rank']         = 0;
             $club['t_played']       = 0;
             $club['t_won']          = 0;
