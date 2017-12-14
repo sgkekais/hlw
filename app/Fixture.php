@@ -285,6 +285,19 @@ class Fixture extends Model
     }
 
     /**
+     *
+     * @return bool
+     */
+    public function isPenalty()
+    {
+        if (isset($this->goals_home_11m) && isset($this->goals_away_11m)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Check wether the match has been rated
      * @return bool
      */
@@ -298,6 +311,7 @@ class Fixture extends Model
     }
 
     /**
+     * Check whether the macht has been cancelled
      * @return bool
      */
     public function isCancelled()

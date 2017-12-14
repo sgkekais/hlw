@@ -33,7 +33,7 @@
                 @endif
             </div>
             <div class="col-9 text-white">
-                <h1 class="font-weight-bold"><span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">{{ $club->name }}</span></h1>
+                <h1 class="font-weight-bold"><span class="p-1 bg-black-transparent">{{ $club->name }}</span></h1>
                 <ul class="list-unstyled">
                     {{-- league championships --}}
                     @php
@@ -41,7 +41,7 @@
                     @endphp
                     @if (!$league_championships->isEmpty())
                         <li class="my-1">
-                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <span class="p-1 bg-black-transparent">
                             @foreach ($league_championships as $league_championship)
                                 <i class="fa fa-fw fa-star" style="color: orange" title="{{ $league_championship->name }}"></i>
                             @endforeach
@@ -54,7 +54,7 @@
                     @endphp
                     @if (!$cup_championships->isEmpty())
                         <li class="my-1">
-                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <span class="p-1 bg-black-transparent">
                             @foreach ($cup_championships as $cup_championship)
                                 <i class="fa fa-fw fa-trophy" style="color: orange" title="{{ $cup_championship->name }}"></i>
                             @endforeach
@@ -67,13 +67,13 @@
                     @endphp
                     @isset ($regular_stadium)
                         <li class="my-1">
-                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <span class="p-1 bg-black-transparent">
                             @svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #FFF', 'width' => '30', 'height' => '30'])
                             {{ $regular_stadium->name }}
                         </span>
                         </li>
                         <li class="my-1">
-                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <span class="p-1 bg-black-transparent">
                             <i class="fa fa-fw fa-calendar"></i> {{ $regular_stadium->pivot->regular_home_day }}
                             <i class="fa fa-fw fa-clock-o"></i> {{ $regular_stadium->pivot->regular_home_time }}
                         </span>
@@ -82,7 +82,7 @@
                     {{-- website --}}
                     @if($club->website)
                         <li class="my-1">
-                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <span class="p-1 bg-black-transparent">
                             <i class="fa fa-fw fa-home"></i> <a href="{{ $club->website }}" target="_blank">Offizielle Website</a>
                         </span>
                         </li>
@@ -90,7 +90,7 @@
                     {{-- facebook --}}
                     @if($club->facebook)
                         <li class="my-1">
-                        <span class="p-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <span class="p-1 bg-black-transparent">
                             <i class="fa fa-fw fa-facebook"></i> <a href="{{ $club->facebook }}" target="_blank">Facebook</a>
                         </span>
                         </li>

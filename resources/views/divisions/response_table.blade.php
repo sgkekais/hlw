@@ -1,4 +1,5 @@
 <h4 class="text-muted">
+    <b>{{ $season->season_nr }}.</b> Saison |
     Spielwoche
     @if ($c_matchweek->number_consecutive)
         <b>{{ $c_matchweek->number_consecutive }}</b>

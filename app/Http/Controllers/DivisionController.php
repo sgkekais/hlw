@@ -26,7 +26,21 @@ class DivisionController extends Controller
         $sunday = Carbon::now()->endOfWeek();
         $fixtures = $season->fixtures()->whereBetween('datetime',[$monday,$sunday])->get();
 
-        return view('divisions.index', compact('division', 'season', 'matchweek', 'fixtures'));
+        // different jumbo backgrounds for different divisions
+        $jumbo_bg = asset('images/grass_green.jpg');
+        if ($division->competition->name_short == "HLW") {
+            if ($division->hierarchy_level == 1) {
+                $jumbo_bg = asset('images/grass_green.jpg');
+            } else {
+                $jumbo_bg = asset('images/grass_brown.jpg');
+            }
+        } elseif ($division->competition->name_short == "AHL") {
+            $jumbo_bg = asset('images/grass_bw.jpg');
+        } elseif ($division->competition->name_short == "P") {
+            $jumbo_bg = asset('images/cup.jpg');
+        }
+
+        return view('divisions.index', compact('division', 'season', 'matchweek', 'fixtures', 'jumbo_bg'));
     }
 
     /**

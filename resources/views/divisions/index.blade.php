@@ -6,6 +6,22 @@
 
 @endsection
 
+@section('jumbotron')
+
+    <div class="jumbotron jumbotron-fluid p-0" style="color: #fff9c4; background: url({{ $jumbo_bg }}) {{ $division->competition->name_short != "P" ? "top left repeat" : "center" }}; {{ $division->competition->name_short == "P" ? "background-size: cover" : null }}">
+        <div class="pt-4 pb-4" style="box-shadow: inset 0px 5px 5px 0px rgba(173,173,173,0.5); width: 100%; height: 100%">
+            <div class="container pt-4 pb-4">
+                <div class="col-12 p-0">
+                    <div class="display-4 font-weight-bold">
+                        {{ $division->name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
 @section('content')
 
     <div class="container pt-4">

@@ -10,17 +10,25 @@
 
     <div class="container pt-4">
         <div class="row">
-            <div class="col-12">
+            <div class="col">
                 <h1 class="font-weight-bold font-italic">TABELLE</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
                 <ul class="nav nav-pills">
                     <li class="nav-item dropdown pr-2">
-                        <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="season_selector_title">Saison: {{ $season->name }} (#{{ $season->season_nr }})</a>
+                        <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="season_selector_title">Saison {{ $season->name }}</a>
                         <div class="dropdown-menu season_selector">
                             @foreach($division->seasons()->published()->orderBy('end','desc')->get() as $s)
-                                <a class="dropdown-item" href="#" id="{{ $s->id }}">{{ $s->name }} (#{{ $s->season_nr }})</a>
+                                <a class="dropdown-item" href="#" id="{{ $s->id }}">{{ $s->name }}</a>
                             @endforeach
                         </div>
                     </li>
+                </ul>
+            </div>
+            <div class="col-sm-10">
+                <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a id="full-table" href="#" class="nav-link active" data-toggle="pill">Tabelle</a>
                     </li>

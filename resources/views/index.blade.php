@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('content')
+@section('jumbotron')
+
     <div class="jumbotron jumbotron-fluid p-0" style="color: #fff9c4; background: url({{ asset('images/duesseldorf.jpg') }}) left; background-size: cover;">
         <div class="pt-4 pb-4" style="box-shadow: inset 0px 5px 5px 0px rgba(173,173,173,0.5); width: 100%; height: 100%">
             <div class="container pt-4 pb-4">
@@ -15,6 +16,10 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('content')
     <div class="container">
         <!-- fixtures of the current week -->
         @if($fixtures->count() > 0)
@@ -103,7 +108,7 @@
         <hr>
         <div class="row">
             @foreach ($divisions as $division)
-                <div class="col-md-4 {{ !$loop->last ? "border border-left-0 border-top-0 border-bottom-0" : null }}">
+                <div class="col-md-4">
                     <h3 class="font-weight-bold font-italic">{{ $division->competition->name_short." &ndash; ".$division->name }}</h3>
                     @php
                         // $c_season = $division->seasons()->published()->current()->first();

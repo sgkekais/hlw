@@ -15,6 +15,9 @@
             </div>
         @endif
 
+        <!-- jumbotron image -->
+        @yield('jumbotron')
+
         <!-- content -->
         @yield('content')
 

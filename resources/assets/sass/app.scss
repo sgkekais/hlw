@@ -40,7 +40,12 @@ body {
   font-family: "Barlow Condensed", sans-serif;
 }
 
-// HLW logo loader
+// half-transparent black background
+.bg-black-transparent {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+  // HLW logo loader
   @keyframes bounce {
     from, 20%, 53%, 80%, to {
       animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
