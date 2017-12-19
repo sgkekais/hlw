@@ -34,9 +34,9 @@
             <label for="color" class="col-md-2 col-form-label">Farbe</label>
             <div class="col-md-4">
                 <select class="form-control" aria-describedby="colorHelp" name="color" id="color">
-                    <option>Gelb</option>
-                    <option>Gelb/Rot</option>
-                    <option>Rot</option>
+                    <option value="yellw">Gelb</option>
+                    <option value="yellow-red">Gelb/Rot</option>
+                    <option value="red">Rot</option>
                 </select>
                 <small id="stadium_idHelp" class="form-text text-muted">Welche Art von Platzverweis?</small>
             </div>
@@ -69,7 +69,7 @@
         <div class="form-group row">
             <label for="ban_reduced_by" class="col-md-2 col-form-label">Sperre reduzieren</label>
             <div class="col-md-2">
-                <input type="number" class="form-control" aria-describedby="ban_reduced_byHelp" name="ban_reduced_by" id="ban_reduced_by" value="{{ $card->ban_reduced_by }}">
+                <input type="number" class="form-control" aria-describedby="ban_reduced_byHelp" name="ban_reduced_by" id="ban_reduced_by" >
                 <small id="ban_reduced_byHelp" class="form-text text-muted">Länge der Sperre reduzieren</small>
             </div>
         </div>
