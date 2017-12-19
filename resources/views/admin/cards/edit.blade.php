@@ -51,7 +51,7 @@
             <label for="color" class="col-md-2 col-form-label">Farbe</label>
             <div class="col-md-4">
                 <select class="form-control" aria-describedby="colorHelp" name="color" id="color">
-                    @foreach($colors = collect(['Gelb','Gelb/Rot','Rot']) as $color)
+                    @foreach($colors = collect(['yellow','yellow-red','red']) as $color)
                         <option value="{{ $color }}" {{ $card->color === $color ? "selected" : null }}>{{ $color }}</option>
                     @endforeach
                 </select>
