@@ -23,7 +23,7 @@ class PortalController extends Controller
         // get the fixtures of the current week
         $monday = Carbon::now()->startOfWeek();
         $sunday = Carbon::now()->endOfWeek();
-        $fixtures = Fixture::whereBetween('datetime', [$monday, $sunday])->orderBy('datetime')->get();
+        $fixtures = Fixture::whereBetween('datetime', ['2017-11-13', '2017-11-19'])->orderBy('datetime')->get();
 
         return view('index', compact('divisions', 'fixtures'));
     }

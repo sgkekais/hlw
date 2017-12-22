@@ -29,8 +29,8 @@ class FixtureController extends Controller
            'clubHome',
            'clubAway',
            'stadium',
-           'goals',
-           'cards'
+           'goals.player.person',
+           'cards.player.person',
         ]);
 
         return view('fixtures.show', compact('fixture'));
