@@ -95,9 +95,14 @@
             <div class="col-md-4">
                 <select class="form-control" name="club_id_home" id="club_id_home">
                     <option></option>
-                    @foreach($clubs as $club)
-                        <option value="{{ $club->id }}">{{ $club->name }}</option>
-                    @endforeach
+                    @if ($fixture->id && $fixture->club_id_home && $fixture->club_id_away)
+                        <option value="{{ $fixture->club_id_home }}">{{ $fixture->clubHome->name }}</option>
+                        <option value="{{ $fixture->club_id_away }}">{{ $fixture->clubAway->name }}</option>
+                    @else
+                        @foreach($clubs as $club)
+                            <option value="{{ $club->id }}">{{ $club->name }}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
             <div class="col-md-2">
@@ -106,9 +111,14 @@
             <div class="col-md-4">
                 <select class="form-control" name="club_id_away" id="club_id_away">
                     <option></option>
-                    @foreach($clubs as $club)
-                        <option value="{{ $club->id }}">{{ $club->name }}</option>
-                    @endforeach
+                    @if ($fixture->id && $fixture->club_id_home && $fixture->club_id_away)
+                        <option value="{{ $fixture->club_id_home }}">{{ $fixture->clubHome->name }}</option>
+                        <option value="{{ $fixture->club_id_away }}">{{ $fixture->clubAway->name }}</option>
+                    @else
+                        @foreach($clubs as $club)
+                            <option value="{{ $club->id }}">{{ $club->name }}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
         </div>
@@ -184,7 +194,7 @@
                     <option value="0">Nein</option>
                     <option value="1">Ja</option>
                 </select>
-                <small id="publishedHelp" class="form-text text-muted">Spielklasse auf Seite veröffentlichen?</small>
+                <small id="publishedHelp" class="form-text text-muted">Paarung auf Seite veröffentlichen?</small>
             </div>
             <div class="col-md-2">
                 <label for="counts_in_tables">Berücksichtigung in Tabelle(n)?</label>
