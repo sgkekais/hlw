@@ -23,8 +23,23 @@ class PortalController extends Controller
         // get the fixtures of the current week
         $monday = Carbon::now()->startOfWeek();
         $sunday = Carbon::now()->endOfWeek();
-        $fixtures = Fixture::whereBetween('datetime', ['2017-11-13', '2017-11-19'])->orderBy('datetime')->get();
+        $fixtures_grouped_by_divisions = Fixture::whereBetween('datetime', ['2017-10-30', '2017-11-11'])
+            ->with([
+                'matchweek.season.division',
+                'clubHome',
+                'clubAway',
+                'stadium',
+                'rescheduledTo.rescheduledBy',
+            ])
+            ->get()
+        ->sortBy('matchweek.season.division.id')
+        ->groupBy('matchweek.season.division.id');
 
-        return view('index', compact('divisions', 'fixtures'));
+        return view('index', compact('divisions', 'fixtures_grouped_by_divisions'));
     }
+
+    public function imprint() {
+        return view('static.imprint');
+    }
+
 }

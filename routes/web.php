@@ -43,6 +43,9 @@ Route::get('fixtures/{fixture}', 'FixtureController@show')->name('frontend.fixtu
 Route::get('profile', 'AccountController@index')->name('frontend.user.profile.show')->middleware('auth');
 Route::post('profile', 'AccountController@update')->name('frontend.user.profile.update')->middleware('auth');
 
+// static
+Route::get('imprint', 'PortalController@imprint')->name('imprint');
+
 /*******************************************************
  * Admin Routes
  * these routes are protected by the laravel auth and a custom isAdmin middleware

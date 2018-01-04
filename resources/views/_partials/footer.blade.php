@@ -5,11 +5,10 @@
             <div class="col-md-2">
                 <h5 class="font-weight-bold">HLW</h5>
                 <ul class="list-unstyled">
-                    <li>Home</li>
-                    <li>1. Liga</li>
-                    <li>2. Liga</li>
-                    <li>AH-Liga</li>
-                    <li>Pokal</li>
+                    <li><a href="{{ route('home') }}" title="zur Startseite">Home</a></li>
+                    @foreach (\HLW\Division::published()->orderBy('name')->get() as $division)
+                        <li><a href="{{ route('frontend.divisions.show', $division) }}" title="zur Spielklasse">{{ $division->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <div class="col-md-6">
@@ -35,7 +34,7 @@
         </div>
         <div class="row pb-2">
             <div class="col-12 text-right">
-                &copy; {{ date('Y') }} &ndash; Hobbyliga-West Düsseldorf
+                <a href="{{ route('imprint') }}" title="Impressum">Impressum</a> | &copy; {{ date('Y') }} &ndash; Hobbyliga-West Düsseldorf
             </div>
         </div>
     </div>
