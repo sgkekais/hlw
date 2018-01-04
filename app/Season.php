@@ -210,6 +210,15 @@ class Season extends Model
         return explode(',', $value);
     }
 
+    /**
+     * Return the type of the related competition
+     * @return string
+     */
+    public function getTypeAttribute()
+    {
+        return $this->division->competition->type;
+    }
+
     /***********************************************************
      * FUNCTIONS
      ************************************************************/
@@ -263,7 +272,9 @@ class Season extends Model
             $matchweek = $this->currentMatchweek();
         }
 
-        $clubs = $this->clubs->sortBy('name')->map(function ($club) {
+        // create new fields for table
+        $clubs = $this->clubs()->orderBy('name')->get();
+        $clubs->map(function ($club) {
             $club['t_rank']         = 0;
             $club['t_played']       = 0;
             $club['t_won']          = 0;
