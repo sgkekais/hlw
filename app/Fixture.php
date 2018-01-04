@@ -268,6 +268,19 @@ class Fixture extends Model
     }
 
     /***********************************************************
+     * ACCESSORS
+     ************************************************************/
+
+    /**
+     * Return the type of the related competition
+     * @return string
+     */
+    public function getTypeAttribute()
+    {
+        return $this->matchweek->season->division->competition->type;
+    }
+
+    /***********************************************************
      * FUNCTIONS
      ************************************************************/
 
