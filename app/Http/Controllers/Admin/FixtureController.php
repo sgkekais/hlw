@@ -32,7 +32,7 @@ class FixtureController extends Controller
     public function create(Matchweek $matchweek, Fixture $fixture)
     {
         // get all clubs of the season
-        $clubs = $matchweek->season->clubs;
+        $clubs = $matchweek->season->clubs->sortBy('name');
         // get all stadiums
         $stadiums = Stadium::all();
 
