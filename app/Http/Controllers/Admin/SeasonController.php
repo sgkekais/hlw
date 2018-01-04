@@ -3,6 +3,7 @@
 namespace HLW\Http\Controllers\Admin;
 
 use HLW\Club;
+use HLW\Division;
 use HLW\Season;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
@@ -51,6 +52,13 @@ class SeasonController extends Controller
         // create a new object
         $season = new Season($request->all());
 
+        // season number given?
+        if (!$request->filled('season_nr')) {
+            $division = Division::find($request->division_id);
+            $season_nr = $division->seasons->max('season_nr') + 1;
+            $season->season_nr = $season_nr;
+        }
+
         // save the season
         $season->save();
 
@@ -83,6 +91,8 @@ class SeasonController extends Controller
      */
     public function edit(Season $season)
     {
+        $season->load('clubs');
+
         return view('admin.seasons.edit', compact('season'));
     }
 
