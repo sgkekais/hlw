@@ -90,7 +90,7 @@ class Card extends Model
      */
     public function scopeReds ($query)
     {
-        return $query->where('color', 'Rot');
+        return $query->where('color', 'red');
     }
 
     /**
@@ -99,7 +99,7 @@ class Card extends Model
      */
     public function scopeYellows ($query)
     {
-        return $query->where('color', 'Gelb');
+        return $query->where('color', 'yellow');
     }
 
     /**
@@ -108,7 +108,7 @@ class Card extends Model
      */
     public function scopeYellowReds ($query)
     {
-        return $query->where('color', 'Gelb/Rot');
+        return $query->where('color', 'yellow-red');
     }
 
     /**
