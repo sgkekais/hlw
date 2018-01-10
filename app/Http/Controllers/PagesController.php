@@ -11,7 +11,7 @@ use HLW\Season;
 use Illuminate\Http\Request;
 use Forecast\Forecast;
 
-class PortalController extends Controller
+class PagesController extends Controller
 {
     public function index()
     {
@@ -38,6 +38,10 @@ class PortalController extends Controller
         return view('index', compact('divisions', 'fixtures_grouped_by_divisions'));
     }
 
+    /**
+     * Imprint
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function imprint() {
         return view('static.imprint');
     }
