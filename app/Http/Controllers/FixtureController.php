@@ -25,15 +25,19 @@ class FixtureController extends Controller
      */
     public function show(Fixture $fixture)
     {
-        $fixture->load([
-           'clubHome',
-           'clubAway',
-           'stadium',
-           'goals.player.person',
-           'cards.player.person',
-        ]);
+        if ($fixture->published) {
+            $fixture->load([
+                'clubHome',
+                'clubAway',
+                'stadium',
+                'goals.player.person',
+                'cards.player.person',
+            ]);
 
-        return view('fixtures.show', compact('fixture'));
+            return view('fixtures.show', compact('fixture'));
+        }
+
+        return redirect()->route('home');
     }
 
 }
