@@ -17,7 +17,7 @@
 
 Auth::routes();
 
-Route::get('/', 'PortalController@index')->name('home');
+Route::get('/', 'PagesController@index')->name('home');
 
 // division details
 Route::get('division/{division}', 'DivisionController@index')->name('frontend.divisions.show');
@@ -28,6 +28,10 @@ Route::get('division/{division}/tables/ajax-away-table', 'DivisionController@aja
 Route::get('division/{division}/tables/ajax-cross-table', 'DivisionController@ajaxGetCrossTable');
 Route::get('division/{division}/fixtures', 'DivisionController@fixtures')->name('frontend.divisions.fixtures');
 Route::get('division/{division}/fixtures/ajax-fixtures', 'DivisionController@ajaxGetFixtures');
+Route::get('division/{division}/sinners', 'DivisionController@sinners')->name('frontend.divisions.sinners');
+Route::get('division/{division}/sinners/ajax-sinners', 'DivisionController@ajaxGetSinners');
+Route::get('division/{division}/scorers', 'DivisionController@scorers')->name('frontend.divisions.scorers');
+Route::get('division/{division}/scorers/ajax-scorers', 'DivisionController@ajaxGetScorers');
 
 // list all clubs of a season
 Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seasons.clubs');
@@ -40,11 +44,13 @@ Route::get('clubs/{club}/ajax-club-results', 'ClubController@ajaxGetClubResults'
 Route::get('fixtures/{fixture}', 'FixtureController@show')->name('frontend.fixtures.show');
 
 // user profile
-Route::get('profile', 'AccountController@index')->name('frontend.user.profile.show')->middleware('auth');
+Route::get('profile', 'AccountController@profile')->name('frontend.user.profile.show')->middleware('auth');
 Route::post('profile', 'AccountController@update')->name('frontend.user.profile.update')->middleware('auth');
+Route::post('profile/clubs', 'AccountController@addClubFavorite')->name('frontend.user.profile.club.add')->middleware('auth');
+Route::delete('profile/clubs/{club}', 'AccountController@deleteClubFavorite')->name('frontend.user.profile.club.delete')->middleware('auth');
 
 // static
-Route::get('imprint', 'PortalController@imprint')->name('imprint');
+Route::get('imprint', 'PagesController@imprint')->name('imprint');
 
 /*******************************************************
  * Admin Routes
