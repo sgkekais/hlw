@@ -14,7 +14,7 @@ class AddBanReducedByColumnToCardsTable extends Migration
     public function up()
     {
         Schema::table('cards', function (Blueprint $table) {
-            $table->integer('ban_reduced_by')->nullable()->after('ban_matches');
+            $table->integer('ban_reduced_by')->default('0')->after('ban_matches');
         });
     }
 
