@@ -147,27 +147,36 @@ class Player extends Model
         // get the last card using the related fixture
         $card = $this->cards->sortByDesc('fixture.datetime')->first();
 
-        // player suspended for life?
-        if ($card->ban_lifetime) {
-            $is_suspended = true;
-        }
-        // player suspended for current season
-        elseif ($card->ban_season) {
-            $current_season = $this->seasons()->current()->first();
-            // if we "have" a current season, then the player is suspended if current_season = card season
-            if ($current_season == $card->fixture->matchweek->season) {
+        if ($card) {
+            // player suspended for life?
+            if ($card->ban_lifetime) {
                 $is_suspended = true;
             }
-        }
-        // else check whether club has played more matches than number of banned matches of card
-        else {
-            // if the number of *played* games is smaller than the number of banned matches minus the reduced ban
-            if ($card->ban_matches - $card->ban_reduced_by > $this->club->getNextGamesPlayed($card->ban_matches - $card->ban_reduced_by, $card->fixture->datetime->addDay())->count()) {
-                $is_suspended = true;
+            // player suspended for current season
+            elseif ($card->ban_season) {
+                $current_season = $this->club->seasons()->current()->first();
+                // if we "have" a current season, then the player is suspended if current_season = card season
+                if ($current_season && ($current_season->id == $card->fixture->matchweek->season->id)) {
+                    $is_suspended = true;
+                }
+            }
+            // else check whether club has played more matches than number of banned matches of card
+            else {
+                // if the number of *played* games is smaller than the number of banned matches minus the reduced ban
+                $number_of_played_games = $this->club->getNextGamesPlayed(($card->ban_matches - $card->ban_reduced_by), $card->fixture->datetime->addDay())->count();
+                $ban_remaining = 0;
+
+                if (($card->ban_matches - $card->ban_reduced_by) > $number_of_played_games) {
+                    $is_suspended = true;
+                    $ban_remaining = $card->ban_matches - $card->ban_reduced_by - $number_of_played_games;
+                }
+
+                // map number of left matches here
+                $card->ban_remaining = $ban_remaining;
             }
         }
 
-        return ($is_suspended ? $card : false);
+        return ($is_suspended ? $card : $is_suspended);
     }
 
     /*******************************************************

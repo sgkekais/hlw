@@ -136,10 +136,10 @@ class Season extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeCurrent($query)
+    public function scopeCurrent ($query)
     {
-        return $query->where('begin', '<=', date('Y-m-d'))
-            ->where('end', '>=', date('Y-m-d'));
+        return $query->where('begin', '<=', Carbon::now())
+            ->where('end', '>=', Carbon::now());
     }
 
     /**
@@ -358,7 +358,6 @@ class Season extends Model
         // #3 Sort the table, use values() on collection
         $clubs = $clubs->sort( function($a, $b) {
             $result = false;
-
             // compare points
             if ($b->t_points > $a->t_points) {
                 $result = true;
@@ -371,9 +370,7 @@ class Season extends Model
                     }
                 }
             }
-
             return $result;
-
         })->values();
 
         // #4 calculate the rank
@@ -436,6 +433,47 @@ class Season extends Model
        return $this->champion ? true : false;
     }
 
+    /**
+     * Return all cards of the season
+     * @return array
+     */
+    public function cards()
+    {
+        $cards = collect();
+
+        foreach ($this->matchweeks as $matchweek) {
+            foreach ($matchweek->fixtures as $fixture) {
+                if (!$fixture->cards->isEmpty()) {
+                    foreach ($fixture->cards->load(['fixture', 'player']) as $card) {
+                        $cards->push($card);
+                    }
+                }
+            }
+        }
+
+        return $cards;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function goals()
+    {
+        $goals = collect();
+
+        foreach ($this->matchweeks as $matchweek) {
+            foreach ($matchweek->fixtures as $fixture) {
+                if (!$fixture->goals->isEmpty() && !$fixture->isCancelled() && !$fixture->isRated()) {
+                    foreach ($fixture->goals->load(['fixture', 'player']) as $goal) {
+                        $goals->push($goal);
+                    }
+                }
+            }
+        }
+
+        return $goals;
+    }
+
     /***********************************************************
      * RELATIONSHIPS
      ************************************************************/
@@ -479,6 +517,10 @@ class Season extends Model
 
     }
 
+    /**
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function champion()
     {
         return $this->belongsTo(Club::class, 'champion');
