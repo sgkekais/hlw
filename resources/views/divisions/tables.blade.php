@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ $division->name }} | Tabelle
+@endsection
+
 @section('subnav')
 
     @include('_partials.subnav_divisions')
@@ -15,11 +19,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2">
-                <ul class="nav nav-pills">
-                    <li class="nav-item dropdown pr-2">
+            <div class="col-sm-2 pr-1">
+                <ul class="nav nav-pills w-100">
+                    <li class="nav-item dropdown pr-2 w-100 text-center">
                         <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="season_selector_title">Saison {{ $season->name }}</a>
-                        <div class="dropdown-menu season_selector">
+                        <div class="dropdown-menu season_selector text-center">
                             @foreach($division->seasons()->published()->orderBy('end','desc')->get() as $s)
                                 <a class="dropdown-item" href="#" id="{{ $s->id }}">{{ $s->name }}</a>
                             @endforeach
@@ -27,7 +31,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-10 pl-1">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a id="full-table" href="#" class="nav-link active" data-toggle="pill">Tabelle</a>

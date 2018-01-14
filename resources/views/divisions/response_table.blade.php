@@ -1,5 +1,5 @@
 <h4 class="text-muted">
-    <b>{{ $season->season_nr }}.</b> Saison |
+    <b>{{ $season->season_nr ? $season->season_nr."." : null }}</b> Saison |
     Spielwoche
     @if ($c_matchweek->number_consecutive)
         <b>{{ $c_matchweek->number_consecutive }}</b>
@@ -77,14 +77,14 @@
                 {{ $club->t_rank }}
             </td>
             <td class="align-middle text-center p-2 p-md-2">
-                @if(!$table_previous->isEmpty())
-                    @if($previous_rank = $table_previous->where('id', $club->id)->first()->t_rank)
+                @if (!$table_previous->isEmpty())
+                    @if ($previous_rank = $table_previous->where('id', $club->id)->first()->t_rank)
                         @if ($previous_rank < $club->t_rank)
-                            <span class="fa fa-fw fa-arrow-circle-down text-warning"></span>
+                            <span class="fa fa-arrow-circle-down text-danger"></span>
                         @elseif ($previous_rank == $club->t_rank)
-                            <span class="fa fa-fw "></span>
+                            <span class="fa "></span>
                         @else
-                            <span class="fa fa-fw fa-arrow-circle-up text-success"></span>
+                            <span class="fa fa-arrow-circle-up text-success"></span>
                         @endif
                         <small>
                             @if(abs($previous_rank-$club->t_rank) > 0)
@@ -271,11 +271,6 @@
             </td>
         </tr>
     @endforeach
-    <tr>
-        <td colspan="13">
-
-        </td>
-    </tr>
     </tbody>
 </table>
 <div class="row">

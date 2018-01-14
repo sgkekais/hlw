@@ -3,9 +3,12 @@
 namespace HLW\Http\Controllers;
 
 use Carbon\Carbon;
+use HLW\Card;
 use HLW\Division;
+use HLW\Player;
 use HLW\Season;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Div;
 
 class DivisionController extends Controller
 {
@@ -16,15 +19,29 @@ class DivisionController extends Controller
     public function index(Division $division)
     {
         $season = $division->seasons()->current()->first();
-        $season->load([
-           'clubs', 'fixtures'
-        ]);
-        $matchweek = $season->currentMatchweek();
 
-        // get the fixtures of the current week
-        $monday = Carbon::now()->startOfWeek();
-        $sunday = Carbon::now()->endOfWeek();
-        $fixtures = $season->fixtures()->whereBetween('datetime',[$monday,$sunday])->get();
+        // no current season found, get last season
+        if (!$season) {
+            $season = $division->seasons()->orderBy('season_nr','desc')->first();
+        }
+
+        // if season, eager load relationships and fixtures of the current week
+        if ($season) {
+            $season->load([
+               'clubs', 'fixtures'
+            ]);
+            $matchweek = $season->currentMatchweek();
+
+            // get the fixtures of the current week
+            $monday = Carbon::now()->startOfWeek();
+            $sunday = Carbon::now()->endOfWeek();
+            $fixtures = $season->fixtures()->whereBetween('datetime',[$monday,$sunday])->get()->where('published', true);
+            if ($fixtures) {
+                $fixtures->load([
+                    'matchweek', 'clubHome', 'clubAway', 'stadium'
+                ]);
+            }
+        }
 
         // different jumbo backgrounds for different divisions
         $jumbo_bg = asset('images/grass_green.jpg');
@@ -53,10 +70,21 @@ class DivisionController extends Controller
         $division->load('seasons');
         // also get the current season
         $season = $division->seasons()->current()->first();
-        // eager load the current season's matchweeks and clubs
-        $season->load('matchweeks', 'clubs');
-        // also get the current matchweek of the current season
-        $c_matchweek = $season->currentMatchweek();
+        if ($season) {
+            // eager load the current season's matchweeks and clubs
+            $season->load([
+                'matchweeks', 'clubs'
+            ]);
+            // also get the current matchweek of the current season
+            $c_matchweek = $season->currentMatchweek();
+        } else {
+            // no current season found, get last season
+            $season = $division->seasons()->orderBy('season_nr','desc')->first();
+            $season->load([
+                'matchweeks', 'clubs'
+            ]);
+            $c_matchweek = $season->matchweeks()->get()->sortByDesc('number_consecutive')->first();
+        }
 
         return view('divisions.tables', compact('division', 'season', 'c_matchweek'));
     }
@@ -166,6 +194,11 @@ class DivisionController extends Controller
     {
         $season = $division->seasons()->current()->first();
 
+        if (!$season) {
+            // no current season found, get last season
+            $season = $division->seasons()->orderBy('season_nr','desc')->first();
+        }
+
         $season->load([
             'clubs',
             'matchweeks',
@@ -203,5 +236,102 @@ class DivisionController extends Controller
         ]);
 
         return view('divisions.response_fixtures', compact('season'));
+    }
+
+    /**
+     * Get cards for the given division and current or last season
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function sinners(Division $division)
+    {
+        $division->load('seasons');
+
+        $season = $division->seasons()->current()->first();
+
+        if (!$season) {
+            // no current season found, get last season
+            $season = $division->seasons()->orderBy('season_nr','desc')->first();
+        }
+
+        $lifetime_bans = Card::lifetimeBan()->get();
+
+        return view('divisions.sinners', compact('division', 'season', 'lifetime_bans'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function ajaxGetSinners(Request $request, Division $division)
+    {
+        // check whether a season id is in the request
+        if (!$request->filled('season_id')) {
+            $season = $division->seasons()->current()->first();
+        } else {
+            $season = Season::find($request->season_id);
+        }
+
+        if ($season) {
+            $season->load('matchweeks.fixtures.cards');
+            $cards = $season->cards()->sortByDesc('fixture.datetime');
+        }
+
+        return view('divisions.response_sinners', compact('cards'));
+    }
+
+    /**
+     * Get goals for the given division and current or last season
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function scorers(Division $division)
+    {
+        $season = $division->seasons()->current()->first();
+
+        if (!$season) {
+            // no current season found, get last season
+            $season = $division->seasons()->orderBy('season_nr','desc')->first();
+        }
+
+        return view('divisions.scorers', compact('division', 'season'));
+    }
+
+    /**
+     * @param Request $request
+     * @param Division $division
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function ajaxGetScorers(Request $request, Division $division)
+    {
+        // check whether a season id is in the request
+        if (!$request->filled('season_id')) {
+            $season = $division->seasons()->current()->first();
+        } else {
+            $season = Season::find($request->season_id);
+        }
+
+        $scorers = collect();
+
+        if ($season) {
+            $season->load('matchweeks.fixtures.goals');
+            $goals = $season->goals();
+            foreach ($goals->groupBy('player.id') as $index => $player_goals) {
+                // get the player and load the person relationship
+                $player = Player::find($index);
+                if ($player) {
+                    $player->load([
+                        'person', 'club'
+                    ]);
+                }
+                // add a goals attribute
+                $player->goals = $player_goals->count();
+                // push the player to the scorers collection
+                $scorers->push($player);
+            }
+        }
+
+        return view('divisions.response_scorers', compact('scorers'));
     }
 }

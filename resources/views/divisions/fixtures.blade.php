@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    {{ $division->name }} | Spielplan
+@endsection
+
 @section('subnav')
 
     @include('_partials.subnav_divisions')
