@@ -112,18 +112,14 @@ class Card extends Model
     }
 
     /**
-     * TODO: cards of the current season
+     * Scope query to lifetime bans only
      * @param $query
-     * @param $season
+     * @return mixed
      */
-    public function scopeOfSeason ($query, $season)
+    public function scopeLifetimeBan ($query)
     {
-
+        return $query->where('ban_lifetime', true);
     }
-
-    /***********************************************************
-     * SCOPES
-     ************************************************************/
 
     /***********************************************************
      * RELATIONSHIPS
