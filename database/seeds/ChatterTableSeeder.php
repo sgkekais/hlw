@@ -11,23 +11,6 @@ class ChatterTableSeeder extends Seeder
      */
     public function run()
     {
-
-        // CREATE THE USER
-
-        if (!\DB::table('users')->find(1)) {
-            \DB::table('users')->insert([
-                0 => [
-                    'id'             => 1,
-                    'name'           => 'Tony Lea',
-                    'email'          => 'tony@hello.com',
-                    'password'       => '$2y$10$9ED4Exe2raEeaeOzk.EW6uMBKn3Ib5Q.7kABWaf4QHagOgYHU8ca.',
-                    'remember_token' => 'RvlORzs8dyG8IYqssJGcuOY2F0vnjBy2PnHHTX2MoV7Hh6udjJd6hcTox3un',
-                    'created_at'     => '2016-07-29 15:13:02',
-                    'updated_at'     => '2016-08-18 14:33:50',
-                ],
-            ]);
-        }
-
         // CREATE THE CATEGORIES
 
         \DB::table('chatter_categories')->delete();
@@ -37,8 +20,8 @@ class ChatterTableSeeder extends Seeder
                 'id'         => 1,
                 'parent_id'  => null,
                 'order'      => 1,
-                'name'       => 'Introductions',
-                'color'      => '#3498DB',
+                'name'       => 'Allgemeines',
+                'color'      => 'gray',
                 'slug'       => 'introductions',
                 'created_at' => null,
                 'updated_at' => null,
@@ -47,9 +30,9 @@ class ChatterTableSeeder extends Seeder
                 'id'         => 2,
                 'parent_id'  => null,
                 'order'      => 2,
-                'name'       => 'General',
-                'color'      => '#2ECC71',
-                'slug'       => 'general',
+                'name'       => '1. Liga',
+                'color'      => 'blue',
+                'slug'       => '1-liga',
                 'created_at' => null,
                 'updated_at' => null,
             ],
@@ -57,9 +40,9 @@ class ChatterTableSeeder extends Seeder
                 'id'         => 3,
                 'parent_id'  => null,
                 'order'      => 3,
-                'name'       => 'Feedback',
-                'color'      => '#9B59B6',
-                'slug'       => 'feedback',
+                'name'       => '2. Liga',
+                'color'      => 'purple',
+                'slug'       => '2-liga',
                 'created_at' => null,
                 'updated_at' => null,
             ],
@@ -67,9 +50,19 @@ class ChatterTableSeeder extends Seeder
                 'id'         => 4,
                 'parent_id'  => null,
                 'order'      => 4,
-                'name'       => 'Random',
-                'color'      => '#E67E22',
-                'slug'       => 'random',
+                'name'       => 'AH-Liga',
+                'color'      => 'teal',
+                'slug'       => 'ah-liga',
+                'created_at' => null,
+                'updated_at' => null,
+            ],
+            4 => [
+                'id'         => 4,
+                'parent_id'  => null,
+                'order'      => 4,
+                'name'       => 'Börse',
+                'color'      => 'yellow',
+                'slug'       => 'boerse',
                 'created_at' => null,
                 'updated_at' => null,
             ],
@@ -77,7 +70,7 @@ class ChatterTableSeeder extends Seeder
 
         // CREATE THE DISCUSSIONS
 
-        \DB::table('chatter_discussion')->delete();
+        /*DB::table('chatter_discussion')->delete();
 
         \DB::table('chatter_discussion')->insert([
             0 => [
@@ -236,6 +229,6 @@ class ChatterTableSeeder extends Seeder
             'created_at' => '2016-08-18 15:01:25',
             'updated_at' => '2016-08-18 15:01:25',
         ],
-        ]);
+        ]);*/
     }
 }
