@@ -30,19 +30,37 @@ class ClubController extends Controller
      */
     public function show(Club $club)
     {
-        $club->load([
-            'championships',
-            'players',
-            'seasons',
-            'stadiums',
-            'regularStadium'
-        ]);
+        if ($club->published) {
+            $club->load([
+                'championships',
+                'players',
+                'seasons',
+                'stadiums',
+                'regularStadium'
+            ]);
 
-        $season = Season::current()->first();
-        $season->load('matchweeks.fixtures');
-        $division = $season->division;
+            $season = $club->seasons()->current()->first();
+            $is_current_season = true;
 
-        return view('clubs.show', compact('club', 'season', 'division'));
+            if (!$season) {
+                $season = $club->seasons()->orderBy('season_nr', 'desc')->get()->where('type','league')->first();
+                $is_current_season = false;
+            }
+
+            if ($season) {
+                $season->load('matchweeks.fixtures');
+                $division = $season->division;
+                $reschedulings = $club->reschedulings->where('matchweek.season.id', $season->id);
+                if ($reschedulings) {
+                    $reschedulings->load('matchweek', 'clubHome', 'clubAway');
+                }
+            }
+
+            return view('clubs.show', compact('club', 'season', 'division', 'reschedulings'));
+
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -54,17 +72,24 @@ class ClubController extends Controller
     {
         if (!$request->filled('season_id')) {
             $season = $club->seasons()->current()->first();
+            if (!$season) {
+                $season = $club->seasons()->orderBy('season_nr', 'desc')->first();
+            }
         } else {
-            $season = Season::findOrFail($request->season_id);
+            $season = Season::find($request->season_id);
         }
 
-        $fixtures = $season->fixtures()->ofClub($club->id)->orderBy('datetime')->get();
-        $fixtures->load([
-            'clubHome',
-            'clubAway',
-            'goals',
-            'cards'
-        ]);
+        if ($season) {
+            $fixtures = $season->fixtures()->ofClub($club->id)->orderBy('datetime')->get();
+            if ($fixtures) {
+                $fixtures->load([
+                    'clubHome',
+                    'clubAway',
+                    'goals',
+                    'cards'
+                ]);
+            }
+        }
 
         return view('clubs.response_results', compact('club', 'fixtures', 'season'));
 }
