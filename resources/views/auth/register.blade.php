@@ -18,7 +18,9 @@
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-form-label">Name</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-id-card-o"></i> </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-fw fa-id-card-o"></i> </span>
+                                    </div>
                                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
                                 </div>
                                 <small id="passwordHelp" class="form-text text-muted">
@@ -35,7 +37,9 @@
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class="col-form-label">E-Mail Addresse</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-envelope-o"></i> </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-fw fa-envelope-o"></i> </span>
+                                    </div>
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required aria-describedby="emailHelp">
                                 </div>
                                 <small id="passwordHelp" class="form-text text-muted">
@@ -52,7 +56,9 @@
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-form-label">Passwort</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-unlock-alt"></i> </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-fw fa-unlock-alt"></i> </span>
+                                    </div>
                                     <input id="password" type="password" class="form-control" name="password" required aria-describedby="passwordHelp">
                                 </div>
                                 <small id="passwordHelp" class="form-text text-muted">
@@ -69,13 +75,15 @@
                             <div class="form-group">
                                 <label for="password-confirm" class="col-form-label">Passwort bestätigen</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i> </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-fw fa-lock"></i> </span>
+                                    </div>
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="clubs">Lieblingsverein(e)</label>
+                                <label for="clubs"><span class="fa fa-fw fa-heart text-danger"></span> Lieblingsverein(e)</label>
                                 <select multiple class="form-control" id="clubs" name="clubs[]" aria-describedby="clubsHelp">
                                     <option value="" selected>Nö, will ich nicht auswählen.</option>
                                     @foreach ($clubs as $club)
