@@ -22,6 +22,8 @@
             <tr>
                 <th class="">ID</th>
                 <th class="">Nachname, Vorname</th>
+                <th class="">Mail</th>
+                <th class="">Mobil</th>
                 <th class=""></th>
                 <th class="">Aktionen</th>
             </tr>
@@ -34,6 +36,12 @@
                         <a href="{{ route('referees.show', $referee ) }}" title="Anzeigen">
                             {{ $referee->person->last_name }}, {{ $referee->person->first_name }}
                         </a>
+                    </td>
+                    <td class="align-middle">
+                        {{ $referee->mail }}
+                    </td>
+                    <td class="align-middle">
+                        {{ $referee->mobile }}
                     </td>
                     <td class="align-middle">
                         @if($referee->note)

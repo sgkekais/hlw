@@ -32,6 +32,23 @@
                 <small id="person_idHelp" class="form-text text-muted">Um welche Person handelt es sich?</small>
             </div>
         </div>
+        <!-- mail and mobile -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="mail">E-Mail</label>
+            </div>
+            <div class="col-md-4">
+                <input type="email" class="form-control" name="mail" id="mail" aria-describedby="mailHelp" value="{{ $referee->mail }}">
+                <small id="mailHelp" class="form-text text-muted">E-Mail-Adresse</small>
+            </div>
+            <div class="col-md-2">
+                <label for="mobile">Mobilnr.</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="mobile" id="mobile" aria-describedby="mobileHelp" value="{{ $referee->mobile }}">
+                <small id="mobileHelp" class="form-text text-muted">Mobilfunknummer</small>
+            </div>
+        </div>
         <!-- note -->
         <div class="form-group row">
             <label for="note" class="col-md-2 col-form-label">Notiz</label>

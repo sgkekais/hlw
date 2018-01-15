@@ -32,7 +32,7 @@ class Referee extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'person_id', 'note'
+        'person_id', 'mobile', 'mail', 'note'
     ];
 
     /**
@@ -46,7 +46,7 @@ class Referee extends Model
      * @var array
      */
     protected $fillable = [
-        'person_id', 'note'
+        'person_id', 'mobile', 'mail', 'note'
     ];
 
     /*******************************************************

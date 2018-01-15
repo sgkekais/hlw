@@ -20,6 +20,7 @@ class RefereeController extends Controller
     public function index()
     {
         $referees = Referee::all();
+        $referees->load('person');
 
         return view('admin.referees.index', compact('referees'));
     }
@@ -31,7 +32,7 @@ class RefereeController extends Controller
      */
     public function create()
     {
-        $people = Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get();
+        $people = Person::active()->orderBy('last_name','asc')->orderBy('first_name','asc')->get();
 
         return view('admin.referees.create', compact('people'));
     }
@@ -44,13 +45,15 @@ class RefereeController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'mail' => 'nullable|email'
+        ]);
+
         $ref = new Referee($request->all());
 
         $ref->save();
 
-        Session::flash('success', 'Schiedsrichter erfolgreich angelegt.');
-
-        return redirect()->route('referees.index');
+        return redirect()->route('referees.index')->with('success', 'Schiedsrichter erfolgreich angelegt.');
     }
 
     /**
