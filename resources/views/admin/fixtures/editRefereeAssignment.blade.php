@@ -21,7 +21,7 @@
         <!-- which referee? -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="referee_id">Spielort</label>
+                <label for="referee_id">Schiedsrichter</label>
             </div>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="referee_id" value="{{ $referee->person->last_name }}, {{ $referee->person->first_name }}" aria-describedby="referee_idHelp" disabled>
