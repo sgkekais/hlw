@@ -27307,7 +27307,7 @@ window._ = __webpack_require__(133);
  */
 
 try {
-  window.$ = __webpack_provided_window_dot_jQuery = __webpack_require__(2);
+  window.$ = __webpack_provided_window_dot_jQuery = window.jquery = __webpack_require__(2);
 
   // bootstrap
   __webpack_require__(134);
