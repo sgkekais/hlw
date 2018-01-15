@@ -210,7 +210,7 @@
                     <option value="0">Nein</option>
                     <option value="1" {{ $fixture->published ? "selected" : null }}>Ja</option>
                 </select>
-                <small id="publishedHelp" class="form-text text-muted">Spielklasse auf Seite veröffentlichen?</small>
+                <small id="publishedHelp" class="form-text text-muted">Paarung auf Seite veröffentlichen?</small>
             </div>
             <div class="col-md-2">
                 <label for="counts_in_tables">Berücksichtigung in Tabelle(n)?</label>
