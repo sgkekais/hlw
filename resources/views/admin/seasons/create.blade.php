@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-4">
                 <input type="number" class="form-control" name="season_nr" id="season_nr" aria-describedby="season_nrHelp" placeholder="{{ old('season_nr') }}">
-                <small id="season_nrHelp" class="form-text text-muted">Spielzeit, bspw. 24. Es wird automatisch die nächsthöchste festgelegt.</small>
+                <small id="season_nrHelp" class="form-text text-muted">Spielzeit, bspw. 24. Es wird <b>automatisch</b> die nächsthöchste festgelegt, wenn das Feld leer gelassen wird.</small>
             </div>
         </div>
         <!-- champion -->
@@ -52,9 +52,8 @@
                 <label for="champion">Sieger</label>
             </div>
             <div class="col-md-4">
-                <select class="form-control" id="champion" name="champion" aria-describedby="championHelp">
-                    <option></option>
-                    <option>Nur der Saison zugeordnete uber many-to-many</option>
+                <select class="form-control" id="champion" name="champion" aria-describedby="championHelp" disabled>
+                    <option>Zuerst Mannschaften zuordnen.</option>
                 </select>
                 <small id="championHelp" class="form-text text-muted">Meister bzw. Pokalsieger, falls schon gegeben, sonst leer lassen</small>
             </div>
