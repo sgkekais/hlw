@@ -1227,6 +1227,43 @@ class Club extends Model
     }
 
     /**
+     * Get the specified number of next games
+     * @param null $numberofgames
+     * @return mixed
+     */
+    public function getNextGames($numberofgames = null)
+    {
+        return Fixture::ofClub($this->id)->orderBy('datetime')
+            ->where('datetime','>=',Carbon::now())
+            ->when($numberofgames, function ($query) use ($numberofgames){
+                return $query->take($numberofgames);
+            })
+            ->get();;
+    }
+
+    /**
+     * Get the specified number of next games that are played
+     * If a date is specified, return the specified number of games equal to or after that date
+     * @param $numberOfGames
+     * @param null $date
+     * @return mixed
+     */
+    public function getNextGamesPlayed($numberOfGames, $date = null)
+    {
+        return Fixture::ofClub($this->id)->played()->orderBy('datetime', 'desc')
+            // if a date is given, then return the last games before that date
+            ->when($date, function ($query) use ($date){
+                return $query->where('datetime', '>=', $date);
+            }, function ($query) {
+                return $query->where('datetime', '>=', Carbon::now());
+            })
+            ->when($numberOfGames, function ($query) use ($numberOfGames){
+                return $query->take($numberOfGames);
+            })
+            ->get();
+    }
+
+    /**
      * Get the specified number of next games that are played or rated
      * If a date is specified, return the specified number of games equal to or after that date
      * @param $numberOfGames
@@ -1246,21 +1283,6 @@ class Club extends Model
                 return $query->take($numberOfGames);
             })
             ->get();
-    }
-
-    /**
-     * Get the specified number of next games
-     * @param null $numberofgames
-     * @return mixed
-     */
-    public function getNextGames($numberofgames = null)
-    {
-        return Fixture::ofClub($this->id)->orderBy('datetime')
-            ->where('datetime','>=',Carbon::now())
-            ->when($numberofgames, function ($query) use ($numberofgames){
-                return $query->take($numberofgames);
-            })
-            ->get();;
     }
 
     /**
