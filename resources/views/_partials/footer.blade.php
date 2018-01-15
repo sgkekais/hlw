@@ -9,18 +9,20 @@
                     @foreach (\HLW\Division::published()->orderBy('name')->get() as $division)
                         <li><a href="{{ route('frontend.divisions.show', $division) }}" title="zur Spielklasse">{{ $division->name }}</a></li>
                     @endforeach
+                    <li><a href="{{ route('chatter.home') }}" title="zur Schänke">Schänke</a></li>
+                    <li><a href="{{ route('articles') }}" title="Satzung, Vorstand, Infos">Infos</a></li>
                 </ul>
             </div>
             <div class="col-md-6">
                 <h5 class="font-weight-bold">Hobbyliga-West Düsseldorf </h5>
-                <p class="font-italic">
+                <p class="">
                     &ndash; Die Fußballliga für Hobby- und Freizeitmannschaften aus Düsseldorf und Umgebung.
                 </p>
                 <h5 class="font-weight-bold">
                     Ihr wollt mitmachen?
                 </h5>
                 <p class="">
-                    Einfach eine Mail an ...
+                    Schaut auf der <a href="{{ route('articles') }}#join" title="zur Info-Seite"> Info-Seite nach!</a>
                 </p>
             </div>
             <div class="col-md-4">
@@ -30,6 +32,8 @@
                     <li><span class="fa fa-fw fa-twitter"></span> <a href="https://twitter.com/HobbyligaWest" title="Twitter" target="_blank">HLW auf Twitter</a> <span class="fa fa-external-link"></span></li>
                     <li><span class="fa fa-fw fa-envelope"></span> Mail an HLW</li>
                 </ul>
+                <a href="{{ route('login') }}" title="Anmelden">Login</a> |
+                <a href="{{ route('register') }}" title="Registrieren">Registrieren</a>
             </div>
         </div>
         <div class="row pb-2">
