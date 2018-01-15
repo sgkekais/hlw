@@ -46,4 +46,12 @@ class PagesController extends Controller
         return view('static.imprint');
     }
 
+    /**
+     * "Satzung"
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function articles() {
+        return view('static.articles');
+    }
+
 }

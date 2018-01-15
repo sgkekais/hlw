@@ -20,6 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}"><span class="fa fa-comments"></span> Schänke</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('articles') ? "active" : null }}" href="{{ route('articles') }}" title="Vorstand, Satzungen und Infos">Infos</a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
