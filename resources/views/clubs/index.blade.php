@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <div class="container pt-4">
+    <div class="container py-4">
         <h1 class="font-weight-bold font-italic">TEAMS der Saison {{ $season->name }}</h1>
 
         @foreach($clubs->chunk(4) as $chunk)
@@ -16,10 +16,12 @@
                 <div class="card-deck w-100">
                     @foreach($chunk as $club)
                         <div class="card text-center">
-                            <div class="card-header ">
-                                <h4 class="text-uppercase">{{ $club->name }}</h4>
+                            <div class="card-header px-1">
+                                <h4 class="text-uppercase font-weight-bold ">
+                                    <a href="{{ route('frontend.clubs.show', $club) }}" class="text-dark" title="Mannschaftsdetails">{{ $club->name }}</a>
+                                </h4>
                             </div>
-                            <div class="card-body" style="background-color: {{ $club->colours_club_primary }};">
+                            <div class="card-body d-flex align-items-center" style="background-color: {{ $club->colours_club_primary }};">
                                 <a href="{{ route('frontend.clubs.show', $club) }}">
                                     @if ($club->logo_url)
                                         <img class="card-img w-75" src="{{ Storage::url($club->logo_url) }}" title="{{ $club->name }}" alt="Vereinswappen">
@@ -28,16 +30,22 @@
                                     @endif
                                 </a>
                             </div>
-                            <div class="card-footer">
+                            @if ($club->regularStadium->first())
+                                <div class="card-body py-1">
+                                    @svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '25', 'height' => '25'])
+                                    {{ $club->regularStadium->first()->name_short }}
+                                </div>
+                            @endif
+                            <div class="card-footer py-1">
                                 @if ($club->championships()->count() > 0)
-                                    @foreach ($club->championships()->orderBy('end','desc')->get() as $championship)
-                                        @php
-                                            $class = null;
-                                            $color = null;
-                                        @endphp
-                                        @if ($division->competition->isLeague())
+                                    @foreach ($club->championships()->orderBy('end','desc')->get()->groupBy('type') as $championship_competitions)
+                                        @foreach ($championship_competitions as $championship)
                                             @php
-                                                if ($championship->division->competition->isLeague()) {
+                                                $class = null;
+                                                $color = null;
+                                            @endphp
+                                            @if ($championship->type == "league")
+                                                @php
                                                     if ($championship->division->hierarchy_level == 1) {
                                                         $class = "fa-star";
                                                         $color = "orange";
@@ -45,17 +53,15 @@
                                                         $class = "fa-star-half-o";
                                                         $color = "grey";
                                                     }
-                                                }
-                                            @endphp
-                                        @elseif ($division->competition->isKnockout())
-                                            @php
-                                                if ($championship->division->competition->isKnockout()) {
+                                                @endphp
+                                            @elseif ($championship->type == "knockout")
+                                                @php
                                                     $class = "fa-trophy";
                                                     $color = "orange";
-                                                }
-                                            @endphp
-                                        @endif
-                                        <span class="fa fa-lg {{ $class }}" style="color: {{ $color }}" title="{{ $championship->name }} {{ $championship->division->name }}"></span>
+                                                @endphp
+                                            @endif
+                                            <span class="fa fa-lg {{ $class }}" style="color: {{ $color }}" title="{{ $championship->name }} {{ $championship->division->name }}"></span>
+                                        @endforeacH
                                     @endforeach
                                 @else
                                     &nbsp;
