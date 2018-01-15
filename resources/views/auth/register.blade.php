@@ -64,7 +64,6 @@
                                 <small id="passwordHelp" class="form-text text-muted">
                                     Dein Passwort muss mindestens 6 Zeichen lang sein.
                                 </small>
-
                                 @if ($errors->has('password'))
                                     <span class="text-danger">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -91,8 +90,13 @@
                                     @endforeach
                                 </select>
                                 <small id="clubsHelp" class="form-text text-muted">
-                                    Wähle deinen Lieblingsverein aus, um schnell auf diesen zugreifen zu können. Mit gehaltener STRG-Taste kannst du auch mehrere Mannschaften auswählen.
+                                    Wähle deinen Lieblingsverein aus, um schnell auf diesen zugreifen zu können. Mit gehaltener STRG-Taste kannst du bis zu <b>drei</b> Teams auswählen.
                                 </small>
+                                @if ($errors->has('clubs'))
+                                    <div class="alert alert-danger">
+                                        Du darfst nicht mehr als drei Teams auswählen.
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="form-group">

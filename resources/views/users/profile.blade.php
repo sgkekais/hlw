@@ -84,24 +84,26 @@
             {{-- favorite teams --}}
             <div class="col-12 col-md-6">
                 <h2 class="font-weight-bold font-italic text-uppercase">Favoriten</h2>
-                <h4 class="font-weight-bold font-italic">Favorit hinzufügen</h4>
-                <div class="row">
-                    <div class="col">
-                        @if (!$clubs->isEmpty())
-                            <form class="form-inline" method="POST" action="{{ route('frontend.user.profile.club.add') }}">
-                                {{ csrf_field() }}
-                                <select id="club" name="club" class="form-control mr-4">
-                                    @foreach ($clubs->sortBy('name') as $club)
-                                        <option value="{{ $club->id }}">{{ $club->name }}</option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="btn btn-sm btn-success">
-                                    <i class="fa fa-heart"></i> Hinzufügen
-                                </button>
-                            </form>
-                        @endif
+                @unless(Auth::user()->clubs->count() >= 3)
+                    <h4 class="font-weight-bold font-italic">Favorit hinzufügen</h4>
+                    <div class="row">
+                        <div class="col">
+                            @if (!$clubs->isEmpty())
+                                <form class="form-inline" method="POST" action="{{ route('frontend.user.profile.club.add') }}">
+                                    {{ csrf_field() }}
+                                    <select id="club" name="club" class="form-control mr-4">
+                                        @foreach ($clubs->sortBy('name') as $club)
+                                            <option value="{{ $club->id }}">{{ $club->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-success">
+                                        <i class="fa fa-heart"></i> Hinzufügen
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
                     </div>
-                </div>
+                @endunless
                 @if (Auth::user()->clubs->count() > 0)
                     <div class="row mt-3">
                         <div class="col">
