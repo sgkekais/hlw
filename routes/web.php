@@ -51,7 +51,7 @@ Route::delete('profile/clubs/{club}', 'AccountController@deleteClubFavorite')->n
 
 // static
 Route::get('imprint', 'PagesController@imprint')->name('imprint');
-Route::get('articles', 'PagesController@articles')->name('articles');
+Route::get('infos', 'PagesController@infos')->name('infos');
 
 /*******************************************************
  * Admin Routes

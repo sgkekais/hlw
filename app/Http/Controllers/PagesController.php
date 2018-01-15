@@ -51,10 +51,10 @@ class PagesController extends Controller
      * "Satzung"
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function articles() {
+    public function infos() {
         $referees = Referee::with('person')->get();
 
-        return view('static.articles', compact('referees'));
+        return view('static.infos', compact('referees'));
     }
 
 }

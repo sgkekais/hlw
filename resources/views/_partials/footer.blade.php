@@ -10,7 +10,7 @@
                         <li><a href="{{ route('frontend.divisions.show', $division) }}" title="zur Spielklasse">{{ $division->name }}</a></li>
                     @endforeach
                     <li><a href="{{ route('chatter.home') }}" title="zur Schänke">Schänke</a></li>
-                    <li><a href="{{ route('articles') }}" title="Satzung, Vorstand, Infos">Infos</a></li>
+                    <li><a href="{{ route('infos') }}" title="Satzung, Vorstand, Infos">Infos</a></li>
                 </ul>
             </div>
             <div class="col-md-6">
@@ -22,7 +22,7 @@
                     Ihr wollt mitmachen?
                 </h5>
                 <p class="">
-                    Schaut auf der <a href="{{ route('articles') }}#join" title="zur Info-Seite"> Info-Seite nach!</a>
+                    Schaut auf der <a href="{{ route('infos') }}#join" title="zur Info-Seite"> Info-Seite nach!</a>
                 </p>
             </div>
             <div class="col-md-4">
