@@ -13,20 +13,25 @@
             <div class="col">
                 <h1 class="font-weight-bold font-italic text-uppercase">Infos</h1>
                 <ul class="nav nav-pills nav-fill">
+                    @auth
+                        <li class="nav-item mr-2">
+                            <a class="nav-link border border-success rounded" href="#referees">Schiedsrichter</a>
+                        </li>
+                    @endauth
                     <li class="nav-item">
-                        <a class="nav-link border rounded" href="#hlw">HLW-Satzung</a>
+                        <a class="nav-link border border-success rounded" href="#hlw">HLW-Satzung</a>
                     </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link border rounded" href="#ah">AH-Satzung</a>
+                    <li class="nav-item ml-2">
+                        <a class="nav-link border border-success rounded" href="#ah">AH-Satzung</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link border rounded" href="#join">Mitmachen</a>
+                    <li class="nav-item ml-2">
+                        <a class="nav-link border border-success rounded" href="#join">Mitmachen</a>
                     </li>
                 </ul>
             </div>
         </div>
-        {{-- HLW-Satzung --}}
-        <div class="row mt-4 mb-4">
+        {{-- Vorstand --}}
+        <div class="row mt-4">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Vorstand der Hobbyliga-West</h2>
                 <span class="text-muted">An alle E-Mail-Adressen ist selbständig "@hobbyligawest.de" anzuhängen.</span>
@@ -37,7 +42,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Michael Leest</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">1. Vorsitzender</h5>
-                                    <p class="card-text">Ansprechpartner für die Teams</p>
+                                    <p class="card-text">Ansprechpartner für die Teams.</p>
                                     <span class="text-success card-link">
                                         <i class="fa fa-fw fa-envelope-o"></i> mleest
                                     </span>
@@ -67,7 +72,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Erwin Scholz</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">Kassierer</h5>
-                                    <p class="card-text">Kassierer der HLW</p>
+                                    <p class="card-text">Kassierer der HLW.</p>
                                     <span class="text-success card-link">
                                         <i class="fa fa-fw fa-envelope-o"></i> escholz
                                     </span>
@@ -79,7 +84,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Klaus Wynants</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">AH-Vorstand</h5>
-                                    <p class="card-text">Verantworlich für die Altherren-Liga.</p>
+                                    <p class="card-text">Verantwortlich für die Altherren-Liga.</p>
                                     <span class="text-success card-link">
                                         <i class="fa fa-fw fa-envelope-o"></i> kwynants
                                     </span>
@@ -89,7 +94,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Jürgen Kaiser</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">Spielplan</h5>
-                                    <p class="card-text">Verantworlich für den Spielplan von HLW und AH-Liga.</p>
+                                    <p class="card-text">Verantwortlich für den Spielplan von HLW und AH-Liga.</p>
                                     <span class="text-success card-link">
                                         <i class="fa fa-fw fa-envelope-o"></i> jkaiser
                                     </span>
@@ -110,8 +115,35 @@
                 </div>
             </div>
         </div>
+        {{-- referees --}}
+        @auth
+            @if (!$referees->isEmpty())
+                <a id="referees"></a>
+                <div class="row mt-4">
+                    <div class="col">
+                        <h2 class="font-weight-bold font-italic">Schiedsrichter</h2>
+                        <ul class="list-group">
+                            @foreach ($referees->sortBy('person.last_name') as $referee)
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <div class="text-left">
+                                        {{ $referee->person->full_name_shortened }}
+                                    </div>
+                                    <div class="">
+                                        {{ $referee->mail }}
+                                    </div>
+                                    <div class="text-right">
+                                        {{ $referee->mobile }}
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+        @endauth
+        {{-- HLW-Satzung --}}
         <a id="hlw"></a>
-        <div class="row">
+        <div class="row mt-4">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Hobbyliga-West</h2>
                 <h5>Stand: </h5>
@@ -131,7 +163,7 @@
             </div>
         </div>
         <a id="ah"></a>
-        <div class="row">
+        <div class="row mt-4">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Altherren-Liga</h2>
                 <h5>Stand: </h5>
@@ -150,8 +182,9 @@
                 </ol>
             </div>
         </div>
+        {{-- how to join --}}
         <a id="join"></a>
-        <div class="row">
+        <div class="row mt-4">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Mitmachen</h2>
                 <p>

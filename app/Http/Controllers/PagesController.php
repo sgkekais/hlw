@@ -7,6 +7,7 @@ use HLW\Competition;
 use HLW\Division;
 use HLW\Fixture;
 use HLW\Matchweek;
+use HLW\Referee;
 use HLW\Season;
 use Illuminate\Http\Request;
 use Forecast\Forecast;
@@ -51,7 +52,9 @@ class PagesController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function articles() {
-        return view('static.articles');
+        $referees = Referee::with('person')->get();
+
+        return view('static.articles', compact('referees'));
     }
 
 }
