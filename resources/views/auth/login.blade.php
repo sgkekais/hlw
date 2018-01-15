@@ -15,7 +15,9 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="email">E-Mail</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-envelope-o"></i> </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-fw fa-envelope-o"></i></span>
+                                    </div>
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus aria-describedby="mailHelp" placeholder="{{ old('email','name@mail.de') }}">
                                 </div>
                                 @if ($errors->has('email'))
@@ -28,7 +30,9 @@
                             <div class="form-group">
                                 <label for="password" class="">Passwort</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><span class="fa fa-fw fa-unlock-alt"></span></div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-fw fa-unlock-alt"></i></span>
+                                    </div>
                                     <input id="password" type="password" class="form-control" name="password" required aria-describedby="passwordHelp" placeholder="{{ old('password','Passwort eingeben') }}">
                                 </div>
                                 @if ($errors->has('password'))
