@@ -26,7 +26,7 @@ class DivisionsSeeder extends Seeder
             1 => [
                 'id'            => 2,
                 'competition_id'=> 1,
-                'name'          => '2. liga',
+                'name'          => '2. Liga',
                 'hierarchy_level' => 2,
                 'published'     => 1,
                 'created_at'    => $timestamp,
