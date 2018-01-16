@@ -32,6 +32,7 @@ class FixtureController extends Controller
                 'stadium',
                 'goals.player.person',
                 'cards.player.person',
+                'referees'
             ]);
 
             return view('fixtures.show', compact('fixture'));

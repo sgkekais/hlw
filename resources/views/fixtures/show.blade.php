@@ -37,10 +37,10 @@
                             @endif
                         @else
                             <span class="fa fa-fw fa-calendar"></span>
-                            <span class="">ohne Datum</span>
+                            <span class="" title="ohne Datum">o.D.</span>
                         @endif
                     </div>
-                    <div class="mb-0 bg-black-transparent">
+                    <div class="bg-black-transparent">
                         @svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #fff', 'width' => '30', 'height' => '30'])
                         @if ($fixture->stadium)
                             @if ($fixture->clubHome)
@@ -59,6 +59,18 @@
                         @else
                             -
                         @endif
+                    </div>
+                    <div class="mb-0 bg-black-transparent">
+                        @auth
+                            @php
+                                $referees = $fixture->referees;
+                            @endphp
+                            @if (!$referees->isEmpty())
+                                @foreach ($referees as $referee)
+                                    <span class="fa fa-fw fa-hand-paper-o"></span> {{ $referee->person->full_name_shortened }}
+                                @endforeach
+                            @endif
+                        @endauth
                     </div>
                 </div>
                 {{-- away details --}}
