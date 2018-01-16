@@ -83,6 +83,20 @@ class Person extends Model
     ];
 
     /*******************************************************
+     * SCOPES
+     * ******************************************************/
+
+    /**
+     * Scope a query to active people
+     * @param $query
+     * @return mixed
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
+    }
+
+    /*******************************************************
      * ACCESSORS
      * ******************************************************/
 
