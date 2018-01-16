@@ -14,23 +14,27 @@ class RolesSeeder extends Seeder
         $timestamp = Carbon::now();
         // insert competitions
         DB::table('roles')->insert([
-            'id'            => 1,
-            'name'          => 'super_admin',
-            'guard_name'    => 'web',
-            'created_at'    => $timestamp,
-            'updated_at'    => $timestamp
-        ], [
-            'id'            => 2,
-            'name'          => 'admin',
-            'guard_name'    => 'web',
-            'created_at'    => $timestamp,
-            'updated_at'    => $timestamp
-        ], [
-            'id'            => 3,
-            'name'          => 'visitor',
-            'guard_name'    => 'web',
-            'created_at'    => $timestamp,
-            'updated_at'    => $timestamp
+            0 => [
+                'id'            => 1,
+                'name'          => 'super_admin',
+                'guard_name'    => 'web',
+                'created_at'    => $timestamp,
+                'updated_at'    => $timestamp
+            ],
+            1 => [
+                'id'            => 2,
+                'name'          => 'admin',
+                'guard_name'    => 'web',
+                'created_at'    => $timestamp,
+                'updated_at'    => $timestamp
+            ],
+            2 => [
+                'id'            => 3,
+                'name'          => 'visitor',
+                'guard_name'    => 'web',
+                'created_at'    => $timestamp,
+                'updated_at'    => $timestamp
+            ]
         ]);
     }
 }

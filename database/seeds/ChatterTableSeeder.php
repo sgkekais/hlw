@@ -57,7 +57,7 @@ class ChatterTableSeeder extends Seeder
                 'updated_at' => null,
             ],
             4 => [
-                'id'         => 4,
+                'id'         => 5,
                 'parent_id'  => null,
                 'order'      => 4,
                 'name'       => 'Börse',
