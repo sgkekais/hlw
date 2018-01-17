@@ -17,7 +17,7 @@ class CreateClubsStadiumsTable extends Migration
             $table->integer('club_id')->unsigned();
             $table->integer('stadium_id')->unsigned();
             $table->string('regular_home_day')->nullable();     // only for info on club page, fixture date and time always count for fixture
-            $table->string('regular_home_time')->nullable();    // only for info on club page, fixture date and time always count for fixture
+            $table->time('regular_home_time')->nullable();    // only for info on club page, fixture date and time always count for fixture
             $table->text('note')->nullable();
             $table->boolean('is_regular_stadium')->default('1');    // is this the "main" stadium of the club?
 
