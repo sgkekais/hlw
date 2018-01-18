@@ -21,9 +21,9 @@
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus aria-describedby="mailHelp" placeholder="{{ old('email','name@mail.de') }}">
                                 </div>
                                 @if ($errors->has('email'))
-                                    <div class="form-control-feedback">
+                                    <span class="text-danger">
                                         {{ $errors->first('email') }}
-                                    </div>
+                                    </span>
                                 @endif
                             </div>
 
@@ -36,9 +36,9 @@
                                     <input id="password" type="password" class="form-control" name="password" required aria-describedby="passwordHelp" placeholder="{{ old('password','Passwort eingeben') }}">
                                 </div>
                                 @if ($errors->has('password'))
-                                    <div class="form-control-feedback" id="passwordError">
+                                    <span class="text-danger" id="passwordError">
                                         {{ $errors->first('password') }}
-                                    </div>
+                                    </span>
                                 @endif
                             </div>
 
@@ -56,8 +56,12 @@
                                         <span class="fa fa-sign-in"></span> Login
                                     </button>
 
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link" href="{{ route('password.request') }}" title="Passwort vergessen">
                                         Passwort vergessen?
+                                    </a>
+
+                                    <a class="btn btn-link" href="{{ route('register') }}" title="Registrieren">
+                                        Neu hier? Registrier dich!
                                     </a>
                                 </div>
                             </div>
