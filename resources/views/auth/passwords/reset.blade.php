@@ -15,9 +15,11 @@
                                 <input type="hidden" name="token" value="{{ $token }}">
 
                                 <div class="form-group">
-                                    <label for="email" class="col-md-4 control-label">E-Mail</label>
-
-                                    <div class="col-md-6">
+                                    <label for="email" class="col-form-label">E-Mail</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-fw fa-envelope-o"></i></span>
+                                        </div>
                                         <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
 
                                         @if ($errors->has('email'))
@@ -28,10 +30,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="col-md-4 control-label">Passwort</label>
-
-                                    <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password" class="col-form-label">Passwort</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-fw fa-unlock-alt"></i></span>
+                                        </div>
                                         <input id="password" type="password" class="form-control" name="password" required>
 
                                         @if ($errors->has('password'))
@@ -42,9 +46,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                    <label for="password-confirm" class="col-md-4 control-label">Passwort wiederholen</label>
-                                    <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-form-label">Passwort wiederholen</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-fw fa-unlock-alt"></i></span>
+                                        </div>
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
 
                                         @if ($errors->has('password_confirmation'))
@@ -56,11 +63,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            Passwort zurücksetzen
-                                        </button>
-                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="fa fa-fw fa-save"></span> Passwort zurücksetzen
+                                    </button>
                                 </div>
                             </form>
                     </div>
