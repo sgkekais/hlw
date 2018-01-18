@@ -22,7 +22,7 @@
     {{-- chatter css --}}
     @yield('css')
 
-    <title>{{ config('app.name') }} | @yield('title') </title>
+    <title>{{ config('app.name') }} @yield('title') </title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

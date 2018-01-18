@@ -21,7 +21,7 @@
                                     <a href="{{ route('frontend.clubs.show', $club) }}" class="text-dark" title="Mannschaftsdetails">{{ $club->name }}</a>
                                 </h4>
                             </div>
-                            <div class="card-body d-flex align-items-center" style="background-color: {{ $club->colours_club_primary }};">
+                            <div class="card-body d-flex align-items-center justify-content-center" style="background-color: {{ $club->colours_club_primary }};">
                                 <a href="{{ route('frontend.clubs.show', $club) }}">
                                     @if ($club->logo_url)
                                         <img class="card-img w-75" src="{{ Storage::url($club->logo_url) }}" title="{{ $club->name }}" alt="Vereinswappen">

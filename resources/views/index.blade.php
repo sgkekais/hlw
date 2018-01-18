@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+
+@endsection
+
 @section('jumbotron')
 
     <div class="jumbotron jumbotron-fluid p-0" style="color: #fff9c4; background: url({{ asset('images/duesseldorf.jpg') }}) left; background-size: cover;">

@@ -25,20 +25,41 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}" title="Anmelden">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}" title="Registrieren">Registrieren</a>
-                    </li>
-                @endguest
-                @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="login-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="fa fa-2x fa-user-circle"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="login-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-2x fa-user-circle"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @guest
+                            <h4 class="px-4">Hallo, Gast!</h4>
+                            <form class="px-4" role="form" method="POST" action="{{ route('login') }}">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="email@beispiel.de">
+                                    @if ($errors->has('email'))
+                                        <small class="text-danger">{{ $errors->first('email') }}</small>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Passwort</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Passwort eingeben">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="remember">
+                                        Merken
+                                    </label>
+                                </div>
+                                {{--TODO {!! app('captcha')->render('de'); !!}--}}
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-sign-in"></i> Anmelden</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('register') }}">Neu hier? Registrier dich!</a>
+                            <a class="dropdown-item" href="{{ route('password.request') }}">Passwort vergessen?</a>
+                        @endguest
+
+                        @auth
                             <h4 class="px-4 py-1">
                                 Hallo, {{ Auth::user()->name }}!
                             </h4>
@@ -75,10 +96,9 @@
                                     <button type="submit" class="btn btn-danger w-100"><span class="fa fa-fw fa-sign-out"></span> Abmelden</button>
                                 </form>
                             </div>
-                        </div>
-                    </li>
-                @endauth
-
+                        @endauth
+                    </div>
+                </li>
             </ul>
         </div>
 

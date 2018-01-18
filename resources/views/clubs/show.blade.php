@@ -207,6 +207,7 @@
                         <div class="col">
                             <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Notizen zum Club</h2>
                             <p>{{ $club->note }}</p>
+                            {{-- TODO: stadiums --}}
                         </div>
                     </div>
                 @endif

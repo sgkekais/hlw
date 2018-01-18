@@ -132,7 +132,7 @@
                                     @if ($fixture->clubHome)
                                         @if (!$fixture->clubHome->regularStadium->isEmpty())
                                             @if ($fixture->clubHome->regularStadium->first()->id != $fixture->stadium->id)
-                                                <span class="text-warning">{{ $fixture->stadium->name_short }}</span>
+                                                <span class="text-danger"><abbr title="abweichender Spielort">{{ $fixture->stadium->name_short }}</abbr></span>
                                             @else
                                                 {{ $fixture->stadium->name_short }}
                                             @endif

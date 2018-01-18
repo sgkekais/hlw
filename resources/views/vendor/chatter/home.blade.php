@@ -18,7 +18,7 @@
 @section('content')
 
 <div id="chatter" class="chatter_home">
-
+{{-- TODO: fix layout (edit & delete buttons, mobile editor), let admins delete any post or discussion, pinning, closing, view count --}}
 	<div id="chatter_hero">
 		<div id="chatter_hero_dimmer"></div>
 		<?php $headline_logo = Config::get('chatter.headline_logo'); ?>
