@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
+use HLW\Notifications\ResetPassword as ResetPasswordNotification;
 
 /**
  * HLW\User
@@ -71,6 +72,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /***********************************************************
+     * FUNCTIONS
+     ************************************************************/
+
+    /**
+     * Send the password reset notification. Overwrite trait.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
     /***********************************************************
      * RELATIONSHIPS
