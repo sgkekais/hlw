@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-2">
             @if($club->logo_url)
-                <img src="{{ Storage::url($club->logo_url) }}" class="img-fluid " title="Vereinswappen" alt="Vereinswappen">
+                <img src="{{ asset('storage/'.$club->logo_url) }}" class="img-fluid " title="Vereinswappen" alt="Vereinswappen">
             @else
             @endif
         </div>
