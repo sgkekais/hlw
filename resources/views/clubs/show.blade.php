@@ -138,19 +138,19 @@
                         <div class="p-4 bg-light rounded text-muted">
                             <ul class="list-inline d-flex justify-content-around">
                                 @if ($club->founded)
-                                    <li class="list-inline-item">
+                                    <li class="list-inline-item" title="Gegründet">
                                         <span class="fa fa-birthday-cake fa-3x pr-1 align-middle"></span>
                                         <span class="h3 align-middle">{{ $club->founded->format('d.m.Y') }}</span>
                                     </li>
                                 @endif
                                 @if ($club->league_entry)
-                                    <li class="list-inline-item">
+                                    <li class="list-inline-item" title="Eingetreten">
                                         <span class="fa fa-sign-in fa-3x pr-1 align-middle"></span>
                                         <span class="h3 align-middle">{{ $club->league_entry->format('d.m.Y') }}</span>
                                     </li>
                                 @endif
                                 @if ($club->league_exit)
-                                    <li class="list-inline-item">
+                                    <li class="list-inline-item" title="Ausgetreten">
                                         <span class="fa fa-sign-out fa-3x pr-1 align-middle"></span>
                                         <span class="h3 align-middle">{{ $club->league_exit->format('d.m.Y') }}</span>
                                     </li>

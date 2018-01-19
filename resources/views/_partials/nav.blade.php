@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #4CAF50;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4CAF50;">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="74" height="30" viewBox="0 0 99 41" class="d-inline-block align-top" fill="white">
