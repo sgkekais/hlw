@@ -77,7 +77,7 @@
                     <tbody>
                     @foreach($matchweek->fixtures()->orderBy('datetime')->get() as $fixture)
                         <tr>
-                            <td>
+                            <td class="align-middle">
                                 @if($fixture->rescheduled_from_fixture_id)
                                     {{ $fixture->rescheduledFrom->id }}
                                     <br>

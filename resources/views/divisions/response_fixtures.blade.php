@@ -23,9 +23,9 @@
                 <table class="table table-hover table-striped table-sm">
                     <thead>
                         <tr>
-                            <th class="d-none d-sm-table-cell align-middle text-center" style="width: 10%">
+                            {{--<th class="d-none d-sm-table-cell align-middle text-center" style="width: 10%">
                                 <span class="fa fa-info"></span>
-                            </th>
+                            </th>--}}
                             <th class="align-middle" style="width: 20%">
                                 <span class="fa fa-calendar"></span>
                             </th>
@@ -43,7 +43,7 @@
                     <tbody>
                     @foreach($matchweek->fixtures->where('published',1)->sortBy('datetime') as $fixture)
                         <tr class="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-muted" : null }}" >
-                            <td class="d-none d-sm-table-cell align-middle text-center">
+                            {{--<td class="d-none d-sm-table-cell align-middle text-center">
                                 @if($fixture->isCancelled())
                                     <span class="fa fa-fw fa-ban text-danger" title="Annulliert"></span>
                                 @elseif($fixture->isRated())
@@ -55,7 +55,7 @@
                                 @else
                                     <span class="fa fa-fw"></span>
                                 @endif
-                            </td>
+                            </td>--}}
                             {{-- date - day of week, date, time --}}
                             <td class="align-middle">
                                 <span class="d-none d-md-inline pr-1">{{ $fixture->datetime ? $fixture->datetime->formatLocalized('%a').". " : null }}</span>

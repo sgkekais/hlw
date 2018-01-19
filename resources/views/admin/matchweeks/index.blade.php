@@ -32,8 +32,8 @@
             <tbody>
             @foreach($matchweeks as $matchweek)
                 <tr>
-                    <td><b>{{ $matchweek->id }}</b></td>
-                    <td>
+                    <td class="align-middle"><b>{{ $matchweek->id }}</b></td>
+                    <td class="align-middle">
                         <a href="{{ route('matchweeks.show', $matchweek ) }}" title="Anzeigen">{{ $matchweek->number_consecutive }}</a>
                         <br>
                         <span class="text-muted">
@@ -44,9 +44,9 @@
                         <br>
                         Paarungen: {{ $matchweek->fixtures()->get()->count() }}
                     </td>
-                    <td>{{ $matchweek->name }}</td>
-                    <td>{{ $matchweek->published ? "JA" : "NEIN" }}</td>
-                    <td>
+                    <td class="align-middle">{{ $matchweek->name }}</td>
+                    <td class="align-middle">{{ $matchweek->published ? "JA" : "NEIN" }}</td>
+                    <td class="align-middle">
                         <!-- display details -->
                         <a class="btn btn-secondary" href="{{ route('matchweeks.show', $matchweek) }}" title="Spielwoche anzeigen">
                             <span class="fa fa-eye"></span>
@@ -56,7 +56,7 @@
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                         </a>
                     </td>
-                    <td>
+                    <td class="align-middle">
                         angelegt am {{ $matchweek->created_at->format('d.m.Y \\u\\m H:i') }} Uhr
                         @if($causer = ModelHelper::causerOfAction($matchweek,'created'))
                             von {{ $causer->name }}
