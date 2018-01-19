@@ -14,10 +14,16 @@
     <meta name="description" content="Hobbyliga-West Düsseldorf. Die Fußballliga für Hobby- und Freizeitmannschaften aus Düsseldorf und Umgebung." />
     <meta name="keywords" content="Hobbyliga-West, Düsseldorf, Hobbyliga, Freizeitliga, Freizeitfußballliga, Fußballliga, Thekenmannschaft, Hobbyfußball, Freizeitfußball, Fußball, Liga" />
 
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" sizes="32x32">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=M4yNP8xXXQ">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=M4yNP8xXXQ">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=M4yNP8xXXQ">
+    <link rel="manifest" href="/manifest.json?v=M4yNP8xXXQ">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=M4yNP8xXXQ" color="#388e3c">
+    <link rel="shortcut icon" href="/favicon.ico?v=M4yNP8xXXQ">
+    <meta name="apple-mobile-web-app-title" content="HLW">
+    <meta name="application-name" content="HLW">
+    <meta name="theme-color" content="#388e3c">
 
     {{-- chatter css --}}
     @yield('css')
