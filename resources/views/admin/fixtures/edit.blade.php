@@ -217,8 +217,8 @@
             </div>
             <div class="col-md-2">
                 <select class="form-control" id="counts_in_tables" name="counts_in_tables" aria-describedby="counts_in_tablesHelp">
-                    <option value="1">Ja</option>
-                    <option value="0" {{ $fixture->counts_in_table ? "selected" : null }}>Nein</option>
+                    <option value="0">Nein</option>
+                    <option value="1" {{ $fixture->counts_in_tables ? "selected" : null }}>Ja</option>
                 </select>
                 <small id="counts_in_tablesHelp" class="form-text text-muted">Wird diese Paarung in der Berechnung der Tabelle berücksichtigt ("Nein", bspw. bei Relegationsspielen)?</small>
             </div>

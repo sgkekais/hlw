@@ -42,7 +42,6 @@ class FixtureController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -65,9 +64,16 @@ class FixtureController extends Controller
 
         $matchweek->fixtures()->save($fixture);
 
-        Session::flash('success', 'Paarung angelegt');
+        // is this a rescheduled fixture? Then set counts_in_tables for the old fixture to 0
+        if ($request->filled('rescheduled_from_fixture_id')) {
+            $old_fixture = Fixture::find($request->rescheduled_from_fixture_id);
+            $old_fixture->counts_in_tables = 0;
+            $old_fixture->save();
+            $old = true;
+        }
 
-        return redirect()->route('seasons.matchweeks.show', [$matchweek->season, $matchweek]);
+        return redirect()->route('seasons.matchweeks.show', [$matchweek->season, $matchweek])
+            ->with('success', 'Paarung erfolgreich angelegt.'.($old_fixture ? "Paarung ".$old_fixture->id." wird nicht mehr in der Tabelle berücksichtigt." : null ));
     }
 
     /**
