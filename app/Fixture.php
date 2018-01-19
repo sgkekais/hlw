@@ -126,6 +126,7 @@ class Fixture extends Model
         'note',
         'cancelled',
         'published',
+        'counts_in_tables',
         'rescheduled_from_fixture_id', 'rescheduled_by_club', 'reschedule_reason', 'reschedule_count'
     ];
 
@@ -143,7 +144,8 @@ class Fixture extends Model
      */
     protected $casts = [
         'cancelled' => 'boolean',
-        'published' => 'boolean'
+        'published' => 'boolean',
+        'counts_in_tables' => 'boolean'
     ];
 
     /***********************************************************
