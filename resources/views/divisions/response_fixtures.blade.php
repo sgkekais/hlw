@@ -58,16 +58,17 @@
                             </td>--}}
                             {{-- date - day of week, date, time --}}
                             <td class="align-middle">
-                                <span class="d-none d-md-inline pr-1">{{ $fixture->datetime ? $fixture->datetime->formatLocalized('%a').". " : null }}</span>
                                 @if ($fixture->datetime)
-                                    <span class="">{{ $fixture->datetime->format('d.m.') }}</span>
+                                    <span class="d-none d-md-inline-block text-uppercase" style="width: 24px">{{ $fixture->datetime->formatLocalized('%a') }}</span>
+                                    <span class="d-inline d-md-none pr-1">{{ $fixture->datetime->format('d.m') }}</span>
+                                    <span class="d-none d-md-inline px-1">{{ $fixture->datetime->format('d.m.y') }}</span>
                                     @if ($fixture->datetime->format('H:i') != "00:00")
                                         <span class="">{{ $fixture->datetime->format('H:i') }}</span>
                                     @else
                                         <span class="">--:--</span>
                                     @endif
                                 @else
-                                    <span class="text-muted">o. D.</span>
+                                    <span class="text-muted">o.D.</span>
                                 @endif
                             </td>
                             <td class="d-flex justify-content-center align-items-center">
@@ -132,7 +133,7 @@
                                     @if ($fixture->clubHome)
                                         @if (!$fixture->clubHome->regularStadium->isEmpty())
                                             @if ($fixture->clubHome->regularStadium->first()->id != $fixture->stadium->id)
-                                                <span class="text-danger"><abbr title="abweichender Spielort">{{ $fixture->stadium->name_short }}</abbr></span>
+                                                <span class="text-warning"><abbr title="abweichender Spielort">{{ $fixture->stadium->name_short }}</abbr></span>
                                             @else
                                                 {{ $fixture->stadium->name_short }}
                                             @endif
