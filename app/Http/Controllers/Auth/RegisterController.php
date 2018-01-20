@@ -131,9 +131,14 @@ class RegisterController extends Controller
         UserVerification::send($user, 'Bestätigung deines Accounts');
 
         return $this->registered($request, $user)
-            ?: redirect($this->redirectPath())->with('status', 'Bitte bestätige deine Anmeldung! Um die Anmeldung abzuschließen, klick bitte auf den Link in der E-Mail, die wir soeben an dich geschickt haben.');
+            ?: redirect($this->redirectPath())->with('registered', 'Um deine Registrierung abzuschließen, bestätige bitte deine E-Mail. Klick dazu auf den Link in der E-Mail, die wir soeben an dich geschickt haben.');
     }
 
+    /**
+     * TODO
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function resendVerificationToken(User $user)
     {
         // generate a verification token

@@ -11,9 +11,12 @@
             <div class="col-12 col-md-9 col-lg-6">
                 <div class="card" style="border: 1px solid rgba(0, 0, 0, 0.15); border-radius: 0.25rem; -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175); box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);">
                     <div class="card-body">
-                        @if (session('status'))
+                        @if (session('registered'))
                             <div class="alert alert-info">
-                                <span class="fa fa-fw fa-envelope"></span> {{ session('status') }}
+                                <h4><span class="fa fa-fw fa-envelope"></span> Registrierung erfolgreich!</h4>
+                                    <p>
+                                        {{ session('status') }}
+                                    </p>
                             </div>
                         @endif
                         @if (session('warning'))
