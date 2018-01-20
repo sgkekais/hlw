@@ -3,6 +3,7 @@
 namespace HLW\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class IsVerified
 {
@@ -16,8 +17,8 @@ class IsVerified
     public function handle($request, Closure $next)
     {
         if (!auth()->user()->verified) {
-            Session::flush();
-            return redirect('login')->withAlert('Bitte bestätige zuerst deine E-Mail-Adresse.');
+            Auth::logout();
+            return redirect()->route('login')->with('warning', 'Bitte bestätige zuerst deine E-Mail-Adresse.');
         }
 
         return $next($request);

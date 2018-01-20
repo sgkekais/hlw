@@ -31,6 +31,16 @@ class RegisterController extends Controller
     use VerifiesUsers;
 
     /**
+     * laravel-user-verification overwrites
+     */
+    protected $redirectIfVerified = '/login';
+    protected $redirectAfterVerification = '/login';
+    protected $redirectIfVerificationFails = '/email-verification/error';
+    protected $verificationErrorView = 'laravel-user-verification::user-verification';
+    protected $verificationEmailView = 'laravel-user-verification::email';
+    protected $userTable = 'users';
+
+    /**
      * Where to redirect users after registration.
      *
      * @var string
@@ -122,5 +132,15 @@ class RegisterController extends Controller
 
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath())->with('status', 'Bitte bestätige deine Anmeldung! Um die Anmeldung abzuschließen, klick bitte auf den Link in der E-Mail, die wir soeben an dich geschickt haben.');
+    }
+
+    public function resendVerificationToken(User $user)
+    {
+        // generate a verification token
+        UserVerification::generate($user);
+        // and send the mail to the user
+        UserVerification::send($user, 'Bestätigung deines Accounts');
+
+        return redirect()->route('login')->with('status', 'Die E-Mail zur Bestätigung deines Accounts wurde dir erneut zugeschickt.');
     }
 }

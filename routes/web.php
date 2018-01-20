@@ -47,10 +47,12 @@ Route::get('clubs/{club}/ajax-club-results', 'ClubController@ajaxGetClubResults'
 Route::get('fixtures/{fixture}', 'FixtureController@show')->name('frontend.fixtures.show');
 
 // user profile
-Route::get('profile', 'AccountController@profile')->name('frontend.user.profile.show')->middleware('auth');
-Route::post('profile', 'AccountController@update')->name('frontend.user.profile.update')->middleware('auth');
-Route::post('profile/clubs', 'AccountController@addClubFavorite')->name('frontend.user.profile.club.add')->middleware('auth');
-Route::delete('profile/clubs/{club}', 'AccountController@deleteClubFavorite')->name('frontend.user.profile.club.delete')->middleware('auth');
+Route::group(['middleware' => ['auth', 'isVerified']], function() {
+    Route::get('profile', 'AccountController@profile')->name('frontend.user.profile.show');
+    Route::post('profile', 'AccountController@update')->name('frontend.user.profile.update');
+    Route::post('profile/clubs', 'AccountController@addClubFavorite')->name('frontend.user.profile.club.add');
+    Route::delete('profile/clubs/{club}', 'AccountController@deleteClubFavorite')->name('frontend.user.profile.club.delete');
+});
 
 // static
 Route::get('imprint', 'PagesController@imprint')->name('imprint');

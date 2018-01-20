@@ -16,6 +16,11 @@
                                 <span class="fa fa-fw fa-envelope"></span> {{ session('status') }}
                             </div>
                         @endif
+                        @if (session('warning'))
+                            <div class="alert alert-warning">
+                                <span class="fa fa-fw fa-warning"></span> {{ session('warning') }}
+                            </div>
+                        @endif
                         <h1 class="font-weight-bold font-italic">Anmelden</h1>
                         <!-- Login Form -->
                         <form class="form" role="form" method="POST" action="{{ route('login') }}">
