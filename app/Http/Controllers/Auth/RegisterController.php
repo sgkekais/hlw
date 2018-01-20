@@ -5,6 +5,7 @@ namespace HLW\Http\Controllers\Auth;
 use HLW\Club;
 use HLW\User;
 use HLW\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -34,7 +35,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -102,12 +103,24 @@ class RegisterController extends Controller
         return $user;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
+
         $user = $this->create($request->all());
+
+        event(new Registered($user));
+
+        // generate a verification token
         UserVerification::generate($user);
+        // and send the mail to the user
         UserVerification::send($user, 'Bestätigung deines Accounts');
-        return back()->with('status', 'Registrierung erfolgreich. Bitte bestätige deine Anmeldung.');
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath())->with('status', 'Bitte bestätige deine Anmeldung! Um die Anmeldung abzuschließen, klick bitte auf den Link in der E-Mail, die wir soeben an dich geschickt haben.');
     }
 }

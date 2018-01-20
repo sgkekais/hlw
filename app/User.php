@@ -4,6 +4,7 @@ namespace HLW;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jrean\UserVerification\Traits\UserVerification;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use HLW\Notifications\ResetPassword as ResetPasswordNotification;
@@ -31,6 +32,9 @@ use HLW\Notifications\ResetPassword as ResetPasswordNotification;
 class User extends Authenticatable
 {
     use Notifiable;
+
+    // user verification
+    use UserVerification;
 
     /**
      * spatie laravel-permission package

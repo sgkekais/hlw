@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    // TODO: Ban users, keep them in the database with a banned indicator, so that the email adress is retained (prevents re-registration)
     /**
      * Display a listing of the resource.
      *
