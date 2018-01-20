@@ -5,8 +5,11 @@ namespace HLW\Http\Controllers\Auth;
 use HLW\Club;
 use HLW\User;
 use HLW\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Jrean\UserVerification\Facades\UserVerification;
+use Jrean\UserVerification\Traits\VerifiesUsers;
 
 class RegisterController extends Controller
 {
@@ -21,7 +24,10 @@ class RegisterController extends Controller
     |
     */
 
+    // TODO: confirm registration mail
+
     use RegistersUsers;
+    use VerifiesUsers;
 
     /**
      * Where to redirect users after registration.
@@ -37,7 +43,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest',['except' => ['getVerification', 'getVerificationError']]);
     }
 
     /**
@@ -94,5 +100,14 @@ class RegisterController extends Controller
         $user->assignRole('visitor');
 
         return $user;
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        UserVerification::generate($user);
+        UserVerification::send($user, 'Bestätigung deines Accounts');
+        return back()->with('status', 'Registrierung erfolgreich. Bitte bestätige deine Anmeldung.');
     }
 }

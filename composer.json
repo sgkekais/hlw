@@ -12,10 +12,12 @@
     ],
     "require": {
         "php": ">=7.0.0",
+        "albertcht/invisible-recaptcha": "^1.8",
         "caouecs/laravel-lang": "~3.0",
         "devdojo/chatter": "dev-master",
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "~3.3",
+        "jrean/laravel-user-verification": "^5.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "maatwebsite/excel": "~2.1.0",

@@ -15,7 +15,7 @@
                         <form class="" method="POST" action="{{ route('register') }}">
                             {{ csrf_field() }}
 
-                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label for="name" class="col-form-label">Name</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -34,7 +34,7 @@
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label for="email" class="col-form-label">E-Mail Addresse</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -53,7 +53,7 @@
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label for="password" class="col-form-label">Passwort</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
