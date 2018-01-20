@@ -167,7 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Jrean\UserVerification\UserVerificationServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -235,8 +235,9 @@ return [
 
         'ModelHelper' => HLW\Helpers\ModelHelper::class,
 
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
     ],
 
 ];

@@ -50,6 +50,7 @@
     "extra": {
         "laravel": {
             "dont-discover": [
+                "jrean/laravel-user-verification"
             ]
         }
     },
