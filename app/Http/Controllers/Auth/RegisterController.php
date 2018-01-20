@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Jrean\UserVerification\Facades\UserVerification;
 use Jrean\UserVerification\Traits\VerifiesUsers;
+use Jrean\UserVerification\Exceptions\UserNotFoundException;
+use Jrean\UserVerification\Exceptions\UserIsVerifiedException;
+use Jrean\UserVerification\Exceptions\TokenMismatchException;
 
 class RegisterController extends Controller
 {
@@ -147,7 +150,7 @@ class RegisterController extends Controller
         }
 
         try {
-            $user = UserVerificationFacade::process($request->input('email'), $token, $this->userTable());
+            $user = UserVerification::process($request->input('email'), $token, $this->userTable());
         } catch (UserNotFoundException $e) {
             return redirect($this->redirectIfVerificationFails());
         } catch (UserIsVerifiedException $e) {
