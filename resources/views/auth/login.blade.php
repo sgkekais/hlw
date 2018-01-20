@@ -19,6 +19,11 @@
                                     </p>
                             </div>
                         @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                <span class="fa fa-fw fa-check-circle-o"></span> {{ session('success') }}
+                            </div>
+                        @endif
                         @if (session('warning'))
                             <div class="alert alert-warning">
                                 <span class="fa fa-fw fa-warning"></span> {{ session('warning') }}

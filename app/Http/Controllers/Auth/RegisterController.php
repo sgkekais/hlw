@@ -135,6 +135,35 @@ class RegisterController extends Controller
     }
 
     /**
+     * Handle the user verification.
+     * Change this to display a success message
+     * @param  string  $token
+     * @return \Illuminate\Http\Response
+     */
+    public function getVerification(Request $request, $token)
+    {
+        if (! $this->validateRequest($request)) {
+            return redirect($this->redirectIfVerificationFails());
+        }
+
+        try {
+            $user = UserVerificationFacade::process($request->input('email'), $token, $this->userTable());
+        } catch (UserNotFoundException $e) {
+            return redirect($this->redirectIfVerificationFails());
+        } catch (UserIsVerifiedException $e) {
+            return redirect($this->redirectIfVerified());
+        } catch (TokenMismatchException $e) {
+            return redirect($this->redirectIfVerificationFails());
+        }
+
+        if (config('user-verification.auto-login') === true) {
+            auth()->loginUsingId($user->id);
+        }
+
+        return redirect($this->redirectAfterVerification())->with('success', 'Du hast deinen Account erfolgreich bestätigt und kannst dich jetzt anmelden!');
+    }
+
+    /**
      * TODO
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
