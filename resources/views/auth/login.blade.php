@@ -15,7 +15,7 @@
                             <div class="alert alert-info">
                                 <h4><span class="fa fa-fw fa-envelope"></span> Registrierung erfolgreich!</h4>
                                     <p>
-                                        {{ session('status') }}
+                                        {{ session('registered') }}
                                     </p>
                             </div>
                         @endif
