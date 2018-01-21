@@ -46,7 +46,7 @@
                 </td>
                 <td class="align-middle text-center">
                     @if($person->photo)
-                        <img src="{{ Storage::url($person->photo) }}" class="rounded" title="Passbild" alt="Passbild" width="25">
+                        <img src="{{ asset('storage/'.$person->photo) }}" class="rounded" title="Passbild" alt="Passbild" width="25">
                         @if($person->photo_public)
                             <span class="fa fa-eye fa-fw" title="Passbild öffentlich"></span>
                         @else

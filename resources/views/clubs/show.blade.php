@@ -119,9 +119,6 @@
                     <a class="ml-1 nav-item nav-link px-2 border-white" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" style="background-color: rgba(0, 0, 0, 0.5);">
                         Kader
                     </a>
-                    <a class="ml-1 nav-item nav-link px-2 border-white" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" style="background-color: rgba(0, 0, 0, 0.5);">
-                        Erfolge
-                    </a>
                 </nav>
             </div>
         </div>
@@ -159,58 +156,59 @@
                         </div>
                     </div>
                 </div>
-                @if ($reschedulings)
-                    @php
-                        $total_reschedulings      = $reschedulings->count();
-                        $counting_reschedulings   = $reschedulings->where('reschedule_count', true)->count();
-                    @endphp
-                    <div class="row mt-4">
-                        <div class="col">
-                            <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Spielverlegungen</h2>
-                            <div class="row">
-                                <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <div class="h1 font-weight-bold font-italic align-middle {{ $counting_reschedulings >= $season->max_rescheduling ? "text-danger" : null }}" title="Anzahl Verlegungen">
-                                        <span class="fa fa-fw fa-calendar-plus-o"></span>
-                                        {{ $counting_reschedulings }}
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        @if ($reschedulings)
+                            @php
+                                $total_reschedulings      = $reschedulings->count();
+                                $counting_reschedulings   = $reschedulings->where('reschedule_count', true)->count();
+                            @endphp
+                                <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Spielverlegungen</h2>
+                                <div class="row">
+                                    <div class="col-2 d-flex justify-content-center align-items-center">
+                                        <div class="h1 font-weight-bold font-italic align-middle text-center {{ $counting_reschedulings >= $season->max_rescheduling ? "text-danger" : null }}" title="Anzahl Verlegungen">
+                                            <span class="fa fa-fw fa-calendar-plus-o"></span>
+                                            {{ $counting_reschedulings }}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <ul class="list-group">
+                                            @if ($total_reschedulings > 0)
+                                                @foreach ($reschedulings as $rescheduled_fixture)
+                                                    <li class="list-group-item">
+                                                        {{ $rescheduled_fixture->clubHome ? $rescheduled_fixture->clubHome->name_short : "-" }}
+                                                        :
+                                                        {{ $rescheduled_fixture->clubAway ? $rescheduled_fixture->clubAway->name_short : "-" }}
+                                                        aus SW {{ $rescheduled_fixture->matchweek->number_consecutive }}
+                                                        verlegt vom {{ $rescheduled_fixture->rescheduledFrom && $rescheduled_fixture->rescheduledFrom->datetime ? $rescheduled_fixture->rescheduledFrom->datetime->format('d.m.Y H:i') : "o.D." }}
+                                                        auf den {{ $rescheduled_fixture->datetime ? $rescheduled_fixture->datetime->format('d.m.Y H:i') : "o.D." }}
+                                                        <span class="pull-right">
+                                                            <a href="{{ route('frontend.fixtures.show', $rescheduled_fixture) }}" title="Match betrachten">
+                                                                <i class="fa fa-fw fa-arrow-right"></i>
+                                                            </a>
+                                                        </span>
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                <li class="list-group-item">
+                                                    <span class="fa fa-fw fa-thumbs-o-up"></span> Team hat bisher kein Spiel verlegt.
+                                                </li>
+                                            @endif
+                                        </ul>
+                                        @if ($total_reschedulings > $counting_reschedulings)
+                                            <small class="text-muted">
+                                                {{ $total_reschedulings - $counting_reschedulings }} Verlegung wird nicht gezählt.
+                                            </small>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <ul class="list-group">
-                                        @foreach ($reschedulings as $rescheduled_fixture)
-                                            <li class="list-group-item">
-                                                {{ $rescheduled_fixture->clubHome ? $rescheduled_fixture->clubHome->name_short : "-" }}
-                                                :
-                                                {{ $rescheduled_fixture->clubAway ? $rescheduled_fixture->clubAway->name_short : "-" }}
-                                                aus SW {{ $rescheduled_fixture->matchweek->number_consecutive }}
-                                                verlegt vom {{ $rescheduled_fixture->rescheduledFrom && $rescheduled_fixture->rescheduledFrom->datetime ? $rescheduled_fixture->rescheduledFrom->datetime->format('d.m.Y H:i') : "o.D." }}
-                                                auf den {{ $rescheduled_fixture->datetime ? $rescheduled_fixture->datetime->format('d.m.Y H:i') : "o.D." }}
-                                                <span class="pull-right">
-                                                    <a href="{{ route('frontend.fixtures.show', $rescheduled_fixture) }}" title="Match betrachten">
-                                                        <i class="fa fa-fw fa-arrow-right"></i>
-                                                    </a>
-                                                </span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    @if ($total_reschedulings > $counting_reschedulings)
-                                        <small class="text-muted">
-                                            {{ $total_reschedulings - $counting_reschedulings }} Verlegung wird nicht gezählt.
-                                        </small>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
+                        @endif
                     </div>
-                @endif
-                @if ($club->note)
-                    <div class="row mt-4">
-                        <div class="col">
-                            <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Notizen zum Club</h2>
-                            <p>{{ $club->note }}</p>
-                            {{-- TODO: stadiums --}}
-                        </div>
+                    {{-- club colors --}}
+                    <div class="col-md-6">
+
                     </div>
-                @endif
+                </div>
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Zuletzt</h2>
@@ -366,6 +364,15 @@
                         @endif
                     </div>
                 </div>
+                @if ($club->note)
+                    <div class="row mt-4">
+                        <div class="col">
+                            <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Notizen zum Club</h2>
+                            <p>{{ $club->note }}</p>
+                            {{-- TODO: stadiums --}}
+                        </div>
+                    </div>
+                @endif
                 @php
                     $players = $club->players()->active()->public()->get();
                 @endphp

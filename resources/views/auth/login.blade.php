@@ -83,8 +83,6 @@
                                     <a class="btn btn-link mt-2 pull-right" href="{{ route('password.request') }}" title="Passwort vergessen">
                                         Passwort vergessen?
                                     </a>
-
-
                                 </div>
                             </div>
                         </form> <!-- ./Login Form -->
