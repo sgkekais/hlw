@@ -74,17 +74,17 @@
 
                             <div class="form-group">
                                 <div class="">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary mr-1 mt-2">
                                         <span class="fa fa-sign-in"></span> Login
                                     </button>
-
-                                    <a class="btn btn-link" href="{{ route('password.request') }}" title="Passwort vergessen">
+                                    <a class="btn btn-outline-primary mr-1 mt-2" href="{{ route('register') }}" title="Registrieren">
+                                        Neu hier? Registrier dich!
+                                    </a>
+                                    <a class="btn btn-link mt-2 pull-right" href="{{ route('password.request') }}" title="Passwort vergessen">
                                         Passwort vergessen?
                                     </a>
 
-                                    <a class="btn btn-link" href="{{ route('register') }}" title="Registrieren">
-                                        Neu hier? Registrier dich!
-                                    </a>
+
                                 </div>
                             </div>
                         </form> <!-- ./Login Form -->

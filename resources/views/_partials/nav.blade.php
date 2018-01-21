@@ -27,10 +27,7 @@
             <ul class="navbar-nav ml-auto">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}" title="Anmelden">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}" title="Registrieren">Registrieren</a>
+                        <a class="nav-link" href="{{ route('login') }}" title="Anmelden">Login <span class="fa fa-fw fa-sign-in"></span></a>
                     </li>
                 @endguest
                 @auth
@@ -63,11 +60,11 @@
                                 </a>
                             </div>
                             @hasanyrole('super_admin|admin')
-                                <div class="px-4 py-1">
-                                    <a class="btn btn-secondary w-100" href="{{ route('admin') }}">
-                                        <span class="fa fa-fw fa-cogs"></span> HLW-Admin
-                                    </a>
-                                </div>
+                            <div class="px-4 py-1">
+                                <a class="btn btn-secondary w-100" href="{{ route('admin') }}">
+                                    <span class="fa fa-fw fa-cogs"></span> HLW-Admin
+                                </a>
+                            </div>
                             @endrole
                             <div class="px-4 py-1">
                                 <form class="" role="form" id="logout-form" action="{{ route('logout') }}" method="POST">
