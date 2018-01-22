@@ -113,11 +113,7 @@ class Matchweek extends Model
     {
         $previous_mw = $this->season->matchweeks->where('number_consecutive', $this->number_consecutive - 1)->first();
 
-        if ($previous_mw->count()) {
-           return $previous_mw;
-        } else {
-            return null;
-        }
+        return $previous_mw;
     }
 
     /**
@@ -128,11 +124,7 @@ class Matchweek extends Model
     {
         $next_mw = $this->season->matchweeks->where('number_consecutive', $this->number_consecutive + 1)->first();
 
-        if ($next_mw->count()) {
-            return $next_mw;
-        } else {
-            return null;
-        }
+        return $next_mw;
     }
 
     /***********************************************************
