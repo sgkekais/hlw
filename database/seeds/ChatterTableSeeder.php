@@ -59,13 +59,23 @@ class ChatterTableSeeder extends Seeder
             4 => [
                 'id'         => 5,
                 'parent_id'  => null,
-                'order'      => 4,
+                'order'      => 5,
                 'name'       => 'Börse',
                 'color'      => 'yellow',
                 'slug'       => 'boerse',
                 'created_at' => null,
                 'updated_at' => null,
             ],
+            5 => [
+                'id'         => 6,
+                'parent_id'  => null,
+                'order'      => 6,
+                'name'       => 'Website',
+                'color'      => 'green',
+                'slug'       => 'website',
+                'created_at' => null,
+                'updated_at' => null,
+            ]
         ]);
 
         // CREATE THE DISCUSSIONS

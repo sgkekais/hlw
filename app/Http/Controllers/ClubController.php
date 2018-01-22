@@ -43,7 +43,7 @@ class ClubController extends Controller
             $is_current_season = true;
 
             if (!$season) {
-                $season = $club->seasons()->orderBy('season_nr', 'desc')->get()->where('type','league')->first();
+                $season = $club->seasons()->published()->orderBy('season_nr', 'desc')->get()->where('type','league')->first();
                 $is_current_season = false;
             }
 
