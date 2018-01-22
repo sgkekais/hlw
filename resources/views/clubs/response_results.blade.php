@@ -87,7 +87,7 @@
                                         {{-- date --}}
                                         <span class="d-inline d-md-none pr-1">{{ $fixture->datetime->format('d.m') }}</span>
                                         <span class="d-none d-md-inline px-1">{{ $fixture->datetime->format('d.m.y') }}</span>
-                                        <span class="">{{ $fixture->datetime->format('H:i') }}</span>
+                                        <span class="">{{ $fixture->datetime->format('H:i') != "00:00" ? $fixture->datetime->format('H:i') : "--:--" }}</span>
                                     </td>
                                 @else
                                     <td class="align-middle text-left text-muted">
@@ -148,10 +148,14 @@
                                     @endif
                                 </td>
                                 <td class="d-none d-md-table-cell align-middle text-left">
-                                    @if($fixture->stadium)
-                                        {{ $fixture->stadium->name_short}}
+                                    @if ($fixture->stadium)
+                                        @if ($fixture->club_id_home == $club->id && ($club->regularStadium()->first()->id != $fixture->stadium->id))
+                                            <span class="text-warning"><abbr title="abweichender Spielort">{{ $fixture->stadium->name_short}}</abbr></span>
+                                        @else
+                                            {{ $fixture->stadium->name_short }}
+                                        @endif
                                     @else
-                                        &nbsp;
+                                        &nbsp;{{ $fixture->stadium_id }}
                                     @endif
                                 </td>
                                 <td class="align-middle text-center">

@@ -480,7 +480,7 @@
                         <form class="form-inline pb-2">
                             <label class="pr-4" for="season-selection"><b>Saison</b></label>
                             <select id="season-selection" name="season-selection" class="form-control" aria-labelledby="">
-                                @foreach($club->seasons->sortByDesc('end') as $club_season)
+                                @foreach($club->seasons()->published()->orderBy('end','desc')->get() as $club_season)
                                     <option {{ $club_season->id == $season->id ? "selected" : null }} value="{{ $club_season->id }}">{{ $club_season->name }} {{ $club_season->division ? "- ".$club_season->division->name : null }}</option>
                                 @endforeach
                             </select>
