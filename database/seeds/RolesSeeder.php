@@ -34,6 +34,13 @@ class RolesSeeder extends Seeder
                 'guard_name'    => 'web',
                 'created_at'    => $timestamp,
                 'updated_at'    => $timestamp
+            ],
+            3 => [
+                'id'            => 4,
+                'name'          => 'club_contact',
+                'guard_name'    => 'web',
+                'created_at'    => $timestamp,
+                'updated_at'    => $timestamp
             ]
         ]);
     }
