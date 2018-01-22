@@ -24,7 +24,7 @@ class PagesController extends Controller
         // get the fixtures of the current week
         $monday = Carbon::now()->startOfWeek();
         $sunday = Carbon::now()->endOfWeek();
-        $fixtures_grouped_by_divisions = Fixture::whereBetween('datetime', ['2017-10-30', '2017-11-11'])
+        $fixtures_grouped_by_divisions = Fixture::whereBetween('datetime', [$monday, $sunday])
             ->with([
                 'matchweek.season.division',
                 'clubHome',
