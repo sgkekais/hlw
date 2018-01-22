@@ -16,7 +16,11 @@
         <div class="container pt-4 pb-4">
             <div class="col-12 p-0">
                 <div class="display-4 font-weight-bold">
-                    {{ $division->competition->name_short }} &#448; {{ $division->name }}
+                    @if ($division->competition_id == 1)
+                        {{ $division->competition->name_short }} &#448; {{ $division->name }}
+                    @else
+                        {{ $division->name }}
+                    @endif
                 </div>
             </div>
         </div>
@@ -27,17 +31,6 @@
 @section('content')
 
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1 class="font-weight-bold font-italic text-uppercase">
-                    @if($division->competition->isLeague())
-                        {{ $division->competition->name_short }} -  {{ $division->name }}
-                    @elseif($division->competition->isKnockout())
-                        {{ $division->competition->name }}
-                    @endif
-                </h1>
-            </div>
-        </div>
         {{-- fixtures in this week--}}
         @if(!$fixtures->isEmpty())
             <div class="row">

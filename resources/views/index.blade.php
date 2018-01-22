@@ -168,7 +168,13 @@
                         }
                     @endphp
                     @if ($c_season && $c_matchweek)
-                        <h3 class="font-weight-bold font-italic text-uppercase">{{ $division->competition->name_short." &ndash; ".$division->name }}</h3>
+                        <h3 class="font-weight-bold font-italic text-uppercase">
+                            @if ($division->competition_id == 1)
+                                {{ $division->competition->name_short." &ndash; ".$division->name }}
+                            @else
+                                {{ $division->name }}
+                            @endif
+                        </h3>
                         {{-- TODO: render partial view for this collection ('c_season') --}}
                         <h4 class="text-muted">
                             SW {{ $c_matchweek->number_consecutive ?? null }}
