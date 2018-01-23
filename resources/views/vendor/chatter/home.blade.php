@@ -17,7 +17,7 @@
 
 @section('content')
 
-<div id="chatter" class="chatter_home">
+<div id="chatter" class="chatter_home bg-light">
 {{-- TODO: fix layout (edit & delete buttons, mobile editor), let admins delete any post or discussion, pinning, closing, view count --}}
 	<div id="chatter_hero">
 		<div id="chatter_hero_dimmer"></div>
@@ -85,7 +85,7 @@
 	    	</div>
 	        <div class="col-md-9 right-column">
 	        	<div class="panel">
-		        	<ul class="discussions">
+		        	<ul class="discussions" style="border: 1px solid rgba(0, 0, 0, 0.125)">
 		        		@foreach($discussions as $discussion)
 				        	<li>
 				        		<a class="discussion_list" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->slug }}/{{ $discussion->slug }}">
@@ -154,8 +154,14 @@
 	        	</div>
 
 	        	<div id="pagination">
-	        		{{ $discussions->links('vendor.pagination.bootstrap-4') }}
+                    <div class="clearfix mt-3">
+                        {{ $discussions->links('vendor.pagination.bootstrap-4') }}
+                        <span class="pull-right">
+                            <a href="#top"><i class="fa fa-fw fa-arrow-up"></i> nach oben</a>
+                        </span>
+                    </div>
 	        	</div>
+
 
 	        </div>
 	    </div>
