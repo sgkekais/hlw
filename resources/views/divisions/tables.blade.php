@@ -100,14 +100,14 @@
             });
         }
 
-        $(function() {
+        $(document).ready(function() {
 
             // set the season id to the initial value and get the full table content when the page is loaded for the first time
             var season_id = {{ $season->id }};
             getTable('full', season_id);
 
             //  change the arrow's orientation on click
-            $('.table-entry-details').click(function(){
+            $('#tables-container').on('click', '.table-entry-details', function(){
                 $(this).find('span').toggleClass('fa-angle-down fa-angle-up');
             });
 

@@ -74,7 +74,7 @@
             </td>
             <td class="align-middle">
                 <span class="fa fa-fw {{ $rank_icon ?? null }}" style="color: {{ $rank_color }};"></span>
-                {{ $club->t_rank }}
+                <b>{{ $club->t_rank }}</b>
             </td>
             <td class="align-middle text-center p-2 p-md-2">
                 @if (!$table_previous->isEmpty())
@@ -120,7 +120,7 @@
             <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_lost }}</td>
             <td class="align-middle text-center d-none d-lg-table-cell">{{ $club->t_goals_for }} : {{ $club->t_goals_against }}</td>
             <td class="align-middle text-center p-2 p-md-2">{{ $club->t_goals_diff }}</td>
-            <td class="align-middle text-center p-2 p-md-2">{{ $club->t_points }}</td>
+            <td class="align-middle text-center p-2 p-md-2"><b>{{ $club->t_points }}</b></td>
             <!-- Form -->
             <td class="align-middle text-center d-none d-lg-table-cell">
                 @foreach ($club->getLastGamesPlayedOrRated(5, $season->isFinished() ? $season->end : null) as $lastGame)
