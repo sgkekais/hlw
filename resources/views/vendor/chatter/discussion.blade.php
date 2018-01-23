@@ -86,13 +86,13 @@
 		                				<div id="delete_warning_{{ $post->id }}" class="chatter_warning_delete">
 		                					<i class="chatter-warning"></i>Möchtest du deine Antwort wirklich löschen?
 		                					<button class="btn btn-sm btn-danger pull-right delete_response">Ja, lösch sie!</button>
-		                					<button class="mr-2 btn btn-sm btn-light pull-right">Ne, danke.</button>
+		                					<button class="mr-2 btn btn-sm btn-default pull-right">Ne, danke.</button>
 		                				</div>
 			                			<div class="chatter_post_actions">
-			                				<button class="btn btn-danger btn-sm chatter_delete_btn">
+			                				<button class="btn btn-outline-danger btn-sm chatter_delete_btn">
 			                					<i class="fa fa-fw fa-trash"></i> Löschen
 			                				</button>
-			                				<button class="btn btn-secondary btn-sm chatter_edit_btn">
+			                				<button class="btn btn-outline-secondary btn-sm chatter_edit_btn">
 			                					<i class="fa fa-fw fa-edit"></i> Bearbeiten
 			                				</button>
 			                			</div>
@@ -190,16 +190,16 @@
 
 					</div><!-- #new_discussion -->
 					<div id="discussion_response_email">
-						<button id="submit_response" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus-circle"></i> Antworten</button>
+						<button id="submit_response" class="btn btn-success pull-right"><i class="fa fa-fw fa-reply"></i> Antworten</button>
 						@if(Config::get('chatter.email.enabled'))
 							<div id="notify_email">
 								<img src="/vendor/devdojo/chatter/assets/images/email.gif" class="chatter_email_loader">
 								<!-- Rounded toggle switch -->
-								<span>Notify me when someone replies</span>
+								<span><i class="fa fa-fw fa-envelope"></i> Benachrichtigung erhalten, wenn jemand antwortet?</span>
 								<label class="switch">
 									<input type="checkbox" id="email_notification" name="email_notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
-									<span class="on">Yes</span>
-									<span class="off">No</span>
+									<span class="on">Ja</span>
+									<span class="off">Nein</span>
 									<div class="slider round"></div>
 								</label>
 							</div>

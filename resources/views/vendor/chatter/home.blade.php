@@ -66,14 +66,19 @@
                             <i class="fa fa-fw fa-plus-circle"></i> Neue {{ Config::get('chatter.titles.discussion') }}
                         </button>
 					@endauth
-                    <h4 class="font-weight-bold font-italic mt-2">Filter</h4>
-					<a href="/{{ Config::get('chatter.routes.home') }}"><span class="fa fa-fw fa-comment-o"></span> Alle {{ Config::get('chatter.titles.discussions') }}</a>
-					<ul class="nav nav-pills nav-stacked">
-						<?php $categories = DevDojo\Chatter\Models\Models::category()->orderBy('name')->get(); ?>
+                    <h2 class="font-weight-bold font-italic mt-2">Filtern</h2>
+					<ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="/{{ Config::get('chatter.routes.home') }}"><span class="fa fa-fw fa-comment-o"></span> Alle {{ Config::get('chatter.titles.discussions') }}</a>
+                        </li>
+						@php
+                            $categories = DevDojo\Chatter\Models\Models::category()->orderBy('name')->get();
+					    @endphp
 						@foreach($categories as $category)
-							<li>
-                                <a href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $category->slug }}">
-                                    <div class="chatter-box" style="background-color:{{ $category->color }}"></div> {{ $category->name }}
+							<li class="list-group-item">
+								<span class="fa fa-fw fa-square" style="color:{{ $category->color }}"></span>
+								<a href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $category->slug }}">
+                                    {{ $category->name }}
                                 </a>
                             </li>
 						@endforeach
@@ -101,15 +106,15 @@
 
 					        			@else
 
-					        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($discussion->user->email) ?>">
-					        					{{ strtoupper(substr($discussion->user->email, 0, 1)) }}
+					        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($discussion->user->name) ?>">
+					        					{{ strtoupper(substr($discussion->user->name, 0, 1)) }}
 					        				</span>
 
 					        			@endif
 					        		</div>
 
-					        		<div class="chatter_middle">
-					        			<h4 class="chatter_middle_title pb-2">
+					        		<div class="chatter_middle pull-left">
+					        			<h4 class="chatter_middle_title m-0 p-0 text-dark">
                                             {{ $discussion->title }}
 										</h4>
 					        			@if($discussion->post[0]->markdown)
@@ -120,12 +125,12 @@
 					        			<p>{{ substr(strip_tags($discussion_body), 0, 80) }}@if(strlen(strip_tags($discussion_body)) > 80){{ '...' }}@endif</p>
                                         <span class="chatter_middle_details">
 											Von: <span data-href="/user">{{ ucfirst($discussion->user->{Config::get('chatter.user.database_field_with_user_name')}) }}</span>
-											{{ \Carbon\Carbon::createFromTimeStamp(strtotime($discussion->created_at))->diffForHumans() }}
-											, in <span class="badge badge-pill text-white" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</span>
+											{{ \Carbon\Carbon::createFromTimeStamp(strtotime($discussion->created_at))->diffForHumans() }}, in
+                                            <span class="badge badge-pill text-white font-weight-normal" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</span>
 										</span>
 					        		</div>
 
-					        		<div class="chatter_right">
+					        		<div class="pull-right">
 					        			<div class="chatter_count">
                                             @if ($discussion->postsCount[0]->total > 0)
                                                 <i class="fa fa-fw fa-comment"></i>

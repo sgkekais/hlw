@@ -2,9 +2,7 @@
 .navbar {
   margin-bottom: 0px;
 }
-body {
-  background: #fff;
-}
+
 #chatter {
   padding-bottom: 30px;
   /********** Styles specific for discussion page **********/
@@ -18,19 +16,7 @@ body {
 #chatter .margin-top {
   margin-top: 40px;
 }
-/*#chatter .btn:focus {
-  outline: none;
-}
-#chatter button.btn.btn-primary {
-  border: 2px solid #f1f5ff;
-  background: none;
-  color: #0098cb;
-}
-#chatter button.btn.btn-primary:hover,
-#chatter button.btn.btn-primary:active,
-#chatter button.btn.btn-primary:focus {
-  outline: none;
-}*/
+
 #chatter #chatter_hero {
   background-image: url('../images/hero_bg.jpg');
   width: 100%;
@@ -372,15 +358,16 @@ body {
 }
 #chatter ul.discussions li a.discussion_list .chatter_middle,
 #chatter ul.discussions li .chatter_posts .chatter_middle {
-  float: left;
+  /*float: left;
+  margin-right: 90px;*/
   margin-left: 80px;
-  margin-right: 90px;
+
 }
 #chatter ul.discussions li a.discussion_list .chatter_middle h4.chatter_middle_title,
 #chatter ul.discussions li .chatter_posts .chatter_middle h4.chatter_middle_title {
-  margin: 0px;
+  /*margin: 0px;
   padding: 0px;
-  color: #111;
+  color: #111;*/
   -webkit-transition: color 0.3s ease;
   transition: color 0.3s ease;
   /*font-size: 18px;
