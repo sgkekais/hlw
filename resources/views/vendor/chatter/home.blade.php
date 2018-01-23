@@ -131,13 +131,21 @@
 					        		</div>
 
 					        		<div class="pull-right">
-					        			<div class="chatter_count">
+					        			<div class="text-secondary">
                                             @if ($discussion->postsCount[0]->total > 0)
-                                                <i class="fa fa-fw fa-comment"></i>
+                                                <span class="fa fa-fw fa-comment" title="Antworten"></span>
                                             @else
-                                                <i class="fa fa-fw fa-comment-o"></i>
+                                                <span class="fa fa-fw fa-comment-o" title="Antworten"></span>
                                             @endif
                                             {{ $discussion->postsCount[0]->total }}
+                                            <br>
+                                            @if ($discussion->views > 1)
+                                                <span class="fa fa-fw fa-eye" title="Aufrufe"></span>
+                                                {{ $discussion->views }}
+                                            @else
+                                                <span class="fa fa-fw fa-eye-slash" title="Aufrufe"></span>
+                                                0
+                                            @endif
                                         </div>
 					        		</div>
 

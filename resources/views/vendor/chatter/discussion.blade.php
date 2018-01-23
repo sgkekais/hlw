@@ -110,8 +110,8 @@
 					        				@endif
 
 					        			@else
-					        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($post->user->email) ?>">
-					        					{{ ucfirst(substr($post->user->email, 0, 1)) }}
+					        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($post->user->name) ?>">
+					        					{{ ucfirst(substr($post->user->name, 0, 1)) }}
 					        				</span>
 					        			@endif
 					        		</div>
