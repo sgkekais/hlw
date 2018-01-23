@@ -71,10 +71,7 @@
                         <li class="list-group-item">
                             <a href="/{{ Config::get('chatter.routes.home') }}"><span class="fa fa-fw fa-comment-o"></span> Alle {{ Config::get('chatter.titles.discussions') }}</a>
                         </li>
-						@php
-                            $categories = DevDojo\Chatter\Models\Models::category()->orderBy('name')->get();
-					    @endphp
-						@foreach($categories as $category)
+						@foreach($categories->sortBy('name') as $category)
 							<li class="list-group-item">
 								<span class="fa fa-fw fa-square" style="color:{{ $category->color }}"></span>
 								<a href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $category->slug }}">
@@ -157,7 +154,7 @@
 	        	</div>
 
 	        	<div id="pagination">
-	        		{{ $discussions->links() }}
+	        		{{ $discussions->links('vendor.pagination.bootstrap-4') }}
 	        	</div>
 
 	        </div>

@@ -163,12 +163,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sgkekais/chatter.git",
-                "reference": "2ace31759a336e9c748c64482d2aeaf98a013de4"
+                "reference": "d172941fb4046ae7fe93f07b149f6e20949ae030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sgkekais/chatter/zipball/2ace31759a336e9c748c64482d2aeaf98a013de4",
-                "reference": "2ace31759a336e9c748c64482d2aeaf98a013de4",
+                "url": "https://api.github.com/repos/sgkekais/chatter/zipball/d172941fb4046ae7fe93f07b149f6e20949ae030",
+                "reference": "d172941fb4046ae7fe93f07b149f6e20949ae030",
                 "shasum": ""
             },
             "require": {
@@ -201,7 +201,7 @@
             "support": {
                 "source": "https://github.com/sgkekais/chatter/tree/master"
             },
-            "time": "2018-01-14T16:33:25+00:00"
+            "time": "2018-01-23T20:57:08+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2515,16 +2515,16 @@
         },
         {
             "name": "spatie/laravel-activitylog",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-activitylog.git",
-                "reference": "86345df10a68a4c1ce67e540d2c37462c2d2fad0"
+                "reference": "65927f3f3ac1d2215c30ddb681791162c7d40689"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-activitylog/zipball/86345df10a68a4c1ce67e540d2c37462c2d2fad0",
-                "reference": "86345df10a68a4c1ce67e540d2c37462c2d2fad0",
+                "url": "https://api.github.com/repos/spatie/laravel-activitylog/zipball/65927f3f3ac1d2215c30ddb681791162c7d40689",
+                "reference": "65927f3f3ac1d2215c30ddb681791162c7d40689",
                 "shasum": ""
             },
             "require": {
@@ -2582,20 +2582,20 @@
                 "spatie",
                 "user"
             ],
-            "time": "2018-01-20T14:50:45+00:00"
+            "time": "2018-01-22T22:49:53+00:00"
         },
         {
             "name": "spatie/laravel-permission",
-            "version": "2.7.8",
+            "version": "2.7.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "e63427e4c364061f05f03fc893727198669c43c7"
+                "reference": "3fc27628f88a24937b0322d9e9a7c3d11ec42ec0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/e63427e4c364061f05f03fc893727198669c43c7",
-                "reference": "e63427e4c364061f05f03fc893727198669c43c7",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/3fc27628f88a24937b0322d9e9a7c3d11ec42ec0",
+                "reference": "3fc27628f88a24937b0322d9e9a7c3d11ec42ec0",
                 "shasum": ""
             },
             "require": {
@@ -2647,7 +2647,7 @@
                 "security",
                 "spatie"
             ],
-            "time": "2018-01-02T16:39:56+00:00"
+            "time": "2018-01-23T16:06:49+00:00"
         },
         {
             "name": "spatie/string",
