@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'headline'      => 'Willkommen in der Schänke',
+    'headline'      => 'Willkommen im Clubhaus',
     'description'   => 'Seid nett zueinander.',
     'headline_logo' => /*'/vendor/devdojo/chatter/assets/images/logo-light.png'*/ null,
 
@@ -187,7 +187,7 @@ return [
     */
 
     'security' => [
-        'limit_time_between_posts' => true, //
+        'limit_time_between_posts' => false, //
         'time_between_posts'       => 1, // In minutes
     ],
 
