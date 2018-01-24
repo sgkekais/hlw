@@ -25,6 +25,7 @@
   background-size: cover;
   background-position: center center;
   text-align: center;
+  /*box-shadow: inset 0px 5px 5px 0px rgba(0,0,0,0.2);*/
 }
 #chatter #chatter_hero img {
   max-height: 60px;
@@ -160,72 +161,72 @@
   min-height: 80px;
 }
 #chatter #chatter_header h1 {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  line-height: 80px;
-  font-size: 24px;
+  /*margin-top: 0px;
+  margin-bottom: 0px;*/
+  /*line-height: 80px;*/
+  font-size: 26px;
   color: #f1f1f1;
-  float: left;
+    /*float: left;*/
 }
 #chatter #chatter_header span {
-  float: right;
-  line-height: 80px;
-  margin-left: 10px;
-  color: #ccc;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 12px;
+    /*float: right;*/
+    line-height: 80px;
+    /*margin-left: 10px;*/
+    color: #ccc;
+    color: rgba(255, 255, 255, 0.85);
+    /*font-size: 12px;*/
 }
 #chatter #chatter_header a.chatter_cat {
-  border-radius: 15px;
-  color: #fff;
-  padding: 5px 10px;
-  margin-left: 10px;
+border-radius: 15px;
+color: #fff;
+padding: 5px 10px;
+margin-left: 10px;
 }
 #chatter #chatter_header a.chatter_cat:hover {
-  text-decoration: none;
+text-decoration: none;
 }
 #chatter #chatter_header a.back_btn {
-  float: left;
-  line-height: 40px;
-  font-size: 15px;
-  margin-right: 10px;
-  border-radius: 50%;
-  padding: 0px;
-  background: rgba(0, 0, 0, 0.2);
-  width: 34px;
-  height: 34px;
-  text-align: center;
-  margin-top: 23px;
-  color: rgba(255, 255, 255, 0.8);
-  -webkit-transition: background 0.3s ease, color 0.4s ease;
-  transition: background 0.3s ease, color 0.4s ease;
+float: left;
+line-height: 40px;
+font-size: 15px;
+margin-right: 10px;
+border-radius: 50%;
+padding: 0px;
+background: rgba(0, 0, 0, 0.2);
+width: 34px;
+height: 34px;
+text-align: center;
+margin-top: 23px;
+color: rgba(255, 255, 255, 0.8);
+-webkit-transition: background 0.3s ease, color 0.4s ease;
+transition: background 0.3s ease, color 0.4s ease;
 }
 #chatter #chatter_header a.back_btn:hover {
-  text-decoration: none;
-  background: rgba(0, 0, 0, 0.4);
-  color: #ffffff;
+text-decoration: none;
+background: rgba(0, 0, 0, 0.4);
+color: #ffffff;
 }
 #chatter #chatter_header a.back_btn:focus,
 #chatter #chatter_header a.back_btn:active {
-  text-decoration: none;
+text-decoration: none;
 }
 #chatter #chatter_header a.back_btn i {
-  position: relative;
-  left: -1px;
+position: relative;
+left: -1px;
 }
 /*#chatter .btn {
-  border: 0px;
-  border-radius: 30px;
+border: 0px;
+border-radius: 30px;
 }
 #chatter .btn i {
-  position: relative;
-  top: 2px;
+position: relative;
+top: 2px;
 }
 #chatter .btn:hover,
 #chatter .btn:visited,
 #chatter .btn:active {
-  border: 0px;
-  outline: none;
+border: 0px;
+outline: none;
 }*/
 #chatter .left-column > a.btn {
   margin-bottom: 15px;

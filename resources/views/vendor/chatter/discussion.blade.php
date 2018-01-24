@@ -23,10 +23,20 @@
 <div id="chatter" class="discussion">
 
 	<div id="chatter_header" style="background-color:{{ $discussion->color }}">
-		<div class="container">
-			<a class="back_btn" href="/{{ Config::get('chatter.routes.home') }}"><i class="chatter-back"></i></a>
-			<h1>{{ $discussion->title }}</h1>
-			<span class="chatter_head_details">Es wird diskutiert in <a class="chatter_cat" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $discussion->category->slug }}" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</a></span>
+		<div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center">
+            <div class="" style="width: 50px">
+                <a class="" href="/{{ Config::get('chatter.routes.home') }}">
+                    <span class="rounded-circle bg-primary p-2">
+                        <i class="fa fa-fw fa-arrow-left"></i>
+                    </span>
+                </a>
+            </div>
+            <h1 class="pl-3 m-0 text-center text-sm-left">{{ $discussion->title }}</h1>
+			<div class="ml-sm-auto text-white text-center text-sm-right my-2">
+                <a class="badge badge-pill font-weight-normal text-white" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $discussion->category->slug }}" style="background-color:{{ $discussion->category->color }}; font-size: .9rem">
+                    {{ $discussion->category->name }}
+                </a>
+            </div>
 		</div>
 	</div>
 

@@ -25,8 +25,8 @@
 		@if( isset( $headline_logo ) && !empty( $headline_logo ) )
 			<img src="{{ Config::get('chatter.headline_logo') }}">
 		@else
-			<h1>{{ Config::get('chatter.headline') }}</h1>
-			<p>{{ Config::get('chatter.description') }}</p>
+			<h1 class=""><span class="p-2">{{ Config::get('chatter.headline') }}</span> </h1>
+			<p><span class="px-2 text-white">{{ Config::get('chatter.description') }}</span></p>
 		@endif
 	</div>
 
@@ -127,23 +127,21 @@
 										</span>
 					        		</div>
 
-					        		<div class="pull-right">
-					        			<div class="text-secondary">
-                                            @if ($discussion->postsCount[0]->total > 0)
-                                                <span class="fa fa-fw fa-comment" title="Antworten"></span>
-                                            @else
-                                                <span class="fa fa-fw fa-comment-o" title="Antworten"></span>
-                                            @endif
-                                            {{ $discussion->postsCount[0]->total }}
-                                            <br>
-                                            @if ($discussion->views > 1)
-                                                <span class="fa fa-fw fa-eye" title="Aufrufe"></span>
-                                                {{ $discussion->views }}
-                                            @else
-                                                <span class="fa fa-fw fa-eye-slash" title="Aufrufe"></span>
-                                                0
-                                            @endif
-                                        </div>
+					        		<div class="pull-right d-inline d-md-block text-secondary">
+										@if ($discussion->postsCount[0]->total > 0)
+											<span class="fa fa-fw fa-comment" title="Antworten"></span>
+										@else
+											<span class="fa fa-fw fa-comment-o" title="Antworten"></span>
+										@endif
+										{{ $discussion->postsCount[0]->total }}
+
+										@if ($discussion->views > 1)
+											<span class="fa fa-fw fa-eye" title="Aufrufe"></span>
+											{{ $discussion->views }}
+										@else
+											<span class="fa fa-fw fa-eye-slash" title="Aufrufe"></span>
+											0
+										@endif
 					        		</div>
 
 					        		<div class="chatter_clear"></div>
