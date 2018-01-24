@@ -22,7 +22,7 @@ class ChatterTableSeeder extends Seeder
                 'order'      => 1,
                 'name'       => 'Allgemeines',
                 'color'      => '#212529',
-                'slug'       => 'introductions',
+                'slug'       => 'general',
                 'created_at' => null,
                 'updated_at' => null,
             ],
