@@ -55,7 +55,7 @@
   margin-bottom: 0px;
 }
 #chatter .chatter_container {
-  margin-top: 40px;
+  /*margin-top: 40px;*/
 }
 #chatter #title.form-control {
   height: 48px;
@@ -305,7 +305,7 @@
   position: relative;
   padding: 12px 15px;
   margin-bottom: 20px;
-  border-radius: 30px;
+  /*border-radius: 30px;*/
   color: #737B7F;
 }
 #chatter ul.discussions li a.discussion_list .chatter_warning_delete i,
@@ -633,7 +633,7 @@
 }
 #chatter.discussion #new_response {
   padding-left: 100px;
-  padding-right: 15px;
+  /*padding-right: 15px;*/
 }
 #chatter.discussion #new_response .chatter_avatar {
   margin-left: 20px;

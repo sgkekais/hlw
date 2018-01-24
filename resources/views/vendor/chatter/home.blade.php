@@ -56,7 +56,7 @@
 
 	<div class="container chatter_container">
 
-	    <div class="row">
+	    <div class="row mt-4">
 
 	    	<div class="col-md-3 left-column">
 	    		<!-- SIDEBAR -->

@@ -25,7 +25,8 @@
 	<div id="chatter_header" style="background-color:{{ $discussion->color }}">
 		<div class="container">
 			<a class="back_btn" href="/{{ Config::get('chatter.routes.home') }}"><i class="chatter-back"></i></a>
-			<h1>{{ $discussion->title }}</h1><span class="chatter_head_details">Es wird diskutiert in <a class="chatter_cat" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $discussion->category->slug }}" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</a></span>
+			<h1>{{ $discussion->title }}</h1>
+			<span class="chatter_head_details">Es wird diskutiert in <a class="chatter_cat" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $discussion->category->slug }}" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</a></span>
 		</div>
 	</div>
 
@@ -53,9 +54,9 @@
 	    </div>
 	@endif
 
-	<div class="container margin-top">
+	<div class="container ">
 
-	    <div class="row">
+	    <div class="row mt-4">
 
 			@if(! Config::get('chatter.sidebar_in_discussion_view'))
 	        	<div class="col-md-12">
@@ -88,14 +89,6 @@
 		                					<button class="btn btn-sm btn-danger pull-right delete_response">Ja, lösch sie!</button>
 		                					<button class="mr-2 btn btn-sm btn-default pull-right">Ne, danke.</button>
 		                				</div>
-			                			<div class="chatter_post_actions">
-			                				<button class="btn btn-outline-danger btn-sm chatter_delete_btn">
-			                					<i class="fa fa-fw fa-trash"></i> Löschen
-			                				</button>
-			                				<button class="btn btn-outline-secondary btn-sm chatter_edit_btn">
-			                					<i class="fa fa-fw fa-edit"></i> Bearbeiten
-			                				</button>
-			                			</div>
 			                		@endif
 			                		<div class="chatter_avatar">
 					        			@if(Config::get('chatter.user.avatar_image_database_field'))
@@ -114,6 +107,8 @@
 					        					{{ ucfirst(substr($post->user->name, 0, 1)) }}
 					        				</span>
 					        			@endif
+                                        <br>
+                                        {{ $post->user->roles->pluck('name') }}
 					        		</div>
 
 					        		<div class="chatter_middle">
@@ -130,8 +125,14 @@
 
 					        			</div>
 					        		</div>
-
-					        		<div class="chatter_clear"></div>
+									<div class="text-right">
+                                        <button class="btn btn-outline-danger btn-sm chatter_delete_btn">
+                                            <i class="fa fa-fw fa-trash"></i> Löschen
+                                        </button>
+                                        <button class="btn btn-outline-secondary btn-sm chatter_edit_btn">
+                                            <i class="fa fa-fw fa-edit"></i> Bearbeiten
+                                        </button>
+                                    </div>
 				        		</span>
 		                	</li>
 	                	@endforeach
@@ -158,8 +159,8 @@
 							@endif
 
 						@else
-							<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->email) ?>">
-								{{ strtoupper(substr(Auth::user()->email, 0, 1)) }}
+							<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->name) ?>">
+								{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
 							</span>
 						@endif
 					</div>

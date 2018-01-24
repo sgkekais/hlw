@@ -115,7 +115,7 @@
                 </div>
             </div>
         </div>
-        {{-- referees --}}
+        {{-- referees TODO: nur fuer super_admin, admin, club_contact --}}
         @auth
             @if (!$referees->isEmpty())
                 <a id="referees"></a>
