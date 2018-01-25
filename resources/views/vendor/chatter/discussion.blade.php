@@ -126,22 +126,22 @@
 				        		</div>
                                 @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
                                     <!-- control buttons -->
-                                    <div class="text-right my-2 chatter_post_actions">
+                                    <div class="d-flex flex-column flex-sm-row mt-3 chatter_post_actions">
                                         @if ($post->created_at < $post->updated_at)
-                                            <small class="text-secondary mr-2">
+                                            <small class="mr-auto text-secondary mr-2">
                                                 Zuletzt aktualisiert: {{ $post->updated_at->diffForHumans() }}
                                             </small>
                                         @endif
                                         <button class="btn btn-outline-secondary btn-sm chatter_edit_btn">
                                             <i class="fa fa-fw fa-edit"></i> Bearbeiten
                                         </button>
-                                        <button class="btn btn-outline-danger btn-sm chatter_delete_btn">
+                                        <button class="btn btn-outline-danger btn-sm chatter_delete_btn ml-2">
                                             <i class="fa fa-fw fa-trash"></i> Löschen
                                         </button>
                                     </div>
                                 @endif
                                 @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
-                                    <div id="delete_warning_{{ $post->id }}" class="chatter_warning_delete alert alert-danger text-right" style="display: none">
+                                    <div id="delete_warning_{{ $post->id }}" class="chatter_warning_delete alert alert-danger text-right mt-2" style="display: none">
                                         <span class="pull-left">
                                             <i class="fa fa-fw fa-warning"></i> Möchtest du deine Antwort wirklich löschen?
                                         </span>
