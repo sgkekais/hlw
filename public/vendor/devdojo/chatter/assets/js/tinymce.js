@@ -5,12 +5,15 @@ var chatter_tinymce_plugins = $('#chatter_tinymce_plugins').val();
 tinymce.init({
 	selector:'textarea.richText',
     language: 'de',
-	skin: 'chatter',
+	skin: 'lightgray',
 	plugins: chatter_tinymce_plugins,
 	toolbar: chatter_tinymce_toolbar,
 	menubar: false,
 	statusbar: false,
 	height : '220',
+    image_class_list: [
+        {title: 'responsive', value: 'img-fluid'}
+    ],
 	content_css : '/vendor/devdojo/chatter/assets/css/chatter.css',
 	template_popup_height: 380,
 	setup: function (editor) {
@@ -51,6 +54,9 @@ function initializeNewTinyMCE(id){
         menubar: false,
         statusbar: false,
         height : '300',
+        image_class_list: [
+            {title: 'responsive', value: 'img-fluid'}
+        ],
         content_css : '/vendor/devdojo/chatter/assets/css/chatter.css',
         template_popup_height: 380
     });

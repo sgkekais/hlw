@@ -167,7 +167,6 @@
 
 	<div id="new_discussion">
 
-
     	<div class="chatter_loader dark" id="new_discussion_loader">
 		    <div></div>
 		</div>
@@ -181,16 +180,16 @@
 
 	            <div class="col-md-4">
 		            <!-- CATEGORY -->
-			            <select id="chatter_category_id" class="form-control" name="chatter_category_id">
-			            	<option value="">Kategorie auswählen</option>
-				            @foreach($categories as $category)
-				            	@if(old('chatter_category_id') == $category->id)
-				            		<option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-				            	@else
-				            		<option value="{{ $category->id }}">{{ $category->name }}</option>
-				            	@endif
-				            @endforeach
-			            </select>
+					<select id="chatter_category_id" class="form-control" name="chatter_category_id">
+						<option value="">Kategorie auswählen</option>
+						@foreach($categories as $category)
+							@if(old('chatter_category_id') == $category->id)
+								<option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+							@else
+								<option value="{{ $category->id }}">{{ $category->name }}</option>
+							@endif
+						@endforeach
+					</select>
 		        </div>
 
 		        <div class="col-md-1">
@@ -216,7 +215,7 @@
             	{{--<input type='text' id="color" name="color" /><span class="select_color_text">Select a Color for this Discussion (optional)</span>--}}
             	<button id="submit_discussion" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus-circle"></i>{{ Config::get('chatter.titles.discussion') }} anlegen</button>
             	<a href="/{{ Config::get('chatter.routes.home') }}" class="btn btn-default pull-right" id="cancel_discussion">Abbrechen</a>
-            	<div style="clear:both"></div>
+            	<div class="clearfix"></div>
             </div>
         </form>
 
@@ -234,61 +233,59 @@
 
 @section(Config::get('chatter.yields.footer'))
 
-
-@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
-	<script src="/vendor/devdojo/chatter/assets/vendor/tinymce/tinymce.min.js"></script>
-	<script src="/vendor/devdojo/chatter/assets/js/tinymce.js"></script>
-	<script>
-		var my_tinymce = tinyMCE;
-		$('document').ready(function(){
-			$('#tinymce_placeholder').click(function(){
-				my_tinymce.activeEditor.focus();
+	@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
+		<script src="/vendor/devdojo/chatter/assets/vendor/tinymce/tinymce.min.js"></script>
+		<script src="/vendor/devdojo/chatter/assets/js/tinymce.js"></script>
+		<script>
+			var my_tinymce = tinyMCE;
+			$('document').ready(function(){
+				$('#tinymce_placeholder').click(function(){
+					my_tinymce.activeEditor.focus();
+				});
 			});
-		});
-	</script>
-@elseif($chatter_editor == 'simplemde')
-	<script src="/vendor/devdojo/chatter/assets/js/simplemde.min.js"></script>
-	<script src="/vendor/devdojo/chatter/assets/js/chatter_simplemde.js"></script>
-@elseif($chatter_editor == 'trumbowyg')
-	<script src="/vendor/devdojo/chatter/assets/vendor/trumbowyg/trumbowyg.min.js"></script>
-	<script src="/vendor/devdojo/chatter/assets/vendor/trumbowyg/plugins/preformatted/trumbowyg.preformatted.min.js"></script>
-	<script src="/vendor/devdojo/chatter/assets/js/trumbowyg.js"></script>
-@endif
+		</script>
+	@elseif($chatter_editor == 'simplemde')
+		<script src="/vendor/devdojo/chatter/assets/js/simplemde.min.js"></script>
+		<script src="/vendor/devdojo/chatter/assets/js/chatter_simplemde.js"></script>
+	@elseif($chatter_editor == 'trumbowyg')
+		<script src="/vendor/devdojo/chatter/assets/vendor/trumbowyg/trumbowyg.min.js"></script>
+		<script src="/vendor/devdojo/chatter/assets/vendor/trumbowyg/plugins/preformatted/trumbowyg.preformatted.min.js"></script>
+		<script src="/vendor/devdojo/chatter/assets/js/trumbowyg.js"></script>
+	@endif
 
-<script src="/vendor/devdojo/chatter/assets/vendor/spectrum/spectrum.js"></script>
-<script src="/vendor/devdojo/chatter/assets/js/chatter.js"></script>
-<script>
-	$('document').ready(function(){
+	<!--<script src="/vendor/devdojo/chatter/assets/vendor/spectrum/spectrum.js"></script>-->
+	<script src="/vendor/devdojo/chatter/assets/js/chatter.js"></script>
+	<script>
+		$('document').ready(function(){
 
-		$('.chatter-close').click(function(){
-			$('#new_discussion').slideUp();
-		});
-		$('#new_discussion_btn, #cancel_discussion').click(function(){
-			@if(Auth::guest())
-				window.location.href = "/{{ Config::get('chatter.routes.home') }}/login";
-			@else
+			$('.chatter-close').click(function(){
+				$('#new_discussion').slideUp();
+			});
+			$('#new_discussion_btn, #cancel_discussion').click(function(){
+				@if(Auth::guest())
+					window.location.href = "/{{ Config::get('chatter.routes.home') }}/login";
+				@else
+					$('#new_discussion').slideDown();
+					$('#title').focus();
+				@endif
+			});
+
+			/*$("#color").spectrum({
+				color: "#333639",
+				preferredFormat: "hex",
+				containerClassName: 'chatter-color-picker',
+				cancelText: '',
+				chooseText: 'close',
+				move: function(color) {
+					$("#color").val(color.toHexString());
+				}
+			});*/
+
+			@if (count($errors) > 0)
 				$('#new_discussion').slideDown();
 				$('#title').focus();
 			@endif
+
 		});
-
-		$("#color").spectrum({
-		    color: "#333639",
-		    preferredFormat: "hex",
-		    containerClassName: 'chatter-color-picker',
-		    cancelText: '',
-    		chooseText: 'close',
-		    move: function(color) {
-				$("#color").val(color.toHexString());
-			}
-		});
-
-		@if (count($errors) > 0)
-			$('#new_discussion').slideDown();
-			$('#title').focus();
-		@endif
-
-
-	});
-</script>
+	</script>
 @stop

@@ -65,62 +65,50 @@
 	@endif
 
 	<div class="container ">
-
 	    <div class="row mt-4">
-
-			@if(! Config::get('chatter.sidebar_in_discussion_view'))
-	        	<div class="col-md-12">
-            @else
-                <div class="col-md-3 left-column">
-                    <!-- SIDEBAR -->
-                    <div class="chatter_sidebar">
-                        <button class="btn btn-primary" id="new_discussion_btn"><i class="chatter-new"></i> New {{ Config::get('chatter.titles.discussion') }}</button>
-                        <a href="/{{ Config::get('chatter.routes.home') }}"><i class="chatter-bubble"></i> All {{ Config::get('chatter.titles.discussions') }}</a>
-                        <ul class="nav nav-pills nav-stacked">
-                            <?php $categories = DevDojo\Chatter\Models\Models::category()->all(); ?>
-                            @foreach($categories as $category)
-                                <li><a href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $category->slug }}"><div class="chatter-box" style="background-color:{{ $category->color }}"></div> {{ $category->name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <!-- END SIDEBAR -->
-                </div>
-                <div class="col-md-9 right-column">
-            @endif
-
+            <div class="col-md-12">
 				<div class="conversation">
 	                <ul class="discussions no-bg" style="display:block;">
 	                	@foreach($posts as $post)
-	                		<li data-id="{{ $post->id }}" data-markdown="{{ $post->markdown }}">
-		                		<span class="chatter_posts">
-		                			@if(!Auth::guest() && (Auth::user()->id == $post->user->id))
-		                				<div id="delete_warning_{{ $post->id }}" class="chatter_warning_delete">
-		                					<i class="chatter-warning"></i>Möchtest du deine Antwort wirklich löschen?
-		                					<button class="btn btn-sm btn-danger pull-right delete_response">Ja, lösch sie!</button>
-		                					<button class="mr-2 btn btn-sm btn-default pull-right">Ne, danke.</button>
-		                				</div>
-			                		@endif
-			                		<div class="chatter_avatar">
-					        			@if(Config::get('chatter.user.avatar_image_database_field'))
+	                		<li class="border border-left-0 border-top-0 border-right-0 py-4" data-id="{{ $post->id }}" data-markdown="{{ $post->markdown }}">
+		                		<div class="chatter_posts d-flex">
+                                    <!-- user info -->
+                                    <div class="pr-3 text-center">
+                                        <div class="chatter_avatar" style="min-width: 100px">
+                                            @if(Config::get('chatter.user.avatar_image_database_field'))
 
-					        				<?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
+                                                <?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
 
-					        				<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
-					        				@if( (substr($post->user->{$db_field}, 0, 7) == 'http://') || (substr($post->user->{$db_field}, 0, 8) == 'https://') )
-					        					<img src="{{ $post->user->{$db_field}  }}">
-					        				@else
-					        					<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $post->user->{$db_field}  }}">
-					        				@endif
+                                                <!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
+                                                    @if( (substr($post->user->{$db_field}, 0, 7) == 'http://') || (substr($post->user->{$db_field}, 0, 8) == 'https://') )
+                                                        <img src="{{ $post->user->{$db_field}  }}">
+                                                    @else
+                                                        <img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $post->user->{$db_field}  }}">
+                                                    @endif
 
-					        			@else
-					        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($post->user->name) ?>">
-					        					{{ ucfirst(substr($post->user->name, 0, 1)) }}
-					        				</span>
-					        			@endif
-                                        <br>
-                                        {{ $post->user->roles->pluck('name') }}
+                                            @else
+                                                <span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($post->user->name) ?>">
+                                                    {{ ucfirst(substr($post->user->name, 0, 1)) }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <ul class="list-unstyled py-1 text-secondary">
+                                            @foreach ($post->user->roles as $role)
+                                                <li>{{ $role->display_name }}</li>
+                                            @endforeach
+                                        </ul>
+                                        @if (!$post->user->clubs->isEmpty())
+                                            <span class="fa fa-fw fa-heart text-danger" title="Favoriten" style="font-size: 12px"></span>
+                                            <ul class="list-inline">
+                                                @foreach ($post->user->clubs as $club)
+                                                    @if ($club->logo_url)
+                                                        <li class="list-inline-item {{ !$loop->last ? "mr-1" : null }}"><img src="{{ asset('storage/'.$club->logo_url) }}" title="{{ $club->name_short }}" width="25"></li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @endif
 					        		</div>
-
+                                    <!-- middle -->
 					        		<div class="chatter_middle">
 					        			<span class="chatter_middle_details"><a href="{{ \DevDojo\Chatter\Helpers\ChatterHelper::userLink($post->user) }}">{{ ucfirst($post->user->{Config::get('chatter.user.database_field_with_user_name')}) }}</a> <span class="ago chatter_middle_details">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</span></span>
 					        			<div class="chatter_body">
@@ -135,15 +123,32 @@
 
 					        			</div>
 					        		</div>
-									<div class="text-right">
-                                        <button class="btn btn-outline-danger btn-sm chatter_delete_btn">
-                                            <i class="fa fa-fw fa-trash"></i> Löschen
-                                        </button>
+				        		</div>
+                                @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
+                                    <!-- control buttons -->
+                                    <div class="text-right my-2 chatter_post_actions">
+                                        @if ($post->created_at < $post->updated_at)
+                                            <small class="text-secondary mr-2">
+                                                Zuletzt aktualisiert: {{ $post->updated_at->diffForHumans() }}
+                                            </small>
+                                        @endif
                                         <button class="btn btn-outline-secondary btn-sm chatter_edit_btn">
                                             <i class="fa fa-fw fa-edit"></i> Bearbeiten
                                         </button>
+                                        <button class="btn btn-outline-danger btn-sm chatter_delete_btn">
+                                            <i class="fa fa-fw fa-trash"></i> Löschen
+                                        </button>
                                     </div>
-				        		</span>
+                                @endif
+                                @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
+                                    <div id="delete_warning_{{ $post->id }}" class="chatter_warning_delete alert alert-danger text-right" style="display: none">
+                                        <span class="pull-left">
+                                            <i class="fa fa-fw fa-warning"></i> Möchtest du deine Antwort wirklich löschen?
+                                        </span>
+                                        <button class="btn btn-sm btn-default mr-2">Ne, danke.</button>
+                                        <button class="btn btn-sm btn-danger delete_response">Ja, lösch sie!</button>
+                                    </div>
+                                @endif
 		                	</li>
 	                	@endforeach
 
@@ -152,143 +157,64 @@
 
 	            <div id="pagination">{{ $posts->links() }}</div>
 
-			@auth
+            <!-- new response -->
+            <div class="row">
+                <div class="col">
+                    @auth
+                        <div id="new_response">
+                            <h1 class="font-weight-bold font-italic">Antworten</h1>
+                            <div id="new_discussion">
+                                <div class="chatter_loader dark" id="new_discussion_loader">
+                                    <div></div>
+                                </div>
+                                <form id="chatter_form_editor" action="/{{ Config::get('chatter.routes.home') }}/posts" method="POST">
 
-				<div id="new_response">
+                                    <!-- BODY -->
+                                    <div id="editor">
+                                        @if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
+                                            <label id="tinymce_placeholder">Beginne hier zu tippen...</label>
+                                            <textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
+                                        @elseif($chatter_editor == 'simplemde')
+                                            <textarea id="simplemde" name="body" placeholder="">{{ old('body') }}</textarea>
+                                        @elseif($chatter_editor == 'trumbowyg')
+                                            <textarea class="trumbowyg" name="body" placeholder="Beginne hier zu tippen...">{{ old('body') }}</textarea>
+                                        @endif
+                                    </div>
 
-					<div class="chatter_avatar">
-						@if(Config::get('chatter.user.avatar_image_database_field'))
+                                    <input type="hidden" name="_token" id="csrf_token_field" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="chatter_discussion_id" value="{{ $discussion->id }}">
+                                </form>
+                            </div><!-- #new_discussion -->
 
-							<?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
-
-							<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
-							@if( (substr(Auth::user()->{$db_field}, 0, 7) == 'http://') || (substr(Auth::user()->{$db_field}, 0, 8) == 'https://') )
-								<img src="{{ Auth::user()->{$db_field}  }}">
-							@else
-								<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . Auth::user()->{$db_field}  }}">
-							@endif
-
-						@else
-							<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode(Auth::user()->name) ?>">
-								{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-							</span>
-						@endif
-					</div>
-
-					<div id="new_discussion">
-
-						<div class="chatter_loader dark" id="new_discussion_loader">
-							<div></div>
-						</div>
-
-						<form id="chatter_form_editor" action="/{{ Config::get('chatter.routes.home') }}/posts" method="POST">
-
-							<!-- BODY -->
-							<div id="editor">
-								@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
-									<label id="tinymce_placeholder">Beginne hier zu tippen...</label>
-									<textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
-								@elseif($chatter_editor == 'simplemde')
-									<textarea id="simplemde" name="body" placeholder="">{{ old('body') }}</textarea>
-								@elseif($chatter_editor == 'trumbowyg')
-									<textarea class="trumbowyg" name="body" placeholder="Beginne hier zu tippen...">{{ old('body') }}</textarea>
-								@endif
-							</div>
-
-							<input type="hidden" name="_token" id="csrf_token_field" value="{{ csrf_token() }}">
-							<input type="hidden" name="chatter_discussion_id" value="{{ $discussion->id }}">
-						</form>
-
-					</div><!-- #new_discussion -->
-					<div id="discussion_response_email">
-						<button id="submit_response" class="btn btn-success pull-right"><i class="fa fa-fw fa-reply"></i> Antworten</button>
-						@if(Config::get('chatter.email.enabled'))
-							<div id="notify_email">
-								<img src="/vendor/devdojo/chatter/assets/images/email.gif" class="chatter_email_loader">
-								<!-- Rounded toggle switch -->
-								<span><i class="fa fa-fw fa-envelope"></i> Benachrichtigung erhalten, wenn jemand antwortet?</span>
-								<label class="switch">
-									<input type="checkbox" id="email_notification" name="email_notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
-									<span class="on">Ja</span>
-									<span class="off">Nein</span>
-									<div class="slider round"></div>
-								</label>
-							</div>
-						@endif
-					</div>
-				</div>
-
-				@else
-
-					<div id="login_or_register">
-						<p>Bitte <a href="/{{ Config::get('chatter.routes.home') }}/login">melde dich an</a> oder <a href="/{{ Config::get('chatter.routes.home') }}/register">registriere dich</a>, um antzuworten.</p>
-					</div>
-
-				@endauth
-
-	        </div>
-
-
-	    </div>
-	</div>
-
-    @if(Config::get('chatter.sidebar_in_discussion_view'))
-        <div id="new_discussion_in_discussion_view">
-
-            <div class="chatter_loader dark" id="new_discussion_loader_in_discussion_view">
-                <div></div>
+                            <div id="discussion_response_email">
+                                <button id="submit_response" class="btn btn-success pull-right"><i class="fa fa-fw fa-reply"></i> Antworten</button>
+                                @if(Config::get('chatter.email.enabled'))
+                                    <div id="notify_email">
+                                        <img src="/vendor/devdojo/chatter/assets/images/email.gif" class="chatter_email_loader">
+                                        <!-- Rounded toggle switch -->
+                                        <span><i class="fa fa-fw fa-envelope"></i> Benachrichtigen?</span>
+                                        <label class="switch">
+                                            <input type="checkbox" id="email_notification" name="email_notification" @if(!Auth::guest() && $discussion->users->contains(Auth::user()->id)){{ 'checked' }}@endif>
+                                            <span class="on">Ja</span>
+                                            <span class="off">Nein</span>
+                                            <div class="slider round"></div>
+                                        </label>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    {{-- login or register --}}
+                    @else
+                        <div id="login_or_register">
+                            <p>Bitte <a href="/{{ Config::get('chatter.routes.home') }}/login">melde dich an</a> oder <a href="/{{ Config::get('chatter.routes.home') }}/register">registriere dich</a>, um antzuworten.</p>
+                        </div>
+                    @endauth
+                </div>
             </div>
 
-            <form id="chatter_form_editor_in_discussion_view" action="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}" method="POST">
-                <div class="row">
-                    <div class="col-md-7">
-                        <!-- TITLE -->
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Titel der {{ Config::get('chatter.titles.discussion') }}" v-model="title" value="{{ old('title') }}" >
-                    </div>
-
-                    <div class="col-md-4">
-                        <!-- CATEGORY -->
-                        <select id="chatter_category_id" class="form-control" name="chatter_category_id">
-                            <option value="">Kategorie auswählen</option>
-                            @foreach($categories as $category)
-                                @if(old('chatter_category_id') == $category->id)
-                                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                                @else
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-1">
-                        <i class="chatter-close"></i>
-                    </div>
-                </div><!-- .row -->
-
-                <!-- BODY -->
-                <div id="editor">
-                    @if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
-                        <label id="tinymce_placeholder">Beginne deine Antwort hier... </label>
-                        <textarea id="body_in_discussion_view" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
-                    @elseif($chatter_editor == 'simplemde')
-                        <textarea id="simplemde_in_discussion_view" name="body" placeholder="">{{ old('body') }}</textarea>
-                    @elseif($chatter_editor == 'trumbowyg')
-                        <textarea class="trumbowyg" name="body" placeholder="">{{ old('body') }}</textarea>
-                    @endif
-                </div>
-
-                <input type="hidden" name="_token" id="csrf_token_field" value="{{ csrf_token() }}">
-
-                <div id="new_discussion_footer">
-                    {{--<input type='text' id="color" name="color" /><span class="select_color_text">Select a Color for this Discussion (optional)</span>--}}
-                    <button id="submit_discussion" class="btn btn-success pull-right"><i class="fa fa-plus"></i>{{ Config::get('chatter.titles.discussion') }}anlegen</button>
-                    <a href="/{{ Config::get('chatter.routes.home') }}" class="btn btn-default pull-right" id="cancel_discussion">Abbrechen</a>
-                    <div style="clear:both"></div>
-                </div>
-            </form>
-
-        </div><!-- #new_discussion -->
-    @endif
+	        </div>
+	    </div>
+	</div>
 
 </div>
 
@@ -316,20 +242,6 @@
 
         });
     </script>
-@elseif($chatter_editor == 'simplemde')
-	<script>var chatter_editor = 'simplemde';</script>
-    <script src="/vendor/devdojo/chatter/assets/js/simplemde.min.js"></script>
-    <script src="/vendor/devdojo/chatter/assets/js/chatter_simplemde.js"></script>
-@elseif($chatter_editor == 'trumbowyg')
-	<script>var chatter_editor = 'trumbowyg';</script>
-    <script src="/vendor/devdojo/chatter/assets/vendor/trumbowyg/trumbowyg.min.js"></script>
-    <script src="/vendor/devdojo/chatter/assets/vendor/trumbowyg/plugins/preformatted/trumbowyg.preformatted.min.js"></script>
-    <script src="/vendor/devdojo/chatter/assets/js/trumbowyg.js"></script>
-@endif
-
-@if(Config::get('chatter.sidebar_in_discussion_view'))
-    <script src="/vendor/devdojo/chatter/assets/vendor/spectrum/spectrum.js"></script>
-    <script src="/vendor/devdojo/chatter/assets/js/chatter.js"></script>
 @endif
 
 <script>
@@ -365,8 +277,6 @@
 			} else {
                 @if($chatter_editor == 'tinymce' || empty($chatter_editor))
                     initializeNewTinyMCE('post-edit-' + id);
-                @elseif($chatter_editor == 'trumbowyg')
-                    initializeNewTrumbowyg('post-edit-' + id);
                 @endif
 			}
 
@@ -380,8 +290,6 @@
 			if(!markdown){
                 @if($chatter_editor == 'tinymce' || empty($chatter_editor))
                     tinymce.remove('#post-edit-' + post_id);
-                @elseif($chatter_editor == 'trumbowyg')
-                    $(e.target).parents('li').find('.trumbowyg').fadeOut();
                 @endif
 			} else {
 				$(e.target).parents('li').find('.editor-toolbar').remove();
@@ -404,8 +312,6 @@
 			} else {
                 @if($chatter_editor == 'tinymce' || empty($chatter_editor))
                     update_body = tinyMCE.get('post-edit-' + post_id).getContent();
-                @elseif($chatter_editor == 'trumbowyg')
-                    update_body = $('#post-edit-' + id).trumbowyg('html');
                 @endif
 			}
 
