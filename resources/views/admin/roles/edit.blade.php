@@ -17,6 +17,15 @@
                 <small id="nameHelp" class="form-text text-muted">Bezeichnung der Rolle</small>
             </div>
         </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="name">Anzeigename</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="display_name" id="display_name" aria-describedby="display_nameHelp" value="{{ $role->display_name }}">
+                <small id="nameHelp" class="form-text text-muted">Welche Bezeichnung soll Besuchern angezeigt werden?</small>
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Ändern</button>
         <a class="btn btn-secondary" href="{{ route('users.index') }}"><span class="fa fa-ban"></span> Abbrechen</a>
     </form>

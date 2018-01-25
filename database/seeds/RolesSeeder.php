@@ -17,6 +17,7 @@ class RolesSeeder extends Seeder
             0 => [
                 'id'            => 1,
                 'name'          => 'super_admin',
+                'display_name'  => 'Super Admin',
                 'guard_name'    => 'web',
                 'created_at'    => $timestamp,
                 'updated_at'    => $timestamp
@@ -24,13 +25,15 @@ class RolesSeeder extends Seeder
             1 => [
                 'id'            => 2,
                 'name'          => 'admin',
+                'display_name'  => 'Admin',
                 'guard_name'    => 'web',
                 'created_at'    => $timestamp,
                 'updated_at'    => $timestamp
             ],
             2 => [
                 'id'            => 3,
-                'name'          => 'visitor',
+                'name'          => 'member',
+                'display_name'  => 'Mitglied',
                 'guard_name'    => 'web',
                 'created_at'    => $timestamp,
                 'updated_at'    => $timestamp
@@ -38,6 +41,7 @@ class RolesSeeder extends Seeder
             3 => [
                 'id'            => 4,
                 'name'          => 'club_contact',
+                'display_name'  => 'Ansprechpartner',
                 'guard_name'    => 'web',
                 'created_at'    => $timestamp,
                 'updated_at'    => $timestamp

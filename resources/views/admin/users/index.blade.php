@@ -32,6 +32,7 @@
                 <tr>
                     <th class="">ID</th>
                     <th class="">Name</th>
+                    <th class="">Anzeigename</th>
                     <th class="">Guard</th>
                     <th class="">Berechtigung(en)</th>
                     <th class="">Aktionen</th>
@@ -44,6 +45,7 @@
                         <td class="align-middle">
                             {{ $role->name }}
                         </td>
+                        <td class="align-middle">{{ $role->display_name }}</td>
                         <td class="align-middle">
                             {{ $role->guard_name }}
                         </td>
