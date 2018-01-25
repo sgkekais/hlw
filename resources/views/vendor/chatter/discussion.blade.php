@@ -127,11 +127,13 @@
                                 @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
                                     <!-- control buttons -->
                                     <div class="d-flex flex-column flex-sm-row mt-3 chatter_post_actions">
-                                        @if ($post->created_at < $post->updated_at)
-                                            <small class="mr-auto text-secondary mr-2">
+                                        <small class="mr-auto text-secondary mr-2">
+                                            @if ($post->created_at < $post->updated_at)
                                                 Zuletzt aktualisiert: {{ $post->updated_at->diffForHumans() }}
-                                            </small>
-                                        @endif
+                                            @else
+
+                                            @endif
+                                        </small>
                                         <button class="btn btn-outline-secondary btn-sm chatter_edit_btn">
                                             <i class="fa fa-fw fa-edit"></i> Bearbeiten
                                         </button>
