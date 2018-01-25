@@ -87,9 +87,9 @@
 	        	<div class="panel">
 		        	<ul class="discussions" style="border: 1px solid rgba(0, 0, 0, 0.125)">
 		        		@foreach($discussions as $discussion)
-				        	<li>
-				        		<a class="discussion_list" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->slug }}/{{ $discussion->slug }}">
-					        		<div class="chatter_avatar">
+				        	<li class="border border-top-0 border-right-0 border-left-0">
+				        		<a class="discussion_list d-flex p-3" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->slug }}/{{ $discussion->slug }}">
+					        		<div class="chatter_avatar pr-3">
 					        			@if(Config::get('chatter.user.avatar_image_database_field'))
 
 					        				<?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
@@ -127,7 +127,7 @@
 										</span>
 					        		</div>
 
-					        		<div class="pull-right d-inline d-md-block text-secondary">
+					        		<div class="ml-auto d-inline d-md-block text-secondary">
 										@if ($discussion->postsCount[0]->total > 0)
 											<span class="fa fa-fw fa-comment" title="Antworten"></span>
 										@else
@@ -202,10 +202,6 @@
         		@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
 					<label id="tinymce_placeholder">Beginne hier zu tippen...</label>
     				<textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
-    			@elseif($chatter_editor == 'simplemde')
-    				<textarea id="simplemde" name="body" placeholder="">{{ old('body') }}</textarea>
-				@elseif($chatter_editor == 'trumbowyg')
-					<textarea class="trumbowyg" name="body" placeholder="Type Your Discussion Here...">{{ old('body') }}</textarea>
 				@endif
     		</div>
 
@@ -244,16 +240,8 @@
 				});
 			});
 		</script>
-	@elseif($chatter_editor == 'simplemde')
-		<script src="/vendor/devdojo/chatter/assets/js/simplemde.min.js"></script>
-		<script src="/vendor/devdojo/chatter/assets/js/chatter_simplemde.js"></script>
-	@elseif($chatter_editor == 'trumbowyg')
-		<script src="/vendor/devdojo/chatter/assets/vendor/trumbowyg/trumbowyg.min.js"></script>
-		<script src="/vendor/devdojo/chatter/assets/vendor/trumbowyg/plugins/preformatted/trumbowyg.preformatted.min.js"></script>
-		<script src="/vendor/devdojo/chatter/assets/js/trumbowyg.js"></script>
 	@endif
 
-	<!--<script src="/vendor/devdojo/chatter/assets/vendor/spectrum/spectrum.js"></script>-->
 	<script src="/vendor/devdojo/chatter/assets/js/chatter.js"></script>
 	<script>
 		$('document').ready(function(){
@@ -269,17 +257,6 @@
 					$('#title').focus();
 				@endif
 			});
-
-			/*$("#color").spectrum({
-				color: "#333639",
-				preferredFormat: "hex",
-				containerClassName: 'chatter-color-picker',
-				cancelText: '',
-				chooseText: 'close',
-				move: function(color) {
-					$("#color").val(color.toHexString());
-				}
-			});*/
 
 			@if (count($errors) > 0)
 				$('#new_discussion').slideDown();
