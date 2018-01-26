@@ -124,7 +124,6 @@
 					        			</div>
 					        		</div>
 				        		</div>
-                                @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
                                     <!-- control buttons -->
                                     <div class="d-flex flex-column flex-sm-row mt-3 chatter_post_actions">
                                         <small class="mr-auto text-secondary mr-2">
@@ -134,17 +133,18 @@
 
                                             @endif
                                         </small>
-                                        <button class="btn btn-outline-secondary btn-sm chatter_edit_btn">
-                                            <i class="fa fa-fw fa-edit"></i> Bearbeiten
-                                        </button>
-                                        <button class="btn btn-outline-danger btn-sm chatter_delete_btn ml-2">
-                                            <i class="fa fa-fw fa-trash"></i> Löschen
-                                        </button>
+                                        @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
+                                            <button class="btn btn-outline-secondary btn-sm chatter_edit_btn">
+                                                <i class="fa fa-fw fa-edit"></i> Bearbeiten
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm chatter_delete_btn mt-1 mt-sm-0 ml-sm-2">
+                                                <i class="fa fa-fw fa-trash"></i> Löschen
+                                            </button>
+                                        @endif
                                     </div>
-                                @endif
                                 @if(!Auth::guest() && (Auth::user()->id == $post->user->id))
                                     <div id="delete_warning_{{ $post->id }}" class="chatter_warning_delete alert alert-danger text-right mt-2" style="display: none">
-                                        <span class="pull-left">
+                                        <span class="pull-left text-center text-sm-left">
                                             <i class="fa fa-fw fa-warning"></i> Möchtest du deine Antwort wirklich löschen?
                                         </span>
                                         <button class="btn btn-sm btn-default mr-2">Ne, danke.</button>
@@ -344,37 +344,6 @@
 			post_id = $(this).parents('li').data('id');
 			$.form('/{{ Config::get('chatter.routes.home') }}/posts/' + post_id, { _token: '{{ csrf_token() }}', _method: 'DELETE'}, 'POST').submit();
 		});
-
-		// logic for when a new discussion needs to be created from the slideUp
-        @if(Config::get('chatter.sidebar_in_discussion_view'))
-            $('.chatter-close').click(function(){
-                $('#new_discussion_in_discussion_view').slideUp();
-            });
-            $('#new_discussion_btn, #cancel_discussion').click(function(){
-                @if(Auth::guest())
-                    window.location.href = "/{{ Config::get('chatter.routes.home') }}/login";
-                @else
-                    $('#new_discussion_in_discussion_view').slideDown();
-                    $('#title').focus();
-                @endif
-            });
-
-            $("#color").spectrum({
-                color: "#333639",
-                preferredFormat: "hex",
-                containerClassName: 'chatter-color-picker',
-                cancelText: '',
-                chooseText: 'close',
-                move: function(color) {
-                    $("#color").val(color.toHexString());
-                }
-            });
-
-            @if (count($errors) > 0)
-                $('#new_discussion_in_discussion_view').slideDown();
-                $('#title').focus();
-            @endif
-        @endif
 
 	});
 </script>
