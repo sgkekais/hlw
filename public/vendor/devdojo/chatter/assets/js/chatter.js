@@ -13,8 +13,11 @@ $('document').ready(function(){
             chatter_email_loader.removeClass('loading');
             if(data){
                 $('#email_notification').prop( "checked", true );
+                // alert the user
+                alert('Für E-Mail-Benachrichtigung eingetragen.');
             } else {
                 $('#email_notification').prop( "checked", false );
+                alert('Für E-Mail-Benachrichtigung ausgetragen.');
             }
         });
 
