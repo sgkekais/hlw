@@ -162,17 +162,20 @@ class Player extends Model
             }
             // else check whether club has played more matches than number of banned matches of card
             else {
-                // if the number of *played* games is smaller than the number of banned matches minus the reduced ban
-                $number_of_played_games = $this->club->getNextGamesPlayed(($card->ban_matches - $card->ban_reduced_by), $card->fixture->datetime->addDay())->count();
-                $ban_remaining = 0;
+                // only possible if fixture has a date
+                if ($card->fixture->datetime) {
+                    // if the number of *played* games is smaller than the number of banned matches minus the reduced ban
+                    $number_of_played_games = $this->club->getNextGamesPlayed(($card->ban_matches - $card->ban_reduced_by), $card->fixture->datetime->addDay())->count();
+                    $ban_remaining = 0;
 
-                if (($card->ban_matches - $card->ban_reduced_by) > $number_of_played_games) {
-                    $is_suspended = true;
-                    $ban_remaining = $card->ban_matches - $card->ban_reduced_by - $number_of_played_games;
+                    if (($card->ban_matches - $card->ban_reduced_by) > $number_of_played_games) {
+                        $is_suspended = true;
+                        $ban_remaining = $card->ban_matches - $card->ban_reduced_by - $number_of_played_games;
+                    }
+
+                    // map number of left matches here
+                    $card->ban_remaining = $ban_remaining;
                 }
-
-                // map number of left matches here
-                $card->ban_remaining = $ban_remaining;
             }
         }
 
