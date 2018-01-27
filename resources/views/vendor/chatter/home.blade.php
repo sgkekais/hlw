@@ -86,67 +86,72 @@
 	        <div class="col-md-9 right-column">
 	        	<div class="panel">
 		        	<ul class="discussions" style="border: 1px solid rgba(0, 0, 0, 0.125)">
-		        		@foreach($discussions as $discussion)
-				        	<li class="border border-top-0 border-right-0 border-left-0">
-				        		<a class="discussion_list d-flex p-3" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->slug }}/{{ $discussion->slug }}">
-					        		<div class="chatter_avatar pr-3">
-					        			@if(Config::get('chatter.user.avatar_image_database_field'))
+		        		@foreach ($discussions->groupBy('sticky') as $sticky)
+							@foreach ($sticky as $discussion)
+								<li class="border border-top-0 border-right-0 border-left-0 {{ $loop->last && $discussion->sticky ? "border-dark" : null }}">
+									<a class="discussion_list d-flex p-3" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->slug }}/{{ $discussion->slug }}">
+										<div class="chatter_avatar pr-3">
+										@if(Config::get('chatter.user.avatar_image_database_field'))
 
-					        				<?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
+                                            <?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
 
-					        				<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
-					        				@if( (substr($discussion->user->{$db_field}, 0, 7) == 'http://') || (substr($discussion->user->{$db_field}, 0, 8) == 'https://') )
-					        					<img src="{{ $discussion->user->{$db_field}  }}">
-					        				@else
-					        					<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $discussion->user->{$db_field}  }}">
-					        				@endif
+											<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
+												@if( (substr($discussion->user->{$db_field}, 0, 7) == 'http://') || (substr($discussion->user->{$db_field}, 0, 8) == 'https://') )
+													<img src="{{ $discussion->user->{$db_field}  }}">
+												@else
+													<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $discussion->user->{$db_field}  }}">
+												@endif
 
-					        			@else
+											@else
 
-					        				<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($discussion->user->name) ?>">
-					        					{{ strtoupper(substr($discussion->user->name, 0, 1)) }}
-					        				</span>
+												<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($discussion->user->name) ?>">
+													{{ strtoupper(substr($discussion->user->name, 0, 1)) }}
+												</span>
 
-					        			@endif
-					        		</div>
+											@endif
+										</div>
 
-					        		<div class="chatter_middle pull-left">
-					        			<h4 class="chatter_middle_title m-0 p-0 text-dark">
-                                            {{ $discussion->title }}
-										</h4>
-					        			@if($discussion->post[0]->markdown)
-					        				<?php $discussion_body = GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $discussion->post[0]->body ); ?>
-					        			@else
-					        				<?php $discussion_body = $discussion->post[0]->body; ?>
-					        			@endif
-					        			<p>{{ substr(strip_tags($discussion_body), 0, 80) }}@if(strlen(strip_tags($discussion_body)) > 80){{ '...' }}@endif</p>
-                                        <span class="chatter_middle_details">
-											Von: <span data-href="/user">{{ ucfirst($discussion->user->{Config::get('chatter.user.database_field_with_user_name')}) }}</span>
-											{{ \Carbon\Carbon::createFromTimeStamp(strtotime($discussion->created_at))->diffForHumans() }}, in
-                                            <span class="badge badge-pill text-white font-weight-normal" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</span>
-										</span>
-					        		</div>
+										<div class="chatter_middle pull-left">
+											<h4 class="chatter_middle_title m-0 p-0 text-dark">
+												@if ($discussion->sticky)
+													<span class="fa fa-thumb-tack text-secondary"></span>
+												@endif
+												{{ $discussion->title }}
+											</h4>
+											@if($discussion->post[0]->markdown)
+                                                <?php $discussion_body = GrahamCampbell\Markdown\Facades\Markdown::convertToHtml( $discussion->post[0]->body ); ?>
+											@else
+                                                <?php $discussion_body = $discussion->post[0]->body; ?>
+											@endif
+											<p>{{ substr(strip_tags($discussion_body), 0, 80) }}@if(strlen(strip_tags($discussion_body)) > 80){{ '...' }}@endif</p>
+											<span class="chatter_middle_details">
+												Von: <span data-href="/user">{{ ucfirst($discussion->user->{Config::get('chatter.user.database_field_with_user_name')}) }}</span>
+												{{ \Carbon\Carbon::createFromTimeStamp(strtotime($discussion->created_at))->diffForHumans() }}, in
+												<span class="badge badge-pill text-white font-weight-normal" style="background-color:{{ $discussion->category->color }}">{{ $discussion->category->name }}</span>
+											</span>
+										</div>
 
-					        		<div class="ml-auto d-inline d-md-block text-secondary">
-										@if ($discussion->postsCount[0]->total > 0)
-											<span class="fa fa-fw fa-comment" title="Antworten"></span>
-										@else
-											<span class="fa fa-fw fa-comment-o" title="Antworten"></span>
-										@endif
-										{{ $discussion->postsCount[0]->total }}
+										<div class="ml-auto d-inline d-md-block text-secondary">
+											@if ($discussion->postsCount[0]->total > 0)
+												<span class="fa fa-fw fa-comment" title="Antworten"></span>
+											@else
+												<span class="fa fa-fw fa-comment-o" title="Antworten"></span>
+											@endif
+											{{ $discussion->postsCount[0]->total }}
 
-										@if ($discussion->views > 1)
-											<span class="fa fa-fw fa-eye" title="Aufrufe"></span>
-											{{ $discussion->views }}
-										@else
-											<span class="fa fa-fw fa-eye-slash" title="Aufrufe"></span>
-											0
-										@endif
-					        		</div>
+											@if ($discussion->views > 1)
+												<span class="fa fa-fw fa-eye" title="Aufrufe"></span>
+												{{ $discussion->views }}
+											@else
+												<span class="fa fa-fw fa-eye-slash" title="Aufrufe"></span>
+												0
+											@endif
+										</div>
 
-					        		<div class="chatter_clear"></div>
-					        	</a>
-				        	</li>
+										<div class="chatter_clear"></div>
+									</a>
+								</li>
+							@endforeach
 			        	@endforeach
 		        	</ul>
 	        	</div>
