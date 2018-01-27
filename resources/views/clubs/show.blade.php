@@ -20,7 +20,7 @@
 <div class="position-relative border border-top-0 border-left-0 border-right-0" style="background-color: {{ $club->colours_club_primary }}">
     <div class="container">
         {{-- TODO: cover! {{ $club->cover_url ? "background-image: url('".asset('storage/'.$club->cover_url)."'); background-size: cover; background-position: center right" :  --}}
-        <div class="position-absolute h-100" style="width: 100%; right: 0; background-image: url(' {{ asset('storage/clubcovers/default.jpg') }} '); background-size: cover; background-position: bottom right">
+        <div class="position-absolute h-100" style="width: 100%; right: 0; background: url(' {{ asset('storage/club_bg.jpg') }} ') no-repeat top center; background-size: cover">
             {{-- inner --}}
             <div class="position-relative h-100" style="width: 40%; background: repeating-linear-gradient(
                     135deg,
@@ -133,7 +133,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="p-4 bg-light rounded text-muted">
-                            <ul class="list-inline d-flex justify-content-around">
+                            <ul class="list-inline d-flex justify-content-around mb-0">
                                 @if ($club->founded)
                                     <li class="list-inline-item" title="Gegründet">
                                         <span class="fa fa-birthday-cake fa-3x pr-1 align-middle"></span>
@@ -502,6 +502,11 @@
                             $active_players = $club->players()->active()->public()->with('person', 'goals.fixture.matchweek.season', 'cards.fixture.matchweek.season')->get()->sortBy('person.last_name');
                         @endphp
                         <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Aktive <span class="badge badge-secondary">{{ $active_players->count() }}</span></h2>
+                        <div class="row my-1">
+                            <div class="col text-muted">
+                                Es sind nur Spieler mit einem gültigen Spielerpass der HLW spielberechtigt.
+                            </div>
+                        </div>
                         @foreach($active_players->chunk(4) as $player_chunk)
                             <div class="row">
                                 @foreach($player_chunk as $player)
@@ -525,7 +530,7 @@
                                                         @if($player->sign_on)
                                                             {{ $player->sign_on->format('d.m.Y') }}
                                                             @if( Carbon::now()->diffInYears($player->sign_on) > 0 )
-                                                                <br><small class="text-muted">{{ Carbon::now()->diffInYears($player->sign_on) }} Jahre dabei</small>
+                                                                <br><small class="text-muted">{{ Carbon::now()->diffInYears($player->sign_on) == 1 ? Carbon::now()->diffInYears($player->sign_on)." Jahr" : Carbon::now()->diffInYears($player->sign_on)." Jahre" }} dabei</small>
                                                             @else
                                                                 <br><small class="text-muted">{{ Carbon::now()->diffInDays($player->sign_on)}} Tage dabei</small>
                                                             @endif

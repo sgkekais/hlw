@@ -10,12 +10,11 @@
 
     <div class="container py-4">
         <h1 class="font-weight-bold font-italic">TEAMS der Saison {{ $season->name }}</h1>
-
-        @foreach($clubs->chunk(4) as $chunk)
-            <div class="row mt-4 p-0 justify-content-center">
-                <div class="card-deck w-100">
-                    @foreach($chunk as $club)
-                        <div class="card text-center">
+        <div class="row mt-4 d-flex justify-content-center">
+            <div class="col">
+                <div class="card-deck">
+                    @foreach($clubs as $club)
+                        <div class="card text-center" style="max-width: 255px">
                             <div class="card-header px-1">
                                 <h4 class="text-uppercase font-weight-bold ">
                                     <a href="{{ route('frontend.clubs.show', $club) }}" class="text-dark" title="Mannschaftsdetails">{{ $club->name }}</a>
@@ -68,10 +67,20 @@
                                 @endif
                             </div>
                         </div>
+                        @if ($loop->iteration % 2 == 0)
+                            <div class="w-100 my-2 d-block d-md-none"><!-- wrap every 2 below md --></div>
+                        @endif
+                        @if ($loop->iteration % 3 == 0)
+                            <div class="w-100 my-2 d-none d-md-block d-lg-none"><!-- wrap every 3 at md --></div>
+                        @endif
+                        @if ($loop->iteration % 4 == 0)
+                            <div class="w-100 my-2 d-none d-lg-block"><!-- wrap every 4 above md --></div>
+                        @endif
                     @endforeach
                 </div>
             </div>
-        @endforeach
+
+        </div>
     </div>
 
 @endsection

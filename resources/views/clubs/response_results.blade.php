@@ -149,10 +149,12 @@
                                 </td>
                                 <td class="d-none d-md-table-cell align-middle text-left">
                                     @if ($fixture->stadium)
-                                        @if ($fixture->club_id_home == $club->id && ($club->regularStadium()->first()->id != $fixture->stadium->id))
-                                            <span class="text-warning"><abbr title="abweichender Spielort">{{ $fixture->stadium->name_short}}</abbr></span>
-                                        @else
-                                            {{ $fixture->stadium->name_short }}
+                                        @if (!$club->regularStadium->isEmpty())
+                                            @if ($fixture->club_id_home == $club->id && ($club->regularStadium()->first()->id != $fixture->stadium->id))
+                                                <span class="text-warning"><abbr title="abweichender Spielort">{{ $fixture->stadium->name_short}}</abbr></span>
+                                            @else
+                                                {{ $fixture->stadium->name_short }}
+                                            @endif
                                         @endif
                                     @else
                                         &nbsp;{{ $fixture->stadium_id }}
