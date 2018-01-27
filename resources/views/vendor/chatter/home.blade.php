@@ -19,7 +19,7 @@
 
 <div id="chatter" class="chatter_home h-100 bg-light">
 {{-- TODO: fix layout (edit & delete buttons, mobile editor), let admins delete any post or discussion, pinning, closing, view count --}}
-	<div id="chatter_hero">
+	<div id="chatter_hero" style="box-shadow: inset 0px 5px 5px 0px rgba(100,100,100,0.5);">
 		<div id="chatter_hero_dimmer"></div>
 		<?php $headline_logo = Config::get('chatter.headline_logo'); ?>
 		@if( isset( $headline_logo ) && !empty( $headline_logo ) )
@@ -165,7 +165,7 @@
 	    </div>
 	</div>
 
-	<div id="new_discussion">
+	<div id="new_discussion" class="border border-right-0 border-bottom-0 border-left-0 border-secondary">
 
     	<div class="chatter_loader dark" id="new_discussion_loader">
 		    <div></div>
@@ -173,14 +173,11 @@
 
     	<form id="chatter_form_editor" action="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}" method="POST">
         	<div class="row">
-	        	<div class="col-md-7">
+	        	<div class="col-10 pr-0 d-flex flex-column flex-md-row">
 		        	<!-- TITLE -->
 	                <input type="text" class="form-control" id="title" name="title" placeholder="Titel der {{ Config::get('chatter.titles.discussion') }}" v-model="title" value="{{ old('title') }}" >
-	            </div>
-
-	            <div class="col-md-4">
 		            <!-- CATEGORY -->
-					<select id="chatter_category_id" class="form-control" name="chatter_category_id">
+					<select id="chatter_category_id" class="form-control" name="chatter_category_id" title="Kategorie auswählen">
 						<option value="">Kategorie auswählen</option>
 						@foreach($categories as $category)
 							@if(old('chatter_category_id') == $category->id)
@@ -192,7 +189,7 @@
 					</select>
 		        </div>
 
-		        <div class="col-md-1">
+		        <div class="col-2 pl-0 text-right">
 		        	<i class="chatter-close"></i>
 		        </div>
 	        </div><!-- .row -->
@@ -200,7 +197,7 @@
             <!-- BODY -->
         	<div id="editor">
         		@if( $chatter_editor == 'tinymce' || empty($chatter_editor) )
-					<label id="tinymce_placeholder">Beginne hier zu tippen...</label>
+					<label id="tinymce_placeholder"></label>
     				<textarea id="body" class="richText" name="body" placeholder="">{{ old('body') }}</textarea>
 				@endif
     		</div>

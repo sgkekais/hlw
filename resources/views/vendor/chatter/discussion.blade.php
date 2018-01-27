@@ -24,14 +24,14 @@
 
 	<div id="chatter_header" style="background-color:{{ $discussion->color }}">
 		<div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center">
-            <div class="" style="width: 50px">
+            <div class="text-center text-sm-left" style="width: 50px">
                 <a class="" href="/{{ Config::get('chatter.routes.home') }}">
                     <span class="rounded-circle bg-primary p-2">
                         <i class="fa fa-fw fa-arrow-left"></i>
                     </span>
                 </a>
             </div>
-            <h1 class="pl-3 m-0 text-center text-sm-left">{{ $discussion->title }}</h1>
+            <h1 class="pl-0 pl-sm-3 m-0 text-center text-sm-left">{{ $discussion->title }}</h1>
 			<div class="ml-sm-auto text-white text-center text-sm-right my-2">
                 <a class="badge badge-pill font-weight-normal text-white" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $discussion->category->slug }}" style="background-color:{{ $discussion->category->color }}; font-size: .9rem">
                     {{ $discussion->category->name }}
@@ -165,7 +165,7 @@
                     @auth
                         <div id="new_response">
                             <h1 class="font-weight-bold font-italic">Antworten</h1>
-                            <div id="new_discussion">
+                            <div id="new_discussion" class="border border-light">
                                 <div class="chatter_loader dark" id="new_discussion_loader">
                                     <div></div>
                                 </div>

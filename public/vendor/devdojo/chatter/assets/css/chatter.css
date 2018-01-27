@@ -70,18 +70,19 @@
 #chatter #new_discussion,
 #new_discussion_in_discussion_view {
   display: none;
-  border: 2px solid #0098cb;
-  border-bottom: 0px;
+  /*border: 2px solid #0098cb;
+  border-bottom: 0px;*/
   position: fixed;
   bottom: 0px;
-  width: 750px;
+  /*width: 750px;
   margin-left: -375px;
-  left: 50%;
+  left: 50%;*/
+    width: 100%;
   height: auto;
   background: #fff;
   z-index: 9999;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+  /*border-top-right-radius: 5px;
+  border-top-left-radius: 5px;*/
   overflow: hidden;
   /********** COLOR PICKER STYLE OVERRIDES **********/
   /********** END COLOR PICKER STYLE OVERRIDES **********/
@@ -566,7 +567,7 @@ outline: none;
   display: none;
 }
 #chatter #editor.loaded #body {
-  display: block;
+  display: block;;
 }
 #chatter #editor.loaded .chatter_loader {
   display: none;
@@ -865,47 +866,15 @@ div.mce-edit-area {
   height: 350px !important;
   resize: vertical !important;
 }
+.mce-content-body {
+    font-family: "Roboto", sans-serif;
+    font-size: .9rem !important;
+}
 #mce-modal-block {
   background: #21292f !important;
 }
 /********** END TINYMCE Modifications **********/
-/********** START SimpleMDE Overrides **********/
-#editor .editor-toolbar,
-.chatter_middle .editor-toolbar {
-  border-radius: 0px;
-  border-color: #eee;
-}
-#editor .editor-toolbar a,
-.chatter_middle .editor-toolbar a {
-  outline: none;
-}
-#editor .editor-toolbar a:focus,
-.chatter_middle .editor-toolbar a:focus {
-  outline: none;
-}
-#editor .CodeMirror,
-.chatter_middle .CodeMirror {
-  height: 220px;
-  min-height: 220px;
-  border-radius: 0px;
-  border-color: #eee;
-}
-#editor .CodeMirror-scroll,
-.chatter_middle .CodeMirror-scroll {
-  min-height: 204px;
-}
-.simplemde #chatter #new_discussion {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-#chatter #new_response #new_discussion {
-  z-index: 3;
-}
-#chatter .editor-toolbar.fullscreen {
-  z-index: 9999;
-}
-/********** END SimpleMDE Overrides **********/
+
 /********** FONTS USED FOR CHATTER **********/
 @font-face {
   font-family: "chatter";
@@ -1085,31 +1054,6 @@ div.mce-edit-area {
   border-radius: 50%;
 }
 /********** End Toggle Switch CSS **********/
-/*#pagination {
-  font-size: 18px;
-}
-#pagination .pagination > .active > span {
-  background: none;
-  color: #333;
-  font-weight: bold;
-  border: 0px;
-}
-#pagination .pagination > .disabled > span {
-  border: 0px;
-  color: #ccc;
-}
-#pagination .pagination > li > a,
-#pagination .pagination > li > span {
-  border: 0px;
-  padding: 6px 5px;
-  color: #777;
-}
-#pagination .pagination > li > a:focus,
-#pagination .pagination > li > a:hover,
-#pagination .pagination > li > span:focus,
-#pagination .pagination > li > span:hover {
-  background: none;
-  font-weight: bold;
-}*/
+
 
 /*# sourceMappingURL=chatter.css.map */
