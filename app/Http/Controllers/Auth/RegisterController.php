@@ -5,8 +5,10 @@ namespace HLW\Http\Controllers\Auth;
 use HLW\Club;
 use HLW\User;
 use HLW\Http\Controllers\Controller;
+use HLW\Mail\UserRegistered;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Jrean\UserVerification\Facades\UserVerification;
@@ -109,8 +111,10 @@ class RegisterController extends Controller
         }
 
         // assign the "visitor" role
-        // TODO: write db seed
-        $user->assignRole('visitor');
+        $user->assignRole('member');
+
+        // Send a notification mail to the admin
+        Mail::send(new UserRegistered($user));
 
         return $user;
     }
