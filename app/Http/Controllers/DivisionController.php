@@ -44,17 +44,17 @@ class DivisionController extends Controller
         }
 
         // different jumbo backgrounds for different divisions
-        $jumbo_bg = asset('images/grass_green.jpg');
+        $jumbo_bg = asset('storage/grass_green.jpg');
         if ($division->competition->name_short == "HLW") {
             if ($division->hierarchy_level == 1) {
-                $jumbo_bg = asset('images/grass_green.jpg');
+                $jumbo_bg = asset('storage/grass_green.jpg');
             } else {
-                $jumbo_bg = asset('images/grass_brown.jpg');
+                $jumbo_bg = asset('storage/grass_brown.jpg');
             }
         } elseif ($division->competition->name_short == "AHL") {
-            $jumbo_bg = asset('images/grass_bw.jpg');
+            $jumbo_bg = asset('storage/grass_bw.jpg');
         } elseif ($division->competition->name_short == "P") {
-            $jumbo_bg = asset('images/cup.jpg');
+            $jumbo_bg = asset('storage/cup.jpg');
         }
 
         return view('divisions.index', compact('division', 'season', 'matchweek', 'fixtures', 'jumbo_bg'));
