@@ -507,19 +507,19 @@
                                 Es sind nur Spieler mit einem gültigen Spielerpass der HLW spielberechtigt.
                             </div>
                         </div>
-                        @foreach($active_players->chunk(4) as $player_chunk)
-                            <div class="row">
-                                @foreach($player_chunk as $player)
-                                    <div class="col-6 col-md-4 col-lg-3 mb-4">
-                                        <div class="card {{ $player->isSuspended() ? "border-danger text-danger" : null }}">
+                        <div class="row mt-4 d-flex justify-content-center">
+                            <div class="col">
+                                <div class="card-deck">
+                                    @foreach($active_players as $player)
+                                        <div class="card {{ $player->isSuspended() ? "border-danger text-danger" : null }} text-center" style="max-width: 255px">
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">
-                                                    <h4 class="card-title font-weight-bold">
+                                                    <h4 class="card-title font-weight-bold mb-0">
                                                         {{ $player->person->full_name_shortened }}
                                                         <span class="pull-right" style="color: {{ $club->colours_club_primary }}">{{ $player->number ? "#".$player->number : null }}</span>
                                                     </h4>
                                                     @if ($player->isSuspended())
-                                                        <h6 class="card-subtitle mb-2">
+                                                        <h6 class="card-subtitle my-1">
                                                             Spieler ist gesperrt
                                                         </h6>
                                                     @endif
@@ -564,13 +564,22 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
-                                @endforeach
+                                        @if ($loop->iteration % 2 == 0)
+                                            <div class="w-100 my-2 d-block d-md-none"><!-- wrap every 2 below md --></div>
+                                        @endif
+                                        @if ($loop->iteration % 3 == 0)
+                                            <div class="w-100 my-2 d-none d-md-block d-lg-none"><!-- wrap every 3 at md --></div>
+                                        @endif
+                                        @if ($loop->iteration % 4 == 0)
+                                            <div class="w-100 my-2 d-none d-lg-block"><!-- wrap every 4 above md --></div>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
-                @php
+                {{--@php
                     $inactive_players = $club->players()->inactive()->with('person', 'goals', 'cards')->get()->sortBy('person.last_name');
                 @endphp
                 @if(!$inactive_players->isEmpty())
@@ -603,7 +612,7 @@
                             </table>
                         </div>
                     </div>
-                @endif
+                @endif--}}
             </div>
         </div>
     </div>
