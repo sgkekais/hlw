@@ -209,7 +209,7 @@ class DivisionController extends Controller
         ]);
         $c_matchweek = $season->currentMatchweek();
 
-        $jumbo_bg = asset('images/cup.jpg');
+        $jumbo_bg = asset('storage/cup.jpg');
 
         return view('divisions.fixtures', compact('division', 'season', 'c_matchweek', 'jumbo_bg'));
     }
