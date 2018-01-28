@@ -6,8 +6,8 @@
 
 @section('content')
 
-    <div class="container-fluid h-100 bg-light">
-        <div class="row h-75 justify-content-center d-flex align-items-center pt-4 pb-4">
+    <div class="container-fluid bg-light">
+        <div class="row justify-content-center d-flex align-items-center pt-4 pb-4">
             <div class="col-12 col-md-9 col-lg-6">
                 <div class="card" style="border: 1px solid rgba(0, 0, 0, 0.15); border-radius: 0.25rem; -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175); box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);">
                     <div class="card-body">
