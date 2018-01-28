@@ -12,19 +12,21 @@
         <div class="row">
             <div class="col">
                 <h1 class="font-weight-bold font-italic text-uppercase">Infos</h1>
-                <ul class="nav nav-pills nav-fill">
+                <ul class="nav nav-pills nav-fill d-flex flex-column flex-md-row">
                     @auth
-                        <li class="nav-item mr-2">
-                            <a class="nav-link border border-success rounded" href="#referees">Schiedsrichter</a>
-                        </li>
+                        @hasanyrole('super_admin|admin|club_contact')
+                            <li class="nav-item mr-md-2">
+                                <a class="nav-link border border-success rounded" href="#referees">Schiedsrichter</a>
+                            </li>
+                        @endhasanyrole
                     @endauth
-                    <li class="nav-item">
+                    <li class="nav-item mt-2 mt-md-0">
                         <a class="nav-link border border-success rounded" href="#hlw">HLW-Satzung</a>
                     </li>
-                    <li class="nav-item ml-2">
+                    <li class="nav-item ml-md-2 mt-2 mt-md-0">
                         <a class="nav-link border border-success rounded" href="#ah">AH-Satzung</a>
                     </li>
-                    <li class="nav-item ml-2">
+                    <li class="nav-item ml-md-2 mt-2 mt-md-0">
                         <a class="nav-link border border-success rounded" href="#join">Mitmachen</a>
                     </li>
                 </ul>
@@ -117,29 +119,31 @@
         </div>
         {{-- referees TODO: nur fuer super_admin, admin, club_contact --}}
         @auth
-            @if (!$referees->isEmpty())
-                <a id="referees"></a>
-                <div class="row mt-4">
-                    <div class="col">
-                        <h2 class="font-weight-bold font-italic">Schiedsrichter</h2>
-                        <ul class="list-group">
-                            @foreach ($referees->sortBy('person.last_name') as $referee)
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <div class="text-left">
-                                        {{ $referee->person->full_name_shortened }}
-                                    </div>
-                                    <div class="">
-                                        {{ $referee->mail }}
-                                    </div>
-                                    <div class="text-right">
-                                        {{ $referee->mobile }}
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
+            @hasanyrole('super_admin|admin|club_contact')
+                @if (!$referees->isEmpty())
+                    <a id="referees"></a>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <h2 class="font-weight-bold font-italic">Schiedsrichter</h2>
+                            <ul class="list-group">
+                                @foreach ($referees->sortBy('person.last_name') as $referee)
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <div class="text-left">
+                                            {{ $referee->person->full_name_shortened }}
+                                        </div>
+                                        <div class="">
+                                            {{ $referee->mail }}
+                                        </div>
+                                        <div class="text-right">
+                                            {{ $referee->mobile }}
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            @endif
+                @endif
+            @endhasanyrole
         @endauth
         {{-- HLW-Satzung --}}
         <a id="hlw"></a>
