@@ -47,9 +47,11 @@
                         </a>
                     </div>
                 </li>
+                {{--
                 <li class="nav-item {{ Route::is('calendar') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('calendar') }}"><span class="fa fa-calendar"></span> Kalender</a>
                 </li>
+                --}}
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item {{ Route::is('users.*') ? 'active' : null }}">
