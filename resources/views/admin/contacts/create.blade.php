@@ -5,7 +5,7 @@
     <!-- create a new contact and assign to club and person -->
     <h1 class="mb-4">Kontakt anlegen</h1>
     <p>
-        Ein Kontakt ist eine Person, die als Ansprechpartner einer Mannschaft dien. Die Person muss zuvor angelegt werden.
+        Ein Kontakt ist eine Person, die als Ansprechpartner einer Mannschaft dient. Die Person muss zuvor angelegt werden.
     </p>
     <form method="POST" action="{{ route('clubs.contacts.store', $club) }}">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
