@@ -68,11 +68,11 @@
 					@endauth
                     <h2 class="font-weight-bold font-italic mt-2">Filtern</h2>
 					<ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item p-2">
                             <a href="/{{ Config::get('chatter.routes.home') }}"><span class="fa fa-fw fa-comment-o"></span> Alle {{ Config::get('chatter.titles.discussions') }}</a>
                         </li>
 						@foreach($categories->sortBy('name') as $category)
-							<li class="list-group-item">
+							<li class="list-group-item p-2">
 								<span class="fa fa-fw fa-square" style="color:{{ $category->color }}"></span>
 								<a href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.category') }}/{{ $category->slug }}">
                                     {{ $category->name }}
