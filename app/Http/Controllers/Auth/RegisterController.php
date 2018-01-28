@@ -27,8 +27,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
-    // TODO: confirm registration mail
+    // TODO: notify me when a user registers
 
     use RegistersUsers;
     use VerifiesUsers;
@@ -67,7 +66,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $clubs = Club::published()->isNotRealClub()->notResigned()->get();
+        $clubs = Club::published()->isNotRealClub()->notResigned()->orderBy('name')->get();
 
         return view('auth.register', compact('clubs'));
     }
