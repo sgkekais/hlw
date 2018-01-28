@@ -158,7 +158,7 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-6">
-                        @if ($reschedulings)
+                        @if ($reschedulings && !$reschedulings->isEmpty())
                             @php
                                 $total_reschedulings      = $reschedulings->count();
                                 $counting_reschedulings   = $reschedulings->where('reschedule_count', true)->count();

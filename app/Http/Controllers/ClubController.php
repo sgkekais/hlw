@@ -47,6 +47,7 @@ class ClubController extends Controller
                 $is_current_season = false;
             }
 
+            $reschedulings = null;
             if ($season) {
                 $season->load('matchweeks.fixtures');
                 $division = $season->division;
