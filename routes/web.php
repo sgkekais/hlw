@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'isVerified']], function() {
 // static
 Route::get('imprint', 'PagesController@imprint')->name('imprint');
 Route::get('infos', 'PagesController@infos')->name('infos');
+Route::get('halloffame', 'PagesController@hallOfFame')->name('halloffame');
 
 /*******************************************************
  * Admin Routes

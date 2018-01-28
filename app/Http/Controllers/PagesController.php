@@ -3,6 +3,7 @@
 namespace HLW\Http\Controllers;
 
 use Carbon\Carbon;
+use HLW\Club;
 use HLW\Competition;
 use HLW\Division;
 use HLW\Fixture;
@@ -55,6 +56,12 @@ class PagesController extends Controller
         $referees = Referee::with('person')->get();
 
         return view('static.infos', compact('referees'));
+    }
+
+    public function hallOfFame() {
+        $former_clubs = Club::published()->resigned()->orderBy('league_exit', 'desc')->with('championships')->get();
+
+        return view('static.halloffame', compact('former_clubs'));
     }
 
 }

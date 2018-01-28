@@ -23,6 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('infos') ? "active" : null }}" href="{{ route('infos') }}" title="Vorstand, Satzungen und Infos">Infos</a>
                 </li>
+                <li>
+                    <a class="nav-link {{ Route::is('halloffame') ? "active" : null }}" href="{{ route('halloffame') }}" title="Ruhmeshalle">Ruhmeshalle</a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 @guest
