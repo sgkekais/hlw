@@ -16,7 +16,7 @@
                     @foreach($clubs as $club)
                         <div class="card text-center" style="max-width: 255px">
                             <div class="card-header px-1">
-                                <h4 class="text-uppercase font-weight-bold ">
+                                <h4 class="text-uppercase font-weight-bold my-0">
                                     <a href="{{ route('frontend.clubs.show', $club) }}" class="text-dark" title="Mannschaftsdetails">{{ $club->name }}</a>
                                 </h4>
                             </div>

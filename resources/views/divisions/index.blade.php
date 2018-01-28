@@ -211,9 +211,12 @@
                 @endif
             </div>
             {{-- scorers --}}
-            <div class="col-md-6">
-                <h2 class="font-weight-bold font-italic">TORSCHÜTZEN</h2>
-            </div>
+            @if (!$scorers->isEmpty())
+                <div class="col-md-6">
+                    <h2 class="font-weight-bold font-italic">TORSCHÜTZEN</h2>
+                    @include ('divisions.response_scorers')
+                </div>
+            @endif
         </div>
     </div>
 @endsection

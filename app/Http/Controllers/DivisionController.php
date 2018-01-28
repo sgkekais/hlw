@@ -41,6 +41,24 @@ class DivisionController extends Controller
                     'matchweek', 'clubHome', 'clubAway', 'stadium'
                 ]);
             }
+
+            $scorers = collect();
+
+            $season->load('matchweeks.fixtures.goals');
+            $goals = $season->goals();
+            foreach ($goals->groupBy('player.id') as $index => $player_goals) {
+                // get the player and load the person relationship
+                $player = Player::find($index);
+                if ($player) {
+                    $player->load([
+                        'person', 'club'
+                    ]);
+                }
+                // add a goals attribute
+                $player->goals = $player_goals->count();
+                // push the player to the scorers collection
+                $scorers->push($player);
+            }
         }
 
         // different jumbo backgrounds for different divisions
@@ -57,7 +75,7 @@ class DivisionController extends Controller
             $jumbo_bg = asset('storage/cup.jpg');
         }
 
-        return view('divisions.index', compact('division', 'season', 'matchweek', 'fixtures', 'jumbo_bg'));
+        return view('divisions.index', compact('division', 'season', 'matchweek', 'fixtures', 'jumbo_bg', 'scorers'));
     }
 
     /**
