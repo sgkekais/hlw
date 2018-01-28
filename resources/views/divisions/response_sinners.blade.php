@@ -57,7 +57,7 @@
                                 @if ($suspension && ($suspension->id == $card->id))
                                     ({{ $suspension->ban_remaining }})
                                 @else
-                                    (0)
+                                    (0) <span class="fa fa-thumbs-up text-primary" title="wieder spielberechtigt"></span>
                                 @endif
                             @else
                                 Saisonsperre
