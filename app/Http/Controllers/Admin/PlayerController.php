@@ -31,7 +31,7 @@ class PlayerController extends Controller
      */
     public function create(Club $club)
     {
-        $people     = Person::orderBy('last_name','asc')->orderBy('first_name','asc')->get();
+        $people     = Person::active()->orderBy('last_name','asc')->orderBy('first_name','asc')->get();
         $positions  = Position::all();
 
         return view('admin.players.create', compact('club', 'people', 'positions'));
