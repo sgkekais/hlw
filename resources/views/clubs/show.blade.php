@@ -222,7 +222,7 @@
                     <div class="col-md-6">
                         <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Farben</h2>
                         <div class="d-flex flex-row justify-content-between">
-                            <div class="d-flex d-flex-block w-50 pr-1">
+                            <div class="d-flex d-flex-block pr-1 border border-secondary rounded" style="width: 45%">
                                 <!-- club colors -->
                                 <div class="rounded-left" style="background-color: {{ $club->colours_club_primary }}; width: 50%">
                                     &nbsp;
