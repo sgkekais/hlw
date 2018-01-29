@@ -300,7 +300,10 @@
                                             </td>
                                             <td class="align-middle text-right">
                                                 @if($fixture->clubHome)
-                                                    <span class="pr-1">{{ $fixture->clubHome->name_short }}</span>
+                                                    {{-- visible only on xs --}}
+                                                    <span class="d-inline d-sm-none align-middle pr-1">{{ $fixture->clubHome->name_code }}</span>
+                                                    {{-- visible only on sm and md --}}
+                                                    <span class="d-none d-sm-inline align-middle pr-1">{{ $fixture->clubHome->name_short }}</span>
                                                     @if($fixture->clubHome->logo_url)
                                                         <img src="{{ asset('storage/'.$fixture->clubHome->logo_url) }}" width="30" class="d-none d-sm-inline-block">
                                                     @else
@@ -341,8 +344,11 @@
                                                     @else
                                                         <span class="fa fa-ban text-muted d-none d-sm-inline-block" title="Kein Vereinswappen vorhanden"></span>
                                                     @endif
-                                                    <span class="pl-1">{{ $fixture->clubAway->name_short }}</span>
-                                                    @else
+                                                        {{-- visible only on xs --}}
+                                                        <span class="d-inline d-sm-none align-middle pr-1">{{ $fixture->clubAway->name_code }}</span>
+                                                        {{-- visible only on sm and md --}}
+                                                        <span class="d-none d-sm-inline align-middle pr-1">{{ $fixture->clubAway->name_short }}</span>
+                                                @else
                                                     <span class="pl-1">{{ $fixture->club_away }}</span>
                                                 @endif
                                             </td>
@@ -368,9 +374,9 @@
                             <table class="table table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Datum</th>
-                                        <th colspan="3" class="text-center">Paarung</th>
-                                        <th></th>
+                                        <th class="align-middle"><span class="fa fa-calendar" title="Datum"></span></th>
+                                        <th colspan="3" class="text-center"><span class="fa fa-handshake-o" title="Paarung"></span></th>
+                                        <th class="align-middle text-center"><span class="fa fa-search-plus" title="Spieldetails"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -385,7 +391,10 @@
                                         </td>
                                         <td class="align-middle text-right">
                                             @if($fixture->clubHome)
-                                                {{ $fixture->clubHome->name_short }}
+                                                {{-- visible only on xs --}}
+                                                <span class="d-inline d-sm-none align-middle pr-1">{{ $fixture->clubHome->name_code }}</span>
+                                                {{-- visible only on sm and md --}}
+                                                <span class="d-none d-sm-inline align-middle pr-1">{{ $fixture->clubHome->name_short }}</span>
                                                 @if($fixture->clubHome->logo_url)
                                                     <img src="{{ asset('storage/'.$fixture->clubHome->logo_url) }}" width="30" class="d-none d-sm-inline-block">
                                                 @else
@@ -396,13 +405,28 @@
                                             @endif
                                         </td>
                                         <td class="align-middle text-center">
-                                            @if($fixture->isPlayed())
-                                                {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
-                                            @elseif($fixture->isRated())
-                                                {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
-                                            @else
-                                                - : -
-                                            @endif
+                                            <div class="rounded {{ $fixture->rescheduledTo || $fixture->isCancelled() ? "bg-light text-muted" : "bg-dark text-white" }} d-inline-block p-1" style="word-break: keep-all; width: 60px">
+                                                {{-- cancelled? --}}
+                                                @if($fixture->isCancelled())
+                                                    <span class="text-danger">
+                                                            @if ($fixture->isPlayed() && !$fixture->isRated())
+                                                            {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                                                        @elseif ($fixture->isRated())
+                                                            {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
+                                                        @else
+                                                            Ann.
+                                                        @endif
+                                                         </span>
+                                                    {{-- played and *not* rated? --}}
+                                                @elseif($fixture->isPlayed() && !$fixture->isRated())
+                                                    {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                                                    {{-- rated? --}}
+                                                @elseif($fixture->isRated())
+                                                    <span class="text-warning">{{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}</span>
+                                                @else
+                                                    -&nbsp;:&nbsp;-
+                                                @endif
+                                            </div>
                                         </td>
                                         <td class="align-middle text-left">
                                             @if($fixture->clubAway)
@@ -411,7 +435,10 @@
                                                 @else
                                                     <span class="d-none d-sm-inline-block fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                                 @endif
-                                                {{ $fixture->clubAway->name_short }}
+                                                {{-- visible only on xs --}}
+                                                <span class="d-inline d-sm-none align-middle pr-1">{{ $fixture->clubAway->name_code }}</span>
+                                                {{-- visible only on sm and md --}}
+                                                <span class="d-none d-sm-inline align-middle pr-1">{{ $fixture->clubAway->name_short }}</span>
                                             @else
                                                 {{ $fixture->club_away }}
                                             @endif
