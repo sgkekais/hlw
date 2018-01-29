@@ -16,13 +16,53 @@ class AdminController extends Controller
         $monday = Carbon::now()->startOfWeek();
         $sunday = Carbon::now()->endOfWeek();
         $today = Carbon::now();
-        $fixtures_this_week = Fixture::whereBetween('datetime', [$monday, $sunday])->notCancelled()->orderBy('datetime')->get();
-        $fixtures_this_week->load('matchweek.season');
+        $fixtures_this_week = Fixture::whereBetween('datetime', [$monday, $sunday])
+            ->notCancelled()
+            ->orderBy('datetime')
+            ->with([
+                'matchweek.season',
+                'clubHome',
+                'clubAway',
+                'referees'
+            ])
+            ->get();
+
+
+        // TODO: Fixtures without referee
+        $month_begin    = Carbon::now()->startOfMonth();
+        $month_end      = Carbon::now()->endOfMonth();
+        $fixtures_without_referee = Fixture::whereBetween('datetime', [$month_begin, $month_end])
+            ->notCancelled()
+            ->orderBy('datetime')
+            ->with([
+                'matchweek.season',
+                'clubHome',
+                'clubAway',
+                'referees'
+            ])
+            ->get();
 
         // Previous fixtures without result
-        $fixtures_without_result = Fixture::where('datetime', '<=', $today)->notPlayedOrRated()->notCancelled()->orderBy('datetime', 'desc')->get();
-        $fixtures_without_result->load('matchweek.season');
+        $fixtures_without_result = Fixture::where('datetime', '<=', $today)
+            ->notPlayedOrRated()
+            ->notCancelled()
+            ->orderBy('datetime', 'desc')
+            ->with([
+                'matchweek.season',
+                'clubHome',
+                'clubAway',
+                'referees'
+            ])
+            ->get();
 
-        return view('admin.index', compact('fixtures_this_week','fixtures_without_result'));
+        return view('admin.index', compact(
+            'fixtures_this_week',
+            'monday',
+            'sunday',
+            'fixtures_without_result',
+            'fixtures_without_referee',
+            'month_begin',
+            'month_end')
+        );
     }
 }
