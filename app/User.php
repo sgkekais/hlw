@@ -41,24 +41,6 @@ class User extends Authenticatable
      */
     use HasRoles;
 
-//    TODO: find better way to log new registered user and changed passwords
-//    use LogsActivity;
-//
-//    /**
-//     * The attributes that should be logged.
-//     * @var array
-//     */
-//    protected static $logAttributes = [
-//        'name',
-//        'email'
-//    ];
-//
-//    /**
-//     * Only the changed attributes should be logged
-//     * @var bool
-//     */
-//    protected static $logOnlyDirty = true;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -75,6 +57,14 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates
+     * @var array
+     */
+    protected $dates = [
+        'ban_date'
     ];
 
     /***********************************************************

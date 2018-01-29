@@ -29,6 +29,11 @@
                                 <span class="fa fa-fw fa-warning"></span> {{ session('warning') }}
                             </div>
                         @endif
+                        @if (session('danger'))
+                            <div class="alert alert-danger">
+                                <span class="fa fa-fw fa-exclamation-circle"></span> {{ session('danger') }}
+                            </div>
+                        @endif
                         <h1 class="font-weight-bold font-italic">Anmelden</h1>
                         <!-- Login Form -->
                         <form class="form" role="form" method="POST" action="{{ route('login') }}">

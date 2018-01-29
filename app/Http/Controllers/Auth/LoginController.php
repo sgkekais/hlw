@@ -5,6 +5,7 @@ namespace HLW\Http\Controllers\Auth;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -77,18 +78,30 @@ class LoginController extends Controller
         if ($this->guard()->validate($this->credentials($request))) {
             $user = $this->guard()->getLastAttempted();
 
-            // Make sure the user is verified
-            if ($user->verified && $this->attemptLogin($request)) {
-                // Send the normal successful login response
-                return $this->sendLoginResponse($request);
+            // Make sure the use is not banned
+            if (!$user->ban_date && $this->attemptLogin($request)) {
+                // Make sure the user is verified
+                if ($user->verified && $this->attemptLogin($request)) {
+                    // Send the normal successful login response
+                    return $this->sendLoginResponse($request);
+                } else {
+                    // User is not verified
+                    // Increment the failed login attempts and redirect back to the
+                    // login form with an error message.
+                    $this->incrementLoginAttempts($request);
+                    return redirect()
+                        ->back()
+                        ->withInput($request->only($this->username(), 'remember'))
+                        ->with('warning', 'Bitte bestätige zuerst deine E-Mail-Adresse.');
+                }
             } else {
+                // User is banned
                 // Increment the failed login attempts and redirect back to the
                 // login form with an error message.
                 $this->incrementLoginAttempts($request);
                 return redirect()
                     ->back()
-                    ->withInput($request->only($this->username(), 'remember'))
-                    ->with('warning', 'Bitte bestätige zuerst deine E-Mail-Adresse.');
+                    ->with('danger', 'Du wurdest am '.$user->ban_date->format('d.m.Y H:i').' gebannt. Grund: '.($user->ban_reason ?? 'nicht angegeben'));
             }
         }
 
@@ -113,6 +126,6 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        return back()->with('authenticated', true);
+        Session::flash('authenticated', true);
     }
 }

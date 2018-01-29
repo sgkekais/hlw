@@ -9,8 +9,8 @@
         <!-- subnavigation -->
         @yield('subnav')
 
-        @if( session('authenticated') )
-            <div id="authSuccess" class="container-fluid alert alert-success w-100 border-0 text-center m-0">
+        @if (session('authenticated'))
+            <div id="authSuccess" class="container-fluid bg-primary text-center text-white m-0 pb-2">
                 &#x1F44B; Willkommen zurück, {{ Auth::user()->name }}!
             </div>
         @endif
@@ -32,7 +32,7 @@
     <script type="text/javascript">
         $(function() {
             @if( session('authenticated') )
-                $("#authSuccess").delay(2500).fadeOut();
+                $("#authSuccess").delay(1000).slideUp();
             @endif
         })
     </script>
