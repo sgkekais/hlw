@@ -551,7 +551,7 @@
                 Ihr seid eine Hobby- / Theken- / Betriebsmannschaft aus Düsseldorf oder der näheren Umgebung? Dann braucht ihr folgendes um mitzumachen:
                 <ul>
                     <li>
-                        <span>Eine motivierte Mannschaft mit ausreichend zuverlässigen Spielern</span>
+                        <span class="font-weight-bold">Eine motivierte Mannschaft mit ausreichend zuverlässigen Spielern</span>
                         <ul>
                             <li>Ihr solltet also allermindestens 11 Spieler plus Reserve sein</li>
                             <li>Keiner dieser Spieler darf in einem Verein spielen</li>
@@ -559,22 +559,22 @@
                         </ul>
                     </li>
                     <li>
-                        <span>Einen Platz, auf dem ihr einen regelmäßigen Heimspieltermin organisieren könnt</span>
+                        <span class="font-weight-bold">Einen Platz, auf dem ihr einen regelmäßigen Heimspieltermin organisieren könnt</span>
                         <ul>
                             <li>Der Platz sollte den DFB-Vorgaben entsprechen und mindestens zwei Stunden zur Verfügung stehen (inkl. Flutlicht-Möglichkeit)</li>
                             <li>Der Platz muss euch die gesamte Saison über zur Verfügung stehen (schaut euch die Spielpläne als Beispiel an)</li>
                         </ul>
                     </li>
                     <li>
-                        <span>Einen Satz passender Ausrüstung</span>
+                        <span class="font-weight-bold">Einen Satz passender Ausrüstung</span>
                         <ul>
                             <li>Denkt an Trikots, Bälle, Torwartausrüstung, etc...</li>
                         </ul>
                     </li>
                     <li>
-                        <span>Einen Namen und ein Vereinswappen</span>
+                        <span class="font-weight-bold">Einen Namen und ein Vereinswappen</span>
                     </li>
-                    <li><span>Startgeld und Schiedsrichterkaution</span></li>
+                    <li><span class="font-weight-bold">Startgeld und Schiedsrichterkaution</span></li>
                 </ul>
                 <p>
                     Einsteigen könnt ihr vor jedem Saisonbeginn (nicht während einer laufenden Saison). Da wir unsere Saisons von Frühling bis Herbst ausspielen, solltet ihr uns euer Interesse für die nächste Saison spätestens bis Ende November des laufenden Jahres mitteilen, damit wir planen können. Schreibt dazu eine Mail den Vorstand (vorstand@...).
