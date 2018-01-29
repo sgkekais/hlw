@@ -315,7 +315,7 @@ class Season extends Model
                 // Home table
                 case 1:
                     // played + rated games
-                    $club->t_played = $club->getGamesPlayedHome($this, $matchweek)->count()+$club->getGamesRatedHome($this, $matchweek)->count();
+                    $club->t_played = $club->getGamesPlayedHome($this, $matchweek)->count() + $club->getGamesRatedHome($this, $matchweek)->count();
                     // won games
                     $club->t_won = $club->getGamesPlayedWonHome($this, $matchweek)->count() + $club->getGamesRatedWonHome($this, $matchweek)->count();
                     // drawn games
@@ -335,7 +335,7 @@ class Season extends Model
                 // Away table
                 case 2:
                     // played + rated games
-                    $club->t_played = $club->getGamesPlayedAway($this, $matchweek)->count()+$club->getGamesRatedAway($this, $matchweek)->count();
+                    $club->t_played = $club->getGamesPlayedAway($this, $matchweek)->count() + $club->getGamesRatedAway($this, $matchweek)->count();
                     // won games
                     $club->t_won = $club->getGamesPlayedWonAway($this, $matchweek)->count() + $club->getGamesRatedWonAway($this, $matchweek)->count();
                     // drawn games

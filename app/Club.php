@@ -1214,6 +1214,10 @@ class Club extends Model
     public function getLastGamesPlayedOrRated($numberOfGames, $date = null)
     {
         return Fixture::ofClub($this->id)->playedOrRated()->orderBy('datetime', 'desc')
+            ->with([
+                'clubHome',
+                'clubAway'
+            ])
             // if a date is given, then return the last games before that date
             ->when($date, function ($query) use ($date){
                 return $query->where('datetime', '<=', $date);
