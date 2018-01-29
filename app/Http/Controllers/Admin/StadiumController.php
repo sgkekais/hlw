@@ -17,7 +17,7 @@ class StadiumController extends Controller
      */
     public function index()
     {
-        $stadiums = Stadium::with('clubs')->get();
+        $stadiums = Stadium::with('clubs')->orderBy('name')->get();
 
         return view('admin.stadiums.index', compact('stadiums'));
     }

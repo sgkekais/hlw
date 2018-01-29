@@ -188,10 +188,9 @@ class ClubController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \HLW\Club  $club
-     * @return \Illuminate\Http\Response
+     * @param Club $club
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Club $club)
     {
@@ -216,11 +215,9 @@ class ClubController extends Controller
         // then delete the club
         $club->delete();
 
-        // flash success message
-        Session::flash('success', 'Mannschaft '.$name.' mit der ID '.$id.' gelöscht. '.$delete_message);
-
         // return to index
-        return redirect()->route('clubs.index');
+        return redirect()->route('clubs.index')
+            ->with('success', 'Mannschaft '.$name.' mit der ID '.$id.' gelöscht. '.$delete_message);
     }
 
     /**
@@ -279,7 +276,7 @@ class ClubController extends Controller
     public function createStadiumAssignment(Club $club)
     {
         // determine the stadiums which are not assigned to the club, yet
-        $all_stadiums           = Stadium::orderBy('name')->get();
+        $all_stadiums           = Stadium::orderBy('name')->published()->get();
         $unassigned_stadiums    = $all_stadiums->diff($club->stadiums);
 
         return view('admin.clubs.createStadiumAssignment', compact('club', 'unassigned_stadiums'));
