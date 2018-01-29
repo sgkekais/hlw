@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-4">
                 <select class="form-control" id="referee_id" name="referee_id" aria-describedby="referee_idHelp">
-                    @foreach($unassigned_referees as $unassigned_referee)
+                    @foreach($unassigned_referees->sortBy('person.last_name') as $unassigned_referee)
                         <option value="{{ $unassigned_referee->id }}">{{ $unassigned_referee->person->last_name }}, {{ $unassigned_referee->person->first_name }}</option>
                     @endforeach
                 </select>

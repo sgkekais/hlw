@@ -26,15 +26,16 @@ class FixtureController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Matchweek $matchweek
+     * @param Fixture $fixture
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Matchweek $matchweek, Fixture $fixture)
     {
         // get all clubs of the season
         $clubs = $matchweek->season->clubs->sortBy('name');
         // get all stadiums
-        $stadiums = Stadium::all();
+        $stadiums = Stadium::published()->orderBy('name')->get();
 
         return view('admin.fixtures.create', compact('matchweek', 'clubs', 'stadiums', 'fixture'));
 
@@ -96,9 +97,9 @@ class FixtureController extends Controller
     public function edit(Matchweek $matchweek, Fixture $fixture)
     {
         // get all clubs of the season
-        $clubs = $matchweek->season->clubs;
+        $clubs = $matchweek->season->clubs->sortBy('name');;
         // get all stadiums
-        $stadiums = Stadium::orderBy('name')->get();
+        $stadiums = Stadium::published()->orderBy('name')->get();
 
         return view('admin.fixtures.edit', compact('matchweek', 'fixture', 'clubs', 'stadiums'));
     }
@@ -127,16 +128,16 @@ class FixtureController extends Controller
 
         $fixture->update($request->all());
 
-        Session::flash('success', 'Paarung geändert');
-
-        return redirect()->route('seasons.matchweeks.show', [$matchweek->season, $matchweek]);
+        return redirect()->route('seasons.matchweeks.show', [$matchweek->season, $matchweek])
+            ->with('success', 'Paarung geändert');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \HLW\Fixture $fixture
-     * @return \Illuminate\Http\Response
+     * @param Matchweek $matchweek
+     * @param Fixture $fixture
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Matchweek $matchweek, Fixture $fixture)
     {
@@ -145,9 +146,8 @@ class FixtureController extends Controller
         // TODO: consider reschedule relationships
         $fixture->delete();
 
-        Session::flash('success', 'Paarung mit der id ' . $id . ' gelöscht.');
-
-        return redirect()->route('seasons.matchweeks.show', [$matchweek->season, $matchweek]);
+        return redirect()->route('seasons.matchweeks.show', [$matchweek->season, $matchweek])
+            ->with('success', 'Paarung mit der id ' . $id . ' gelöscht.');
     }
 
     /**
@@ -157,7 +157,7 @@ class FixtureController extends Controller
     public function createRefereeAssignment(Fixture $fixture)
     {
         // determine the referees which are not assigned to the fixture, yet
-        $all_referees = Referee::all();
+        $all_referees = Referee::with('person')->get();
         $unassigned_referees = $all_referees->diff($fixture->referees);
 
         return view('admin.fixtures.createRefereeAssignment', compact('fixture', 'unassigned_referees'));

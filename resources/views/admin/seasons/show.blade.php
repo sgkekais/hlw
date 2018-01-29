@@ -6,6 +6,7 @@
     <h2 class="mt-4 text-primary">&mdash; {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }} <span class="text-muted">({{ $season->division->name }} - {{ $season->division->competition->name }})</span>
     </h2>
     <div class="row">
+        {{--TODO: reactivate some time later
         <!-- CSV Modal for Matchweeks-Import -->
         <div class="modal fade" id="csvImportMatchweeks" tabindex="-1" role="dialog" aria-labelledby="csvImportMatchweeksLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -40,6 +41,7 @@
                 </div>
             </div>
         </div>
+
         <!-- CSV Modal for Fixtures-Import -->
         <div class="modal fade" id="csvImportFixtures" tabindex="-1" role="dialog" aria-labelledby="csvImportFixturesLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -74,6 +76,7 @@
                 </div>
             </div>
         </div>
+        --}}
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
                 <a class="btn btn-primary mb-2" href="{{ route('seasons.edit', $season ) }}" title="Saison bearbeiten">
@@ -86,12 +89,12 @@
                 <a class="btn btn-secondary" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
                     <span class="fa fa-plus-square"></span> Mannschaft
                 </a>
-                <a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#csvImportMatchweeks">
-                    <span class="fa fa-file-excel-o"></span> Spielwochen-Import
-                </a>
-                <a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#csvImportFixtures">
-                    <span class="fa fa-file-excel-o"></span> Paarungen-Import
-                </a>
+            {{--<a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#csvImportMatchweeks">
+                <span class="fa fa-file-excel-o"></span> Spielwochen-Import
+            </a>
+            {{--<a classn btn-secondary" href="#" data-toggle="modal" data-target="#csvImportFixtures">
+                <span class="fa fa-file-excel-o"></span> Paarungen-Import
+            </a>--}}
         </div>
         <!-- dates -->
         <div class="col-md-6">
