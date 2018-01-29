@@ -416,8 +416,10 @@
                                                 {{ $fixture->club_away }}
                                             @endif
                                         </td>
-                                        <td>
-
+                                        <td class="align-middle text-center">
+                                            <a href="{{ route('frontend.fixtures.show', $fixture) }}" title="Spieldetails">
+                                                <span class="fa fa-fw fa-arrow-right"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -480,22 +482,37 @@
                     <div class="row mt-2">
                         <div class="col">
                             <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $club->colours_club_primary }}">Ansprechpartner</h2>
+                            <p class="text-muted">Nur für angemeldete Mitglieder sichtbar.</p>
                             @if (!$contacts->isEmpty())
                                 <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <div class="col-1 font-weight-bold">
+                                            <span class="font-weight-bold">#</span>
+                                        </div>
+                                        <div class="col-4">
+                                            <span class="fa fa-user"></span>
+                                        </div>
+                                        <div class="col-4">
+                                            <span class="fa fa-envelope"></span>
+                                        </div>
+                                        <div class="col-3 ">
+                                            <span class="fa fa-phone"></span>
+                                        </div>
+                                    </li>
                                     @foreach ($club->contacts()->orderBy('hierarchy_level')->with('person')->get() as $contact)
                                         <li class="list-group-item d-flex justify-content-between">
-                                            <span class="font-weight-bold">
+                                            <div class="col-1 font-weight-bold">
                                                 {{ $contact->hierarchy_level }}
-                                            </span>
-                                            <span class="">
+                                            </div>
+                                            <div class="col-4">
                                                 {{ $contact->person->first_name }} {{ $contact->person->last_name }}
-                                            </span>
-                                            <span class="">
+                                            </div>
+                                            <div class="col-4">
                                                 {{ $contact->mail }}
-                                            </span>
-                                            <span class="">
+                                            </div>
+                                            <div class="col-3 ">
                                                 {{ $contact->mobile }}
-                                            </span>
+                                            </div>
                                         </li>
                                     @endforeach
                                 </ul>
