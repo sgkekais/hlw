@@ -36,7 +36,11 @@
         <div class="row mt-4">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Vorstand der Hobbyliga-West</h2>
-                <span class="text-muted">An alle E-Mail-Adressen ist selbständig "@hobbyligawest.de" anzuhängen.</span>
+                <span class="text-muted">
+                    An alle E-Mail-Adressen ist selbständig "@hobbyligawest.de" anzuhängen.
+                    <br>
+                    Anfragen und Infos bitte immer an die Vorstandsadresse (<b>vorstand@hobby...</b>), damit der gesamte Vorstand die Info erhält und schneller reagieren kann.
+                </span>
                 <div class="row mt-2">
                     <div class="col">
                         <div class="card-deck">
