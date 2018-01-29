@@ -30,7 +30,7 @@
                 <ul class="list-unstyled">
                     <li><span class="fa fa-fw fa-facebook"></span> <a href="https://www.facebook.com/HobbyligaWest/" title="Facebook" target="_blank">HLW auf Facebook</a> <span class="fa fa-external-link"></span> </li>
                     <li><span class="fa fa-fw fa-twitter"></span> <a href="https://twitter.com/HobbyligaWest" title="Twitter" target="_blank">HLW auf Twitter</a> <span class="fa fa-external-link"></span></li>
-                    <li><span class="fa fa-fw fa-envelope"></span> Mail an HLW</li>
+                    <li><span class="fa fa-fw fa-envelope"></span> vorstand [AT] hobbyligawest [DOT] de</li>
                 </ul>
                 <a href="{{ route('login') }}" title="Anmelden">Login</a> |
                 <a href="{{ route('register') }}" title="Registrieren">Registrieren</a>

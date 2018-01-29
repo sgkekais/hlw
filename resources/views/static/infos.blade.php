@@ -151,9 +151,10 @@
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Hobbyliga-West</h2>
                 <h5>Stand: 11.01.2018</h5>
-                <ol class="text-justify">
-                    <li><span class="h4 font-weight-bold">Allgemeines</span>
-                        <ol>
+                <ul class="list-unstyled text-justify">
+                    <li>
+                        <span class="h4 font-weight-bold">1. Allgemeines</span>
+                        <ol class="py-2">
                             <li>
                                 Der Spaß steht im Vordergrund unserer Liga. Die Mannschaften spielen nicht gegen-, sondern miteinander. Die Teams sind fair zueinander, und zu den Schiedsrichtern, sowohl vor, als auch während und nach dem Spiel.
                                 Die Satzung wurde von allen Teams gemeinsam mit dem Vorstand entworfen.
@@ -166,8 +167,9 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Startgeld</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">2. Startgeld</span>
+                        <ol class="py-2">
                             <li>
                                 Das Startgeld beträgt pro Mannschaft <b>80,- €</b> und ist am Tag der Jahreshauptversammlung beim Kassierer zu bezahlen.
                             </li>
@@ -176,8 +178,9 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Meldungen</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">3. Meldungen</span>
+                        <ol class="py-2">
                             <li>
                                 Jede Mannschaft stellt der Ligaleitung eine Mannschaftsliste zur Verfügung aus der Zu-, Vorname, Geburtsdatum und Vereinszugehörigkeit eines jeden Spielers hervorgehen. Nur die Spieler, zu denen alle Daten vorliegen, sind spielberechtigt. Diese Mannschaftsliste muss der Ligaleitung <u>spätestens 1 Woche</u> vor dem 1. Spieltag vorliegen!
                             </li>
@@ -212,8 +215,9 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Pässe und Spielberichtsbögen</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">4. Pässe und Spielberichtsbögen</span>
+                        <ol class="py-2">
                             <li>
                                 Es wird jeder Mannschaft ein Satz Spielerpässe von der Ligaleitung ausgestellt. Die Schiedsrichter sind verpflichtet, vor jedem Spiel die Spielberechtigung der anwesenden Spieler anhand der <u>Spielerpässe</u> zu prüfen, die von den jeweiligen Mannschaften <u>zwingend mitzuführen</u> sind.
                             </li>
@@ -227,8 +231,9 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Spielbetrieb</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">5. Spielbetrieb</span>
+                        <ol class="py-2">
                             <li>
                                 Der Spielplan wird von der Ligaleitung erstellt und ist für alle teilnehmenden Mannschaften verbindlich.
                                 <br>
@@ -303,15 +308,17 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Übermittlung der Spielergebnisse</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">6. Übermittlung der Spielergebnisse</span>
+                        <ol class="py-2">
                             <li>
                                 Die Spielergebnisse und besonderen Vorkommnisse werden vom Schiedsrichter im Spielberichtsbogen notiert, von der Heimmannschaft abfotografiert und per Mail an den Vorstand übermittelt.
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Strafen</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">7. Strafen</span>
+                        <ol class="py-2">
                             <li>
                                 <b>Alle Karten gelten wettbewerbsübergreifend, d.h. für Pokal- und Meisterschaftsspiele!</b>
                             </li>
@@ -352,15 +359,17 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Schiedsrichter</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">8. Schiedsrichter</span>
+                        <ol class="py-2">
                             <li>
                                 Die Schiedsrichter werden vom Schiedsrichterobmann angesetzt und können nicht abgelehnt werden.
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Kosten</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">9. Kosten</span>
+                        <ol class="py-2">
                             <li>
                                 Die Heimmannschaft trägt die Kosten für den Platz und zahlt dem Schiedsrichter <b>30,- €</b> pro Spiel.
                             </li>
@@ -381,8 +390,9 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Nachholspiele</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">10. Nachholspiele</span>
+                        <ol class="py-2">
                             <li>
                                 Ein Nachholspieltermin ist von der Heimmannschaft innerhalb von einer Woche mit dem Gegner abzustimmen und innerhalb dieser Frist an den Schiedsrichterobmann und die Ligaleitung zu melden. Sollten sich beide Mannschaften nicht auf einen Termin einigen, so wird die Ligaleitung einen Termin vorschreiben, an dem gespielt werden muss (ansonsten 10.3).
                             </li>
@@ -403,8 +413,9 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Pokalwettbewerb</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">11. Pokalwettbewerb</span>
+                        <ol class="py-2">
                             <li>
                                 Es gelten beim Pokal, sowie beim Endspiel, dieselben Melderegeln für spielberechtigte Spieler, wie im Ligaspielbetrieb.
                             </li>
@@ -416,78 +427,136 @@
                             </li>
                         </ol>
                     </li>
-                    <li><span class="h4 font-weight-bold">Haftung</span>
-                        <ol>
+                    <li>
+                        <span class="h4 font-weight-bold">12. Haftung</span>
+                        <ol class="py-2">
                             <li>
                                 Die Hobbyliga-West Düsseldorf ist eine Eigeninitiative von mehreren Freizeit- und  Hobbyfußballmannschaften. Sie ist nicht Veranstalter der Spiele sondern verwaltet lediglich die Ergebnisse der Spielrunde. Sie ist weder für Körper- noch für Sachschäden haftbar zu machen.
                             </li>
                         </ol>
                     </li>
-                </ol>
+                </ul>
             </div>
         </div>
         <a id="ah"></a>
         <div class="row mt-4">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Altherren-Liga</h2>
-                <h5>Stand: </h5>
-                <ol>
-                    <li class="h4 font-weight-bold">Allgemeines</li>
-                    <li class="h4 font-weight-bold">Startgeld</li>
-                    <li class="h4 font-weight-bold">Meldungen</li>
-                    <li class="h4 font-weight-bold">Pässe</li>
-                    <li class="h4 font-weight-bold">Spielbetrieb</li>
-                    <li class="h4 font-weight-bold">Spielergebnisse</li>
-                    <li class="h4 font-weight-bold">Strafen</li>
-                    <li class="h4 font-weight-bold">Schiedsrichter</li>
-                    <li class="h4 font-weight-bold">Kosten</li>
-                    <li class="h4 font-weight-bold">Nachholspiele</li>
-                    <li class="h4 font-weight-bold">Haftung</li>
-                </ol>
+                <h5>Stand: 22.12.2017</h5>
+                <ul class="list-unstyled">
+                    <li><span class="h4 font-weight-bold">1. Spielberechtigung</span>
+                        <ol class="py-2">
+                            <li>Spielberechtigt sind alle Spieler, die das <b>30.</b> Lebensjahr vollendet haben.</li>
+                            <li>Spielerpässe werden nicht ausgestellt. Auf Verlangen muss sich der Spieler dem Schiedsrichter gegenüber ausweisen können.</li>
+                            <li>Vereinsspieler sind nicht spielberechtigt (Spieler die <b>regelmäßig</b> in einer Vereinsmannschaft spielen)</li>
+                            <li>Findet ein Vereinswechsel im Laufe der Saison statt, ist der Spieler für ein Spiel gesperrt.</li>
+                            <li>Eine Spielerliste ist bei der Ligaleitung vor Beginn der Saison zu hinterlegen. Neue Spieler müssen nachgemeldet werden.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <span class="h4 font-weight-bold">2. Durchführung</span>
+                        <ol class="py-2">
+                            <li>Grundsätzlich wird nach den aktuellen Regeln des DFB gespielt.</li>
+                            <li>Es dürfen während eines Spiels 6 Auswechslungen vorgenommen werden. Bereits ausgewechselte Spieler dürfen wieder eingewechselt werden, solange die Auswechselgrenze von 6 Wechseln nicht erreicht ist.</li>
+                            <li>15 Minuten beträgt die Wartezeit, falls der Gegner nicht pünktlich zum Anstoß erschienen ist.
+                                <ol>
+                                    <li>Evtl. anfallende Schiedsrichterkosten bei einem Spielausfall trägt der Verursacher.</li>
+                                </ol>
+                            </li>
+                            <li>Tritt eine Mannschaft nicht an, wird das Spiel mit 3:0 Punkten und 5:0 Toren gewertet.</li>
+                            <li>Sind in der Abschlusstabelle zwei Mannschaften punkt- und Torgleich zählt der direkte Vergleich. Erst dann erfolgt ein Entscheidungsspiel. Diese Regelung gilt nur für Platz 1 und 2.</li>
+                            <li>Jede Mannschaft kann zwei Spielverlegungen vornehmen. Weitere Spielverlegungen sind nicht möglich, auch wenn das Einverständnis des Gegners vorliegt. Diese Regelung gilt nicht für Spielausfälle wegen höherer Gewalt.
+                                <ol>
+                                    <li>
+                                        Eine Spielverlegung muss mit einer Vorlaufzeit von mindestens 1 Tag erfolgen - Zwischen der Absage/Verlegung und dem Spieltag muss 1 Tag liegen.
+                                        <br><b>Beispiele</b><br>
+                                        Spiel Samstag, Absage bis Donnerstag<br>
+                                        Spiel Freitag, Absage bis Mittwoch<br>
+                                        Die Verlegung muss folgenden Personen mitgeteilt werden:<br>
+                                        A) gegnerische Mannschaft<br>
+                                        B) Ligaleitung<br>
+                                        C) Schiedsrichterobmann
+                                    </li>
+                                    <li>Ein Nachholspieltermin ist von der Heimmannschaft innerhalb von zwei
+                                        Wochen mit dem Gegner abzustimmen und innerhalb dieser Frist an die
+                                        Ligaleitung zu melden. Sollten sich beide Mannschaften nicht auf einen Termin
+                                        einigen, so wird die Ligaleitung einen Termin vorschreiben, an dem gespielt
+                                        werden muss.
+                                    </li>
+                                    <li>Nachholspiele können jederzeit gespielt werden. Die dafür reservierten
+                                        Wochen sind mögliche Spieltage, aber nicht zwingend.
+                                        Nachholspiele aus der Hinrunde sind bis zum Ende der Sommerferien
+                                        nachzuholen.
+                                    </li>
+                                    <li>
+                                        Bis zum Beginn der ersten Spielwoche und während der Sommerpause (bis
+                                        zum Beginn der ersten Rückrundenspielwoche) dürfen Spiele unbegrenzt
+                                        verlegt werden. Diese Spielverlegungen zählen nicht zu 2.6.
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>Heimmannschaft müssen zwei Trikotsätze vor Ort haben, damit im Bedarfsfall eine
+                                Ausweichmöglichkeit existiert.</li>
+                            <li>Sämtliche Trikotsätze müssen mit Rückennummern ausgestattet sein.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <span class="h4 font-weight-bold">3. Übermittlung der Spielergebnisse</span>
+                        <ol class="py-2">
+                            <li>Das Spielergebnis wird von der Heimmannschaft in der gemeinsamen Chat-
+                                Gruppe eingestellt.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <span class="h4 font-weight-bold">4. Strafen</span>
+                        <ol class="py-2">
+                            <li>Gelb-Rot = Matchstrafe</li>
+                            <li>Rote Karte = 1 Pflichtspiele Sperre</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <span class="h4 font-weight-bold">5. Schiedsrichter</span>
+                        <ol class="py-2">
+                            <li>Der vom Veranstalter angesetzte Schiedsrichter erhält
+                                vor dem Spiel von der Heimmannschaft 35,00 EURO und kann
+                                nicht abgelehnt werden.</li>
+                            <li>Erscheint der Schiedsrichter nicht, stellt die
+                                Heimmannschaft eine geeignete Person zur Leitung des Spiels ab.
+                                Ist dies nicht möglich, versucht der Gast
+                                eine geeignete Person zu stellen. Kommt es zu keiner
+                                Einigung, so findet ein Nachholspiel statt und die
+                                Kosten müssen geteilt werden.</li>
+                        </ol>
+                    </li>
+                </ul>
             </div>
         </div>
         {{-- how to join --}}
         <a id="join"></a>
         <div class="row mt-4">
             <div class="col">
-                <h2 class="font-weight-bold font-italic">Mitmachen</h2>
-                <p>
-                    - "Was brauchen wir um mitzumachen"-Seite? Mit Infos:
-                    - Eine Mannschaft, die zuverlässig ist, um Spielabsagen zu vermeiden
-                    - Umkreis Düsseldorf + direkte Nachbarstädte
-                    - Startgeld + Schiedsrichterkaution
-                    - Einstieg (nur) vor jedem Saisonbeginn in der 2. Liga möglich
-                    - Einen Platz, auf dem ihr einen regelmäßigen Heimspieltermin organisieren könnt
-                    ○ Der Platz muss x Stunden, siehe Satzung
-                    -geht eine Saison immer halbjährig oder ganzjährig
-                    -wie viele Spieler müssen pro Mannschaft gemeldet sein
-                    -Spielt man im Bereich der DFB-Regeln (2x45min)
-                    -Bis wann muss man seine Mannschaft gemeldet haben
-                    -werden die Spiele wöchentlich ausgetragen
-
-                </p>
-                <p>
-                    Kurze Zusammenfassung unserer Satzung:
-                    Wir spielen nach DFB-Regeln, d.h. 2 x 45 Minuten auf Großfeld.
-
-                </p>
-                <ul class="list-unstyled">
-                    <li class="font-weight-bold">F: Wie können wir mitmachen?</li>
-                    <li class="">A: fdsghjkl</li>
-                    <li class="font-weight-bold">F: Was kostet die Teilnahme?</li>
-                    <li class="font-weight-bold">F: Was brauchen wir?</li>
-                    <li class="">A: Ihr braucht:
+                <h2 class="font-weight-bold font-italic">Ihr wollt mitmachen?</h2>
+                Ihr seid eine Hobby- / Theken- / Betriebsmannschaft aus Düsseldorf oder der näheren Umgebung? Dann braucht ihr folgendes um mitzumachen:
+                <ul>
+                    <li>Eine motivierte Mannschaft mit ausreichend zuverlässigen Spielern
                         <ul>
-                            <li>
-                                Einen Platz, auf dem ihr regelmäßig Heimspiele austragen könnt. Dieser Platz muss mindestens x Stunden zur Verfügung stehen.
-                            </li>
-                            <li>
-                                Genügend Spieler im Kader. Also allermindestens 11, plus Auswechselspieler. Keiner dieser Spieler darf in einem Verein spielen.
-                            </li>
+                            <li>Ihr solltet also allermindestens 11 Spieler plus Reserve sein</li>
+                            <li>Keiner dieser Spieler darf in einem Verein spielen</li>
                         </ul>
-                    </li>
-                    <li class="font-weight-bold">F: Wann können wir mitmachen?</li>
+                    <li>Einen Platz, auf dem ihr einen regelmäßigen Heimspieltermin organisieren könnt</li>
+                        <ul>
+                            <li>Der Platz muss den DFB-Vorgaben entsprechen und mindestens zwei Stunden zur Verfügung stehen (inkl. Flutlicht-Möglichkeit)</li>
+                            <li>Der Platz muss euch die gesamte Saison über zur Verfügung stehen (schaut euch die Spielpläne als Beispiel an)</li>
+                        </ul>
+                    <li>Einen Satz passender Ausrüstung</li>
+                        <ul>
+                            <li>Denkt an Trikots, Bälle, Torwartausrüstung, etc...</li>
+                        </ul>
+                    <li>Startgeld und Schiedsrichterkaution</li>
                 </ul>
+                <p>
+                    Einsteigen könnt ihr vor jedem Saisonbeginn (nciht während einer laufenden Saison). Da wir unsere Saisons von Frühling bis Herbst ausspielen, solltet ihr uns euer Interesse für die nächste Saison spätestens bis Ende November des laufenden Jahres mitteilen, damit wir planen können.
+                </p>
             </div>
         </div>
     </div>
