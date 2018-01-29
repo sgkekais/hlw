@@ -14,8 +14,7 @@ class PlayerController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function index()
     {
@@ -26,15 +25,17 @@ class PlayerController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Club $club
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Club $club)
     {
         $people     = Person::active()->orderBy('last_name','asc')->orderBy('first_name','asc')->get();
+        $unassigned_people    = $people->diff($club->players);
+
         $positions  = Position::all();
 
-        return view('admin.players.create', compact('club', 'people', 'positions'));
+        return view('admin.players.create', compact('club', 'unassigned_people', 'positions'));
     }
 
     /**
@@ -73,9 +74,9 @@ class PlayerController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \HLW\Player  $player
-     * @return \Illuminate\Http\Response
+     * @param Club $club
+     * @param Player $player
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Club $club, Player $player)
     {
@@ -109,17 +110,16 @@ class PlayerController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param Club $club
      * @param Player $player
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Club $club, Player $player)
     {
         $player->delete();
 
-        Session::flash('success', 'Zuordnung gelöscht.');
-
-        return redirect()->route('clubs.show', $club);
+        return redirect()->route('clubs.show', $club)
+            ->with('success', 'Zuordnung gelöscht.');
     }
 }
