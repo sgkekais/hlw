@@ -60,6 +60,7 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="w-100 my-2 d-block d-md-none"><!-- wrap every 2 below md --></div>
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Stefan Abels</h4>
@@ -70,6 +71,7 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="w-100 my-2 d-none d-md-block d-lg-none"><!-- wrap every 3 at md --></div>
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Erwin Scholz</h4>
@@ -80,8 +82,8 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-deck mt-4">
+                            <div class="w-100 my-2 d-block d-md-none"><!-- wrap every 2 below md --></div>
+                            <div class="w-100 my-2 d-none d-lg-block"><!-- wrap every 4 above md --></div>
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Klaus Wynants</h4>
@@ -102,6 +104,8 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="w-100 my-2 d-block d-md-none"><!-- wrap every 2 below md --></div>
+                            <div class="w-100 my-2 d-none d-md-block d-lg-none"><!-- wrap every 3 at md --></div>
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title font-weight-bold">Kevin Kaiser</h4>
@@ -151,10 +155,10 @@
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Hobbyliga-West</h2>
                 <h5>Stand: 11.01.2018</h5>
-                <ul class="list-unstyled text-justify">
+                <ul class="list-unstyled">
                     <li>
                         <span class="h4 font-weight-bold">1. Allgemeines</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Der Spaß steht im Vordergrund unserer Liga. Die Mannschaften spielen nicht gegen-, sondern miteinander. Die Teams sind fair zueinander, und zu den Schiedsrichtern, sowohl vor, als auch während und nach dem Spiel.
                                 Die Satzung wurde von allen Teams gemeinsam mit dem Vorstand entworfen.
@@ -169,7 +173,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">2. Startgeld</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Das Startgeld beträgt pro Mannschaft <b>80,- €</b> und ist am Tag der Jahreshauptversammlung beim Kassierer zu bezahlen.
                             </li>
@@ -180,7 +184,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">3. Meldungen</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Jede Mannschaft stellt der Ligaleitung eine Mannschaftsliste zur Verfügung aus der Zu-, Vorname, Geburtsdatum und Vereinszugehörigkeit eines jeden Spielers hervorgehen. Nur die Spieler, zu denen alle Daten vorliegen, sind spielberechtigt. Diese Mannschaftsliste muss der Ligaleitung <u>spätestens 1 Woche</u> vor dem 1. Spieltag vorliegen!
                             </li>
@@ -217,7 +221,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">4. Pässe und Spielberichtsbögen</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Es wird jeder Mannschaft ein Satz Spielerpässe von der Ligaleitung ausgestellt. Die Schiedsrichter sind verpflichtet, vor jedem Spiel die Spielberechtigung der anwesenden Spieler anhand der <u>Spielerpässe</u> zu prüfen, die von den jeweiligen Mannschaften <u>zwingend mitzuführen</u> sind.
                             </li>
@@ -233,7 +237,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">5. Spielbetrieb</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Der Spielplan wird von der Ligaleitung erstellt und ist für alle teilnehmenden Mannschaften verbindlich.
                                 <br>
@@ -310,7 +314,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">6. Übermittlung der Spielergebnisse</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Die Spielergebnisse und besonderen Vorkommnisse werden vom Schiedsrichter im Spielberichtsbogen notiert, von der Heimmannschaft abfotografiert und per Mail an den Vorstand übermittelt.
                             </li>
@@ -318,7 +322,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">7. Strafen</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 <b>Alle Karten gelten wettbewerbsübergreifend, d.h. für Pokal- und Meisterschaftsspiele!</b>
                             </li>
@@ -361,7 +365,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">8. Schiedsrichter</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Die Schiedsrichter werden vom Schiedsrichterobmann angesetzt und können nicht abgelehnt werden.
                             </li>
@@ -369,7 +373,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">9. Kosten</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Die Heimmannschaft trägt die Kosten für den Platz und zahlt dem Schiedsrichter <b>30,- €</b> pro Spiel.
                             </li>
@@ -392,7 +396,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">10. Nachholspiele</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Ein Nachholspieltermin ist von der Heimmannschaft innerhalb von einer Woche mit dem Gegner abzustimmen und innerhalb dieser Frist an den Schiedsrichterobmann und die Ligaleitung zu melden. Sollten sich beide Mannschaften nicht auf einen Termin einigen, so wird die Ligaleitung einen Termin vorschreiben, an dem gespielt werden muss (ansonsten 10.3).
                             </li>
@@ -415,7 +419,7 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">11. Pokalwettbewerb</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Es gelten beim Pokal, sowie beim Endspiel, dieselben Melderegeln für spielberechtigte Spieler, wie im Ligaspielbetrieb.
                             </li>
@@ -429,17 +433,19 @@
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">12. Haftung</span>
-                        <ol class="py-2">
+                        <ol class="py-2 text-justify">
                             <li>
                                 Die Hobbyliga-West Düsseldorf ist eine Eigeninitiative von mehreren Freizeit- und  Hobbyfußballmannschaften. Sie ist nicht Veranstalter der Spiele sondern verwaltet lediglich die Ergebnisse der Spielrunde. Sie ist weder für Körper- noch für Sachschäden haftbar zu machen.
                             </li>
                         </ol>
                     </li>
                 </ul>
+                <span class="pull-right"><a href="#top"><span class="fa fa-arrow-up"></span> nach oben</a></span>
+                <div class="clearfix"></div>
             </div>
         </div>
         <a id="ah"></a>
-        <div class="row mt-4">
+        <div class="row mt-2">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Altherren-Liga</h2>
                 <h5>Stand: 22.12.2017</h5>
@@ -529,34 +535,49 @@
                         </ol>
                     </li>
                 </ul>
+                <span class="pull-right"><a href="#top"><span class="fa fa-arrow-up"></span> nach oben</a></span>
+                <div class="clearfix"></div>
             </div>
         </div>
         {{-- how to join --}}
         <a id="join"></a>
-        <div class="row mt-4">
+        <div class="row mt-2">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Ihr wollt mitmachen?</h2>
                 Ihr seid eine Hobby- / Theken- / Betriebsmannschaft aus Düsseldorf oder der näheren Umgebung? Dann braucht ihr folgendes um mitzumachen:
                 <ul>
-                    <li>Eine motivierte Mannschaft mit ausreichend zuverlässigen Spielern
+                    <li>
+                        Eine motivierte Mannschaft mit ausreichend zuverlässigen Spielern
                         <ul>
                             <li>Ihr solltet also allermindestens 11 Spieler plus Reserve sein</li>
                             <li>Keiner dieser Spieler darf in einem Verein spielen</li>
+                            <li>Seid euch sicher, dass ihr mindestens eine Saison hinbekommt. Erspart euch die Peinlichkeit viele Spielabsagen oder sogar den Rücktritt aus einer laufenden Saison.</li>
                         </ul>
-                    <li>Einen Platz, auf dem ihr einen regelmäßigen Heimspieltermin organisieren könnt</li>
+                    </li>
+                    <li>
+                        Einen Platz, auf dem ihr einen regelmäßigen Heimspieltermin organisieren könnt
                         <ul>
                             <li>Der Platz muss den DFB-Vorgaben entsprechen und mindestens zwei Stunden zur Verfügung stehen (inkl. Flutlicht-Möglichkeit)</li>
                             <li>Der Platz muss euch die gesamte Saison über zur Verfügung stehen (schaut euch die Spielpläne als Beispiel an)</li>
                         </ul>
-                    <li>Einen Satz passender Ausrüstung</li>
+                    </li>
+                    <li>
+                        Einen Satz passender Ausrüstung
                         <ul>
                             <li>Denkt an Trikots, Bälle, Torwartausrüstung, etc...</li>
                         </ul>
+                    </li>
+                    <li>
+                        Einen Namen und ein Vereinswappen.
+                    </li>
                     <li>Startgeld und Schiedsrichterkaution</li>
                 </ul>
                 <p>
-                    Einsteigen könnt ihr vor jedem Saisonbeginn (nciht während einer laufenden Saison). Da wir unsere Saisons von Frühling bis Herbst ausspielen, solltet ihr uns euer Interesse für die nächste Saison spätestens bis Ende November des laufenden Jahres mitteilen, damit wir planen können.
+                    Einsteigen könnt ihr vor jedem Saisonbeginn (nciht während einer laufenden Saison). Da wir unsere Saisons von Frühling bis Herbst ausspielen, solltet ihr uns euer Interesse für die nächste Saison spätestens bis Ende November des laufenden Jahres mitteilen, damit wir planen können. Schreibt dazu eine Mail den Vorstand (vorstand@...).
                 </p>
+
+                <span class="pull-right"><a href="#top"><span class="fa fa-arrow-up"></span> nach oben</a></span>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>

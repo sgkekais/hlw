@@ -511,7 +511,7 @@
                             <div class="col">
                                 <div class="card-deck">
                                     @foreach($active_players as $player)
-                                        <div class="card {{ $player->isSuspended() ? "border-danger text-danger" : null }} text-center" style="max-width: 255px">
+                                        <div class="card {{ $player->isSuspended() ? "border-danger text-danger" : null }} text-center">
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">
                                                     <h4 class="card-title font-weight-bold mb-0">
