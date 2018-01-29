@@ -125,7 +125,7 @@
 					        		</div>
 				        		</div>
                                     <!-- control buttons -->
-                                    <div class="d-flex flex-column flex-sm-row mt-3 chatter_post_actions">
+                                    <div id="edit_and_delete" class="d-flex flex-column flex-sm-row mt-3 chatter_post_actions">
                                         <small class="mr-auto text-secondary mr-2">
                                             @if ($post->created_at < $post->updated_at)
                                                 Zuletzt aktualisiert: {{ $post->updated_at->diffForHumans() }}
@@ -254,6 +254,8 @@
 		$('.chatter_edit_btn').click(function(){
 			parent = $(this).parents('li');
 			parent.addClass('editing');
+			// toogle d-flex to d-none so that a user cannote click the edit button twice
+			$('#edit_and_delete').toggleClass('d-flex d-none');
 			id = parent.data('id');
 			markdown = parent.data('markdown');
 			container = parent.find('.chatter_middle');
@@ -303,6 +305,8 @@
 			parent_actions.remove();
 
 			parent_li.removeClass('editing');
+            // toogle d-none back to d-flex
+            $('#edit_and_delete').toggleClass('d-none d-flex');
 		});
 
 		$('.discussions li').on('click', '.update_chatter_edit', function(e){
