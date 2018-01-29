@@ -131,21 +131,24 @@
 											</span>
 										</div>
 
-										<div class="ml-auto d-inline d-md-block text-secondary">
-											@if ($discussion->postsCount[0]->total > 0)
-												<span class="fa fa-fw fa-comment" title="Antworten"></span>
-											@else
-												<span class="fa fa-fw fa-comment-o" title="Antworten"></span>
-											@endif
-											{{ $discussion->postsCount[0]->total }}
-
-											@if ($discussion->views > 1)
-												<span class="fa fa-fw fa-eye" title="Aufrufe"></span>
-												{{ $discussion->views }}
-											@else
-												<span class="fa fa-fw fa-eye-slash" title="Aufrufe"></span>
-												0
-											@endif
+										<div class="ml-auto d-flex flex-column text-secondary">
+											<div class="text-right">
+												{{ $discussion->postsCount[0]->total }}
+												@if ($discussion->postsCount[0]->total > 0)
+													<span class="fa fa-fw fa-comment" title="Antworten"></span>
+												@else
+													<span class="fa fa-fw fa-comment-o" title="Antworten"></span>
+												@endif
+											</div>
+											<div class="text-right">
+												@if ($discussion->views > 1)
+													{{ $discussion->views }}
+													<span class="fa fa-fw fa-eye" title="Aufrufe"></span>
+												@else
+													0
+													<span class="fa fa-fw fa-eye-slash" title="Aufrufe"></span>
+												@endif
+											</div>
 										</div>
 
 										<div class="chatter_clear"></div>
