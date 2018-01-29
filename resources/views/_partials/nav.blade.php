@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4CAF50;">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">
+        <a class="navbar-brand" href="{{ route('home') }}" title="Startseite">
             <svg xmlns="http://www.w3.org/2000/svg" width="74" height="30" viewBox="0 0 99 41" class="d-inline-block align-top" fill="white">
                 <path class="hlw-logo" d="M0 4h7v13h14V4h7v32h-7V23H7v13L0 41V4z"/>
                 <path class="hlw-logo" d="M33 4v32h22l4-6H40V0L33 4z"/>
@@ -14,11 +14,11 @@
             <ul class="navbar-nav">
                 @foreach(\HLW\Division::published()->orderBy('name')->get() as $division)
                     <li class="nav-item {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
-                        <a class="nav-link" href="{{ $division->competition->isLeague() ? route('frontend.divisions.show', $division ) : route('frontend.divisions.fixtures', $division) }}"> <span class="fa"></span> {{ $division->name }}</a>
+                        <a class="nav-link" href="{{ $division->competition->isLeague() ? route('frontend.divisions.show', $division ) : route('frontend.divisions.fixtures', $division) }}" title="{{ $division->name }}"> <span class="fa"></span> {{ $division->name }}</a>
                     </li>
                 @endforeach
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}"><span class="fa fa-comments"></span> Clubhaus</a>
+                    <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}" title="Clubhaus"><span class="fa fa-comments"></span> Clubhaus</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('infos') ? "active" : null }}" href="{{ route('infos') }}" title="Vorstand, Satzungen und Infos">Infos</a>

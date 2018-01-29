@@ -9,8 +9,9 @@
                     @foreach (\HLW\Division::published()->orderBy('name')->get() as $division)
                         <li><a href="{{ route('frontend.divisions.show', $division) }}" title="zur Spielklasse">{{ $division->name }}</a></li>
                     @endforeach
-                    <li><a href="{{ route('chatter.home') }}" title="zur Schänke">Schänke</a></li>
+                    <li><a href="{{ route('chatter.home') }}" title="zum Clubhaus">Clubhaus</a></li>
                     <li><a href="{{ route('infos') }}" title="Satzung, Vorstand, Infos">Infos</a></li>
+                    <li><a href="{{ route('halloffame') }}" title="Ruhmeshalle">Ruhmeshalle</a></li>
                 </ul>
             </div>
             <div class="col-md-6">
@@ -32,8 +33,15 @@
                     <li><span class="fa fa-fw fa-twitter"></span> <a href="https://twitter.com/HobbyligaWest" title="Twitter" target="_blank">HLW auf Twitter</a> <span class="fa fa-external-link"></span></li>
                     <li><span class="fa fa-fw fa-envelope"></span> vorstand [AT] hobbyligawest [DOT] de</li>
                 </ul>
-                <a href="{{ route('login') }}" title="Anmelden">Login</a> |
-                <a href="{{ route('register') }}" title="Registrieren">Registrieren</a>
+                @guest
+                    <a href="{{ route('login') }}" title="Anmelden">Login</a> |
+                    <a href="{{ route('register') }}" title="Registrieren">Registrieren</a>
+                @endguest
+                @auth
+                    <a href="{{ route('frontend.user.profile.show') }}" title="Profil">Profil</a> |
+                    <a href="{{ route('logout') }}" title="Abmelden">Logout</a>
+                @endauth
+
             </div>
         </div>
         <div class="row pb-2">
