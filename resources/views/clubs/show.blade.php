@@ -228,7 +228,7 @@
                                     &nbsp;
                                 </div>
                                 <div class="rounded-right" style="background-color: {{ $club->colours_club_secondary }}; width: 50%">
-                                    &nbsp;
+                                    &nbsp;&nbsp;
                                 </div>
                             </div>
                             <div class="d-flex flex-row w-50 pl-1 justify-content-around align-items-center">
