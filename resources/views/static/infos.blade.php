@@ -168,7 +168,7 @@
                 <h5>Stand: 11.01.2018</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <span class="h4 font-weight-bold">1. Allgemeines</span>
+                        <span class="h4 font-weight-bold">0. Allgemeines</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Der Spaß steht im Vordergrund unserer Liga. Die Mannschaften spielen nicht gegen-, sondern miteinander. Die Teams sind fair zueinander, und zu den Schiedsrichtern, sowohl vor, als auch während und nach dem Spiel.
@@ -183,7 +183,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">2. Startgeld</span>
+                        <span class="h4 font-weight-bold">1. Startgeld</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Das Startgeld beträgt pro Mannschaft <b>80,- €</b> und ist am Tag der Jahreshauptversammlung beim Kassierer zu bezahlen.
@@ -194,7 +194,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">3. Meldungen</span>
+                        <span class="h4 font-weight-bold">2. Meldungen</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Jede Mannschaft stellt der Ligaleitung eine Mannschaftsliste zur Verfügung aus der Zu-, Vorname, Geburtsdatum und Vereinszugehörigkeit eines jeden Spielers hervorgehen. Nur die Spieler, zu denen alle Daten vorliegen, sind spielberechtigt. Diese Mannschaftsliste muss der Ligaleitung <u>spätestens 1 Woche</u> vor dem 1. Spieltag vorliegen!
@@ -231,7 +231,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">4. Pässe und Spielberichtsbögen</span>
+                        <span class="h4 font-weight-bold">3. Pässe und Spielberichtsbögen</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Es wird jeder Mannschaft ein Satz Spielerpässe von der Ligaleitung ausgestellt. Die Schiedsrichter sind verpflichtet, vor jedem Spiel die Spielberechtigung der anwesenden Spieler anhand der <u>Spielerpässe</u> zu prüfen, die von den jeweiligen Mannschaften <u>zwingend mitzuführen</u> sind.
@@ -247,7 +247,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">5. Spielbetrieb</span>
+                        <span class="h4 font-weight-bold">4. Spielbetrieb</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Der Spielplan wird von der Ligaleitung erstellt und ist für alle teilnehmenden Mannschaften verbindlich.
@@ -324,7 +324,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">6. Übermittlung der Spielergebnisse</span>
+                        <span class="h4 font-weight-bold">5. Übermittlung der Spielergebnisse</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Die Spielergebnisse und besonderen Vorkommnisse werden vom Schiedsrichter im Spielberichtsbogen notiert, von der Heimmannschaft abfotografiert und per Mail an den Vorstand übermittelt.
@@ -332,7 +332,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">7. Strafen</span>
+                        <span class="h4 font-weight-bold">6. Strafen</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 <b>Alle Karten gelten wettbewerbsübergreifend, d.h. für Pokal- und Meisterschaftsspiele!</b>
@@ -375,7 +375,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">8. Schiedsrichter</span>
+                        <span class="h4 font-weight-bold">7. Schiedsrichter</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Die Schiedsrichter werden vom Schiedsrichterobmann angesetzt und können nicht abgelehnt werden.
@@ -383,7 +383,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">9. Kosten</span>
+                        <span class="h4 font-weight-bold">8. Kosten</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Die Heimmannschaft trägt die Kosten für den Platz und zahlt dem Schiedsrichter <b>30,- €</b> pro Spiel.
@@ -406,7 +406,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">10. Nachholspiele</span>
+                        <span class="h4 font-weight-bold">9. Nachholspiele</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Ein Nachholspieltermin ist von der Heimmannschaft innerhalb von einer Woche mit dem Gegner abzustimmen und innerhalb dieser Frist an den Schiedsrichterobmann und die Ligaleitung zu melden. Sollten sich beide Mannschaften nicht auf einen Termin einigen, so wird die Ligaleitung einen Termin vorschreiben, an dem gespielt werden muss (ansonsten 10.3).
@@ -429,7 +429,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">11. Pokalwettbewerb</span>
+                        <span class="h4 font-weight-bold">10. Pokalwettbewerb</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Es gelten beim Pokal, sowie beim Endspiel, dieselben Melderegeln für spielberechtigte Spieler, wie im Ligaspielbetrieb.
@@ -443,7 +443,7 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">12. Haftung</span>
+                        <span class="h4 font-weight-bold">11. Haftung</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Die Hobbyliga-West Düsseldorf ist eine Eigeninitiative von mehreren Freizeit- und  Hobbyfußballmannschaften. Sie ist nicht Veranstalter der Spiele sondern verwaltet lediglich die Ergebnisse der Spielrunde. Sie ist weder für Körper- noch für Sachschäden haftbar zu machen.
