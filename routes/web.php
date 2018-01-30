@@ -55,9 +55,10 @@ Route::group(['middleware' => ['auth', 'isVerified']], function() {
 });
 
 // static
-Route::get('imprint', 'PagesController@imprint')->name('imprint');
-Route::get('infos', 'PagesController@infos')->name('infos');
-Route::get('halloffame', 'PagesController@hallOfFame')->name('halloffame');
+Route::get('imprint', 'PagesController@imprint')->name('frontend.static.imprint');
+Route::get('infos', 'PagesController@infos')->name('frontend.static.infos');
+Route::get('halloffame', 'PagesController@hallOfFame')->name('frontend.static.halloffame');
+Route::get('matchprotocol', 'PagesController@matchProtocol')->name('frontend.static.matchprotocol');
 
 /*******************************************************
  * Admin Routes

@@ -10,8 +10,8 @@
                         <li><a href="{{ route('frontend.divisions.show', $division) }}" title="zur Spielklasse">{{ $division->name }}</a></li>
                     @endforeach
                     <li><a href="{{ route('chatter.home') }}" title="zum Clubhaus">Clubhaus</a></li>
-                    <li><a href="{{ route('infos') }}" title="Satzung, Vorstand, Infos">Infos</a></li>
-                    <li><a href="{{ route('halloffame') }}" title="Ruhmeshalle">Ruhmeshalle</a></li>
+                    <li><a href="{{ route('frontend.static.infos') }}" title="Satzung, Vorstand, Infos">Infos</a></li>
+                    <li><a href="{{ route('frontend.static.halloffame') }}" title="Ruhmeshalle">Ruhmeshalle</a></li>
                 </ul>
             </div>
             <div class="col-md-6">
@@ -23,7 +23,7 @@
                     Ihr wollt mitmachen?
                 </h5>
                 <p class="">
-                    Schaut auf der <a href="{{ route('infos') }}#join" title="zur Info-Seite"> Info-Seite nach!</a>
+                    Schaut auf der <a href="{{ route('frontend.static.infos') }}#join" title="zur Info-Seite"> Info-Seite nach!</a>
                 </p>
             </div>
             <div class="col-md-4">
@@ -46,7 +46,7 @@
         </div>
         <div class="row pb-2">
             <div class="col-12 text-right">
-                <a href="{{ route('imprint') }}" title="Impressum">Impressum</a> | &copy; {{ date('Y') }} &ndash; Hobbyliga-West Düsseldorf
+                <a href="{{ route('frontend.static.imprint') }}" title="Impressum">Impressum</a> | &copy; {{ date('Y') }} &ndash; Hobbyliga-West Düsseldorf
             </div>
         </div>
     </div>

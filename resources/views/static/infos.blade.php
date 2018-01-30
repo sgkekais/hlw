@@ -29,6 +29,11 @@
                     <li class="nav-item ml-md-2 mt-2 mt-md-0">
                         <a class="nav-link border border-success rounded" href="#join">Mitmachen</a>
                     </li>
+                    @auth
+                        <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
+                            <a class="nav-link border border-success rounded" href="{{ route('frontend.static.matchprotocol') }}" title="Herunterladen"><span class="fa fa-fw fa-download" title="Herunterladen"></span> Spielberichtsbogen</a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -125,7 +130,6 @@
                 </div>
             </div>
         </div>
-        {{-- referees TODO: nur fuer super_admin, admin, club_contact --}}
         @auth
             @hasanyrole('super_admin|admin|club_contact')
                 @if (!$referees->isEmpty())
@@ -133,6 +137,9 @@
                     <div class="row mt-4">
                         <div class="col">
                             <h2 class="font-weight-bold font-italic">Schiedsrichter</h2>
+                            <p class="text-muted">
+                                Diese Daten sind nur für Admins und die Ansprechpartner der Teams einsehbar.
+                            </p>
                             <ul class="list-group">
                                 @foreach ($referees->sortBy('person.last_name') as $referee)
                                     <li class="list-group-item d-flex justify-content-between">
