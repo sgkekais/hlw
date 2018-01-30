@@ -381,7 +381,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($nextGames as $fixture)
-                                    <tr>
+                                    <tr class="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-muted" : null }}">
                                         <td class="align-middle text-left">
                                             @if ($fixture->datetime)
                                                 {{-- date --}}
