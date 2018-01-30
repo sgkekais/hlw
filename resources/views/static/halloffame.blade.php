@@ -21,7 +21,18 @@
             <div class="col">
                 <ul class="list-group">
                     @if (!$former_clubs->isEmpty())
-                        @foreach ($former_clubs as $club)
+                        <li class="list-group-item d-flex justify-content-between font-weight-bold">
+                            <div class="col-4 text-left">
+                                <span class="fa fa-shield" title="Verein"></span>
+                            </div>
+                            <div class="col-3 text-center text-md-right">
+                                Ausgetreten - Eingetreten
+                            </div>
+                            <div class="col-5 text-left w-50">
+                                <span class="fa fa-trophy" title="Titel"></span>
+                            </div>
+                        </li>
+                    @foreach ($former_clubs as $club)
                             <li class="list-group-item d-flex justify-content-between ">
                                 <div class="col-4 text-left">
                                     <a href="{{ route('frontend.clubs.show', $club) }}" title="Teamdetails">{{ $club->name }}</a>
