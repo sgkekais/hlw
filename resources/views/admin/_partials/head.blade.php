@@ -8,6 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Do not show this page or Cached link search results and don't follow the links on this page -->
+    <meta name="robots" content="noindex, nofollow">
+
     <title>HLW-Admin | {{ Route::currentRouteName() }}</title>
 
     <!-- Styles -->
