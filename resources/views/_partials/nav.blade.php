@@ -21,10 +21,10 @@
                     <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}" title="Clubhaus"><span class="fa fa-comments"></span> Clubhaus</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('infos') ? "active" : null }}" href="{{ route('frontend.static.infos') }}" title="Vorstand, Satzungen und Infos">Infos</a>
+                    <a class="nav-link {{ Route::is('frontend.static.infos') ? "active" : null }}" href="{{ route('frontend.static.infos') }}" title="Vorstand, Satzungen und Infos">Infos</a>
                 </li>
                 <li>
-                    <a class="nav-link {{ Route::is('halloffame') ? "active" : null }}" href="{{ route('frontend.static.halloffame') }}" title="Ruhmeshalle">Ruhmeshalle</a>
+                    <a class="nav-link {{ Route::is('frontend.static.halloffame') ? "active" : null }}" href="{{ route('frontend.static.halloffame') }}" title="Ruhmeshalle">Ruhmeshalle</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
