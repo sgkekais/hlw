@@ -8,7 +8,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * HLW\Club
- *
+ * TODO: rethink rescheduled matches, also consider using published and cancelled scopes and so on for fixture functions
  * @property int $id
  * @property string $name
  * @property string|null $name_short

@@ -29,7 +29,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-    // TODO: notify me when a user registers
 
     use RegistersUsers;
     use VerifiesUsers;
@@ -170,7 +169,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * TODO
+     *
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */

@@ -7,7 +7,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * HLW\Fixture
- *
+ * TODO: rethink rescheduling (wrong fields are filled in admin)
  * @property int $id
  * @property int $matchweek_id
  * @property \Carbon\Carbon|null $datetime

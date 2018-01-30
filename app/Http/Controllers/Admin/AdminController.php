@@ -28,7 +28,7 @@ class AdminController extends Controller
             ->get();
 
 
-        // TODO: Fixtures without referee
+        // Fixtures without referee
         $month_begin    = Carbon::now()->startOfMonth();
         $month_end      = Carbon::now()->endOfMonth();
         $fixtures_without_referee = Fixture::whereBetween('datetime', [$month_begin, $month_end])
