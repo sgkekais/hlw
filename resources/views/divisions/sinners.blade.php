@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Sünderkartei
+    | {{ $division->name }} | Sünderkartei
 @endsection
 
 @section('subnav')

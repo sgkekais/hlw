@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $division->name }}
+    | {{ $division->name }}
 @endsection
 
 @section('subnav')

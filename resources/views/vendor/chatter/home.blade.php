@@ -15,6 +15,10 @@
 	@endif
 @stop
 
+@section('title')
+	| Clubhaus
+@endsection
+
 @section('content')
 
 <div id="chatter" class="chatter_home h-100 bg-light">

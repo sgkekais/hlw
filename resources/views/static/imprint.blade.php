@@ -2,7 +2,7 @@
 
 @section('title')
 
-    Impressum
+    | Impressum
 
 @endsection
 

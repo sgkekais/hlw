@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    | {{ $season->name }} | Teams
+@endsection
+
 @section('subnav')
 
     @include('_partials.subnav_divisions')

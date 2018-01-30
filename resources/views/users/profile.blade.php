@@ -2,7 +2,7 @@
 
 @section('title')
 
-    Profil
+    | Profil
 
 @endsection
 

@@ -1,5 +1,9 @@
 @extends ('layouts.app')
 
+@section('title')
+
+@endsection
+
 @section ('content')
 
     <div class="w-100 bg-dark">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Torschützen
+    | {{ $division->name }} | Torschützen
 @endsection
 
 @section('subnav')

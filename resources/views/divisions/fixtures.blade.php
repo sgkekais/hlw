@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $division->name }} | Spielplan
+    | {{ $division->name }} | Spielplan
 @endsection
 
 @section('subnav')

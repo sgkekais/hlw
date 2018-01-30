@@ -17,6 +17,9 @@
     @endif
 @stop
 
+@section('title')
+    | Clubhaus
+@endsection
 
 @section('content')
 
