@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-2">
             @if($person->photo)
-                <img src="{{ Storage::url($person->photo) }}" class="w-75">
+                <img src="{{ asset('storage/'.$person->photo) }}" class="w-75">
             @else
                 <span class="fa fa-ban fa-4x text-muted" title="kein Passbild vorhanden"></span>
             @endif
@@ -167,7 +167,7 @@
                                             <td class="align-middle">{{ $goal->score }}</td>
                                             <td class="align-middle">
                                                 <!-- show match -->
-                                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$goal->fixture->matchweek, $card->fixture]) }}" title="Paarung anzeigen">
+                                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$goal->fixture->matchweek, $goal->fixture]) }}" title="Paarung anzeigen">
                                                     <span class="fa fa-search-plus"></span>
                                                 </a>
                                                 <!-- edit -->

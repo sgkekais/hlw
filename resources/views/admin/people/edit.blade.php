@@ -69,7 +69,7 @@
             </div>
             <div class="col-md-2">
                 @if($person->photo)
-                    <img src="{{ Storage::url($person->photo) }}" class="img-fluid " title="Passbild" alt="Passbild">
+                    <img src="{{ asset('storage/'.$person->photo) }}" class="img-fluid " title="Passbild" alt="Passbild">
                 @else
                     <span class="fa fa-ban fa-4x text-muted" title="kein Passbild vorhanden"></span>
                 @endif
