@@ -516,32 +516,34 @@
                                         <div class="col-1 font-weight-bold">
                                             <span class="font-weight-bold">#</span>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <span class="fa fa-user"></span>
                                         </div>
                                         <div class="col-4">
                                             <span class="fa fa-envelope"></span>
                                         </div>
-                                        <div class="col-3 ">
-                                            <span class="fa fa-phone"></span>
-                                        </div>
+                                        @hasanyrole('super_admin|admin|club_contact')
+                                            <div class="col-4 ">
+                                                <span class="fa fa-phone"></span>
+                                                <br>
+                                                <small class="text-muted">Nur von Admins und Ansprechpartnern sichtbar</small>
+                                            </div>
+                                        @endhasanyrole
                                     </li>
                                     @foreach ($club->contacts()->orderBy('hierarchy_level')->with('person')->get() as $contact)
                                         <li class="list-group-item d-flex justify-content-between">
                                             <div class="col-1 font-weight-bold">
                                                 {{ $contact->hierarchy_level }}
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 {{ $contact->person->first_name }} {{ $contact->person->last_name }}
                                             </div>
                                             <div class="col-4">
                                                 {{ $contact->mail }}
                                             </div>
                                             @hasanyrole('super_admin|admin|club_contact')
-                                                <div class="col-3 ">
+                                                <div class="col-4">
                                                     {{ $contact->mobile }}
-                                                    <br>
-                                                    <small class="text-muted">Nur von Admins und Ansprechpartnern sichtbar</small>
                                                 </div>
                                             @endhasanyrole
                                         </li>
