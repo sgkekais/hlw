@@ -57,7 +57,7 @@
                                 @else
                                     <li class="mb-2 pb-2 {{ $fixture->rescheduledTo ? "text-muted" : null }}">
                                 @endif
-                                    @if ($d->competition->type == "knockout")
+                                    @if ($d->competition->type == "knockout" && $loop->first)
                                         <div class="row">
                                             <div class="col font-weight-bold">
                                                 {{ $fixture->matchweek->name }}
