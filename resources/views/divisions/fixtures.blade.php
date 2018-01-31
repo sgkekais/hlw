@@ -13,7 +13,7 @@
 @if ($division->competition->isKnockout())
     @section('jumbotron')
 
-        <div class="jumbotron jumbotron-fluid p-0 m-0" style="color: #fff9c4; background: url({{ $jumbo_bg }}) {{ $division->competition->name_short != "P" ? "top left repeat" : "center" }}; {{ $division->competition->name_short == "P" ? "background-size: cover" : null }}">
+        <div class="jumbotron jumbotron-fluid p-0 m-0" style="color: #fff9c4; background: url({{ $jumbo_bg }}) {{ $division->competition->name_short != "P" ? "top left repeat" : "center" }}; {{ $division->competition->type == "knockout" ? "background-size: cover" : null }}">
             <div class="container pt-4 pb-4">
                 <div class="col-12 p-0">
                     <div class="display-4 font-weight-bold">
