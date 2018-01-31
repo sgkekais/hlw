@@ -64,7 +64,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -76,7 +77,29 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // validate name, email
+        $this->validate($request, [
+            'name'      => 'required|string|min:2|max:20|unique:users,name,'.$user->id,
+            'email'     => 'required|string|email|max:255|unique:users,email,'.$user->id
+        ]);
+
+        // only retrieve the name and email fields
+        $input = $request->only(['name', 'email']);
+        // update user
+        $user->fill($input)->save();
+
+        // retrieve all selected roles
+        $roles = $request['roles'];
+
+        if (isset($roles)) {
+            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
+        }
+        else {
+            $user->roles()->detach(); // If no role is selected remove existing roles associated to the user
+        }
+
+        return redirect()->route('users.index')
+            ->with('success', 'User erfolgreich aktualisiert.');
     }
 
     /**

@@ -49,7 +49,7 @@
                         <td class="align-middle">
                             {{ $role->guard_name }}
                         </td>
-                        <td class="align-middle">{{ $role->permissions->pluck('name') }}</td>
+                        <td class="align-middle">{{ $role->permissions->pluck('name')->implode(' ') }}</td>
                         <td class="align-middle">
                             @role('super_admin')
                             <!-- edit -->
@@ -106,10 +106,12 @@
                             {{ $user->isVerified() ? "Ja" : "Nein" }}
                         </td>
                         <td class="align-middle">
+                            {{--
                             <!-- display details -->
                             <a class="btn btn-secondary" href="{{ route('users.show', $user) }}" title="User anzeigen">
                                 <span class="fa fa-search-plus"></span>
                             </a>
+                            --}}
                             <!-- edit -->
                             <a class="btn btn-primary" href="{{ route('users.edit', $user) }}" title="User bearbeiten">
                                 <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
