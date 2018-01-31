@@ -75,12 +75,18 @@
                                 {{-- home team --}}
                                 <div class="d-flex-inline text-right" style="width: 40%">
                                     @if($fixture->clubHome)
+                                        @if ($fixture->type == "knockout" && $fixture->clubHome->hasWon($fixture))
+                                            <b>
+                                        @endif
                                         {{-- visible only on xs --}}
                                         <span class="d-inline d-sm-none align-middle pr-1">{{ $fixture->clubHome->name_code }}</span>
                                         {{-- visible only on sm and md --}}
                                         <span class="d-none d-sm-inline d-lg-none align-middle pr-1">{{ $fixture->clubHome->name_short }}</span>
                                         {{-- hidden on xs, sm, md --}}
                                         <span class="d-none d-lg-inline align-middle pr-1">{{ $fixture->clubHome->name }}</span>
+                                        @if ($fixture->type == "knockout" && $fixture->clubHome->hasWon($fixture))
+                                            </b>
+                                        @endif
                                         @if($fixture->clubHome->logo_url)
                                             <img src="{{ asset('storage/'.$fixture->clubHome->logo_url) }}" height="25" class="d-none d-md-inline align-middle">
                                         @else
@@ -116,12 +122,18 @@
                                         @else
                                             <span class="fa fa-ban text-muted d-none d-md-inline" title="Kein Vereinswappen vorhanden"></span>
                                         @endif
+                                        @if ($fixture->type == "knockout" && $fixture->clubAway->hasWon($fixture))
+                                            <b>
+                                        @endif
                                         {{-- visible only on xs --}}
                                         <span class="d-inline d-sm-none pl-1">{{ $fixture->clubAway->name_code }}</span>
                                         {{-- visible only on sm and md --}}
                                         <span class="d-none d-sm-inline d-lg-none pl-1">{{ $fixture->clubAway->name_short }}</span>
                                         {{-- hidden on xs, sm, md --}}
                                         <span class="d-none d-lg-inline pl-1">{{ $fixture->clubAway->name }}</span>
+                                        @if ($fixture->type == "knockout" && $fixture->clubAway->hasWon($fixture))
+                                            </b>
+                                        @endif
                                     @else
                                         <span class="pl-1">{{ $fixture->club_id_away ?? "-" }}</span>
                                     @endif
