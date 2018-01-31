@@ -537,9 +537,13 @@
                                             <div class="col-4">
                                                 {{ $contact->mail }}
                                             </div>
-                                            <div class="col-3 ">
-                                                {{ $contact->mobile }}
-                                            </div>
+                                            @hasanyrole('super_admin|admin|club_contact')
+                                                <div class="col-3 ">
+                                                    {{ $contact->mobile }}
+                                                    <br>
+                                                    <small class="text-muted">Nur von Admins und Ansprechpartnern sichtbar</small>
+                                                </div>
+                                            @endhasanyrole
                                         </li>
                                     @endforeach
                                 </ul>
