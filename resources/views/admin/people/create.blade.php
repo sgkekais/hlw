@@ -4,6 +4,16 @@
 
     <!-- create a new person -->
     <h1 class="mb-4">Person anlegen</h1>
+    <div class="alert alert-info">
+        <ul class="p-0 m-0 pl-2">
+            <li>Eine Person repräsentiert eine "echte" Person.</li>
+            <li>Bitte immer vorher mit der Suche prüfen, ob die Person nicht schon angelegt ist!</li>
+            <li>Nach der Anlage kann eine Person als Spieler einer oder mehrerer Mannschaften, als Ansprechpartner, oder als Schiedsrichter zugeordnet werden.</li>
+            <li>Diese Zuordnungen sind in der Betrachtungsfunktion (Lupensymbol) aufgelistet.</li>
+            <li>Geburtsdatum und Passbild sind optional.</li>
+            <li>Personen können als Vereinsspieler gekennzeichnet werden.</li>
+        </ul>
+    </div>
     <form method="POST" action="{{ route('people.store') }}" enctype="multipart/form-data">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}

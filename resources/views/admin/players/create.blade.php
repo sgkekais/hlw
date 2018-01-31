@@ -4,9 +4,14 @@
 
     <!-- create a new player and assign to club and person -->
     <h1 class="mb-4">Spieler anlegen</h1>
-    <p>
-        Ein Spieler ist eine Person, die in einem bestimmten Zeitraum für eine Mannschaft spielt. Die Person muss zuvor angelegt werden. Sollte eine Person den Verein wechseln, so ist hier das Austrittsdatum zu vermerken und anschließend ein neuer Spieler anzulegen.
-    </p>
+    <div class="alert alert-info">
+        <ul class="p-0 m-0 pl-2">
+            <li>Ein Spieler ist eine Person, die in einem bestimmten Zeitraum für eine Mannschaft spielt.</li>
+            <li>Die Person muss zuvor angelegt werden und auf <b>aktiv</b> stehen. Vorher bitte mit der Suche prüfen, ob diese nicht schon angelegt ist!</li>
+            <li>Sollte eine Person den Verein wechseln, so ist hier das Austrittsdatum zu vermerken und anschließend ein neuer Spieler in der neuen Mannschaft anzulegen.</li>
+            <li>Nummer und Position sind optional</li>
+        </ul>
+    </div>
     <form method="POST" action="{{ route('clubs.players.store', $club) }}">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}

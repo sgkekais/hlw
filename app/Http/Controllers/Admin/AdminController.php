@@ -28,11 +28,11 @@ class AdminController extends Controller
             ->get();
 
 
-        // Fixtures without referee
-        $month_begin    = Carbon::now()->startOfMonth();
-        $month_end      = Carbon::now()->endOfMonth();
-        $fixtures_without_referee = Fixture::whereBetween('datetime', [$month_begin, $month_end])
+        // Fixtures without referee, get them for the next 30 days
+        $in_thirty_days = Carbon::now()->addDays(30);
+        $fixtures_without_referee = Fixture::whereBetween('datetime', [$today, $in_thirty_days])
             ->notCancelled()
+            ->doesntHave('referees')
             ->orderBy('datetime')
             ->with([
                 'matchweek.season',
@@ -40,7 +40,8 @@ class AdminController extends Controller
                 'clubAway',
                 'referees'
             ])
-            ->get();
+            ->get()
+            ;
 
         // Previous fixtures without result
         $fixtures_without_result = Fixture::where('datetime', '<=', $today)
@@ -57,12 +58,12 @@ class AdminController extends Controller
 
         return view('admin.index', compact(
             'fixtures_this_week',
+            'today',
             'monday',
             'sunday',
             'fixtures_without_result',
             'fixtures_without_referee',
-            'month_begin',
-            'month_end')
+            'in_thirty_days')
         );
     }
 }

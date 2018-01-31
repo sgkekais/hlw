@@ -4,9 +4,14 @@
 
     <!-- create a new contact and assign to club and person -->
     <h1 class="mb-4">Kontakt anlegen</h1>
-    <p>
-        Ein Kontakt ist eine Person, die als Ansprechpartner einer Mannschaft dient. Die Person muss zuvor angelegt werden.
-    </p>
+    <div class="alert alert-info">
+        <ul class="p-0 m-0 pl-2">
+            <li>Ein Kontakt ist eine Person, die als Ansprechpartner einer Mannschaft dient.</li>
+            <li>Die Person muss zuvor angelegt werden und auf <b>aktiv</b> stehen. Vorher bitte mit der Suche prüfen, ob diese nicht schon angelegt ist!</li>
+            <li>Sollte eine Person den Verein wechseln, so ist hier das Austrittsdatum zu vermerken und anschließend ein neuer Spieler in der neuen Mannschaft anzulegen.</li>
+            <li>Nummer und Position sind optional</li>
+        </ul>
+    </div>
     <form method="POST" action="{{ route('clubs.contacts.store', $club) }}">
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}

@@ -18,9 +18,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="font-weight-bold">Ohne Schiedsrichterzuweisung</h3>
-                <h5>Zeitraum: {{ $month_begin->format('d.m.Y') }} - {{ $month_end->format('d.m.Y') }}</h5>
+                <h5>Zeitraum immer nächste 30 Tage: {{ $today->format('d.m.Y') }} - {{ $in_thirty_days->format('d.m.Y') }}</h5>
                 @if(!$fixtures_without_referee->isEmpty())
-                    @include('admin._partials.fixtures', ['fixtures' => $fixtures_this_week])
+                    @include('admin._partials.fixtures', ['fixtures' => $fixtures_without_referee])
                 @else
                     <div class="alert alert-secondary">
                         Keine Partien in diesem Monat.

@@ -77,7 +77,7 @@
                 @else
                     <span class="fa fa-fw"></span>
                 @endif
-                @if($fixture->referees->count() === 0)
+                @if($fixture->referees->isEmpty())
                     <span class="fa fa-hand-stop-o fa-fw text-danger" title="Kein Schiedsrichter"></span>
                 @else
                     <span class="fa fa-hand-stop-o fa-fw text-success" title="Schiedsrichter zugewiesen"></span>
