@@ -149,7 +149,7 @@
             @php
                 $fixtures = $club->fixtures()->sortByDesc('datetime')->load('clubHome', 'clubAway', 'stadium', 'goals', 'cards', 'referees');
             @endphp
-            @if(!$fixtures->isEmpty()))
+            @if(!$fixtures->isEmpty())
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
                     <tr>
