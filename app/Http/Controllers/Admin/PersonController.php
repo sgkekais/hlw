@@ -63,18 +63,17 @@ class PersonController extends Controller
         if($request->hasFile('photo'))
         {
             // store the uploaded logo and save the path to the logo in the database
-            if($person->photo = $request->file('photo')->store('public/passportphotos/'.$person->id))
-            {
-                $store_message = "Passbild erfoglreich hochgeladen.";
-
-                // save the model again
+            if ($request->file('photo')->store('public/passportphotos/'.$person->id)) {
+                $photo_path = 'passportphotos/'.$person->id.'/'.$request->file('photo')->hashName();
+                $person->photo = $photo_path;
+                $store_message = "Passbild erfoglreich hochgeladen. ";
+                // save the club again
                 $person->save();
             }
         }
 
-        Session::flash('success','Person '.$person->first_name." ".$person->last_name." erfolgreich mit der ID ".$person->id." angelegt".($store_message ? " und Passbild hochgeladen " : null).".");
-
-        return redirect()->route('people.index');
+        return redirect()->route('people.index')
+            ->with('success','Person '.$person->first_name." ".$person->last_name." erfolgreich mit der ID ".$person->id." angelegt".($store_message ? " und Passbild hochgeladen " : null).".");
     }
 
     /**
@@ -129,23 +128,25 @@ class PersonController extends Controller
             // then delete the old logo
             Storage::delete($person->photo);#
 
-            // save the new photo
-            $person->photo  = $request->file('photo')->store('public/passportphotos/'.$person->id);
-
-            // save the person
-            $person->save();
+            // store the uploaded logo and save the path to the logo in the database
+            if ($request->file('photo')->store('public/passportphotos/'.$person->id)) {
+                $photo_path = 'passportphotos/'.$person->id.'/'.$request->file('photo')->hashName();
+                $person->photo = $photo_path;
+                $store_message = "Passbild erfoglreich hochgeladen. ";
+                // save the club again
+                $person->save();
+            }
         }
 
-        Session::flash('success','Person '.$person->first_name.' '.$person->last_name.' erfolgreich geändert.');
-
-        return redirect()->route('people.index');
+        return redirect()->route('people.index')
+            ->with('success','Person '.$person->first_name.' '.$person->last_name.' erfolgreich geändert.');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \HLW\Person  $person
-     * @return \Illuminate\Http\Response
+     * @param Person $person
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Person $person)
     {
@@ -156,10 +157,8 @@ class PersonController extends Controller
         // delete the model
         $person->delete();
 
-        // flash message
-        Session::flash('success', 'Person '.$first_name.' '.$last_name.' mit der ID '.$id.' gelöscht.');
-
         // return to index
-        return redirect()->route('people.index');
+        return redirect()->route('people.index')
+            ->with('success', 'Person '.$first_name.' '.$last_name.' mit der ID '.$id.' gelöscht.');
     }
 }
