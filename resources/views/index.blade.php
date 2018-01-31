@@ -126,7 +126,7 @@
                                         <div class="col-sm-3 d-none d-sm-block text-left">
                                             @if ($fixture->stadium)
                                                 @if ($fixture->clubHome && !$fixture->clubHome->regularStadium->isEmpty() && $fixture->clubHome->regularStadium->first()->id != $fixture->stadium->id)
-                                                    <span class="text-warning">{{ $fixture->stadium->name_short }}</span>
+                                                    <span class="text-warning"><abbr title="abweichender Spielort">{{ $fixture->stadium->name_short }}</abbr></span>
                                                 @else
                                                     {{ $fixture->stadium->name_short }}
                                                 @endif
