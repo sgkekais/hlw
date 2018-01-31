@@ -6,6 +6,7 @@ use HLW\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Arcanedev\NoCaptcha\Rules\CaptchaRule;
 
 class LoginController extends Controller
 {
@@ -50,8 +51,8 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             $this->username() => 'required|string',
-            'password' => 'required|string'
-            // 'g-recaptcha-response' => 'required|captcha'
+            'password' => 'required|string',
+            'g-recaptcha-response' => ['required', new CaptchaRule]
         ]);
     }
 

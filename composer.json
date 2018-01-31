@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "albertcht/invisible-recaptcha": "^1.8",
+        "arcanedev/no-captcha": "^5.0",
         "caouecs/laravel-lang": "~3.0",
         "devdojo/chatter": "dev-master",
         "doctrine/dbal": "^2.5",

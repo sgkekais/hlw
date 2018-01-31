@@ -16,6 +16,7 @@ use Jrean\UserVerification\Traits\VerifiesUsers;
 use Jrean\UserVerification\Exceptions\UserNotFoundException;
 use Jrean\UserVerification\Exceptions\UserIsVerifiedException;
 use Jrean\UserVerification\Exceptions\TokenMismatchException;
+use Arcanedev\NoCaptcha\Rules\CaptchaRule;
 
 class RegisterController extends Controller
 {
@@ -84,7 +85,8 @@ class RegisterController extends Controller
             'name'      => 'required|string|min:2|max:20|unique:users',
             'email'     => 'required|string|email|max:255|unique:users',
             'password'  => 'required|string|min:6|confirmed',
-            'clubs'     => 'nullable|array|max:3'
+            'clubs'     => 'nullable|array|max:3',
+            'g-recaptcha-response' => ['required', new CaptchaRule]
         ]);
     }
 

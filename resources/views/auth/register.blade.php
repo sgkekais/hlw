@@ -98,7 +98,9 @@
                                     </div>
                                 @endif
                             </div>
-
+                            <div class="form-group">
+                                {!! Captcha::display() !!}
+                            </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">
                                     <span class="fa fa-fw fa-user-plus"></span> Registrieren!
@@ -108,7 +110,7 @@
                                 </a>
                             </div>
                         </form>
-
+                        {!! Captcha::script() !!}
                     </div>
                 </div>
             </div>

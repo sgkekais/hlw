@@ -76,7 +76,9 @@
                                     </label>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                {!! Captcha::display() !!}
+                            </div>
                             <div class="form-group">
                                 <div class="">
                                     <button type="submit" class="btn btn-primary mr-1 mt-2">
@@ -91,6 +93,7 @@
                                 </div>
                             </div>
                         </form> <!-- ./Login Form -->
+                        {!! Captcha::script() !!}
                     </div>
                 </div>
             </div>
