@@ -49,20 +49,20 @@
                     @endphp
                     @if (!$league_championships->isEmpty())
                         <li class="my-1">
-                        <span class="p-1 bg-black-transparent">
-                            @foreach ($league_championships as $league_championship)
-                                @php
-                                    if ($league_championship->division->hierarchy_level == 1) {
-                                        $class = "fa-star";
-                                        $color = "orange";
-                                    } else {
-                                        $class = "fa-star-half-o";
-                                        $color = "orange";
-                                    }
-                                @endphp
-                                <i class="fa fa-fw {{ $class }}" style="color: {{ $color }}" data-toggle="tooltip" title="{{ $league_championship->name }} | {{ $league_championship->division->name }}"></i>
-                            @endforeach
-                        </span>
+                            <span class="p-1 bg-black-transparent">
+                                @foreach ($league_championships as $league_championship)
+                                    @php
+                                        if ($league_championship->division->hierarchy_level == 1) {
+                                            $class = "fa-star";
+                                            $color = "orange";
+                                        } else {
+                                            $class = "fa-star-half-o";
+                                            $color = "orange";
+                                        }
+                                    @endphp
+                                    <i class="fa fa-fw {{ $class }}" style="color: {{ $color }}" data-toggle="tooltip" title="{{ $league_championship->name }} | {{ $league_championship->division->name }}"></i>
+                                @endforeach
+                            </span>
                         </li>
                     @endif
                     {{-- cup trophys --}}
@@ -71,11 +71,11 @@
                     @endphp
                     @if (!$cup_championships->isEmpty())
                         <li class="my-1">
-                        <span class="p-1 bg-black-transparent">
-                            @foreach ($cup_championships as $cup_championship)
-                                <i class="fa fa-fw fa-trophy" style="color: orange" title="{{ $cup_championship->name }}"></i>
-                            @endforeach
-                        </span>
+                            <span class="p-1 bg-black-transparent">
+                                @foreach ($cup_championships as $cup_championship)
+                                    <i class="fa fa-fw fa-trophy" style="color: orange" data-toggle="tooltip" title="{{ $cup_championship->name }}"></i>
+                                @endforeach
+                            </span>
                         </li>
                     @endif
                     {{-- stadium --}}
