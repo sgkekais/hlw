@@ -70,7 +70,7 @@ class PagesController extends Controller
 
     public function matchProtocol() {
 
-        $storage_path = storage_path('app\public\spielberichtsbogen.pdf');
+        $storage_path = storage_path('app/public/spielberichtsbogen.pdf');
 
         return response()->download($storage_path);
     }
