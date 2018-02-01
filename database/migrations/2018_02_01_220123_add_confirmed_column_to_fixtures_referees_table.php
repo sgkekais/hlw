@@ -14,6 +14,7 @@ class AddConfirmedColumnToFixturesRefereesTable extends Migration
     public function up()
     {
         Schema::table('fixtures_referees', function (Blueprint $table) {
+            // add confirmed column
             $table->boolean('confirmed')->default(0)->after('referee_id');
         });
     }
