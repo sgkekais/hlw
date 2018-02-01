@@ -130,7 +130,7 @@
 
     <script type="text/javascript">
         $(function() {
-            var beginDate = $("input[name=datetime]").val();
+            var beginDate = $("input[name=date_of_birth]").val();
             if ( !beginDate ) {
                 beginDate = moment().format("YYYY-MM-DD");
             }
