@@ -4,7 +4,7 @@
 
         <div class="row">
             <div class="col-12">
-                <h3 class="font-weight-bold">In dieser Woche</h3>
+                <h3 class="font-weight-bold">In den nächsten zwei Wochen</h3>
                 <h5>Zeitraum: {{ $monday->format('d.m.Y') }} - {{ $sunday->format('d.m.Y') }}</h5>
                 @if(!$fixtures_this_week->isEmpty())
                     @include('admin._partials.fixtures', ['fixtures' => $fixtures_this_week])

@@ -12,9 +12,9 @@ class AdminController extends Controller
     public function index(){
         // TODO: Rollenbasiertes Dashboard?
 
-        // Fixtures in this week
+        // Fixtures in the next two weeks
         $monday = Carbon::now()->startOfWeek();
-        $sunday = Carbon::now()->endOfWeek();
+        $sunday = Carbon::now()->addWeek()->endOfWeek();
         $today = Carbon::now();
         $fixtures_this_week = Fixture::whereBetween('datetime', [$monday, $sunday])
             ->notCancelled()
@@ -40,8 +40,7 @@ class AdminController extends Controller
                 'clubAway',
                 'referees'
             ])
-            ->get()
-            ;
+            ->get();
 
         // Previous fixtures without result
         $fixtures_without_result = Fixture::where('datetime', '<=', $today)

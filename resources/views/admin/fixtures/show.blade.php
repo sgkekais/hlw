@@ -67,6 +67,17 @@
         </div>
     </div>
     <hr>
+    @if ($fixture->note)
+        <div class="row">
+            <div class="col">
+                <h3>Notiz</h3>
+                <div class="alert alert-secondary">
+                    {{ $fixture->note }}
+                </div>
+            </div>
+        </div>
+        <hr>
+    @endif
     @if($fixture->rescheduledFrom)
         <div class="row">
             <div class="col-md-12">
