@@ -240,10 +240,25 @@
                                 @else
                                     <span class="fa fa-fw"></span>
                                 @endif
-                                @if($fixture->referees->count() === 0)
+                                @if($fixture->referees->isEmpty())
                                     <span class="fa fa-hand-stop-o fa-fw text-danger" title="Kein Schiedsrichter"></span>
                                 @else
                                     <span class="fa fa-hand-stop-o fa-fw text-success" title="Schiedsrichter zugewiesen"></span>
+                                    @php
+                                        $confirmed = true;
+                                    @endphp
+                                    @foreach ($fixture->referees as $referee)
+                                        @php
+                                            if (!$referee->pivot->confirmed) {
+                                                $confirmed = false;
+                                            }
+                                        @endphp
+                                    @endforeach
+                                    @if ($confirmed)
+                                        <span class="fa fa-check-circle text-success" title="Alle Schiedsrichter Bestätigt"></span>
+                                    @else
+                                        <span class="fa fa-question-circle text-danger" title="Nicht alle Schiedsrichter bestätigt"></span>
+                                    @endif
                                 @endif
                             </td>
                             <td class="align-middle">{{ $fixture->cancelled ? "Ann." : null }}</td>

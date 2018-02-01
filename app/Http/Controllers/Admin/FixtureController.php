@@ -175,7 +175,8 @@ class FixtureController extends Controller
 
         // store the assignment in the pivot table
         $fixture->referees()->attach($referee, [
-            'note' => $request->note
+            'note'      => $request->note,
+            'confirmed' => $request->confirmed
         ]);
 
         Session::flash('success', 'Schiedsrichter ' . $referee->person->last_name . ', ' . $referee->person->first_name . 'erfolgreich zugeordnet.');
@@ -206,7 +207,8 @@ class FixtureController extends Controller
     {
         // sync with existing pivot entry
         $fixture->referees()->updateExistingPivot($referee->id, [
-            'note' => $request->note
+            'note'      => $request->note,
+            'confirmed' => $request->confirmed
         ]);
 
         Session::flash('success', 'Zuordnung erfolgreich geändert.');

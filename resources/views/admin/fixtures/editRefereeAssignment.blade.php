@@ -28,6 +28,19 @@
                 <small id="referee_idHelp" class="form-text text-muted">Welcher Schiedsrichter soll der Paarung zugeordnet werden?</small>
             </div>
         </div>
+        <!-- confirmation -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="confirmed">Bestätigt?</label>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" id="confirmed" name="confirmed" aria-describedby="confirmedHelp">
+                    <option value="0">Nein</option>
+                    <option value="1" {{ $referee->pivot->confirmed ? "selected" : null }}>Ja</option>
+                </select>
+                <small id="confirmedHelp" class="form-text text-muted">Hat der Schiedsrichter die Zuordnung bestätigt?</small>
+            </div>
+        </div>
         <!-- note -->
         <div class="form-group row">
             <div class="col-md-2">

@@ -61,26 +61,41 @@
                 @endif
             </td>
             <td class="align-middle">
-                @if($fixture->goals_home && $fixture->goals_away)
-                    @if($fixture->goals->count() === 0 && $fixture->goals_home + $fixture->goals_away > 0)
+                @if ($fixture->goals_home && $fixture->goals_away)
+                    @if ($fixture->goals->count() === 0 && $fixture->goals_home + $fixture->goals_away > 0)
                         <span class="fa fa-soccer-ball-o fa-fw text-danger" title="Torschützen noch nicht gepflegt"></span>
-                    @elseif($fixture->goals->count() < $fixture->goals_home + $fixture->goals_away)
+                    @elseif ($fixture->goals->count() < $fixture->goals_home + $fixture->goals_away)
                         <span class="fa fa-soccer-ball-o fa-fw text-warning" title="Torschützen evtl. nicht vollständig gepflegt"></span>
-                    @elseif($fixture->goals->count() === $fixture->goals_home + $fixture->goals_away)
+                    @elseif ($fixture->goals->count() === $fixture->goals_home + $fixture->goals_away)
                         <span class="fa fa-soccer-ball-o fa-fw text-success" title="Torschützen gepflegt"></span>
                     @endif
                 @else
                     <span class="fa fa-fw"></span>
                 @endif
-                @if($fixture->cards->count() > 0)
+                @if ($fixture->cards->count() > 0)
                     <span class="fa fa-clone fa-fw" title="Karte(n) gepflegt"></span>
                 @else
                     <span class="fa fa-fw"></span>
                 @endif
-                @if($fixture->referees->isEmpty())
+                @if ($fixture->referees->isEmpty())
                     <span class="fa fa-hand-stop-o fa-fw text-danger" title="Kein Schiedsrichter"></span>
                 @else
                     <span class="fa fa-hand-stop-o fa-fw text-success" title="Schiedsrichter zugewiesen"></span>
+                    @php
+                        $confirmed = true;
+                    @endphp
+                    @foreach ($fixture->referees as $referee)
+                        @php
+                            if (!$referee->pivot->confirmed) {
+                                $confirmed = false;
+                            }
+                        @endphp
+                    @endforeach
+                    @if ($confirmed)
+                        <span class="fa fa-check-circle text-success" title="Alle Schiedsrichter Bestätigt"></span>
+                    @else
+                        <span class="fa fa-question-circle text-danger" title="Nicht alle Schiedsrichter bestätigt"></span>
+                    @endif
                 @endif
             </td>
             <td class="align-middle">{{ $fixture->cancelled ? "Ann." : null }}</td>

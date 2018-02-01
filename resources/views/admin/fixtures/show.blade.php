@@ -281,6 +281,8 @@
                         <tr>
                             <th class="">ID</th>
                             <th class="">Schiedsrichter</th>
+                            <th></th>
+                            <th class="text-center">Bestätigt</th>
                             <th class="">Notiz</th>
                             <th class="">Aktionen</th>
                         </tr>
@@ -291,8 +293,19 @@
                                 <td class="align-middle">{{ $referee->id }}</td>
                                 <td class="align-middle">
                                     <a href="{{ route('referees.show', $referee) }}" title="Schiedsricher anzeigen">
-                                        {{ $referee->person->last_name }}, {{ $referee->person->first_name }}
+                                        {{ $referee->person->full_name }}
                                     </a>
+                                </td>
+                                <td class="align-middle">
+                                    Angelegt: {{ $referee->pivot->created_at->format('d.m.y h:i') }} <br>
+                                    Geändert: {{ $referee->pivot->updated_at->format('d.m.y h:i') }} <br>
+                                </td>
+                                <td class="align-middle text-center">
+                                    @if ($referee->pivot->confirmed)
+                                        <span class="fa fa-check-circle text-success" title="Bestätigt"></span>
+                                    @else
+                                        <span class="fa fa-times-circle text-danger" title="Bestätigt"></span>
+                                    @endif
                                 </td>
                                 <td class="align-middle"><i>{{ $referee->pivot->note }}</i></td>
                                 <td class="align-middle">
@@ -401,8 +414,6 @@
                                 @else
                                     <button class="btn btn-outline-danger" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
                                 @endif
-
-
                             </td>
                         </tr>
                     @endif

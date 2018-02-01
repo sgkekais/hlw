@@ -430,7 +430,7 @@ class Fixture extends Model
     public function referees()
     {
         return $this->belongsToMany(Referee::class, 'fixtures_referees')
-            ->withPivot('note')
+            ->withPivot('confirmed','note')
             ->withTimestamps();
     }
 }
