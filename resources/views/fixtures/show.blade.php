@@ -9,12 +9,15 @@
     <div class="w-100 bg-dark" style="background: url({{ asset('storage/matchbg.jpg') }}) bottom; background-size: cover">
         <div class="container">
             <div class="row">
-                <div class="col text-white font-weight-bold">
-                    @if ($fixture->type == "league")
-                        {{ $fixture->matchweek->number_consecutive }}. Spielwoche {{ $fixture->matchweek->name ? "|".$fixture->matchweek->name : null }}
-                    @elseif ($fixture->type == "knockout")
-                        {{ $fixture->matchweek->name }}
-                    @endif
+                <div class="col">
+                    <div class="text-center text-white font-weight-bold bg-black-transparent">
+                        {{ $fixture->matchweek->season->division->name }}&nbsp;&ndash;
+                        @if ($fixture->type == "league")
+                            {{ $fixture->matchweek->number_consecutive }}. Spielwoche {{ $fixture->matchweek->name ? "|".$fixture->matchweek->name : null }}
+                        @elseif ($fixture->type == "knockout")
+                            {{ $fixture->matchweek->name }}
+                        @endif
+                    </div>
                 </div>
             </div>
             <div class="row">
