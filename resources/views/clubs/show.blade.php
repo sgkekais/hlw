@@ -481,7 +481,7 @@
                 @if (!$players->isEmpty())
                     <div class="row mt-2">
                         <div class="col">
-                            <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $club->colours_club_primary }}">Gesperrte Spieler</h2>
+                            <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Gesperrte Spieler</h2>
                             <ul class="list-group border-danger">
                             @php
                                 $suspended_players = false;
@@ -517,7 +517,7 @@
                     @endphp
                     <div class="row mt-2">
                         <div class="col">
-                            <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $club->colours_club_primary }}">Ansprechpartner</h2>
+                            <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Ansprechpartner</h2>
                             <p class="text-muted">Nur für angemeldete Mitglieder sichtbar.</p>
                             @if (!$contacts->isEmpty())
                                 <ul class="list-group">
@@ -624,7 +624,7 @@
                         @php
                             $active_players = $club->players()->active()->public()->with('person', 'goals.fixture.matchweek.season', 'cards.fixture.matchweek.season')->get()->sortBy('person.last_name');
                         @endphp
-                        <h2 class="font-weight-bold" style="color: {{ $club->colours_club_primary }}">Aktive <span class="badge badge-secondary">{{ $active_players->count() }}</span></h2>
+                        <h2 class="font-weight-bold" style="color: {{ $primary_color }}">Aktive <span class="badge badge-secondary">{{ $active_players->count() }}</span></h2>
                         <div class="row my-1">
                             <div class="col text-muted">
                                 Es sind nur Spieler mit einem gültigen Spielerpass der HLW spielberechtigt.
