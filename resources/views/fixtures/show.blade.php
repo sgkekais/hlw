@@ -151,7 +151,7 @@
     <div class="container">
         {{-- form --}}
         <div class="row mt-2">
-            <div class="col-6">
+            <div class="col-6 d-flex flex-column flex-sm-row justify-content-start align-items-start">
                 @if ($fixture->clubHome)
                     @foreach ($fixture->clubHome->getLastGamesPlayedOrRated(5, $fixture->matchweek->season->isFinished() ? $fixture->matchweek->season->end : null) as $lastGame)
                         <span class="fa-stack fa-lg" data-toggle="tooltip" data-html="true" title="{{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
@@ -174,7 +174,7 @@
                     @endforeach
                 @endif
             </div>
-            <div class="col-6 text-right">
+            <div class="col-6 d-flex flex-column flex-sm-row justify-content-end align-items-end">
                 @if ($fixture->clubAway)
                     @foreach ($fixture->clubAway->getLastGamesPlayedOrRated(5, $fixture->matchweek->season->isFinished() ? $fixture->matchweek->season->end : null) as $lastGame)
                         <span class="fa-stack fa-lg" data-toggle="tooltip" data-html="true" title="{{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
