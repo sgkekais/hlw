@@ -14,6 +14,7 @@ class RenameChampionColumnToChampionId extends Migration
     public function up()
     {
         Schema::table('seasons', function (Blueprint $table) {
+            // rename column
             $table->renameColumn('champion', 'champion_id');
         });
     }
