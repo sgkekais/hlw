@@ -54,7 +54,7 @@
                                                         $color = "orange";
                                                     } else {
                                                         $class = "fa-star-half-o";
-                                                        $color = "grey";
+                                                        $color = "orange";
                                                     }
                                                 @endphp
                                             @elseif ($championship->type == "knockout")
@@ -63,7 +63,7 @@
                                                     $color = "orange";
                                                 @endphp
                                             @endif
-                                            <span class="fa fa-lg {{ $class }}" style="color: {{ $color }}" title="{{ $championship->name }} {{ $championship->division->name }}"></span>
+                                            <span class="fa fa-lg {{ $class }}" style="color: {{ $color }}" data-toggle="tooltip" title="{{ $championship->name }} | {{ $championship->division->name }}"></span>
                                         @endforeacH
                                     @endforeach
                                 @else
@@ -86,5 +86,20 @@
 
         </div>
     </div>
+
+@endsection
+
+@section('js-footer')
+
+    <script type="text/javascript">
+        $(function() {
+
+            // activate tooltips for this page
+            $("body").tooltip({
+                selector: '[data-toggle="tooltip"]'
+            });
+
+        });
+    </script>
 
 @endsection

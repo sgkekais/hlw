@@ -51,7 +51,16 @@
                         <li class="my-1">
                         <span class="p-1 bg-black-transparent">
                             @foreach ($league_championships as $league_championship)
-                                <i class="fa fa-fw fa-star" style="color: orange" title="{{ $league_championship->name }}"></i>
+                                @php
+                                    if ($league_championship->division->hierarchy_level == 1) {
+                                        $class = "fa-star";
+                                        $color = "orange";
+                                    } else {
+                                        $class = "fa-star-half-o";
+                                        $color = "orange";
+                                    }
+                                @endphp
+                                <i class="fa fa-fw {{ $class }}" style="color: {{ $color }}" data-toggle="tooltip" title="{{ $league_championship->name }} | {{ $league_championship->division->name }}"></i>
                             @endforeach
                         </span>
                         </li>
@@ -736,7 +745,7 @@
 
 @section('js-footer')
 
-    <script>
+    <script type="text/javascript">
 
         // get the results of a club for the specified season
         function getResults(season){
@@ -766,6 +775,11 @@
                 // get results of selected season
                 getResults($(this).val());
 
+            });
+
+            // activate tooltips for this page
+            $("body").tooltip({
+                selector: '[data-toggle="tooltip"]'
             });
         });
 
