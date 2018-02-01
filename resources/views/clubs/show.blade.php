@@ -526,7 +526,7 @@
                                             <div class="col-4 ">
                                                 <span class="fa fa-phone"></span>
                                                 <br>
-                                                <small class="text-muted">Nur von Admins und Ansprechpartnern sichtbar</small>
+                                                <small class="text-muted">Nur für Admins und Ansprechpartnern sichtbar</small>
                                             </div>
                                         @endhasanyrole
                                     </li>
