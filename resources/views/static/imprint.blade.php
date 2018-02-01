@@ -42,7 +42,10 @@
                         <a href="https://thenounproject.com/sobinstock/collection/soccer/?i=1339450" target="_blank" title="Quelle">"Soccer Shirt"</a> (modifiziert) von <a href="https://thenounproject.com/sobinstock/" target="_blank" title="Autor">sobinsergey</a> from the <a href="https://thenounproject.com/" title="Noun Project" target="_blank">Noun Project</a>
                     </li>
                     <li>
-                        <a href="https://thenounproject.com/search/?q=arena&i=113863" target="_blank" title="Quelle">"Arena</a> von <a href="https://thenounproject.com/AlexAlmqvist/" title="Autor" target="_blank">Alex Almqvist</a> from the <a href="https://thenounproject.com/" title="Noun Project" target="_blank">Noun Project</a>
+                        <a href="https://thenounproject.com/search/?q=arena&i=113863" target="_blank" title="Quelle">"Arena"</a> von <a href="https://thenounproject.com/AlexAlmqvist/" title="Autor" target="_blank">Alex Almqvist</a> from the <a href="https://thenounproject.com/" title="Noun Project" target="_blank">Noun Project</a>
+                    </li>
+                    <li>
+                        <a href="https://thenounproject.com/search/?q=whistle&i=689560" target="_blank" title="Quelle">"Whistle"</a> von <a href="https://thenounproject.com/dreamingmao/" title="Autor" target="_blank">Makarenko Andreyt</a> from the <a href="https://thenounproject.com/" title="Noun Project" target="_blank">Noun Project</a>
                     </li>
                 </ul>
 

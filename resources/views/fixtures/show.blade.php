@@ -6,8 +6,8 @@
 
 @section ('content')
 
-    <div class="w-100 bg-dark">
-        <div class="container" style="background: url({{ asset('storage/clubcovers/default.jpg') }}) bottom; background-size: cover">
+    <div class="w-100 bg-dark" style="background: url({{ asset('storage/matchbg.jpg') }}) bottom; background-size: cover">
+        <div class="container">
             <div class="row">
                 <div class="col text-white font-weight-bold">
                     @if ($fixture->type == "league")
@@ -20,9 +20,9 @@
             <div class="row">
                 {{-- home logo --}}
                 <div class="col-4 d-flex">
-                    @if ($fixture->clubAway)
+                    @if ($fixture->clubHome)
                         @if ($fixture->clubHome->logo_url)
-                            <img src="{{ asset('storage/'.$fixture->clubHome->logo_url) }}" class="img-fluid align-self-end p-2 pull-left bg-black-transparent">
+                            <img src="{{ asset('storage/'.$fixture->clubHome->logo_url) }}" class="img-fluid align-self-end py-2 pull-left bg-black-transparent">
                         @endif
                     @endif
                 </div>
@@ -46,20 +46,23 @@
                     </div>
                     <div class="bg-black-transparent">
                         @svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #fff', 'width' => '30', 'height' => '30'])
-                        @if ($fixture->stadium)
-                            @if ($fixture->clubHome)
-                                @if (!$fixture->clubHome->regularStadium->isEmpty())
-                                    @if ($fixture->clubHome->regularStadium->first()->id != $fixture->stadium->id)
-                                        <span class="text-warning">{{ $fixture->stadium->name }}</span>
-                                    @else
-                                        {{ $fixture->stadium->name }}
-                                    @endif
-                                @else
-                                    {{ $fixture->stadium->name }}
+                        @php
+                            $color = null;
+                            $title = null;
+                        @endphp
+                        @if ($fixture->stadium && $fixture->clubHome)
+                            @if (!$fixture->clubHome->regularStadium->isEmpty())
+                                @if ($fixture->clubHome->regularStadium->first()->id != $fixture->stadium->id)
+                                    @php
+                                        $color = "text-warning";
+                                        $title = "Abweichender Spielort";
+                                    @endphp
                                 @endif
-                            @else
-                                {{ $fixture->stadium->name }}
                             @endif
+                        @endif
+                        @if ($fixture->stadium)
+                            <span class="d-inline d-lg-none {{ $color }}" title="{{ $title }}">{{ $fixture->stadium->name_short }}</span>
+                            <span class="d-none d-lg-inline {{ $color }}" title="{{ $title }}">{{ $fixture->stadium->name }}</span>
                         @else
                             -
                         @endif
@@ -71,7 +74,8 @@
                             @endphp
                             @if (!$referees->isEmpty())
                                 @foreach ($referees as $referee)
-                                    <span class="fa fa-fw fa-hand-paper-o"></span> {{ $referee->person->full_name_shortened }}
+                                    @svg('whistle', ['class' => 'align-middle pr-1', 'style' => 'fill: #fff', 'width' => '35', 'height' => '35'])
+                                    {{ $referee->person->full_name_shortened }}
                                 @endforeach
                             @endif
                         @endauth
@@ -81,7 +85,7 @@
                 <div class="col-4 d-flex justify-content-end">
                     @if ($fixture->clubAway)
                         @if ($fixture->clubAway->logo_url)
-                            <img src="{{ asset('storage/'.$fixture->clubAway->logo_url) }}" class="img-fluid align-self-end p-2 bg-black-transparent">
+                            <img src="{{ asset('storage/'.$fixture->clubAway->logo_url) }}" class="img-fluid align-self-end py-2 bg-black-transparent">
                         @endif
                     @endif
                 </div>
