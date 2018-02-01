@@ -54,6 +54,12 @@
                 <input type="text" class="form-control" name="date_of_birth" id="singledatepicker" aria-describedby="date_of_birthHelp" value="{{ old('date_of_birth') }}">
                 <small id="date_of_birthHelp" class="form-text text-muted">JJJJ-MM-TT</small>
             </div>
+            <div class="form-check col-md-2">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="datetimenull">
+                    Leer lassen
+                </label>
+            </div>
         </div>
         <!-- photo -->
         <div class="form-group row">
@@ -124,6 +130,11 @@
 
     <script type="text/javascript">
         $(function() {
+            var beginDate = $("input[name=datetime]").val();
+            if ( !beginDate ) {
+                beginDate = moment().format("YYYY-MM-DD");
+            }
+
             $('input[id="singledatepicker"]').daterangepicker({
                 singleDatePicker: true,
                 showDropdowns: true,
@@ -162,7 +173,15 @@
                     "firstDay": 1
                 }
             });
+            $('#datetimenull').click(function (){
+                if ( this.checked ){
+                    $('#singledatepicker').val(null);
+                }else{
+                    $('#singledatepicker').val(beginDate);
+                }
+            });
         });
+
     </script>
 
 @endsection
