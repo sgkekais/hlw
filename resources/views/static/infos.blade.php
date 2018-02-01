@@ -141,15 +141,26 @@
                                 Diese Daten sind nur für Admins und die Ansprechpartner der Teams einsehbar.
                             </p>
                             <ul class="list-group">
+                                <li class="list-group-item d-flex flex-column flex-md-row justify-content-between">
+                                    <div class="col-md-4 text-left">
+                                        <span class="fa fa-user" title="Schiedsrichter"></span>
+                                    </div>
+                                    <div class="col-md-4 text-left">
+                                        <span class="fa fa-envelope" title="E-Mail"></span>
+                                    </div>
+                                    <div class="col-md-4 text-md-right">
+                                        <span class="fa fa-phone" title="Telefon"></span>
+                                    </div>
+                                </li>
                                 @foreach ($referees->sortBy('person.last_name') as $referee)
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <div class="text-left">
+                                    <li class="list-group-item d-flex flex-column flex-md-row justify-content-between">
+                                        <div class="col-md-4 text-left">
                                             {{ $referee->person->full_name_shortened }}
                                         </div>
-                                        <div class="">
+                                        <div class="col-md-4 text-left">
                                             {{ $referee->mail }}
                                         </div>
-                                        <div class="text-right">
+                                        <div class="col-md-4 text-md-right">
                                             {{ $referee->mobile }}
                                         </div>
                                     </li>

@@ -68,14 +68,13 @@
         <!-- champion -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="champion">Sieger</label>
+                <label for="champion_id">Sieger</label>
             </div>
             <div class="col-md-4">
-                <select class="form-control" id="champion" name="champion" aria-describedby="championHelp">
+                <select class="form-control" id="champion_id" name="champion_id" aria-describedby="champion_idHelp">
                     <option></option>
                     @foreach ($season->clubs->sortBy('name') as $club)
-                        {{--TODO: @if ($season->champion) {{ $season->champion->id == $club->id ? "selected" : null }} @endif--}}
-                        <option value="{{ $club->id }}" >{{ $club->name }}</option>
+                        <option value="{{ $club->id }}" {{ $season->champion_id == $club->id ? "selected" : null }} >{{ $club->name }}</option>
                     @endforeacH
                 </select>
                 <small id="championHelp" class="form-text text-muted">Meister bzw. Pokalsieger, falls schon gegeben, sonst leer lassen</small>

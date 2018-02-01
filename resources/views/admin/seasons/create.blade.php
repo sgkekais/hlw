@@ -49,10 +49,10 @@
         <!-- champion -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="champion">Sieger</label>
+                <label for="champion_id">Sieger</label_id>
             </div>
             <div class="col-md-4">
-                <select class="form-control" id="champion" name="champion" aria-describedby="championHelp" disabled>
+                <select class="form-control" id="champion_id" name="champion_id" aria-describedby="championHelp" disabled>
                     <option>Zuerst Mannschaften zuordnen.</option>
                 </select>
                 <small id="championHelp" class="form-text text-muted">Meister bzw. Pokalsieger, falls schon gegeben, sonst leer lassen</small>

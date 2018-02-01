@@ -521,37 +521,37 @@
                             <p class="text-muted">Nur für angemeldete Mitglieder sichtbar.</p>
                             @if (!$contacts->isEmpty())
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <div class="col-1 font-weight-bold">
+                                    <li class="list-group-item d-flex flex-column flex-md-row justify-content-between">
+                                        <div class="col-md-1 font-weight-bold">
                                             <span class="font-weight-bold">#</span>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-md-3">
                                             <span class="fa fa-user"></span>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-md-4">
                                             <span class="fa fa-envelope"></span>
                                         </div>
                                         @hasanyrole('super_admin|admin|club_contact')
-                                            <div class="col-4 ">
+                                            <div class="col-md-4 ">
                                                 <span class="fa fa-phone"></span>
-                                                <br>
-                                                <small class="text-muted">Nur für Admins und Ansprechpartnern sichtbar</small>
+                                                <br class="d-none d-md-inline-block">
+                                                <small class="text-muted">Nur für Admins und Ansprechpartner sichtbar</small>
                                             </div>
                                         @endhasanyrole
                                     </li>
                                     @foreach ($club->contacts()->orderBy('hierarchy_level')->with('person')->get() as $contact)
-                                        <li class="list-group-item d-flex justify-content-between">
-                                            <div class="col-1 font-weight-bold">
+                                        <li class="list-group-item d-flex flex-column flex-md-row justify-content-between">
+                                            <div class="col-md-1 font-weight-bold">
                                                 {{ $contact->hierarchy_level }}
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-md-3">
                                                 {{ $contact->person->first_name }} {{ $contact->person->last_name }}
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-md-4">
                                                 {{ $contact->mail }}
                                             </div>
                                             @hasanyrole('super_admin|admin|club_contact')
-                                                <div class="col-4">
+                                                <div class="col-md-4">
                                                     {{ $contact->mobile }}
                                                 </div>
                                             @endhasanyrole

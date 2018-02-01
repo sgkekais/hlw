@@ -1478,7 +1478,7 @@ class Club extends Model
      */
     public function championships()
     {
-        return $this->hasMany(Season::class, 'champion');
+        return $this->hasMany(Season::class, 'champion_id');
     }
 
     /**
