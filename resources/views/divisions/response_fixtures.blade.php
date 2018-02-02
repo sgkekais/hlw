@@ -29,7 +29,7 @@
                             <th class="align-middle" style="width: 20%">
                                 <span class="fa fa-calendar"></span>
                             </th>
-                            <th class="align-middle text-center" style="width: 50%">
+                            <th class="align-middle text-center" style="width: 55%">
                                 <span class="fa fa-fw fa-handshake-o"></span>
                             </th>
                             <th class="align-middle text-left">
