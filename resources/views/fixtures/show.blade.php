@@ -307,9 +307,12 @@
                             @foreach ($home_goals as $home_goal)
                                 <li>
                                     <span class="align-middle">
-                                        <span class="font-weight-bold">
-                                            {{ $home_goal->score }}
-                                        </span> {{ $home_goal->player->person->full_name_shortened }}
+                                        {{ $home_goal->player->person->full_name_shortened }}&nbsp;
+                                        @if ($home_goal->score)
+                                            <span class="font-weight-bold">
+                                                ({{ $home_goal->score }})
+                                            </span>
+                                        @endif
                                     </span>
                                     <span class="fa fa-fw fa-soccer-ball-o align-middle"></span>
                                 </li>
@@ -328,12 +331,12 @@
                                 <li>
                                     <span class="fa fa-fw fa-soccer-ball-o align-middle"></span>
                                     <span class="align-middle">
-                                        {{--<span class="d-flex-inline text-center text-white rounded bg-dark d-inline-block ml-1 mr-1 p-1" style="width: 50px">--}}
-                                        {{ $away_goal->score ? "- ".$away_goal->score." -" : null }}
-                                        {{ $away_goal->player->person->full_name_shortened }}
-                                        <span class="text-muted">
-                                            {{ $away_goal->player->number }}
-                                        </span>
+                                        @if ($away_goal->score)
+                                            <span class="font-weight-bold">
+                                                ({{ $away_goal->score }})
+                                            </span>
+                                        @endif
+                                        &nbsp;{{ $away_goal->player->person->full_name_shortened }}
                                     </span>
                                 </li>
                             @endforeach
