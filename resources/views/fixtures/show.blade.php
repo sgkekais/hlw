@@ -174,7 +174,7 @@
                     @endforeach
                 @endif
             </div>
-            <div class="col-6 d-flex flex-column flex-sm-row justify-content-end align-items-end">
+            <div class="col-6 d-flex flex-column flex-sm-row justify-content-start justify-content-sm-end align-items-end">
                 @if ($fixture->clubAway)
                     @foreach ($fixture->clubAway->getLastGamesPlayedOrRated(5, $fixture->matchweek->season->isFinished() ? $fixture->matchweek->season->end : null) as $lastGame)
                         <span class="fa-stack fa-lg" data-toggle="tooltip" data-html="true" title="{{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
@@ -365,14 +365,27 @@
                     @if (!$home_cards->isEmpty())
                         <ul class="list-unstyled text-right">
                             @foreach ($home_cards as $home_card)
-                                {{ $home_card->player->person->full_name_shortened }}
-                                @if ($home_card->color == "yellow")
-                                    <span class="fa fa-fw fa-square text-warning"></span>
-                                @elseif ($home_card->color == "yellow-red")
-                                    <span class="fa fa-square text-warning"></span> <span class="fa fa-fw fa-square text-danger"></span>
-                                @elseif ($home_card->color == "red")
-                                    <span class="fa fa-fw fa-square text-danger"></span>
-                                @endif
+                                <li>
+                                    <div class="">
+                                        {{ $home_card->player->person->full_name_shortened }}
+                                        @if ($home_card->color == "yellow")
+                                            <span class="fa fa-fw fa-square text-warning"></span>
+                                        @elseif ($home_card->color == "yellow-red")
+                                            <span class="fa fa-square text-warning"></span> <span class="fa fa-fw fa-square text-danger"></span>
+                                        @elseif ($home_card->color == "red")
+                                            <span class="fa fa-fw fa-square text-danger"></span>
+                                        @endif
+                                    </div>
+                                    <small class="text-muted">
+                                        @if ($home_card->ban_lifetime)
+                                            <span class="text-danger">Sperre auf Lebenszeit</span>
+                                        @elseif ($home_card->ban_season)
+                                            <span class="text-danger">Saisonsperre</span>
+                                        @else
+                                            {{ $home_card->ban_matches - $home_card->ban_reduced_by }} Spiel{{ $home_card->ban_matches - $home_card->ban_reduced_by > 1 ? "e" : null }} Sperre
+                                        @endif
+                                    </small>
+                                </li>
                             @endforeach
                         </ul>
                     @endif
@@ -385,14 +398,27 @@
                     @if (!$away_cards->isEmpty())
                         <ul class="list-unstyled text-left">
                             @foreach ($away_cards as $away_card)
-                                @if ($away_card->color == "yellow")
-                                    <span class="fa fa-fw fa-square text-warning"></span>
-                                @elseif ($away_card->color == "yellow-red")
-                                    <span class="fa fa-square text-warning"></span> <span class="fa fa-fw fa-square text-danger"></span>
-                                @elseif ($away_card->color == "red")
-                                    <span class="fa fa-fw fa-square text-danger"></span>
-                                @endif
-                                {{ $away_card->player->person->full_name_shortened }}
+                                <li>
+                                    <div class="">
+                                        @if ($away_card->color == "yellow")
+                                            <span class="fa fa-fw fa-square text-warning"></span>
+                                        @elseif ($away_card->color == "yellow-red")
+                                            <span class="fa fa-square text-warning"></span> <span class="fa fa-fw fa-square text-danger"></span>
+                                        @elseif ($away_card->color == "red")
+                                            <span class="fa fa-fw fa-square text-danger"></span>
+                                        @endif
+                                        {{ $away_card->player->person->full_name_shortened }}
+                                    </div>
+                                    <small class="text-muted">
+                                        @if ($away_card->ban_lifetime)
+                                            <span class="text-danger">Sperre auf Lebenszeit</span>
+                                        @elseif ($away_card->ban_season)
+                                            <span class="text-danger">Saisonsperre</span>
+                                        @else
+                                            {{ $away_card->ban_matches - $away_card->ban_reduced_by }} Spiel{{ $away_card->ban_matches - $away_card->ban_reduced_by > 1 ? "e" : null }} Sperre
+                                        @endif
+                                    </small>
+                                </li>
                             @endforeach
                         </ul>
                     @endif
