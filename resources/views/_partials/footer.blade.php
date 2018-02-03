@@ -29,7 +29,7 @@
                     Ihr sucht einen Verein?
                 </h5>
                 <p>
-                    Registriert euch und postet unter Börse im Clubhaus!
+                    Registriert euch und postet unter 'Börse' im Clubhaus!
                 </p>
             </div>
             <div class="col-md-4">
