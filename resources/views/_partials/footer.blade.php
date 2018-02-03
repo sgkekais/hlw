@@ -25,6 +25,12 @@
                 <p class="">
                     Schaut auf der <a href="{{ route('frontend.static.infos') }}#join" title="zur Info-Seite"> Info-Seite nach!</a>
                 </p>
+                <h5 class="font-weight-bold">
+                    Ihr sucht einen Verein?
+                </h5>
+                <p>
+                    Registriert euch und postet unter Börse im Clubhaus!
+                </p>
             </div>
             <div class="col-md-4">
                 <h5 class="font-weight-bold">Social Media</h5>
