@@ -132,8 +132,8 @@
                                                 @endif
                                             @endif
                                         </div>
-                                        <div class="col-2 col-sm-1 d-flex flex-column flex-md-row justify-content-end align-items-center">
-                                            <a href="{{ route('frontend.fixtures.show', $fixture) }}" class="order-md-3 pl-md-1" title="Spieldetails">
+                                        <div class="col-2 col-sm-1 d-flex flex-row flex-sm-column flex-md-row justify-content-end align-items-center">
+                                            <a href="{{ route('frontend.fixtures.show', $fixture) }}" class="order-1 pl-1 pl-sm-0 pl-md-1" title="Spieldetails">
                                                 <span class="fa fa-fw fa-arrow-right"></span>
                                             </a>
                                             @if (!$fixture->goals->isEmpty())
