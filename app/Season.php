@@ -224,6 +224,17 @@ class Season extends Model
      ************************************************************/
 
     /**
+     * Get the previous season using the season nr and division id
+     * @return mixed
+     */
+    public function previousSeason()
+    {
+        $previous_season = Season::where('division_id', $this->division_id)->where('season_nr',$this->season_nr-1)->first();
+
+        return $previous_season;
+    }
+
+    /**
      * Get the current matchweek (based on the current date) of the season
      *
      * @return Matchweek

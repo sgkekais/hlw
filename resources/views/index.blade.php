@@ -172,6 +172,10 @@
                             $c_season = $division->seasons()->orderBy('season_nr','desc')->first();
                             $c_matchweek = $c_season->currentMatchweek();
                         }
+                        $p_season = $c_season->previousSeason();
+                        if ($p_season) {
+                            $p_champion = $p_season->champion;
+                        }
                     @endphp
                     @if ($c_season && $c_matchweek)
                         <h3 class="font-weight-bold font-italic text-uppercase">
@@ -204,6 +208,7 @@
                                     @php
                                         $rank_color = null;
                                         $rank_icon  = null;
+                                        $previous_season_of_club = $club->seasons()->orderBy('end','desc')->where('end','>=',Carbon::now()->subYear()->format('Y-m-d'))->where('begin','<=',Carbon::now()->subYear()->format('Y-m-d'))->get()->where('division.competition_id', $c_season->division->competition_id)->first();
                                     @endphp
                                     @if(in_array($club->t_rank, $c_season->ranks_champion) || in_array($club->t_rank, $c_season->ranks_promotion))
                                         @php
@@ -238,7 +243,20 @@
                                             @endif
                                             <a href="{{ route('frontend.clubs.show', $club) }}" class="pl-1 align-middle" title="{{ $club->name }}">
                                                 {{ $club->name_code }}
+
                                             </a>
+                                            @if ($p_champion)
+                                                @if ($p_champion->id == $club->id)
+                                                    <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                                                @endif
+                                            @endif
+                                            @if ($previous_season_of_club)
+                                                @if ($previous_season_of_club->division->hierarchy_level < $c_season->division->hierarchy_level)
+                                                    <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
+                                                @elseif ($previous_season_of_club->division->hierarchy_level > $c_season->division->hierarchy_level)
+                                                    <span class="pull-right" data-toggle="tooltip" title="Aufsteiger"><small class="text-secondary">N</small></span>
+                                                @endif
+                                            @endif
                                         </td>
                                         <td class="align-middle text-center">{{ $club->t_played }}</td>
                                         <td class="align-middle text-center">{{ $club->t_goals_diff }}</td>

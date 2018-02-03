@@ -11,7 +11,6 @@ use HLW\Matchweek;
 use HLW\Referee;
 use HLW\Season;
 use Illuminate\Http\Request;
-use Forecast\Forecast;
 
 class PagesController extends Controller
 {
