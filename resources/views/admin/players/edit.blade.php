@@ -24,7 +24,7 @@
                 <label for="person_id">Person</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="person_id" aria-describedby="person_idHelp" value="({{ $player->id }}) {{ $player->person->last_name }}, {{ $player->person->first_name }}" disabled>
+                <input type="text" class="form-control" name="person_id" aria-describedby="person_idHelp" value="({{ $player->person->id }}) {{ $player->person->last_name }}, {{ $player->person->first_name }}" disabled>
                 <small id="person_idHelp" class="form-text text-muted">Um welche Person handelt es sich?</small>
             </div>
         </div>

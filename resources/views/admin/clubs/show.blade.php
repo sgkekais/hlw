@@ -339,7 +339,7 @@
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('people.show', $p_active->person->id) }}" title="Person bearbeiten (nicht Spieler)">
-                                    {{ $p_active->person->full_name ?? "-" }}
+                                    ({{ $p_active->person->id }}) {{ $p_active->person->full_name ?? "-" }}
                                 </a>
                             </td>
                             <td class="align-middle">{{ $p_active->sign_on->format('d.m.Y') }}</td>

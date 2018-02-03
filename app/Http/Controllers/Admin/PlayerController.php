@@ -30,8 +30,15 @@ class PlayerController extends Controller
      */
     public function create(Club $club)
     {
-        $people     = Person::active()->orderBy('last_name','asc')->orderBy('first_name','asc')->get();
-        $unassigned_people    = $people->diff($club->players);
+        /*$people = Person::active()->orderBy('last_name','asc')->orderBy('first_name','asc')->get();*/
+        // doesnt work, compares player id with person id, should be player->person id with person id
+        // $unassigned_people = $people->diff($club->players);
+        $unassigned_people = Person::whereDoesntHave('players', function ($query) use ($club) {
+            $query->where('club_id', $club->id);
+        })
+            ->orderBy('last_name', 'asc')
+            ->orderBy('first_name', 'asc')
+            ->get();
 
         $positions  = Position::all();
 
