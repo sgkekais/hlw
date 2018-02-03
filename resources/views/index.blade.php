@@ -140,7 +140,7 @@
                                                 <span class="fa fa-fw fa-soccer-ball-o text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Torschützen vorhanden"></span>
                                             @endif
                                             @if (!$fixture->cards->isEmpty())
-                                                <span class="fa fa-fw fa-clone text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Karten vorhanden"></span>
+                                                <span class="fa fa-fw fa-clone pl-1 pt-0 pl-sm-0 pt-sm-1 pl-md-1 pt-md-0 text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Karten vorhanden"></span>
                                             @endif
                                         </div>
                                     </div>
