@@ -69,7 +69,7 @@
         <div class="form-group row">
             <label for="ban_reduced_by" class="col-md-2 col-form-label">Sperre reduzieren</label>
             <div class="col-md-2">
-                <input type="number" class="form-control" aria-describedby="ban_reduced_byHelp" name="ban_reduced_by" id="ban_reduced_by" >
+                <input type="number" class="form-control" aria-describedby="ban_reduced_byHelp" name="ban_reduced_by" id="ban_reduced_by" value="0" >
                 <small id="ban_reduced_byHelp" class="form-text text-muted">Länge der Sperre reduzieren</small>
             </div>
         </div>

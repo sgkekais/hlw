@@ -132,10 +132,16 @@
                                                 @endif
                                             @endif
                                         </div>
-                                        <div class="col-2 col-sm-1 text-right">
-                                            <a href="{{ route('frontend.fixtures.show', $fixture) }}" title="Spieldetails">
+                                        <div class="col-2 col-sm-1 d-flex flex-column flex-md-row justify-content-end align-items-center">
+                                            <a href="{{ route('frontend.fixtures.show', $fixture) }}" class="order-md-3 pl-md-1" title="Spieldetails">
                                                 <span class="fa fa-fw fa-arrow-right"></span>
                                             </a>
+                                            @if (!$fixture->goals->isEmpty())
+                                                <span class="fa fa-fw fa-soccer-ball-o text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Torschützen vorhanden"></span>
+                                            @endif
+                                            @if (!$fixture->cards->isEmpty())
+                                                <span class="fa fa-fw fa-clone text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Karten vorhanden"></span>
+                                            @endif
                                         </div>
                                     </div>
                                     @if ($fixture->rescheduledTo)
@@ -252,4 +258,19 @@
             @endforeach
         </div>
     </div>
+@endsection
+
+@section('js-footer')
+
+    <script type="text/javascript">
+        $(function() {
+
+            // activate tooltips for this page
+            $("body").tooltip({
+                selector: '[data-toggle="tooltip"]'
+            });
+
+        });
+    </script>
+
 @endsection
