@@ -369,11 +369,11 @@
                                     <div class="">
                                         {{ $home_card->player->person->full_name_shortened }}
                                         @if ($home_card->color == "yellow")
-                                            <span class="fa fa-fw fa-square text-warning"></span>
+                                            <span class="fa fa-square text-warning"></span>
                                         @elseif ($home_card->color == "yellow-red")
                                             <span class="fa fa-square text-warning"></span> <span class="fa fa-fw fa-square text-danger"></span>
                                         @elseif ($home_card->color == "red")
-                                            <span class="fa fa-fw fa-square text-danger"></span>
+                                            <span class="fa fa-square text-danger"></span>
                                         @endif
                                     </div>
                                     <small class="text-muted">
@@ -401,11 +401,11 @@
                                 <li>
                                     <div class="">
                                         @if ($away_card->color == "yellow")
-                                            <span class="fa fa-fw fa-square text-warning"></span>
+                                            <span class="fa fa-square text-warning"></span>
                                         @elseif ($away_card->color == "yellow-red")
                                             <span class="fa fa-square text-warning"></span> <span class="fa fa-fw fa-square text-danger"></span>
                                         @elseif ($away_card->color == "red")
-                                            <span class="fa fa-fw fa-square text-danger"></span>
+                                            <span class="fa fa-square text-danger"></span>
                                         @endif
                                         {{ $away_card->player->person->full_name_shortened }}
                                     </div>
