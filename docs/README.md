@@ -16,7 +16,7 @@
 
 # How-To's
 
-## Kaderpflege
+## Kaderpflegen
 
 ## Spielverlegung
 
