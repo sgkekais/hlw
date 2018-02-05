@@ -19,7 +19,17 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts" !default;
 // datatables
 @import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 
-body {
+// sticky footer
+html, body {
+  height: 100%;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  flex: 1 0 auto;
 }
 

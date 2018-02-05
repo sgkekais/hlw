@@ -65,4 +65,9 @@ class AdminController extends Controller
             'in_thirty_days')
         );
     }
+
+    public function docs ()
+    {
+        return view('admin.docs');
+    }
 }

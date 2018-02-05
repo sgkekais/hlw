@@ -64,6 +64,11 @@
                         <span class="fa fa-history"></span> Log
                     </a>
                 </li>
+                <li class="nav-item {{ Route::is('docs') ? 'active' : null }}">
+                    <a class="nav-link" href="{{ route('docs') }}">
+                        <span class="fa fa-book"></span> Docs
+                    </a>
+                </li>
                 <!-- user -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -68,71 +68,72 @@ Route::get('matchprotocol', 'PagesController@matchProtocol')->name('frontend.sta
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'isAdmin']], function(){
     // Show Admin Dashboard after login into admin panel
     Route::get('', 'AdminController@index')->name('admin');
-    // log
+    // Log
     Route::get('log', 'LogController@index')->name('log');
-    // calendar
+    // Calendar TODO: fix memory overload
     Route::get('calendar', 'CalendarController@index')->name('calendar');
-    // user, role and permissions management
+    // Docs
+    Route::get('docs', 'AdminController@docs')->name('docs');
+    // User, role and permissions management
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
-
+    // Competitions
     Route::resource('competitions', 'CompetitionController');
+    // Divisions
     Route::resource('divisions', 'DivisionController');
+    // Seasons
     Route::resource('seasons', 'SeasonController');
-
-    // assigning clubs to seasons
+    // Assigning clubs to seasons
     Route::get('seasons/{season}/clubs/create', 'SeasonController@createClubAssignment')->name('createClubAssignment');
     Route::post('seasons/{season}/clubs', 'SeasonController@storeClubAssignment')->name('storeClubAssignment');
     Route::get('seasons/{season}/clubs/{club}/edit', 'SeasonController@editClubAssignment')->name('editClubAssignment');
     Route::patch('seasons/{season}/clubs/{club}', 'SeasonController@updateClubAssignment')->name('updateClubAssignment');
     Route::delete('seasons/{season}/clubs/{club}', 'SeasonController@destroyClubAssignment')->name('destroyClubAssignment');
-
-    // matchweek crud, all matchweek routes are handled with a specific season
+    // Matchweek crud, all matchweek routes are handled with a specific season
     Route::resource('seasons.matchweeks', 'MatchweekController');
-
-    // csv import of matchweeks
+    // Csv import of matchweeks
     Route::post('seasons/{season}/matchweeks/import', 'MatchweekController@importCSV')->name('seasons.matchweeks.import');
-
-    // rescheduling of matches
+    // Rescheduling of matches
     Route::get('matchweeks/{matchweek}/fixtures/{fixture}/create', 'FixtureController@create')->name('reschedule.create');
-    // fixtures crud, all fixtures routes are handled with a specific matchweek
+    // Fixtures crud, all fixtures routes are handled with a specific matchweek
     Route::resource('matchweeks.fixtures', 'FixtureController');
-    // fixture import
+    // Fixture import
     Route::post('fixtures/import', 'FixtureController@importCSV')->name('fixtures.import');
-    // managing cards of a match
+    // Managing cards of a match
     Route::resource('fixtures.cards', 'CardController');
-    // managing goals of a match
+    // Managing goals of a match
     Route::resource('fixtures.goals', 'GoalController');
-    // assigning and managing referees of a match
+    // Assigning and managing referees of a match
     Route::get('fixtures/{fixture}/referees/create', 'FixtureController@createRefereeAssignment')->name('createRefereeAssignment');
     Route::post('fixtures/{fixture}/referees', 'FixtureController@storeRefereeAssignment')->name('storeRefereeAssignment');
     Route::get('fixtures/{fixture}/referees/{referee}/edit', 'FixtureController@editRefereeAssignment')->name('editRefereeAssignment');
     Route::patch('fixtures/{fixture}/referees/{referee}', 'FixtureController@updateRefereeAssignment')->name('updateRefereeAssignment');
     Route::delete('fixtures/{fixture}/referees/{referee}', 'FixtureController@destroyRefereeAssignment')->name('destroyRefereeAssignment');
-
+    // Stadiums
     Route::resource('stadiums', 'StadiumController');
     Route::post('stadiums/import', 'StadiumController@importCSV')->name('stadiums.import');
-
+    // Clubs
     Route::resource('clubs', 'ClubController');
-
-    // csv import of clubs
+    // Csv import of clubs
     Route::post('clubs/import', 'ClubController@importCSV')->name('clubs.import');
-
-    // assigning and managing players
+    // Assigning and managing players
     Route::resource('clubs.players', 'PlayerController');
-    // assigning and managing contacts
+    // Assigning and managing contacts
     Route::resource('clubs.contacts', 'ContactController');
-    // assigning and managing stadiums
+    // Assigning and managing stadiums
     Route::get('clubs/{club}/stadiums/create', 'ClubController@createStadiumAssignment')->name('createStadiumAssignment');
     Route::post('clubs/{club}/stadiums', 'ClubController@storeStadiumAssignment')->name('storeStadiumAssignment');
     Route::get('clubs/{club}/stadiums/{stadium}/edit', 'ClubController@editStadiumAssignment')->name('editStadiumAssignment');
     Route::patch('clubs/{club}/stadiums/{stadium}', 'ClubController@updateStadiumAssignment')->name('updateStadiumAssignment');
     Route::delete('clubs/{club}/stadiums/{stadium}', 'ClubController@destroyStadiumAssignment')->name('destroyStadiumAssignment');
-
+    // Positions
     Route::resource('positions', 'PositionController');
+    // Official divisions
     Route::resource('divisions-official', 'DivisionOfficialController');
+    // Referees
     Route::resource('referees', 'RefereeController');
+    // People
     Route::resource('people', 'PersonController');
 
 });
