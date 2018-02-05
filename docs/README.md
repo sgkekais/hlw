@@ -1,6 +1,6 @@
 # HLW-Admin Dokumentation
 
-
+> Stand: 05.02.2018
 
 # Einführung
 Die Hobbyliga-West Seite lässt sich in zwei Bereiche unterteilen:
