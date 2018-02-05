@@ -1,5 +1,7 @@
 # HLW-Admin Dokumentation
 
+> Dokumentation ist noch unvollständig und wir von mir nach und nach gepflegt.
+
 > Stand: 05.02.2018
 
 # Einführung
