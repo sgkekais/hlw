@@ -66,7 +66,7 @@
                 </li>
                 <li class="nav-item {{ Route::is('docs') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('docs') }}">
-                        <span class="fa fa-book"></span> Docs
+                        <span class="fa fa-book"></span> Hilfe
                     </a>
                 </li>
                 <!-- user -->
