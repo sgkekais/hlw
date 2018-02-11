@@ -153,8 +153,8 @@
         <div class="row mt-2">
             <div class="col-6 d-flex flex-column flex-sm-row justify-content-start align-items-start">
                 @if ($fixture->clubHome)
-                    @foreach ($fixture->clubHome->getLastGamesPlayedOrRated(5, $fixture->matchweek->season->isFinished() ? $fixture->matchweek->season->end : null) as $lastGame)
-                        <span class="fa-stack fa-lg" data-toggle="tooltip" data-html="true" title="{{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
+                    @foreach ($fixture->clubHome->getLastGamesPlayedOrRated(5, $fixture->matchweek->season->isFinished() ? $fixture->matchweek->season->end : null, $fixture->matchweek->season->begin) as $lastGame)
+                        <span class="fa-stack fa-lg" data-toggle="tooltip" data-html="true" title="{{ $lastGame->matchweek->season->division->name }} | {{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
                             @if ($lastGame->isPlayed() && !$lastGame->isRated())
                                 @if ($fixture->clubHome->hasWon($lastGame))
                                     <i class="fa fa-circle fa-stack-2x text-success"></i>
@@ -176,8 +176,8 @@
             </div>
             <div class="col-6 d-flex flex-column flex-sm-row justify-content-start justify-content-sm-end align-items-end">
                 @if ($fixture->clubAway)
-                    @foreach ($fixture->clubAway->getLastGamesPlayedOrRated(5, $fixture->matchweek->season->isFinished() ? $fixture->matchweek->season->end : null) as $lastGame)
-                        <span class="fa-stack fa-lg" data-toggle="tooltip" data-html="true" title="{{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
+                    @foreach ($fixture->clubAway->getLastGamesPlayedOrRated(5, $fixture->matchweek->season->isFinished() ? $fixture->matchweek->season->end : null, $fixture->matchweek->season->begin) as $lastGame)
+                        <span class="fa-stack fa-lg" data-toggle="tooltip" data-html="true" title="{{ $lastGame->matchweek->season->division->name }} | {{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
                             @if ($lastGame->isPlayed() && !$lastGame->isRated())
                                 @if ($fixture->clubAway->hasWon($lastGame))
                                     <i class="fa fa-circle fa-stack-2x text-success"></i>
