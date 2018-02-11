@@ -266,7 +266,7 @@
                     <div class="col-lg-6">
                         <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Zuletzt</h2>
                         @php
-                            $lastGames = $club->getLastGamesPlayedOrRated(5)->load('clubHome', 'clubAway');
+                            $lastGames = $club->getLastGamesPlayedOrRated(5);
                         @endphp
                         @if (!$lastGames->isEmpty())
                             <table class="table table-striped table-sm">
@@ -622,37 +622,68 @@
                 <div class="row">
                     <div class="col-12">
                         @php
-                            $active_players = $club->players()->active()->public()->with('person', 'goals.fixture.matchweek.season', 'cards.fixture.matchweek.season')->get()->sortBy('person.last_name');
+                            $active_players = $club->players()->active()->public()->with('person', 'person.realClub', 'goals.fixture.matchweek.season', 'cards.fixture.matchweek.season')->get()->sortBy('person.last_name');
+                            $active_players_in_official_club = $club->players()->active()->public()->whereHas('person', function ($query) { $query->whereNotNull('registered_at_club'); })->get()->count();
                         @endphp
-                        <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Aktive <span class="badge badge-secondary">{{ $active_players->count() }}</span></h2>
-                        <div class="row my-1">
-                            <div class="col text-muted">
-                                Es sind nur Spieler mit einem gültigen Spielerpass der HLW spielberechtigt.
+                        <!-- title -->
+                        <div class="row">
+                            <div class="col d-flex flex-column flex-sm-row justify-content-between">
+                                <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">
+                                    Aktive <span class="badge badge-secondary">{{ $active_players->count() }}</span>
+                                </h2>
+                                @if ($active_players_in_official_club > 0)
+                                    <h3 class="text-muted">
+                                        davon <span class="badge badge-light">{{ $active_players_in_official_club }}</span> Vereinsspieler
+                                    </h3>
+                                @endif
                             </div>
                         </div>
-                        <div class="row mt-4 d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col text-muted">
+                                <div class="alert alert-secondary bg-light">
+                                    <span class="fa fa-fw fa-info-circle"></span> Es sind nur Spieler mit einem gültigen Spielerpass der HLW spielberechtigt.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
                             <div class="col">
                                 <div class="card-deck">
-                                    @foreach($active_players as $player)
+                                    @foreach ($active_players as $player)
                                         <div class="card {{ $player->isSuspended() ? "border-danger text-danger" : null }} text-center">
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">
+                                                <li class="list-group-item bg-light d-flex justify-content-between align-items-center">
                                                     <h4 class="card-title font-weight-bold mb-0">
                                                         {{ $player->person->full_name_shortened }}
-                                                        <span class="pull-right" style="color: {{ $club->colours_club_primary }}">{{ $player->number ? "#".$player->number : null }}</span>
                                                     </h4>
-                                                    @if ($player->isSuspended())
+                                                    <div class="h5 mb-0 font-weight-bold d-flex flex-row justify-content-end align-items-center">
+                                                        @if ($player->person->registered_at_club)
+                                                            <div class="pr-1">
+                                                                <span class="fa fa-shield text-warning" data-toggle="tooltip" title="{{ $player->person->realClub->name_short }}"></span>
+                                                                @if ($player->person->realDivision)
+                                                                    {{ $player->person->realDivision->name_short }}
+                                                                @endif
+                                                            </div>
+                                                        @endif
+                                                        @if ($player->number)
+                                                            <div class="pl-1 border-left border-secondary">
+                                                                #{{ $player->number }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </li>
+                                                @if ($player->isSuspended())
+                                                    <li class="list-group-item">
                                                         <h6 class="card-subtitle my-1">
                                                             Spieler ist gesperrt
                                                         </h6>
-                                                    @endif
-                                                </li>
+                                                    </li>
+                                                @endif
                                                 <li class="list-group-item">
                                                     <p class="card-text">
                                                         <span class="fa fa-pencil-square-o"></span>
-                                                        @if($player->sign_on)
+                                                        @if ($player->sign_on)
                                                             {{ $player->sign_on->format('d.m.Y') }}
-                                                            @if( Carbon::now()->diffInYears($player->sign_on) > 0 )
+                                                            @if (Carbon::now()->diffInYears($player->sign_on) > 0)
                                                                 <br><small class="text-muted">{{ Carbon::now()->diffInYears($player->sign_on) == 1 ? Carbon::now()->diffInYears($player->sign_on)." Jahr" : Carbon::now()->diffInYears($player->sign_on)." Jahre" }} dabei</small>
                                                             @else
                                                                 <br><small class="text-muted">{{ Carbon::now()->diffInDays($player->sign_on)}} Tage dabei</small>
@@ -670,9 +701,9 @@
                                                         <li>
                                                             Saison <b>{{ $season->name }}</b>
                                                             <ul class="list-inline">
-                                                                <li class="list-inline-item"><span class="fa fa-soccer-ball-o fa-fw"></span> {{ $goals_season }}</li>
-                                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: orange;"></span> <b> {{ $cards_yr }}</b></li>
-                                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: red"></span> <b> {{ $cards_r }}</b></li>
+                                                                <li class="list-inline-item"><span class="fa fa-soccer-ball-o fa-fw" title="Tore"></span> {{ $goals_season }}</li>
+                                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: orange;" title="Gelb-rote Karten"></span> <b> {{ $cards_yr }}</b></li>
+                                                                <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: red" title="Rote Karten"></span> <b> {{ $cards_r }}</b></li>
                                                             </ul>
                                                         </li>
                                                     </ul>
@@ -680,9 +711,9 @@
                                                 <li class="list-group-item">
                                                     Insgesamt
                                                     <ul class="list-inline">
-                                                        <li class="list-inline-item"><span class="fa fa-soccer-ball-o fa-fw"></span> <b>{{ $player->goals->count() }}</b></li>
-                                                        <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: orange;"></span> <b>{{ $player->cards()->yellowReds()->count() }}</b></li>
-                                                        <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: red"></span> <b>{{ $player->cards()->reds()->count() }}</b></li>
+                                                        <li class="list-inline-item"><span class="fa fa-soccer-ball-o fa-fw" title="Tore"></span> <b>{{ $player->goals->count() }}</b></li>
+                                                        <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: orange;" title="Gelb-rote Karten"></span> <b>{{ $player->cards()->yellowReds()->count() }}</b></li>
+                                                        <li class="list-inline-item"><span class="fa fa-clone fa-fw" style="color: red" title="Rote Karten"></span> <b>{{ $player->cards()->reds()->count() }}</b></li>
                                                     </ul>
                                                 </li>
                                             </ul>
