@@ -1,5 +1,14 @@
-@if($season)
-    @foreach($season->matchweeks as $matchweek)
+@if ($season)
+    @if ($season->type == "knockout" && $season->note)
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-secondary bg-light">
+                    <span class="fa fa-fw fa-info-circle"></span> {{ $season->note }}
+                </div>
+            </div>
+        </div>
+    @endif
+    @foreach ($season->matchweeks as $matchweek)
         <div class="row">
             <a name="matchweek{{ $matchweek->number_consecutive }}"></a>
             <div class="col-12">
@@ -23,9 +32,6 @@
                 <table class="table table-hover table-striped table-sm">
                     <thead>
                         <tr>
-                            {{--<th class="d-none d-sm-table-cell align-middle text-center" style="width: 10%">
-                                <span class="fa fa-info"></span>
-                            </th>--}}
                             <th class="align-middle" style="width: 20%">
                                 <span class="fa fa-calendar"></span>
                             </th>
@@ -41,21 +47,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($matchweek->fixtures->where('published',1)->sortBy('datetime') as $fixture)
-                        <tr class="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-muted" : null }}" >
-                            {{--<td class="d-none d-sm-table-cell align-middle text-center">
-                                @if($fixture->isCancelled())
-                                    <span class="fa fa-fw fa-ban text-danger" title="Annulliert"></span>
-                                @elseif($fixture->isRated())
-                                    <span class="fa fa-fw fa-gavel text-warning" title="Gewertet"></span>
-                                @elseif($fixture->rescheduledTo)
-                                    <span class="fa fa-fw fa-calendar-times-o" title="Verlegt"></span>
-                                @elseif($fixture->rescheduledFrom)
-                                    <span class="fa fa-fw fa-calendar-plus-o" title="Verlegte Begegnung"></span>
-                                @else
-                                    <span class="fa fa-fw"></span>
-                                @endif
-                            </td>--}}
+                    @foreach ($matchweek->fixtures->where('published',1)->sortBy('datetime') as $fixture)
+                        <tr class="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-muted" : null }}">
                             {{-- date - day of week, date, time --}}
                             <td class="align-middle">
                                 @if ($fixture->datetime)
