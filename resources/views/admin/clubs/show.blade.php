@@ -288,7 +288,7 @@
         <!-- players -->
         <div class="tab-pane" id="players" role="tabpanel">
             <h4 class="mb-4 mt-4">Aktive
-                <small class="text-muted">(davon <b>{{ $club->players()->whereHas('person', function ($query) { $query->whereNotNull('registered_at_club'); })->get()->count() }}</b> Vereinsspieler)</small>
+                <small class="text-muted">(davon <b>{{ $club->players()->active()->whereHas('person', function ($query) { $query->whereNotNull('registered_at_club'); })->get()->count() }}</b> Vereinsspieler)</small>
             </h4>
             @php
                 $active_players = $club->players()->whereNull('sign_off')->get()->sortBy('person.last_name');
