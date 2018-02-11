@@ -1,3 +1,9 @@
+@php
+    $p_season = $season->previousSeason();
+    if ($p_season) {
+        $p_champion = $p_season->champion;
+    }
+@endphp
 <h4 class="text-muted">
     <b>{{ $season->season_nr ? $season->season_nr."." : null }}</b> Saison |
     Spielwoche
@@ -30,6 +36,7 @@
         @php
             $rank_color = "";
             $rank_icon  = null;
+            $previous_season_of_club = $club->seasons()->orderBy('end','desc')->where('end','>=',Carbon::now()->subYear()->format('Y-m-d'))->where('begin','<=',Carbon::now()->subYear()->format('Y-m-d'))->get()->where('division.competition_id', $season->division->competition_id)->first();
         @endphp
         {{-- ranks_champion OR ranks_promotion --}}
         @if (in_array($club->t_rank, $season->ranks_champion) || in_array($club->t_rank, $season->ranks_promotion))
@@ -103,6 +110,18 @@
                 <a href="{{ route('frontend.clubs.show', $club) }}">
                     {{ $club->name }}
                 </a>
+                @if ($p_champion)
+                    @if ($p_champion->id == $club->id)
+                        <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                    @endif
+                @endif
+                @if ($previous_season_of_club)
+                    @if ($previous_season_of_club->division->hierarchy_level < $season->division->hierarchy_level)
+                        <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
+                    @elseif ($previous_season_of_club->division->hierarchy_level > $season->division->hierarchy_level)
+                        <span class="pull-right" data-toggle="tooltip" title="Aufsteiger"><small class="text-secondary">N</small></span>
+                    @endif
+                @endif
             </td>
             <td class="align-middle d-sm-none p-2">
                 @if($club->logo_url)
@@ -113,6 +132,18 @@
                 <a href="{{ route('frontend.clubs.show', $club) }}">
                     {{ $club->name_code }}
                 </a>
+                @if ($p_champion)
+                    @if ($p_champion->id == $club->id)
+                        <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                    @endif
+                @endif
+                @if ($previous_season_of_club)
+                    @if ($previous_season_of_club->division->hierarchy_level < $season->division->hierarchy_level)
+                        <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
+                    @elseif ($previous_season_of_club->division->hierarchy_level > $season->division->hierarchy_level)
+                        <span class="pull-right" data-toggle="tooltip" title="Aufsteiger"><small class="text-secondary">N</small></span>
+                    @endif
+                @endif
             </td>
             <td class="align-middle text-center p-2 p-md-2">{{ $club->t_played }}</td>
             <td class="align-middle text-center d-none d-md-table-cell">{{ $club->t_won }}</td>
@@ -123,8 +154,8 @@
             <td class="align-middle text-center p-2 p-md-2"><b>{{ $club->t_points }}</b></td>
             <!-- Form -->
             <td class="align-middle text-center d-none d-lg-table-cell">
-                @foreach ($club->getLastGamesPlayedOrRated(5, $season->isFinished() ? $season->end : null) as $lastGame)
-                    <span class="fa-stack" data-toggle="tooltip" data-html="true" title="{{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
+                @foreach ($club->getLastGamesPlayedOrRated(5, $season->isFinished() ? $season->end : null, $season->begin) as $lastGame)
+                    <span class="fa-stack" data-toggle="tooltip" data-html="true" title="{{ $lastGame->matchweek->season->division->name }} | {{ $lastGame->datetime ?  $lastGame->datetime->format('d.m.') : null }} - {{ $lastGame->clubHome ? $lastGame->clubHome->name_code : null }} {{ $lastGame->goals_home ?? $lastGame->goals_home_rated }} : {{ $lastGame->goals_away ?? $lastGame->goals_away_rated }} {{ $lastGame->clubAway ? $lastGame->clubAway->name_code : null }}">
                         @if ($lastGame->isPlayed() && !$lastGame->isRated())
                             @if ($club->hasWon($lastGame))
                                 <i class="fa fa-circle fa-stack-2x text-success"></i>
@@ -145,21 +176,23 @@
             </td>
             <!-- next -->
             <td class="align-middle text-center d-none d-md-table-cell">
-                @php
-                    $nextgame = $club->getNextGames(1)->load('clubHome', 'clubAway')->first()
-                @endphp
-                @if ($nextgame)
+                @if (!$season->isFinished())
                     @php
-                        $logo = null;
-                        if($nextgame->clubHome && $nextgame->clubHome->id == $club->id )
-                            $logo = $nextgame->clubAway->logo_url;
-                        elseif($nextgame->clubAway && $nextgame->clubAway->id == $club->id)
-                            $logo = $nextgame->clubHome->logo_url;
+                        $nextgame = $club->getNextGames(1)->load('clubHome', 'clubAway')->first();
                     @endphp
-                    @if($logo)
-                        <img src="{{ Storage::url($logo) }}" width="30" class="pr-1">
-                    @else
-                        <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                    @if ($nextgame)
+                        @php
+                            $logo = null;
+                            if($nextgame->clubHome && $nextgame->clubHome->id == $club->id )
+                                $logo = $nextgame->clubAway->logo_url;
+                            elseif($nextgame->clubAway && $nextgame->clubAway->id == $club->id)
+                                $logo = $nextgame->clubHome->logo_url;
+                        @endphp
+                        @if($logo)
+                            <img src="{{ asset('storage/'.$logo) }}" width="30" class="">
+                        @else
+                            <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                        @endif
                     @endif
                 @endif
             </td>
@@ -178,7 +211,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        @if ($lastgame = $club->getLastGamesPlayedOrRated(1)->load('clubHome', 'clubAway')->first())
+                        @if ($lastgame = $club->getLastGamesPlayedOrRated(1, $season->isFinished() ? $season->end : null)->load('clubHome', 'clubAway')->first())
                             <div class="row">
                                 <div class="col-md-12">
                                     Letztes Spiel am <b>{{ $lastgame->datetime ? $lastgame->datetime->format('d.m.Y') : null }}</b>
@@ -225,46 +258,49 @@
                         @endif
                     </div>
                     <div class="col-md-4">
-                        @if ($nextgame)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    Nächstes Spiel am <b>{{ $nextgame->datetime ? $nextgame->datetime->format('d.m.Y') : null }}</b>
+                        @if (!$season->isFinished())
+                            @if ($nextgame)
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Nächstes Spiel am <b>{{ $nextgame->datetime ? $nextgame->datetime->format('d.m.Y') : null }}</b>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-md-5 pr-0">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-8 pt-2 pb-2 pr-1 text-right">
-                                            {{ $nextgame->clubHome->name_short }}
+                                <div class="row pt-2">
+                                    <div class="col-md-5 pr-0">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-8 pt-2 pb-2 pr-1 text-right">
+                                                {{ $nextgame->clubHome->name_short }}
+                                            </div>
+                                            <div class="col-md-4 p-2 text-center" style="background-color: {{ $nextgame->clubHome->colours_club_primary }}">
+                                                @if ($nextgame->clubHome->logo_url)
+                                                    <img src="{{ asset('storage/'.$nextgame->clubHome->logo_url) }}" width="25" class="">
+                                                @else
+                                                    <span class="fa fa-ban text-muted fa-2x"></span>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="col-md-4 p-2 text-center" style="background-color: {{ $nextgame->clubHome->colours_club_primary }}">
-                                            @if ($nextgame->clubHome->logo_url)
-                                                <img src="{{ Storage::url($nextgame->clubHome->logo_url) }}" width="25" class="">
-                                            @else
-                                                <span class="fa fa-ban text-muted fa-2x"></span>
-                                            @endif
+                                    </div>
+                                    <div class="col-md-2 text-center bg-faded pt-2">
+                                        <b>vs.</b>
+                                    </div>
+                                    <div class="col-md-5 pl-0">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4 p-2 text-center" style="background-color: {{ $nextgame->clubAway->colours_club_primary }}">
+                                                @if ($nextgame->clubAway->logo_url)
+                                                    <img src="{{ asset('storage/'.$nextgame->clubAway->logo_url) }}" width="25" class="">
+                                                @else
+                                                    <span class="fa fa-ban text-muted fa-2x"></span>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-8 pt-2 pb-2 pl-1 text-left">
+                                                {{ $nextgame->clubAway->name_short }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2 text-center bg-faded pt-2">
-                                    <b>vs.</b>
-                                </div>
-                                <div class="col-md-5 pl-0">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-4 p-2 text-center" style="background-color: {{ $nextgame->clubAway->colours_club_primary }}">
-                                            @if ($nextgame->clubAway->logo_url)
-                                                <img src="{{ Storage::url($nextgame->clubAway->logo_url) }}" width="25" class="">
-                                            @else
-                                                <span class="fa fa-ban text-muted fa-2x"></span>
-                                            @endif                                                </div>
-                                        <div class="col-md-8 pt-2 pb-2 pl-1 text-left">
-                                            {{ $nextgame->clubAway->name_short }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @else
-                            <i>Kein anstehendes Spiel.</i>
+                            @else
+                                <i>Kein anstehendes Spiel.</i>
+                            @endif
                         @endif
                     </div>
                 </div>
