@@ -660,7 +660,7 @@
                                                             <div class="pr-1">
                                                                 <span class="fa fa-shield text-warning" data-toggle="tooltip" title="{{ $player->person->realClub->name_short }}"></span>
                                                                 @if ($player->person->realDivision)
-                                                                    <span class="" title="{{ $player->person->realDivision->name }}">
+                                                                    <span class="" data-toggle="tooltip" title="{{ $player->person->realDivision->name }}">
                                                                         {{ $player->person->realDivision->name_short }}
                                                                     </span>
                                                                 @endif
