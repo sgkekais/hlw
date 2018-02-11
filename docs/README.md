@@ -91,12 +91,17 @@ Sollte ein Spiel verlegt werden, dann:
 1. Person muss vorhanden sein. Es können nur **aktive** Personen einer Mannschaft zugeordnet werden.
 2. In den Mannschaftsdetails auf "+ Spieler" klicken, um eine Person zuzuordnen. Details ausfüllen, soweit bekannt.
 
+## Vereinsspieler kennzeichnen
+1. Person bearbeiten und unter "Vereinsspieler" den Verein (Mannschaft mit Kennzeichen "echter Verein") auswählen
+2. Klasse auswählen
+3. Wenn Klasse nicht bekannt, dann unter "offizielle Spielklassen" anlegen
+
 ## Karten
 1. Über den Anzeigen-Button eine Paarung aufrufen und anschließend auf "Karte eintragen" klicken.
 2. Es können nur Karten für Spieler gepflegt werden, die den teilnehmenden Mannschaften zugeordnet wurden. 
 
 ## Torschützen
-Siehe Karten.
+Siehe Karten. Haken bei **"Ignorieren"** machen, für Einträge, die nicht gespeichert werden sollen.
 
 ## Wie komme ich zur Übersicht einer Spielwoche?
 1. Saisons über das Menü auswählen
@@ -139,6 +144,19 @@ Bezeichnung | Muss-Feld? | Werte
 (hierarchy_level) Hierarchieebene | Ja | positive Zahl (bspw. "1" für 1. Liga)
 (competition_id) Wettbewerb | Ja | ein Wettbewerb
 (published) Veröffentlichen | Ja | Ja / Nein
+
+## "Offizielle" Spielklassen
+Spielklassen, die Vereinsspielern zugeordnet werden.
+
+### Beziehungen
+- Einer offizielle Spielklasse sind beliebig viele Personen zugeordnet
+- Einer Person kann genau eine offizielle Spielklasse zugeordnet werden 
+
+### Felder
+Bezeichnung | Muss-Feld? | Bedeutung | Werte
+--- | --- | --- |
+(name) Name | Ja | Bezeichnung, bspw. "Kreisliga A" | Zeichenkette
+(name_short) Name kurz | Nein | Abkürzung, bspw. "Kl. A" | Zeichenkette 
 
 ## Saison
 Eine Saison fasst u.a. Spielwochen und Begegnungen organisatorisch zusammen.
@@ -244,12 +262,27 @@ Bezeichnung | Muss-Feld? | Bedeutung | Werte
 (reschedule_reason) Grund für Verlegung | Nein | Wird im Front-End in Spieldetails angezeigt | Text
 (reschedule_count) Verlegung zählen | Nein | Zählt die Verlegung zu den max. Verlegungen? | Ja (Standard) / Nein
 
-### Karte
-
-
-### Torschütze
-
 ### Schiedsrichterzuordnung
+Einer Paarung können beliebig viele Schiedsrichter zugeordnet werden. 
+
+#### Felder
+Bezeichnung | Muss-Feld? | Bedeutung | Werte
+--- | --- | --- | ---
+(referee_id) Schiedsrichter | Ja | Schiedsrichter, der vorher angelegt wurde | Auswählen
+(confirmed) Bestätigt | Ja | Hinweis, ob Schiedsrichter die Zuordnung bestätigt hat | Nein (Standard / Ja
+(note) Notiz | Nein | | Text
+
+## Karte
+
+### Beziehungen
+
+### Felder
+
+## Torschütze
+
+### Beziehungen
+
+### Felder
 
 ## Spielort
 
@@ -277,15 +310,46 @@ Bezeichnung | Muss-Feld? | Bedeutung | Werte
 ### Zuordnung zwischen Mannschaft und Spielort(en)
 
 ### Zuordnung zwischen Mannschaft und Spieler(n)
+Ein Spieler ist eine **Person** die einer Mannschaft für einen bestimmten Zeitraum zugeordnet ist.
+
+#### Felder
 
 ### Zuordnung zwischen Mannschaft und Ansprechpartner(n)
+Eine **Person** kann außerdem als Ansprechpartner einer Mannschaft zugeordnet sein. 
+
+#### Felder
 
 ## Person
+Die Repräsentation einer realen Person. Eine Person existiert nur einmal, kann aber Spieler und Ansprechpartner bei beliebig vielen Mannschaften und zugleich Schiedsrichter sein. 
 
 ### Beziehungen
+- Eine Person kann beliebig viele Spieler sein
+- Eine Person kann beliebig viele Ansprechpartner sein
+- Eine Person kann ein Schiedsrichter sein
+- Eine Person kann einer "echten" Mannschaft als Vereinsspieler zugeordnet sein
+- Eine Person kann als Vereinsspieler einer "offiziellen" Spielklasse zugeordnet sein
 
 ### Felder
 
 ## Schiedsrichter
 
+
+### Beziehungen
+- Ein Schiedsrichter ist genau einer Person zugeordnet.
+- Ein Schiedsrichter kann beliebig vielen Paarungen zugeordnet werden. 
+
+### Felder
+Bezeichnung | Muss-Feld? | Bedeutung | Werte
+--- | --- | --- | ---
+(person_id) Person | Ja | Die echte Person | Auswählen 
+(mail) E-Mail | Nein | Wird in der Schiri-Liste auf der Info-Seite angezeigt | Zeichenkette
+(mobile) Mobilnr. | Nein | Wird in der Schiri-Liste auf der Info-Seite angezeigt | Zeichenkette
+Notiz | Nein | | Text
+
+## Position
+Wird noch nicht verwendet. 
+
+### Beziehungen
+
+### Felder
 
