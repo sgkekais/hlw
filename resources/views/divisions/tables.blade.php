@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-2 pr-1">
+            <div class="col-sm-3 col-md-2 pr-sm-1">
                 <ul class="nav nav-pills w-100">
                     <li class="nav-item dropdown pr-2 w-100 text-center">
                         <a class="nav-link dropdown-toggle bg-secondary text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="season_selector_title">Saison {{ $season->name }}</a>
@@ -31,7 +31,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-sm-10 pl-1">
+            <div class="col-sm-9 col-md-10 mt-3 mt-sm-0 pl-sm-1">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a id="full-table" href="#" class="nav-link active" data-toggle="pill">Tabelle</a>

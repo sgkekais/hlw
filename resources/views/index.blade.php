@@ -243,7 +243,6 @@
                                             @endif
                                             <a href="{{ route('frontend.clubs.show', $club) }}" class="pl-1 align-middle" title="{{ $club->name }}">
                                                 {{ $club->name_code }}
-
                                             </a>
                                             @if ($p_champion)
                                                 @if ($p_champion->id == $club->id)
