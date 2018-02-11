@@ -1206,23 +1206,29 @@ class Club extends Model
 
     /**
      * Get the specified number of last games that are played or rated
-     * If a date is specified, return the specified number of games equal to or before that date
+     * If a start from date is specified, return the specified number of games equal to or before that date
+     * If an until date is specified, do not return games later than that date
      * @param $numberOfGames
-     * @param null $date
+     * @param null $startFromDate
+     * @param null $untilDate
      * @return mixed
      */
-    public function getLastGamesPlayedOrRated($numberOfGames, $date = null)
+    public function getLastGamesPlayedOrRated($numberOfGames, $startFromDate = null, $untilDate = null)
     {
         return Fixture::ofClub($this->id)->playedOrRated()->orderBy('datetime', 'desc')
             ->with([
                 'clubHome',
                 'clubAway'
             ])
-            // if a date is given, then return the last games before that date
-            ->when($date, function ($query) use ($date){
-                return $query->where('datetime', '<=', $date);
+            // if a startFrom date is given, then return the last games before that date, else start from now
+            ->when($startFromDate, function ($query) use ($startFromDate){
+                return $query->where('datetime', '<=', $startFromDate);
             }, function ($query) {
                 return $query->where('datetime', '<=', Carbon::now());
+            })
+            // if an untilDate is given, only return fixtures until this date
+            ->when($untilDate, function ($query) use ($untilDate){
+                return $query->where('datetime', '>=', $untilDate);
             })
             ->when($numberOfGames, function ($query) use ($numberOfGames){
                 return $query->take($numberOfGames);
