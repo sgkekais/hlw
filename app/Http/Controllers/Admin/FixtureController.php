@@ -304,10 +304,12 @@ class FixtureController extends Controller
                 $fixture->match_report_url = $report_path;
                 // save the club again
                 $fixture->save();
+
+                return redirect()->back()->with('success', 'Spielbericht erfoglreich hochgeladen.');
             }
         }
 
-        return redirect()->back()->with('success', 'Spielbericht erfoglreich hochgeladen.');
+        return redirect()->back()->with('danger', 'Spielbericht konnte nicht hochgeladen werden.');
     }
 
     /**
