@@ -151,9 +151,17 @@
                                 @endif
                             </td>
                             <td class="align-middle text-center">
-                                <a href="{{ route('frontend.fixtures.show', $fixture) }}" title="Match betrachten">
-                                    <span class="fa fa-fw fa-arrow-right"></span>
-                                </a>
+                                <div class="d-flex flex-row flex-sm-column flex-md-row justify-content-end align-items-center">
+                                    <a href="{{ route('frontend.fixtures.show', $fixture) }}" class="order-1 pl-1 pl-sm-0 pl-md-1" title="Spieldetails">
+                                        <span class="fa fa-fw fa-arrow-right"></span>
+                                    </a>
+                                    @if (!$fixture->goals->isEmpty())
+                                        <span class="fa fa-fw fa-soccer-ball-o text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Torschützen vorhanden"></span>
+                                    @endif
+                                    @if (!$fixture->cards->isEmpty())
+                                        <span class="fa fa-fw fa-clone pl-1 pt-0 pl-sm-0 pt-sm-1 pl-md-1 pt-md-0 text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Karten vorhanden"></span>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @endforeach

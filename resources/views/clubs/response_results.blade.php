@@ -52,7 +52,7 @@
                             <th class="align-middle text-left"><span class="fa fa-calendar" title="Datum"></span></th>
                             <th colspan="3" class="align-middle text-center"><span class="fa fa-handshake-o" title="Paarung"></span></th>
                             <th class="d-none d-md-table-cell">@svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '30', 'height' => '30'])</th>
-                            <th class="align-middle text-center"><span class="fa fa-search-plus" title="Spieldetails"></span></th>
+                            <th class="align-middle text-right"><span class="fa fa-fw fa-search-plus" title="Spieldetails"></span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -161,9 +161,17 @@
                                     @endif
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="{{ route('frontend.fixtures.show', $fixture) }}" title="Match betrachten">
-                                        <span class="fa fa-fw fa-arrow-right"></span>
-                                    </a>
+                                    <div class="d-flex flex-row flex-sm-column flex-md-row justify-content-end align-items-center">
+                                        <a href="{{ route('frontend.fixtures.show', $fixture) }}" class="order-1 pl-1 pl-sm-0 pl-md-1" title="Spieldetails">
+                                            <span class="fa fa-fw fa-arrow-right"></span>
+                                        </a>
+                                        @if (!$fixture->goals->isEmpty())
+                                            <span class="fa fa-fw fa-soccer-ball-o text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Torschützen vorhanden"></span>
+                                        @endif
+                                        @if (!$fixture->cards->isEmpty())
+                                            <span class="fa fa-fw fa-clone pl-1 pt-0 pl-sm-0 pt-sm-1 pl-md-1 pt-md-0 text-secondary" style="font-size: .8rem" data-toggle="tooltip" title="Karten vorhanden"></span>
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
