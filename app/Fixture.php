@@ -76,11 +76,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Fixture extends Model
 {
-    /*
-     * TODO fixture ended in penalty shoot-out?
-     * TODO fixture was rated?
-     */
-
     use LogsActivity;
 
     /**
@@ -98,6 +93,7 @@ class Fixture extends Model
         'goals_away_11m',
         'goals_home_rated', 'goals_away_rated', 'rated_note',
         'note',
+        'match_report_url',
         'cancelled',
         'published',
         'rescheduled_from_fixture_id', 'rescheduled_by_club', 'reschedule_reason', 'reschedule_count'
@@ -124,6 +120,7 @@ class Fixture extends Model
         'goals_away_11m',
         'goals_home_rated', 'goals_away_rated', 'rated_note',
         'note',
+        'match_report_url',
         'cancelled',
         'published',
         'counts_in_tables',

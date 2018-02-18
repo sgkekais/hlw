@@ -31,7 +31,7 @@
                     </li>
                     @auth
                         <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
-                            <a class="nav-link border border-success rounded" href="{{ route('frontend.static.matchprotocol') }}" title="Herunterladen"><span class="fa fa-fw fa-download" title="Herunterladen"></span> Spielberichtsbogen</a>
+                            <a class="nav-link border border-success rounded" href="{{ route('frontend.static.matchreport') }}" title="Herunterladen"><span class="fa fa-fw fa-download" title="Herunterladen"></span> Spielberichtsbogen</a>
                         </li>
                     @endauth
                 </ul>

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Excel;
+use Illuminate\Support\Facades\Storage;
 
 class FixtureController extends Controller
 {
@@ -281,5 +282,45 @@ class FixtureController extends Controller
         Session::flash('success', $number_of_records . ' Paarung(en) erfolreich importiert.');
 
         return redirect()->route('seasons.show', $season);
+    }
+
+    /**
+     * Upload a match report
+     * @param Request $request
+     * @param Fixture $fixture
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeMatchReport(Request $request, Fixture $fixture)
+    {
+        $this->validate($request, [
+            'match_report' => 'image'
+        ]);
+
+        // is there a report?
+        if ($request->hasFile('match_report')) {
+            // store the uploaded report and save the path to the report in the database
+            if ($request->file('match_report')->store('public/matchreports/'.$fixture->id)) {
+                $report_path = 'matchreports/'.$fixture->id.'/'.$request->file('match_report')->hashName();
+                $fixture->match_report_url = $report_path;
+                // save the club again
+                $fixture->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Spielbericht erfoglreich hochgeladen.');
+    }
+
+    /**
+     * Delete a match report
+     * @param Fixture $fixture
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteMatchReport(Fixture $fixture)
+    {
+        if (Storage::delete($fixture->match_report_url)) {
+            return redirect()->back->with('success', 'Spielbericht erfolgreich gelöscht.');
+        }
+
+        return redirect()->back()->with('danger', 'Spielbericht konnte nicht gelöscht werden.');
     }
 }

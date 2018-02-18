@@ -6,6 +6,33 @@
 
 @section('content')
 
+    <!-- match report upload form -->
+    <div class="modal" tabindex="-1" role="dialog" id="uploadMatchReport">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Spielbericht hochladen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="uploadForm" class="" method="POST" action="{{ route('fixtures.matchreport.store', $fixture) }}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="match_report">Datei auswählen:</label>
+                            <input type="file" class="form-control-file" id="match_report" name="match_report">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="fa fa-fw fa-ban"></span> Abbrechen</button>
+                    <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('uploadForm').submit();"><span class="fa fa-fw fa-upload"></span> Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <h1 class="">Details zu Paarung</h1>
     <div class="row mt-4 mb-4">
         <div class="col-md-12">
@@ -67,17 +94,42 @@
         </div>
     </div>
     <hr>
-    @if ($fixture->note)
-        <div class="row">
-            <div class="col">
+    <div class="row">
+        <div class="col-sm-6">
+            @if ($fixture->note)
                 <h3>Notiz</h3>
                 <div class="alert alert-secondary">
                     {{ $fixture->note }}
                 </div>
+            @endif
+        </div>
+        <div class="col-sm-6">
+            <h3>Spielbericht</h3>
+            <div class="row">
+                @if ($fixture->match_report_url)
+                    <div class="col-6">
+                        <img src="{{ asset('storage/'.$fixture->match_report_url) }}" class="img-fluid " title="Spielbericht" alt="Spielbericht">
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-outline-danger" onclick="event.preventDefault(); document.getElementById('deleteMatchReport').submit();"><span class="fa fa-fw fa-upload"></span> Löschen</button>
+                        <form id="deleteMatchReport" class="d-none" method="POST" action="{{ route('fixtures.matchreport.delete', $fixture) }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                        </form>
+                    </div>
+                @else
+                    <div class="col-6">
+                        Kein Spielbericht vorhanden.
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#uploadMatchReport" ><span class="fa fa-fw fa-upload"></span> Hochladen</button>
+                    </div>
+                @endif
             </div>
         </div>
-        <hr>
-    @endif
+    </div>
+    <hr>
+
     @if($fixture->rescheduledFrom)
         <div class="row">
             <div class="col-md-12">

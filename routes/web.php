@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth', 'isVerified']], function() {
 Route::get('imprint', 'PagesController@imprint')->name('frontend.static.imprint');
 Route::get('infos', 'PagesController@infos')->name('frontend.static.infos');
 Route::get('halloffame', 'PagesController@hallOfFame')->name('frontend.static.halloffame');
-Route::get('matchprotocol', 'PagesController@matchProtocol')->name('frontend.static.matchprotocol');
+Route::get('matchreport', 'PagesController@matchReport')->name('frontend.static.matchreport');
 
 /*******************************************************
  * Admin Routes
@@ -110,6 +110,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('fixtures/{fixture}/referees/{referee}/edit', 'FixtureController@editRefereeAssignment')->name('editRefereeAssignment');
     Route::patch('fixtures/{fixture}/referees/{referee}', 'FixtureController@updateRefereeAssignment')->name('updateRefereeAssignment');
     Route::delete('fixtures/{fixture}/referees/{referee}', 'FixtureController@destroyRefereeAssignment')->name('destroyRefereeAssignment');
+    Route::post('fixtures/{fixture}/matchreport', 'FixtureController@storeMatchReport')->name('fixtures.matchreport.store');
+    Route::delete('fixtures/{fixture}/matchreport', 'FixtureController@deleteMatchReport')->name('fixtures.matchreport.delete');
     // Stadiums
     Route::resource('stadiums', 'StadiumController');
     Route::post('stadiums/import', 'StadiumController@importCSV')->name('stadiums.import');

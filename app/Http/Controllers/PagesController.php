@@ -67,7 +67,7 @@ class PagesController extends Controller
         return view('static.halloffame', compact('former_clubs'));
     }
 
-    public function matchProtocol() {
+    public function matchReport() {
 
         $storage_path = storage_path('app/public/spielberichtsbogen.pdf');
 
