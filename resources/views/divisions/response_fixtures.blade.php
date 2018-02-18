@@ -41,8 +41,8 @@
                             <th class="align-middle text-left">
                                 @svg('arena', ['class' => 'align-middle pr-1', 'style' => 'fill: #343a40', 'width' => '30', 'height' => '30'])
                             </th>
-                            <th class="align-middle text-center">
-                                <span class="fa fa-search-plus"></span>
+                            <th class="align-middle text-right">
+                                <span class="fa fa-fw fa-search-plus"></span>
                             </th>
                         </tr>
                     </thead>
