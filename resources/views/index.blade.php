@@ -147,7 +147,7 @@
                                     @if ($fixture->rescheduledTo)
                                         <div class="row">
                                             <div class="col">
-                                                <small><span class="text-danger">Paarung wurde {{ "von ".$fixture->rescheduledTo->rescheduledBy->name_short }} verlegt.</span> Siehe <a href="{{ route('frontend.fixtures.show', $fixture) }}" title="Matchdetails">Spiel</a>  für Details.</small>
+                                                <small><span class="text-danger">Paarung wurde {{ $fixture->rescheduledTo->rescheduledBy ? "von ".$fixture->rescheduledTo->rescheduledBy->name_short : null }} verlegt.</span> Siehe <a href="{{ route('frontend.fixtures.show', $fixture) }}" title="Matchdetails">Spiel</a>  für Details.</small>
                                             </div>
                                         </div>
                                     @endif
