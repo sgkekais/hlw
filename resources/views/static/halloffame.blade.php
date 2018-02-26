@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-
-    | Ruhmeshalle
-
-@endsection
+@section('title', '| Ruhmeshalle')
 
 @section('content')
 
@@ -38,8 +34,8 @@
                                     <a href="{{ route('frontend.clubs.show', $club) }}" title="Teamdetails">{{ $club->name }}</a>
                                 </div>
                                 <div class="col-3 text-center text-md-right">
-                                    {{ $club->league_exit->format('d.m.Y') }} -
-                                    {{ $club->league_entry->format('d.m.Y') }}
+                                    {{ $club->league_exit ? $club->league_exit->format('d.m.Y') : null }} -
+                                    {{ $club->league_entry ? $club->league_entry->format('d.m.Y') : null }}
                                 </div>
                                 <div class="col-5 text-left w-50">
                                     @if (!$club->championships->isEmpty())
