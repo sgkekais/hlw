@@ -87,7 +87,7 @@
                                                     <span class="align-middle">{{ $fixture->club_home }}</span>
                                                 @endif
                                             </div>
-                                            <div class="d-inline-block text-center  {{ $fixture->rescheduledTo ? "text-muted bg-light" : "text-white bg-dark" }} rounded p-1 mx-2" style="word-break: keep-all; width: 60px">
+                                            <div class="d-inline-block text-center {{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-muted bg-light" : "text-white bg-dark" }} rounded p-1 mx-2" style="word-break: keep-all; width: 60px">
                                                 {{-- cancelled? --}}
                                                 @if ($fixture->isCancelled())
                                                     <span class="text-danger">Ann.</span>

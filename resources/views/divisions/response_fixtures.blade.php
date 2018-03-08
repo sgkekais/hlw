@@ -90,7 +90,7 @@
                                     @endif
                                 </div>
                                 {{-- result --}}
-                                <div class="d-flex-inline text-center text-white rounded bg-dark d-inline-block ml-2 mr-2 p-1" style="word-break: keep-all; width: 60px">
+                                <div class="d-inline-block text-center {{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-muted bg-light" : "text-white bg-dark" }} rounded p-1 mx-2" style="word-break: keep-all; width: 60px">
                                     {{-- cancelled? --}}
                                     @if ($fixture->isCancelled())
                                         <span class="text-danger">Ann.</span>
