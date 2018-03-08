@@ -191,7 +191,7 @@ class Fixture extends Model
     public function scopePlayed($query, $played = true)
     {
         // if played is set to false, then return fixtures that are not played
-        return ($played ? $query->whereNotNull('goals_home')->whereNotNull('goals_away') : $query->whereNull('goals_home')->whereNull('goals_away'));
+        return ($played ? $query->whereNotNull('goals_home')->whereNotNull('goals_away')->whereNull('goals_home_rated')->whereNull('goals_away_rated') : $query->whereNull('goals_home')->whereNull('goals_away')->whereNull('goals_home_rated')->whereNull('goals_away_rated'));
     }
 
     /**
