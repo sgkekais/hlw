@@ -39,7 +39,9 @@ class ClubController extends Controller
                 'regularStadium'
             ]);
 
-            $season = $club->seasons()->current()->first();
+            // TODO: überarbeiten, eigentlich hier alle aktuellen Saisons und Spielverlegungen addieren?
+
+            $season = $club->seasons()->current()->get()->where('type','league')->first();
             $is_current_season = true;
 
             if (!$season) {
