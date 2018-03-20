@@ -382,7 +382,9 @@
                                         @elseif ($home_card->ban_season)
                                             <span class="text-danger">Saisonsperre</span>
                                         @else
-                                            {{ $home_card->ban_matches - $home_card->ban_reduced_by }} Spiel{{ $home_card->ban_matches - $home_card->ban_reduced_by > 1 ? "e" : null }} Sperre
+                                            {{ $home_card->ban_matches }} Spiel{{ $home_card->ban_matches - $home_card->ban_reduced_by > 1 ? "e" : null }} Sperre
+                                            <br>
+                                            {{ $home_card->ban_reduced_by ? "(um ".$home_card->ban_reduced_by." reduziert)" : null }}
                                         @endif
                                     </small>
                                 </li>
@@ -415,7 +417,9 @@
                                         @elseif ($away_card->ban_season)
                                             <span class="text-danger">Saisonsperre</span>
                                         @else
-                                            {{ $away_card->ban_matches - $away_card->ban_reduced_by }} Spiel{{ $away_card->ban_matches - $away_card->ban_reduced_by > 1 ? "e" : null }} Sperre
+                                            {{ $away_card->ban_matches }} Spiel{{ $away_card->ban_matches - $away_card->ban_reduced_by > 1 ? "e" : null }} Sperre
+                                            <br>
+                                            {{ $away_card->ban_reduced_by ? "(um ".$away_card->ban_reduced_by." reduziert)" : null }}
                                         @endif
                                     </small>
                                 </li>
