@@ -53,7 +53,7 @@
                         {{-- Ban --}}
                         <td class="text-center">
                             @if (!$card->ban_season)
-                                {{ $card->ban_matches - $card->ban_reduced_by }}
+                                {{ $card->ban_matches }} {{ $card->ban_reduced_by ? "- ".$card->ban_reduced_by : null }}
                                 @if ($suspension && ($suspension->id == $card->id))
                                     ({{ $suspension->ban_remaining }})
                                 @else
