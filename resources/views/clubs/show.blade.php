@@ -492,7 +492,7 @@
                                             {{ $player->person->first_name }} {{ $player->person->last_name }}
                                             wurde am <b>{{ $card->fixture->datetime ? $card->fixture->datetime->format('d.m.Y') : null }}</b>
                                             im Spiel <a href="{{ route('frontend.fixtures.show', $card->fixture) }}" class="text-danger" title="Spieldetails">{{ $card->fixture->clubHome ? $card->fixture->clubHome->name : null }} : {{ $card->fixture->clubAway ? $card->fixture->clubAway->name : null }}</a>
-                                            für <b>{{ $card->ban_matches }}</b> Spiele gesperrt {{ $card->ban_reduced_by ? "um ".$card->ban_reduced_by." reduziert." : null }}. Die Sperre gilt noch für <b>{{ $card->ban_remaining }}</b> weitere Spiele.
+                                            für <b>{{ $card->ban_matches }}</b> Spiele gesperrt {{ $card->ban_reduced_by ? "(um ".$card->ban_reduced_by." reduziert)" : null }}. Die Sperre gilt noch für <b>{{ $card->ban_remaining }}</b> weitere Spiele.
                                             @if ($card->ban_reason)
                                                 Grund der Sperre: {{ $card->ban_reason }}
                                             @endif
