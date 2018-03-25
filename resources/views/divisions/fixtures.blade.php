@@ -54,7 +54,7 @@
                         <div class="dropdown-menu" aria-labelledby="matchweek_selector">
                             @foreach($season->matchweeks as $matchweek)
                                 <a class="dropdown-item" href="#matchweek{{ $matchweek->number_consecutive }}">
-                                    {{ $matchweek->name && strlen($matchweek->name) > 0 ? $matchweek->name : $matchweek->number_consecutive }}
+                                    {{ $matchweek->number_consecutive }} {{ $matchweek->name && strlen($matchweek->name) > 0 ? "- ".$matchweek->name : null }}
                                 </a>
                             @endforeach
                         </div>
