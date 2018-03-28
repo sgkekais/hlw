@@ -113,9 +113,11 @@
                             </a>
                             --}}
                             <!-- edit -->
-                            <a class="btn btn-primary" href="{{ route('users.edit', $user) }}" title="User bearbeiten">
-                                <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                            </a>
+                            @role('super_admin')
+                                <a class="btn btn-primary" href="{{ route('users.edit', $user) }}" title="User bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
+                            @endrole
                         </td>
                     </tr>
                 @endforeach
