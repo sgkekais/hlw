@@ -24,6 +24,7 @@
 @endsection
 
 @section('content')
+    @include('cookieConsent::index')
     <div class="container">
         <!-- fixtures of the current week -->
         @if($fixtures_grouped_by_divisions->count() > 0)
