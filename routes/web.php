@@ -59,6 +59,7 @@ Route::get('imprint', 'PagesController@imprint')->name('frontend.static.imprint'
 Route::get('infos', 'PagesController@infos')->name('frontend.static.infos');
 Route::get('halloffame', 'PagesController@hallOfFame')->name('frontend.static.halloffame');
 Route::get('matchreport', 'PagesController@matchReport')->name('frontend.static.matchreport');
+Route::get('datenschutz', 'PagesController@datenschutz')->name('frontend.static.datenschutz');
 
 /*******************************************************
  * Admin Routes

@@ -74,4 +74,8 @@ class PagesController extends Controller
         return response()->download($storage_path);
     }
 
+    public function datenschutz() {
+        return view('static.datenschutz');
+    }
+
 }

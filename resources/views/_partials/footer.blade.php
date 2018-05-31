@@ -57,6 +57,7 @@
         </div>
         <div class="row pb-2">
             <div class="col-12 text-right">
+                <a href="{{ route('frontend.static.datenschutz') }}" title="Datenschutzerklärung">Datenschutz</a> |
                 <a href="{{ route('frontend.static.imprint') }}" title="Impressum">Impressum</a> | &copy; {{ date('Y') }} &ndash; Hobbyliga-West Düsseldorf
             </div>
         </div>
