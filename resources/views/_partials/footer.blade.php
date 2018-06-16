@@ -41,7 +41,7 @@
                 </ul>
                 <h5 class="font-weight-bold">Freunde</h5>
                 <ul class="list-unstyled">
-                    <li><img src="{{ asset('storage/bsgligalogooriginal.png') }}" class="bg-white rounded" height="50"> <a href="http://www.bsgdbuv-cup.de/" target="_blank" class="pl-2" title="BSG-Liga">BSG-Cup Düsseldorf</a> <span class="fa fa-fw fa-external-link"></span></li>
+                    <li><img src="{{ asset('storage/bsgligalogooriginal.png') }}" class="bg-white rounded" height="50"> <a href="http://www.bsgdbuv-cup.de/" target="_blank" class="pl-2" title="zur Kleinfeld-Liga Düsseldorf">Kleinfeld-Liga Düsseldorf</a> <span class="fa fa-fw fa-external-link"></span></li>
                 </ul>
                 <span class="pull-right">
                     @guest
