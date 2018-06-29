@@ -21,7 +21,7 @@
                 <label for="rescheduled_by_club" class="form-control-label col-md-2">Verlegt von Mannschaft</label>
                 <div class="col-md-4">
                     <select class="form-control" name="rescheduled_by_club" id="rescheduled_by_club">
-                        <option></option>
+                        <option>Keiner</option>
                         @if($fixture->club_id_home)
                             <option value="{{ $fixture->club_id_home }}">{{ $fixture->clubHome->name }}</option>
                         @endif
@@ -63,13 +63,7 @@
             <label for="datetime" class="col-md-2 col-form-label">Datum und Uhrzeit</label>
             <div class="col-md-4">
                 <input type="datetime-local" class="form-control" name="datetime" id="singledatetimepicker" aria-describedby="datetimeHelp" placeholder="{{ old('date') }}">
-                <small id="datetimeHelp" class="form-text text-muted">Datum und Uhrzeit der Paarung</small>
-            </div>
-            <div class="form-check col-md-2">
-                <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="datetimenull">
-                    Leer lassen
-                </label>
+                <small id="datetimeHelp" class="form-text text-muted">Datum und Uhrzeit der Paarung im Format JJJJ-MM-TT HH:MM:SS, bspw. 2018-06-20 20:30:00</small>
             </div>
         </div>
         <!-- stadium -->
@@ -215,7 +209,7 @@
 
 @section('pagespecificscripts')
 
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         $(function() {
             var beginDate = $("input[name=datetime]").val();
             if ( !beginDate ) {
@@ -272,6 +266,6 @@
                 }
             });
         });
-    </script>
+    </script>-->
 
 @endsection
