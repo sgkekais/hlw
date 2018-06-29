@@ -279,9 +279,6 @@ class Season extends Model
      * @return \Illuminate\Support\Collection|static
      */
     public function generateTable (Matchweek $matchweek = null, $scope = 0) {
-        if (is_null($matchweek)) {
-            $matchweek = $this->currentMatchweek();
-        }
 
         // create new fields for table
         $clubs = $this->clubs()->orderBy('name')->get();

@@ -205,7 +205,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($c_season->generateTable($c_matchweek) as $club)
+                                @foreach ($c_season->generateTable() as $club)
                                     @php
                                         $rank_color = null;
                                         $rank_icon  = null;
