@@ -129,7 +129,7 @@ class DivisionController extends Controller
         $p_matchweek = $c_matchweek->previousMatchweek();
 
         // generate the tables for the current and previous matchweek
-        $table_current = $season->generateTable($c_matchweek);
+        $table_current = $season->generateTable();
         $table_previous = $season->generateTable($p_matchweek);
 
         return view('divisions.response_table', compact('division', 'season', 'table_current', 'table_previous', 'c_matchweek', 'p_matchweek'));
@@ -154,7 +154,7 @@ class DivisionController extends Controller
         $c_matchweek = $season->currentMatchweek();
         $p_matchweek = $c_matchweek->previousMatchweek();
 
-        $table_current = $season->generateTable($c_matchweek, 1);
+        $table_current = $season->generateTable(null, 1);
         $table_previous = $season->generateTable($p_matchweek, 1);
 
         return view('divisions.response_table', compact('division', 'season', 'table_current', 'table_previous', 'c_matchweek', 'p_matchweek'));
@@ -179,7 +179,7 @@ class DivisionController extends Controller
         $c_matchweek = $season->currentMatchweek();
         $p_matchweek = $c_matchweek->previousMatchweek();
 
-        $table_current = $season->generateTable($c_matchweek, 2);
+        $table_current = $season->generateTable(null, 2);
         $table_previous = $season->generateTable($p_matchweek, 2);
 
         return view('divisions.response_table', compact('division', 'season', 'table_current', 'table_previous', 'c_matchweek', 'p_matchweek'));
