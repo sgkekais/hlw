@@ -39,7 +39,7 @@
             <div class="col-md-4">
                 <select class="form-control" aria-describedby="player_idHelp" name="player_id" id="player_id">
                     @foreach($players as $player)
-                        <option value="{{ $player->id }}" {{ $player->id === $goal->player->id ? "selected" : null }}>{{ $player->club->name_short }} | {{ $player->person->last_name}}, {{ $player->person->first_name }}</option>
+                        <option value="{{ $player->id }}" {{ $player->id === $goal->player->id ? "selected" : null }}>{{ $player->club->name_short }} | {{ $player->person->last_name}}, {{ $player->person->first_name }} ({{ $player->sign_off ? "Inaktiv" : "Aktiv" }}, ID: {{ $player->id }})</option>
                     @endforeach
                 </select>
                 <small id="player_idHelp" class="form-text text-muted">Welcher Spieler?</small>
