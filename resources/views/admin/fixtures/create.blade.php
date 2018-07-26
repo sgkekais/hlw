@@ -21,7 +21,7 @@
                 <label for="rescheduled_by_club" class="form-control-label col-md-2">Verlegt von Mannschaft</label>
                 <div class="col-md-4">
                     <select class="form-control" name="rescheduled_by_club" id="rescheduled_by_club">
-                        <option>Keiner</option>
+                        <option value="">Keiner</option>
                         @if($fixture->club_id_home)
                             <option value="{{ $fixture->club_id_home }}">{{ $fixture->clubHome->name }}</option>
                         @endif
