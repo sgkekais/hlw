@@ -54,7 +54,7 @@
                 <label for="matchweek_id">Spielwoche</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="matchweek_id" aria-describedby="matchweek_idHelp" value="({{ $matchweek->id }}) Nr. {{ $matchweek->number_consecutive }} | {{ $matchweek->begin->toDateString() }} - {{ $matchweek->end->toDateString() }}" disabled>
+                <input type="text" class="form-control" name="matchweek_id" aria-describedby="matchweek_idHelp" value="({{ $matchweek->id }}) Nr. {{ $matchweek->number_consecutive }} | {{ $matchweek->begin ? $matchweek->begin->toDateString() : null }} - {{ $matchweek->end ? $matchweek->end->toDateString() : null }}" disabled>
                 <small id="matchweek_idHelp" class="form-text text-muted">Zuordnung zu welcher Spielwoche?</small>
             </div>
         </div>
