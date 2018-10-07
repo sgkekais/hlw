@@ -67,6 +67,7 @@ class FixtureController extends Controller
         $matchweek->fixtures()->save($fixture);
 
         // is this a rescheduled fixture? Then set counts_in_tables for the old fixture to 0
+        $old_fixture = null;
         if ($request->filled('rescheduled_from_fixture_id')) {
             $old_fixture = Fixture::find($request->rescheduled_from_fixture_id);
             $old_fixture->counts_in_tables = 0;
