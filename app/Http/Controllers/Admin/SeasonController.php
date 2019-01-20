@@ -44,9 +44,9 @@ class SeasonController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'begin' => 'required|date',
-            'end' => 'required|date|after_or_equal:begin',
-            'max_rescheduling' => 'nullable|integer|min:1'
+            'begin'             => 'required|date',
+            'end'               => 'required|date|after_or_equal:begin',
+            'max_rescheduling'  => 'nullable|integer'
         ]);
 
         // create a new object
