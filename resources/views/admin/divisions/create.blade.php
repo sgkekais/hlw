@@ -19,11 +19,11 @@
         <!-- hierarchy level -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="hierarchy_level">Hierarchiebene</label>
+                <label for="hierarchy_level">Hierarchieebene</label>
             </div>
             <div class="col-md-4">
                 <input type="number" class="form-control" name="hierarchy_level" id="hierarchy_level" aria-describedby="hierarchy_levelHelp" placeholder="{{ old('hierarchy_level', '1') }}">
-                <small id="hierarchy_levelHelp" class="form-text text-muted">Hierarchiebene der Spielklasse, bspw. 2 für 2. Liga</small>
+                <small id="hierarchy_levelHelp" class="form-text text-muted">Hierarchieebene der Spielklasse, bspw. 2 für 2. Liga</small>
             </div>
         </div>
         <!-- competition -->

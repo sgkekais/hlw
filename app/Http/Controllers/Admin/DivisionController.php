@@ -44,7 +44,7 @@ class DivisionController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:2',
-            'hierarchy_level' => 'required' // TODO: should be unique for one competition
+            'hierarchy_level' => 'nullable' // TODO: should be unique for one competition
         ]);
 
         // create a new object
@@ -53,11 +53,9 @@ class DivisionController extends Controller
         // save the division
         $division->save();
 
-        // flash success message and return competition name as test
-        Session::flash('success', 'Spielklasse '.$division->name.' erfolgreich angelegt und Wettbewerb '.$division->competition->name.' zugeordnet.');
-
         // return to index
-        return redirect()->route('divisions.index');
+        return redirect()->route('divisions.index')
+            ->with('success', 'Spielklasse '.$division->name.' erfolgreich angelegt und Wettbewerb '.$division->competition->name.' zugeordnet.');
     }
 
     /**
@@ -99,17 +97,15 @@ class DivisionController extends Controller
         // validate the input data
         $this->validate($request, [
             'name' => 'required|min:4',
-            'hierarchy_level' => 'required' // TODO: should be unique for one competition
+            'hierarchy_level' => 'nullable' // TODO: should be unique for one competition
         ]);
 
         // update the changes
         $division->update($request->all());
 
-        // flash success message
-        Session::flash('success', 'Spielklasse '.$division->name.' erfolgreich geändert.');
-
         // redirect to updated competition
-        return redirect()->route('divisions.index', $division);
+        return redirect()->route('divisions.index', $division)
+            ->with('success', 'Spielklasse '.$division->name.' erfolgreich geändert.');
     }
 
     /**
@@ -126,10 +122,8 @@ class DivisionController extends Controller
         // delete the model
         $division->delete();
 
-        // flash message
-        Session::flash('success', 'Spielklasse '.$name.' mit der ID '.$id.' gelöscht.');
-
         // return to index
-        return redirect()->route('divisions.index');
+        return redirect()->route('divisions.index')
+            ->with('success', 'Spielklasse '.$name.' mit der ID '.$id.' gelöscht.');
     }
 }
