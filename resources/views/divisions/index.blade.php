@@ -147,6 +147,8 @@
                             $p_season = $season->previousSeason();
                             if ($p_season) {
                                 $p_champion = $p_season->champion;
+                            } else {
+                                $p_champion = null;
                             }
                         @endphp
                         <table class="table table-hover table-striped table-sm">
