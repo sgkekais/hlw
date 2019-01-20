@@ -38,7 +38,7 @@
         @php
             $rank_color = "";
             $rank_icon  = null;
-            $previous_season_of_club = $club->seasons()->orderBy('end','desc')->where('end','>=',Carbon::now()->subYear()->format('Y-m-d'))->where('begin','<=',Carbon::now()->subYear()->format('Y-m-d'))->get()->where('division.competition_id', $season->division->competition_id)->first();
+            $previous_season_of_club = $club->seasons()->orderBy('end','desc')->where('end','>=',Carbon::now()->subYear()->format('Y-m-d'))->where('begin','<=',Carbon::now()->subYear()->format('Y-m-d'))->get()->where('division.id', $season->division->id)->first();
         @endphp
         {{-- ranks_champion OR ranks_promotion --}}
         @if (in_array($club->t_rank, $season->ranks_champion) || in_array($club->t_rank, $season->ranks_promotion))
