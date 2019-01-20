@@ -64,7 +64,7 @@ class DivisionController extends Controller
         // different jumbo backgrounds for different divisions
         $jumbo_bg = asset('storage/grass_green.jpg');
         if ($division->competition->name_short == "HLW") {
-            if ($division->hierarchy_level == 1) {
+            if ($division->hierarchy_level == (1 || null)) {
                 $jumbo_bg = asset('storage/grass_green.jpg');
             } else {
                 $jumbo_bg = asset('storage/grass_brown.jpg');
