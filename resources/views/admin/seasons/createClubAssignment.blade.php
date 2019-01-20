@@ -18,7 +18,7 @@
             <div class="col-md-4">
                 <select class="form-control" id="club_id" name="club_id" aria-describedby="club_idHelp">
                     @foreach($unassigned_clubs as $club)
-                        <option value="{{ $club->id }}">{{ $club->name }}</option>
+                        <option value="{{ $club->id }}">{{ $club->name }} ({{ $club->id }})</option>
                     @endforeach
                 </select>
                 <small id="club_idHelp" class="form-text text-muted">Welche Mannschaft soll der Saison zugeordnet werden?</small>

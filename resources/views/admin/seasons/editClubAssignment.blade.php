@@ -24,7 +24,7 @@
                 <label for="club_id">Mannschaft</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="club_id" value="{{ $club->name }}" aria-describedby="club_idHelp" disabled>
+                <input type="text" class="form-control" name="club_id" value="{{ $club->name }} ({{ $club->id }})" aria-describedby="club_idHelp" disabled>
                 <small id="club_idHelp" class="form-text text-muted">Welche Mannschaft soll der Saison zugeordnet werden?</small>
             </div>
         </div>
