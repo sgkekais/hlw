@@ -81,6 +81,23 @@
                 <small id="stadium_idHelp" class="form-text text-muted">Platz, auf dem das Spiel ausgetragen wird</small>
             </div>
         </div>
+        <!-- alternative texts for home and away -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="club_id_home">Heim</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="club_id_home_alt_text" id="club_id_home_alt_text" aria-describedby="club_id_home_alt_textHelp" placeholder="{{ old('club_id_home_alt_text') }}">
+                <small id="club_id_home_alt_textHelp" class="form-text text-muted">Alternativer Text für Heim-Team, wird nur angezeigt, wenn kein Team ausgewählt ist</small>
+            </div>
+            <div class="col-md-2">
+                <label for="club_id_away">Gast</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="club_id_away_alt_text" id="club_id_away_alt_text" aria-describedby="club_id_away_alt_textHelp" placeholder="{{ old('club_id_away_alt_text') }}">
+                <small id="club_id_away_alt_textHelp" class="form-text text-muted">Alternativer Text für Gast-Team, wird nur angezeigt, wenn kein Team ausgewählt ist</small>
+            </div>
+        </div>
         <!-- home and away clubs -->
         <div class="form-group row">
             <div class="col-md-2">
