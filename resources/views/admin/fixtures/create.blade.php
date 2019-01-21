@@ -84,18 +84,18 @@
         <!-- alternative texts for home and away -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="club_id_home">Heim</label>
+                <label for="club_id_home">Heim - Text</label>
             </div>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="club_id_home_alt_text" id="club_id_home_alt_text" aria-describedby="club_id_home_alt_textHelp" placeholder="{{ old('club_id_home_alt_text') }}">
-                <small id="club_id_home_alt_textHelp" class="form-text text-muted">Alternativer Text für Heim-Team, wird nur angezeigt, wenn kein Team ausgewählt ist</small>
+                <small id="club_id_home_alt_textHelp" class="form-text text-muted">Alternativer Text für Heim-Team - bspw. "Sieger Spiel X". Wird nur angezeigt, wenn kein Team ausgewählt ist.</small>
             </div>
             <div class="col-md-2">
-                <label for="club_id_away">Gast</label>
+                <label for="club_id_away">Gast - Text</label>
             </div>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="club_id_away_alt_text" id="club_id_away_alt_text" aria-describedby="club_id_away_alt_textHelp" placeholder="{{ old('club_id_away_alt_text') }}">
-                <small id="club_id_away_alt_textHelp" class="form-text text-muted">Alternativer Text für Gast-Team, wird nur angezeigt, wenn kein Team ausgewählt ist</small>
+                <small id="club_id_away_alt_textHelp" class="form-text text-muted">Alternativer Text für Gast-Team - bspw. "Sieger Spiel X". Wird nur angezeigt, wenn kein Team ausgewählt ist.</small>
             </div>
         </div>
         <!-- home and away clubs -->
