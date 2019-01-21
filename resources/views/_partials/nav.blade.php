@@ -12,11 +12,32 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav">
-                @foreach(\HLW\Division::published()->orderBy('name')->get() as $division)
+                <?php
+                    // Nav menu by published division
+                    /*
+                     *  @foreach(\HLW\Division::published()->orderBy('name')->get() as $division)
+                            <li class="nav-item {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
+                                <a class="nav-link" href="{{ $division->competition->isLeague() ? route('frontend.divisions.show', $division ) : route('frontend.divisions.fixtures', $division) }}" title="{{ $division->name }}"> <span class="fa"></span> {{ $division->name }}</a>
+                            </li>
+                        @endforeach
+                     */
+
+                    $division_ids = [5, 6, 8, 3, 4];
+
+                    $divisons = Division::find($division_ids);
+
+                    $divisions_ordered = $divisons->sortBy(function($model) use ($division_ids) {
+                        return array_search($model->getKey(), $division_ids);
+                    });
+                ?>
+                <!-- Manual menu for 2019 TODO: make menu builder -->
+
+                @foreach($divisions_ordered as $division)
                     <li class="nav-item {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
                         <a class="nav-link" href="{{ $division->competition->isLeague() ? route('frontend.divisions.show', $division ) : route('frontend.divisions.fixtures', $division) }}" title="{{ $division->name }}"> <span class="fa"></span> {{ $division->name }}</a>
                     </li>
                 @endforeach
+
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}" title="Clubhaus"><span class="fa fa-comments"></span> Clubhaus</a>
                 </li>
