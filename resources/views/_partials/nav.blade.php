@@ -24,7 +24,7 @@
 
                     $division_ids = [5, 6, 8, 3, 4];
 
-                    $divisons = Division::find($division_ids);
+                    $divisons = HLW\Division::find($division_ids);
 
                     $divisions_ordered = $divisons->sortBy(function($model) use ($division_ids) {
                         return array_search($model->getKey(), $division_ids);
