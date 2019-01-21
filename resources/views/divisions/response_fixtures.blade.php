@@ -85,6 +85,8 @@
                                         @else
                                             <span class="fa fa-ban text-muted d-none d-md-inline align-middle" title="Kein Vereinswappen vorhanden"></span>
                                         @endif
+                                    @elseif($fixture->club_id_home_alt_text)
+                                        <span class="align-middle pr-1">{{ $fixture->club_id_home_alt_text }}</span>
                                     @else
                                         <span class="align-middle pr-1">{{ $fixture->club_id_home ?? "-" }}</span>
                                     @endif
@@ -127,6 +129,8 @@
                                         @if ($fixture->type == "knockout" && $fixture->clubAway->hasWon($fixture))
                                             </b>
                                         @endif
+                                    @elseif($fixture->club_id_away_alt_text)
+                                        <span class="align-middle pl-1">{{ $fixture->club_id_away_alt_text }}</span>
                                     @else
                                         <span class="pl-1">{{ $fixture->club_id_away ?? "-" }}</span>
                                     @endif
