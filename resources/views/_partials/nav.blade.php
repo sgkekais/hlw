@@ -13,6 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav">
                 <?php
+                        // TODO: controller for nav...?
                     // Nav menu by published division
                     /*
                      *  @foreach(\HLW\Division::published()->orderBy('name')->get() as $division)
@@ -24,17 +25,37 @@
 
                     $division_ids = [5, 6, 8, 3, 4];
 
-                    $divisons = HLW\Division::find($division_ids);
-
-                    $divisions_ordered = $divisons->sortBy(function($model) use ($division_ids) {
+                    $divisions = HLW\Division::find($division_ids);
+                    $divisions->load('seasons');
+                    $divisions_ordered = $divisions->sortBy(function($model) use ($division_ids) {
                         return array_search($model->getKey(), $division_ids);
                     });
                 ?>
                 <!-- Manual menu for 2019 TODO: make menu builder -->
 
                 @foreach($divisions_ordered as $division)
-                    <li class="nav-item {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
-                        <a class="nav-link" href="{{ $division->competition->isLeague() ? route('frontend.divisions.tables', $division ) : route('frontend.divisions.fixtures', $division) }}" title="{{ $division->name }}"> <span class="fa"></span> {{ $division->name }}</a>
+                    <li class="nav-item dropdown {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
+                        <a class="nav-link" href="{{ $division->competition->isLeague() ? route('frontend.divisions.tables', $division ) : route('frontend.divisions.fixtures', $division) }}" title="{{ $division->name }} " id="navbarDropdown{{ $loop->index }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="fa"></span> {{ $division->name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown{{ $loop->index }}">
+                            @if ($division->competition->isLeague())
+                                <a class="dropdown-item" href="{{ route('frontend.divisions.tables', $division) }}">
+                                    <span class="fa fa-fw fa-list-ol"></span> Tabelle
+                                </a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('frontend.divisions.fixtures', $division) }}"><span class="fa fa-fw fa-calendar"></span> Spielplan</a>
+                            <a class="dropdown-item" href="{{ route('frontend.divisions.scorers', $division) }}"><span class="fa fa-fw fa-soccer-ball-o"></span> Torjäger</a>
+                            <a class="dropdown-item" href="{{ route('frontend.divisions.sinners', $division) }}"><span class="fa fa-fw fa-thumbs-o-down"></span> Sünderkartei</a>
+                            <a class="dropdown-item" href="{{ route('frontend.seasons.clubs',
+                                $division->seasons()->current()->first()
+                                ?: $division->seasons()->where('begin','>=',Carbon::now())->orderBy('begin')->get()->first()
+                                ?: $division->seasons()->orderBy('end', 'desc')->first()
+                                ) }}
+                            ">
+                                <span class="fa fa-fw fa-shield"></span> Teams
+                            </a>
+                        </div>
                     </li>
                 @endforeach
 

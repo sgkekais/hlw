@@ -4,11 +4,13 @@
     | {{ $division->name }} | Spielplan
 @endsection
 
+{{--
 @section('subnav')
 
     @include('_partials.subnav_divisions')
 
 @endsection
+--}}
 
 @if ($division->competition->isKnockout())
     @section('jumbotron')

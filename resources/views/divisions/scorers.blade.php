@@ -4,11 +4,13 @@
     | {{ $division->name }} | Torschützen
 @endsection
 
+{{--
 @section('subnav')
 
     @include('_partials.subnav_divisions')
 
 @endsection
+--}}
 
 @section('content')
 
