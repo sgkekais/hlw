@@ -2,9 +2,13 @@
     <div class="container">
         <ul class="navbar-nav mr-auto">
             @if ($division->competition->isLeague())
-                <li class="nav-item">
-                    <a class="nav-link pl-0 {{ Route::is('frontend.divisions.show') ? "active" : null }}" href="{{ route('frontend.divisions.show', $division) }}">Home</a>
-                </li>
+                @php
+                    /**
+                    *   <li class="nav-item">
+                            <a class="nav-link pl-0 {{ Route::is('frontend.divisions.show') ? "active" : null }}" href="{{ route('frontend.divisions.show', $division) }}">Home</a>
+                        </li>
+                    */
+                @endphp
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('frontend.divisions.tables') ? "active" : null }}" href="{{ route('frontend.divisions.tables', $division) }}">Tabelle</a>
                 </li>
