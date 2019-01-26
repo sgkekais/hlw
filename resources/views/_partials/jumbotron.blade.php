@@ -1,3 +1,23 @@
+
+@if(str_is('home', Route::currentRouteName()))
+
+    <div class="jumbotron jumbotron-fluid p-0" style="color: #fff9c4; background: url({{ asset('storage/duesseldorf.jpg') }}) left; background-size: cover;">
+        <div class="pt-4 pb-4" style="box-shadow: inset 0px 5px 5px 0px rgba(173,173,173,0.5); width: 100%; height: 100%">
+            <div class="container pt-4 pb-4">
+                <div class="col-12 p-0">
+                    <div class="display-4 font-weight-bold">
+                        <span class="px-1 bg-black-transparent" {{--style="font-size: 3rem !important;"--}}>Hobbyliga-West Düsseldorf</span>
+                    </div>
+                    <h1>
+                        <span class="px-1 bg-black-transparent" {{--style="font-size: 2rem !important;"--}}>Die Fußballliga für Hobby- und Freizeitmannschaften aus Düsseldorf und Umgebung.</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endif
+
 @if(str_is('frontend.divisions.*', Route::currentRouteName()))
 
     @php
