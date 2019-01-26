@@ -61,21 +61,7 @@ class DivisionController extends Controller
             }
         }
 
-        // different jumbo backgrounds for different divisions
-        $jumbo_bg = asset('storage/grass_green.jpg');
-        if ($division->competition->name_short == "HLW") {
-            if ($division->hierarchy_level == (1 || null)) {
-                $jumbo_bg = asset('storage/grass_green.jpg');
-            } else {
-                $jumbo_bg = asset('storage/grass_brown.jpg');
-            }
-        } elseif ($division->competition->name_short == "AHL") {
-            $jumbo_bg = asset('storage/grass_bw.jpg');
-        } elseif ($division->competition->name_short == "P") {
-            $jumbo_bg = asset('storage/cup.jpg');
-        }
-
-        return view('divisions.index', compact('division', 'season', 'matchweek', 'fixtures', 'jumbo_bg', 'scorers'));
+        return view('divisions.index', compact('division', 'season', 'matchweek', 'fixtures', 'scorers'));
     }
 
     /**

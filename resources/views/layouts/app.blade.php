@@ -16,7 +16,7 @@
         @endif
 
         <!-- jumbotron image -->
-        @yield('jumbotron')
+        @include('_partials.jumbotron')
 
         <!-- content -->
         @yield('content')
