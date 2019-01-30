@@ -46,6 +46,7 @@ class AdminController extends Controller
         $fixtures_without_result = Fixture::where('datetime', '<=', $today)
             ->notPlayedOrRated()
             ->notCancelled()
+            ->doesntHave('rescheduledTo')
             ->orderBy('datetime', 'desc')
             ->with([
                 'matchweek.season',
