@@ -36,7 +36,7 @@
                         @endif
                         <h1 class="font-weight-bold font-italic">Anmelden</h1>
                         <!-- Login Form -->
-                        <form class="form" role="form" method="POST" action="{{ route('login') }}">
+                        <form id="login-form" class="form" role="form" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group">
@@ -76,14 +76,22 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                {!! Captcha::display() !!}
-                            </div>
+                            {{--
+                                <div class="form-group">
+                                    {!! Captcha::display() !!}
+                                </div>
+                            --}}
                             <div class="form-group">
                                 <div class="">
-                                    <button type="submit" class="btn btn-primary mr-1 mt-2">
-                                        <span class="fa fa-sign-in"></span> Login
-                                    </button>
+                                    {!! Captcha::button('<span class="fa fa-sign-in"></span> Login', [
+                                        'data-badge' => 'inline',
+                                        'class' => 'g-recaptcha btn btn-primary mr-1 mt-2'
+                                    ]) !!}
+                                    {{--
+                                        <button type="submit" class="btn btn-primary mr-1 mt-2">
+                                            <span class="fa fa-sign-in"></span> Login
+                                        </button>
+                                    --}}
                                     <a class="btn btn-outline-primary mr-1 mt-2" href="{{ route('register') }}" title="Registrieren">
                                         Neu hier? Registrier dich!
                                     </a>
@@ -94,6 +102,11 @@
                             </div>
                         </form> <!-- ./Login Form -->
                         {!! Captcha::script() !!}
+                        <script>
+                            function onSubmit(token) {
+                                document.getElementById("login-form").submit();
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
