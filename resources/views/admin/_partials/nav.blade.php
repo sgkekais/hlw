@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark ">
-    <div class="container">
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark ">
+    <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="/images/hlwlogo_w.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">
         </a>
@@ -17,34 +17,52 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-soccer-ball-o"></span> Spielbetrieb</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item {{ Route::is('competitions.*') ? 'active' : null }}" href="{{ route('competitions.index') }}">
-                            <span class="fa fa-trophy fa-fw"></span> Wettbewerbe
-                        </a>
-                        <a class="dropdown-item {{ Route::is('divisions.*') ? 'active' : null }}" href="{{ route('divisions.index') }}">
-                            <span class="fa fa-exchange fa-rotate-90 fa-fw"></span> Spielklassen
-                        </a>
-                        <a class="dropdown-item {{ Route::is('seasons.*') ? 'active' : null }}" href="{{ route('seasons.index') }}">
-                            <span class="fa fa-line-chart fa-fw"></span> Saisons
-                        </a>
-                        <a class="dropdown-item {{ Route::is('stadiums.*') ? 'active' : null }}" href="{{ route('stadiums.index') }}">
-                            <span class="fa fa-map-marker fa-fw"></span> Spielorte
-                        </a>
+                        @can('list competitions')
+                            <a class="dropdown-item {{ Route::is('competitions.*') ? 'active' : null }}" href="{{ route('competitions.index') }}">
+                                <span class="fa fa-trophy fa-fw"></span> Wettbewerbe
+                            </a>
+                        @endcan
+                        @can('list divisions')
+                            <a class="dropdown-item {{ Route::is('divisions.*') ? 'active' : null }}" href="{{ route('divisions.index') }}">
+                                <span class="fa fa-exchange fa-rotate-90 fa-fw"></span> Spielklassen
+                            </a>
+                        @endcan
+                        @can('list seasons')
+                            <a class="dropdown-item {{ Route::is('seasons.*') ? 'active' : null }}" href="{{ route('seasons.index') }}">
+                                <span class="fa fa-line-chart fa-fw"></span> Saisons
+                            </a>
+                        @endcan
+                        @can('list stadiums')
+                            <a class="dropdown-item {{ Route::is('stadiums.*') ? 'active' : null }}" href="{{ route('stadiums.index') }}">
+                                <span class="fa fa-map-marker fa-fw"></span> Spielorte
+                            </a>
+                        @endcan
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item {{ Route::is('clubs.*') ? 'active' : null }}" href="{{ route('clubs.index') }}">
-                            <span class="fa fa-shield fa-fw"></span> Mannschaften
-                        </a>
-                        <a class="dropdown-item {{ Route::is('people.*') ? 'active' : null }}" href="{{ route('people.index') }}">
-                            <span class="fa fa-id-badge fa-fw"></span> Personen
-                        </a>
-                        <a class="dropdown-item {{ Route::is('positions.*') ? 'active' : null }}" href="{{ route('positions.index') }}">
-                            <span class="fa fa-hand-o-down fa-fw"></span> Positionen
-                        </a>
-                        <a class="dropdown-item {{ Route::is('divisions-official.*') ? 'active' : null }}" href="{{ route('divisions-official.index') }}">
-                            <span class="fa fa-certificate fa-fw"></span> Offizielle Spielklassen
-                        </a>
-                        <a class="dropdown-item {{ Route::is('referees.*') ? 'active' : null }}" href="{{ route('referees.index') }}">
-                            <span class="fa fa-hand-stop-o fa-fw"></span> Schiedsrichter
-                        </a>
+                        @can('list clubs')
+                            <a class="dropdown-item {{ Route::is('clubs.*') ? 'active' : null }}" href="{{ route('clubs.index') }}">
+                                <span class="fa fa-shield fa-fw"></span> Mannschaften
+                            </a>
+                        @endcan
+                        @can('list people')
+                            <a class="dropdown-item {{ Route::is('people.*') ? 'active' : null }}" href="{{ route('people.index') }}">
+                                <span class="fa fa-id-badge fa-fw"></span> Personen
+                            </a>
+                        @endcan
+                        @can('list positions')
+                            <a class="dropdown-item {{ Route::is('positions.*') ? 'active' : null }}" href="{{ route('positions.index') }}">
+                                <span class="fa fa-hand-o-down fa-fw"></span> Positionen
+                            </a>
+                        @endcan
+                        @can('list divisions_official')
+                            <a class="dropdown-item {{ Route::is('divisions-official.*') ? 'active' : null }}" href="{{ route('divisions-official.index') }}">
+                                <span class="fa fa-certificate fa-fw"></span> Offizielle Spielklassen
+                            </a>
+                        @endcan
+                        @can('list referees')
+                            <a class="dropdown-item {{ Route::is('referees.*') ? 'active' : null }}" href="{{ route('referees.index') }}">
+                                <span class="fa fa-hand-stop-o fa-fw"></span> Schiedsrichter
+                            </a>
+                        @endcan
                     </div>
                 </li>
                 {{--
@@ -54,11 +72,13 @@
                 --}}
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item {{ Route::is('users.*') ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('users.index') }}">
-                        <span class="fa fa-users"></span> User
-                    </a>
-                </li>
+                @can('list users')
+                    <li class="nav-item {{ Route::is('users.*') ? 'active' : null }}">
+                        <a class="nav-link" href="{{ route('users.index') }}">
+                            <span class="fa fa-users"></span> Benutzerverwaltung
+                        </a>
+                    </li>
+                @endcan
                 <li class="nav-item {{ Route::is('log') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('log') }}">
                         <span class="fa fa-history"></span> Log

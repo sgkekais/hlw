@@ -6,6 +6,7 @@
     <p>
         Verwaltung der Mannschaften.
     </p>
+    {{--
     <!-- CSV Modal -->
     <div class="modal fade" id="csvImport" tabindex="-1" role="dialog" aria-labelledby="csvImportLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -40,15 +41,21 @@
             </div>
         </div>
     </div>
+    --}}
+
     <div class="row">
         <div class="col-md-6">
             <!-- controls -->
-            <a class="btn btn-success" href="{{ route('clubs.create') }}" title="Mannschaft anlegen">
-                <span class="fa fa-plus-square"></span> Mannschaft anlegen
-            </a>
-            <a class="btn btn-secondary" data-toggle="modal" data-target="#csvImport">
-                <span class="fa fa-file-excel-o"></span> Import
-            </a>
+            @can('create club')
+                <a class="btn btn-success" href="{{ route('clubs.create') }}" title="Mannschaft anlegen">
+                    <span class="fa fa-plus-square"></span> Mannschaft anlegen
+                </a>
+            @endcan
+            {{--
+                <a class="btn btn-secondary" data-toggle="modal" data-target="#csvImport">
+                    <span class="fa fa-file-excel-o"></span> Import
+                </a>
+            --}}
         </div>
     </div>
     <hr>
@@ -84,7 +91,11 @@
                         @endif
                     </td>
                     <td class="align-middle">
-                        <a href="{{ route('clubs.show', $club ) }}" title="Anzeigen">{{ $club->name }}</a>
+                        @can('read club')
+                            <a href="{{ route('clubs.show', $club ) }}" title="Anzeigen">{{ $club->name }}</a>
+                        @else
+                            {{ $club->name }}
+                        @endcan
                     </td>
                     <td class="align-middle text-center">
                         @if($club->is_real_club)
@@ -92,14 +103,18 @@
                         @endif
                     </td>
                     <td class="align-middle">
-                        <!-- display details -->
-                        <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">
-                            <span class="fa fa-search-plus"></span>
-                        </a>
-                        <!-- edit -->
-                        <a class="btn btn-primary" href="{{ route('clubs.edit', $club) }}" title="Mannschaft bearbeiten">
-                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                        </a>
+                        @can('read club')
+                            <!-- display details -->
+                            <a class="btn btn-secondary btn-sm" href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">
+                                <span class="fa fa-search-plus"></span>
+                            </a>
+                        @endcan
+                        @can('update club')
+                            <!-- edit -->
+                            <a class="btn btn-primary btn-sm" href="{{ route('clubs.edit', $club) }}" title="Mannschaft bearbeiten">
+                                <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                            </a>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

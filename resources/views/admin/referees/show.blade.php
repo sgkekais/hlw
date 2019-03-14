@@ -7,9 +7,11 @@
     <div class="row">
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
-            <a class="btn btn-primary mb-4" href="{{ route('referees.edit', $referee ) }}" title="Schiedsrichter bearbeiten">
-                <span class="fa fa-pencil"></span> Bearbeiten
-            </a>
+            @can('update referee')
+                <a class="btn btn-primary mb-4" href="{{ route('referees.edit', $referee ) }}" title="Schiedsrichter bearbeiten">
+                    <span class="fa fa-pencil"></span> Bearbeiten
+                </a>
+            @endcan
         </div>
         <!-- dates -->
         <div class="col-md-6">
@@ -80,26 +82,38 @@
                             </td>
                             <td class="align-middle">
                                 @if($fixture->clubHome)
-                                    <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
+                                            {{ $fixture->clubHome->name_short }}
+                                        </a>
+                                    @else
                                         {{ $fixture->clubHome->name_short }}
-                                    </a>
+                                    @endcan
                                 @else
                                     -
                                 @endif
                                 vs.
                                 @if($fixture->clubAway)
-                                    <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
+                                            {{ $fixture->clubAway->name_short }}
+                                        </a>
+                                    @else
                                         {{ $fixture->clubAway->name_short }}
-                                    </a>
+                                    @endcan
                                 @else
                                     -
                                 @endif
                             </td>
                             <td class="align-middle">
                                 @if($fixture->stadium)
-                                    <a href="{{ route('stadiums.show', $fixture->stadium) }}">
+                                    @can('read stadium')
+                                        <a href="{{ route('stadiums.show', $fixture->stadium) }}">
+                                            {{ $fixture->stadium->name_short }}
+                                        </a>
+                                    @else
                                         {{ $fixture->stadium->name_short }}
-                                    </a>
+                                    @endcan
                                 @endif
                             </td>
                             <td class="align-middle">
@@ -161,22 +175,18 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <!-- show -->
-                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}" title="Paarung anzeigen">
-                                    <span class="fa fa-search-plus" aria-hidden="true"></span>
-                                </a>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
-                                <!-- reschedule, only once -->
-                                @if(!$fixture->rescheduled_to)
-                                    <a class="btn btn-warning" href="{{ route('reschedule.create', [$fixture->matchweek, $fixture]) }}" title="Paarung verlegen">
-                                        <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
+                                @can('read fixture')
+                                    <!-- show -->
+                                    <a class="btn btn-secondary btn-sm" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}" title="Paarung anzeigen">
+                                        <span class="fa fa-search-plus" aria-hidden="true"></span>
                                     </a>
-                                @else
-                                    <button class="btn btn-outline-danger" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
-                                @endif
+                                @endcan
+                                @can('update referee_assignment')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('editRefereeAssignment', [ $fixture, $referee ]) }}" title="Schiedsrichterzuordnung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

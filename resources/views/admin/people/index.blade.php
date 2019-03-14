@@ -9,9 +9,11 @@
     <div class="row">
         <div class="col-md-3">
             <!-- controls -->
-            <a class="btn btn-success" href="{{ route('people.create') }}" title="Person anlegen">
-                <span class="fa fa-plus-square"></span> Person anlegen
-            </a>
+            @can('create person')
+                <a class="btn btn-success" href="{{ route('people.create') }}" title="Person anlegen">
+                    <span class="fa fa-plus-square"></span> Person anlegen
+                </a>
+            @endcan
         </div>
     </div>
     <hr>
@@ -57,9 +59,7 @@
                     @endif
                 </td>
                 <td class="align-middle">
-                    <a href="{{ route('people.show', $person ) }}" title="Anzeigen">
-                        {{ $person->last_name }}, {{ $person->first_name }}
-                    </a>
+                    {{ $person->last_name }}, {{ $person->first_name }}
                 </td>
                 <td class="align-middle">{{ $person->date_of_birth ? $person->date_of_birth->format('d.m.Y') : "-" }}</td>
                 <td class="align-middle">
@@ -97,14 +97,18 @@
                         <span class="fa fa-fw"></span>
                 @endif
                 <td class="align-middle">
-                    <!-- display details -->
-                    <a class="btn btn-secondary" href="{{ route('people.show', $person) }}" title="Person anzeigen">
-                        <span class="fa fa-search-plus"></span>
-                    </a>
-                    <!-- edit -->
-                    <a class="btn btn-primary" href="{{ route('people.edit', $person) }}" title="Person bearbeiten">
-                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                    </a>
+                    @can('read person')
+                        <!-- display details -->
+                        <a class="btn btn-secondary btn-sm" href="{{ route('people.show', $person) }}" title="Person anzeigen">
+                            <span class="fa fa-search-plus"></span>
+                        </a>
+                    @endcan
+                    @can('update person')
+                        <!-- edit -->
+                        <a class="btn btn-primary btn-sm" href="{{ route('people.edit', $person) }}" title="Person bearbeiten">
+                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                        </a>
+                    @endcan
                 </td>
             </tr>
         @endforeach

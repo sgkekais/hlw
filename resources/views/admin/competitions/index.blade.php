@@ -8,10 +8,12 @@
     </p>
     <div class="row">
         <div class="col-md-3">
-            <!-- controls -->
-            <a class="btn btn-success" href="{{ route('competitions.create') }}" title="Wettbewerb anlegen">
-                <span class="fa fa-plus-square"></span> Wettbewerb anlegen
-            </a>
+            @can('create competition')
+                <!-- controls -->
+                <a class="btn btn-success" href="{{ route('competitions.create') }}" title="Wettbewerb anlegen">
+                    <span class="fa fa-plus-square"></span> Wettbewerb anlegen
+                </a>
+            @endcan
         </div>
     </div>
     <hr>
@@ -40,7 +42,7 @@
                         @endif
                     </td>
                     <td class="align-middle">
-                        <a href="{{ route('competitions.show', $competition ) }}" title="Anzeigen">{{ $competition->name }}</a>
+                       {{ $competition->name }}
                         <br>Spielklassen: {{ $competition->divisions()->get()->count() }}
                     </td>
                     <td class="align-middle">{{ $competition->name_short }}</td>
@@ -54,14 +56,18 @@
                         @endif
                     </td>
                     <td class="align-middle">
+                       @can('read competition')
                         <!-- display details -->
-                        <a class="btn btn-secondary" href="{{ route('competitions.show', $competition) }}" title="Wettbewerb anzeigen">
+                        <a class="btn btn-secondary btn-sm" href="{{ route('competitions.show', $competition) }}" title="Wettbewerb anzeigen">
                             <span class="fa fa-search-plus"></span>
                         </a>
+                       @endcan
+                       @can('update competition')
                         <!-- edit -->
-                        <a class="btn btn-primary" href="{{ route('competitions.edit', $competition) }}" title="Wettbewerb bearbeiten">
+                        <a class="btn btn-primary btn-sm" href="{{ route('competitions.edit', $competition) }}" title="Wettbewerb bearbeiten">
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                         </a>
+                       @endcan
                     </td>
                 </tr>
             @endforeach

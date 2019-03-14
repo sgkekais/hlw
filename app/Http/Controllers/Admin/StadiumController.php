@@ -11,6 +11,24 @@ use Excel;
 class StadiumController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * StadiumController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list stadiums')->only('index');
+        $this->middleware('permission:create stadium')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update stadium')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete stadium')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -79,16 +79,22 @@
         --}}
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
-                <a class="btn btn-primary mb-2" href="{{ route('seasons.edit', $season ) }}" title="Saison bearbeiten">
-                    <span class="fa fa-pencil"></span> Saison bearbeiten
-                </a>
-            <br>
-                <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.create', $season ) }}" title="Spielwoche hinzufügen">
-                    <span class="fa fa-plus-square"></span> Spielwoche
-                </a>
-                <a class="btn btn-secondary" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
-                    <span class="fa fa-plus-square"></span> Mannschaft
-                </a>
+                @can('update season')
+                    <a class="btn btn-primary mb-2" href="{{ route('seasons.edit', $season ) }}" title="Saison bearbeiten">
+                        <span class="fa fa-pencil"></span> Saison bearbeiten
+                    </a>
+                    <br>
+                @endcan
+                @can('create matchweek')
+                    <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.create', $season ) }}" title="Spielwoche hinzufügen">
+                        <span class="fa fa-plus-square"></span> Spielwoche
+                    </a>
+                @endcan
+                @can('create club_season_assignment')
+                    <a class="btn btn-secondary" href="{{ route('createClubAssignment', $season ) }}" title="Mannschaft zuordnen">
+                        <span class="fa fa-plus-square"></span> Mannschaft
+                    </a>
+                @endcan
             {{--<a class="btn btn-secondary" href="#" data-toggle="modal" data-target="#csvImportMatchweeks">
                 <span class="fa fa-file-excel-o"></span> Spielwochen-Import
             </a>
@@ -134,13 +140,13 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#clubs" role="tab">
                 Mannschaften
-                <span class="badge badge-pill badge-secondary">{{ $season->clubs->count() }}</span></a>
+                <span class="badge badge-pill badge-secondary">{{ $season->clubs->count() }}</span>
+            </a>
         </li>
     </ul>
-    <!-- show club details -->
+    <!-- show season details -->
     <div class="tab-content">
         <div class="tab-pane active" id="matchweeks" role="tabpanel">
-            <!-- show season details -->
             <h4 class="mt-4">
                 Zugeordnete Spielwochen
             </h4>
@@ -171,21 +177,25 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <a href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Anzeigen">{{ $matchweek->number_consecutive }}</a>
+                                {{ $matchweek->number_consecutive }}
                                 <br>
                                 Paarungen: {{ $matchweek->fixtures()->get()->count() }}
                             </td>
                             <td class="align-middle">{{ $matchweek->begin ? $matchweek->begin->format('d.m.Y') : null }} - {{ $matchweek->end ? $matchweek->end->format('d.m.Y') : null }}</td>
                             <td class="align-middle">{{ $matchweek->name }}</td>
                             <td class="align-middle">
-                                <!-- display details -->
-                                <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Spielwoche anzeigen">
-                                    <span class="fa fa-search-plus"></span>
-                                </a>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('seasons.matchweeks.edit', [$season, $matchweek]) }}" title="Spielwoche bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('read matchweek')
+                                    <!-- display details -->
+                                    <a class="btn btn-secondary btn-sm" href="{{ route('seasons.matchweeks.show', [$season, $matchweek]) }}" title="Spielwoche anzeigen">
+                                        <span class="fa fa-search-plus"></span>
+                                    </a>
+                                @endcan
+                                @can('update matchweek')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('seasons.matchweeks.edit', [$season, $matchweek]) }}" title="Spielwoche bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -221,7 +231,11 @@
                         <tr>
                             <td class="align-middle"><b>{{ $club->id }}</b></td>
                             <td class="align-middle">
-                                <a href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">{{ $club->name }}</a>
+                                @can('read club')
+                                    <a href="{{ route('clubs.show', $club) }}" title="Mannschaft anzeigen">{{ $club->name }}</a>
+                                @else
+                                    {{ $club->name }}
+                                @endcan
                             </td>
                             <td class="align-middle text-center">
                                 {{ $club->reschedulings()->where('reschedule_count','1')->get()->where('matchweek.season.id', $season->id)->count() }}
@@ -236,10 +250,12 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('editClubAssignment',[$season,$club]) }}" title="Zuordnung bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update club_season_assignment')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('editClubAssignment',[$season,$club]) }}" title="Zuordnung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

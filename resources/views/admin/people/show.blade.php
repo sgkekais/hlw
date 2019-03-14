@@ -25,9 +25,11 @@
     <div class="row">
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
-            <a class="btn btn-primary mb-4" href="{{ route('people.edit', $person ) }}" title="Person bearbeiten">
-                <span class="fa fa-pencil"></span> Bearbeiten
-            </a>
+            @can('update person')
+                <a class="btn btn-primary mb-4" href="{{ route('people.edit', $person ) }}" title="Person bearbeiten">
+                    <span class="fa fa-pencil"></span> Bearbeiten
+                </a>
+            @endcan
         </div>
         <!-- dates -->
         <div class="col-md-6">
@@ -75,9 +77,11 @@
                             <tr>
                                 <td class="align-middle">{{ $player->id }}</td>
                                 <td class="align-middle">
-                                    <a href="{{ route('clubs.show', $player->club) }}" title="Mannschaft anzeigen">
-                                        {{ $player->club->name }}
-                                    </a>
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $player->club) }}" title="Mannschaft anzeigen">
+                                            {{ $player->club->name }}
+                                        </a>
+                                    @endcan
                                 </td>
                                 <td class="align-middle">{{ $player->sign_on->format('d.m.Y') }}</td>
                                 <td class="align-middle">{{ $player->sign_off ? $player->sign_off->format('d.m.Y') : null }}</td>
@@ -90,10 +94,12 @@
                                     @endif
                                 </td>
                                 <td class="align-middle">
-                                    <!-- edit -->
-                                    <a class="btn btn-primary" href="{{ route('clubs.players.edit', [$player->club, $player]) }}" title="Spieler bearbeiten">
-                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                    </a>
+                                    @can('update club_player_assignment')
+                                        <!-- edit -->
+                                        <a class="btn btn-primary btn-sm" href="{{ route('clubs.players.edit', [$player->club, $player]) }}" title="Spieler bearbeiten">
+                                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                        </a>
+                                    @endcan
                                 </td>
                             </tr>
                             </tbody>
@@ -127,14 +133,18 @@
                                             <td class="align-middle">{{ $card->color }}</td>
                                             <td class="align-middle">{{ $card->ban_matches }}</td>
                                             <td class="align-middle">
-                                                <!-- show match -->
-                                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$card->fixture->matchweek, $card->fixture]) }}" title="Paarung anzeigen">
-                                                    <span class="fa fa-search-plus"></span>
-                                                </a>
-                                                <!-- edit -->
-                                                <a class="btn btn-primary" href="{{ route('fixtures.cards.edit', [ $card->fixture, $card ]) }}" title="Karte bearbeiten">
-                                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                                </a>
+                                                @can('read fixture')
+                                                    <!-- show match -->
+                                                    <a class="btn btn-secondary btn-sm" href="{{ route('matchweeks.fixtures.show', [$card->fixture->matchweek, $card->fixture]) }}" title="Paarung anzeigen">
+                                                        <span class="fa fa-search-plus"></span>
+                                                    </a>
+                                                @endcan
+                                                @can('update fixture')
+                                                    <!-- edit -->
+                                                    <a class="btn btn-primary btn-sm" href="{{ route('fixtures.cards.edit', [ $card->fixture, $card ]) }}" title="Karte bearbeiten">
+                                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                                    </a>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
@@ -166,14 +176,18 @@
                                             </td>
                                             <td class="align-middle">{{ $goal->score }}</td>
                                             <td class="align-middle">
-                                                <!-- show match -->
-                                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$goal->fixture->matchweek, $goal->fixture]) }}" title="Paarung anzeigen">
-                                                    <span class="fa fa-search-plus"></span>
-                                                </a>
-                                                <!-- edit -->
-                                                <a class="btn btn-primary" href="{{ route('fixtures.goals.edit', [$goal->fixture, $goal]) }}" title="Torschützen bearbeiten">
-                                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                                </a>
+                                                @can('read fixture')
+                                                    <!-- show match -->
+                                                    <a class="btn btn-secondary btn-sm" href="{{ route('matchweeks.fixtures.show', [$goal->fixture->matchweek, $goal->fixture]) }}" title="Paarung anzeigen">
+                                                        <span class="fa fa-search-plus"></span>
+                                                    </a>
+                                                @endcan
+                                                @can('update goal')
+                                                    <!-- edit -->
+                                                    <a class="btn btn-primary btn-sm" href="{{ route('fixtures.goals.edit', [$goal->fixture, $goal]) }}" title="Torschützen bearbeiten">
+                                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                                    </a>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

@@ -8,10 +8,12 @@
     </p>
     <div class="row">
         <div class="col-md-3">
-            <!-- controls -->
-            <a class="btn btn-success" href="{{ route('divisions-official.create') }}" title="Spielklasse anlegen">
-                <span class="fa fa-plus-square"></span> Off. Spielklasse anlegen
-            </a>
+            @can('create division_official')
+                <!-- controls -->
+                <a class="btn btn-success" href="{{ route('divisions-official.create') }}" title="Spielklasse anlegen">
+                    <span class="fa fa-plus-square"></span> Off. Spielklasse anlegen
+                </a>
+            @endcan
         </div>
     </div>
     <hr>
@@ -31,18 +33,22 @@
             <tr>
                 <td class="align-middle"><b>{{ $division->id }}</b></td>
                 <td class="align-middle">
-                    <a href="{{ route('divisions-official.show', $division ) }}" title="Anzeigen">{{ $division->name }}</a>
+                    {{ $division->name }}
                 </td>
                 <td class="align-middle">{{ $division->name_short }}</td>
                 <td class="align-middle">
-                    <!-- display details -->
-                    <a class="btn btn-secondary" href="{{ route('divisions-official.show', $division) }}" title="Spielklasse anzeigen">
-                        <span class="fa fa-search-plus"></span>
-                    </a>
-                    <!-- edit -->
-                    <a class="btn btn-primary" href="{{ route('divisions-official.edit', $division) }}" title="Spielklasse bearbeiten">
-                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                    </a>
+                    @can('read division_official')
+                        <!-- display details -->
+                        <a class="btn btn-secondary btn-sm" href="{{ route('divisions-official.show', $division) }}" title="Spielklasse anzeigen">
+                            <span class="fa fa-search-plus"></span>
+                        </a>
+                    @endcan
+                    @can('update division_official')
+                        <!-- edit -->
+                        <a class="btn btn-primary btn-sm" href="{{ route('divisions-official.edit', $division) }}" title="Spielklasse bearbeiten">
+                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                        </a>
+                    @endcan
                 </td>
             </tr>
         @endforeach

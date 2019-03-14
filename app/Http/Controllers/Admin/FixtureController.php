@@ -16,6 +16,39 @@ use Illuminate\Support\Facades\Storage;
 class FixtureController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * CardController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list fixtures')->only('index');
+        $this->middleware('permission:create fixture')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update fixture')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete fixture')->only('destroy');
+
+        // Referee permissions
+        $this->middleware('permission:create referee_assignment')->only([
+            'createRefereeAssignment',
+            'storeRefereeAssignment'
+        ]);
+        $this->middleware('permission:update referee_assignment')->only([
+            'editRefereeAssignment',
+            'updateRefereeAssignment'
+        ]);
+        $this->middleware('permission:delete referee_assignment')->only('destroyRefereeAssignment');
+
+        // Match Report
+        $this->middleware('permission:create matchreport')->only('storeMatchReport');
+        $this->middleware('permission:delete matchreport')->only('deleteMatchReport');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

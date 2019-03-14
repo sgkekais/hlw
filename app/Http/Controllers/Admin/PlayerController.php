@@ -12,6 +12,20 @@ use Illuminate\Support\Facades\Session;
 
 class PlayerController extends Controller
 {
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list players')->only('index');
+        $this->middleware('permission:create club_player_assignment')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update club_player_assignment')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete club_player_assignment')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Database\Eloquent\Collection|static[]

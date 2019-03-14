@@ -13,6 +13,35 @@ use Excel;
 class ClubController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * ClubController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list clubs')->only('index');
+        $this->middleware('permission:create club')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:read club')->only('show');
+        $this->middleware('permission:update club')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete club')->only('destroy');
+
+        // Club Stadium Assignments
+        $this->middleware('permission:create club_stadium_assignment')->only([
+            'createStadiumAssignment',
+            'storeStadiumAssignment']);
+        $this->middleware('permission:update club_stadium_assignment')->only([
+            'editStadiumAssignment',
+            'updateStadiumAssignment'
+        ]);
+        $this->middleware('permission:delete club_stadium_assignment')->only('destroyStadiumAssignment');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

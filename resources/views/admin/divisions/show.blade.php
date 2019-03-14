@@ -8,9 +8,11 @@
     <div class="row">
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
-            <a class="btn btn-primary mb-4" href="{{ route('divisions.edit', $division ) }}" title="Spielklasse bearbeiten">
-                <span class="fa fa-pencil"></span> Bearbeiten
-            </a>
+            @can('update division')
+                <a class="btn btn-primary mb-4" href="{{ route('divisions.edit', $division ) }}" title="Spielklasse bearbeiten">
+                    <span class="fa fa-pencil"></span> Bearbeiten
+                </a>
+            @endcan
         </div>
         <!-- dates -->
         <div class="col-md-6">
@@ -70,23 +72,25 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <a href="{{ route('seasons.show', $season ) }}" title="Anzeigen">
-                                    {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}
-                                </a>
+                                {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}
                                 <br>
                                 <span class="text-muted">{{ $season->division->name }}</span>
                                 <br>
                                 Spielwochen: {{ $season->matchweeks()->get()->count() }}
                             </td>
                             <td class="align-middle">
-                                <!-- display details -->
-                                <a class="btn btn-secondary" href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
-                                    <span class="fa fa-search-plus"></span>
-                                </a>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('seasons.edit', $season) }}" title="Saison bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('read season')
+                                    <!-- display details -->
+                                    <a class="btn btn-secondary btn-sm" href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
+                                        <span class="fa fa-search-plus"></span>
+                                    </a>
+                                @endcan
+                                @can('update season')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('seasons.edit', $season) }}" title="Saison bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

@@ -17,8 +17,64 @@
         <div class="col">
             @role('super_admin')
                 <a class="btn btn-success" href="{{ route('roles.create') }}" title="Rolle anlegen">
-                <span class="fa fa-plus-square"></span> Rolle anlegen
+                    <span class="fa fa-plus-square"></span> Rolle anlegen
                 </a>
+            @endrole
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <table class="table table-sm table-striped table-hover">
+                <thead class="thead-default">
+                <tr>
+                    <th class="">ID</th>
+                    <th class="">Name</th>
+                    <th class="">Anzeigename</th>
+                    <th class="">Berechtigung(en)</th>
+                    <th class="">Aktionen</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($roles as $role)
+                    <tr>
+                        <td class="align-top"><b>{{ $role->id }}</b></td>
+                        <td class="align-top">
+                            {{ $role->name }}
+                        </td>
+                        <td class="align-top">{{ $role->display_name }}</td>
+                        <td class="align-middle">
+                            {{-- $role->permissions->pluck('name') --}}
+                            @foreach($role->permissions->sortBy('description') as $permission)
+                                {{ $permission->description }}
+                                @unless($loop->last)
+                                    <br>
+                                @endunless
+                            @endforeach
+                        </td>
+                        <td class="align-middle">
+                            @role('super_admin')
+                                <!-- edit -->
+                                <a class="btn btn-primary btn-sm" href="{{ route('roles.edit', $role) }}" title="Rolle bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
+                            @endrole
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <!-- list all permissions -->
+    <div class="row">
+        <div class="col">
+            <h2 class="">Angelegte Berechtigungen <span class="badge badge-secondary">{{ $permissions->count() }}</span></h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @role('super_admin')
                 <a class="btn btn-success" href="{{ route('permissions.create') }}" title="Berechtigung anlegen">
                     <span class="fa fa-plus-square"></span> Berechtigung anlegen
                 </a>
@@ -32,30 +88,28 @@
                 <tr>
                     <th class="">ID</th>
                     <th class="">Name</th>
-                    <th class="">Anzeigename</th>
-                    <th class="">Guard</th>
-                    <th class="">Berechtigung(en)</th>
+                    <th class="">Beschreibung</th>
+                    <th class="">Rolle(n)</th>
                     <th class="">Aktionen</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($roles as $role)
+                @foreach($permissions as $permission)
                     <tr>
-                        <td class="align-middle"><b>{{ $role->id }}</b></td>
+                        <td class="align-middle"><b>{{ $permission->id }}</b></td>
                         <td class="align-middle">
-                            {{ $role->name }}
+                            {{ $permission->name }}
                         </td>
-                        <td class="align-middle">{{ $role->display_name }}</td>
                         <td class="align-middle">
-                            {{ $role->guard_name }}
+                            {{ $permission->description }}
                         </td>
-                        <td class="align-middle">{{ $role->permissions->pluck('name')->implode(' ') }}</td>
+                        <td class="align-middle">{{ $permission->roles->pluck('name')->implode(' ') }}</td>
                         <td class="align-middle">
                             @role('super_admin')
-                            <!-- edit -->
-                            <a class="btn btn-primary" href="{{ route('roles.edit', $role) }}" title="Rolle bearbeiten">
-                                <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                            </a>
+                                <!-- edit -->
+                                <a class="btn btn-primary btn-sm" href="{{ route('permissions.edit', $permission) }}" title="Berechtigung bearbeiten">
+                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                </a>
                             @endrole
                         </td>
                     </tr>
@@ -114,7 +168,7 @@
                             --}}
                             <!-- edit -->
                             @role('super_admin')
-                                <a class="btn btn-primary" href="{{ route('users.edit', $user) }}" title="User bearbeiten">
+                                <a class="btn btn-primary btn-sm" href="{{ route('users.edit', $user) }}" title="User bearbeiten">
                                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </a>
                             @endrole

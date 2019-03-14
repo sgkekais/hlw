@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\Session;
 class PositionController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * PositionController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list positions')->only('index');
+        $this->middleware('permission:create position')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update position')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete position')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

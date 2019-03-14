@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="display_name" id="display_name" aria-describedby="display_nameHelp" value="{{ $role->display_name }}">
-                <small id="nameHelp" class="form-text text-muted">Welche Bezeichnung soll Besuchern angezeigt werden?</small>
+                <small id="display_nameHelp" class="form-text text-muted">Welche Bezeichnung soll Besuchern angezeigt werden?</small>
             </div>
         </div>
         <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Ändern</button>

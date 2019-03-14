@@ -64,7 +64,11 @@
         {{ method_field('DELETE') }}
         <span class="form-text">Löscht den Torschützen-Eintrag.</span>
         <br>
-        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
-        <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}"><span class="fa fa-ban"></span> Abbrechen</a>
+        @can('delete goal')
+            <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
+            <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}"><span class="fa fa-ban"></span> Abbrechen</a>
+        @else
+            Keine Berechtigung.
+        @endcan
     </form>
 @endsection

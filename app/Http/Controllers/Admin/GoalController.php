@@ -11,6 +11,24 @@ use Illuminate\Support\Facades\Session;
 class GoalController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * CardController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list goals')->only('index');
+        $this->middleware('permission:create goal')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update goal')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete goal')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

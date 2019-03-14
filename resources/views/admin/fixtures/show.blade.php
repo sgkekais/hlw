@@ -38,11 +38,19 @@
         <div class="col-md-12">
             <p class="h3">
                @if($fixture->clubHome)
-                    <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">{{ $fixture->clubHome->name }}</a>
+                    @can('read club')
+                        <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">{{ $fixture->clubHome->name }}</a>
+                    @else
+                        {{ $fixture->clubHome->name }}
+                    @endcan
                 @endif
                 <span class="text-muted">vs.</span>
                 @if($fixture->clubAway)
-                    <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">{{ $fixture->clubAway->name }}</a>
+                    @can('read club')
+                        <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">{{ $fixture->clubAway->name }}</a>
+                    @else
+                       {{ $fixture->clubAway->name }}
+                    @endcan
                 @endif
             </p>
         </div>
@@ -69,15 +77,19 @@
                 <i>Kein Spielort angegeben.</i>
             @endif
             <br>
-            <a class="btn btn-primary mt-4" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
-                <span class="fa fa-pencil-square-o" aria-hidden="true"></span> Paarung bearbeiten
-            </a>
+            @can('update fixture')
+                <a class="btn btn-primary mt-4" href="{{ route('matchweeks.fixtures.edit', [$matchweek, $fixture]) }}" title="Paarung bearbeiten">
+                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span> Paarung bearbeiten
+                </a>
+            @endcan
             <br>
             <!-- reschedule, only once -->
             @if(!$fixture->rescheduledTo)
-                <a class="btn btn-warning mt-2" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
-                    <span class="fa fa-calendar-plus-o" aria-hidden="true"></span> Paarung verlegen
-                </a>
+                @can('reschedule fixture')
+                    <a class="btn btn-warning mt-2" href="{{ route('reschedule.create', [$matchweek, $fixture]) }}" title="Paarung verlegen">
+                        <span class="fa fa-calendar-plus-o" aria-hidden="true"></span> Paarung verlegen
+                    </a>
+                @endcan
             @else
                 <button class="btn btn-outline-danger mt-2" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> Paarung wurde schon verlegt.</button>
             @endif
@@ -111,18 +123,22 @@
                         <img src="{{ asset('storage/'.$fixture->match_report_url) }}" class="img-fluid " title="Spielbericht" alt="Spielbericht">
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-outline-danger" onclick="event.preventDefault(); document.getElementById('deleteMatchReport').submit();"><span class="fa fa-fw fa-upload"></span> Löschen</button>
-                        <form id="deleteMatchReport" class="d-none" method="POST" action="{{ route('fixtures.matchreport.delete', $fixture) }}" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                        </form>
+                        @can('delete matchreport')
+                            <button type="button" class="btn btn-outline-danger" onclick="event.preventDefault(); document.getElementById('deleteMatchReport').submit();"><span class="fa fa-fw fa-upload"></span> Löschen</button>
+                            <form id="deleteMatchReport" class="d-none" method="POST" action="{{ route('fixtures.matchreport.delete', $fixture) }}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                            </form>
+                        @endcan
                     </div>
                 @else
                     <div class="col-6">
                         Kein Spielbericht vorhanden.
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#uploadMatchReport" ><span class="fa fa-fw fa-upload"></span> Hochladen</button>
+                        @can('create matchreport')
+                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#uploadMatchReport" ><span class="fa fa-fw fa-upload"></span> Hochladen</button>
+                        @endcan
                     </div>
                 @endif
             </div>
@@ -174,26 +190,38 @@
                             </td>
                             <td class="align-middle">
                                 @if($oldfixture->clubHome)
-                                    <a href="{{ route('clubs.show', $oldfixture->clubHome) }}" title="Mannschaft anzeigen">
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $oldfixture->clubHome) }}" title="Mannschaft anzeigen">
+                                            {{ $oldfixture->clubHome->name_short }}
+                                        </a>
+                                    @else
                                         {{ $oldfixture->clubHome->name_short }}
-                                    </a>
+                                    @endcan
                                 @else
                                     -
                                 @endif
                                 vs.
                                 @if($oldfixture->clubAway)
-                                    <a href="{{ route('clubs.show', $oldfixture->clubAway) }}" title="Mannschaft anzeigen">
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $oldfixture->clubAway) }}" title="Mannschaft anzeigen">
+                                            {{ $oldfixture->clubAway->name_short }}
+                                        </a>
+                                    @else
                                         {{ $oldfixture->clubAway->name_short }}
-                                    </a>
+                                    @endcan
                                 @else
                                     -
                                 @endif
                             </td>
                             <td class="align-middle">
                                 @if($oldfixture->stadium)
-                                    <a href="{{ route('stadiums.show', $oldfixture->stadium) }}">
+                                    @can('read stadium')
+                                        <a href="{{ route('stadiums.show', $oldfixture->stadium) }}">
+                                            {{ $oldfixture->stadium->name_short }}
+                                        </a>
+                                    @else
                                         {{ $oldfixture->stadium->name_short }}
-                                    </a>
+                                    @endcan
                                 @endif
                             </td>
                             <td class="align-middle">
@@ -204,18 +232,24 @@
                             <td class="align-middle">{{ $oldfixture->cancelled ? "Ann." : null }}</td>
                             <td class="align-middle">
                                 <!-- show -->
-                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$oldfixture->matchweek, $oldfixture]) }}" title="Paarung anzeigen">
-                                    <span class="fa fa-search-plus" aria-hidden="true"></span>
-                                </a>
+                                @can('read fixture')
+                                    <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$oldfixture->matchweek, $oldfixture]) }}" title="Paarung anzeigen">
+                                        <span class="fa fa-search-plus" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                                 <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$oldfixture->matchweek, $oldfixture]) }}" title="Paarung bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update fixture')
+                                    <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$oldfixture->matchweek, $oldfixture]) }}" title="Paarung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                                 <!-- reschedule, only once -->
                                 @if(!$oldfixture->rescheduledTo)
-                                    <a class="btn btn-warning" href="{{ route('reschedule.create', [$oldfixture->matchweek, $oldfixture]) }}" title="Paarung verlegen">
-                                        <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
-                                    </a>
+                                    @can('reschedule fixture')
+                                        <a class="btn btn-warning" href="{{ route('reschedule.create', [$oldfixture->matchweek, $oldfixture]) }}" title="Paarung verlegen">
+                                            <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
+                                        </a>
+                                    @endcan
                                 @else
                                     <button class="btn btn-outline-danger" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
                                 @endif
@@ -235,9 +269,11 @@
                 <!-- add goals, if goals_home or goals_away not null -->
                 @if($fixture->goals_home || $fixture->goals_away )
                     @if($fixture->goals->count() < $fixture->goals_home + $fixture->goals_away)
-                        <a class="btn btn-success mb-4" href="{{ route('fixtures.goals.create', $fixture) }}" title="Tore pflegen">
-                            <span class="fa fa-soccer-ball-o" aria-hidden="true"></span> Torschützen eintragen
-                        </a>
+                        @can('create goal')
+                            <a class="btn btn-success mb-4" href="{{ route('fixtures.goals.create', $fixture) }}" title="Tore pflegen">
+                                <span class="fa fa-soccer-ball-o" aria-hidden="true"></span> Torschützen eintragen
+                            </a>
+                        @endcan
                     @elseif($fixture->goals->count() === $fixture->goals_home + $fixture->goals_away)
                         <div class="alert alert-success" role="alert">
                             <span class="fa fa-check"></span> Alle Torschützen eingetragen.
@@ -267,10 +303,12 @@
                                 <td>{{ $goal->player->club->name_short }}</td>
                                 <td>{{ $goal->score }}</td>
                                 <td>
-                                    <!-- edit -->
+                                <!-- edit -->
+                                @can('update goal')
                                     <a class="btn btn-primary" href="{{ route('fixtures.goals.edit', [$fixture, $goal]) }}" title="Torschützen bearbeiten">
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
+                                @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -287,10 +325,12 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="mt-4">Karten</h3>
-                <!-- add cards -->
-                <a class="btn btn-success mb-4" href="{{ route('fixtures.cards.create', $fixture ) }}" title="Karte eintragen">
-                    <span class="fa fa-clone" aria-hidden="true"></span> Karte eintragen
-                </a>
+                @can('create card')
+                    <!-- add cards -->
+                    <a class="btn btn-success mb-4" href="{{ route('fixtures.cards.create', $fixture ) }}" title="Karte eintragen">
+                        <span class="fa fa-clone" aria-hidden="true"></span> Karte eintragen
+                    </a>
+                @endcan
                 <!-- list cards -->
                 @if($fixture->cards->count() > 0)
                     <table class="table table-sm table-striped table-hover">
@@ -316,9 +356,11 @@
                                 <td>{{ $card->ban_reason }}</td>
                                 <td>
                                     <!-- edit -->
-                                    <a class="btn btn-primary" href="{{ route('fixtures.cards.edit', [ $fixture, $card ]) }}" title="Karte bearbeiten">
-                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                    </a>
+                                    @can('update card')
+                                        <a class="btn btn-primary" href="{{ route('fixtures.cards.edit', [ $fixture, $card ]) }}" title="Karte bearbeiten">
+                                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                        </a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -334,10 +376,12 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="mt-4">Schiedsrichter</h3>
-                <!-- add referee -->
-                <a class="btn btn-success mb-4" href="{{ route('createRefereeAssignment', $fixture ) }}" title="Schiedsrichter zuordnen">
-                    <span class="fa fa-clone" aria-hidden="true"></span> Schiedsrichter zuordnen
-                </a>
+                @can('create referee_assignment')
+                    <!-- add referee -->
+                    <a class="btn btn-success mb-4" href="{{ route('createRefereeAssignment', $fixture ) }}" title="Schiedsrichter zuordnen">
+                        <span class="fa fa-clone" aria-hidden="true"></span> Schiedsrichter zuordnen
+                    </a>
+                @endcan
                 @if($fixture->referees->count() > 0)
                     <table class="table table-sm table-striped table-hover">
                         <thead class="thead-default">
@@ -355,9 +399,13 @@
                             <tr>
                                 <td class="align-middle">{{ $referee->id }}</td>
                                 <td class="align-middle">
-                                    <a href="{{ route('referees.show', $referee) }}" title="Schiedsricher anzeigen">
+                                    @can('read referee')
+                                        <a href="{{ route('referees.show', $referee) }}" title="Schiedsricher anzeigen">
+                                            {{ $referee->person->full_name }}
+                                        </a>
+                                    @else
                                         {{ $referee->person->full_name }}
-                                    </a>
+                                    @endcan
                                 </td>
                                 <td class="align-middle">
                                     Angelegt: {{ $referee->pivot->created_at->format('d.m.y h:i') }} <br>
@@ -373,9 +421,11 @@
                                 <td class="align-middle"><i>{{ $referee->pivot->note }}</i></td>
                                 <td class="align-middle">
                                     <!-- edit -->
-                                    <a class="btn btn-primary" href="{{ route('editRefereeAssignment', [ $fixture, $referee ]) }}" title="Schiedsrichterzuordnung bearbeiten">
-                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                    </a>
+                                    @can('update referee_assignment')
+                                        <a class="btn btn-primary" href="{{ route('editRefereeAssignment', [ $fixture, $referee ]) }}" title="Schiedsrichterzuordnung bearbeiten">
+                                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                        </a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -432,17 +482,25 @@
                             </td>
                             <td class="align-middle">
                                 @if($newfixture->clubHome)
-                                    <a href="{{ route('clubs.show', $newfixture->clubHome) }}" title="Mannschaft anzeigen">
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $newfixture->clubHome) }}" title="Mannschaft anzeigen">
+                                            {{ $newfixture->clubHome->name_short }}
+                                        </a>
+                                    @else
                                         {{ $newfixture->clubHome->name_short }}
-                                    </a>
+                                    @endcan
                                 @else
                                     -
                                 @endif
                                 vs.
                                 @if($newfixture->clubAway)
-                                    <a href="{{ route('clubs.show', $newfixture->clubAway) }}" title="Mannschaft anzeigen">
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $newfixture->clubAway) }}" title="Mannschaft anzeigen">
+                                            {{ $newfixture->clubAway->name_short }}
+                                        </a>
+                                    @else
                                         {{ $newfixture->clubAway->name_short }}
-                                    </a>
+                                    @endcan
                                 @else
                                     -
                                 @endif
@@ -462,18 +520,24 @@
                             <td class="align-middle">{{ $newfixture->cancelled ? "Ann." : null }}</td>
                             <td class="align-middle">
                                 <!-- show -->
-                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$newfixture->matchweek, $newfixture]) }}" title="Paarung anzeigen">
-                                    <span class="fa fa-search-plus" aria-hidden="true"></span>
-                                </a>
+                                @can('read fixture')
+                                    <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$newfixture->matchweek, $newfixture]) }}" title="Paarung anzeigen">
+                                        <span class="fa fa-search-plus" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                                 <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$newfixture->matchweek, $newfixture]) }}" title="Paarung bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update fixture')
+                                    <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$newfixture->matchweek, $newfixture]) }}" title="Paarung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                                 <!-- reschedule, only once -->
                                 @if(!$newfixture->rescheduledTo)
-                                    <a class="btn btn-warning" href="{{ route('reschedule.create', [$newfixture->matchweek, $newfixture]) }}" title="Paarung verlegen">
-                                        <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
-                                    </a>
+                                    @can('reschedule fixture')
+                                        <a class="btn btn-warning" href="{{ route('reschedule.create', [$newfixture->matchweek, $newfixture]) }}" title="Paarung verlegen">
+                                            <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
+                                        </a>
+                                    @endcan
                                 @else
                                     <button class="btn btn-outline-danger" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
                                 @endif

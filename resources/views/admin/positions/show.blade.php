@@ -56,20 +56,30 @@
                         <tr>
                             <td>{{ $player->id }}</td>
                             <td>
-                                <a href="{{ route('people.show', $player->person) }}" title="Person anzeigen">
+                                @can('read person')
+                                    <a href="{{ route('people.show', $player->person) }}" title="Person anzeigen">
+                                        {{ $player->person->last_name }}, {{ $player->person->first_name }}
+                                    </a>
+                                @else
                                     {{ $player->person->last_name }}, {{ $player->person->first_name }}
-                                </a>
+                                @endcan
                             </td>
                             <td>
-                                <a href="{{ route('clubs.show', $player->club) }}" title="Mannschaft anzeigen">
+                                @can('read club')
+                                    <a href="{{ route('clubs.show', $player->club) }}" title="Mannschaft anzeigen">
+                                        {{ $player->club->name }}
+                                    </a>
+                                @else
                                     {{ $player->club->name }}
-                                </a>
+                                @endcan
                             </td>
                             <td>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('clubs.players.edit', [$player->club,$player]) }}" title="Spieler bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update club_player_assignment')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('clubs.players.edit', [$player->club,$player]) }}" title="Spieler bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

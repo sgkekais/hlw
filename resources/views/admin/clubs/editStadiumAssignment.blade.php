@@ -84,10 +84,14 @@
         <!-- protection against CSRF (cross-site request forgery) attacks-->
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
-        <span class="form-text">Löscht die Zuordnung des Spielorts zur Mannschaft</span></b>.</span>
+        <span class="form-text">Löscht die Zuordnung des Spielorts zur Mannschaft.</span>
         <br>
-        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
-        <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}"><span class="fa fa-ban"></span> Abbrechen</a>
+        @can('delete club_stadium_assignment')
+            <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
+            <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}"><span class="fa fa-ban"></span> Abbrechen</a>
+        @else
+            Keine Berechtigung.
+        @endcan
     </form>
 
 @endsection

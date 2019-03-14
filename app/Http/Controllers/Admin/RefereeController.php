@@ -13,6 +13,25 @@ use Illuminate\Support\Facades\Session;
 class RefereeController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * ClubController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list referees')->only('index');
+        $this->middleware('permission:create referee')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:read referee')->only('show');
+        $this->middleware('permission:update referee')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete referee')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

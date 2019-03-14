@@ -13,6 +13,24 @@ use Excel;
 class MatchweekController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * CompetitionController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list matchweeks')->only('index');
+        $this->middleware('permission:create matchweek')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update matchweek')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete matchweek')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

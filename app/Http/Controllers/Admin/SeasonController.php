@@ -12,6 +12,35 @@ use Illuminate\Support\Facades\Session;
 class SeasonController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * ContactController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list seasons')->only('index');
+        $this->middleware('permission:create season')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update season')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete season')->only('destroy');
+
+        // Club Assignment Permissions
+        $this->middleware('permission:create club_season_assignment')->only([
+            'createClubAssignment',
+            'storeClubAssignment']);
+        $this->middleware('permission:update club_season_assignment')->only([
+            'editClubAssignment',
+            'updateClubAssignment'
+        ]);
+        $this->middleware('permission:delete club_season_assignment')->only('destroyClubAssignment');
+
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

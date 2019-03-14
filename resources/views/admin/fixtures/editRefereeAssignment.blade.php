@@ -56,16 +56,20 @@
             <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}"><span class="fa fa-ban"></span> Abbrechen</a>
         </div>
     </form>
-    <hr>
-    <h3 class="mt-4">Zuordnung löschen</h3>
-    <form method="POST" action="{{ route('destroyRefereeAssignment', [$fixture, $referee]) }}">
-        <!-- protection against CSRF (cross-site request forgery) attacks-->
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-        <span class="form-text">Löscht die Zuordnung des Schiedsrichters zur Paarung</span></b>.</span>
-        <br>
-        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
-        <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}"><span class="fa fa-ban"></span> Abbrechen</a>
-    </form>
+    @can('delete referee_assignment')
+        <hr>
+        <h3 class="mt-4">Zuordnung löschen</h3>
+        <form method="POST" action="{{ route('destroyRefereeAssignment', [$fixture, $referee]) }}">
+            <!-- protection against CSRF (cross-site request forgery) attacks-->
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <span class="form-text">Löscht die Zuordnung des Schiedsrichters zur Paarung</span>
+            <br>
+            @can('delete referee_assignment')
+                <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
+                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}"><span class="fa fa-ban"></span> Abbrechen</a>
+            @endcan
+        </form>
+    @endcan
 
 @endsection

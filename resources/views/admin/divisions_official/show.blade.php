@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="">Details zu Spielklasse</h1>
+    <h1 class="">Details zu off. Spielklasse</h1>
     <h2 class="mt-4 text-primary">&mdash; {{ $division->name }}</h2>
 
     <div class="row">

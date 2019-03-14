@@ -17,19 +17,27 @@
     <div class="row">
         <div class="col-md-6">
             <h3 class="mt-4">Aktionen</h3>
-            <a class="btn btn-primary mb-2" href="{{ route('clubs.edit', $club ) }}" title="Wettbewerb bearbeiten">
-                <span class="fa fa-pencil"></span> Bearbeiten
-            </a>
-            <br>
-            <a class="btn btn-secondary" href="{{ route('clubs.players.create', $club ) }}" title="Spieler zuordnen">
-                <span class="fa fa-plus-square"></span> Spieler
-            </a>
-            <a class="btn btn-secondary" href="{{ route('clubs.contacts.create', $club) }}" title="Ansprechpartner zuordnen">
-                <span class="fa fa-plus-square"></span> Kontakt
-            </a>
-            <a class="btn btn-secondary" href="{{ route('createStadiumAssignment', $club) }}" title="Spielort zuordnen">
-                <span class="fa fa-plus-square"></span> Spielort
-            </a>
+            @can('update club')
+                <a class="btn btn-primary mb-2" href="{{ route('clubs.edit', $club ) }}" title="Mannschaft bearbeiten">
+                    <span class="fa fa-pencil"></span> Bearbeiten
+                </a>
+                <br>
+            @endcan
+            @can('create club_player_assignment')
+                <a class="btn btn-secondary" href="{{ route('clubs.players.create', $club ) }}" title="Spieler zuordnen">
+                    <span class="fa fa-plus-square"></span> Spieler
+                </a>
+            @endcan
+            @can('create contact')
+                <a class="btn btn-secondary" href="{{ route('clubs.contacts.create', $club) }}" title="Ansprechpartner zuordnen">
+                    <span class="fa fa-plus-square"></span> Kontakt
+                </a>
+            @endcan
+            @can('create club_stadium_assignment')
+                <a class="btn btn-secondary" href="{{ route('createStadiumAssignment', $club) }}" title="Spielort zuordnen">
+                    <span class="fa fa-plus-square"></span> Spielort
+                </a>
+            @endcan
         </div>
         <!-- dates -->
         <div class="col-md-6">
@@ -119,9 +127,13 @@
                         <tr>
                             <td>{{ $season->id }}</td>
                             <td>
-                                <a href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
+                                @can('read season')
+                                    <a href="{{ route('seasons.show', $season) }}" title="Saison anzeigen">
+                                        {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}
+                                    </a>
+                                @else
                                     {{ $season->begin->format('d.m.Y') }} bis {{ $season->end->format('d.m.Y') }}
-                                </a>
+                                @endcan
                                 <br>
                                 <span class="text-muted">({{ $season->division->name }})</span>
                             </td>
@@ -130,10 +142,12 @@
                             <td>{{ $season->pivot->deduction_goals }}</td>
                             <td>{{ $season->pivot->withdrawal }}</td>
                             <td>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('editClubAssignment', [$season, $club]) }}" title="Zuordnung bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update club_season_assignment')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('editClubAssignment', [$season, $club]) }}" title="Zuordnung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -192,26 +206,38 @@
                             </td>
                             <td class="align-middle">
                                 @if($fixture->clubHome)
-                                    <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
+                                            {{ $fixture->clubHome->name_short }}
+                                        </a>
+                                    @else
                                         {{ $fixture->clubHome->name_short }}
-                                    </a>
+                                    @endcan
                                 @else
                                     -
                                 @endif
                                 vs.
                                 @if($fixture->clubAway)
-                                    <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
+                                    @can('read club')
+                                        <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
+                                            {{ $fixture->clubAway->name_short }}
+                                        </a>
+                                    @else
                                         {{ $fixture->clubAway->name_short }}
-                                    </a>
+                                    @endcan
                                 @else
                                     -
                                 @endif
                             </td>
                             <td class="align-middle">
                                 @if($fixture->stadium)
-                                    <a href="{{ route('stadiums.show', $fixture->stadium) }}">
+                                    @can('read stadium')
+                                        <a href="{{ route('stadiums.show', $fixture->stadium) }}">
+                                            {{ $fixture->stadium->name_short }}
+                                        </a>
+                                    @else
                                         {{ $fixture->stadium->name_short }}
-                                    </a>
+                                    @endcan
                                 @endif
                             </td>
                             <td class="align-middle text-center">
@@ -268,14 +294,18 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <!-- show -->
-                                <a class="btn btn-secondary" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}" title="Paarung anzeigen">
-                                    <span class="fa fa-search-plus" aria-hidden="true"></span>
-                                </a>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('read fixture')
+                                    <!-- show -->
+                                    <a class="btn btn-secondary btn-sm" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}" title="Paarung anzeigen">
+                                        <span class="fa fa-search-plus" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
+                                @can('update fixture')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -338,9 +368,13 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <a href="{{ route('people.show', $p_active->person->id) }}" title="Person bearbeiten (nicht Spieler)">
+                                @can('read person')
+                                    <a href="{{ route('people.show', $p_active->person->id) }}" title="Person bearbeiten (nicht Spieler)">
+                                        ({{ $p_active->person->id }}) {{ $p_active->person->full_name ?? "-" }}
+                                    </a>
+                                @else
                                     ({{ $p_active->person->id }}) {{ $p_active->person->full_name ?? "-" }}
-                                </a>
+                                @endcan
                             </td>
                             <td class="align-middle">{{ $p_active->sign_on->format('d.m.Y') }}</td>
                             <td class="align-middle">{{ $p_active->number ?? "-" }}</td>
@@ -359,10 +393,12 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('clubs.players.edit', [$club, $p_active]) }}" title="Spieler bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update club_player_assignment')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('clubs.players.edit', [$club, $p_active]) }}" title="Spieler bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -389,17 +425,23 @@
                         <tr>
                             <td>{{ $p_inactive->id }}</td>
                             <td>
-                                <a href="" title="Person bearbeiten">
+                                @can('update person')
+                                    <a href="" title="Person bearbeiten">
+                                        {{ $p_inactive->person->last_name }}, {{ $p_inactive->person->first_name }}
+                                    </a>
+                                @else
                                     {{ $p_inactive->person->last_name }}, {{ $p_inactive->person->first_name }}
-                                </a>
+                                @endcan
                             </td>
                             <td>{{ $p_inactive->sign_on->format('d.m.Y') }}</td>
                             <td>{{ $p_inactive->sign_off->format('d.m.Y') }}</td>
                             <td>
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('clubs.players.edit', [$club, $p_inactive]) }}" title="Spieler bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update club_player_assignment')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary" href="{{ route('clubs.players.edit', [$club, $p_inactive]) }}" title="Spieler bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -429,18 +471,24 @@
                         <tr>
                             <td class="align-middle">{{ $contact->id }}</td>
                             <td class="align-middle">
-                                <a href="{{ route('people.show', $contact->person ) }}">
+                                @can('read person')
+                                    <a href="{{ route('people.show', $contact->person ) }}">
+                                        {{ $contact->person->last_name }}, {{ $contact->person->first_name }}
+                                    </a>
+                                @else
                                     {{ $contact->person->last_name }}, {{ $contact->person->first_name }}
-                                </a>
+                                @endcan
                             </td>
                             <td class="align-middle">{{ $contact->hierarchy_level }}.</td>
                             <td class="align-middle">{{ $contact->mail }}</td>
                             <td class="align-middle">{{ $contact->mobile }}</td>
                             <td class="align-middle">
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('clubs.contacts.edit', [ $club, $contact ]) }}" title="Kontakt bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update contact')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('clubs.contacts.edit', [ $club, $contact ]) }}" title="Kontakt bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -471,9 +519,13 @@
                         <tr>
                             <td class="align-middle">{{ $stadium->id }}</td>
                             <td class="align-middle">
-                                <a href="{{ route('stadiums.show', $stadium) }}" title="Spielort anzeigen">
+                                @can('read stadium')
+                                    <a href="{{ route('stadiums.show', $stadium) }}" title="Spielort anzeigen">
+                                        {{ $stadium->name }}
+                                    </a>
+                                @else
                                     {{ $stadium->name }}
-                                </a>
+                                @endcan
                             </td>
                             <td class="align-middle">{{ $stadium->pivot->regular_home_day }} {{ $stadium->pivot->regular_home_time }}</td>
                             <td class="align-middle">
@@ -485,10 +537,12 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                <!-- edit -->
-                                <a class="btn btn-primary" href="{{ route('editStadiumAssignment', [$club,$stadium]) }}" title="Spielort-Zuordnung bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
+                                @can('update club_stadium_assignment')
+                                    <!-- edit -->
+                                    <a class="btn btn-primary btn-sm" href="{{ route('editStadiumAssignment', [$club,$stadium]) }}" title="Spielort-Zuordnung bearbeiten">
+                                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

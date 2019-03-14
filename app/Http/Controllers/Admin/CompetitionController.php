@@ -5,10 +5,29 @@ namespace HLW\Http\Controllers\Admin;
 use HLW\Competition;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CompetitionController extends Controller
 {
+    /**
+     * Assign permission middleware to specific actions
+     * CompetitionController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list competitions')->only('index');
+        $this->middleware('permission:create competition')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update competition')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete competition')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +59,7 @@ class CompetitionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-           'name' => 'required|min:4'
+            'name' => 'required|min:4'
         ]);
 
         // create a new object

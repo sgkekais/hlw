@@ -6,6 +6,7 @@ use HLW\User;
 
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -19,9 +20,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('name')->get();
-        $roles = Role::all();
+        $roles = Role::orderBy('name')->get();
+        $permissions = Permission::orderBy('description')->get();
 
-        return view('admin.users.index', compact('users', 'roles'));
+        return view('admin.users.index', compact('users', 'roles', 'permissions'));
     }
 
     /**

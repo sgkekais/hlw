@@ -6,10 +6,29 @@ use HLW\Card;
 use HLW\Fixture;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CardController extends Controller
 {
+    /**
+     * Assign permission middleware to specific actions
+     * CardController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list cards')->only('index');
+        $this->middleware('permission:create card')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update card')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete card')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

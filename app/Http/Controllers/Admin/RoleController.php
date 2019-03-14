@@ -38,11 +38,13 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'  =>  'required|unique:roles'
+            'name'          =>  'required|unique:roles',
+            'display_name'  =>  'nullable'
         ]);
 
         $role = new Role([
-            'name'  =>  $request->name
+            'name'          => $request->name,
+            'display_name'  => $request->display_name
         ]);
 
         $role->save();
@@ -80,11 +82,13 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $this->validate($request, [
-            'name'  =>  'required|unique:roles'
+            'name'          => 'required',
+            'display_name'  => 'nullable'
         ]);
 
         $role->update([
-            'name'  =>  $request->name
+            'name'          => $request->name,
+            'display_name'  => $request->display_name
         ]);
 
         return redirect()->route('users.index')->with('success', 'Rolle '.$role->name.' erfolgreich geändert.');

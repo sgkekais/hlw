@@ -51,8 +51,12 @@
         {{ method_field('DELETE') }}
         <span class="form-text">Löscht die off. Spielklasse</span>
         <br>
-        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
-        <a class="btn btn-secondary" href="{{ route('divisions-official.index') }}"><span class="fa fa-ban"></span> Abbrechen</a>
+        @can('delete division_official')
+            <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
+            <a class="btn btn-secondary" href="{{ route('divisions-official.index') }}"><span class="fa fa-ban"></span> Abbrechen</a>
+        @else
+            Keine Berechtigung.
+        @endcan
     </form>
 
 @endsection

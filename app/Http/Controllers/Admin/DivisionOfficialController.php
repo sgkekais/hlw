@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\Session;
 class DivisionOfficialController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * DivisionOfficialController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list divisions_official')->only('index');
+        $this->middleware('permission:create division_official')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update division_official')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete division_official')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

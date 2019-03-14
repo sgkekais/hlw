@@ -9,9 +9,11 @@
     <div class="row">
         <div class="col-md-3">
             <!-- controls -->
-            <a class="btn btn-success" href="{{ route('divisions.create') }}" title="Spielklasse anlegen">
-                <span class="fa fa-plus-square"></span> Spielklasse anlegen
-            </a>
+            @can('create division')
+                <a class="btn btn-success" href="{{ route('divisions.create') }}" title="Spielklasse anlegen">
+                    <span class="fa fa-plus-square"></span> Spielklasse anlegen
+                </a>
+            @endcan
         </div>
     </div>
     <hr>
@@ -39,7 +41,7 @@
                     @endif
                 </td>
                 <td class="align-middle">
-                    <a href="{{ route('divisions.show', $division ) }}" title="Anzeigen">{{ $division->name }}</a>
+                    {{ $division->name }}
                     <br>
                     <span class="text-muted">{{ $division->competition->name }}</span>
                     <br>
@@ -47,14 +49,18 @@
                 </td>
                 <td class="align-middle">{{ $division->hierarchy_level }}</td>
                 <td class="align-middle">
-                    <!-- display details -->
-                    <a class="btn btn-secondary" href="{{ route('divisions.show', $division) }}" title="Spielklasse anzeigen">
-                        <span class="fa fa-search-plus"></span>
-                    </a>
-                    <!-- edit -->
-                    <a class="btn btn-primary" href="{{ route('divisions.edit', $division) }}" title="Spielklasse bearbeiten">
-                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                    </a>
+                    @can('read division')
+                        <!-- display details -->
+                        <a class="btn btn-secondary btn-sm" href="{{ route('divisions.show', $division) }}" title="Spielklasse anzeigen">
+                            <span class="fa fa-search-plus"></span>
+                        </a>
+                    @endcan
+                    @can('update division')
+                        <!-- edit -->
+                        <a class="btn btn-primary btn-sm" href="{{ route('divisions.edit', $division) }}" title="Spielklasse bearbeiten">
+                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                        </a>
+                    @endcan
                 </td>
             </tr>
         @endforeach

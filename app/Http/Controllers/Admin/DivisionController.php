@@ -11,6 +11,24 @@ use Illuminate\Support\Facades\Session;
 class DivisionController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * DivisionController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list divisions')->only('index');
+        $this->middleware('permission:create division')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update division')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete division')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

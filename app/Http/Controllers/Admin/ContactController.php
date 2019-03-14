@@ -12,6 +12,24 @@ use Illuminate\Support\Facades\Session;
 class ContactController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * ContactController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list contacts')->only('index');
+        $this->middleware('permission:create contact')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update contact')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete contact')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -86,8 +86,12 @@
         {{ method_field('DELETE') }}
         <span class="form-text">Löscht den Ansprechpartner.</span>
         <br>
-        <button type="submit" class="btn btn-danger">Löschen</button>
-        <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}">Abbrechen</a>
+        @can('delete contact')
+            <button type="submit" class="btn btn-danger">Löschen</button>
+            <a class="btn btn-secondary" href="{{ route('clubs.show', $club) }}">Abbrechen</a>
+        @else
+            Keine Berechtigung.
+        @endcan
     </form>
 
 @endsection

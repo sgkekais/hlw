@@ -10,6 +10,24 @@ use Spatie\Permission\Models\Role;
 class PermissionController extends Controller
 {
     /**
+     * Assign permission middleware to specific actions
+     * PermissionController constructor.
+     */
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list permissions')->only('index');
+        $this->middleware('permission:create permission')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:update permission')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete permission')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -40,11 +58,13 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-           'name'   =>  'required|unique:permissions'
+            'name'          =>  'required|unique:permissions',
+            'description'   =>  'nullable'
         ]);
 
         $permission = new Permission([
-            'name'  =>  $request->name
+            'name'          =>  $request->name,
+            'description'   =>  $request->description
         ]);
 
         $permission->save();
@@ -75,9 +95,10 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
+        $roles = Role::all();
         $permission->load('roles');
 
-        return view('admin.permissions.edit', compact('permission'));
+        return view('admin.permissions.edit', compact('permission', 'roles'));
     }
 
     /**
@@ -89,6 +110,29 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         //
+        $this->validate($request, [
+            'name'          =>  'required',
+            'description'   =>  'nullable'
+        ]);
+
+        // only retrieve the name and description fields
+        $input = $request->only(['name', 'description']);
+        // update user
+        $permission->fill($input)->save();
+
+        // retrieve all selected roles
+        $roles = $request['roles'];
+
+        if (isset($roles)) {
+            $permission->roles()->sync($roles);  //If one or more role is selected associate user to roles
+        }
+        else {
+            $permission->roles()->detach(); // If no role is selected remove existing roles associated to the user
+        }
+
+        return redirect()->route('users.index')
+            ->with('success', 'Berechtigung erfolgreich aktualisiert.');
+
     }
 
     /**

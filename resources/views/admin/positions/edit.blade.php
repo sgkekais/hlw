@@ -47,8 +47,12 @@
         {{ method_field('DELETE') }}
         <span class="form-text">Löscht die Position.</span>
         <br>
-        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
-        <a class="btn btn-secondary" href="{{ url()->previous() }}"><span class="fa fa-ban"></span> Abbrechen</a>
+        @can('delete position')
+            <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
+            <a class="btn btn-secondary" href="{{ url()->previous() }}"><span class="fa fa-ban"></span> Abbrechen</a>
+        @else
+            Keine Berechtigung.
+        @endcan
     </form>
 
 @endsection

@@ -10,9 +10,11 @@
         <div class="row">
             <div class="col-md-3">
                 <!-- controls -->
-                <a class="btn btn-primary" href="{{ route('matchweeks.create') }}" title="Spielwoche anlegen">
-                    <span class="fa fa-plus-circle"></span> Spielwoche anlegen
-                </a>
+                @can('create matchweek')
+                    <a class="btn btn-primary" href="{{ route('matchweeks.create') }}" title="Spielwoche anlegen">
+                        <span class="fa fa-plus-circle"></span> Spielwoche anlegen
+                    </a>
+                @endcan
             </div>
         </div>
         <hr>
@@ -47,14 +49,18 @@
                     <td class="align-middle">{{ $matchweek->name }}</td>
                     <td class="align-middle">{{ $matchweek->published ? "JA" : "NEIN" }}</td>
                     <td class="align-middle">
-                        <!-- display details -->
-                        <a class="btn btn-secondary" href="{{ route('matchweeks.show', $matchweek) }}" title="Spielwoche anzeigen">
-                            <span class="fa fa-eye"></span>
-                        </a>
-                        <!-- edit -->
-                        <a class="btn btn-primary" href="{{ route('matchweeks.edit', $matchweek) }}" title="Spielwoche bearbeiten">
-                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                        </a>
+                        @can('read matchweek')
+                            <!-- display details -->
+                            <a class="btn btn-secondary btn-sm" href="{{ route('matchweeks.show', $matchweek) }}" title="Spielwoche anzeigen">
+                                <span class="fa fa-eye"></span>
+                            </a>
+                        @endcan
+                        @can('update matchweek')
+                            <!-- edit -->
+                            <a class="btn btn-primary btn-sm" href="{{ route('matchweeks.edit', $matchweek) }}" title="Spielwoche bearbeiten">
+                                <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                            </a>
+                        @endcan
                     </td>
                     <td class="align-middle">
                         angelegt am {{ $matchweek->created_at->format('d.m.Y \\u\\m H:i') }} Uhr

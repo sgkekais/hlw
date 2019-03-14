@@ -3,7 +3,7 @@
 <div id="app">
     <!-- Navigation -->
     @include('admin._partials.nav')
-    <div class="container h-100">
+    <div class="container-fluid h-100">
 
             <div class="row mt-2">
                 <div class="col-12">

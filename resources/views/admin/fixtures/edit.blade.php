@@ -237,17 +237,23 @@
         <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Ändern</button>
         <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$matchweek->season, $matchweek]) }}"><span class="fa fa-ban"></span> Abbrechen</a>
     </form>
-    <hr>
-    <h3 class="mt-4">Paarung löschen</h3>
-    <form method="POST" action="{{ route('matchweeks.fixtures.destroy', [$matchweek, $fixture]) }}">
-        <!-- protection against CSRF (cross-site request forgery) attacks-->
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-        <span class="form-text">Löscht die Paarung.</span>
-        <br>
-        <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
-        <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$matchweek->season, $matchweek]) }}"><span class="fa fa-ban"></span> Abbrechen</a>
-    </form>
+        <hr>
+        <h3 class="mt-4">Paarung löschen</h3>
+        <div class="form-group">
+            <form method="POST" action="{{ route('matchweeks.fixtures.destroy', [$matchweek, $fixture]) }}">
+                <!-- protection against CSRF (cross-site request forgery) attacks-->
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <span class="form-text">Löscht die Paarung.</span>
+                <br>
+                @can('delete fixture')
+                    <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> Löschen</button>
+                    <a class="btn btn-secondary" href="{{ route('seasons.matchweeks.show', [$matchweek->season, $matchweek]) }}"><span class="fa fa-ban"></span> Abbrechen</a>
+                @else
+                    Keine Berechtigung.
+                @endcan
+            </form>
+        </div>
 
 @endsection
 

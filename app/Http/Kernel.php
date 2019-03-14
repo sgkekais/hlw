@@ -63,5 +63,9 @@ class Kernel extends HttpKernel
         'isAdmin' => \HLW\Http\Middleware\VerifyAdmins::class,
         // custom middleware to check whether a user is verified
         'isVerified' => \HLW\Http\Middleware\IsVerified::class,
+        // permission middlewares
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class
     ];
 }

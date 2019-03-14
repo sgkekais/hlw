@@ -8,10 +8,12 @@
     </p>
     <div class="row">
         <div class="col-md-3">
-            <!-- controls -->
-            <a class="btn btn-success" href="{{ route('referees.create') }}" title="Schiedsrichter anlegen">
-                <span class="fa fa-plus-square"></span> Schiedsrichter anlegen
-            </a>
+            @can('create referee')
+                <!-- controls -->
+                <a class="btn btn-success" href="{{ route('referees.create') }}" title="Schiedsrichter anlegen">
+                    <span class="fa fa-plus-square"></span> Schiedsrichter anlegen
+                </a>
+            @endcan
         </div>
     </div>
     <hr>
@@ -24,7 +26,7 @@
                 <th class="">Nachname, Vorname</th>
                 <th class="">Mail</th>
                 <th class="">Mobil</th>
-                <th class=""></th>
+                <th class="">Notiz</th>
                 <th class="">Aktionen</th>
             </tr>
             </thead>
@@ -33,9 +35,7 @@
                 <tr>
                     <td class="align-middle"><b>{{ $referee->id }}</b></td>
                     <td class="align-middle">
-                        <a href="{{ route('referees.show', $referee ) }}" title="Anzeigen">
-                            {{ $referee->person->last_name }}, {{ $referee->person->first_name }}
-                        </a>
+                        {{ $referee->person->last_name }}, {{ $referee->person->first_name }}
                     </td>
                     <td class="align-middle">
                         {{ $referee->mail }}
@@ -44,19 +44,21 @@
                         {{ $referee->mobile }}
                     </td>
                     <td class="align-middle">
-                        @if($referee->note)
-                            <span class="fa fa-file-text" title="Notiz vorhanden"></span>
-                        @endif
+                        {{ $referee->note }}
                     </td>
                     <td class="align-middle">
-                        <!-- display details -->
-                        <a class="btn btn-secondary" href="{{ route('referees.show', $referee) }}" title="Schiedsrichter anzeigen">
-                            <span class="fa fa-search-plus"></span>
-                        </a>
-                        <!-- edit -->
-                        <a class="btn btn-primary" href="{{ route('referees.edit', $referee) }}" title="Schiedsrichter bearbeiten">
-                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                        </a>
+                        @can('read referee')
+                            <!-- display details -->
+                            <a class="btn btn-secondary btn-sm" href="{{ route('referees.show', $referee) }}" title="Schiedsrichter anzeigen">
+                                <span class="fa fa-search-plus"></span>
+                            </a>
+                        @endcan
+                        @can('update referee')
+                            <!-- edit -->
+                            <a class="btn btn-primary btn-sm" href="{{ route('referees.edit', $referee) }}" title="Schiedsrichter bearbeiten">
+                                <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                            </a>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
