@@ -11,6 +11,16 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list users')->only('index');
+        $this->middleware('permission:update user')->only([
+            'create',
+            'store']
+        );
+    }
+
     // TODO: method for banning, method for roles
     /**
      * Display a listing of the resource.
@@ -66,7 +76,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::all();
+        $roles = Role::orderBy('name')->get();
         return view('admin.users.edit', compact('user', 'roles'));
     }
 

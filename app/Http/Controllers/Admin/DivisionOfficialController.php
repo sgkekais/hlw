@@ -20,6 +20,7 @@ class DivisionOfficialController extends Controller
         $this->middleware('permission:create division_official')->only([
             'create',
             'store']);
+        $this->middleware('permission:read division_official')->only('show');
         $this->middleware('permission:update division_official')->only([
             'edit',
             'update'

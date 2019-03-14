@@ -26,7 +26,7 @@
             </td>
             <td class="align-middle">
                 @if($fixture->datetime)
-                    {{ $fixture->datetime->format('d.m.Y H:i') }}
+                    {{ $fixture->datetime->format('d.m. H:i') }}
                 @endif
             </td>
             <td class="align-middle">

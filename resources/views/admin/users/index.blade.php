@@ -6,9 +6,12 @@
     <p>
         Verwaltung der User.
     </p>
+    <a class="btn btn-outline-secondary" href="#roles" role="button">Rollen <span class="badge badge-primary">{{ $roles->count() }}</span></a>
+    <a class="btn btn-outline-secondary" href="#permissions" role="button">Berechtigungen <span class="badge badge-primary">{{ $permissions->count() }}</span></a>
+    <a class="btn btn-outline-secondary" href="#users" role="button">User <span class="badge badge-primary">{{ $users->count() }}</span></a>
     <hr>
     <!-- list all roles -->
-    <div class="row">
+    <div class="row" id="roles">
         <div class="col">
             <h2 class="">Angelegte Rollen <span class="badge badge-secondary">{{ $roles->count() }}</span></h2>
         </div>
@@ -51,7 +54,7 @@
                                 @endunless
                             @endforeach
                         </td>
-                        <td class="align-middle">
+                        <td class="align-top">
                             @role('super_admin')
                                 <!-- edit -->
                                 <a class="btn btn-primary btn-sm" href="{{ route('roles.edit', $role) }}" title="Rolle bearbeiten">
@@ -67,7 +70,7 @@
     </div>
     <hr>
     <!-- list all permissions -->
-    <div class="row">
+    <div class="row" id="permissions">
         <div class="col">
             <h2 class="">Angelegte Berechtigungen <span class="badge badge-secondary">{{ $permissions->count() }}</span></h2>
         </div>
@@ -120,7 +123,7 @@
     </div>
     <hr>
     <!-- list all users -->
-    <div class="row">
+    <div class="row" id="users">
         <div class="col">
             <h2 class="">Angelegte User <span class="badge badge-secondary">{{ $users->count() }}</span></h2>
         </div>

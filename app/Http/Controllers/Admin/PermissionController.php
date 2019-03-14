@@ -20,6 +20,7 @@ class PermissionController extends Controller
         $this->middleware('permission:create permission')->only([
             'create',
             'store']);
+        $this->middleware('permission:read permission')->only('show');
         $this->middleware('permission:update permission')->only([
             'edit',
             'update'

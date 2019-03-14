@@ -21,6 +21,7 @@ class CompetitionController extends Controller
         $this->middleware('permission:create competition')->only([
             'create',
             'store']);
+        $this->middleware('permission:read competition')->only('show');
         $this->middleware('permission:update competition')->only([
             'edit',
             'update'

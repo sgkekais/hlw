@@ -20,6 +20,7 @@ class PositionController extends Controller
         $this->middleware('permission:create position')->only([
             'create',
             'store']);
+        $this->middleware('permission:read position')->only('show');
         $this->middleware('permission:update position')->only([
             'edit',
             'update'

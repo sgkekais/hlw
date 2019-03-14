@@ -22,6 +22,7 @@ class SeasonController extends Controller
         $this->middleware('permission:create season')->only([
             'create',
             'store']);
+        $this->middleware('permission:read season')->only('show');
         $this->middleware('permission:update season')->only([
             'edit',
             'update'

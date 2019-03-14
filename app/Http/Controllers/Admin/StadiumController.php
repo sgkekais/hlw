@@ -21,6 +21,7 @@ class StadiumController extends Controller
         $this->middleware('permission:create stadium')->only([
             'create',
             'store']);
+        $this->middleware('permission:read stadium')->only('show');
         $this->middleware('permission:update stadium')->only([
             'edit',
             'update'

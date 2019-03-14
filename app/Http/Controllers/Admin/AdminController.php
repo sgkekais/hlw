@@ -16,6 +16,7 @@ class AdminController extends Controller
         $monday = Carbon::now()->startOfWeek();
         $sunday = Carbon::now()->addWeek()->endOfWeek();
         $today = Carbon::now();
+        $year_start = Carbon::now()->startOfYear();
         $fixtures_this_week = Fixture::whereBetween('datetime', [$monday, $sunday])
             ->notCancelled()
             ->orderBy('datetime')
@@ -28,9 +29,9 @@ class AdminController extends Controller
             ->get();
 
 
-        // Fixtures without referee, get them for the next 30 days
+        // Fixtures without referee, get them for the next 30 days starting from monday of current week
         $in_thirty_days = Carbon::now()->addDays(30);
-        $fixtures_without_referee = Fixture::whereBetween('datetime', [$today, $in_thirty_days])
+        $fixtures_without_referee = Fixture::whereBetween('datetime', [$monday, $in_thirty_days])
             ->notCancelled()
             ->doesntHave('referees')
             ->orderBy('datetime')
@@ -42,8 +43,9 @@ class AdminController extends Controller
             ])
             ->get();
 
-        // Previous fixtures without result
+        // Previous fixtures without result, only for current year
         $fixtures_without_result = Fixture::where('datetime', '<=', $today)
+            ->where('datetime', '>=', $year_start)
             ->notPlayedOrRated()
             ->notCancelled()
             ->doesntHave('rescheduledTo')
@@ -61,6 +63,7 @@ class AdminController extends Controller
             'today',
             'monday',
             'sunday',
+            'year_start',
             'fixtures_without_result',
             'fixtures_without_referee',
             'in_thirty_days')

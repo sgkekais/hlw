@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\Storage;
 
 class PersonController extends Controller
 {
+    public function __construct()
+    {
+        // Permissions
+        $this->middleware('permission:list people')->only('index');
+        $this->middleware('permission:create person')->only([
+            'create',
+            'store']);
+        $this->middleware('permission:read person')->only('show');
+        $this->middleware('permission:update person')->only([
+            'edit',
+            'update'
+        ]);
+        $this->middleware('permission:delete person')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

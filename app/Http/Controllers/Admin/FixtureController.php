@@ -26,6 +26,7 @@ class FixtureController extends Controller
         $this->middleware('permission:create fixture')->only([
             'create',
             'store']);
+        $this->middleware('permission:read fixture')->only('show');
         $this->middleware('permission:update fixture')->only([
             'edit',
             'update'

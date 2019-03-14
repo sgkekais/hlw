@@ -21,6 +21,7 @@ class GoalController extends Controller
         $this->middleware('permission:create goal')->only([
             'create',
             'store']);
+        $this->middleware('permission:read goal')->only('show');
         $this->middleware('permission:update goal')->only([
             'edit',
             'update'

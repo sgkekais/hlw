@@ -23,6 +23,7 @@ class MatchweekController extends Controller
         $this->middleware('permission:create matchweek')->only([
             'create',
             'store']);
+        $this->middleware('permission:read matchweek')->only('show');
         $this->middleware('permission:update matchweek')->only([
             'edit',
             'update'

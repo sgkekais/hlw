@@ -19,6 +19,7 @@ class PlayerController extends Controller
         $this->middleware('permission:create club_player_assignment')->only([
             'create',
             'store']);
+        $this->middleware('permission:read club_player_assignment')->only('show');
         $this->middleware('permission:update club_player_assignment')->only([
             'edit',
             'update'

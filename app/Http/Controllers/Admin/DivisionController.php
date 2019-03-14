@@ -21,6 +21,7 @@ class DivisionController extends Controller
         $this->middleware('permission:create division')->only([
             'create',
             'store']);
+        $this->middleware('permission:read division')->only('show');
         $this->middleware('permission:update division')->only([
             'edit',
             'update'

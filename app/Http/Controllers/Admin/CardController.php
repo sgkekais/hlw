@@ -22,6 +22,7 @@ class CardController extends Controller
         $this->middleware('permission:create card')->only([
             'create',
             'store']);
+        $this->middleware('permission:read card')->only('show');
         $this->middleware('permission:update card')->only([
             'edit',
             'update'

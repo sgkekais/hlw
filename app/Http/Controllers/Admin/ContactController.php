@@ -22,6 +22,7 @@ class ContactController extends Controller
         $this->middleware('permission:create contact')->only([
             'create',
             'store']);
+        $this->middleware('permission:read contact')->only('show');
         $this->middleware('permission:update contact')->only([
             'edit',
             'update'
