@@ -32,18 +32,20 @@
             @endif
         </div>
     </div>
-    <div class="row" id="noresult">
-        <div class="col-12">
-            <h3 class="font-weight-bold">Noch ohne Ergebnis <span class="badge badge-secondary">{{ $fixtures_without_result->count() }}</span></h3>
-            <h5>Zurückliegende Partien (in diesem Jahr)</h5>
-            @if($fixtures_without_result)
-                @include('admin._partials.fixtures', ['fixtures' => $fixtures_without_result])
-            @else
-                <div class="alert alert-secondary">
-                    Keine Partien in dieser Woche.
-                </div>
-            @endif
+    @hasanyrole('super_admin|admin')
+        <div class="row" id="noresult">
+            <div class="col-12">
+                <h3 class="font-weight-bold">Noch ohne Ergebnis <span class="badge badge-secondary">{{ $fixtures_without_result->count() }}</span></h3>
+                <h5>Zurückliegende Partien (in diesem Jahr)</h5>
+                @if($fixtures_without_result)
+                    @include('admin._partials.fixtures', ['fixtures' => $fixtures_without_result])
+                @else
+                    <div class="alert alert-secondary">
+                        Keine Partien in dieser Woche.
+                    </div>
+                @endif
+            </div>
         </div>
-    </div>
+    @endrole
 
 @endsection
