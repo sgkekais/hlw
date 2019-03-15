@@ -38,6 +38,15 @@ class CardController extends Controller
     public function index()
     {
         //
+        $cards = Card::with('fixture')->get()->sortByDesc('fixture.datetime');
+        $cards->load([
+            'player',
+            'player.person',
+            'fixture.matchweek',
+            'fixture.clubHome',
+            'fixture.clubAway'
+        ]);
+        return view('admin.cards.index', compact('cards'));
     }
 
     /**

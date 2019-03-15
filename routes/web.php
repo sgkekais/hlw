@@ -102,7 +102,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     // Fixture import
     Route::post('fixtures/import', 'FixtureController@importCSV')->name('fixtures.import');
     // Managing cards of a match
-    Route::resource('fixtures.cards', 'CardController');
+    Route::resource('fixtures.cards', 'CardController', [
+        'except' => 'index'
+    ]);
+    Route::get('cards', 'CardController@index')->name('cards.index');
     // Managing goals of a match
     Route::resource('fixtures.goals', 'GoalController');
     // Assigning and managing referees of a match

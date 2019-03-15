@@ -122,6 +122,23 @@ class Card extends Model
     }
 
     /***********************************************************
+     * ACCESSORS
+     ************************************************************/
+
+    public function getColorAttribute($value)
+    {
+        if ($value == "yellow") {
+            return "gelb";
+        } elseif ($value == "yellow-red") {
+            return "gelb-rot";
+        } elseif ($value == "red") {
+            return "rot";
+        } else {
+            return $value;
+        }
+    }
+
+    /***********************************************************
      * RELATIONSHIPS
      ************************************************************/
 

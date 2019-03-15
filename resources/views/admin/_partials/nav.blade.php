@@ -38,6 +38,12 @@
                             </a>
                         @endcan
                         <div class="dropdown-divider"></div>
+                        @can('list cards')
+                            <a class="dropdown-item {{ Route::is('cards.*') ? 'active' : null }}" href="{{ route('cards.index') }}">
+                                <span class="fa fa-copy fa-fw"></span> Kartenhistorie
+                            </a>
+                        @endcan
+                        <div class="dropdown-divider"></div>
                         @can('list clubs')
                             <a class="dropdown-item {{ Route::is('clubs.*') ? 'active' : null }}" href="{{ route('clubs.index') }}">
                                 <span class="fa fa-shield fa-fw"></span> Mannschaften
