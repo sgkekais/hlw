@@ -4,6 +4,7 @@
         <th class="">ID</th>
         <th class="">Datum</th>
         <th class="">Paarung</th>
+        <th class="">Spielort</th>
         <th class="">Erg.</th>
         <th class="">11m</th>
         <th class="">Wert.</th>
@@ -53,6 +54,9 @@
                 @else
                     -
                 @endif
+            </td>
+            <td class="align-middle">
+                {{ $fixture->stadium ? $fixture->stadium->name_short : null }}
             </td>
             <td class="align-middle">
                 <!-- TODO replace with proper methods to test fixture -->
