@@ -128,4 +128,12 @@ class Division extends Model
     {
         return $this->hasMany(Season::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cards()
+    {
+        return $this->belongsToMany(Card::class, 'cards_divisions');
+    }
 }

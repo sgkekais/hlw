@@ -159,4 +159,12 @@ class Card extends Model
     {
         return $this->belongsTo(Fixture::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function divisions()
+    {
+        return $this->belongsToMany(Division::class, 'cards_divisions');
+    }
 }

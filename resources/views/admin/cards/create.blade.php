@@ -34,7 +34,7 @@
             <label for="color" class="col-md-2 col-form-label">Farbe</label>
             <div class="col-md-4">
                 <select class="form-control" aria-describedby="colorHelp" name="color" id="color">
-                    <option value="yellw">Gelb</option>
+                    <option value="yellow">Gelb</option>
                     <option value="yellow-red">Gelb/Rot</option>
                     <option value="red">Rot</option>
                 </select>
@@ -72,6 +72,20 @@
                 <input type="number" class="form-control" aria-describedby="ban_reduced_byHelp" name="ban_reduced_by" id="ban_reduced_by" value="0" >
                 <small id="ban_reduced_byHelp" class="form-text text-muted">Länge der Sperre reduzieren</small>
             </div>
+        </div>
+        <div class="form-group">
+            <h4>Spielklasse zuordnen</h4>
+            Für welche Spielklassen soll die Sperre gelten?
+            @if (!$divisions->isEmpty())
+                @foreach ($divisions as $division)
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="divisions[]" type="checkbox" value="{{ $division->id }}" {{ $fixture->matchweek->season->division->id == $division->id ? "checked" : null  }}>
+                                {{ $division->competition->name }} | {{ $division->name }}
+                        </label>
+                    </div>
+                @endforeach
+            @endif
         </div>
         <!-- ban reason and note -->
         <div class="form-group row">

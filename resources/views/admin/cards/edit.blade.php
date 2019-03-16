@@ -90,6 +90,16 @@
                 <small id="ban_reduced_byHelp" class="form-text text-muted">Länge der Sperre reduzieren</small>
             </div>
         </div>
+        <div class="form-group">
+        @foreach ($divisions as $division)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ $division->id }}" id="role{{ $loop->iteration }}" name="divisions[]" {{ $card->divisions->contains($division->id) ? "checked" : null }}>
+                <label class="form-check-label" for="role{{ $loop->iteration }}">
+                    {{ $division->competition->name }} | {{ $division->name }}
+                </label>
+            </div>
+        @endforeach
+        </div>
         <!-- ban reason and note -->
         <div class="form-group row">
             <label for="ban_reason" class="col-md-2 col-form-label">Grund</label>

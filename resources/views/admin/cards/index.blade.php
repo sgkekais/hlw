@@ -23,6 +23,7 @@
             <th class="text-center">Farbe</th>
             <th class="text-center">Sperre</th>
             <th class="text-center">Minderung</th>
+            <th>Gilt für</th>
             <th class="">Grund</th>
             <th class="">Notiz</th>
             <th class="">Aktionen</th>
@@ -33,7 +34,13 @@
             <tr>
                 <td class="align-middle"><b>{{ $card->id }}</b></td>
                 <td class="align-middle">
-                    {{ $card->player->person->full_name }}
+                    @can('read person')
+                        <a href="{{ route('people.show', $card->player->person) }}">
+                            {{ $card->player->person->full_name }}
+                        </a>
+                    @else
+                        {{ $card->player->person->full_name }}
+                    @endcan
                 </td>
                 <td class="align-middle">
                     {{ $card->fixture->clubHome->name_short }} : {{ $card->fixture->clubAway->name_short }}
@@ -69,6 +76,14 @@
                 </td>
                 <td class="align-middle text-center">
                     {{ $card->ban_reduced_by }}
+                </td>
+                <td class="align-middle">
+                    @foreach ($card->divisions as $division)
+                        {{ $division->name }}
+                        @unless($loop->last)
+                            <br>
+                        @endunless
+                    @endforeach
                 </td>
                 <td class="align-middle" width="15%">
                     {{ $card->ban_reason }}

@@ -3,6 +3,7 @@
 namespace HLW\Http\Controllers\Admin;
 
 use HLW\Card;
+use HLW\Division;
 use HLW\Fixture;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
@@ -44,7 +45,8 @@ class CardController extends Controller
             'player.person',
             'fixture.matchweek',
             'fixture.clubHome',
-            'fixture.clubAway'
+            'fixture.clubAway',
+            'divisions'
         ]);
         return view('admin.cards.index', compact('cards'));
     }
@@ -57,6 +59,7 @@ class CardController extends Controller
      */
     public function create(Fixture $fixture)
     {
+        $divisions = Division::orderBy('name')->get();
         $fixture->load('clubHome','clubAway');
 
         // get the players of both teams and merge them into a single collection
@@ -64,7 +67,7 @@ class CardController extends Controller
         $players_away = $fixture->clubAway->players->load('person');
         $players      = $players_home->sortBy('person.last_name')->merge($players_away->sortBy('person.last_name'));
 
-        return view('admin.cards.create', compact('fixture', 'players'));
+        return view('admin.cards.create', compact('fixture', 'players', 'divisions'));
     }
 
     /**
@@ -81,9 +84,26 @@ class CardController extends Controller
             'ban_reduced_by' => 'nullable|integer|min:0|'
         ]);
 
-        $card = new Card($request->all());
+        $card = new Card([
+            'player_id'     =>  $request->player_id,
+            'color'         =>  $request->color,
+            'ban_matches'   =>  $request->ban_matches,
+            'ban_reduced_by'=>  $request->ban_reduced_by,
+            'ban_season'    =>  $request->ban_season,
+            'ban_lifetime'  =>  $request->ban_lifetime,
+            'ban_reason'    =>  $request->ban_reason,
+            'note'          =>  $request->note
+        ]);
 
         $fixture->cards()->save($card);
+
+        $divisions = $request['divisions'];
+
+        if (isset($divisions)) {
+            $card->divisions()->sync($divisions);
+        } else {
+            $card->divisions()->detach();
+        }
 
         Session::flash('success', $card->color.'e Karte mit '.$card->ban_matches.' Spiel(en) Sperre gepflegt.');
 
@@ -109,12 +129,14 @@ class CardController extends Controller
      */
     public function edit(Fixture $fixture, Card $card)
     {
+        $divisions = Division::orderBy('name')->get();
+
         // get the players of both teams and merge them into a single collection
         $players_home = $fixture->clubHome->players->load('person');
         $players_away = $fixture->clubAway->players->load('person');
         $players      = $players_home->sortBy('person.last_name')->merge($players_away->sortBy('person.last_name'));
 
-        return view('admin.cards.edit', compact('fixture', 'card', 'players'));
+        return view('admin.cards.edit', compact('fixture', 'card', 'players', 'divisions'));
     }
 
     /**
@@ -130,25 +152,42 @@ class CardController extends Controller
             'ban_matches' => 'nullable|integer|min:0'
         ]);
 
-        $card->update($request->all());
+        $card->update([
+            'player_id'     =>  $request->player_id,
+            'color'         =>  $request->color,
+            'ban_matches'   =>  $request->ban_matches,
+            'ban_reduced_by'=>  $request->ban_reduced_by,
+            'ban_season'    =>  $request->ban_season,
+            'ban_lifetime'  =>  $request->ban_lifetime,
+            'ban_reason'    =>  $request->ban_reason,
+            'note'          =>  $request->note
+        ]);
 
-        Session::flash('success', 'Karte erfolgreich geändert.');
+        $divisions = $request['divisions'];
 
-        return redirect()->route('matchweeks.fixtures.show', [ $fixture->matchweek, $fixture ]);
+        if (isset($divisions)) {
+            $card->divisions()->sync($divisions);
+        } else {
+            $card->divisions()->detach();
+        }
+
+        return redirect()->route('matchweeks.fixtures.show', [ $fixture->matchweek, $fixture ])
+            ->with('success', 'Karte erfolgreich geändert.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource
      *
-     * @param  \HLW\Card  $card
-     * @return \Illuminate\Http\Response
+     * @param Fixture $fixture
+     * @param Card $card
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Fixture $fixture, Card $card)
     {
         $card->delete();
 
-        Session::flash('success', 'Karte erfolgreich gelöscht');
-
-        return redirect()->route('matchweeks.fixtures.show', [ $fixture->matchweek, $fixture ] );
+        return redirect()->route('matchweeks.fixtures.show', [ $fixture->matchweek, $fixture ] )
+            ->with('success', 'Karte erfolgreich gelöscht');
     }
 }
