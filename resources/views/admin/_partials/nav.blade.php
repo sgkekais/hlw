@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark ">
-    <div class="container-fluid">
+    <div class="container-fluid px-0">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="/images/hlwlogo_w.png" class="d-inline-block align-top" height="30" alt="HLW-Logo">
         </a>
@@ -32,12 +32,12 @@
                                 <span class="fa fa-line-chart fa-fw"></span> Saisons
                             </a>
                         @endcan
-                        @can('list stadiums')
-                            <a class="dropdown-item {{ Route::is('stadiums.*') ? 'active' : null }}" href="{{ route('stadiums.index') }}">
-                                <span class="fa fa-map-marker fa-fw"></span> Spielorte
+                        <div class="dropdown-divider"></div>
+                        @can('list fixtures')
+                            <a class="dropdown-item {{ Route::is('fixtures.*') ? 'active' : null }}" href="{{ route('fixtures.index') }}">
+                                <span class="fa fa-handshake-o fa-fw"></span> Paarungshistorie
                             </a>
                         @endcan
-                        <div class="dropdown-divider"></div>
                         @can('list cards')
                             <a class="dropdown-item {{ Route::is('cards.*') ? 'active' : null }}" href="{{ route('cards.index') }}">
                                 <span class="fa fa-copy fa-fw"></span> Kartenhistorie
@@ -67,6 +67,11 @@
                         @can('list referees')
                             <a class="dropdown-item {{ Route::is('referees.*') ? 'active' : null }}" href="{{ route('referees.index') }}">
                                 <span class="fa fa-hand-stop-o fa-fw"></span> Schiedsrichter
+                            </a>
+                        @endcan
+                        @can('list stadiums')
+                            <a class="dropdown-item {{ Route::is('stadiums.*') ? 'active' : null }}" href="{{ route('stadiums.index') }}">
+                                <span class="fa fa-map-marker fa-fw"></span> Spielorte
                             </a>
                         @endcan
                     </div>

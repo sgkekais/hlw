@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use HLW\Fixture;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,8 @@ class AdminController extends Controller
                 'matchweek.season',
                 'clubHome',
                 'clubAway',
-                'referees'
+                'referees',
+                'rescheduledTo'
             ])
             ->get();
 
@@ -39,7 +41,8 @@ class AdminController extends Controller
                 'matchweek.season',
                 'clubHome',
                 'clubAway',
-                'referees'
+                'referees',
+                'rescheduledTo'
             ])
             ->get();
 
@@ -58,6 +61,11 @@ class AdminController extends Controller
             ])
             ->get();
 
+        $can_read_club = Auth::user()->can('read club') ? true : false;
+        $can_read_fixture = Auth::user()->can('read fixture') ? true : false;
+        $can_update_fixture = Auth::user()->can('update fixture') ? true : false;
+        $can_reschedule_fixture = Auth::user()->can('reschedule fixture') ? true : false;
+
         return view('admin.index', compact(
             'fixtures_this_week',
             'today',
@@ -66,7 +74,11 @@ class AdminController extends Controller
             'year_start',
             'fixtures_without_result',
             'fixtures_without_referee',
-            'in_thirty_days')
+            'in_thirty_days',
+            'can_read_club',
+            'can_read_fixture',
+            'can_update_fixture',
+            'can_reschedule_fixture')
         );
     }
 

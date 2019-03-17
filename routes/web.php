@@ -99,6 +99,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('matchweeks/{matchweek}/fixtures/{fixture}/create', 'FixtureController@create')->name('reschedule.create');
     // Fixtures crud, all fixtures routes are handled with a specific matchweek
     Route::resource('matchweeks.fixtures', 'FixtureController');
+    // Fixtures overview
+    Route::get('fixtures', 'FixtureController@index')->name('fixtures.index');
     // Fixture import
     Route::post('fixtures/import', 'FixtureController@importCSV')->name('fixtures.import');
     // Managing cards of a match

@@ -6,8 +6,6 @@
         <th class="">Paarung</th>
         <th class="">Spielort</th>
         <th class="">Erg.</th>
-        <th class="">11m</th>
-        <th class="">Wert.</th>
         <th class=""></th>
         <th class=""></th>
         <th></th>
@@ -18,12 +16,16 @@
     @foreach($fixtures as $fixture)
         <tr>
             <td class="align-middle">
-                @if($fixture->rescheduled_from_fixture_id)
-                    <b>{{ $fixture->rescheduledFrom->id }}</b>
+                @if ($fixture->rescheduled_from_fixture_id)
+                    (von: {{ $fixture->rescheduled_from_fixture_id }})
                     <br>
                     <span class="fa fa-level-up fa-rotate-90"></span>
                 @endif
                 <b>{{ $fixture->id }}</b>
+                @if ($fixture->rescheduledTo)
+                    <br>
+                    (nach: {{ $fixture->rescheduledTo->id }})
+                @endif
             </td>
             <td class="align-middle">
                 @if($fixture->datetime)
@@ -32,25 +34,25 @@
             </td>
             <td class="align-middle">
                 @if($fixture->clubHome)
-                    @can('read club')
+                    @if($can_read_club)
                         <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
                             {{ $fixture->clubHome->name_short }}
                         </a>
                     @else
                         {{ $fixture->clubHome->name_short }}
-                    @endcan
+                    @endif
                 @else
                     -
                 @endif
                 vs.
                 @if($fixture->clubAway)
-                    @can('read club')
+                    @if($can_read_club)
                         <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
                             {{ $fixture->clubAway->name_short }}
                         </a>
                     @else
                         {{ $fixture->clubAway->name_short }}
-                    @endcan
+                    @endif
                 @else
                     -
                 @endif
@@ -59,17 +61,20 @@
                 {{ $fixture->stadium ? $fixture->stadium->name_short : null }}
             </td>
             <td class="align-middle">
-                <!-- TODO replace with proper methods to test fixture -->
-                {{ $fixture->goals_home ?? "-" }} : {{ $fixture->goals_away ?? "-" }}
-            </td>
-            <td class="align-middle">
-                @if(isset($fixture->goals_home_11m) && isset($fixture->goals_away_11m))
-                    ({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})
-                @endif
-            </td>
-            <td class="align-middle">
-                @if(isset($fixture->goals_home_rated) && isset($fixture->goals_away_rated))
-                    {{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}
+                {{-- cancelled? --}}
+                @if ($fixture->isCancelled())
+                    <span class="text-danger">Ann.</span>
+                    {{-- rated? --}}
+                @elseif ($fixture->isRated())
+                    <span class="text-warning">{{ $fixture->goals_home_rated }} : {{ $fixture->goals_away_rated }}</span>
+                    {{-- played and *not* rated? --}}
+                @elseif ($fixture->isPlayed() && !$fixture->isRated())
+                    {{ $fixture->goals_home }} : {{ $fixture->goals_away }}
+                    @if ($fixture->isPenalty())
+                        <br><small>({{ $fixture->goals_home_11m }} : {{ $fixture->goals_away_11m }})</small>
+                    @endif
+                @else
+                    -&nbsp;:&nbsp;-
                 @endif
             </td>
             <td class="align-middle">
@@ -118,19 +123,19 @@
             </td>
             <td class="align-middle">
                 <!-- show -->
-                @can('read fixture')
+                @if($can_read_fixture)
                     <a class="btn btn-secondary btn-sm" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}" title="Paarung anzeigen">
                         <span class="fa fa-search-plus" aria-hidden="true"></span>
                     </a>
-                @endcan
+                @endif
                 <!-- edit -->
-                @can('update fixture')
+                @if($can_update_fixture)
                     <a class="btn btn-primary btn-sm" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung bearbeiten">
                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                     </a>
-                @endcan
+                @endif
                 <!-- reschedule -->
-                @can('reschedule fixture')
+                @if($can_reschedule_fixture)
                     @if(!$fixture->rescheduledTo)
                         <a class="btn btn-warning btn-sm" href="{{ route('reschedule.create', [$fixture->matchweek, $fixture]) }}" title="Paarung verlegen">
                             <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
@@ -138,7 +143,7 @@
                     @else
                         <button class="btn btn-outline-danger btn-sm" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
                     @endif
-                @endcan
+                @endif
             </td>
         </tr>
     @endforeach
