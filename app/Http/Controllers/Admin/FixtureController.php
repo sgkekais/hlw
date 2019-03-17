@@ -9,6 +9,7 @@ use HLW\Season;
 use HLW\Stadium;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Excel;
 use Illuminate\Support\Facades\Storage;
@@ -57,6 +58,24 @@ class FixtureController extends Controller
     public function index()
     {
         //
+        $fixtures = Fixture::orderBy('datetime', 'desc')->get();
+        $fixtures->load([
+            'matchweek',
+            'matchweek.season.division',
+            'clubHome',
+            'clubAway',
+            'rescheduledTo',
+            'cards',
+            'referees',
+            'goals'
+        ]);
+
+        $can_update_fixture = Auth::user()->can('update fixture') ? true : false;
+        $can_read_fixture = Auth::user()->can('read fixture') ? true : false;
+        $can_reschedule_fixture = Auth::user()->can('reschedule fixture') ? true : false;
+        $can_read_club = Auth::user()->can('read club') ? true : false;
+
+        return view('admin.fixtures.index', compact('fixtures', 'can_update_fixture', 'can_read_fixture', 'can_read_club', 'can_reschedule_fixture'));
     }
 
     /**

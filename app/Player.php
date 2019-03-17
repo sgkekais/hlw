@@ -165,9 +165,15 @@ class Player extends Model
                 // only possible if fixture has a date
                 if ($card->fixture->datetime) {
                     // if the number of *played* games is smaller than the number of banned matches minus the reduced ban
-                    $number_of_played_games = $this->club->getNextGamesPlayed(($card->ban_matches - $card->ban_reduced_by), $card->fixture->datetime->addDay())->count();
+                    $played_games = $this->club->getNextGamesPlayed(($card->ban_matches - $card->ban_reduced_by), $card->fixture->datetime->addDay());
+                    // count games that have been played in the divisions for which the card is valid
+                    $number_of_played_games = 0;
+                    foreach ($played_games as $played_game) {
+                        if ($card->divisions->contains('id', $played_game->matchweek->season->division->id)) {
+                            $number_of_played_games++;
+                        }
+                    }
                     $ban_remaining = 0;
-
                     if (($card->ban_matches - $card->ban_reduced_by) > $number_of_played_games) {
                         $is_suspended = true;
                         $ban_remaining = $card->ban_matches - $card->ban_reduced_by - $number_of_played_games;

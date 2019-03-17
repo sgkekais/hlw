@@ -342,6 +342,7 @@
                             <th class="">Karte</th>
                             <th class="">Sperre</th>
                             <th class="">Grund</th>
+                            <th class="">Gilt für</th>
                             <th class="">Aktionen</th>
                         </tr>
                         </thead>
@@ -354,6 +355,14 @@
                                 <td>{{ $card->color }}</td>
                                 <td>{{ $card->ban_matches }}</td>
                                 <td>{{ $card->ban_reason }}</td>
+                                <td>
+                                    @foreach ($card->divisions as $division)
+                                        {{ $division->name }}
+                                        @unless ($loop->last)
+                                            <br>
+                                        @endunless
+                                    @endforeach
+                                </td>
                                 <td>
                                     <!-- edit -->
                                     @can('update card')

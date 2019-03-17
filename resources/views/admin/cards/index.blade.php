@@ -13,7 +13,7 @@
             <h2 class="">Angelegte Karten <span class="badge badge-secondary">{{ $cards->count() }}</span></h2>
         </div>
     </div>
-    <table class="table table-sm table-striped" id="cards">
+    <table class="table table-sm table-striped table-hover" id="cards">
         <thead class="thead-default">
         <tr>
             <th class="">ID</th>
