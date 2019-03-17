@@ -31,8 +31,18 @@
                     </select>
                 </div>
                 <label for="reschedule_reason" class="form-control-label col-md-2">Grund für Verlegung</label>
+                {{--
+                    <div class="col-md-4">
+                        <textarea class="form-control" id="reschedule_reason" name="reschedule_reason" rows="3">{{ old('reschedule_reason') }}</textarea>
+                    </div>
+                --}}
+                {{-- pre-defined reasons --}}
                 <div class="col-md-4">
-                    <textarea class="form-control" id="reschedule_reason" name="reschedule_reason" rows="3">{{ old('reschedule_reason') }}</textarea>
+                    <select class="form-control" name="reschedule_reason" id="reschedule_reason">
+                        <option value="Spielermangel">Spielermangel</option>
+                        <option value="Höhere Gewalt">Höhere Gewalt</option>
+                        <option value="Spielverlegung innerhalb der Frist">Spielverlegung innerhalb der Frist</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
