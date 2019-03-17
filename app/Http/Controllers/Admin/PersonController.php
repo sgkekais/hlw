@@ -7,6 +7,7 @@ use HLW\DivisionOfficial;
 use HLW\Person;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,9 +36,12 @@ class PersonController extends Controller
     public function index()
     {
         $people = Person::orderBy('last_name')->orderBy('first_name')->get();
-        $people->load('players','contacts','referees');
+        $people->load('players','contacts','referees', 'realDivision');
 
-        return view('admin.people.index', compact('people'));
+        $can_read_person = Auth::user()->can('read person') ? true : false;
+        $can_update_person = Auth::user()->can('update person') ? true : false;
+
+        return view('admin.people.index', compact('people', 'can_read_person', 'can_update_person'));
     }
 
     /**

@@ -97,18 +97,18 @@
                         <span class="fa fa-fw"></span>
                 @endif
                 <td class="align-middle">
-                    @can('read person')
+                    @if($can_read_person)
                         <!-- display details -->
                         <a class="btn btn-secondary btn-sm" href="{{ route('people.show', $person) }}" title="Person anzeigen">
                             <span class="fa fa-search-plus"></span>
                         </a>
-                    @endcan
-                    @can('update person')
+                    @endif
+                    @if($can_update_person)
                         <!-- edit -->
                         <a class="btn btn-primary btn-sm" href="{{ route('people.edit', $person) }}" title="Person bearbeiten">
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                         </a>
-                    @endcan
+                    @endif
                 </td>
             </tr>
         @endforeach
