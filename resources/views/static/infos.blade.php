@@ -179,7 +179,7 @@
         <div class="row mt-4">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Hobbyliga-West</h2>
-                <h5>Stand: 11.01.2018</h5>
+                <h5>Stand: 09.01.2019</h5>
                 <ul class="list-unstyled">
                     <li>
                         <span class="h4 font-weight-bold">0. Allgemeines</span>
@@ -242,6 +242,11 @@
                             <li>
                                 Vereinsspielern, die zum Altbestand zählen, ist es ab der Saison 2016 erlaubt, innerhalb der Hobbyliga den Verein zu wechseln.
                             </li>
+                            <li>
+                                <b>Zusatz - gültig ab 09.01.2019:</b>
+                                <br>
+                                Neuanmeldungen PER E-MAIL an vorstand@hobbyligawest.de senden.
+                            </li>
                         </ol>
                     </li>
                     <li>
@@ -258,6 +263,11 @@
                                 <br>
                                 Vorstands-EmaiL: vorstand [AT] hobbyligawest [DOT] DE
                             </li>
+                            <li>
+                                <b>Zusatz - gültig ab 09.01.2019:</b>
+                                <br>
+                                Spielerpässe sind jetzt auch digital erlaubt (auch zur Passkontrolle beim Spiel), müssen aber den Stempel der aktuellen Saison enthalten.
+                            </li>
                         </ol>
                     </li>
                     <li>
@@ -272,7 +282,7 @@
                                 Eine Spielansetzung kann in der Woche frühestens um 19:00 Uhr und spätestens um 21:00 Uhr erfolgen. Samstags zwischen 11:00 Uhr und 17:00 Uhr.
                             </li>
                             <li>
-                                Eine Spielverlegung muss bis <b>spätestens 24 h vor dem Spiel</b>, durch die verlegende Mannschaft, an die Ligaleitung, den Gegner und den Schiedsrichterobmann gemeldet werden.
+                                <del>Eine Spielverlegung muss bis <b>spätestens 24 h vor dem Spiel</b>, durch die verlegende Mannschaft, an die Ligaleitung, den Gegner und den Schiedsrichterobmann gemeldet werden.</del>
                             </li>
                             <li>
                                 Bei Unbespielbarkeit des Platzes erfolgt ein Nachholspiel. Sollte eine Unbespielbarkeit absehbar sein, so sind der Gegner, der Schiedsrichterobmann und die Ligaleitung frühzeitig zu informieren.
@@ -327,21 +337,37 @@
                                 An dieser Stelle soll noch einmal darauf hingewiesen werden, dass das Tragen von Schienbeinschützern zwingend vorgeschrieben ist.
                             </li>
                             <li>
-                                <b>Auf- und Abstieg:</b> Der Vorstand wird im Laufe der Saison (frühzeitig) über den Auf- und Abstieg (erneut) entscheiden, nachdem abzusehen ist, wie viele Mannschaften in der kommenden Saison an den Start gehen.
+                                <b>In 2019 aufgrund des aktuellen Modus nicht gültig</b>
+                                <br>
+                                <del><b>Auf- und Abstieg:</b> Der Vorstand wird im Laufe der Saison (frühzeitig) über den Auf- und Abstieg (erneut) entscheiden, nachdem abzusehen ist, wie viele Mannschaften in der kommenden Saison an den Start gehen.</del>
                             </li>
                             <li>
                                 Scheidet eine Mannschaft aus dem laufenden Wettbewerb aus, werden alle Spiele dieser Mannschaft annulliert.
                             </li>
                             <li>
-                                Der Aufstieg von der 2. in die 1. Liga kann nicht abgelehnt werden.
+                                <b>In 2019 aufgrund des aktuellen Modus  nicht gültig</b>
+                                <br>
+                                <del>Der Aufstieg von der 2. in die 1. Liga kann nicht abgelehnt werden.</del>
+                            </li>
+                            <li>
+                                <b>Zusatz - gültig ab 09.01.2019:</b>
+                                <br>
+                                <strong style="color: red">Nachholspiele sind nicht mehr erlaubt!</strong> Ausnahme bleiben Ausfälle wegen „höherer Gewalt“ (unbespielbar, Platz doppelt belegt etc.). Die Möglichkeit zur Verlegung vor Saisonstart
+                                (= 1. Spielwoche) und in den Sommerferien (vor der „Rückrunde“) bleibt wie gehabt.
+                                Zwischen dem Ende der „Hauptrunde“ und dem Start der Meisterschaft-Playoffs wird eine Pufferwoche für o.g. Ausnahmen eingebaut.
+
                             </li>
                         </ol>
+
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">5. Übermittlung der Spielergebnisse</span>
                         <ol class="py-2 text-justify">
                             <li>
                                 Die Spielergebnisse und besonderen Vorkommnisse werden vom Schiedsrichter im Spielberichtsbogen notiert, von der Heimmannschaft abfotografiert und per Mail an den Vorstand übermittelt.
+                            </li>
+                            <li>
+                                Spielerpässe sind jetzt auch digital erlaubt (auch zur Passkontrolle beim Spiel), müssen aber den Stempel der aktuellen Saison enthalten.
                             </li>
                         </ol>
                     </li>
@@ -350,6 +376,9 @@
                         <ol class="py-2 text-justify">
                             <li>
                                 <b>Alle Karten gelten wettbewerbsübergreifend, d.h. für Pokal- und Meisterschaftsspiele!</b>
+                            </li>
+                            <li>
+                                Sperren aufgrund Platzverweis im Pokal für Spieler, die in der HLW <strong>und</strong> AH spielen, gelten „übergreifend“, d.h. sowohl in der HLW als auch in der AH-Liga. Für x Spiele und begrenzt auf x Wochen.
                             </li>
                             <li>
                                 Zeitstrafe = 10 Minuten
