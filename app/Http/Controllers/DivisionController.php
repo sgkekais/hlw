@@ -286,7 +286,7 @@ class DivisionController extends Controller
         }
 
         // get other cards
-        $cards_from_other_season_or_division = $division->cards->where('fixture.matchweek.season.id', '!=', $season->id)->sortByDesc('fixture.datetime');
+        $cards_from_other_season_or_division = $division->cards->where('ban_lifetime', '!=', 1)->where('fixture.matchweek.season.id', '!=', $season->id)->sortByDesc('fixture.datetime');
 
         return view('divisions.response_sinners', compact('season','cards', 'cards_from_other_season_or_division'));
     }
