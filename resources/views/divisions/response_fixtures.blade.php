@@ -50,7 +50,7 @@
                     @foreach ($matchweek->fixtures->where('published',1)->sortBy('datetime') as $fixture)
                         <tr class="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-muted" : null }}">
                             {{-- date - day of week, date, time --}}
-                            <td class="align-middle">
+                            <td class="align-middle" style="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-decoration: line-through": null }}">
                                 @if ($fixture->datetime)
                                     <span class="d-none d-md-inline-block text-uppercase" style="width: 24px">{{ $fixture->datetime->formatLocalized('%a') }}</span>
                                     <span class="d-inline d-md-none pr-1">{{ $fixture->datetime->format('d.m.') }}</span>
