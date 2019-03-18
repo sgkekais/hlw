@@ -23,7 +23,7 @@
             <div class="col-md-4">
                 <select class="form-control" id="person_id" name="person_id" aria-describedby="person_idHelp">
                     @foreach($unassigned_people as $person)
-                        <option value="{{ $person->id }}">({{$person->id}}) {{ $person->last_name }}, {{ $person->first_name }}</option>
+                        <option value="{{ $person->id }}">{{ $person->last_name }}, {{ $person->first_name }} ({{$person->id}})</option>
                     @endforeach
                 </select>
                 <small id="person_idHelp" class="form-text text-muted">Um welche Person handelt es sich?</small>
