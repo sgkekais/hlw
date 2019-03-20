@@ -368,11 +368,11 @@
                                 <li>
                                     <div class="">
                                         {{ $home_card->player->person->full_name_shortened }}
-                                        @if ($home_card->color == "yellow")
+                                        @if ($home_card->color == "gelb")
                                             <span class="fa fa-square text-warning"></span>
-                                        @elseif ($home_card->color == "yellow-red")
+                                        @elseif ($home_card->color == "gelb-rot")
                                             <span class="fa fa-square text-warning"></span> <span class="fa fa-fw fa-square text-danger"></span>
-                                        @elseif ($home_card->color == "red")
+                                        @elseif ($home_card->color == "rot")
                                             <span class="fa fa-square text-danger"></span>
                                         @endif
                                     </div>
@@ -402,11 +402,11 @@
                             @foreach ($away_cards as $away_card)
                                 <li>
                                     <div class="">
-                                        @if ($away_card->color == "yellow")
+                                        @if ($away_card->color == "gelb")
                                             <span class="fa fa-square text-warning"></span>
-                                        @elseif ($away_card->color == "yellow-red")
+                                        @elseif ($away_card->color == "gelb-rot")
                                             <span class="fa fa-square text-warning"></span> <span class="fa fa-fw fa-square text-danger"></span>
-                                        @elseif ($away_card->color == "red")
+                                        @elseif ($away_card->color == "rot")
                                             <span class="fa fa-square text-danger"></span>
                                         @endif
                                         {{ $away_card->player->person->full_name_shortened }}
