@@ -51,9 +51,9 @@
             <label for="color" class="col-md-2 col-form-label">Farbe</label>
             <div class="col-md-4">
                 <select class="form-control" aria-describedby="colorHelp" name="color" id="color">
-                    @foreach($colors = collect(['yellow','yellow-red','red']) as $color)
-                        <option value="{{ $color }}" {{ $card->color === $color ? "selected" : null }}>{{ $color }}</option>
-                    @endforeach
+                    <option value="yellow" {{ $card->color == "gelb" ? selected : null }}>Gelb</option>
+                    <option value="yellow-red" {{ $card->color == "gelb-rot" ? selected : null }}>Gelb/Rot</option>
+                    <option value="red" {{ $card->color == "rot" ? selected : null }}>Rot</option>
                 </select>
                 <small id="stadium_idHelp" class="form-text text-muted">Welche Art von Platzverweis?</small>
             </div>
