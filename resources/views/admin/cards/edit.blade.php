@@ -30,7 +30,7 @@
                 <label for="fixture">Für Paarung</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="fixture" aria-describedby="fixtureHelp" value="({{ $fixture->id }}) {{ $fixture->datetime->toDateString() }} - {{ $fixture->clubHome->name_short }} vs. {{ $fixture->clubAway->name_short }}" disabled>
+                <input type="text" class="form-control" name="fixture" aria-describedby="fixtureHelp" value="({{ $fixture->id }}) {{ $fixture->datetime ? $fixture->datetime->toDateString() : null }} - {{ $fixture->clubHome->name_short }} vs. {{ $fixture->clubAway->name_short }}" disabled>
                 <small id="card_idHelp" class="form-text text-muted">Zuordnung zu welcher Paarung?</small>
             </div>
         </div>
