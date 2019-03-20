@@ -1258,10 +1258,10 @@ class Club extends Model
      * @param null $date
      * @return mixed
      */
-    public function getNextGamesPlayed($numberOfGames, $date = null)
+    public function getNextGamesPlayed($numberOfGames, $date)
     {
-        return Fixture::ofClub($this->id)->played()->orderBy('datetime', 'desc')
-            // if a date is given, then return the last games before that date
+        return Fixture::ofClub($this->id)->played()->orderBy('datetime', 'asc')
+            // if a date is given, then return the next games after that date
             ->when($date, function ($query) use ($date){
                 return $query->where('datetime', '>=', $date);
             }, function ($query) {
