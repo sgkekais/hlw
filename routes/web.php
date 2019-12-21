@@ -54,12 +54,20 @@ Route::group(['middleware' => ['auth', 'isVerified']], function() {
     Route::delete('profile/clubs/{club}', 'AccountController@deleteClubFavorite')->name('frontend.user.profile.club.delete');
 });
 
+// archive
+    Route::get('archive', 'ArchiveController@index')->name('frontend.archive.index');
+    // hall of fame
+    Route::get('halloffame', 'ArchiveController@hallOfFame')->name('frontend.static.halloffame');
+    // former clubs
+    Route::get('formerclubs', 'ArchiveController@formerClubs')->name('frontend.archive.formerclubs');
+
 // static
 Route::get('imprint', 'PagesController@imprint')->name('frontend.static.imprint');
 Route::get('infos', 'PagesController@infos')->name('frontend.static.infos');
-Route::get('halloffame', 'PagesController@hallOfFame')->name('frontend.static.halloffame');
 Route::get('matchreport', 'PagesController@matchReport')->name('frontend.static.matchreport');
 Route::get('datenschutz', 'PagesController@datenschutz')->name('frontend.static.datenschutz');
+
+
 
 /*******************************************************
  * Admin Routes

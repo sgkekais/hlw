@@ -2,14 +2,20 @@
 
 @section('title', '| Ruhmeshalle')
 
+@section('subnav')
+
+    @include('archive.subnav')
+
+@endsection
+
 @section('content')
 
     <div class="container mt-4">
         <div class="row">
             <div class="col">
-                <h1 class="font-weight-bold font-italic text-uppercase">Ruhmeshalle</h1>
+                <h1 class="font-weight-bold font-italic text-uppercase">Ehemalige</h1>
                 <p class="text-muted">
-                    Ehre, wem Ehre gebührt.
+                    Ehemalige Teams der Hobbyliga-West.
                 </p>
             </div>
         </div>

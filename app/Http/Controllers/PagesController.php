@@ -57,16 +57,6 @@ class PagesController extends Controller
         return view('static.infos', compact('referees'));
     }
 
-    /**
-     * Hall of Fame
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function hallOfFame() {
-        $former_clubs = Club::published()->resigned()->orderBy('league_exit', 'desc')->with('championships')->get();
-
-        return view('static.halloffame', compact('former_clubs'));
-    }
-
     public function matchReport() {
 
         $storage_path = storage_path('app/public/spielberichtsbogen.pdf');
