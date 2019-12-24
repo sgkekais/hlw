@@ -3,6 +3,7 @@
 namespace HLW\Http\Controllers;
 
 use HLW\Club;
+use HLW\Division;
 use HLW\Season;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,19 @@ class ArchiveController extends Controller
 {
 
     public function index() {
-        $seasons = Season::published()->get()->sortByDesc('name')
-        ->load('division')
+
+        $divisions = Division::all()->sortBy('name');
+
+        $seasons = Season::published()->withCount([
+          'matchweeks',
+          'fixtures',
+          'clubs'
+        ])
+        ->get()->sortByDesc('name')
+        ->load('division', 'champion', 'clubs')
         ->groupBy('name');
 
-        return view('archive.index', compact('seasons'));
+        return view('archive.index', compact('divisions','seasons'));
     }
 
     /**

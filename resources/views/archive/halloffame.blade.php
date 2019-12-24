@@ -15,7 +15,7 @@
             <div class="col">
                 <h1 class="font-weight-bold font-italic text-uppercase">Ruhmeshalle</h1>
                 <p class="text-muted">
-                    <span class="badge badge-primary">{{ $champions->count() }}</span> Titelträger. Ehre, wem Ehre gebührt.
+                    <span class="badge badge-primary">{{ $champions->count() }}</span> Titelträger.
                 </p>
             </div>
         </div>
