@@ -45,6 +45,15 @@ body {
   font-family: "Barlow Condensed", sans-serif;
 }
 
+// navbar color overrides
+.navbar-dark .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+  text-decoration: underline;
+}
+
 // half-transparent black background
 .bg-black-transparent {
   background-color: rgba(0, 0, 0, 0.5);

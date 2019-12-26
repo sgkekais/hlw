@@ -24,35 +24,39 @@
                 </ul>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col">
                 <h2 id="divisionen" class="font-weight-bold font-italic text-uppercase">Divisionen</h2>
-
-                @foreach($divisions as $division)
-                    <div class="h4 font-weight-bold text-uppercase">{{ $division->name }}</div>
-                    <div class="alert alert-light">
-                        <ul class="list-unstyled p-0 m-0">
-                            <li>
-                                <span class="fa fa-fw fa-calendar"></span><a class="" href="{{ route('frontend.divisions.fixtures', $division) }}"> Alle <strong>Spielpläne</strong> dieser Division aufrufen</a>
-                            </li>
-                            <li>
-                                <span class="fa fa-fw fa-list-ol"></span><a class="" href="{{ route('frontend.divisions.tables', $division) }}"> Alle <strong>Tabellen</strong> dieser Division aufrufen</a>
-                            </li>
-                            <li>
-                                <span class="fa fa-fw fa-soccer-ball-o"></span><a class="" href="{{ route('frontend.divisions.scorers', $division) }}"> Alle <strong>Torjäger</strong> dieser Division aufrufen</a>
-                            </li>
-                            <li>
-                                <span class="fa fa-fw fa-thumbs-o-down"></span><a class="" href="{{ route('frontend.divisions.sinners', $division) }}"> Alle <strong>Sünder</strong> dieser Division aufrufen</a>
-                            </li>
-                        </ul>
-                    </div>
-                @endforeach
+                <span>Alle bisherigen Divisionen der Hobby- und Altherrenliga.</span>
+                <div class="row">
+                    @foreach($divisions as $division)
+                        <div class="col-3">
+                            <div class="h4 font-weight-bold text-uppercase">{{ $division->name }}</div>
+                            <div class="alert alert-light">
+                                <ul class="list-unstyled p-0 m-0">
+                                    <li>
+                                        <span class="fa fa-fw fa-calendar"></span><a class="" href="{{ route('frontend.divisions.fixtures', $division) }}"> Alle <strong>Spielpläne</strong></a>
+                                    </li>
+                                    <li>
+                                        <span class="fa fa-fw fa-list-ol"></span><a class="" href="{{ route('frontend.divisions.tables', $division) }}"> Alle <strong>Tabellen</strong></a>
+                                    </li>
+                                    <li>
+                                        <span class="fa fa-fw fa-soccer-ball-o"></span><a class="" href="{{ route('frontend.divisions.scorers', $division) }}"> Alle <strong>Torjäger</strong></a>
+                                    </li>
+                                    <li>
+                                        <span class="fa fa-fw fa-thumbs-o-down"></span><a class="" href="{{ route('frontend.divisions.sinners', $division) }}"> Alle <strong>Sünder</strong></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col">
                 <h2 id="chronik" class="font-weight-bold font-italic text-uppercase">Chronik</h2>
-
+                <span>Auf Jahr klicken zum Ausklappen.</span>
                 <div class="accordion pb-4" id="seasons_accordion">
                     {{-- seasons are grouped by 'name', i.e. year --}}
                     @foreach($seasons as $index => $group)
