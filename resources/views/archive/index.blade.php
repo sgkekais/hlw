@@ -30,7 +30,7 @@
                 <span>Alle bisherigen Divisionen der Hobby- und Altherrenliga.</span>
                 <div class="row">
                     @foreach($divisions as $division)
-                        <div class="col-3">
+                        <div class="col-md-4 col-lg-3">
                             <div class="h4 font-weight-bold text-uppercase">{{ $division->name }}</div>
                             <div class="alert alert-light">
                                 <ul class="list-unstyled p-0 m-0">
@@ -62,7 +62,7 @@
                     @foreach($seasons as $index => $group)
                         <div class="card">
                             <div class="card-header" id="{{ $loop->index }}">
-                                <button class="btn btn-link text-dark d-flex w-100 align-content-center justify-content-between" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
+                                <button class="btn btn-link text-dark d-flex flex-column flex-md-row w-100 align-content-center justify-content-between" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
                                     <span class="h4 font-weight-bold text-uppercase">Jahr {{ $index }}</span>
                                     <span class="h5">
                                         @foreach ($group->sortBy('division.name') as $season)
