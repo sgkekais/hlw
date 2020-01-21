@@ -61,7 +61,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($division->seasons as $season)
+                    @foreach($division->seasons->sortByDesc('end') as $season)
                         <tr>
                             <td class="align-middle"><b>{{ $season->id }}</b></td>
                             <td class="align-middle">
