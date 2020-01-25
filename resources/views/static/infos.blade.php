@@ -56,7 +56,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Michael Leest</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">1. Vorsitzender</h5>
-                                    <p class="card-text">Ansprechpartner für die Teams.</p>
+                                    <p class="card-text">Ansprechpartner für die Teams und zusätzlich verantwortlich für Schiedsrichteransetzungen.</p>
                                     <div class="mt-auto">
                                         <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:mleest@hobbyligawest.de" title="Mail an M. Leest">mleest</a>
                                     </div>
@@ -64,11 +64,11 @@
                             </div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Sven Kienert</h4>
+                                    <h4 class="card-title font-weight-bold">Daniel Alberty</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">2. Vorsitzender</h5>
-                                    <p class="card-text">Ansprechpartner für die Teams und zusätzlich verantwortlich für Spielerpässe.</p>
+                                    <p class="card-text">Ansprechpartner für die Teams und zusätzlich verantwortlich für Schiedsrichteransetzungen.</p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:skienert@hobbyligawest.de" title="Mail an S. Kienert">skienert</a>
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:dalberty@hobbyligawest.de" title="Mail an D. Alberty">dalberty</a>
                                     </div>
                                 </div>
                             </div>
@@ -76,14 +76,26 @@
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Stefan Abels</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">Schiedsrichterobmann</h5>
-                                    <p class="card-text">Verantwortlich für die Schiedsrichterzuteilung und zusätzlich verantwortlich für Spielerpässe.</p>
+                                    <h5 class="card-subtitle mb-2 text-muted">&nbsp;</h5>
+                                    <p class="card-text">Verantwortlich für Spielerpässe.</p>
                                     <div class="mt-auto">
                                         <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:sabels@hobbyligawest.de" title="Mail an S. Abels">sabels</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="w-100 my-2 d-none d-md-block d-lg-none"><!-- wrap every 3 at md --></div>
+                            <div class="card">
+                                <div class="card-body d-flex flex-column">
+                                    <h4 class="card-title font-weight-bold">Harald Scholz</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">&nbsp;</h5>
+                                    <p class="card-text">Verantwortlich für Spielerpässe und die HLW-Facebook-Seite.</p>
+                                    <div class="mt-auto">
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:hscholz@hobbyligawest.de" title="Mail an H. Scholz">hscholz</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100 my-2 d-block d-md-none"><!-- wrap every 2 below md --></div>
+                            <div class="w-100 my-2 d-none d-lg-block"><!-- wrap every 4 above md --></div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Erwin Scholz</h4>
@@ -94,8 +106,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-100 my-2 d-block d-md-none"><!-- wrap every 2 below md --></div>
-                            <div class="w-100 my-2 d-none d-lg-block"><!-- wrap every 4 above md --></div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Klaus Wynants</h4>
