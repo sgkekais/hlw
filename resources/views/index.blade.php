@@ -229,7 +229,7 @@
                                                 <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                             @endif
                                             <a href="{{ route('frontend.clubs.show', $club) }}" class="pl-1 align-middle" title="{{ $club->name }}">
-                                                {{ $club->name_code }}
+                                                {{ $divisions_count >= 3 ? $club->name_code : $club->name_short }}
                                             </a>
                                             @if ($p_champion)
                                                 @if ($p_champion->id == $club->id)
