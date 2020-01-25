@@ -229,7 +229,7 @@
                                                 <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                                             @endif
                                             <a href="{{ route('frontend.clubs.show', $club) }}" class="pl-1 align-middle" title="{{ $club->name }}">
-                                                @if ($division_count >=3 )
+                                                @if ($division_count < 3 )
                                                     {{-- visible only on xs --}}
                                                     <span class="d-inline d-sm-none">{{ $club->name_code }}</span>
                                                     {{-- visible only on sm and md --}}
