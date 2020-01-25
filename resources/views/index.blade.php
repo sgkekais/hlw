@@ -144,7 +144,7 @@
         <!-- shortened standings for leagues -->
         <div class="row mt-2">
             @foreach ($divisions as $division)
-                <div class="col-md-4">
+                <div class="{{ $division_count >= 3 ? "col-md-4" : "cold-md-6" }}">
                     @php
                         // $c_season = $division->seasons()->published()->current()->first();
                         $c_season = $division->currentSeason();

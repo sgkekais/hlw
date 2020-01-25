@@ -17,6 +17,7 @@ class PagesController extends Controller
     public function index()
     {
         $divisions = Division::published()->get()->where('competition.type', 'league');
+        $division_count = $divisions->count();
         $divisions->load(['seasons' => function ($query) {
             $query->published()->current();
         }], 'seasons.clubs', 'seasons.matchweeks');
@@ -36,7 +37,7 @@ class PagesController extends Controller
         ->sortBy('matchweek.season.division.id')
         ->groupBy('matchweek.season.division.id');
 
-        return view('index', compact('divisions', 'fixtures_grouped_by_divisions'));
+        return view('index', compact('divisions', 'fixtures_grouped_by_divisions', 'division_count'));
     }
 
     /**
