@@ -107,7 +107,7 @@
                             @hasanyrole('super_admin|admin')
                             <div class="px-4 py-1">
                                 <a class="btn btn-secondary w-100" href="{{ route('admin') }}">
-                                    <span class="fa fa-fw fa-cogs"></span> HLW-Admin
+                                    <span class="fa fa-fw fa-cogs"></span> Admin
                                 </a>
                             </div>
                             @endrole
