@@ -79,6 +79,8 @@
                 </select>
                 <small id="championHelp" class="form-text text-muted">Meister bzw. Pokalsieger, falls schon gegeben, sonst leer lassen</small>
             </div>
+        </div>
+        <div class="form-group row">
             <div class="col-md-2">
                 <label for="champion_icon">Icon</label>
             </div>
