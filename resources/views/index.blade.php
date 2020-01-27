@@ -252,8 +252,8 @@
                                                 @endif
                                             --}}
                                             @isset($previous_titles_of_club)
-                                                @foreach($previous_titles_of_club)
-                                                        <span class="pull-right" data-toggle="tooltip" title=" {{ $previous_titles_of_club->name }}"><small class="text-secondary"><i class="fa {{ $previous_titles_of_club->champion_icon }}" style="color: {{ $previous_titles_of_club->champion_icon_color }}"></i> </small></span>
+                                                @foreach($previous_titles_of_club as $title)
+                                                        <span class="pull-right" data-toggle="tooltip" title=" {{ $title->name }}"><small class="text-secondary"><i class="fa {{ $title->champion_icon }}" style="color: {{ $title->champion_icon_color }}"></i> </small></span>
                                                 @endforeach
                                             @endisset
                                             @if ($previous_season_of_club)
