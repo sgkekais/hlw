@@ -154,10 +154,12 @@
                             $c_season = $division->seasons()->orderBy('season_nr','desc')->first();
                             $c_matchweek = $c_season->currentMatchweek();
                         }
-                        $p_season = $c_season->previousSeason();
-                        if ($p_season) {
-                            $p_champion = $p_season->champion;
-                        }
+                        /* not necessary anymore due to new champion_icon and champion_icon_color columns, also not working if divisions change between year
+                            $p_season = $c_season->previousSeason();
+                            if ($p_season) {
+                                $p_champion = $p_season->champion;
+                            }
+                        */
                     @endphp
                     @if ($c_season && $c_matchweek)
                         <h3 class="font-weight-bold font-italic text-uppercase">
@@ -191,6 +193,8 @@
                                         $rank_color = null;
                                         $rank_icon  = null;
                                         $previous_season_of_club = $club->seasons()->orderBy('end','desc')->where('end','>=',Carbon::now()->subYear()->format('Y-m-d'))->where('begin','<=',Carbon::now()->subYear()->format('Y-m-d'))->get()->where('division.id', $c_season->division->id)->first();
+                                        $previous_titles_of_club =  $club->championships()->where('end','<=',Carbon::now()->subYear()->endOfYear()->format('Y-m-d'))->where('begin','>=',Carbon::now()->subYear()->startOfYear()->format('Y-m-d'))->get();
+
                                     @endphp
                                     @if(in_array($club->t_rank, $c_season->ranks_champion) || in_array($club->t_rank, $c_season->ranks_promotion))
                                         @php
@@ -240,11 +244,18 @@
                                                    {{ $club->name_code }}
                                                 @endif
                                             </a>
-                                            @if ($p_champion)
-                                                @if ($p_champion->id == $club->id)
-                                                    <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                                            {{-- not working when divisions change
+                                                @if ($p_champion)
+                                                    @if ($p_champion->id == $club->id)
+                                                        <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                                                    @endif
                                                 @endif
-                                            @endif
+                                            --}}
+                                            @isset($previous_titles_of_club)
+                                                @foreach($previous_titles_of_club)
+                                                        <span class="pull-right" data-toggle="tooltip" title=" {{ $previous_titles_of_club->name }}"><small class="text-secondary"><i class="fa {{ $previous_titles_of_club->champion_icon }}" style="color: {{ $previous_titles_of_club->champion_icon_color }}"></i> </small></span>
+                                                @endforeach
+                                            @endisset
                                             @if ($previous_season_of_club)
                                                 @if ($previous_season_of_club->division->hierarchy_level < $c_season->division->hierarchy_level)
                                                     <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
