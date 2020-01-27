@@ -26,6 +26,7 @@
             <th></th>
             <th class="">Zeitraum</th>
             <th>Nr.</th>
+            <th></th>
             <th>Wettbewerb</th>
             <th>Spielkl.</th>
             <th>Clubs</th>
@@ -50,6 +51,7 @@
                     {{ $season->begin->format('d.m.y') }} bis {{ $season->end->format('d.m.y') }}
                 </td>
                 <td class="align-middle">{{ $season->season_nr }}</td>
+                <td class="align-middle"><span class="fa fa-fw {{ $season->champion_icon }}" style="color: {{ $season->champion_icon_color }}"></span> </td>
                 <td class="align-middle">{{ $season->division->competition->name }}</td>
                 <td class="align-middle">{{ $season->division->name }}</td>
                 <td class="align-middle">{{ $season->clubs->count() }}</td>

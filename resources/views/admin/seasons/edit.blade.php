@@ -90,7 +90,7 @@
                     <option value="fa-star" {{ $season->champion_icon == "fa-star" ? "selected" : null }}><i class="fa fa-fw fa-trophy"></i> fa-star</option>
                     <option value="fa-trophy" {{ $season->champion_icon == "fa-trophy" ? "selected" : null }}><i class="fa fa-fw fa-star"></i> fa-trophy</option>
                 </select>
-                <small id="champion_iconHelp" class="form-text text-muted">Meister bzw. Pokalsieger, falls schon gegeben, sonst leer lassen</small>
+                <small id="champion_iconHelp" class="form-text text-muted">Icon für die Titelanzeige</small>
             </div>
             <div class="col-md-2">
                 <label for="champion_icon_color">Icon-Farbe</label>
@@ -101,7 +101,7 @@
                     <option value="#ffa500" {{ $season->champion_icon_color == "#ffa500" ? "selected" : null }}>Gold</option>
                     <option value="#808080" {{ $season->champion_icon_color == "#808080" ? "selected" : null }}>Silber</option>
                 </select>
-                <small id="champion_iconHelp" class="form-text text-muted">Meister bzw. Pokalsieger, falls schon gegeben, sonst leer lassen</small>
+                <small id="champion_iconHelp" class="form-text text-muted">Farbe des Icons</small>
             </div>
         </div>
         <!-- ranks -->
