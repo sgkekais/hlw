@@ -82,7 +82,7 @@
             <div class="col-md-2">
                 <label for="champion_icon">Icon</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <select class="form-control" id="champion_icon" name="champion_icon" aria-describedby="champion_iconHelp">
                     <option></option>
                     <option value="fa-star" {{ $season->champion_icon == "fa-star" ? "selected" : null }}><i class="fa fa-fw fa-trophy"></i> fa-star</option>
@@ -93,11 +93,11 @@
             <div class="col-md-2">
                 <label for="champion_icon_color">Icon-Farbe</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <select class="form-control" id="champion_icon_color" name="champion_icon_color" aria-describedby="champion_icon_colorHelp">
                     <option></option>
-                    <option value="#ffa500" {{ $season->champion_icon == "#ffa500" ? "selected" : null }}>Gold</option>
-                    <option value="#808080" {{ $season->champion_icon == "#808080" ? "selected" : null }}>Silber</option>
+                    <option value="#ffa500" {{ $season->champion_icon_color == "#ffa500" ? "selected" : null }}>Gold</option>
+                    <option value="#808080" {{ $season->champion_icon_color == "#808080" ? "selected" : null }}>Silber</option>
                 </select>
                 <small id="champion_iconHelp" class="form-text text-muted">Meister bzw. Pokalsieger, falls schon gegeben, sonst leer lassen</small>
             </div>
