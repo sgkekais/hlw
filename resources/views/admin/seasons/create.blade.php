@@ -49,7 +49,7 @@
         <!-- champion -->
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="champion_id">Sieger</label_id>
+                <label for="champion_id">Sieger</label>
             </div>
             <div class="col-md-4">
                 <select class="form-control" id="champion_id" name="champion_id" aria-describedby="championHelp" disabled>
