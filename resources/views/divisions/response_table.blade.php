@@ -103,38 +103,15 @@
                     @endif
                 @endif
             </td>
-            <td class="align-middle d-none d-sm-table-cell">
+            <td class="align-middle">
                 @if($club->logo_url)
                     <img src="{{ asset('storage/'.$club->logo_url) }}" width="30" class="pr-1">
                 @else
                     <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
                 @endif
                 <a href="{{ route('frontend.clubs.show', $club) }}">
-                    {{ $club->name }}
-                </a>
-                {{--
-                    @if ($p_champion)
-                        @if ($p_champion->id == $club->id)
-                            <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
-                        @endif
-                    @endif
-                --}}
-                @if ($previous_season_of_club)
-                    @if ($previous_season_of_club->division->hierarchy_level < $season->division->hierarchy_level)
-                        <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
-                    @elseif ($previous_season_of_club->division->hierarchy_level > $season->division->hierarchy_level)
-                        <span class="pull-right" data-toggle="tooltip" title="Aufsteiger"><small class="text-secondary">N</small></span>
-                    @endif
-                @endif
-            </td>
-            <td class="align-middle d-sm-none p-2">
-                @if($club->logo_url)
-                    <img src="{{ asset('storage/'.$club->logo_url) }}" width="30" class="pr-1">
-                @else
-                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
-                @endif
-                <a href="{{ route('frontend.clubs.show', $club) }}">
-                    {{ $club->name_code }}
+                    <span class="d-none d-sm-inline">{{ $club->name }}</span>
+                    <span class="d-sm-none">{{ $club->name_code }}</span>
                 </a>
                 {{--
                     @if ($p_champion)
