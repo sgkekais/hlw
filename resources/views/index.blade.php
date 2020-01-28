@@ -29,7 +29,7 @@
                                         @php
                                             $d = \HLW\Division::findOrFail($division);
                                         @endphp
-                                        <a href="{{ route('frontend.divisions.show', $d) }}">{{ $d->name }}</a>
+                                        <a href="{{ route('frontend.divisions.tables', $d) }}">{{ $d->name }}</a>
                                     </h4>
                                 </div>
                             </div>
