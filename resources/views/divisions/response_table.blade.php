@@ -112,11 +112,13 @@
                 <a href="{{ route('frontend.clubs.show', $club) }}">
                     {{ $club->name }}
                 </a>
-                @if ($p_champion)
-                    @if ($p_champion->id == $club->id)
-                        <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                {{--
+                    @if ($p_champion)
+                        @if ($p_champion->id == $club->id)
+                            <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                        @endif
                     @endif
-                @endif
+                --}}
                 @if ($previous_season_of_club)
                     @if ($previous_season_of_club->division->hierarchy_level < $season->division->hierarchy_level)
                         <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
@@ -134,11 +136,13 @@
                 <a href="{{ route('frontend.clubs.show', $club) }}">
                     {{ $club->name_code }}
                 </a>
-                @if ($p_champion)
-                    @if ($p_champion->id == $club->id)
-                        <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                {{--
+                    @if ($p_champion)
+                        @if ($p_champion->id == $club->id)
+                            <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                        @endif
                     @endif
-                @endif
+                --}}
                 @if ($previous_season_of_club)
                     @if ($previous_season_of_club->division->hierarchy_level < $season->division->hierarchy_level)
                         <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
