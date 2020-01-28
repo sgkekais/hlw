@@ -1,3 +1,4 @@
+{{--
 @php
     $p_season = $season->previousSeason();
     if ($p_season) {
@@ -6,6 +7,7 @@
         $p_champion = null;
     }
 @endphp
+--}}
 <h4 class="text-muted">
     <b>{{ $season->season_nr ? $season->season_nr."." : null }}</b> Saison |
     Spielwoche
@@ -39,6 +41,8 @@
             $rank_color = "";
             $rank_icon  = null;
             $previous_season_of_club = $club->seasons()->orderBy('end','desc')->where('end','>=',Carbon::now()->subYear()->format('Y-m-d'))->where('begin','<=',Carbon::now()->subYear()->format('Y-m-d'))->get()->where('division.id', $season->division->id)->first();
+            $previous_titles_of_club =  $club->championships()->where('end','<=',Carbon::now()->subYear()->endOfYear()->format('Y-m-d'))->where('begin','>=',Carbon::now()->subYear()->startOfYear()->format('Y-m-d'))->get();
+
         @endphp
         {{-- ranks_champion OR ranks_promotion --}}
         @if (in_array($club->t_rank, $season->ranks_champion) || in_array($club->t_rank, $season->ranks_promotion))
@@ -120,6 +124,11 @@
                         @endif
                     @endif
                 --}}
+                @isset($previous_titles_of_club)
+                    @foreach($previous_titles_of_club as $title)
+                        <span class="pull-right"><small class="text-secondary"><i class="fa {{ $title->champion_icon }}" style="color: {{ $title->champion_icon_color }}"></i> </small></span>
+                    @endforeach
+                @endisset
                 @if ($previous_season_of_club)
                     @if ($previous_season_of_club->division->hierarchy_level < $season->division->hierarchy_level)
                         <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
