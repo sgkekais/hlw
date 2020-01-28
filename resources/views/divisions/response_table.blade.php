@@ -224,7 +224,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2 text-center bg-faded pt-2">
+                                <div class="col-md-2 text-center bg-faded pt-2 px-1">
                                     @if ($lastgame->isPlayed() && !$lastgame->isRated())
                                         {{ $lastgame->goals_home }} : {{ $lastgame->goals_away }}
                                     @elseif ($lastgame->isRated())
