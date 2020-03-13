@@ -7,6 +7,20 @@
 @section('content')
     @include('cookieConsent::index')
     <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-warning alert-dismissible fade show">
+                    <h4 class="alert-heading"><i class="fa fa-warning"></i> COVID-19 - Kein Spielbetrieb aufgrund der Coronavirus-Situation</h4>
+                    <p>Aufgrund der aktuellen Entwicklungen hat der Vorstand der Hobbyliga-West entschieden, den gesamten Spielbetrieb der HLW und der AH-Liga bis auf Weiteres auszusetzen.</p>
+                    <p>Da die Hobbyliga ein Gemeinschaftsprojekt ist, soll in einer außerordentlichen Versammlung mit dem Team-Verantwortlichen besprochen werden, bis wann diese Unterbrechnung anhalten soll und wie mit der Saison im Anschluss fortzufahren ist.</p>
+                    <p>Die Details zum Termin und alles Weitere folgen.</p>
+                    <hr>
+                    <p class="mb-0">Der Vorstand der Hobbyliga-West</p>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            </div>
+
+        </div>
         <!-- fixtures of the current week -->
         @if($fixtures_grouped_by_divisions->count() > 0)
             <div class="row">
