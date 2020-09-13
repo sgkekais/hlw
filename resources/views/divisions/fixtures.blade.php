@@ -37,7 +37,7 @@
     <div class="container pt-4">
         <div class="row mb-2">
             <div class="col-12">
-                <h1 class="font-weight-bold font-italic">SPIELPLAN</h1>
+                <h1 class="font-weight-bold font-italic">SPIELPLANS</h1>
                 <ul class="nav mt-2">
                     <li class="nav-item dropdown pr-2">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="season_selector_title" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
