@@ -43,6 +43,9 @@
             <div class="col-9 text-white">
                 <h1 class="font-weight-bold"><span class="p-1 bg-black-transparent">{{ $club->name }}</span></h1>
                 <ul class="list-unstyled">
+                    {{--
+
+                    --}}
                     {{-- league championships --}}
                     @php
                         $league_championships = $club->championships->where('division.competition.type', 'league')->sortByDesc('end');
