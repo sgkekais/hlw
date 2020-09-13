@@ -68,6 +68,12 @@ class PagesController extends Controller
         return response()->download($storage_path);
     }
 
+    public function jhvCorona(){
+        $storage_path = storage_path('app/public/hlw-jhv-2020-09-03_2.pdf');
+
+        return response()->download($storage_path);
+    }
+
     public function datenschutz() {
         return view('static.datenschutz');
     }

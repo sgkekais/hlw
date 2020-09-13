@@ -54,43 +54,43 @@
                         <div class="card-deck">
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Michael Leest</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">1. Vorsitzender</h5>
-                                    <p class="card-text">Ansprechpartner für die Teams und zusätzlich verantwortlich für Schiedsrichteransetzungen.</p>
+                                    <h4 class="card-title font-weight-bold">Daniel Alberty</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
+                                    <p class="card-text">Schiedsrichteransetzungen & Ansprechpartner Teams</p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:mleest@hobbyligawest.de" title="Mail an M. Leest">mleest</a>
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:dalberty@hobbyligawest.de" title="Mail an D. Alberty">dalberty</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Daniel Alberty</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">2. Vorsitzender</h5>
-                                    <p class="card-text">Ansprechpartner für die Teams und zusätzlich verantwortlich für Schiedsrichteransetzungen.</p>
+                                    <h4 class="card-title font-weight-bold">Stefan Abels</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
+                                    <p class="card-text">Spielerpässe</p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:dalberty@hobbyligawest.de" title="Mail an D. Alberty">dalberty</a>
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:sabels@hobbyligawest.de" title="Mail an S. Abels">sabels</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="w-100 my-2 d-block d-md-none"><!-- wrap every 2 below md --></div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Stefan Abels</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">&nbsp;</h5>
-                                    <p class="card-text">Verantwortlich für Spielerpässe.</p>
+                                    <h4 class="card-title font-weight-bold">Jürgen Kaiser</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
+                                    <p class="card-text">Spielpläne HLW + AH & Ansprechpartner Teams</p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:sabels@hobbyligawest.de" title="Mail an S. Abels">sabels</a>
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:jkaiser@hobbyligawest.de" title="Mail an J. Kaiser">jkaiser</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="w-100 my-2 d-none d-md-block d-lg-none"><!-- wrap every 3 at md --></div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Harald Scholz</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">&nbsp;</h5>
-                                    <p class="card-text">Verantwortlich für Spielerpässe und die HLW-Facebook-Seite.</p>
+                                    <h4 class="card-title font-weight-bold">Klaus Wynants</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
+                                    <p class="card-text">Verantwortlich für die Altherren-Liga</p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:hscholz@hobbyligawest.de" title="Mail an H. Scholz">hscholz</a>
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:kwynants@hobbyligawest.de" title="Mail an K. Wynants">kwynants</a>
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +99,8 @@
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Erwin Scholz</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">Kassierer</h5>
-                                    <p class="card-text">Kassierer der HLW.</p>
+                                    <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
+                                    <p class="card-text">Kassierer & Ansprechpartner Teams</p>
                                     <div class="mt-auto">
                                         <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:escholz@hobbyligawest.de" title="Mail an E. Scholz">escholz</a>
                                     </div>
@@ -108,21 +108,21 @@
                             </div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Klaus Wynants</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">AH-Vorstand</h5>
-                                    <p class="card-text">Verantwortlich für die Altherren-Liga.</p>
+                                    <h4 class="card-title font-weight-bold">Harald Scholz</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
+                                    <p class="card-text">Außenauftritt, Spielerpass-Vertretung & Ansprechpartner Teams</p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:kwynants@hobbyligawest.de" title="Mail an K. Wynants">kwynants</a>
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:hscholz@hobbyligawest.de" title="Mail an H. Scholz">hscholz</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Jürgen Kaiser</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">Spielplan</h5>
-                                    <p class="card-text">Verantwortlich für den Spielplan von HLW und AH-Liga.</p>
+                                    <h4 class="card-title font-weight-bold">Kevin Kaiser</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
+                                    <p class="card-text">Webmaster</p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:jkaiser@hobbyligawest.de" title="Mail an J. Kaiser">jkaiser</a>
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:webmaster@hobbyligawest.de" title="Mail an Webmaster">webmaster</a>
                                     </div>
                                 </div>
                             </div>
@@ -130,11 +130,11 @@
                             <div class="w-100 my-2 d-none d-md-block d-lg-none"><!-- wrap every 3 at md --></div>
                             <div class="card">
                                 <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Kevin Kaiser</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">Webmaster</h5>
+                                    <h4 class="card-title font-weight-bold">&nbsp;</h4>
+                                    <h5 class="card-subtitle mb-2 text-muted">&nbsp;</h5>
                                     <p class="card-text"></p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:webmaster@hobbyligawest.de" title="Mail an Webmaster">webmaster</a>
+                                        &nbsp;
                                     </div>
                                 </div>
                             </div>

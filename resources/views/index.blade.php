@@ -9,11 +9,18 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="alert alert-warning alert-dismissible fade show">
-                    <h4 class="alert-heading"><i class="fa fa-warning"></i> COVID-19 - Kein Spielbetrieb aufgrund der Coronavirus-Situation</h4>
-                    <p>Aufgrund der aktuellen Entwicklungen hat der Vorstand der Hobbyliga-West entschieden, den gesamten Spielbetrieb der HLW und der AH-Liga bis auf Weiteres auszusetzen.</p>
-                    <p>Da die Hobbyliga ein Gemeinschaftsprojekt und dieser Schritt gravierend ist, soll in einer außerordentlichen Versammlung zusammen mit den Team-Verantwortlichen besprochen werden, bis wann diese Unterbrechnung anhält und wie mit der Saison im Anschluss fortzufahren ist.</p>
-                    <p>Die Details zum Termin und alles Weitere folgen.</p>
+                <div class="alert alert-light alert-dismissible fade show">
+                    <h4 class="alert-heading text-left">&#127881; Am 14.09.2020 geht es endlich weiter und es darf wieder gekickt werden! &#127881;</h4>
+                    <hr>
+                    <p>ℹ️&nbsp;Bitte beachtet hierzu die <a class="" href="{{ route('frontend.static.jhvCorona') }}" title="Herunterladen"><span class="fa fa-fw fa-download" title="Herunterladen"></span> Beschlüsse der Ligaversammlung vom 02.09.2020</a>.</p>
+                    <p>ℹ️&nbsp;Bitte verfolgt ferner das aktuelle Infektionsgeschehen, die gesetzlichen Regelungen bezüglich des Infektionsschutzgesetzes und der Corona-Schutzverordnung.</p>
+                        <ul>
+                            <li>🇩🇪 Infos des Bundesgesundheitsministeriums findet ihr <strong><a href="https://www.bundesgesundheitsministerium.de/coronavirus.html" title="Bundesministerium für Gesundheit" target="_blank">hier</a></strong></li>
+                            <li>🏙️ Infos der Stadt Düsseldorf findet ihr <strong><a href="https://corona.duesseldorf.de/" title="Düsseldorf - Corona" target="_blank">hier</a></strong></li>
+                            <li>🏅 Bezüglich des Sports findet ihr außerdem aktuelle Infos beim <strong><a href="https://www.vibss.de/vereinsmanagement/ablage-slider/coronavirus-covid-19-sars-cov-2/">Landessportbund NRW</a></strong></li>
+                        </ul>
+                    <p>Für alle Fragen stehen wir euch unter vorstand@hobbyligawest.de zur Verfügung.</p>
+                    <p>Natürlich halten wir euch auch weiter auf dem Laufenden und <strong>wünschen allen Mannschaften jetzt erstmal viel Spaß beim Kicken und eine faire & erfolgreiche Saison!</strong></p>
                     <hr>
                     <p class="mb-0">Der Vorstand der Hobbyliga-West</p>
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
