@@ -33,7 +33,7 @@ class PagesController extends Controller
                 'stadium',
                 'rescheduledTo.rescheduledBy',
             ])
-            ->whereHas('season', function ($query) {
+            ->whereHas('matchweek.season', function ($query) {
                 $query->where('published', '=', '1');
             })
             ->get()
