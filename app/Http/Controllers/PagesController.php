@@ -33,6 +33,9 @@ class PagesController extends Controller
                 'stadium',
                 'rescheduledTo.rescheduledBy',
             ])
+            ->whereHas('season', function ($query) {
+                $query->where('published', '=', '1');
+            })
             ->get()
         ->sortBy('matchweek.season.division.id')
         ->groupBy('matchweek.season.division.id');
