@@ -114,7 +114,7 @@ class Season extends Model
 
         // format the end date if it is not null
         if ($this->end) {
-            $end = substr($this->end->format('Y'), 2);
+            $end = $this->end->format('Y');
         } else {
             $end = null;
         }
@@ -123,7 +123,7 @@ class Season extends Model
         if ($begin == $end) {
             return $begin;
         } else {
-            return $begin . ($end ? "/" . $end : null);
+            return $begin . ($end ? "/" . substr($end, 2) : null);
         }
     }
 
