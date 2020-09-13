@@ -63,7 +63,7 @@
                         <div class="card">
                             <div class="card-header" id="{{ $loop->index }}">
                                 <button class="btn btn-link text-dark d-flex flex-column flex-md-row w-100 align-content-center justify-content-between" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
-                                    <span class="h4 font-weight-bold text-uppercase">Jahr {{ $index }}</span>
+                                    <span class="h4 font-weight-bold text-uppercase">Saison {{ $index }}</span>
                                     <span class="h5">
                                         @foreach ($group->sortBy('division.name') as $season)
 
