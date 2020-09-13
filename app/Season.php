@@ -123,7 +123,7 @@ class Season extends Model
         if ($begin == $end) {
             return $begin;
         } else {
-            return $begin . ($end ? " / " . $end : null);
+            return $begin . ($end ? "/" . $end : null);
         }
     }
 
