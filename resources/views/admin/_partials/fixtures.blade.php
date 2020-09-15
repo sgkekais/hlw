@@ -1,14 +1,16 @@
-<table class="table table-sm table-striped table-hover">
+<table class="table table-sm table-striped table-hover" id="{{ $id }}">
     <thead class="thead-default">
     <tr>
         <th class="">ID</th>
-        <th class="">Datum</th>
-        <th class="">Paarung</th>
-        <th class="">Spielort</th>
+        <th class=""><span class="fa fa-fw fa-calendar" title="Datum"></span></th>
+        <th class=""><span class="fa fa-fw fa-handshake-o" title="Paarung"></span></th>
+        <th class=""><span class="fa fa-fw fa-map-marker"></span></th>
         <th class="">Erg.</th>
+        <th class="">T</th>
+        <th class="">K</th>
+        <th class="">S</th>
         <th class=""></th>
         <th class=""></th>
-        <th></th>
         <th>Aktionen</th>
     </tr>
     </thead>
@@ -16,6 +18,21 @@
     @foreach($fixtures as $fixture)
         <tr>
             <td class="align-middle">
+                <small>
+                    @switch ($fixture->matchweek->season->division->competition->id)
+                        @case (1)
+                            <span class="badge badge-success">HLW</span>
+                            @break
+                        @case (2)
+                            <span class="badge badge-warning">Pok</span>
+                            @break
+                        @case (3)
+                            <span class="badge badge-secondary">AH</span>
+                            @break
+                        @case (4)
+                            <span class="badge badge-success">PlOff</span>
+                    @endswitch
+                </small>
                 @if ($fixture->rescheduled_from_fixture_id)
                     (von: {{ $fixture->rescheduled_from_fixture_id }})
                     <br>
@@ -29,29 +46,32 @@
             </td>
             <td class="align-middle">
                 @if($fixture->datetime)
-                    {{ $fixture->datetime->format('d.m. H:i') }}
+                    <div class="{{ $today->format('d.m.') == $fixture->datetime->format('d.m.') ? "font-weight-bold" : null }} ">
+                        {{ $fixture->datetime->format('d.m.y H:i') }}
+                    </div>
                 @endif
             </td>
             <td class="align-middle">
                 @if($fixture->clubHome)
                     @if($can_read_club)
                         <a href="{{ route('clubs.show', $fixture->clubHome) }}" title="Mannschaft anzeigen">
-                            {{ $fixture->clubHome->name_short }}
-                        </a>
-                    @else
-                        {{ $fixture->clubHome->name_short }}
+                    @endif
+                        <span class="d-inline d-lg-none">{{ $fixture->clubHome->name_code }}</span>
+                        <span class="d-none d-lg-inline">{{ $fixture->clubHome->name_short }}</span>
+                    @if($can_read_club)
                     @endif
                 @else
                     -
                 @endif
-                vs.
+                :
                 @if($fixture->clubAway)
                     @if($can_read_club)
                         <a href="{{ route('clubs.show', $fixture->clubAway) }}" title="Mannschaft anzeigen">
-                            {{ $fixture->clubAway->name_short }}
+                    @endif
+                        <span class="d-inline d-lg-none">{{ $fixture->clubAway->name_code }}</span>
+                        <span class="d-none d-lg-inline">{{ $fixture->clubAway->name_short }}</span>
+                    @if($can_read_club)
                         </a>
-                    @else
-                        {{ $fixture->clubAway->name_short }}
                     @endif
                 @else
                     -
@@ -89,30 +109,32 @@
                 @else
                     <span class="fa fa-fw"></span>
                 @endif
+            </td>
+            <td class="align-middle">
                 @if ($fixture->cards->count() > 0)
                     <span class="fa fa-clone fa-fw" title="Karte(n) gepflegt"></span>
                 @else
                     <span class="fa fa-fw"></span>
                 @endif
+            </td>
+            <td class="align-middle">
                 @if ($fixture->referees->isEmpty())
                     <span class="fa fa-hand-stop-o fa-fw text-danger" title="Kein Schiedsrichter"></span>
                 @else
-                    <span class="fa fa-hand-stop-o fa-fw text-success" title="Schiedsrichter zugewiesen"></span>
-                    @php
-                        $confirmed = true;
-                    @endphp
                     @foreach ($fixture->referees as $referee)
-                        @php
-                            if (!$referee->pivot->confirmed) {
-                                $confirmed = false;
-                            }
-                        @endphp
+                        <small>
+                            @if ($referee->pivot->confirmed)
+                                <span class="fa fa-check-circle text-success" title="Alle Schiedsrichter Bestätigt"></span>
+                            @else
+                                <span class="fa fa-question-circle text-danger" title="Nicht alle Schiedsrichter bestätigt"></span>
+                            @endif
+                            {{ substr($referee->person->first_name, 0, 1)."., ".$referee->person->last_name }}
+                        </small>
+                            @unless( $loop->last )
+                                <br>
+                            @endunless
                     @endforeach
-                    @if ($confirmed)
-                        <span class="fa fa-check-circle text-success" title="Alle Schiedsrichter Bestätigt"></span>
-                    @else
-                        <span class="fa fa-question-circle text-danger" title="Nicht alle Schiedsrichter bestätigt"></span>
-                    @endif
+
                 @endif
             </td>
             <td class="align-middle">{{ $fixture->cancelled ? "Ann." : null }}</td>
@@ -122,28 +144,31 @@
                 @endif
             </td>
             <td class="align-middle">
-                <!-- show -->
-                @if($can_read_fixture)
-                    <a class="btn btn-secondary btn-sm" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}" title="Paarung anzeigen">
-                        <span class="fa fa-search-plus" aria-hidden="true"></span>
-                    </a>
-                @endif
-                <!-- edit -->
-                @if($can_update_fixture)
-                    <a class="btn btn-primary btn-sm" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung bearbeiten">
-                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                    </a>
-                @endif
-                <!-- reschedule -->
-                @if($can_reschedule_fixture)
-                    @if(!$fixture->rescheduledTo)
-                        <a class="btn btn-warning btn-sm" href="{{ route('reschedule.create', [$fixture->matchweek, $fixture]) }}" title="Paarung verlegen">
-                            <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
+                <div class="d-flex flex-column flex-md-row justify-content-between justify-content-md-start">
+                    <!-- show -->
+                    @if($can_read_fixture)
+                        <a class="btn btn-secondary btn-sm mb-2 mb-md-0 mr-md-2" href="{{ route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]) }}" title="Paarung anzeigen">
+                            <span class="fa fa-search-plus" aria-hidden="true"></span>
                         </a>
-                    @else
-                        <button class="btn btn-outline-danger btn-sm" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
                     @endif
-                @endif
+                <!-- edit -->
+                    @if($can_update_fixture)
+                        <a class="btn btn-primary btn-sm mb-2 mb-md-0 mr-md-2" href="{{ route('matchweeks.fixtures.edit', [$fixture->matchweek, $fixture]) }}" title="Paarung bearbeiten">
+                            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                        </a>
+                    @endif
+                <!-- reschedule -->
+                    @if($can_reschedule_fixture)
+                        @if(!$fixture->rescheduledTo)
+                            <a class="btn btn-warning btn-sm" href="{{ route('reschedule.create', [$fixture->matchweek, $fixture]) }}" title="Paarung verlegen">
+                                <span class="fa fa-calendar-plus-o" aria-hidden="true"></span>
+                            </a>
+                        @else
+                            <button class="btn btn-outline-danger btn-sm" type="button" title="Paarung wurde schon einmal verlegt." aria-disabled="true" disabled><span class="fa fa-calendar-times-o"></span> </button>
+                        @endif
+                    @endif
+                </div>
+
             </td>
         </tr>
     @endforeach
