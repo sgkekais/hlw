@@ -57,6 +57,17 @@
                 <small id="noteHelp" class="form-text text-muted">Interne Notiz</small>
             </div>
         </div>
+        <!-- active indicator -->
+        <div class="form-group row">
+            <label for="reschedule_count" class="form-control-label col-md-2">Schiri in HLW aktiv?</label>
+            <div class="col-md-4">
+                <select class="form-control" name="active" id="active" aria-describedby="activeHelp">
+                    <option value="0">Nein</option>
+                    <option value="1" {{ $referee->active ? "selected" : null }}>Ja</option>
+                </select>
+                <small id="activeHelp" class="form-text text-muted">Nein auswählen, wenn inaktiv. Wird dann in Auswahl nicht mehr angezeigt.</small>
+            </div>
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary"><span class="fa fa-save"></span> Ändern</button>
             <a class="btn btn-secondary" href="{{ route('referees.index') }}"><span class="fa fa-ban"></span> Abbrechen</a>

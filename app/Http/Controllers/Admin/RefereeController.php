@@ -38,10 +38,12 @@ class RefereeController extends Controller
      */
     public function index()
     {
-        $referees = Referee::all();
-        $referees->load('person');
+        $active_referees = Referee::active()->get();
+        $active_referees->load('person');
+        $inactive_referees = Referee::inactive()->get();
+        $inactive_referees->load('person');
 
-        return view('admin.referees.index', compact('referees'));
+        return view('admin.referees.index', compact('active_referees', 'inactive_referees'));
     }
 
     /**

@@ -216,8 +216,8 @@ class FixtureController extends Controller
     public function createRefereeAssignment(Fixture $fixture)
     {
         // determine the referees which are not assigned to the fixture, yet
-        $all_referees = Referee::with('person')->get();
-        $unassigned_referees = $all_referees->diff($fixture->referees);
+        $active_referees = Referee::active()->with('person')->get();
+        $unassigned_referees = $active_referees->diff($fixture->referees);
 
         return view('admin.fixtures.createRefereeAssignment', compact('fixture', 'unassigned_referees'));
     }

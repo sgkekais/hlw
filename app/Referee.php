@@ -32,7 +32,7 @@ class Referee extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'person_id', 'mobile', 'mail', 'note'
+        'person_id', 'mobile', 'mail', 'note', 'active'
     ];
 
     /**
@@ -46,8 +46,22 @@ class Referee extends Model
      * @var array
      */
     protected $fillable = [
-        'person_id', 'mobile', 'mail', 'note'
+        'person_id', 'mobile', 'mail', 'note', 'active'
     ];
+
+    /*******************************************************
+     * SCOPES
+     * ******************************************************/
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('active', 0);
+    }
 
     /*******************************************************
      * RELATIONSHIPS
