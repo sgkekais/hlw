@@ -40,11 +40,11 @@
 </head>
 <body>
     <div class="sidebar" style="">
-        <img src="{{ asset('storage/hlwlogo.png') }}" height="30">
+        <img src="{{ asset('storage/hlwlogo_w.png') }}" height="30">
     </div>
     <div class="main">
        @unless(!$player->club->logo_url)
-            <img src="{{ asset('storage/'.$player->club->logo_url) }}">
+            <img src="{{ asset('storage/'.$player->club->logo_url) }}" height="25">
         @endunless
         {{ $player->club->name }}
         <hr>
