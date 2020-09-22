@@ -9,6 +9,7 @@ use HLW\Position;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class PlayerController extends Controller
 {
@@ -128,6 +129,23 @@ class PlayerController extends Controller
         Session::flash('success', 'Spieler '.$player->person->first_name.' '.$player->person->last_name.' erfolgreich geändert.');
 
         return redirect()->route('clubs.show', compact('club'));
+    }
+
+    public function generatePlayerPassportDebug(Player $player) {
+
+        $player->load([
+            'person',
+            'club'
+        ]);
+
+        return view('admin.players.playerPassport', compact('player'));
+    }
+
+    public function generatePlayerPassport() {
+
+        $passport = PDF::loadView('admin.players.playerPassport');
+
+        return $passport->setPaper('a5', 'landscape')->download('Pass.pdf');
     }
 
     /**

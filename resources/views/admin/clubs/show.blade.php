@@ -399,6 +399,12 @@
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
                                 @endcan
+                                @can('generate player_passport')
+                                    <!-- generate player passport pdf -->
+                                    <a class="btn btn-danger btn-sm" href="{{ route('generatePlayerPassportDebug', [$p_active]) }}" title="Spielerpass erzeugen">
+                                        <span class="fa fa-file-pdf-o" aria-hidden="true"></span>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

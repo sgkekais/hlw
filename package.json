@@ -22,5 +22,6 @@
     "font-awesome": "^4.7.0",
     "fullcalendar": "^3.7.0",
     "datatables.net-bs4": "^1.10.16"
-  }
+  },
+  "dependencies": {}
 }

@@ -136,6 +136,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('clubs/import', 'ClubController@importCSV')->name('clubs.import');
     // Assigning and managing players
     Route::resource('clubs.players', 'PlayerController');
+    Route::get('pdf', 'PlayerController@generatePlayerPassport')->name('generatePlayerPassport');
+    Route::get('{player}/pdf-debug', 'PlayerController@generatePlayerPassportDebug')->name('generatePlayerPassportDebug');;
     // Assigning and managing contacts
     Route::resource('clubs.contacts', 'ContactController');
     // Assigning and managing stadiums

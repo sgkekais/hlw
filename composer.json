@@ -13,6 +13,7 @@
     "require": {
         "php": ">=7.0.0",
         "arcanedev/no-captcha": "^5.0",
+        "barryvdh/laravel-dompdf": "^0.8.7",
         "caouecs/laravel-lang": "~3.0",
         "devdojo/chatter": "dev-master",
         "doctrine/dbal": "^2.5",
