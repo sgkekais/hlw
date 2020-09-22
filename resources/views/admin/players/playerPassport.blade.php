@@ -43,7 +43,9 @@
         <img src="{{ asset('storage/hlwlogo.png') }}" height="30">
     </div>
     <div class="main">
-        {{ $player->club->logo_url }}
+       @unless(!$player->club->logo_url)
+            <img src="{{ asset('storage/'.$player->club->logo_url) }}">
+        @endunless
         {{ $player->club->name }}
         <hr>
         <div class="main-inner">
