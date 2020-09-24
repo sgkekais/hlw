@@ -78,9 +78,12 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'roboto' => array(
-    'normal' => $fontDir . '/roboto-normal_cf99a9d56c411ce3fa8a2fc49c520e74',
+    'normal' => $fontDir . '/roboto-normal_9e96d9e23ad102bc05be47680b365314',
   ),
   'fontawesome' => array(
     'normal' => $fontDir . '/fontawesome-normal_3891f9f1e7c98d444cfe2307cac8f31d',
+  ),
+  'barlow condensed' => array(
+    '800' => $fontDir . '/barlow-condensed-800_cbf49cb850188bbcbe5a0cded4fcd7e4',
   ),
 ) ?>

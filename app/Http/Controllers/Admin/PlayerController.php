@@ -138,14 +138,23 @@ class PlayerController extends Controller
             'club'
         ]);
 
+        $passport = PDF::loadView('admin.players.playerPassport', compact('player'));
+
+        // return $passport->setPaper('a5', 'landscape')->stream('Pass.pdf');
+
         return view('admin.players.playerPassport', compact('player'));
     }
 
-    public function generatePlayerPassport() {
+    public function generatePlayerPassport(Player $player) {
 
-        $passport = PDF::loadView('admin.players.playerPassport');
+        $player->load([
+            'person',
+            'club'
+        ]);
 
-        return $passport->setPaper('a5', 'landscape')->download('Pass.pdf');
+        $passport = PDF::loadView('admin.players.playerPassport', compact('player'));
+
+        return $passport->setPaper('a5', 'landscape')->stream('Pass.pdf');
     }
 
     /**

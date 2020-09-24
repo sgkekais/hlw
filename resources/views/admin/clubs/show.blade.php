@@ -401,7 +401,7 @@
                                 @endcan
                                 @can('generate player_passport')
                                     <!-- generate player passport pdf -->
-                                    <a class="btn btn-danger btn-sm" href="{{ route('generatePlayerPassportDebug', [$p_active]) }}" title="Spielerpass erzeugen">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('generatePlayerPassport', [$p_active]) }}" title="Spielerpass erzeugen">
                                         <span class="fa fa-file-pdf-o" aria-hidden="true"></span>
                                     </a>
                                 @endcan
