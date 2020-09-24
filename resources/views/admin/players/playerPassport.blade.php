@@ -74,13 +74,22 @@
             font-size: 12px;
             color: #999999;
         }
-        .clubName {
-            font-family: "Barlow Condensed", sans-serif;
-            font-size: 24px;
-            font-weight: bold;
+        .clubNameContainer {
             margin: 20px 0px 10px 20px;
             border-bottom: 2px solid #4caf50;
             padding-bottom: 10px;
+        }
+        .clubName {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .clubLogo {
+            display: block;
+        }
+        .clubSubtitle {
+            font-size: 12px;
         }
 
     </style>
@@ -94,15 +103,16 @@
             </div>
 
             <div class="divTableCell passportRight">
-                <div class="clubName">
-                    <span style="display: inline-block; vertical-align: middle">
+                <div class="clubNameContainer">
+                    <div style="display: inline-block; vertical-align: middle">
                         @if($player->club->logo_url)
-                            <img src="{{ asset('storage/'.$player->club->logo_url) }}" title="Vereinswappen" alt="Vereinswappen" height="40">
+                            <img class="clubLogo" src="{{ asset('storage/'.$player->club->logo_url) }}" title="Vereinswappen" alt="Vereinswappen" height="50">
                         @endif
-                    </span>
-                    <span style="display: inline-block; vertical-align: middle">
-                        {{ $player->club->name }}
-                    </span>
+                    </div>
+                    <div style="display: inline-block; vertical-align: middle">
+                        <div class="clubName">{{ $player->club->name }}</div>
+                        <div class="clubSubtitle">Mitglied der Hobbyliga-West</div>
+                    </div>
                 </div>
                 <div class="divTable passport">
                     <div class="divTableBody">
