@@ -7,7 +7,7 @@
 @section('content')
     @include('cookieConsent::index')
     <div class="container">
-        {{--<div class="row">
+        {{-- <div class="row">
             <div class="col">
                 <div class="alert alert-light alert-dismissible fade show">
                     <h4 class="alert-heading text-left">&#127881; Am 14.09.2020 geht es endlich weiter und es darf wieder gekickt werden! &#127881;</h4>
