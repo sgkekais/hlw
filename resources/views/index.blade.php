@@ -6,7 +6,7 @@
 
 @section('content')
     @include('cookieConsent::index')
-    <div class="container">
+    {{--<div class="container">
         <div class="row">
             <div class="col">
                 <div class="alert alert-light alert-dismissible fade show">
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-        </div>
+        </div>--}}
         <!-- fixtures of the current week -->
         @if($fixtures_grouped_by_divisions->count() > 0)
             <div class="row">
