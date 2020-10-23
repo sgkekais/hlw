@@ -12,7 +12,6 @@
                 <div class="alert alert-light alert-dismissible fade show">
                     <h4 class="alert-heading text-left">&#127881; Am 14.09.2020 geht es endlich weiter und es darf wieder gekickt werden! &#127881;</h4>
                     <hr>
-                    <p>ℹ️&nbsp;Bitte beachtet hierzu die <a class="" href="{{ route('frontend.static.jhvCorona') }}" title="Herunterladen"><span class="fa fa-fw fa-download" title="Herunterladen"></span> Beschlüsse der Ligaversammlung vom 02.09.2020</a>.</p>
                     <p>ℹ️&nbsp;Bitte verfolgt ferner das aktuelle Infektionsgeschehen, die gesetzlichen Regelungen bezüglich des Infektionsschutzgesetzes und der Corona-Schutzverordnung.</p>
                         <ul>
                             <li>🇩🇪 Infos des Bundesgesundheitsministeriums findet ihr <strong><a href="https://www.bundesgesundheitsministerium.de/coronavirus.html" title="Bundesministerium für Gesundheit" target="_blank">hier</a></strong></li>

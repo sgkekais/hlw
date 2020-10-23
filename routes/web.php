@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth', 'isVerified']], function() {
 Route::get('imprint', 'PagesController@imprint')->name('frontend.static.imprint');
 Route::get('infos', 'PagesController@infos')->name('frontend.static.infos');
 Route::get('matchreport', 'PagesController@matchReport')->name('frontend.static.matchreport');
-Route::get('jhvCorona', 'PagesController@jhvCorona')->name('frontend.static.jhvCorona');
+// Route::get('jhvCorona', 'PagesController@jhvCorona')->name('frontend.static.jhvCorona');
 Route::get('datenschutz', 'PagesController@datenschutz')->name('frontend.static.datenschutz');
 
 
