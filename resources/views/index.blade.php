@@ -7,26 +7,30 @@
 @section('content')
     @include('cookieConsent::index')
     <div class="container">
-        {{-- <div class="row">
+       <div class="row">
             <div class="col">
                 <div class="alert alert-light alert-dismissible fade show">
-                    <h4 class="alert-heading text-left">&#127881; Am 14.09.2020 geht es endlich weiter und es darf wieder gekickt werden! &#127881;</h4>
+                    <h4 class="alert-heading text-left">ℹ️&nbsp; Corona-bedingte Pause</h4>
                     <hr>
-                    <p>ℹ️&nbsp;Bitte verfolgt ferner das aktuelle Infektionsgeschehen, die gesetzlichen Regelungen bezüglich des Infektionsschutzgesetzes und der Corona-Schutzverordnung.</p>
+                    <p>Aufgrund der aktuellen Verfügungslage (neue CoronaSchVo ab 02.11.2020) pausieren wir vorerst den Spielbetrieb. </p>
+                    <p>
+                    Aktuelle Infos findet ihr hier:
                         <ul>
-                            <li>🇩🇪 Infos des Bundesgesundheitsministeriums findet ihr <strong><a href="https://www.bundesgesundheitsministerium.de/coronavirus.html" title="Bundesministerium für Gesundheit" target="_blank">hier</a></strong></li>
-                            <li>🏙️ Infos der Stadt Düsseldorf findet ihr <strong><a href="https://corona.duesseldorf.de/" title="Düsseldorf - Corona" target="_blank">hier</a></strong></li>
-                            <li>🏅 Bezüglich des Sports findet ihr außerdem aktuelle Infos beim <strong><a href="https://www.vibss.de/vereinsmanagement/ablage-slider/coronavirus-covid-19-sars-cov-2/">Landessportbund NRW</a></strong></li>
+                            <li>🇩🇪 Infos des Bundesgesundheitsministeriums <strong><a href="https://www.bundesgesundheitsministerium.de/coronavirus.html" title="Bundesministerium für Gesundheit" target="_blank">hier</a></strong></li>
+                            <li>🍺 Infos des Landes NRW <strong><a href="https://www.land.nrw/corona" title="Land NRW - Corona" target="_blank">hier</a></strong></li>
+                            <li>🏙️ Infos der Stadt Düsseldorf <strong><a href="https://corona.duesseldorf.de/" title="Düsseldorf - Corona" target="_blank">hier</a></strong></li>
+                            <li>🏅 beim <strong><a href="https://www.vibss.de/vereinsmanagement/ablage-slider/coronavirus-covid-19-sars-cov-2/">Landessportbund NRW</a></strong></li>
                         </ul>
-                    <p>Für alle Fragen stehen wir euch unter vorstand@hobbyligawest.de zur Verfügung.</p>
-                    <p>Natürlich halten wir euch auch weiter auf dem Laufenden und <strong>wünschen allen Mannschaften jetzt erstmal viel Spaß beim Kicken und eine faire & erfolgreiche Saison!</strong></p>
+                    </p>
+                    <p>Wir informieren euch, sollte sich etwas für die Hobbyliga ändern.</p>
+                    Bleibt gesund!
                     <hr>
                     <p class="mb-0">Der Vorstand der Hobbyliga-West</p>
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                 </div>
             </div>
 
-        </div>--}}
+        </div>
         <!-- fixtures of the current week -->
         @if($fixtures_grouped_by_divisions->count() > 0)
             <div class="row">
