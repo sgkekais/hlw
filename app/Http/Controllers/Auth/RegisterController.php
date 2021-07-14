@@ -8,6 +8,7 @@ use HLW\Http\Controllers\Controller;
 use HLW\Mail\UserRegistered;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -101,7 +102,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name'      => $data['name'],
             'email'     => $data['email'],
-            'password'  => bcrypt($data['password']),
+            'password'  => Hash::make($data['password']),
         ]);
 
         // create club favorites, if selected

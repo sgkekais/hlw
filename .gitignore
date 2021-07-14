@@ -14,3 +14,4 @@ _ide_helper_models.php
 credits
 /_ideas_and_snippets/
 /credits.txt
+.phpunit.result.cache

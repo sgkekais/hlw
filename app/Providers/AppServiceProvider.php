@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Schema;
 class AppServiceProvider extends ServiceProvider
 {
     /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
      * Bootstrap any application services.
      *
      * @return void
@@ -23,15 +33,5 @@ class AppServiceProvider extends ServiceProvider
         // mock date TODO: remove
         //$mockdate = Carbon::create(2017,11,14);
         //Carbon::setTestNow($mockdate);
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 }

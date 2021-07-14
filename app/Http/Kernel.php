@@ -16,8 +16,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+        \HLW\Http\Middleware\CheckForMaintenanceMode::class,
         \HLW\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \HLW\Http\Middleware\TrustProxies::class,
@@ -57,7 +57,9 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'guest' => \HLW\Http\Middleware\RedirectIfAuthenticated::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         // custom middleware to check whether user has admin or visitor role
         'isAdmin' => \HLW\Http\Middleware\VerifyAdmins::class,
