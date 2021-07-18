@@ -78,7 +78,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    {!! no_captcha()->button('<span class="fa fa-sign-in"></span> Login', [
+                                    {!! no_captcha()->button('Login', [
                                         'data-badge' => 'inline',
                                         'class' => 'g-recaptcha btn btn-primary mr-1 mt-2'
                                     ]) !!}
