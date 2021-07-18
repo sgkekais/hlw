@@ -99,7 +99,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                {!! Captcha::display() !!}
+                                {!! no_captcha()->display() !!}
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">
@@ -110,7 +110,7 @@
                                 </a>
                             </div>
                         </form>
-                        {!! Captcha::script() !!}
+                        {!! no_captcha()->script() !!}
                     </div>
                 </div>
             </div>
