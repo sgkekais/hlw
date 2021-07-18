@@ -76,22 +76,12 @@
                                     </label>
                                 </div>
                             </div>
-                            {{--
-                                <div class="form-group">
-                                    {!! Captcha::display() !!}
-                                </div>
-                            --}}
                             <div class="form-group">
                                 <div class="">
-                                    {!! Captcha::button('<span class="fa fa-sign-in"></span> Login', [
+                                    {!! no_captcha()->button('<span class="fa fa-sign-in"></span> Login', [
                                         'data-badge' => 'inline',
                                         'class' => 'g-recaptcha btn btn-primary mr-1 mt-2'
                                     ]) !!}
-                                    {{--
-                                        <button type="submit" class="btn btn-primary mr-1 mt-2">
-                                            <span class="fa fa-sign-in"></span> Login
-                                        </button>
-                                    --}}
                                     <a class="btn btn-outline-primary mr-1 mt-2" href="{{ route('register') }}" title="Registrieren">
                                         Neu hier? Registrier dich!
                                     </a>
@@ -101,7 +91,7 @@
                                 </div>
                             </div>
                         </form> <!-- ./Login Form -->
-                        {!! Captcha::script() !!}
+                        {!! no_captcha()->script() !!}
                         <script>
                             function onSubmit(token) {
                                 document.getElementById("login-form").submit();
