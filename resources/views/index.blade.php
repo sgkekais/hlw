@@ -188,7 +188,7 @@
                     @if ($c_season && $c_matchweek)
                         <h3 class="font-weight-bold font-italic text-uppercase">
                             @if ($division->competition_id == 1)
-                                {{ $division->competition->name_short." &ndash; ".$division->name }}
+                                {{ $division->competition->name_short." -; ".$division->name }}
                             @else
                                 {{ $division->name }}
                             @endif
