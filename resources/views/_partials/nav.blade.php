@@ -23,7 +23,7 @@
                         @endforeach
                      */
 
-                    $division_ids = [1, 3, 4];
+                    $division_ids = [9, 10];
 
                     $divisions = HLW\Division::find($division_ids);
                     $divisions->load('seasons');
@@ -36,7 +36,7 @@
                 @foreach($divisions_ordered as $division)
                     <li class="nav-item dropdown {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
                         <a class="nav-link" href="{{ $division->competition->isLeague() ? route('frontend.divisions.tables', $division ) : route('frontend.divisions.fixtures', $division) }}" title="{{ $division->name }} " id="navbarDropdown{{ $loop->index }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="fa"></span> {{ $division->name }}
+                            <span class="fa"></span> {{ $division->competition->name_short }} {{ $division->name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown{{ $loop->index }}">
                             @if ($division->competition->isLeague())

@@ -7,7 +7,7 @@
 @section('content')
     @include('cookieConsent::index')
     <div class="container">
-       <div class="row">
+        <div class="row">
             <div class="col">
                 <div class="alert alert-light alert-dismissible fade show">
                     <h4 class="alert-heading text-left">ℹ️&nbsp; Corona-bedingte Pause</h4>
@@ -166,145 +166,153 @@
         @endif
         <!-- end fixtures of the current week -->
         <!-- shortened standings for leagues -->
-        <div class="row mt-2">
-            @foreach ($divisions as $division)
-                <div class="{{ $division_count >= 3 ? "col-md-4" : "col-md-6" }}">
-                    @php
-                        // $c_season = $division->seasons()->published()->current()->first();
-                        $c_season = $division->currentSeason();
-                        if ($c_season) {
-                            $c_matchweek = $c_season->currentMatchweek();
-                        } else {
-                            $c_season = $division->seasons()->orderBy('season_nr','desc')->first();
-                            $c_matchweek = $c_season->currentMatchweek();
-                        }
-                        /* not necessary anymore due to new champion_icon and champion_icon_color columns, also not working if divisions change between year
-                            $p_season = $c_season->previousSeason();
-                            if ($p_season) {
-                                $p_champion = $p_season->champion;
+        @foreach ($divisions->groupBy('competition.name') as $key => $division_g)
+            <h2 class="font-weight-bold font-italic text-uppercase">
+                {{ $key }}
+            </h2>
+            <div class="row mt-2">
+                @foreach ($division_g as $division)
+                    <div class="{{ $division_count >= 3 ? "col-md-4" : "col-md-6" }}">
+                        @php
+                            // $c_season = $division->seasons()->published()->current()->first();
+                            $c_season = $division->currentSeason();
+                            if ($c_season) {
+                                $c_matchweek = $c_season->currentMatchweek();
+                            } else {
+                                $c_season = $division->seasons()->orderBy('season_nr','desc')->first();
+                                if ($c_season)
+                                {
+                                    $c_matchweek = $c_season->currentMatchweek();
+                                }
                             }
-                        */
-                    @endphp
-                    @if ($c_season && $c_matchweek)
-                        <h3 class="font-weight-bold font-italic text-uppercase">
-                            @if ($division->competition_id == 1)
-                                {{ $division->competition->name_short." -; ".$division->name }}
-                            @else
-                                {{ $division->name }}
-                            @endif
-                        </h3>
-                        {{-- TODO: render partial view for this collection ('c_season') --}}
-                        <h4 class="text-muted">
-                            SW {{ $c_matchweek->number_consecutive ?? null }}
-                            <small class="text-muted">
-                                {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.y') : null }}
-                                {{ $c_matchweek->end ? "bis ".$c_matchweek->end->format('d.m.y') : null }}
-                            </small>
-                        </h4>
-                        <table class="table table-hover table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th class="">Pos</th>
-                                    <th class="">Club</th>
-                                    <th class=" text-center">Sp</th>
-                                    <th class=" text-center">TD</th>
-                                    <th class=" text-center">Pkt</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($c_season->generateTable() as $club)
-                                    @php
-                                        $rank_color = null;
-                                        $rank_icon  = null;
-                                        $previous_season_of_club = $club->seasons()->orderBy('end','desc')->where('end','>=',Carbon::now()->subYear()->format('Y-m-d'))->where('begin','<=',Carbon::now()->subYear()->format('Y-m-d'))->get()->where('division.id', $c_season->division->id)->first();
-                                        $previous_titles_of_club =  $club->championships()->where('end','<=',Carbon::now()->subYear()->endOfYear()->format('Y-m-d'))->where('begin','>=',Carbon::now()->subYear()->startOfYear()->format('Y-m-d'))->get();
-
-                                    @endphp
-                                    @if(in_array($club->t_rank, $c_season->ranks_champion) || in_array($club->t_rank, $c_season->ranks_promotion))
-                                        @php
-                                            $rank_color = "#FFC107";
-                                            $rank_icon  = "fa-circle";
-                                        @endphp
-                                    @elseif(in_array($club->t_rank, $c_season->playoff_champion))
-                                        @php
-                                            $rank_color = "#FFC107";
-                                            $rank_icon  = "fa-circle-o";
-                                        @endphp
-                                    @elseif(in_array($club->t_rank, $c_season->ranks_relegation))
-                                        @php
-                                            $rank_color = "#F44336";
-                                            $rank_icon  = "fa-circle";
-                                        @endphp
-                                    @elseif(in_array($club->t_rank, $c_season->playoff_relegation))
-                                        @php
-                                            $rank_color = "#FF9800";
-                                            $rank_icon  = "fa-circle-o";
-                                        @endphp
-                                    @endif
+                            /* not necessary anymore due to new champion_icon and champion_icon_color columns, also not working if divisions change between year
+                                $p_season = $c_season->previousSeason();
+                                if ($p_season) {
+                                    $p_champion = $p_season->champion;
+                                }
+                            */
+                        @endphp
+                        @if ($c_season && $c_matchweek)
+                            <h3 class="font-weight-bold font-italic text-uppercase">
+                                @if ($division->competition_id == 1)
+                                    {{ $division->competition->name_short." - ".$division->name }}
+                                @else
+                                    {{ $division->name }}
+                                @endif
+                            </h3>
+                            {{-- TODO: render partial view for this collection ('c_season') --}}
+                            <h4 class="text-muted">
+                                SW {{ $c_matchweek->number_consecutive ?? null }}
+                                <small class="text-muted">
+                                    {{ $c_matchweek->begin ? $c_matchweek->begin->format('d.m.y') : null }}
+                                    {{ $c_matchweek->end ? "bis ".$c_matchweek->end->format('d.m.y') : null }}
+                                </small>
+                            </h4>
+                            <table class="table table-hover table-striped table-sm">
+                                <thead>
                                     <tr>
-                                        <td class="align-middle">
-                                            @if($rank_icon)
-                                                <span class="fa fa-fw {{ $rank_icon }}" style="color: {{ $rank_color }};"></span>
-                                            @else
-                                                <span class="fa fa-fw"></span>
-                                            @endif
-                                            {{ $club->t_rank }}
-                                        </td>
-                                        <td class="align-middle">
-                                            @if($club->logo_url)
-                                                <img src="{{ asset('storage/'.$club->logo_url) }}" width="25">
-                                            @else
-                                                <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
-                                            @endif
-                                            <a href="{{ route('frontend.clubs.show', $club) }}" class="pl-1 align-middle" title="{{ $club->name }}">
-                                                @if ($division_count < 3 )
-                                                    {{-- visible only on xs --}}
-                                                    <span class="d-inline d-sm-none">{{ $club->name_code }}</span>
-                                                    {{-- visible only on sm and md --}}
-                                                    <span class="d-none d-sm-inline d-lg-none">{{ $club->name_short }}</span>
-                                                    {{-- hidden on xs, sm, md --}}
-                                                    <span class="d-none d-lg-inline">{{ $club->name }}</span>
+                                        <th class="">Pos</th>
+                                        <th class="">Club</th>
+                                        <th class=" text-center">Sp</th>
+                                        <th class=" text-center">TD</th>
+                                        <th class=" text-center">Pkt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($c_season->generateTable() as $club)
+                                        @php
+                                            $rank_color = null;
+                                            $rank_icon  = null;
+                                            $previous_season_of_club = $club->seasons()->orderBy('end','desc')->where('end','>=',Carbon::now()->subYear()->format('Y-m-d'))->where('begin','<=',Carbon::now()->subYear()->format('Y-m-d'))->get()->where('division.id', $c_season->division->id)->first();
+                                            $previous_titles_of_club =  $club->championships()->where('end','<=',Carbon::now()->subYear()->endOfYear()->format('Y-m-d'))->where('begin','>=',Carbon::now()->subYear()->startOfYear()->format('Y-m-d'))->get();
+
+                                        @endphp
+                                        @if(in_array($club->t_rank, $c_season->ranks_champion) || in_array($club->t_rank, $c_season->ranks_promotion))
+                                            @php
+                                                $rank_color = "#FFC107";
+                                                $rank_icon  = "fa-circle";
+                                            @endphp
+                                        @elseif(in_array($club->t_rank, $c_season->playoff_champion))
+                                            @php
+                                                $rank_color = "#FFC107";
+                                                $rank_icon  = "fa-circle-o";
+                                            @endphp
+                                        @elseif(in_array($club->t_rank, $c_season->ranks_relegation))
+                                            @php
+                                                $rank_color = "#F44336";
+                                                $rank_icon  = "fa-circle";
+                                            @endphp
+                                        @elseif(in_array($club->t_rank, $c_season->playoff_relegation))
+                                            @php
+                                                $rank_color = "#FF9800";
+                                                $rank_icon  = "fa-circle-o";
+                                            @endphp
+                                        @endif
+                                        <tr>
+                                            <td class="align-middle">
+                                                @if($rank_icon)
+                                                    <span class="fa fa-fw {{ $rank_icon }}" style="color: {{ $rank_color }};"></span>
                                                 @else
-                                                   {{ $club->name_code }}
+                                                    <span class="fa fa-fw"></span>
                                                 @endif
-                                            </a>
-                                            {{-- not working when divisions change
-                                                @if ($p_champion)
-                                                    @if ($p_champion->id == $club->id)
-                                                        <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                                                {{ $club->t_rank }}
+                                            </td>
+                                            <td class="align-middle">
+                                                @if($club->logo_url)
+                                                    <img src="{{ asset('storage/'.$club->logo_url) }}" width="25">
+                                                @else
+                                                    <span class="fa fa-ban text-muted" title="Kein Vereinswappen vorhanden"></span>
+                                                @endif
+                                                <a href="{{ route('frontend.clubs.show', $club) }}" class="pl-1 align-middle" title="{{ $club->name }}">
+                                                    @if ($division_count < 3 )
+                                                        {{-- visible only on xs --}}
+                                                        <span class="d-inline d-sm-none">{{ $club->name_code }}</span>
+                                                        {{-- visible only on sm and md --}}
+                                                        <span class="d-none d-sm-inline d-lg-none">{{ $club->name_short }}</span>
+                                                        {{-- hidden on xs, sm, md --}}
+                                                        <span class="d-none d-lg-inline">{{ $club->name }}</span>
+                                                    @else
+                                                       {{ $club->name_code }}
+                                                    @endif
+                                                </a>
+                                                {{-- not working when divisions change
+                                                    @if ($p_champion)
+                                                        @if ($p_champion->id == $club->id)
+                                                            <span class="pull-right" data-toggle="tooltip" title="Meister {{ $p_season->name }}"><small class="text-secondary"><i class="fa fa-star" style="color: orange"></i> </small></span>
+                                                        @endif
+                                                    @endif
+                                                --}}
+                                                @isset($previous_titles_of_club)
+                                                    @foreach($previous_titles_of_club as $title)
+                                                            <span class="pull-right"><small class="text-secondary"><i class="fa {{ $title->champion_icon }}" style="color: {{ $title->champion_icon_color }}"></i> </small></span>
+                                                    @endforeach
+                                                @endisset
+                                                @if ($previous_season_of_club)
+                                                    @if ($previous_season_of_club->division->hierarchy_level < $c_season->division->hierarchy_level)
+                                                        <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
+                                                    @elseif ($previous_season_of_club->division->hierarchy_level > $c_season->division->hierarchy_level)
+                                                        <span class="pull-right" data-toggle="tooltip" title="Aufsteiger"><small class="text-secondary">N</small></span>
                                                     @endif
                                                 @endif
-                                            --}}
-                                            @isset($previous_titles_of_club)
-                                                @foreach($previous_titles_of_club as $title)
-                                                        <span class="pull-right"><small class="text-secondary"><i class="fa {{ $title->champion_icon }}" style="color: {{ $title->champion_icon_color }}"></i> </small></span>
-                                                @endforeach
-                                            @endisset
-                                            @if ($previous_season_of_club)
-                                                @if ($previous_season_of_club->division->hierarchy_level < $c_season->division->hierarchy_level)
-                                                    <span class="pull-right" data-toggle="tooltip" title="Absteiger"><small class="text-secondary">A</small></span>
-                                                @elseif ($previous_season_of_club->division->hierarchy_level > $c_season->division->hierarchy_level)
-                                                    <span class="pull-right" data-toggle="tooltip" title="Aufsteiger"><small class="text-secondary">N</small></span>
-                                                @endif
-                                            @endif
-                                        </td>
-                                        <td class="align-middle text-center">{{ $club->t_played }}</td>
-                                        <td class="align-middle text-center">{{ $club->t_goals_diff }}</td>
-                                        <td class="align-middle text-center">{{ $club->t_points }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="text-right">
-                            <ul class="list-inline">
-                                <li class="list-inline-item"><span class="fa fa-fw fa-calendar"></span> <a href="{{ route('frontend.divisions.fixtures', $division) }}">Spielplan</a></li>
-                                <li class="list-inline-item"><span class="fa fa-fw fa-list-ol"></span> <a href="{{ route('frontend.divisions.tables', $division) }}">Tabelle</a></li>
-                            </ul>
-                        </div>
-                    @endif
-                </div>
-            @endforeach
-        </div>
+                                            </td>
+                                            <td class="align-middle text-center">{{ $club->t_played }}</td>
+                                            <td class="align-middle text-center">{{ $club->t_goals_diff }}</td>
+                                            <td class="align-middle text-center">{{ $club->t_points }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="text-right">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><span class="fa fa-fw fa-calendar"></span> <a href="{{ route('frontend.divisions.fixtures', $division) }}">Spielplan</a></li>
+                                    <li class="list-inline-item"><span class="fa fa-fw fa-list-ol"></span> <a href="{{ route('frontend.divisions.tables', $division) }}">Tabelle</a></li>
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
     </div>
 @endsection
 
