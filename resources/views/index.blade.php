@@ -13,7 +13,7 @@
                     <h4 class="alert-heading text-left font-weight-bolder ">📣 RESTART am 23.08.!</h4>
                     <hr>
                     <p class="blockquote">
-                        Aufgrund der aktuellen Lage ist der Restart des Spielbetriebs der HLW und der Altherren-Liga ist für <strong>die dritte Augustwoche geplant!</strong>
+                        Aufgrund der aktuellen Lage ist der Restart des Spielbetriebs der HLW und der Altherren-Liga für <strong>die dritte Augustwoche geplant!</strong>
                     </p>
                     <p>
                         Der Modus für #Restart-Versuch No. 2 (3?) lautet für die HLW und AHL aufgrund der knapp bemessenen Zeit wie folgt:
