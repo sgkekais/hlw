@@ -10,20 +10,33 @@
         <div class="row">
             <div class="col">
                 <div class="alert alert-light alert-dismissible fade show">
-                    <h4 class="alert-heading text-left">ℹ️&nbsp; Corona-bedingte Pause</h4>
+                    <h4 class="alert-heading text-left font-weight-bolder ">📣 RESTART am 23.08.!</h4>
                     <hr>
-                    <p>Aufgrund der aktuellen Verfügungslage (neue CoronaSchVo ab 02.11.2020) pausieren wir vorerst den Spielbetrieb. </p>
+                    <p class="blockquote">
+                        Aufgrund der aktuellen Lage ist der Restart des Spielbetriebs der HLW und der Altherren-Liga ist für <strong>die dritte Augustwoche geplant!</strong>
+                    </p>
                     <p>
-                    Aktuelle Infos findet ihr hier:
+                        Der Modus für #Restart-Versuch No. 2 (3?) lautet für die HLW und AHL aufgrund der knapp bemessenen Zeit wie folgt:
+                    </p>
+                        <ul>
+                            <li>Zwei Gruppen A und B mit Hin- und Rückspiel</li>
+                            <li>Playoff-Runde der jeweils besten Vier um die Meisterschaft</li>
+                        </ul>
+                    <p>
+                        Modus und Spielplan der Altherren-Liga sind bereits eingepflegt. HLW folgt!
+                    </p>
+                    <hr>
+                    <p>
+                    Aktuelle Infos zur Corona-Lage findet ihr weiterhin unter:
                         <ul>
                             <li>🇩🇪 Infos des Bundesgesundheitsministeriums <strong><a href="https://www.bundesgesundheitsministerium.de/coronavirus.html" title="Bundesministerium für Gesundheit" target="_blank">hier</a></strong></li>
                             <li>🍺 Infos des Landes NRW <strong><a href="https://www.land.nrw/corona" title="Land NRW - Corona" target="_blank">hier</a></strong></li>
                             <li>🏙️ Infos der Stadt Düsseldorf <strong><a href="https://corona.duesseldorf.de/" title="Düsseldorf - Corona" target="_blank">hier</a></strong></li>
                             <li>🏅 beim <strong><a href="https://www.vibss.de/vereinsmanagement/ablage-slider/coronavirus-covid-19-sars-cov-2/">Landessportbund NRW</a></strong></li>
+                            <li>💉 Informationen zur Corona-Schutzimpfung <strong><a href="https://www.zusammengegencorona.de/impfen/">Zusammen gegen Corona</a></strong></li></li>
                         </ul>
                     </p>
-                    <p>Wir informieren euch, sollte sich etwas für die Hobbyliga ändern.</p>
-                    Bleibt gesund!
+                    <p>Haltet die Inzidenzzahlen und -stufen im Blick und bleibt gesund! Wir halten euch natürlich weiterhin auch auf dem Laufenden.</p>
                     <hr>
                     <p class="mb-0">Der Vorstand der Hobbyliga-West</p>
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
