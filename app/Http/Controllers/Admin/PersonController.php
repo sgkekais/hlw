@@ -69,7 +69,7 @@ class PersonController extends Controller
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'date_of_birth' => 'nullable|date',
-            'photo'         => 'nullable|image|mimes:png,jpg,jpeg'
+            'photo'         => 'nullable|image'
         ]);
 
         $person = new Person($request->all());
