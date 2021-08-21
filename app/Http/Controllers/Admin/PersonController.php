@@ -69,7 +69,7 @@ class PersonController extends Controller
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'date_of_birth' => 'nullable|date',
-            'photo'         => 'nullable|image'
+            'photo'         => 'nullable|file|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         $person = new Person($request->all());
@@ -135,7 +135,7 @@ class PersonController extends Controller
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'date_of_birth' => 'nullable|date',
-            'photo'         => 'nullable|image'
+            'photo'         => 'nullable|file|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         // update the changes
