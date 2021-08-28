@@ -7,7 +7,7 @@
                 <ul class="list-unstyled">
                     <li><a href="{{ route('home') }}" title="zur Startseite">Home</a></li>
                     @foreach (\HLW\Division::published()->orderBy('name')->get() as $division)
-                        <li><a href="{{ route('frontend.divisions.show', $division) }}" title="zur Spielklasse">{{ $division->name }}</a></li>
+                        <li><a href="{{ route('frontend.divisions.show', $division) }}" title="zur Spielklasse">{{ $division->competition->name_short }} {{ $division->name }}</a></li>
                     @endforeach
                     <li><a href="{{ route('chatter.home') }}" title="zum Clubhaus">Clubhaus</a></li>
                     <li><a href="{{ route('frontend.static.infos') }}" title="Satzung, Vorstand, Infos">Infos</a></li>
