@@ -37,7 +37,16 @@
                 <a class="btn btn-secondary" href="{{ route('createStadiumAssignment', $club) }}" title="Spielort zuordnen">
                     <span class="fa fa-plus-square"></span> Spielort
                 </a>
-            @endcan
+{{--                <br>--}}
+{{--            @endcan--}}
+{{--            <a class="btn btn-danger mt-2" href="{{ route('generatePlayerPassports', $club) }}" title="Passmappe erzeugen">--}}
+{{--                <span class="fa fa-repeat"></span> Passmappe erzeugen--}}
+{{--            </a>--}}
+{{--            @if ($club->passports_url)--}}
+{{--                <a class="btn btn-secondary mt-2" href="{{ route('displayPlayerPassports', $club) }}" title="Passmappe ansehen">--}}
+{{--                    <span class="fa fa-file-pdf-o"></span> Passmappe ansehen (Stand: {{ $club->passports_timestamp }})--}}
+{{--                </a>--}}
+{{--            @endif--}}
         </div>
         <!-- dates -->
         <div class="col-md-6">
@@ -316,13 +325,13 @@
             @endif
         </div>
         <!-- players -->
+        @php
+            $active_players = $club->players()->whereNull('sign_off')->get()->sortBy('person.last_name');
+        @endphp
         <div class="tab-pane" id="players" role="tabpanel">
-            <h4 class="mb-4 mt-4">Aktive
+            <h4 class="mb-4 mt-4">Aktive ({{ $active_players->count() }})
                 <small class="text-muted">(davon <b>{{ $club->players()->active()->whereHas('person', function ($query) { $query->whereNotNull('registered_at_club'); })->get()->count() }}</b> Vereinsspieler)</small>
             </h4>
-            @php
-                $active_players = $club->players()->whereNull('sign_off')->get()->sortBy('person.last_name');
-            @endphp
             @if(!$active_players->isEmpty())
                 <table class="table table-sm table-striped table-hover">
                     <thead class="thead-default">
@@ -351,7 +360,7 @@
                                 @endif
                             </td>
                             <td class="align-middle text-center">
-                                @if($p_active->person->photo)
+                                @if($p_active->person && $p_active->person->photo)
                                     <img src="{{ Storage::url($p_active->person->photo) }}" class="rounded" title="Passbild" alt="Passbild" width="25">
                                 @else
                                     <span class="fa fa-ban fa-fw text-muted" title="Kein Passbild"></span>
@@ -401,7 +410,7 @@
                                 @endcan
                                 @can('generate player_passport')
                                     <!-- generate player passport pdf -->
-                                    <a class="btn btn-danger btn-sm" href="{{ route('generatePlayerPassport', [$p_active]) }}" title="Spielerpass erzeugen">
+                                    <a class="btn btn-danger btn-sm" href="{{ route('generatePlayerPassport', [$p_active]) }}" target="_blank" title="Spielerpass erzeugen">
                                         <span class="fa fa-file-pdf-o" aria-hidden="true"></span>
                                     </a>
                                 @endcan
