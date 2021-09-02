@@ -367,7 +367,7 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                @if($p_active->person->registered_at_club)
+                                @if($p_active->person && $p_active->person->registered_at_club)
                                     <span class="fa fa-shield text-warning fa-fw" title="Vereinsspieler"></span>
                                     @if($p_active->person->realDivision)
                                         {{ $p_active->person->realDivision->name_short }}
@@ -395,7 +395,7 @@
                                 @endif
                             </td>
                             <td class="align-middle">
-                                @if($p_active->registered_at_club)
+                                @if($p_active->person && $p_active->person->registered_at_club)
                                     <span class="fa fa-shield text-warning fa-fw" title="Vereinsspieler"></span>
                                 @else
                                     <span class="fa fa-fw"></span>
