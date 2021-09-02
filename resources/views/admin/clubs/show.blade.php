@@ -39,9 +39,9 @@
                 </a>
                 <br>
             @endcan
-            <a class="btn btn-danger mt-2" href="{{ route('generatePlayerPassports', $club) }}" title="Passmappe erzeugen">
-                <span class="fa fa-repeat"></span> Passmappe erzeugen
-            </a>
+{{--            <a class="btn btn-danger mt-2" href="{{ route('generatePlayerPassports', $club) }}" title="Passmappe erzeugen">--}}
+{{--                <span class="fa fa-repeat"></span> Passmappe erzeugen--}}
+{{--            </a>--}}
 {{--            @if ($club->passports_url)--}}
 {{--                <a class="btn btn-secondary mt-2" href="{{ route('displayPlayerPassports', $club) }}" title="Passmappe ansehen">--}}
 {{--                    <span class="fa fa-file-pdf-o"></span> Passmappe ansehen (Stand: {{ $club->passports_timestamp }})--}}
