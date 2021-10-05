@@ -582,6 +582,14 @@
                         <ol class="py-2">
                             <li>Gelb-Rot = Matchstrafe</li>
                             <li>Rote Karte = 1 Pflichtspiele Sperre</li>
+                            <li>Bei roter Karte wegen außergewöhnlichen Vergehen entscheidet der Ligaleiter über die Dauer der Sperre.</li>
+                            <li>Setzt eine Mannschaft einen oder mehrere nicht spielberechtigte Spieler ein (z.B. Vereinsspieler siehe 1.3., keine 30 Jahre alt, nicht gemeldet) werden beim
+                                <ol>
+                                    <li>Vergehen das Spiel mit 5:0 Toren für den Gegner gewertet und zusätzlich werden 3 Punkte abgezogen</li>
+                                    <li>Vergehen das Spiel mit 5:0 Toren für den Gegner gewertet und zusätzlich werden 6 Punkte abgezogen</li>
+                                    <li>Vergehen der Ausschluss aus der Liga ausgesprochen</li>
+                                </ol>
+                            </li>
                         </ol>
                     </li>
                     <li>
