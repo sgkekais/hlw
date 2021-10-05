@@ -95,6 +95,12 @@ class ClubController extends Controller
         }
 
         return view('clubs.response_results', compact('club', 'fixtures', 'season'));
-}
+    }
 
+    public function displayPlayerPassports(Club $club)
+    {
+        $storage_path = storage_path('app/public/'.$club->passports_url);
+
+        return response()->download($storage_path);
+    }
 }

@@ -131,6 +131,11 @@
                     <a class="ml-1 nav-item nav-link px-2 border-white" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" style="background-color: rgba(0, 0, 0, 0.5);">
                         Kader
                     </a>
+{{--                    @hasanyrole('super_admin|admin|club_contact')--}}
+{{--                        <a class="ml-1 nav-item nav-link px-2 border-white" href="{{ route('playerpassports', $club) }}" style="background-color: rgba(255, 255, 255, 0.9);">--}}
+{{--                            <i class="fa fa-download"></i> <strong>Pässe</strong>--}}
+{{--                        </a>--}}
+{{--                    @endhasanyrole--}}
                 </nav>
             </div>
         </div>

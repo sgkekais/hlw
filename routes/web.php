@@ -42,6 +42,9 @@ Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seas
 // clubs
 Route::get('clubs/{club}', 'ClubController@show')->name('frontend.clubs.show');
 Route::get('clubs/{club}/ajax-club-results', 'ClubController@ajaxGetClubResults');
+//Route::group(['middleware' => ['can:read playerPassports']], function() {
+//   Route::get('clubs/{club}/passmappe','ClubController@displayPlayerPassports')->name('playerpassports');
+//});
 
 // fixtures
 Route::get('fixtures/{fixture}', 'FixtureController@show')->name('frontend.fixtures.show');
@@ -67,8 +70,6 @@ Route::get('infos', 'PagesController@infos')->name('frontend.static.infos');
 Route::get('matchreport', 'PagesController@matchReport')->name('frontend.static.matchreport');
 // Route::get('jhvCorona', 'PagesController@jhvCorona')->name('frontend.static.jhvCorona');
 Route::get('datenschutz', 'PagesController@datenschutz')->name('frontend.static.datenschutz');
-
-
 
 /*******************************************************
  * Admin Routes
@@ -132,6 +133,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::post('stadiums/import', 'StadiumController@importCSV')->name('stadiums.import');
     // Clubs
     Route::resource('clubs', 'ClubController');
+    Route::get('clubs/{club}/generate-playerpassports', 'ClubController@generatePlayerPassports')->name('generatePlayerPassports');
+    Route::get('clubs/{club}/display-playerpassports', 'ClubController@displayPlayerPassports')->name('displayPlayerPassports');
     // Csv import of clubs
     Route::post('clubs/import', 'ClubController@importCSV')->name('clubs.import');
     // Assigning and managing players

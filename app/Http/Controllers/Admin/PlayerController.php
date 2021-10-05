@@ -154,7 +154,7 @@ class PlayerController extends Controller
 
         $passport = PDF::loadView('admin.players.playerPassport', compact('player'));
 
-        return $passport->setPaper('a5', 'landscape')->stream('Pass.pdf');
+        return $passport->setPaper('a5', 'landscape')->stream(date('Y-m-d').'-Pass-'.$player->person->last_name.'.pdf');
     }
 
     /**

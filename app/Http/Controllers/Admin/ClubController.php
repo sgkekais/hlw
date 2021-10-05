@@ -2,6 +2,7 @@
 
 namespace HLW\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use HLW\Club;
 use HLW\Stadium;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Excel;
+use PDF;
 
 class ClubController extends Controller
 {
@@ -381,5 +383,32 @@ class ClubController extends Controller
         Session::flash('success', 'Stadionzuordnung '.$stadium->name.'erfolgreich entfernt.');
 
         return redirect()->route('clubs.show', $club);
+    }
+
+    public function generatePlayerPassports(Club $club)
+    {
+        $active_players = $club->players()->whereNull('sign_off')->get()->sortBy('person.last_name');
+
+        $active_players->load(['person', 'club']);
+
+        $passport = PDF::loadView('admin.clubs.playerPassports', compact('active_players'));
+
+        $passport->setPaper('a5', 'landscape');
+
+        $passport->save(storage_path('app/public/clubpassports/'.date('Y-m-d').'-'.$club->id.'.pdf'));
+        $passports_url = 'clubpassports/'.date('Y-m-d').'-'.$club->id.'.pdf';
+        $club->passports_url = $passports_url;
+        $club->passports_timestamp = Carbon::now();
+        // save the club
+        $club->save();
+
+        return redirect()->route('clubs.show', $club);
+    }
+
+    public function displayPlayerPassports(Club $club)
+    {
+        $storage_path = storage_path('app/public/'.$club->passports_url);
+
+        return response()->download($storage_path);
     }
 }

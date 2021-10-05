@@ -96,7 +96,10 @@
 </head><body><div class="divTable passport">
     <div class="divTableBody">
         <div class="divTableRow">
-            <div class="divTableCell passportLeft">
+            <div class="divTableCell passportLeft" style="position: relative">
+                <div style="position: absolute; left: 0; top: 50%; height: 1px; width: 33%; background-color: #000">
+                    &nbsp;
+                </div>
                 <div class="logo-hlw">
                     <img src="{{ asset('storage/hlwlogo_w.png') }}" height="30">
                 </div>
@@ -190,6 +193,7 @@
         </div>
     </div>
     <div class="footer">
-        <span style="display: block; padding: 10px; text-align: right">Pass erstellt am: {{ date('d.m.Y') }}</span>
+        <span style="display: block; padding: 5px 10px 5px 10px; text-align: right">Pass erstellt am: {{ date('d.m.Y') }}</span>
+        <span style="display: block; padding: 0px 10px 10px 10px; text-align: right">Ersteller: {{ auth()->user()->name }}</span>
     </div>
 </div></body></html>
