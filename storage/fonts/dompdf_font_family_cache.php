@@ -78,7 +78,7 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'roboto' => array(
-    'normal' => $fontDir . '/roboto-normal_b7834828abc03e1e6aa6b18153302986',
+    'normal' => $fontDir . '/roboto-normal_ea8a516f74db1359b3df4ecad83b7f3b',
   ),
   'fontawesome' => array(
     'normal' => $fontDir . '/fontawesome-normal_3891f9f1e7c98d444cfe2307cac8f31d',
