@@ -66,7 +66,7 @@
                                         @php
                                             $d = \HLW\Division::findOrFail($division);
                                         @endphp
-                                        <a href="{{ route('frontend.divisions.tables', $d) }}">{{ $d->competition->name_short }} {{ $d->name }}</a>
+                                        <a href="{{ route('frontend.divisions.tables', $d) }}">{{ $d->competition->isLeague() ? $d->competition->name_short." - " : null }}{{ $d->name }}</a>
                                     </h4>
                                 </div>
                             </div>
