@@ -95,25 +95,25 @@
 								<li class="border border-top-0 border-right-0 border-left-0 {{ $loop->last && $discussion->sticky ? "border-dark" : null }}">
 									<a class="discussion_list d-flex p-3" href="/{{ Config::get('chatter.routes.home') }}/{{ Config::get('chatter.routes.discussion') }}/{{ $discussion->category->slug }}/{{ $discussion->slug }}">
 										<div class="chatter_avatar pr-3">
-{{--										@if(Config::get('chatter.user.avatar_image_database_field'))--}}
+										@if(Config::get('chatter.user.avatar_image_database_field'))
 
-{{--                                            <?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>--}}
+                                            <?php $db_field = Config::get('chatter.user.avatar_image_database_field'); ?>
 
-{{--											<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->--}}
-{{--												@if( (substr($discussion->user->{$db_field}, 0, 7) == 'http://') || (substr($discussion->user->{$db_field}, 0, 8) == 'https://') )--}}
-{{--													<img src="{{ $discussion->user->{$db_field}  }}">--}}
-{{--												@else--}}
-{{--													<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $discussion->user->{$db_field}  }}">--}}
-{{--												@endif--}}
+											<!-- If the user db field contains http:// or https:// we don't need to use the relative path to the image assets -->
+												@if( (substr($discussion->user->{$db_field}, 0, 7) == 'http://') || (substr($discussion->user->{$db_field}, 0, 8) == 'https://') )
+													<img src="{{ $discussion->user->{$db_field}  }}">
+												@else
+													<img src="{{ Config::get('chatter.user.relative_url_to_image_assets') . $discussion->user->{$db_field}  }}">
+												@endif
 
-{{--											@else--}}
+											@else
 
-{{--												<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($discussion->user->name) ?>">--}}
-{{--													{{ strtoupper(substr($discussion->user->name, 0, 1)) }}--}}
-{{--												</span>--}}
+												<span class="chatter_avatar_circle" style="background-color:#<?= \DevDojo\Chatter\Helpers\ChatterHelper::stringToColorCode($discussion->user->name) ?>">
+													{{ strtoupper(substr($discussion->user->name, 0, 1)) }}
+												</span>
 
-{{--											@endif--}}
-{{--										</div>--}}
+											@endif
+										</div>
 
 										<div class="chatter_middle pull-left">
 											<h4 class="chatter_middle_title m-0 p-0 text-dark">
