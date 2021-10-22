@@ -175,14 +175,14 @@
                                                         &nbsp;
                                                     </div>
                                                 </div>
-                                                <div class="divTableRow" >
-                                                    <div class="divTableCell fieldName" >
+{{--                                                <div class="divTableRow" >--}}
+{{--                                                    <div class="divTableCell fieldName" >--}}
 
-                                                    </div>
-                                                    <div class="divTableCell fieldValue" style="font-weight: normal; font-size: 12px; text-align: right">
-                                                        <strong>Unterschrift des Spielers</strong>
-                                                    </div>
-                                                </div>
+{{--                                                    </div>--}}
+{{--                                                    <div class="divTableCell fieldValue" style="font-weight: normal; font-size: 12px; text-align: right">--}}
+{{--                                                        <strong>Unterschrift des Spielers</strong>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                             </div>
                                         </div>
                                     </div>

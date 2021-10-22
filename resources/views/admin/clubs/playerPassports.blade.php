@@ -56,13 +56,13 @@
             padding: 10px 20px 0px 10px;
             font-weight: bold;
             font-size: 18px;
-            vertical-align: center;
+            vertical-align: middle;
         }
         .fieldValue {
             width: 75%;
             padding: 10px 0px 0px 0px;
             font-size: 18px;
-            vertical-align: center;
+            vertical-align: middle;
         }
         .fieldGroup {
 
@@ -77,7 +77,7 @@
             color: #999999;
         }
         .clubNameContainer {
-            margin: 20px 0px 10px 20px;
+            margin: 20px 0px 0px 20px;
             border-bottom: 2px solid #4caf50;
             padding-bottom: 10px;
         }
@@ -106,10 +106,9 @@
                             &nbsp;
                         </div>
                         <div class="logo-hlw">
-                            <img src="{{ asset('storage/hlwlogo_w.png') }}" height="30">
+{{--                            <img src="{{ asset('storage/hlwlogo_w.png') }}" height="30">--}}
                         </div>
                     </div>
-
                     <div class="divTableCell passportRight">
                         <div class="clubNameContainer">
                             <div style="display: inline-block; vertical-align: middle">
@@ -117,7 +116,7 @@
                                     <img class="clubLogo" src="{{ asset('storage/'.$player->club->logo_url) }}" title="Vereinswappen" alt="Vereinswappen" height="50">
                                 @endif
                             </div>
-                            <div style="display: inline-block; vertical-align: middle">
+                            <div style="display: inline-block; line-height: 15px; vertical-align: middle">
                                 <div class="clubName">{{ $player->club->name }}</div>
                                 <div class="clubSubtitle">Mitglied der Hobbyliga-West</div>
                             </div>
@@ -125,31 +124,31 @@
                         <div class="divTable passport">
                             <div class="divTableBody">
                                 <div class="divTableRow passportHeader">
-                                    <div class="divTableCell" style="width: 25%; padding: 0px 0px 20px 20px">
+                                    <div class="divTableCell" style="width: 25%; padding: 0px 0px 0px 20px">
                                         <h1>Spielerpass </h1>
                                     </div>
                                     <div class="divTableCell" style="text-align: right; padding: 0px 20px 20px 20px">
-                                        <h1>_no° {{ $player->id }}</h1>
+                                        <h1>no° {{ $player->id }}</h1>
                                     </div>
                                 </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell" style="padding-left: 20px ">
+                                <div class="divTableRow" style="">
+                                    <div class="divTableCell" style="padding:10px 20px 0px 40px;">
                                         @if($player->person->photo)
                                             <img src="{{ asset('storage/'.$player->person->photo) }}" class="" title="Passbild" alt="Passbild" width="150">
                                         @else
                                             &nbsp;
                                         @endif
                                     </div>
-                                    <div class="divTableCell" style="vertical-align: top">
+                                    <div class="divTableCell" style="">
                                         <div class="divTable">
                                             <div class="divTableBody">
                                                 <div class="divTableRow">
-                                                    <div class="divTableCell fieldName">Vorname:</div>
-                                                    <div class="divTableCell fieldValue">{{ $player->person->first_name }}</div>
+                                                    <div class="divTableCell fieldName">Name:</div>
+                                                    <div class="divTableCell fieldValue">{{ $player->person->last_name }}</div>
                                                 </div>
                                                 <div class="divTableRow">
-                                                    <div class="divTableCell fieldName">Nachname:</div>
-                                                    <div class="divTableCell fieldValue">{{ $player->person->last_name }}</div>
+                                                    <div class="divTableCell fieldName">Vorname:</div>
+                                                    <div class="divTableCell fieldValue">{{ $player->person->first_name }}</div>
                                                 </div>
                                                 <div class="divTableRow">
                                                     <div class="divTableCell fieldName">Geburtsdatum:</div>
@@ -172,22 +171,22 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="divTableRow">
-                                                    <div class="divTableCell fieldName" style="height: 80px">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="divTableCell fieldValue" style="border-bottom: 1px solid #666">
-                                                        &nbsp;
-                                                    </div>
-                                                </div>
-                                                <div class="divTableRow" >
-                                                    <div class="divTableCell fieldName" >
+{{--                                                <div class="divTableRow">--}}
+{{--                                                    <div class="divTableCell fieldName" style="height: 80px">--}}
+{{--                                                        &nbsp;--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="divTableCell fieldValue" style="border-bottom: 1px solid #666">--}}
+{{--                                                        &nbsp;--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="divTableRow" >--}}
+{{--                                                    <div class="divTableCell fieldName" >--}}
 
-                                                    </div>
-                                                    <div class="divTableCell fieldValue" style="font-weight: normal; font-size: 12px; text-align: right">
-                                                        <strong>Unterschrift des Spielers</strong>
-                                                    </div>
-                                                </div>
+{{--                                                    </div>--}}
+{{--                                                    <div class="divTableCell fieldValue" style="font-weight: normal; font-size: 12px; text-align: right">--}}
+{{--                                                        <strong>Unterschrift des Spielers</strong>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                             </div>
                                         </div>
                                     </div>

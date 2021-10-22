@@ -395,8 +395,10 @@ class ClubController extends Controller
 
         $passport->setPaper('a5', 'landscape');
 
-        $passport->save(storage_path('app/public/clubpassports/'.date('Y-m-d').'-'.$club->id.'.pdf'));
-        $passports_url = 'clubpassports/'.date('Y-m-d').'-'.$club->id.'.pdf';
+        $filename = date('Y-m-d').'_Passmappe_'.$club->id.'-'.$club->name_code.'.pdf';
+
+        $passport->save(storage_path('app/public/clubpassports/'.$filename));
+        $passports_url = 'clubpassports/'.$filename;
         $club->passports_url = $passports_url;
         $club->passports_timestamp = Carbon::now();
         // save the club
