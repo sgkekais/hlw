@@ -6,6 +6,10 @@
 
 @endsection
 
+@section('css')
+
+@endsection
+
 @section('content')
 
     <div class="container mt-4">
@@ -190,19 +194,18 @@
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Hobbyliga-West</h2>
                 <h5>Stand: 09.01.2019</h5>
-                <ul class="list-unstyled">
+                <ol id="list" class="list-unstyled">
                     <li>
                         <span class="h4 font-weight-bold">0. Allgemeines</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Der Spaß steht im Vordergrund unserer Liga. Die Mannschaften spielen nicht gegen-, sondern miteinander. Die Teams sind fair zueinander, und zu den Schiedsrichtern, sowohl vor, als auch während und nach dem Spiel.
-                                Die Satzung wurde von allen Teams gemeinsam mit dem Vorstand entworfen.
+                                Der Spaß steht im Vordergrund unserer Liga. Die Mannschaften spielen nicht gegen-, sondern miteinander. Die Teams sind fair zueinander und zu den Schiedsrichtern, sowohl vor, während als auch nach dem Spiel. Die Satzung wurde von allen Teams gemeinsam mit dem Vorstand entworfen.
                             </li>
                             <li>
                                 Der Vorstand ist die Vertretung der Hobbyliga-West und zuständig für Finanzen, Verwaltung, Öffentlichkeitsarbeit und Ligaentwicklung. Der Vorstand behält sich vor, Spieler, die in grober Weise die Gesundheit anderer Spieler gefährden oder sich in ebenso grobem Maße unsportlich verhalten, zu sperren oder gar vom Spielbetrieb der Hobbyliga-West zu suspendieren. Dies gilt auch für Teams, die sich in grober Art und Weise der Satzung der Hobbyliga-West widersetzen. Um jegliches Konfliktpotenzial zu vermeiden, wird kein Vorstandsmitglied in irgendeiner Weise in eine Entscheidung eingreifen, die seine eigene Mannschaft betrifft.
                             </li>
                             <li>
-                                In der Hobbyliga-West können <b>Hobby-, Freizeit-, und Betriebsportmannschaften</b> teilnehmen. Ab der Saison 2013 dürfen die teilnehmenden Mannschaften jedoch nur noch <b>vereinslose</b> Spieler anmelden (bereits gemeldete Spieler genießen Bestandsschutz).
+                                In der Hobbyliga-West können Hobby-, Freizeit-, und Betriebsportmannschaften teilnehmen. Seit der Saison 2013 dürfen die teilnehmenden Mannschaften jedoch <strong>nur noch vereinslose Spieler</strong> anmelden (bereits vor diesem Zeitpunkt gemeldete Spieler genießen Bestandsschutz, siehe auch 4.6).
                             </li>
                         </ol>
                     </li>
@@ -210,28 +213,37 @@
                         <span class="h4 font-weight-bold">1. Startgeld</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Das Startgeld beträgt pro Mannschaft <b>80,- €</b> und ist am Tag der Jahreshauptversammlung beim Kassierer zu bezahlen.
+                                Das Startgeld beträgt aktuell pro Mannschaft 80,- € und ist am Tag der Jahreshauptversammlung beim Kassierer zu bezahlen oder vor der JHV pünktlich zu überweisen.
+                                <br>
+                                <strong>IBAN: DE73300400000272242991</strong>
                             </li>
                             <li>
-                                Bei Ausschluss oder Austritt verbleibt das Startgeld bei der Hobbyliga-West und wird der Mannschaft nicht zurückerstattet.
+                                Bei Ausschluss oder Austritt verbleibt das Startgeld bei der Hobbyliga-West und wird der Mannschaft nicht - auch nicht anteilig - zurückerstattet.
                             </li>
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">2. Meldungen</span>
+                        <span class="h4 font-weight-bold">2. Spielermeldungen</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Jede Mannschaft stellt der Ligaleitung eine Mannschaftsliste zur Verfügung aus der Zu-, Vorname, Geburtsdatum und Vereinszugehörigkeit eines jeden Spielers hervorgehen. Nur die Spieler, zu denen alle Daten vorliegen, sind spielberechtigt. Diese Mannschaftsliste muss der Ligaleitung <u>spätestens 1 Woche</u> vor dem 1. Spieltag vorliegen!
+                                Jede Mannschaft erhält rechtzeitig vor der angekündigten Jahreshauptversammlung (JHV) die digitale Passmappe mit allen aktiven Spielern.
                             </li>
                             <li>
-                                <b>Zusatz - gültig ab 11.08.2013:</b>
-                                <br>
-                                Alle Spieler, die nach dem 11.08.2013 angemeldet werden, müssen sich beim jeweiligen Spielverantwortlichen mit einem gültigen Identitätsnachweis (Personalausweis, Reisepass, etc.) ausweisen. Der Spielverantwortliche ist somit für die Richtigkeit aller Angaben verantwortlich und hat die Daten des Identitätsnachweises mit dem Spielerpass abzugleichen. Der neuangemeldete Spieler ist spielberichtigt, sobald der Mannschaft der entsprechende Spielerpass vorliegt.
+                                Nicht mehr aktive Spieler und Neuanmeldungen müssen bis zur JHV gemeldet werden.
                             </li>
                             <li>
-                                <b>Neuregelung ab der Saison 2013:</b>
+                                Die aktualisierte Mappe wir vor Saisonbeginn versendet.
+                            </li>
+                            <li>
+                                Neue Teams müssen eine Liste mit Namen, Vornamen und Geburtsdaten zur Anmeldung der Spieler erstellen. Diese ist zusammen mit den digitalen Portraitfotos der Spieler spätestens 14 Tage vor der JHV an den Vorstand zu senden.
+                            </li>
+                            <li>
+                                Weitere Regeln:
                                 <br>
                                 <ul>
+                                    <li>
+                                        Alle Spieler, die angemeldet werden, müssen sich beim jeweiligen Spielverantwortlichen mit einem gültigen Identitätsnachweis (Personalausweis, Reisepass, etc.) ausweisen. Der Spielverantwortliche ist somit für die Richtigkeit aller Angaben verantwortlich und hat die Daten des Identitätsnachweises mit dem Spielerpass abzugleichen.
+                                    </li>
                                     <li>
                                         Spieler, die nicht das 18. Lebensjahr erreicht haben, dürfen nicht in der HLW mitspielen.
                                     </li>
@@ -242,20 +254,18 @@
                                         Nachgemeldete Spieler sind erst dann spielberechtigt, wenn der Spielerpass vorliegt.
                                     </li>
                                     <li>
-                                        <b><u>Neu</u>angemeldete Spieler dürfen nicht in einem Verein spielen.</b>
+                                        Neu anzumeldende Spieler dürfen nicht in einem Verein spielen (siehe 0.3.) und auch nur in einer Mannschaft der HLW angemeldet werden.
+                                    </li>
+                                    <li>
+                                        Neuanmeldungen sind <strong>ausschließlich PER E-MAIL an vorstand@hobbyligawest.de</strong> zu senden.
+                                    </li>
+                                    <li>
+                                        Vereinsspielern mit Bestandsschutz (siehe 0.3) ist erlaubt innerhalb der Hobbyliga den Verein zu wechseln.
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                Falls eine Mannschaft einen nicht spielberechtigten Spieler einsetzt, wird das Spiel für diese Mannschaft als verloren (0 Punkte / 0:2 Tore) gewertet. Beim ersten Verstoß werden zusätzlich 6 Punkte abgezogen. Beim zweiten Verstoß erfolgt der Ausschluss aus der Hobbyliga-West.
-                            </li>
-                            <li>
-                                Vereinsspielern, die zum Altbestand zählen, ist es ab der Saison 2016 erlaubt, innerhalb der Hobbyliga den Verein zu wechseln.
-                            </li>
-                            <li>
-                                <b>Zusatz - gültig ab 09.01.2019:</b>
-                                <br>
-                                Neuanmeldungen PER E-MAIL an vorstand@hobbyligawest.de senden.
+                                Falls eine Mannschaft einen nicht spielberechtigten Spieler einsetzt, wird das Spiel für diese Mannschaft als verloren gewertet (0 Punkte / 0:2 Tore). Beim ersten Verstoß werden zusätzlich 6 Punkte abgezogen. Ab dem zweiten Verstoß kann der Ausschluss aus der Hobbyliga-West erfolgen. Die Entscheidung trifft der Vorstand.
                             </li>
                         </ol>
                     </li>
@@ -263,20 +273,13 @@
                         <span class="h4 font-weight-bold">3. Pässe und Spielberichtsbögen</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Es wird jeder Mannschaft ein Satz Spielerpässe von der Ligaleitung ausgestellt. Die Schiedsrichter sind verpflichtet, vor jedem Spiel die Spielberechtigung der anwesenden Spieler anhand der <u>Spielerpässe</u> zu prüfen, die von den jeweiligen Mannschaften <u>zwingend mitzuführen</u> sind.
+                                Es wird jeder Mannschaft eine digitale Passmappe (pdf-Datei) vom Vorstand ausgestellt. Die Schiedsrichter sind verpflichtet, vor jedem Spiel die Spielberechtigung der anwesenden Spieler anhand der <strong>Spielerpässe</strong> zu prüfen, die von den Mannschaften <strong>zwingend mitzuführen</strong> sind.
                             </li>
                             <li>
-                                Von der Ligaleitung ausgehändigte Pässe dürfen in keiner Weise nachträglich ohne die Zustimmung der Ligaleitung verändert werden. Das heißt, dass weder ein Passfoto geändert werden darf, noch dürfen handschriftliche oder sonstige nachträgliche Änderungen eigenhändig vorgenommen werden. Derartige Pässe sind ungültig, dürfen auch vom Schiedsrichter nicht akzeptiert werden und müssen bei der Ligaleitung neu beantragt werden.
+                                Die Spielberichtsbögen stehen auf der Website unter <strong>Infos</strong> als PDF zum Download zur Verfügung. Diese sind ordnungsgemäß von beiden Teams ausgefüllt vor jedem Spiel dem Schiedsrichter zu übergeben.
                             </li>
                             <li>
-                                Ab der Saison 2013 werden von der Ligaleitung Spielberichtsbögen an die Mannschaften ausgegeben, die ordnungsgemäß von beiden Teams ausgefüllt, vor jedem Spiel dem Schiedsrichter zu übergeben sind. Der Schiedsrichter wird diesen nach dem Spiel um die fehlenden Details ergänzen (Spielergebnis, Karten, bes. Vorkommnisse, etc.). Die Heimmannschaft wird den ausgefüllten, und von allen Parteien (Käpten Heim / Käpten Gast / Schiedsrichter) unterschriebenen Spielbericht, abfotografieren und per Mail am selben Tag an den Vorstand senden. Sollte der Spielbericht nicht an den Vorstand gesendet werden, wird das Spiel mit 2:0 für die Gastmannschaft gewertet.
-                                <br>
-                                Vorstands-EmaiL: vorstand [AT] hobbyligawest [DOT] DE
-                            </li>
-                            <li>
-                                <b>Zusatz - gültig ab 09.01.2019:</b>
-                                <br>
-                                Spielerpässe sind jetzt auch digital erlaubt (auch zur Passkontrolle beim Spiel), müssen aber den Stempel der aktuellen Saison enthalten.
+                                Der Schiedsrichter ergänzt den Spielberichtsbogen nach dem Spiel mit den Spieldaten (Spielergebnis, Karten, bes. Vorkommnisse, etc.). Die Heimmannschaft fotografiert den ausgefüllten und von allen Parteien (Kapitän / Verantwortlicher Heim, Kapitän / Verantwortlicher Gast, Schiedsrichter) unterschriebenen Spielbericht ab und sendet diesen - spätestens am Folgetag - per Mail an den Vorstand (vorstand@hobbyligawest.de). Sollte der Spielbericht nicht an den Vorstand gesendet werden, wird das Spiel mit 2:0 Toren für die Gastmannschaft gewertet.
                             </li>
                         </ol>
                     </li>
@@ -284,24 +287,79 @@
                         <span class="h4 font-weight-bold">4. Spielbetrieb</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Der Spielplan wird von der Ligaleitung erstellt und ist für alle teilnehmenden Mannschaften verbindlich.
+                                Der Spielplan wird vom Vorstand erstellt und ist für alle teilnehmenden Mannschaften verbindlich. Gespielt wird in den angegebenen Wochen.
                                 <br>
-                                Gespielt wird in den angegebenen Wochen. Die Mannschaften erhalten den Spielplan im Dezember und senden diesen – ergänzt um die Termine und Anstoßzeiten ihrer Heimspiele – bis zu dem von der Ligaleitung angegebenen Termin an diese zurück.
+                                Basis für die Erstellung sind:
+                                <ul>
+                                    <li>Heimplatz, Wochentag, Anstoßzeit aus der Vorsaison</li>
+                                    <li>der Rahmen-Terminkalender, welcher die Spielwochen der Saison vorgibt</li>
+                                </ul>
+                                Die Mannschaften erhalten den vorläufigen Spielplan rechtzeitig vor der JHV, Änderungen bzgl. der Heimspiele sind umgehend an den Vorstand zu melden.
+                                <br>
+                                <strong>Bindend ist ausschließlich der auf der Website veröffentlichte Spielplan!</strong>
                             </li>
                             <li>
                                 Eine Spielansetzung kann in der Woche frühestens um 19:00 Uhr und spätestens um 21:00 Uhr erfolgen. Samstags zwischen 11:00 Uhr und 17:00 Uhr.
                             </li>
                             <li>
-                                <del>Eine Spielverlegung muss bis <b>spätestens 24 h vor dem Spiel</b>, durch die verlegende Mannschaft, an die Ligaleitung, den Gegner und den Schiedsrichterobmann gemeldet werden.</del>
+                                <strong>Spielverlegungen</strong>
+                                <ol>
+                                    <li>
+                                        <strong>Grundsätzlich sind jeder Mannschaft pro Saison 2 Verlegungen erlaubt.</strong>
+                                    </li>
+                                    <li>
+                                        Änderungen dieser Anzahl können nur gemeinsam mit den Mannschaftsverantwortlichen bei einer JHV beschlossen werden.
+                                    </li>
+                                    <li>
+                                        Die Absage des geplanten Spiels muss spätestens 48 Stunden vor der Anstoßzeit an den Vorstand und den Gegner erfolgen, Beispiele:
+                                        <ul>
+                                            <li>Spiel Freitag 20.00h, Absage bis Mittwoch 19:59h</li>
+                                            <li>Spiel Montag 19:30h, Absage bis Samstag der Vorwoche bis 19:29h</li>
+                                        </ul>
+                                        Wird die Frist nicht eingehalten, erfolgt die Wertung (2:0 Tore, 3 Punkte) für
+                                        den Gegner. Das Spiel wird nicht nachgeholt.
+                                    </li>
+                                    <li>Spielausfälle aufgrund höherer Gewalt (Witterung, Platzsperre,
+                                        Doppelbelegung etc.) zählen nicht zu dieser Regelung)
+                                    </li>
+                                    <li>
+                                        Bei einem Saisonmodus mit Meisterschafts-Play-Offs ist für diese Spiele eine Verlegung <strong>nicht erlaubt</strong> damit die Austragung der nächsten K.O.-Runde nicht gefährdet ist.
+                                    </li>
+                                </ol>
                             </li>
                             <li>
-                                Bei Unbespielbarkeit des Platzes erfolgt ein Nachholspiel. Sollte eine Unbespielbarkeit absehbar sein, so sind der Gegner, der Schiedsrichterobmann und die Ligaleitung frühzeitig zu informieren.
+                                <strong>Nachholspiele</strong>
+                                <ol>
+                                    <li>
+                                        Ein Nachholspieltermin ist von der Heimmannschaft innerhalb von <strong>einer Woche</strong> mit dem Gegner abzustimmen und innerhalb dieser Frist an den Vorstand zu melden. Sollten sich beide Mannschaften nicht auf einen Termin einigen, so wird der Vorstand einen Termin ansetzen an dem gespielt werden muss (außer 8.5 Pokalbetrieb).
+                                    </li>
+                                    <li>
+                                        Nachholspiele können jederzeit gespielt werden. Die dafür im Rahmenspielplan reservierten Wochen sind mögliche Spieltage – jedoch nicht zwingend. Nachholspiele für bis zur Winterpause angesetzte Spiele müssen bis zum Ende der Winterpause durchgeführt werden. Auch können die Ferien für die Nachholspiele genutzt werden.
+                                    </li>
+                                    <li>
+                                        Bei witterungsbedingten Ausfällen erfolgt ein Nachholspiel. Sollte dies absehbar sein, so sind der Gegner und der Vorstand frühzeitig zu informieren.
+                                    </li>
+                                </ol>
                             </li>
                             <li>
                                 Grundsätzlich wird nach den aktuellen Regeln des DFB gespielt.
                             </li>
                             <li>
-                                Es dürfen während eines Spiels 6 Auswechslungen vorgenommen werden. Bereits ausgewechselte Spieler dürfen wieder eingewechselt werden, solange die Auswechselgrenze von 6 Wechseln nicht erreicht ist. (Achtung: Vereinsspieler!).
+                                Für Spieler mit Bestandsschutz gelten folgenden Regeln:
+                                <ul>
+                                    <li>
+                                        Der Bestandsschutz gilt nur für Spieler ab Vereinszugehörigkeit zur <strong>Kreisliga B bis zur Kreisliga A</strong> (bei Ligen außerhalb NRW entsprechende Spielklassen).
+                                    </li>
+                                    <li>
+                                        Ab der <strong>Bezirksliga</strong> entfällt der Bestandsschutz (<strong>Achtung</strong>: bei Aufstiegen muss Meldung an den Vorstand erfolgen, ebenso beim Aufstieg von KL B zur KL A).
+                                    </li>
+                                    <li>
+                                        In einem Spiel dürfen maximal 4 dieser Spieler gleichzeitig auf dem Platz sein, davon maximal 2 Spieler der Kreisliga A (<strong>Achtung</strong> bei den Wechseln)
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Während eines Spiels dürfen 6 Auswechslungen vorgenommen werden. Bereits ausgewechselte Spieler dürfen wieder eingewechselt werden, solange die Auswechselgrenze von 6 Wechseln nicht erreicht ist. (<strong>Achtung</strong>: Anzahl Vereinsspieler! Siehe 4.6).
                             </li>
                             <li>
                                 Die Wartezeit für den Anpfiff bei Verspätung einer Mannschaft beträgt 20 Minuten.
@@ -313,145 +371,90 @@
                                 Die Kosten für den Schiedsrichter trägt immer die nicht angetretene Mannschaft. Tritt die Auswärtsmannschaft ohne rechtzeitige Abmeldung nicht an, so hat sie der Heimmannschaft die Kosten für den Platz zu ersetzen, wenn dieser nicht anderweitig genutzt werden kann (durch andere Mannschaft oder Trainingsspiel).
                             </li>
                             <li>
-                                Die Kosten für den Schiedsrichter müssen <b><u>vor</u></b> dem Spiel gezahlt werden. Bei Nicht-Einhaltung kann der Schiedsrichter den Platz wieder verlassen und bekommt die Kosten von der HLW ersetzt. Die Mannschaft, die den Schiedsrichter nicht bezahlt hat, muss das Geld an die HLW bezahlen. Bei Wiederholung, wird die Mannschaft aus der HLW ausgeschlossen.
-                            </li>
-                            <li>
-                                Sind am Saisonende zwei oder mehr Mannschaften punktgleich, so entscheidet die Tordifferenz über die Vergabe des Meistertitels bzw. die Platzierung.
+                                Die Kosten für den Schiedsrichter müssen vor dem Spiel gezahlt werden. Bei Nicht-Einhaltung kann der Schiedsrichter den Platz wieder verlassen und bekommt die Kosten von der HLW ersetzt. Die Mannschaft, die den Schiedsrichter nicht bezahlt hat, muss das Geld an die HLW bezahlen. Bei Wiederholung wird die Mannschaft aus der HLW ausgeschlossen.
                             </li>
                             <li>
                                 Die Heimmannschaft hat immer folgende Voraussetzungen zu erfüllen:
                                 <ul>
-                                    <li>
-                                        Der Platz muss mindestens 2 Stunden zur Verfügung stehen (Pokalspiel: 3 Stunden).
-                                    </li>
-                                    <li>
-                                        Erscheint der Schiedsrichter nicht, stellt die Heimmannschaft eine geeignete Person zur Leitung des Spiels.
-                                        <br>
-                                        Ist dies nicht möglich, versucht der Gast eine geeignete Person zu stellen. Kommt es zu keiner Einigung, so findet ein Nachholspiel statt und die anfallenden Kosten (Platz/Schiedsrichter) werden von beiden Mannschaften zur Hälfte getragen.
-                                    </li>
-                                    <li>
-                                        Bei Trikotgleichheit sorgt die Heimmannschaft für eine Möglichkeit zur Unterscheidung (2.Trikotsatz oder Leibchen etc.).
-                                    </li>
-                                    <li>
-                                        Mannschaften dürfen nicht mit doppelten (bzw. mehrfach gleichen) Rückennummern gleichzeitig spielen.
-                                    </li>
+                                    <li>Der Platz muss mindestens 2 Stunden zur Verfügung stehen (Pokalspiel: 3 Stunden).</li>
+                                    <li>Erscheint der Schiedsrichter nicht, stellt die Heimmannschaft eine geeignete Person zur Leitung des Spiels.</li>
+                                    <li>Ist dies nicht möglich, versucht der Gast eine geeignete Person zu stellen - auch eine Teilung „jeder eine Halbzeit“ ist möglich. Kommt es zu keiner Einigung, so findet ein Nachholspiel statt und die anfallenden Kosten (Platz/Schiedsrichter) werden von beiden Mannschaften zur Hälfte getragen.</li>
+                                    <li>Bei Trikotgleichheit sorgt die Heimmannschaft für eine Möglichkeit zur Unterscheidung (2.Trikotsatz oder Leibchen etc.).</li>
                                 </ul>
                             </li>
-                            <li>
-                                Ein Spieler darf keine Kleidungsstücke oder Ausrüstungsgegenstände tragen, die ihn oder einen anderen Spieler gefährden könnten (einschließlich jeder Art von Schmuck). Im Gegensatz zu den geltenden DFB-Regeln, ist das Abkleben von Schmuck erlaubt.
-                            </li>
-                            <li>
-                                Ein abgebrochenes Spiel wird normal gewertet, wenn 75 % der regulären Spielzeit abgelaufen sind.
-                            </li>
-                            <li>
-                                An dieser Stelle soll noch einmal darauf hingewiesen werden, dass das Tragen von Schienbeinschützern zwingend vorgeschrieben ist.
-                            </li>
-                            <li>
-                                <b>In 2019 aufgrund des aktuellen Modus nicht gültig</b>
-                                <br>
-                                <del><b>Auf- und Abstieg:</b> Der Vorstand wird im Laufe der Saison (frühzeitig) über den Auf- und Abstieg (erneut) entscheiden, nachdem abzusehen ist, wie viele Mannschaften in der kommenden Saison an den Start gehen.</del>
-                            </li>
-                            <li>
-                                Scheidet eine Mannschaft aus dem laufenden Wettbewerb aus, werden alle Spiele dieser Mannschaft annulliert.
-                            </li>
-                            <li>
-                                <b>In 2019 aufgrund des aktuellen Modus  nicht gültig</b>
-                                <br>
-                                <del>Der Aufstieg von der 2. in die 1. Liga kann nicht abgelehnt werden.</del>
-                            </li>
-                            <li>
-                                <b>Zusatz - gültig ab 09.01.2019:</b>
-                                <br>
-                                <strong style="color: red">Nachholspiele sind nicht mehr erlaubt!</strong> Ausnahme bleiben Ausfälle wegen „höherer Gewalt“ (unbespielbar, Platz doppelt belegt etc.). Die Möglichkeit zur Verlegung vor Saisonstart
-                                (= 1. Spielwoche) und in den Sommerferien (vor der „Rückrunde“) bleibt wie gehabt.
-                                Zwischen dem Ende der „Hauptrunde“ und dem Start der Meisterschaft-Playoffs wird eine Pufferwoche für o.g. Ausnahmen eingebaut.
-
-                            </li>
-                        </ol>
-
-                    </li>
-                    <li>
-                        <span class="h4 font-weight-bold">5. Übermittlung der Spielergebnisse</span>
-                        <ol class="py-2 text-justify">
-                            <li>
-                                Die Spielergebnisse und besonderen Vorkommnisse werden vom Schiedsrichter im Spielberichtsbogen notiert, von der Heimmannschaft abfotografiert und per Mail an den Vorstand übermittelt.
-                            </li>
-                            <li>
-                                Spielerpässe sind jetzt auch digital erlaubt (auch zur Passkontrolle beim Spiel), müssen aber den Stempel der aktuellen Saison enthalten.
-                            </li>
+                            <li>Trikots mit Rückennummern sind Pflicht, Mannschaften dürfen nicht mit doppelten (bzw. mehrfach gleichen) Rückennummern spielen.</li>
+                            <li>Ein abgebrochenes Spiel wird normal gewertet, wenn 75 % der regulären Spielzeit abgelaufen sind.</li>
+                            <li>Ein Spieler darf keine Kleidungsstücke oder Ausrüstungsgegenstände tragen, die ihn oder einen anderen Spieler gefährden könnten (einschließlich jeder Art von Schmuck). Im Gegensatz zu den geltenden DFB-Regeln, ist das Abkleben von Schmuck erlaubt.</li>
+                            <li>Das Tragen von Schienbeinschützern ist zwingend vorgeschrieben.</li>
+                            <li>Scheidet eine Mannschaft aus dem laufenden Wettbewerb aus, werden alle Spiele dieser Mannschaft <strong>annulliert</strong>.</li>
+                            <li><strong>Je nach Spielmodus</strong> wird über evtl. Auf- und Abstiege bei der JHV je nach Teilnehmerzahl und Spielmodus der nächsten Saison entschieden.</li>
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">6. Strafen</span>
+                        <span class="h4 font-weight-bold">5. Strafen</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                <b>Alle Karten gelten wettbewerbsübergreifend, d.h. für Pokal- und Meisterschaftsspiele!</b>
+                                Alle Karten gelten <strong>wettbewerbsübergreifend</strong>, d.h. für Meisterschafts- und Pokalspiele!
                             </li>
                             <li>
-                                Sperren aufgrund Platzverweis im Pokal für Spieler, die in der HLW <strong>und</strong> AH spielen, gelten „übergreifend“, d.h. sowohl in der HLW als auch in der AH-Liga. Für x Spiele und begrenzt auf x Wochen.
-                            </li>
+                                Sperren aufgrund Platzverweises im <strong>Pokal</strong> für Spieler, die in der HLW und AH spielen, gelten „übergreifend“, d.h. sowohl in der HLW als auch in der AH-Liga werden die Spieler nach 5.1. gesperrt. Die Sperre kann also durch Spiele in beiden Ligen und im Pokal „abgesessen“ werden.                            </li>
                             <li>
-                                Zeitstrafe = 10 Minuten
-                            </li>
-                            <li>
-                                Gelb-Rote Karte = Matchstrafe + 1 Spiel Sperre
-                            </li>
-                            <li>
-                                Rote Karte mit 2 Spielen Sperre, bspw. bei:
+                                Karten:
                                 <ul>
-                                    <li>
-                                        absichtlichem Handspiel
+                                    <li>Zeitstrafe = 10 Minuten</li>
+                                    <li>Gelb-Rote Karte = Matchstrafe + 1 Spiel Sperre</li>
+                                    <li>Rote Karte (gespielte Spiele):
+                                        <ul>
+                                            <li>
+                                                grundsätzlich <strong>2</strong> Spiele Sperre (z.B. bei absichtlichem Handspiel, Notbremse, grobem oder wiederholtem Foulspiel)
+                                            </li>
+                                            <li>
+                                                bei Schiedsrichterbeleidigung <strong>5</strong> Spiele Sperre
+                                            </li>
+                                            <li>
+                                                je nach Schwere des Verstoßes behält sich der Vorstand auf Basis des Spielberichts und der Aussagen des Schiedsrichters und des Mannschafts-Verantwortlichen eine Straferhöhung vor
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li>
-                                        Notbremse
-                                    </li>
-                                    <li>
-                                        Grobem oder wiederholtem Foulspiel
-                                    </li>
+
                                 </ul>
-                            </li>
-                            <li>
-                                Rote mit 5 Spielen Sperre bei Schiedsrichterbeleidigung
-                            </li>
-                            <li>
-                                Je nach Schwere des Verstoßes behält sich der Vorstand eine Straferhöhung vor.
                             </li>
                             <li>
                                 Im Wiederholungsfall wird ein Spieler immer um ein Spiel mehr als vorher gesperrt.
                             </li>
                             <li>
-                                Bei Prügeleien oder <b>rassistischen</b>, <b>antisemitischen</b> und sonstigen <b>fremdenfeindlichen</b> oder <b>diffamierenden</b> Äußerungen werden Spieler aus der HWL ausgeschlossen.
+                                Bei Prügeleien, rassistischen, antisemitischen oder sonstigen fremdenfeindlichen oder diffamierenden Äußerungen werden Spieler aus der HLW ausgeschlossen.
                             </li>
                             <li>
-                                Diese Strafen gelten auch, wenn sie nicht auf der HP vermerkt sind.
-                            </li>
-                        </ol>
-                    </li>
-                    <li>
-                        <span class="h4 font-weight-bold">7. Schiedsrichter</span>
-                        <ol class="py-2 text-justify">
-                            <li>
-                                Die Schiedsrichter werden vom Schiedsrichterobmann angesetzt und können nicht abgelehnt werden.
+                                Diese Strafen gelten auch, wenn sie nicht auf der Website vermerkt sind.
                             </li>
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">8. Kosten</span>
+                        <span class="h4 font-weight-bold">6. Schiedsrichter</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Die Heimmannschaft trägt die Kosten für den Platz und zahlt dem Schiedsrichter <b>30,- €</b> pro Spiel.
+                                Die Schiedsrichter werden vom Schiedsrichterobmann eingeteilt und sind auf der Website beim jeweiligen Spiel für Mannschaftsverantwortliche sichtbar.
                             </li>
                             <li>
-                                Porto, Telefon und sonstige Kosten, die in Verbindung mit dem Spielbetrieb stehen gehen zu Lasten der teilnehmenden Mannschaften.
+                                Die angesetzten Schiedsrichter können nicht abgelehnt werden.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <span class="h4 font-weight-bold">7. Kosten</span>
+                        <ol class="py-2 text-justify">
+                            <li>
+                                Die Heimmannschaft trägt die Kosten für den Platz und zahlt dem Schiedsrichter aktuell 35,- € pro Spiel.
                             </li>
                             <li>
-                                Jede Mannschaft hinterlegt am Tag der Jahreshauptversammlung eine Kaution in Höhe von <b>60,- €</b> als Schiedsrichterkaution. Hieraus wird der Kassierer notwendige Schiedsrichterkosten für eventuelle Spielausfälle bezahlen. Diese Kaution ist im Laufe des Jahres bitte immer bei mindestens 30,- € pro Mannschaft zu halten.
+                                Jede Mannschaft hinterlegt am Tag der Jahreshauptversammlung eine Kaution in Höhe von aktuell 70,- € als Schiedsrichterkaution, bzw. füllt diese entsprechend wieder auf. Hieraus wird der Kassierer notwendige Schiedsrichterkosten für eventuelle Spielausfälle bezahlen. Diese Kaution ist im Laufe des Jahres bitte immer bei mindestens aktuell 35,- € pro Mannschaft zu halten.
                             </li>
                             <li>
-                                Die Kosten (Platz und 3 Schiedsrichter) für das Pokalendspiel werden von der Liga übernommen.
+                                Die Kosten (Platz und 3 Schiedsrichter) für das Pokalendspiel und - je nach Saisonmodus - für ein Meisterschaftsendspiel werden von der Liga übernommen.
                             </li>
                             <li>
-                                Die Kosten (Platz und 3 Schiedsrichter) für ein notwendiges Entscheidungsspiel zur Meisterschaft und für das Relegationsspiel werden ebenfalls von der Liga übernommen.
+                                Die Kosten (Platz und 3 Schiedsrichter), je nach Saisonmodus, für ein Entscheidungsspiel zur Meisterschaft oder für ein Relegationsspiel werden ebenfalls von der Liga übernommen.
                             </li>
                             <li>
                                 Die Kosten für Pokalspiele (Platz & Schiedsrichter) werden von den beiden Mannschaften geteilt.
@@ -459,51 +462,37 @@
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">9. Nachholspiele</span>
+                        <span class="h4 font-weight-bold">8. Pokalwettbewerb</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Ein Nachholspieltermin ist von der Heimmannschaft innerhalb von einer Woche mit dem Gegner abzustimmen und innerhalb dieser Frist an den Schiedsrichterobmann und die Ligaleitung zu melden. Sollten sich beide Mannschaften nicht auf einen Termin einigen, so wird die Ligaleitung einen Termin vorschreiben, an dem gespielt werden muss (ansonsten 10.3).
+                                Es gelten beim Pokal dieselben Melderegeln für spielberechtigte Spieler wie im Ligaspielbetrieb
                             </li>
                             <li>
-                                Nachholspiele können jederzeit gespielt werden. Die dafür reservierten Wochen sind mögliche Spieltage, aber nicht zwingend.
-                                <br>
-                                Nachholspiele aus der Hinrunde sind bis zum Ende der Sommerferien nachzuholen!
-                                <br>
-                                Auch können die Ferien für die Nachholspiele genutzt werden.
+                                Für teilnehmende Teams der AH-Liga gelten die Melderegeln wie in der Liga der AH.
                             </li>
                             <li>
-                                Ab der Saison 2016 dürfen in der gesamten Saison pro Mannschaft maximal <b>2</b> Spiele verlegt werden.
-                                <br>
-                                Spielausfälle aufgrund höherer Gewalt (Platz nicht bespielbar, gesperrt, etc.) zählen nicht zu dieser Regelung.
-                            </li>
-                            <li>
-                                Bis zum Beginn der ersten Spielwoche und während der Sommerpause (bis zum Beginn der ersten Rückrundenspielwoche) dürfen Spiele unbegrenzt verlegt werden. Diese Spielverlegungen zählen nicht zu 10.3.
-                            </li>
-                        </ol>
-                    </li>
-                    <li>
-                        <span class="h4 font-weight-bold">10. Pokalwettbewerb</span>
-                        <ol class="py-2 text-justify">
-                            <li>
-                                Es gelten beim Pokal, sowie beim Endspiel, dieselben Melderegeln für spielberechtigte Spieler, wie im Ligaspielbetrieb.
+                                Ein Spielbericht ist auch dann zwingend erforderlich, wenn einer der Teilnehmer ein AH-Team oder eine Gastmannschaft ist.
                             </li>
                             <li>
                                 Die Pokalspiele werden ohne Verlängerung gespielt. Es gibt bei unentschiedenem Spielausgang sofort ein Elfmeterschießen.
                             </li>
                             <li>
-                                Pokalwochen müssen eingehalten werden, ansonsten ist die absagende Mannschaft ausgeschieden.
+                                Pokalwochen müssen <strong>grundsätzlich</strong> eingehalten werden, ansonsten ist die absagende Mannschaft ausgeschieden.
+                            </li>
+                            <li>
+                                Evtl. Ausnahmen für AH-Teams aufgrund deren Spielplan werden vor jeder Pokalsaison festgelegt. Die Termine für betroffene Spiele müssen vom Vorstand genehmigt werden.
                             </li>
                         </ol>
                     </li>
                     <li>
-                        <span class="h4 font-weight-bold">11. Haftung</span>
+                        <span class="h4 font-weight-bold">9. Haftung</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Die Hobbyliga-West Düsseldorf ist eine Eigeninitiative von mehreren Freizeit- und  Hobbyfußballmannschaften. Sie ist nicht Veranstalter der Spiele sondern verwaltet lediglich die Ergebnisse der Spielrunde. Sie ist weder für Körper- noch für Sachschäden haftbar zu machen.
+                                Die Hobbyliga-West Düsseldorf ist eine Eigeninitiative von mehreren Freizeit- und Hobbyfußballmannschaften. Sie ist <strong>nicht</strong> Veranstalter der Spiele, sondern verwaltet und organisiert lediglich den Spielbetrieb und die Ergebnisse der Spielrunden. Sie ist weder für Körper- noch für Sachschäden haftbar zu machen.
                             </li>
                         </ol>
                     </li>
-                </ul>
+                </ol>
                 <span class="pull-right"><a href="#top"><span class="fa fa-arrow-up"></span> nach oben</a></span>
                 <div class="clearfix"></div>
             </div>
