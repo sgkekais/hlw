@@ -23,7 +23,7 @@
                         @endforeach
                      */
 
-                    $division_ids = [5, 6, 9, 10, 3];
+                    $division_ids = [5, 6, 9, 10, 11, 3];
 
                     $divisions = HLW\Division::find($division_ids);
                     $divisions->load('seasons');
@@ -36,7 +36,27 @@
                 @foreach($divisions_ordered as $division)
                     <li class="nav-item dropdown {{ Request::segment(1) == "division" && Request::segment(2) == $division->id ? "active" : null }} {{ Request::segment(1) == "season" && \HLW\Season::find(Request::segment(2))->division->id == $division->id ? "active" : null }}">
                         <a class="nav-link" href="{{ $division->competition->isLeague() ? route('frontend.divisions.tables', $division ) : route('frontend.divisions.fixtures', $division) }}" title="{{ $division->name }} " id="navbarDropdown{{ $loop->index }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="fa"></span> {{ $division->competition->isLeague() ? $division->competition->name_short : null }} {{ $division->name }}
+                            <span class="fa"></span> {{ $division->competition->isLeague() ? $division->competition->name_short : null }}
+                            @switch($division->id)
+                                @case(5)
+                                    Gr. A
+                                    @break
+                                @case(6)
+                                    Gr. B
+                                    @break
+                                @case(9)
+                                    Gr. A
+                                    @break
+                                @case(10)
+                                    Gr. B
+                                    @break
+                                @case(11)
+                                    AH Playoffs
+                                    @break
+                                @case(3)
+                                    {{ $division->name }}
+                                    @break
+                            @endswitch
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown{{ $loop->index }}">
                             @if ($division->competition->isLeague())
