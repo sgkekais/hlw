@@ -185,7 +185,16 @@
             </h2>
             <div class="row mt-2">
                 @foreach ($division_g as $division)
-                    <div class="{{ $division_g->count() == 1 ? "col-md-12" : ($division_g-count() >= 3 ? "col-md-4" : "col-md-6") }}">
+                    @php
+                        $col_class = "";
+                        if ($division_g->count() == 1)
+                            $col_class = "col-md-12";
+                        elseif ($division_g->count() == 2)
+                            $col_class = "col-md-6";
+                        else
+                            $col_class = "col-md-4";
+                    @endphp
+                    <div class="{{ $col_class }}">
                         @php
                             // $c_season = $division->seasons()->published()->current()->first();
                             $c_season = $division->currentSeason();
