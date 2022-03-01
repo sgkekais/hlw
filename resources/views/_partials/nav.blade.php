@@ -44,6 +44,8 @@
                                 @case(6)
                                     Gr. B
                                     @break
+                                @case(8)
+                                    HLW Playoffs
                                 @case(9)
                                     Gr. A
                                     @break
