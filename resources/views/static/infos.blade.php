@@ -81,7 +81,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Harald Scholz</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
-                                    <p class="card-text">Spielerpässe</p>
+                                    <p class="card-text">Spielerpässe & Ansprechpartner Teams</p>
                                     <div class="mt-auto">
                                         <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:vorstand@hobbyligawest.de" title="Mail an H. Scholz">vorstand</a>
                                     </div>
