@@ -172,17 +172,13 @@
                     @php
                         $nextgame = $club->getNextGames(1)->load('clubHome', 'clubAway')->first();
                     @endphp
-                    @if ($nextgame)
+                    @if ($nextgame && $nextgame->clubHome && $nextgame->clubAway)
                         @php
                             $logo = null;
-                            if($nextgame->clubHome) {
-                                if ($nextgame->clubHome->id == $club->id) {
-                                     if ($nextgame->clubAway) $logo = $nextgame->clubAway->logo_url;
-                                }
-                            } elseif($nextgame->clubAway) {
-                                if ($nextgame->clubAway->id == $club->id) {
-                                    if ($nextgame->clubHome) $logo = $nextgame->clubHome->logo_url;
-                                }
+                            if ($nextgame->clubHome->id == $club->id) {
+                                 $logo = $nextgame->clubAway->logo_url;
+                            } if ($nextgame->clubAway->id == $club->id) {
+                                $logo = $nextgame->clubHome->logo_url;
                             }
                         @endphp
                         @if($logo)
@@ -256,7 +252,7 @@
                     </div>
                     <div class="col-md-4">
                         @if (!$season->isFinished())
-                            @if ($nextgame)
+                            @if ($nextgame && $nextgame->clubHome && $nextgame->clubAway)
                                 <div class="row">
                                     <div class="col-md-12">
                                         Nächstes Spiel am <b>{{ $nextgame->datetime ? $nextgame->datetime->format('d.m.Y') : null }}</b>
