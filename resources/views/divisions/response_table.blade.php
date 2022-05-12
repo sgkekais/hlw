@@ -176,9 +176,9 @@
                         @php
                             $logo = null;
                             if($nextgame->clubHome && $nextgame->clubHome->id == $club->id )
-                                $logo = $nextgame->clubAway->logo_url;
+                                if ($nextgame->clubAway) $logo = $nextgame->clubAway->logo_url;
                             elseif($nextgame->clubAway && $nextgame->clubAway->id == $club->id)
-                                $logo = $nextgame->clubHome->logo_url;
+                                if ($nextgame->clubHome) $logo = $nextgame->clubHome->logo_url;
                         @endphp
                         @if($logo)
                             <img src="{{ asset('storage/'.$logo) }}" width="30" class="">
