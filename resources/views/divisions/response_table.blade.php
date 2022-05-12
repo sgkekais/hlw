@@ -175,10 +175,15 @@
                     @if ($nextgame)
                         @php
                             $logo = null;
-                            if($nextgame->clubHome && $nextgame->clubHome->id == $club->id )
-                                if ($nextgame->clubAway) $logo = $nextgame->clubAway->logo_url;
-                            elseif($nextgame->clubAway && $nextgame->clubAway->id == $club->id)
-                                if ($nextgame->clubHome) $logo = $nextgame->clubHome->logo_url;
+                            if($nextgame->clubHome) {
+                                if ($nextgame->clubHome->id == $club->id) {
+                                     if ($nextgame->clubAway) $logo = $nextgame->clubAway->logo_url;
+                                }
+                            } elseif($nextgame->clubAway) {
+                                if ($nextgame->clubAway->id == $club->id) {
+                                    if ($nextgame->clubHome) $logo = $nextgame->clubHome->logo_url;
+                                }
+                            }
                         @endphp
                         @if($logo)
                             <img src="{{ asset('storage/'.$logo) }}" width="30" class="">
