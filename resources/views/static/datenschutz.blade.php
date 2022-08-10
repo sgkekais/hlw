@@ -22,7 +22,7 @@
                     <li><a href="#zugriffsdaten">Zugriffsdaten</a></li>
                     <li><a href="#cookies">Cookies</a></li>
                     <li><a href="#ssl">SSL-Verschlüsselung</a></li>
-                    <li><a href="#skriptbibliotheken">Verwendung von Skriptbibliotheken</a></li>
+                    {{--<li><a href="#skriptbibliotheken">Verwendung von Skriptbibliotheken</a></li>--}}
                     <li><a href="#youtube">Eingebettete YouTube-Videos</a></li>
                     <li><a href="#kontaktdaten">Umgang mit Kontaktdaten</a></li>
                     <li><a href="#kommentare">Umgang mit Kommentaren und Beiträgen</a></li>
@@ -91,6 +91,7 @@
                 </p>
             </div>
         </div>
+        {{--
         <div class="row">
             <div class="col">
                 <a id="skriptbibliotheken"></a>
@@ -104,6 +105,7 @@
                 </p>
             </div>
         </div>
+        --}}
         <div class="row">
             <div class="col">
                 <a id="youtube"></a>
