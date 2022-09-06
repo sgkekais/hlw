@@ -23,7 +23,7 @@
                         @endforeach
                      */
 
-                    $division_ids = [1, 4, 11, 3];
+                    $division_ids = [1, 3, 4, 11, 12];
 
                     $divisions = HLW\Division::find($division_ids);
                     $divisions->load('seasons');
@@ -55,6 +55,9 @@
                                     @break
                                 @case(11)
                                     AH Playoffs
+                                    @break
+                                @case(12)
+                                    AH Cup
                                     @break
                                 @case(3)
                                     {{ $division->name }}
