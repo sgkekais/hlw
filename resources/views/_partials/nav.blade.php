@@ -86,7 +86,7 @@
                 @endforeach
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}" title="Clubhaus"><span class="fa fa-comments"></span> Clubhaus</a>
+                    <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}" title="Transfermarkt"><span class="fa fa-comments"></span> Transfermarkt</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('frontend.static.infos') ? "active" : null }}" href="{{ route('frontend.static.infos') }}" title="Vorstand, Satzungen und Infos">Infos</a>
