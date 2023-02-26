@@ -82,9 +82,9 @@
                                         'data-badge' => 'inline',
                                         'class' => 'g-recaptcha btn btn-primary mr-1 mt-2'
                                     ]) !!}
-                                    {{--<a class="btn btn-outline-primary mr-1 mt-2" href="{{ route('register') }}" title="Registrieren">
+                                    <a class="btn btn-outline-primary mr-1 mt-2" href="{{ route('register') }}" title="Registrieren">
                                         Neu hier? Registrier dich!
-                                    </a>--}}
+                                    </a>
                                     <a class="btn btn-link mt-2 pull-right" href="{{ route('password.request') }}" title="Passwort vergessen">
                                         Passwort vergessen?
                                     </a>
