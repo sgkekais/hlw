@@ -46,7 +46,7 @@
                 <span class="pull-right">
                     @guest
                         <a href="{{ route('login') }}" title="Anmelden">Login</a> |
-                        {{--<a href="{{ route('register') }}" title="Registrieren">Registrieren</a>--}}
+                        <a href="{{ route('register') }}" title="Registrieren">Registrieren</a>
                     @endguest
                     @auth
                         <a href="{{ route('frontend.user.profile.show') }}" title="Profil">Profil</a> |
