@@ -99,12 +99,15 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                {!! no_captcha()->display() !!}
+                                {!! no_captcha()->button('Registrieren!', [
+                                        'data-badge' => 'inline',
+                                        'class' => 'g-recaptcha btn btn-primary mr-1 mt-2'
+                                    ]) !!}
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">
+                                {{-- <button type="submit" class="btn btn-primary">
                                     <span class="fa fa-fw fa-user-plus"></span> Registrieren!
-                                </button>
+                                </button>--}}
                                 <a class="btn btn-link" href="{{ route('login') }}">
                                     Bereits registriert?
                                 </a>
