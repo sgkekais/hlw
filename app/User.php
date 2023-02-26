@@ -67,6 +67,10 @@ class User extends Authenticatable
         'ban_date'
     ];
 
+    protected $casts = [
+        'verified' => 'boolean'
+    ];
+
     /***********************************************************
      * FUNCTIONS
      ************************************************************/
