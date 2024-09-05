@@ -23,7 +23,7 @@
                         @endforeach
                      */
 
-                    $division_ids = [5, 6, 3, 4];
+                    $division_ids = [5, 6, 3, 4, 12];
 
                     $divisions = HLW\Division::find($division_ids);
                     $divisions->load('seasons');
