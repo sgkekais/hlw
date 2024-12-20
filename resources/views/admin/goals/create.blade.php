@@ -36,7 +36,7 @@
                 <label for="player_id" class="col-md-2 col-form-label">Spieler</label>
                 <div class="col-md-4">
                     <select class="form-control" aria-describedby="player_idHelp" name="entities[{{ $i }}][player_id]" id="player_id">
-                        @foreach($players->where('active') as $player)
+                        @foreach($players as $player)
                             <option value="{{ $player->id }}">{{ $player->club->name_short }} | {{ $player->person->last_name}}, {{ $player->person->first_name }} ({{ $player->sign_off ? "Inaktiv" : "Aktiv" }}, ID: {{ $player->id }}) </option>
                         @endforeach
                     </select>
