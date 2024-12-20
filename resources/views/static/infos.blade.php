@@ -235,7 +235,7 @@
                                 Die aktualisierte Mappe wir vor Saisonbeginn versendet.
                             </li>
                             <li>
-                                Neue Teams müssen eine Liste mit Namen, Vornamen und Geburtsdaten zur Anmeldung der Spieler erstellen. Diese ist zusammen mit den digitalen Portraitfotos der Spieler spätestens 14 Tage vor der JHV an den Vorstand zu senden.
+                                Neue Teams müssen eine Liste mit Namen, Vornamen und Geburtsdaten zur Anmeldung der Spieler erstellen. Diese ist zusammen mit den digitalen Portraitfotos, einer Kopie (Foto) vom Personalausweis (Vorderseite, mit „schwärzen“ aller Daten außer Name, Vorname, Geburtsdatum, Foto) der Spieler spätestens 14 Tage vor der JHV an den Vorstand zu senden.
                             </li>
                             <li>
                                 Weitere Regeln:
@@ -262,10 +262,16 @@
                                     <li>
                                         Vereinsspielern mit Bestandsschutz (siehe 0.3) ist erlaubt innerhalb der Hobbyliga den Verein zu wechseln.
                                     </li>
+                                    <li>
+                                        Am Spieltag werden keine Pässe ausgestellt bzw. Passmappen versendet!
+                                    </li>
+                                    <li>
+                                        Wechselt ein Spieler während der Saison den Verein innerhalb der Liga, erfolgt ein Pflichtspiel Sperre. Bei Saisons mit PlayOff-Modus darf nur bis zum Ende der „Vorrunde“ gewechselt werden.
+                                    </li>
                                 </ul>
                             </li>
                             <li>
-                                Falls eine Mannschaft einen nicht spielberechtigten Spieler einsetzt, wird das Spiel für diese Mannschaft als verloren gewertet (0 Punkte / 0:2 Tore). Beim ersten Verstoß werden zusätzlich 6 Punkte abgezogen. Ab dem zweiten Verstoß kann der Ausschluss aus der Hobbyliga-West erfolgen. Die Entscheidung trifft der Vorstand.
+                                Falls eine Mannschaft einen nicht spielberechtigten Spieler einsetzt, wird das Spiel für diese Mannschaft als verloren gewertet (0 Punkte / 0:5 Tore). Beim ersten Verstoß werden zusätzlich 6 Punkte abgezogen. Ab dem zweiten Verstoß kann der Ausschluss aus der Hobbyliga-West erfolgen. Die Entscheidung trifft der Vorstand.
                             </li>
                         </ol>
                     </li>
@@ -279,7 +285,7 @@
                                 Die Spielberichtsbögen stehen auf der Website unter <strong>Infos</strong> als PDF zum Download zur Verfügung. Diese sind ordnungsgemäß von beiden Teams ausgefüllt vor jedem Spiel dem Schiedsrichter zu übergeben.
                             </li>
                             <li>
-                                Der Schiedsrichter ergänzt den Spielberichtsbogen nach dem Spiel mit den Spieldaten (Spielergebnis, Karten, bes. Vorkommnisse, etc.). Die Heimmannschaft fotografiert den ausgefüllten und von allen Parteien (Kapitän / Verantwortlicher Heim, Kapitän / Verantwortlicher Gast, Schiedsrichter) unterschriebenen Spielbericht ab und sendet diesen - spätestens am Folgetag - per Mail an den Vorstand (vorstand@hobbyligawest.de). Sollte der Spielbericht nicht an den Vorstand gesendet werden, wird das Spiel mit 2:0 Toren für die Gastmannschaft gewertet.
+                                Der Schiedsrichter ergänzt den Spielberichtsbogen nach dem Spiel mit den Spieldaten (Spielergebnis, gelb-rote und rote Karten, bes. Vorkommnisse, etc.). Die Heimmannschaft fotografiert den ausgefüllten und von allen Parteien (Kapitän / Verantwortlicher Heim, Kapitän / Verantwortlicher Gast, Schiedsrichter) unterschriebenen Spielbericht ab und sendet diesen - spätestens am Folgetag - per Mail an den Vorstand (vorstand@hobbyligawest.de). Sollte der Spielbericht nicht an den Vorstand gesendet werden, wird das Spiel mit 5:0 Toren für die Gastmannschaft gewertet.
                             </li>
                         </ol>
                     </li>
@@ -294,9 +300,16 @@
                                     <li>Heimplatz, Wochentag, Anstoßzeit aus der Vorsaison</li>
                                     <li>der Rahmen-Terminkalender, welcher die Spielwochen der Saison vorgibt</li>
                                 </ul>
-                                Die Mannschaften erhalten den vorläufigen Spielplan rechtzeitig vor der JHV, Änderungen bzgl. der Heimspiele sind umgehend an den Vorstand zu melden.
+                                Der Modus für die aktuelle Saison wird auf der JHV durch Abstimmung der anwesenden Mannschaftsverantwortlichen festgelegt.
                                 <br>
-                                <strong>Bindend ist ausschließlich der auf der Website veröffentlichte Spielplan!</strong>
+                                Der Vorstand erstellt dazu Vorschläge, Basis dafür sind:
+                                <ul>
+                                    <li>die Anzahl der teilnehmenden Teams</li>
+                                    <li>die Anzahl der möglichen Spielwochen</li>
+                                </ul>
+                                Die Mannschaften erhalten den <i>vorläufigen</i> Spielplan umgehend nach der JHV, Änderungen bzgl. der Heimspiele sind umgehend an den Vorstand zu melden. . Dazu wird eine angemessene Frist eingeräumt, in der die Änderungen nicht als Verlegung gewertet werden.
+                                <br>
+                                <strong>Bindend ist ausschließlich der auf der Website veröffentlichte finale Spielplan!</strong>
                             </li>
                             <li>
                                 Eine Spielansetzung kann in der Woche frühestens um 19:00 Uhr und spätestens um 21:00 Uhr erfolgen. Samstags zwischen 11:00 Uhr und 17:00 Uhr.
@@ -306,6 +319,10 @@
                                 <ol>
                                     <li>
                                         <strong>Grundsätzlich sind jeder Mannschaft pro Saison 2 Verlegungen erlaubt.</strong>
+                                        <br>
+                                        <strong>Gegen eine Mannschaft sind pro Saison nur 3 Verlegungen erlaubt.</strong>
+                                        <br>
+                                        Über den Stand (Anzahl) der Verlegungen wird vom Vorstand regelmäßig informiert.
                                     </li>
                                     <li>
                                         Änderungen dieser Anzahl können nur gemeinsam mit den Mannschaftsverantwortlichen bei einer JHV beschlossen werden.
@@ -316,14 +333,14 @@
                                             <li>Spiel Freitag 20.00h, Absage bis Mittwoch 19:59h</li>
                                             <li>Spiel Montag 19:30h, Absage bis Samstag der Vorwoche bis 19:29h</li>
                                         </ul>
-                                        Wird die Frist nicht eingehalten, erfolgt die Wertung (2:0 Tore, 3 Punkte) für
+                                        Wird die Frist nicht eingehalten, erfolgt die Wertung (5:0 Tore, 3 Punkte) für
                                         den Gegner. Das Spiel wird nicht nachgeholt.
                                     </li>
                                     <li>Spielausfälle aufgrund höherer Gewalt (Witterung, Platzsperre,
                                         Doppelbelegung etc.) zählen nicht zu dieser Regelung)
                                     </li>
                                     <li>
-                                        Bei einem Saisonmodus mit Meisterschafts-Play-Offs ist für diese Spiele eine Verlegung <strong>nicht erlaubt</strong> damit die Austragung der nächsten K.O.-Runde nicht gefährdet ist.
+                                        Bei einem Saisonmodus mit Meisterschafts-Play-Offs ist für diese Spiele eine Verlegung <strong>nur in Ausnahmefällen und mit Genehmigung des Vorstands erlaubt</strong> damit die Austragung der nächsten K.O.-Runde nicht gefährdet ist.
                                     </li>
                                 </ol>
                             </li>
@@ -345,18 +362,7 @@
                                 Grundsätzlich wird nach den aktuellen Regeln des DFB gespielt.
                             </li>
                             <li>
-                                Für Spieler mit Bestandsschutz gelten folgenden Regeln:
-                                <ul>
-                                    <li>
-                                        Der Bestandsschutz gilt nur für Spieler ab Vereinszugehörigkeit zur <strong>Kreisliga B bis zur Kreisliga A</strong> (bei Ligen außerhalb NRW entsprechende Spielklassen).
-                                    </li>
-                                    <li>
-                                        Ab der <strong>Bezirksliga</strong> entfällt der Bestandsschutz (<strong>Achtung</strong>: bei Aufstiegen muss Meldung an den Vorstand erfolgen, ebenso beim Aufstieg von KL B zur KL A).
-                                    </li>
-                                    <li>
-                                        In einem Spiel dürfen maximal 4 dieser Spieler gleichzeitig auf dem Platz sein, davon maximal 2 Spieler der Kreisliga A (<strong>Achtung</strong> bei den Wechseln)
-                                    </li>
-                                </ul>
+                                Die veralteten Regeln für Spieler mit Bestandsschutz entfallen (Beschluss JHV 2022).
                             </li>
                             <li>
                                 Während eines Spiels dürfen 6 Auswechslungen vorgenommen werden. Bereits ausgewechselte Spieler dürfen wieder eingewechselt werden, solange die Auswechselgrenze von 6 Wechseln nicht erreicht ist. (<strong>Achtung</strong>: Anzahl Vereinsspieler! Siehe 4.6).
@@ -368,7 +374,11 @@
                                 Tritt eine Mannschaft nicht an, wird das ausgefallene Spiel mit 3 Punkten und 2:0 Toren für den Gegner gewertet.
                             </li>
                             <li>
-                                Die Kosten für den Schiedsrichter trägt immer die nicht angetretene Mannschaft. Tritt die Auswärtsmannschaft ohne rechtzeitige Abmeldung nicht an, so hat sie der Heimmannschaft die Kosten für den Platz zu ersetzen, wenn dieser nicht anderweitig genutzt werden kann (durch andere Mannschaft oder Trainingsspiel).
+                                Die Kosten für den Schiedsrichter trägt immer die nicht angetretene Mannschaft.
+                                <br>
+                                Bei einer Absage am Spieltag erhält der entsprechende Schiedsrichter 50 % des Betrages als Entschädigung. Ist der Schiedsrichter bereits auf dem Platz, bzw. wird das Spiel während seiner Anreise abgesagt, erhält er 100 % Erstattung.
+                                <br>
+                                Tritt die Auswärtsmannschaft ohne rechtzeitige Abmeldung nicht an, so hat sie der Heimmannschaft die Kosten für den Platz zu ersetzen, wenn dieser nicht anderweitig genutzt werden kann (durch andere Mannschaft oder Trainingsspiel).
                             </li>
                             <li>
                                 Die Kosten für den Schiedsrichter müssen vor dem Spiel gezahlt werden. Bei Nicht-Einhaltung kann der Schiedsrichter den Platz wieder verlassen und bekommt die Kosten von der HLW ersetzt. Die Mannschaft, die den Schiedsrichter nicht bezahlt hat, muss das Geld an die HLW bezahlen. Bei Wiederholung wird die Mannschaft aus der HLW ausgeschlossen.
@@ -388,13 +398,16 @@
                             <li>Das Tragen von Schienbeinschützern ist zwingend vorgeschrieben.</li>
                             <li>Scheidet eine Mannschaft aus dem laufenden Wettbewerb aus, werden alle Spiele dieser Mannschaft <strong>annulliert</strong>.</li>
                             <li><strong>Je nach Spielmodus</strong> wird über evtl. Auf- und Abstiege bei der JHV je nach Teilnehmerzahl und Spielmodus der nächsten Saison entschieden.</li>
+                            <li>
+                                Bei Punktgleichheit in der Tabelle entscheidet zuerst der direkte Vergleich, danach das Torverhältnis über den Tabellenplatz.
+                            </li>
                         </ol>
                     </li>
                     <li>
                         <span class="h4 font-weight-bold">5. Strafen</span>
                         <ol class="py-2 text-justify">
                             <li>
-                                Alle Karten gelten <strong>wettbewerbsübergreifend</strong>, d.h. für Meisterschafts- und Pokalspiele!
+                                Alle Karten gelten <un>saison- und wettbewerbsübergreifend</un>, d.h. für Meisterschafts- und Pokalspiele!
                             </li>
                             <li>
                                 Sperren aufgrund Platzverweises im <strong>Pokal</strong> für Spieler, die in der HLW und AH spielen, gelten „übergreifend“, d.h. sowohl in der HLW als auch in der AH-Liga werden die Spieler nach 5.1. gesperrt. Die Sperre kann also durch Spiele in beiden Ligen und im Pokal „abgesessen“ werden.                            </li>
@@ -406,15 +419,24 @@
                                     <li>Rote Karte (gespielte Spiele):
                                         <ul>
                                             <li>
-                                                grundsätzlich <strong>2</strong> Spiele Sperre (z.B. bei absichtlichem Handspiel, Notbremse, grobem oder wiederholtem Foulspiel)
+                                                mindestens <strong>2</strong> Spiele Sperre (z.B. bei absichtlichem Handspiel, Notbremse, grobem oder wiederholtem Foulspiel)
                                             </li>
                                             <li>
-                                                bei Schiedsrichterbeleidigung <strong>5</strong> Spiele Sperre
+                                                bei Schiedsrichterbeleidigung mindetens <strong>3</strong> Spiele Sperre
                                             </li>
                                             <li>
                                                 je nach Schwere des Verstoßes behält sich der Vorstand auf Basis des Spielberichts und der Aussagen des Schiedsrichters und des Mannschafts-Verantwortlichen eine Straferhöhung vor
                                             </li>
                                         </ul>
+                                    </li>
+                                    <li>
+                                        Wertigkeit/Reihenfolge der Strafen:
+                                        <ul>
+                                            <li>1. Gelb / Zeitstrafe 10 Min.</li>
+                                            <li>Gelb-Rot</li>
+                                            <li>Rot</li>
+                                        </ul>
+                                        Dies bedeutet, dass nach einer Strafe bei weiteren Vergehen nur eine <strong>höhere</strong> Strafe folgen kann.
                                     </li>
 
                                 </ul>
@@ -477,10 +499,15 @@
                                 Die Pokalspiele werden ohne Verlängerung gespielt. Es gibt bei unentschiedenem Spielausgang sofort ein Elfmeterschießen.
                             </li>
                             <li>
-                                Pokalwochen müssen <strong>grundsätzlich</strong> eingehalten werden, ansonsten ist die absagende Mannschaft ausgeschieden.
+                                Pokalwochen müssen <strong>grundsätzlich</strong> eingehalten werden, ansonsten ist die absagende Mannschaft ausgeschieden. <strong>Ausnahmen sind nur mit Genehmigung des Vorstands möglich.</strong>
                             </li>
                             <li>
                                 Evtl. Ausnahmen für AH-Teams aufgrund deren Spielplan werden vor jeder Pokalsaison festgelegt. Die Termine für betroffene Spiele müssen vom Vorstand genehmigt werden.
+                            </li>
+                            <li>
+                                Sollten Vereine mit 2 Teams (HLW und AH) teilnehmen, dürfen maximal <strong>5</strong> Spieler in beiden Teams spielen. Diese sind vor Beginn der Pokalrunde an den Vorstand zu melden und gelten für die <strong>gesamte</strong> laufende Pokalsaison.
+                                <br>
+                                Die Teams können ab dem Viertelfinale auch gegeneinander ausgelost werden.
                             </li>
                         </ol>
                     </li>
