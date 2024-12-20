@@ -193,7 +193,7 @@
         <div class="row mt-4">
             <div class="col">
                 <h2 class="font-weight-bold font-italic">Satzung der Hobbyliga-West</h2>
-                <h5>Stand: 25.10.2021</h5>
+                <h5>Stand: 21.08.2024</h5>
                 <ol id="list" class="list-unstyled">
                     <li>
                         <span class="h4 font-weight-bold">0. Allgemeines</span>
