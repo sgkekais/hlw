@@ -219,6 +219,7 @@
                         <th class="">Name</th>
                         <th class="text-center"><span class="fa fa-calendar-plus-o" title="Spielverlegungen"></span> </th>
                         <th class="">Rang</th>
+                        <th class="">Startpunkte</th>
                         <th class="">Punktabzug</th>
                         <th class="">Torabzug</th>
                         <th class="">Ausgeschieden</th>
@@ -241,6 +242,7 @@
                                 {{ $club->reschedulings()->where('reschedule_count','1')->get()->where('matchweek.season.id', $season->id)->count() }}
                             </td>
                             <td class="align-middle">{{ $club->pivot->rank }}</td>
+                            <td class="align-middle">{{ $club->pivot->start_points }}</td>
                             <td class="align-middle">{{ $club->pivot->deduction_points }}</td>
                             <td class="align-middle">{{ $club->pivot->deduction_goals }}</td>
                             <td class="align-middle">{{ $club->pivot->withdrawal }}</td>
