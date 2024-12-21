@@ -317,7 +317,7 @@ class Season extends Model
                     // goals diff
                     $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
                     // points
-                    $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1 - $club->pivot->deduction_points;
+                    $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1 + $club->pivot->start_points - $club->pivot->deduction_points;
 
                     break;
                 // Home table
@@ -337,7 +337,7 @@ class Season extends Model
                     // goals diff
                     $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
                     // points
-                    $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1 - $club->pivot->deduction_points;
+                    $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1 + $club->pivot->start_points- $club->pivot->deduction_points;
 
                     break;
                 // Away table
@@ -357,7 +357,7 @@ class Season extends Model
                     // goals diff
                     $club->t_goals_diff = $club->t_goals_for - $club->t_goals_against;
                     // points
-                    $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1 - $club->pivot->deduction_points;
+                    $club->t_points    = $club->t_won * 3 + $club->t_drawn * 1 + $club->pivot->start_points - $club->pivot->deduction_points;
 
                     break;
             }
@@ -520,7 +520,7 @@ class Season extends Model
     public function clubs()
     {
         return $this->belongsToMany(Club::class, 'clubs_seasons')
-            ->withPivot('rank', 'deduction_points', 'deduction_goals', 'withdrawal', 'note')
+            ->withPivot('rank', 'start_points', 'deduction_points', 'deduction_goals', 'withdrawal', 'note')
             ->withTimestamps();
 
     }

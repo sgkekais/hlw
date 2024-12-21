@@ -34,6 +34,16 @@
                 <small id="rankHelp" class="form-text text-muted">Welchen Platz hat die Mannschaft am Ende der Saison erreicht?</small>
             </div>
         </div>
+        <!-- start points -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="rank">Startpunkte</label>
+            </div>
+            <div class="col-md-4">
+                <input type="number" class="form-control" id="start_points" name="start_points" aria-describedby="rankHelp" placeholder="{{ old('start_points') }}">
+                <small id="rankHelp" class="form-text text-muted">Punkte, mit denen die Mannschaft starten soll</small>
+            </div>
+        </div>
         <!-- deductions -->
         <div class="form-group row">
             <div class="col-md-2">

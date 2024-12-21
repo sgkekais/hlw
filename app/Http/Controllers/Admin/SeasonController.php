@@ -198,6 +198,7 @@ class SeasonController extends Controller
     {
         $this->validate($request, [
             'rank'              => 'nullable|integer|min:1',
+            'start_points'      => 'nullable|integer|min:1',
             'deduction_points'  => 'nullable|integer|min:1',
             'deduction_goals'   => 'nullable|integer|min:1',
             'withdrawal'        => 'nullable|date'
@@ -209,6 +210,7 @@ class SeasonController extends Controller
         // store the assignment in the pivot table
         $season->clubs()->attach($club, [
             'rank'              => $request->rank,
+            'start_points'      => $request->start_points,
             'deduction_points'  => $request->deduction_points,
             'deduction_goals'   => $request->deduction_goals,
             'withdrawal'        => $request->withdrawal,
@@ -243,6 +245,7 @@ class SeasonController extends Controller
     {
         $this->validate($request, [
             'rank'              => 'nullable|integer|min:1',
+            'start_points'      => 'nullable|integer|min:1',
             'deduction_points'  => 'nullable|integer|min:1',
             'deduction_goals'   => 'nullable|integer|min:1',
             'withdrawal'        => 'nullable|date'
@@ -251,6 +254,7 @@ class SeasonController extends Controller
         // sync with existing pivot entry
         $season->clubs()->updateExistingPivot($club->id, [
             'rank'              => $request->rank,
+            'start_points'      => $request->start_points,
             'deduction_points'  => $request->deduction_points,
             'deduction_goals'   => $request->deduction_goals,
             'withdrawal'        => $request->withdrawal,
