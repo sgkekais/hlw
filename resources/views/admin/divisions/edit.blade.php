@@ -58,7 +58,7 @@
                 <label for="nav_order">Navigationsreihenfolge</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="nav_order" id="nav_order" aria-describedby="navorderHelp" value="{{ $division->nav_order }}" placeholder="{{ $division->nav_order }} }}">
+                <input type="text" class="form-control" name="nav_order" id="nav_order" aria-describedby="navorderHelp" value="{{ $division->nav_order }}" placeholder="{{ $division->nav_order }}">
                 <small id="navorderHelp" class="form-text text-muted">Für Sotierung in Navigationsleiste</small>
             </div>
         </div>
