@@ -46,6 +46,18 @@
         <!-- nav text and order -->
         <div class="form-group row">
             <div class="col-md-2">
+                <label for="nav_show">Anzeige in Navigation?</label>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" id="nav_show" name="nav_show" aria-describedby="navshowHelp">
+                    <option value="0">Nein</option>
+                    <option value="1" {{ $division->nav_show ? "selected" : null }}>Ja</option>
+                </select>
+                <small id="navshowHelp" class="form-text text-muted">In Navigation anzeigen?</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2">
                 <label for="nav_text">Navigationstext</label>
             </div>
             <div class="col-md-4">

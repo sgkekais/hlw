@@ -37,7 +37,7 @@ class Division extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name', 'competition_id', 'hierarchy_level', 'nav_text', 'nav_order', 'published'
+        'name', 'competition_id', 'hierarchy_level', 'nav_show', 'nav_text', 'nav_order', 'published'
     ];
 
     /**
@@ -51,7 +51,7 @@ class Division extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'competition_id', 'hierarchy_level', 'nav_text', 'nav_order', 'published'
+        'name', 'competition_id', 'hierarchy_level', 'nav_show', 'nav_text', 'nav_order', 'published'
     ];
 
     /**
@@ -74,6 +74,11 @@ class Division extends Model
     public function scopePublished ($query)
     {
         return $query->where('published', 1);
+    }
+
+    public function scopeNavShow ($query)
+    {
+        return $query->where('nav_show', 1);
     }
 
     /***********************************************************

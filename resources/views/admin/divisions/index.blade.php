@@ -26,6 +26,7 @@
             <th></th>
             <th class="">Name</th>
             <th class="">Hierarchieebene</th>
+            <th class="">Nav?</th>
             <th class="">Nav-Text</th>
             <th class="">Nav-Nr</th>
             <th class="">Aktionen</th>
@@ -50,6 +51,13 @@
                     Saisons: {{ $division->seasons()->get()->count() }}
                 </td>
                 <td class="align-middle">{{ $division->hierarchy_level }}</td>
+                <td class="align-middle">
+                    @if($division->nav_show)
+                        Ja
+                    @else
+                        Nein
+                    @endif
+                </td>
                 <td class="align-middle">{{ $division->nav_text }}</td>
                 <td class="align-middle">{{ $division->nav_order }}</td>
                 <td class="align-middle">
