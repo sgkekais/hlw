@@ -31,7 +31,7 @@
                         return array_search($model->getKey(), $division_ids);
                     });*/
 
-                    $divisions = HLW\Division::published()->orderBy('nav_order')->get()->load('seasons');
+                    $divisions = HLW\Division::navShow()->orderBy('nav_order')->get()->load('seasons');
                 ?>
                 <!-- Manual menu for 2019 TODO: make menu builder -->
 
