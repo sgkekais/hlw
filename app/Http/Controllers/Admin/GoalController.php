@@ -104,7 +104,8 @@ class GoalController extends Controller
         // get the players of both teams and merge them into a single collection
         $players_home = $fixture->clubHome->players->load('person');
         $players_away = $fixture->clubAway->players->load('person');
-        $players      = $players_home->sortBy('person.last_name')->merge($players_away->sortBy('person.last_name'));
+        $coll      = $players_home->sortBy('person.last_name')->merge($players_away->sortBy('person.last_name'));
+        $players  = $coll->where('sign_off', NULL);
 
         return view('admin.goals.edit', compact('fixture', 'goal', 'players'));
     }
