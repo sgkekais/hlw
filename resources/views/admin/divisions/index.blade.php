@@ -26,6 +26,8 @@
             <th></th>
             <th class="">Name</th>
             <th class="">Hierarchieebene</th>
+            <th class="">Nav-Text</th>
+            <th class="">Nav-Nr</th>
             <th class="">Aktionen</th>
         </tr>
         </thead>
