@@ -50,6 +50,8 @@
                     Saisons: {{ $division->seasons()->get()->count() }}
                 </td>
                 <td class="align-middle">{{ $division->hierarchy_level }}</td>
+                <td class="align-middle">{{ $division->nav_text }}</td>
+                <td class="align-middle">{{ $division->nav_order }}</td>
                 <td class="align-middle">
                     @can('read division')
                         <!-- display details -->
