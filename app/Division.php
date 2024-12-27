@@ -37,7 +37,7 @@ class Division extends Model
      * @var array
      */
     protected static $logAttributes = [
-        'name', 'competition_id', 'hierarchy_level', 'published'
+        'name', 'competition_id', 'hierarchy_level', 'nav_text', 'nav_order', 'published'
     ];
 
     /**
@@ -51,7 +51,7 @@ class Division extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'competition_id', 'hierarchy_level', 'published'
+        'name', 'competition_id', 'hierarchy_level', 'nav_text', 'nav_order', 'published'
     ];
 
     /**

@@ -63,6 +63,8 @@ class DivisionController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:2',
+            'nav_text' => 'nullable',
+            'nav_order' => 'nullable',
             'hierarchy_level' => 'nullable' // TODO: should be unique for one competition
         ]);
 
@@ -116,6 +118,8 @@ class DivisionController extends Controller
         // validate the input data
         $this->validate($request, [
             'name' => 'required|min:4',
+            'nav_text' => 'nullable',
+            'nav_order' => 'nullable',
             'hierarchy_level' => 'nullable' // TODO: should be unique for one competition
         ]);
 

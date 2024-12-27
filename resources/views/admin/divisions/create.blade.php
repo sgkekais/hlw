@@ -26,6 +26,25 @@
                 <small id="hierarchy_levelHelp" class="form-text text-muted">Hierarchieebene der Spielklasse, bspw. 2 für 2. Liga</small>
             </div>
         </div>
+        <!-- nav text and order -->
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="nav_text">Navigationstext</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="nav_text" id="nav_text" aria-describedby="navtextHelp" placeholder="{{ old('nav_text', 'Gr. A') }}">
+                <small id="navtextHelp" class="form-text text-muted">Text in Navigationsleiste</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="nav_order">Navigationsreihenfolge</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="nav_order" id="nav_order" aria-describedby="navorderHelp" placeholder="{{ old('nav_order', '2') }}">
+                <small id="navorderHelp" class="form-text text-muted">Für Sotierung in Navigationsleiste</small>
+            </div>
+        </div>
         <!-- competition -->
         <div class="form-group row">
             <div class="col-md-2">
