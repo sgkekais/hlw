@@ -10,6 +10,9 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    # TEMPORARY: block admin, login and registration until the PHP update is done
+    RewriteRule ^(admin|login|logout|register|password|email-verification|profile)(/.*)?$ - [F,L,NC]
+
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

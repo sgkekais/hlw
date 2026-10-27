@@ -124,6 +124,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                {{-- TEMPORARY: login/admin hidden until the PHP update is done
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}" title="Anmelden">Login <span class="fa fa-fw fa-sign-in"></span></a>
@@ -174,6 +175,7 @@
                         </div>
                     </li>
                 @endauth
+                --}}
 
             </ul>
         </div>
