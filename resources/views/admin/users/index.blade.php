@@ -128,13 +128,13 @@
             <h2 class="">Angelegte User <span class="badge badge-secondary">{{ $users->count() }}</span></h2>
         </div>
     </div>
-    {{-- <div class="row ">
-         <div class="col">
-             <a class="btn btn-success" href="{{ route('users.create') }}" title="Rolle anlegen">
-                 <span class="fa fa-plus-square"></span> User anlegen
-             </a>
-         </div>
-     </div>--}}
+    <div class="row ">
+        <div class="col">
+            <a class="btn btn-success" href="{{ route('users.create') }}" title="User anlegen">
+                <span class="fa fa-plus-square"></span> User anlegen
+            </a>
+        </div>
+    </div>
     <div class="row mt-4">
         <div class="col">
             <table class="table table-sm table-striped table-hover">
@@ -158,7 +158,7 @@
                         <td class="align-middle">
                             {{ $user->email }}
                         </td>
-                        <td class="align-middle">{{ $user->roles()->pluck('name') }}</td>
+                        <td class="align-middle">{{ $user->roles->pluck('name')->implode(', ') }}</td>
                         <td class="align-middle">
                             {{ $user->verified ? "Ja" : "Nein" }}
                         </td>
@@ -170,11 +170,9 @@
                             </a>
                             --}}
                             <!-- edit -->
-                            @role('super_admin')
-                                <a class="btn btn-primary btn-sm" href="{{ route('users.edit', $user) }}" title="User bearbeiten">
-                                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                </a>
-                            @endrole
+                            <a class="btn btn-primary btn-sm" href="{{ route('users.edit', $user) }}" title="User bearbeiten">
+                                <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

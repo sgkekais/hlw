@@ -3,12 +3,10 @@
 namespace HLW\Http\Controllers;
 
 use Carbon\Carbon;
-use HLW\Card;
 use HLW\Division;
-use HLW\Player;
 use HLW\Season;
+use HLW\Support\DivisionStatistics;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\AssignOp\Div;
 
 class DivisionController extends Controller
 {
@@ -46,21 +44,7 @@ class DivisionController extends Controller
 
             // scorers are personal data, see config/hlw.php
             if (config('hlw.public_personal_data')) {
-                $season->load('matchweeks.fixtures.goals');
-                $goals = $season->goals();
-                foreach ($goals->groupBy('player.id') as $index => $player_goals) {
-                    // get the player and load the person relationship
-                    $player = Player::find($index);
-                    if ($player) {
-                        $player->load([
-                            'person', 'club'
-                        ]);
-                    }
-                    // add a goals attribute
-                    $player->goals = $player_goals->count();
-                    // push the player to the scorers collection
-                    $scorers->push($player);
-                }
+                $scorers = DivisionStatistics::scorers($season);
             }
         }
 
@@ -263,7 +247,7 @@ class DivisionController extends Controller
             $season = $division->seasons()->orderBy('season_nr','desc')->first();
         }
 
-        $lifetime_bans = Card::lifetimeBan()->get();
+        $lifetime_bans = DivisionStatistics::lifetimeBans();
 
         return view('divisions.sinners', compact('division', 'season', 'lifetime_bans'));
     }
@@ -275,21 +259,8 @@ class DivisionController extends Controller
      */
     public function ajaxGetSinners(Request $request, Division $division)
     {
-        // check whether a season id is in the request
-        if (!$request->filled('season_id')) {
-            $season = $division->seasons()->current()->first();
-        } else {
-            $season = Season::find($request->season_id);
-        }
-
-        // get cards of selected season
-        if ($season) {
-            $season->load('matchweeks.fixtures.cards');
-            $cards = $season->cards()->sortByDesc('fixture.datetime');
-        }
-
-        // get other cards
-        $cards_from_other_season_or_division = $division->cards->where('ban_lifetime', '!=', 1)->where('fixture.matchweek.season.id', '!=', $season->id)->sortByDesc('fixture.datetime');
+        $season = DivisionStatistics::season($division, $request->season_id);
+        [$cards, $cards_from_other_season_or_division] = DivisionStatistics::sinners($division, $season);
 
         return view('divisions.response_sinners', compact('season','cards', 'cards_from_other_season_or_division'));
     }
@@ -318,32 +289,7 @@ class DivisionController extends Controller
      */
     public function ajaxGetScorers(Request $request, Division $division)
     {
-        // check whether a season id is in the request
-        if (!$request->filled('season_id')) {
-            $season = $division->seasons()->current()->first();
-        } else {
-            $season = Season::find($request->season_id);
-        }
-
-        $scorers = collect();
-
-        if ($season) {
-            $season->load('matchweeks.fixtures.goals');
-            $goals = $season->goals();
-            foreach ($goals->groupBy('player.id') as $index => $player_goals) {
-                // get the player and load the person relationship
-                $player = Player::find($index);
-                if ($player) {
-                    $player->load([
-                        'person', 'club'
-                    ]);
-                }
-                // add a goals attribute
-                $player->goals = $player_goals->count();
-                // push the player to the scorers collection
-                $scorers->push($player);
-            }
-        }
+        $scorers = DivisionStatistics::scorers(DivisionStatistics::season($division, $request->season_id));
 
         return view('divisions.response_scorers', compact('scorers'));
     }

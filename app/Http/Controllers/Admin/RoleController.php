@@ -10,6 +10,14 @@ use HLW\Http\Controllers\Controller;
 class RoleController extends Controller
 {
     /**
+     * Only super admins manage roles and their permissions.
+     */
+    public function __construct()
+    {
+        $this->middleware('role:super_admin');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

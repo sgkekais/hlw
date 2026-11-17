@@ -23,6 +23,21 @@ trait UsesRealRecords
 {
     private $params;
 
+    /**
+     * A user with the role member only, like the former public accounts.
+     */
+    protected function createMember(): User
+    {
+        $member = User::forceCreate([
+            'name' => 'Mitglied',
+            'email' => 'mitglied@example.com',
+            'password' => bcrypt('smoke-test'),
+        ]);
+        $member->assignRole('member');
+
+        return $member;
+    }
+
     protected function fillParameters($uri)
     {
         $params = $this->parameters();

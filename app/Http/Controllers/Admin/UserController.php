@@ -6,22 +6,20 @@ use HLW\User;
 
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
+use Illuminate\Validation\Rules\Password;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+/**
+ * Only super admins manage the accounts of the admin area.
+ */
 class UserController extends Controller
 {
     public function __construct()
     {
-        // Permissions
-        $this->middleware('permission:list users')->only('index');
-        $this->middleware('permission:update user')->only([
-            'create',
-            'store']
-        );
+        $this->middleware('role:super_admin');
     }
 
-    // TODO: method for banning, method for roles
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('name')->get();
+        $users = User::with('roles')->orderBy('name')->get();
         $roles = Role::orderBy('name')->get();
         $permissions = Permission::orderBy('description')->get();
 
@@ -43,7 +41,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::orderBy('name')->get();
+
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -54,18 +54,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'name'      => 'required|string|min:2|max:20|unique:users,name',
+            'email'     => 'required|string|email|max:255|unique:users,email',
+            'password'  => ['required', 'confirmed', Password::min(12)],
+            'roles'     => 'nullable|array',
+            'roles.*'   => 'exists:roles,id',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \HLW\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
+        $user = new User($request->only(['name', 'email']));
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        $user->roles()->sync($request->input('roles', []));
+
+        return redirect()->route('users.index')
+            ->with('success', 'User erfolgreich angelegt.');
     }
 
     /**
@@ -89,26 +93,26 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // validate name, email
+        // validate name, email, an optional new password
         $this->validate($request, [
             'name'      => 'required|string|min:2|max:20|unique:users,name,'.$user->id,
-            'email'     => 'required|string|email|max:255|unique:users,email,'.$user->id
+            'email'     => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password'  => ['nullable', 'confirmed', Password::min(12)],
+            'roles'     => 'nullable|array',
+            'roles.*'   => 'exists:roles,id',
         ]);
 
         // only retrieve the name and email fields
         $input = $request->only(['name', 'email']);
         // update user
-        $user->fill($input)->save();
-
-        // retrieve all selected roles
-        $roles = $request['roles'];
-
-        if (isset($roles)) {
-            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
+        $user->fill($input);
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
         }
-        else {
-            $user->roles()->detach(); // If no role is selected remove existing roles associated to the user
-        }
+        $user->save();
+
+        // sync the selected roles, none removes all roles
+        $user->roles()->sync($request->input('roles', []));
 
         return redirect()->route('users.index')
             ->with('success', 'User erfolgreich aktualisiert.');
@@ -120,8 +124,17 @@ class UserController extends Controller
      * @param  \HLW\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
-        //
+        if ($user->is($request->user())) {
+            return redirect()->back()->with('danger', 'Der eigene User kann nicht gelöscht werden.');
+        }
+
+        $user->roles()->detach();
+        $user->permissions()->detach();
+        $user->delete();
+
+        return redirect()->route('users.index')
+            ->with('success', 'User erfolgreich gelöscht.');
     }
 }

@@ -13,6 +13,12 @@
                     <span class="fa fa-pencil"></span> Bearbeiten
                 </a>
             @endcan
+            <a class="btn btn-secondary mb-4" href="{{ route('admin.divisions.scorers', $division) }}" title="Torschützen">
+                <span class="fa fa-soccer-ball-o"></span> Torschützen
+            </a>
+            <a class="btn btn-secondary mb-4" href="{{ route('admin.divisions.sinners', $division) }}" title="Sünderkartei">
+                <span class="fa fa-thumbs-o-down"></span> Sünderkartei
+            </a>
         </div>
         <!-- dates -->
         <div class="col-md-6">

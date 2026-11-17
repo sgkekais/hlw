@@ -34,6 +34,8 @@
                 <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" value="{{ $user->email }}" >
             </div>
         </div>
+        <!-- password -->
+        @include('admin.users._password', ['required' => false])
         <!-- roles -->
         <div class="form-group">
             <span class="col-form-label">Rollen</span>

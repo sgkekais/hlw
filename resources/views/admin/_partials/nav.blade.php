@@ -44,6 +44,13 @@
                             </a>
                         @endcan
                         <div class="dropdown-divider"></div>
+                        <h6 class="dropdown-header">Torschützen & Sünder</h6>
+                        @foreach (\HLW\Division::with('competition')->orderBy('competition_id')->orderBy('name')->get() as $nav_division)
+                            <a class="dropdown-item {{ Route::is('admin.divisions.*') && request()->route('division')->is($nav_division) ? 'active' : null }}" href="{{ route('admin.divisions.scorers', $nav_division) }}">
+                                <span class="fa fa-list-ol fa-fw"></span> {{ $nav_division->competition->name_short }} {{ $nav_division->name }}
+                            </a>
+                        @endforeach
+                        <div class="dropdown-divider"></div>
                         @can('list clubs')
                             <a class="dropdown-item {{ Route::is('clubs.*') ? 'active' : null }}" href="{{ route('clubs.index') }}">
                                 <span class="fa fa-shield fa-fw"></span> Mannschaften
@@ -83,13 +90,13 @@
                 --}}
             </ul>
             <ul class="navbar-nav">
-                @can('list users')
+                @role('super_admin')
                     <li class="nav-item {{ Route::is('users.*') ? 'active' : null }}">
                         <a class="nav-link" href="{{ route('users.index') }}">
                             <span class="fa fa-users"></span> Benutzerverwaltung
                         </a>
                     </li>
-                @endcan
+                @endrole
                 <li class="nav-item {{ Route::is('log') ? 'active' : null }}">
                     <a class="nav-link" href="{{ route('log') }}">
                         <span class="fa fa-history"></span> Log

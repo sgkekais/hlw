@@ -84,13 +84,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     // Docs
     Route::get('docs', 'AdminController@docs')->name('docs');
     // User, role and permissions management
-    Route::resource('users', 'UserController');
+    Route::resource('users', 'UserController')->except('show');
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
     // Competitions
     Route::resource('competitions', 'CompetitionController');
     // Divisions
     Route::resource('divisions', 'DivisionController');
+    // Scorers and sinners of a division, on the public site only if personal data is public
+    Route::get('divisions/{division}/scorers', 'StatisticsController@scorers')->name('admin.divisions.scorers');
+    Route::get('divisions/{division}/sinners', 'StatisticsController@sinners')->name('admin.divisions.sinners');
     // Seasons
     Route::resource('seasons', 'SeasonController');
     // Assigning clubs to seasons

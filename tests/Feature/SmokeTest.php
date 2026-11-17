@@ -86,10 +86,7 @@ class SmokeTest extends TestCase
     {
         $admin = User::role('admin')->firstOrFail();
         $admin->forceFill(['password' => bcrypt('smoke-test')])->save();
-        $member = User::role('member')->whereDoesntHave('roles', function ($query) {
-            $query->whereIn('name', ['admin', 'super_admin']);
-        })->firstOrFail();
-        $member->forceFill(['password' => bcrypt('smoke-test')])->save();
+        $member = $this->createMember();
 
         $this->post('/admin/login', ['email' => $member->email, 'password' => 'smoke-test'])
             ->assertSessionHasErrors('email');
@@ -109,9 +106,7 @@ class SmokeTest extends TestCase
 
     public function test_members_are_locked_out_of_the_admin_area()
     {
-        $member = User::role('member')->whereDoesntHave('roles', function ($query) {
-            $query->whereIn('name', ['admin', 'super_admin']);
-        })->firstOrFail();
+        $member = $this->createMember();
 
         $this->actingAs($member)->get('/admin')->assertStatus(403);
     }
