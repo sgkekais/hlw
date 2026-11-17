@@ -102,6 +102,14 @@ class UserController extends Controller
             'roles.*'   => 'exists:roles,id',
         ]);
 
+        // the own account and the last super admin keep the role, otherwise nobody could manage users anymore
+        $superAdmin = Role::findByName('super_admin');
+        $removesSuperAdmin = $user->hasRole($superAdmin) && !in_array($superAdmin->id, $request->input('roles', []));
+        if ($removesSuperAdmin && ($user->is($request->user()) || User::role($superAdmin)->count() === 1)) {
+            return redirect()->back()->withInput()
+                ->with('danger', 'Die Rolle super_admin kann dem eigenen und dem letzten Super-Admin nicht entzogen werden.');
+        }
+
         // only retrieve the name and email fields
         $input = $request->only(['name', 'email']);
         // update user

@@ -22,6 +22,11 @@ class LoginController extends Controller
     const MAX_ATTEMPTS = 5;
 
     /**
+     * Failed attempts per IP, whatever e-mail addresses are tried.
+     */
+    const MAX_ATTEMPTS_PER_IP = 20;
+
+    /**
      * Lockout in seconds after too many failed attempts.
      */
     const DECAY_SECONDS = 300;
@@ -44,11 +49,14 @@ class LoginController extends Controller
         ]);
 
         $key = Str::lower($request->input('email')) . '|' . $request->ip();
+        $ipKey = 'login|' . $request->ip();
 
-        if ($limiter->tooManyAttempts($key, self::MAX_ATTEMPTS)) {
-            throw ValidationException::withMessages([
-                'email' => 'Zu viele Anmeldeversuche. Bitte in ' . ceil($limiter->availableIn($key) / 60) . ' Minuten erneut versuchen.',
-            ]);
+        foreach ([$key => self::MAX_ATTEMPTS, $ipKey => self::MAX_ATTEMPTS_PER_IP] as $limitKey => $maxAttempts) {
+            if ($limiter->tooManyAttempts($limitKey, $maxAttempts)) {
+                throw ValidationException::withMessages([
+                    'email' => 'Zu viele Anmeldeversuche. Bitte in ' . ceil($limiter->availableIn($limitKey) / 60) . ' Minuten erneut versuchen.',
+                ]);
+            }
         }
 
         $guard = Auth::guard();
@@ -58,6 +66,7 @@ class LoginController extends Controller
             || $guard->getLastAttempted()->ban_date
             || !$guard->getLastAttempted()->hasAnyRole(VerifyAdmins::ROLES)) {
             $limiter->hit($key, self::DECAY_SECONDS);
+            $limiter->hit($ipKey, self::DECAY_SECONDS);
 
             throw ValidationException::withMessages([
                 'email' => 'Die Anmeldedaten sind ungültig.',

@@ -598,7 +598,7 @@
                                             });
                                         }
                                     </script>
-                                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBKAZ6Ay4GdEqmP3gG6Zpp3kOyBSSa-Lc&callback=initMap">
+                                    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&callback=initMap">
                                     </script>
                                 @endif
                         </div>

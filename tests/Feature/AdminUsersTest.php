@@ -125,4 +125,40 @@ class AdminUsersTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Sünderkartei');
     }
+
+    public function test_super_admins_cannot_lock_out_user_management()
+    {
+        $super = User::role('super_admin')->firstOrFail();
+        $this->actingAs($super);
+        $otherRoles = $super->roles->where('name', '!=', 'super_admin')->pluck('id')->all();
+
+        // own account
+        $this->from('/admin/users')->patch("/admin/users/{$super->id}", [
+            'name' => $super->name, 'email' => $super->email, 'roles' => $otherRoles,
+        ])->assertSessionHas('danger');
+        $this->assertTrue($super->fresh()->hasRole('super_admin'));
+
+        // the last super admin
+        User::role('super_admin')->where('id', '!=', $super->id)->get()
+            ->each(fn ($user) => $user->removeRole('super_admin'));
+        $other = User::role('admin')->where('id', '!=', $super->id)->firstOrFail();
+        $other->assignRole('super_admin');
+        $this->actingAs($other);
+        $super->removeRole('super_admin');
+
+        $this->patch("/admin/users/{$other->id}", [
+            'name' => $other->name, 'email' => $other->email, 'roles' => [],
+        ])->assertSessionHas('danger');
+        $this->assertTrue($other->fresh()->hasRole('super_admin'));
+    }
+
+    public function test_logins_from_one_ip_are_limited_across_e_mail_addresses()
+    {
+        for ($i = 0; $i < 20; $i++) {
+            $this->post('/admin/login', ['email' => "unbekannt{$i}@example.com", 'password' => 'falsch']);
+        }
+
+        $this->post('/admin/login', ['email' => 'noch-einer@example.com', 'password' => 'falsch'])
+            ->assertSessionHasErrors(['email' => 'Zu viele Anmeldeversuche. Bitte in 5 Minuten erneut versuchen.']);
+    }
 }
