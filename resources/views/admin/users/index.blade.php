@@ -160,7 +160,7 @@
                         </td>
                         <td class="align-middle">{{ $user->roles()->pluck('name') }}</td>
                         <td class="align-middle">
-                            {{ $user->isVerified() ? "Ja" : "Nein" }}
+                            {{ $user->verified ? "Ja" : "Nein" }}
                         </td>
                         <td class="align-middle">
                             {{--

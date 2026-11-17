@@ -150,10 +150,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
-         */
-        Jrean\UserVerification\UserVerificationServiceProvider::class,
-        /*
          * Application Service Providers...
          */
         HLW\Providers\AppServiceProvider::class,
@@ -161,11 +157,6 @@ return [
         // HLW\Providers\BroadcastServiceProvider::class,
         HLW\Providers\EventServiceProvider::class,
         HLW\Providers\RouteServiceProvider::class,
-
-        /*
-         * Chatter
-         */
-        DevDojo\Chatter\ChatterServiceProvider::class,
 
     ],
 
@@ -219,10 +210,6 @@ return [
         'Carbon' => Carbon\Carbon::class,
 
         'ModelHelper' => HLW\Helpers\ModelHelper::class,
-
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
-        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
 
         'PDF' => \Barryvdh\DomPDF\Facade::class
     ],

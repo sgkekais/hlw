@@ -11,14 +11,6 @@
             <div class="col-12 col-md-9 col-lg-6">
                 <div class="card" style="border: 1px solid rgba(0, 0, 0, 0.15); border-radius: 0.25rem; -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175); box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);">
                     <div class="card-body">
-                        @if (session('registered'))
-                            <div class="alert alert-info">
-                                <h4><span class="fa fa-fw fa-envelope"></span> Registrierung erfolgreich!</h4>
-                                    <p>
-                                        {{ session('registered') }}
-                                    </p>
-                            </div>
-                        @endif
                         @if (session('success'))
                             <div class="alert alert-success">
                                 <span class="fa fa-fw fa-check-circle-o"></span> {{ session('success') }}
@@ -34,9 +26,9 @@
                                 <span class="fa fa-fw fa-exclamation-circle"></span> {{ session('danger') }}
                             </div>
                         @endif
-                        <h1 class="font-weight-bold font-italic">Anmelden</h1>
+                        <h1 class="font-weight-bold font-italic">Admin-Login</h1>
                         <!-- Login Form -->
-                        <form id="login-form" class="form" role="form" method="POST" action="{{ route('login') }}">
+                        <form class="form" role="form" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group">
@@ -78,25 +70,10 @@
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    {!! no_captcha()->button('Login', [
-                                        'data-badge' => 'inline',
-                                        'class' => 'g-recaptcha btn btn-primary mr-1 mt-2'
-                                    ]) !!}
-                                    <a class="btn btn-outline-primary mr-1 mt-2" href="{{ route('register') }}" title="Registrieren">
-                                        Neu hier? Registrier dich!
-                                    </a>
-                                    <a class="btn btn-link mt-2 pull-right" href="{{ route('password.request') }}" title="Passwort vergessen">
-                                        Passwort vergessen?
-                                    </a>
+                                    <button type="submit" class="btn btn-primary mr-1 mt-2">Login</button>
                                 </div>
                             </div>
                         </form> <!-- ./Login Form -->
-                        {!! no_captcha()->script() !!}
-                        <script>
-                            function onSubmit(token) {
-                                document.getElementById("login-form").submit();
-                            }
-                        </script>
                     </div>
                 </div>
             </div>

@@ -39,6 +39,7 @@
                 </a>
                 <br>
             @endcan
+            {{-- PARKED: player passports are rebuilt after the Laravel upgrade (routes commented out in routes/web.php)
             @can('generate player_passports')
                 <a class="btn btn-danger mt-2" href="{{ route('generatePlayerPassports', $club) }}" title="Passmappe erzeugen">
                     <span class="fa fa-repeat"></span> Passmappe erzeugen
@@ -49,6 +50,7 @@
                     <span class="fa fa-file-pdf-o"></span> Passmappe ansehen (Stand: {{ $club->passports_timestamp }})
                 </a>
             @endif
+            --}}
         </div>
         <!-- dates -->
         <div class="col-md-6">
@@ -410,12 +412,14 @@
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
                                 @endcan
+                                {{-- PARKED: player passports are rebuilt after the Laravel upgrade (routes commented out in routes/web.php)
                                 @can('generate player_passport')
                                     <!-- generate player passport pdf -->
                                     <a class="btn btn-danger btn-sm" href="{{ route('generatePlayerPassport', [$p_active]) }}" target="_blank" title="Spielerpass erzeugen">
                                         <span class="fa fa-file-pdf-o" aria-hidden="true"></span>
                                     </a>
                                 @endcan
+                                --}}
                             </td>
                         </tr>
                     @endforeach

@@ -44,20 +44,23 @@ class DivisionController extends Controller
 
             $scorers = collect();
 
-            $season->load('matchweeks.fixtures.goals');
-            $goals = $season->goals();
-            foreach ($goals->groupBy('player.id') as $index => $player_goals) {
-                // get the player and load the person relationship
-                $player = Player::find($index);
-                if ($player) {
-                    $player->load([
-                        'person', 'club'
-                    ]);
+            // scorers are personal data, see config/hlw.php
+            if (config('hlw.public_personal_data')) {
+                $season->load('matchweeks.fixtures.goals');
+                $goals = $season->goals();
+                foreach ($goals->groupBy('player.id') as $index => $player_goals) {
+                    // get the player and load the person relationship
+                    $player = Player::find($index);
+                    if ($player) {
+                        $player->load([
+                            'person', 'club'
+                        ]);
+                    }
+                    // add a goals attribute
+                    $player->goals = $player_goals->count();
+                    // push the player to the scorers collection
+                    $scorers->push($player);
                 }
-                // add a goals attribute
-                $player->goals = $player_goals->count();
-                // push the player to the scorers collection
-                $scorers->push($player);
             }
         }
 

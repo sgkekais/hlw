@@ -31,16 +31,21 @@ class SmokeTest extends TestCase
     use DatabaseTransactions;
 
     /**
-     * Routes that are not part of the comparison: removed during the upgrade
-     * (forum, public accounts, csv import, player passports), debug tools,
-     * or known to be broken already (calendar, see TODO in routes/web.php).
+     * Routes that are not part of the comparison: debug tools, the login form
+     * (tested separately), or known to be broken already (calendar, see TODO
+     * in routes/web.php).
      */
     const EXCLUDED = [
-        '#^(login|logout|register|password|profile|email-verification)\b#',
-        '#^(forum|discussion|category|posts)\b#',
         '#^(api|_debugbar|_ignition)\b#',
-        '#^admin/(calendar)$#',
-        '#playerpassports|/pdf(-debug)?$#',
+        '#^admin/(calendar|login)$#',
+    ];
+
+    /**
+     * Public pages that were removed: forum, accounts, registration, password reset.
+     */
+    const REMOVED = [
+        '/login', '/register', '/password/reset', '/profile',
+        '/email-verification/error', '/forum',
     ];
 
     /**
@@ -64,6 +69,9 @@ class SmokeTest extends TestCase
 
     public function test_public_pages_render()
     {
+        // render the pages with personal data too, they can be switched on again
+        config(['hlw.public_personal_data' => true]);
+
         $failures = $this->requestAll(function ($uri) {
             return strpos($uri, 'admin') !== 0;
         });
@@ -85,7 +93,71 @@ class SmokeTest extends TestCase
 
     public function test_admin_area_requires_login()
     {
-        $this->get('/admin')->assertRedirect();
+        $this->get('/admin')->assertRedirect('/admin/login');
+        $this->get('/admin/login')->assertStatus(200)->assertSee('Admin-Login');
+    }
+
+    public function test_only_admins_can_log_in()
+    {
+        $admin = User::role('admin')->firstOrFail();
+        $admin->forceFill(['password' => bcrypt('smoke-test')])->save();
+        $member = User::role('member')->whereDoesntHave('roles', function ($query) {
+            $query->whereIn('name', ['admin', 'super_admin']);
+        })->firstOrFail();
+        $member->forceFill(['password' => bcrypt('smoke-test')])->save();
+
+        $this->post('/admin/login', ['email' => $member->email, 'password' => 'smoke-test'])
+            ->assertSessionHasErrors('email');
+        $this->assertGuest();
+
+        $this->post('/admin/login', ['email' => $admin->email, 'password' => 'wrong'])
+            ->assertSessionHasErrors('email');
+        $this->assertGuest();
+
+        $this->post('/admin/login', ['email' => $admin->email, 'password' => 'smoke-test'])
+            ->assertRedirect('/admin');
+        $this->assertAuthenticatedAs($admin);
+
+        $this->post('/admin/logout')->assertRedirect('/');
+        $this->assertGuest();
+    }
+
+    public function test_members_are_locked_out_of_the_admin_area()
+    {
+        $member = User::role('member')->whereDoesntHave('roles', function ($query) {
+            $query->whereIn('name', ['admin', 'super_admin']);
+        })->firstOrFail();
+
+        $this->actingAs($member)->get('/admin')->assertStatus(403);
+    }
+
+    public function test_removed_public_pages_are_gone()
+    {
+        foreach (self::REMOVED as $url) {
+            $this->assertSame(404, $this->get($url)->getStatusCode(), $url);
+        }
+    }
+
+    public function test_personal_data_is_hidden_by_default()
+    {
+        $params = $this->parameters();
+
+        $this->get("/division/{$params['division']}/scorers")->assertStatus(404);
+        $this->get("/division/{$params['division']}/sinners/ajax-sinners")->assertStatus(404);
+        $this->get("/division/{$params['division']}")->assertStatus(200)->assertDontSee('Torjäger')->assertDontSee('TORSCHÜTZEN');
+        $this->get("/clubs/{$params['club']}")->assertStatus(200)->assertDontSee('id="players-tab"');
+        $this->get("/fixtures/{$params['fixture']}")->assertStatus(200)->assertDontSee('Gemeldete Torschützen');
+    }
+
+    public function test_personal_data_can_be_switched_on()
+    {
+        config(['hlw.public_personal_data' => true]);
+        $params = $this->parameters();
+
+        $this->get("/division/{$params['division']}/scorers")->assertStatus(200);
+        $this->get("/division/{$params['division']}")->assertStatus(200)->assertSee('Torjäger');
+        $this->get("/clubs/{$params['club']}")->assertStatus(200)->assertSee('id="players-tab"');
+        $this->get("/fixtures/{$params['fixture']}")->assertStatus(200)->assertSee('Gemeldete Torschützen');
     }
 
     /**

@@ -40,12 +40,14 @@
                                     <li>
                                         <span class="fa fa-fw fa-list-ol"></span><a class="" href="{{ route('frontend.divisions.tables', $division) }}"> Alle <strong>Tabellen</strong></a>
                                     </li>
-                                    <li>
-                                        <span class="fa fa-fw fa-soccer-ball-o"></span><a class="" href="{{ route('frontend.divisions.scorers', $division) }}"> Alle <strong>Torjäger</strong></a>
-                                    </li>
-                                    <li>
-                                        <span class="fa fa-fw fa-thumbs-o-down"></span><a class="" href="{{ route('frontend.divisions.sinners', $division) }}"> Alle <strong>Sünder</strong></a>
-                                    </li>
+                                    @if (config('hlw.public_personal_data'))
+                                        <li>
+                                            <span class="fa fa-fw fa-soccer-ball-o"></span><a class="" href="{{ route('frontend.divisions.scorers', $division) }}"> Alle <strong>Torjäger</strong></a>
+                                        </li>
+                                        <li>
+                                            <span class="fa fa-fw fa-thumbs-o-down"></span><a class="" href="{{ route('frontend.divisions.sinners', $division) }}"> Alle <strong>Sünder</strong></a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

@@ -128,9 +128,11 @@
                     <a class="ml-1 nav-item nav-link px-2 border-white" id="results-tab" data-toggle="tab" href="#results" role="tab" aria-controls="results" style="background-color: rgba(0, 0, 0, 0.5);" >
                         Resultate
                     </a>
-                    <a class="ml-1 nav-item nav-link px-2 border-white" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" style="background-color: rgba(0, 0, 0, 0.5);">
-                        Kader
-                    </a>
+                    @if (config('hlw.public_personal_data'))
+                        <a class="ml-1 nav-item nav-link px-2 border-white" id="players-tab" data-toggle="tab" href="#players" role="tab" aria-controls="players" style="background-color: rgba(0, 0, 0, 0.5);">
+                            Kader
+                        </a>
+                    @endif
 {{--                    @hasanyrole('super_admin|admin|club_contact')--}}
 {{--                        <a class="ml-1 nav-item nav-link px-2 border-white" href="{{ route('playerpassports', $club) }}" style="background-color: rgba(255, 255, 255, 0.9);">--}}
 {{--                            <i class="fa fa-download"></i> <strong>Pässe</strong>--}}
@@ -484,7 +486,8 @@
                     </div>
                 @endif
                 @php
-                    $players = $club->players()->active()->public()->get();
+                    /* suspended players are personal data, see config/hlw.php */
+                    $players = config('hlw.public_personal_data') ? $club->players()->active()->public()->get() : collect();
                 @endphp
                 @if (!$players->isEmpty())
                     <div class="row mt-2">
@@ -626,6 +629,7 @@
             </div>
             <!-- end results tab -->
             <!-- players tab -->
+            @if (config('hlw.public_personal_data'))
             <div class="tab-pane fade" id="players" role="tabpanel" aria-labelledby="home-tab">
                 <div class="row">
                     <div class="col-12">
@@ -778,6 +782,7 @@
                     </div>
                 @endif--}}
             </div>
+            @endif
         </div>
     </div>
 </div>

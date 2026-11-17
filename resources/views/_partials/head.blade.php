@@ -25,7 +25,6 @@
     <meta name="application-name" content="HLW">
     <meta name="theme-color" content="#388e3c">
 
-    {{-- chatter css --}}
     @yield('css')
 
     <title>{{ config('app.name') }} @yield('title') </title>

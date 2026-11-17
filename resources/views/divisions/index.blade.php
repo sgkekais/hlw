@@ -214,7 +214,7 @@
                 @endif
             </div>
             {{-- scorers --}}
-            @if (!$scorers->isEmpty())
+            @if (config('hlw.public_personal_data') && !$scorers->isEmpty())
                 <div class="col-md-6">
                     <h2 class="font-weight-bold font-italic">TORSCHÜTZEN</h2>
                     @include ('divisions.response_scorers')

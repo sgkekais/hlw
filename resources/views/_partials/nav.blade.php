@@ -73,8 +73,10 @@
                                 </a>
                             @endif
                             <a class="dropdown-item" href="{{ route('frontend.divisions.fixtures', $division) }}"><span class="fa fa-fw fa-calendar"></span> Spielplan</a>
-                            <a class="dropdown-item" href="{{ route('frontend.divisions.scorers', $division) }}"><span class="fa fa-fw fa-soccer-ball-o"></span> Torjäger</a>
-                            <a class="dropdown-item" href="{{ route('frontend.divisions.sinners', $division) }}"><span class="fa fa-fw fa-thumbs-o-down"></span> Sünderkartei</a>
+                            @if (config('hlw.public_personal_data'))
+                                <a class="dropdown-item" href="{{ route('frontend.divisions.scorers', $division) }}"><span class="fa fa-fw fa-soccer-ball-o"></span> Torjäger</a>
+                                <a class="dropdown-item" href="{{ route('frontend.divisions.sinners', $division) }}"><span class="fa fa-fw fa-thumbs-o-down"></span> Sünderkartei</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('frontend.seasons.clubs',
                                 $division->seasons()->current()->first()
                                 ?: $division->seasons()->where('begin','>=',Carbon::now())->orderBy('begin')->get()->first()
@@ -99,8 +101,10 @@
                                 </a>
                             @endif
                             <a class="dropdown-item" href="{{ route('frontend.divisions.fixtures', $division) }}"><span class="fa fa-fw fa-calendar"></span> Spielplan</a>
-                            <a class="dropdown-item" href="{{ route('frontend.divisions.scorers', $division) }}"><span class="fa fa-fw fa-soccer-ball-o"></span> Torjäger</a>
-                            <a class="dropdown-item" href="{{ route('frontend.divisions.sinners', $division) }}"><span class="fa fa-fw fa-thumbs-o-down"></span> Sünderkartei</a>
+                            @if (config('hlw.public_personal_data'))
+                                <a class="dropdown-item" href="{{ route('frontend.divisions.scorers', $division) }}"><span class="fa fa-fw fa-soccer-ball-o"></span> Torjäger</a>
+                                <a class="dropdown-item" href="{{ route('frontend.divisions.sinners', $division) }}"><span class="fa fa-fw fa-thumbs-o-down"></span> Sünderkartei</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('frontend.seasons.clubs',
                                 $division->seasons()->current()->first()
                                 ?: $division->seasons()->where('begin','>=',Carbon::now())->orderBy('begin')->get()->first()
@@ -114,69 +118,11 @@
                 @endforeach
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('chatter.*') ? "active" : null }}" href="{{ route('chatter.home') }}" title="Transfermarkt"><span class="fa fa-comments"></span> Transfermarkt</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link {{ Route::is('frontend.static.infos') ? "active" : null }}" href="{{ route('frontend.static.infos') }}" title="Vorstand, Satzungen und Infos">Infos</a>
                 </li>
                 <li>
                     <a class="nav-link {{ Route::is('frontend.archive.index') ? "active" : null }}" href="{{ route('frontend.archive.index') }}" title="Archiv">Historie</a>
                 </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                {{-- TEMPORARY: login/admin hidden until the PHP update is done
-                @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}" title="Anmelden">Login <span class="fa fa-fw fa-sign-in"></span></a>
-                    </li>
-                @endguest
-                @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="login-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="fa fa-2x fa-user-circle"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <h4 class="px-4 py-1">
-                                Hallo, {{ Auth::user()->name }}!
-                            </h4>
-                            <div class="px-4 py-1">
-                                @php
-                                    $favorite_clubs = Auth::user()->clubs;
-                                @endphp
-                                @if(!$favorite_clubs->isEmpty())
-                                    <h5 class="font-weight-bold font-italic">Meine Teams</h5>
-                                    <ul class="list-unstyled">
-                                        @foreach ($favorite_clubs as $club)
-                                            <li class=" pt-1 pb-1 {{ !$loop->last ? "border border-left-0 border-top-0 border-right-0" : null }} }}"><a href="{{ route('frontend.clubs.show', $club) }}"><img class="pr-1" src="{{ asset('storage/'.$club->logo_url) }}" title="Vereinswappen" width="25px">{{ $club->name_short }}</a></li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <div class="text-muted text-center"><small>Füge ein Team als Favorit hinzu!</small></div>
-                                @endif
-                            </div>
-                            <div class="px-4 py-1">
-                                <a class="btn btn-primary w-100" href="{{ route('frontend.user.profile.show') }}">
-                                    <span class="fa fa-fw fa-user"></span> Profil
-                                </a>
-                            </div>
-                            @hasanyrole('super_admin|admin')
-                            <div class="px-4 py-1">
-                                <a class="btn btn-secondary w-100" href="{{ route('admin') }}">
-                                    <span class="fa fa-fw fa-cogs"></span> Admin
-                                </a>
-                            </div>
-                            @endrole
-                            <div class="px-4 py-1">
-                                <form class="" role="form" id="logout-form" action="{{ route('logout') }}" method="POST">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-danger w-100"><span class="fa fa-fw fa-sign-out"></span> Abmelden</button>
-                                </form>
-                            </div>
-                        </div>
-                    </li>
-                @endauth
-                --}}
-
             </ul>
         </div>
     </div>

@@ -16,12 +16,14 @@
             <li class="nav-item">
                 <a class="nav-link {{ $division->competition->isKnockout() ? "pl-0" : null }} {{ Route::is('frontend.divisions.fixtures') ? "active" : null }}" href="{{ route('frontend.divisions.fixtures', $division) }}">Spielplan</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::is('frontend.divisions.sinners') ? "active" :null }}" href="{{ route('frontend.divisions.sinners', $division) }}">Sünderkartei</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::is('frontend.divisions.scorers') ? "active" :null }}" href="{{ route('frontend.divisions.scorers', $division) }}">Torjäger</a>
-            </li>
+            @if (config('hlw.public_personal_data'))
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('frontend.divisions.sinners') ? "active" :null }}" href="{{ route('frontend.divisions.sinners', $division) }}">Sünderkartei</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('frontend.divisions.scorers') ? "active" :null }}" href="{{ route('frontend.divisions.scorers', $division) }}">Torjäger</a>
+                </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link {{ Route::is('frontend.seasons.clubs') || Route::is('frontend.clubs.show') ? "active" : null }}" href="{{ route('frontend.seasons.clubs', $season ) }}">Teams</a>
             </li>

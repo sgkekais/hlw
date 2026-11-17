@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Excel;
 use PDF;
 
 class ClubController extends Controller
@@ -249,55 +248,6 @@ class ClubController extends Controller
         // return to index
         return redirect()->route('clubs.index')
             ->with('success', 'Mannschaft '.$name.' mit der ID '.$id.' gelöscht. '.$delete_message);
-    }
-
-    /**
-     * Import clubs via .csv-files
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function importCSV(Request $request)
-    {
-        $this->validate($request, [
-            'csvfile' => 'required|file'
-        ]);
-
-        $importData = Excel::load($request->csvfile, function ($reader) {} )->get();
-
-        if ($num_of_records = $importData->count()) {
-            // temporarily unguard the model to be able to manually set the id
-            Club::unguard();
-            foreach ($importData as $csvLine) {
-                $club = new Club([
-                    'id'                        => $csvLine->id,
-                    'name'                      => $csvLine->name,
-                    'name_short'                => $csvLine->name_short,
-                    'name_code'                 => $csvLine->name_code,
-                    'founded'                   => $csvLine->founded,
-                    'league_entry'              => $csvLine->league_entry,
-                    'league_exit'               => $csvLine->league_exit,
-                    'colours_club_primary'      => $csvLine->colours_club_primary,
-                    'colours_club_secondary'    => $csvLine->colours_club_secondary,
-                    'colours_kit_home_primary'  => $csvLine->colours_kit_home_primary,
-                    'colours_kit_home_secondary'=> $csvLine->colours_kit_home_secondary,
-                    'colours_kit_away_primary'  => $csvLine->colours_kit_away_primary,
-                    'colours_kit_away_secondary'=> $csvLine->colours_kit_away_secondary,
-                    'website'                   => $csvLine->website,
-                    'facebook'                  => $csvLine->facebook,
-                    'note'                      => $csvLine->note,
-                    'is_real_club'              => $csvLine->is_real_club ?? "0",
-                    'published'                 => $csvLine->published ?? "0"
-                ]);
-
-                $club->save();
-            }
-            // reguard the model
-            Club::reguard();
-        }
-
-        Session::flash('success', $num_of_records.' Mannschaft(en) erfolreich importiert.');
-
-        return redirect()->route('clubs.index');
     }
 
     /**

@@ -4,10 +4,8 @@ namespace HLW;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Jrean\UserVerification\Traits\UserVerification;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
-use HLW\Notifications\ResetPassword as ResetPasswordNotification;
 
 /**
  * HLW\User
@@ -32,9 +30,6 @@ use HLW\Notifications\ResetPassword as ResetPasswordNotification;
 class User extends Authenticatable
 {
     use Notifiable;
-
-    // user verification
-    use UserVerification;
 
     /**
      * spatie laravel-permission package
@@ -66,36 +61,4 @@ class User extends Authenticatable
     protected $dates = [
         'ban_date'
     ];
-
-    protected $casts = [
-        'verified' => 'boolean'
-    ];
-
-    /***********************************************************
-     * FUNCTIONS
-     ************************************************************/
-
-    /**
-     * Send the password reset notification. Overwrite trait.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordNotification($token));
-    }
-
-    /***********************************************************
-     * RELATIONSHIPS
-     ************************************************************/
-
-    /**
-     * A user has many favorite clubs
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function clubs()
-    {
-        return $this->belongsToMany(Club::class, 'users_clubs')->withTimestamps();
-    }
 }

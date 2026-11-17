@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
-use Excel;
 
 class MatchweekController extends Controller
 {
@@ -141,34 +140,4 @@ class MatchweekController extends Controller
         return redirect()->route('seasons.show', $season);
     }
 
-    public function importCSV(Request $request, Season $season)
-    {
-        $this->validate($request, [
-            'csvfile' => 'required|file'
-        ]);
-
-        $importData = Excel::load($request->csvfile, function ($reader) {} )->get();
-
-        if ($number_of_records = $importData->count()) {
-            // temporarily unguard the model to set id
-            Matchweek::unguard();
-            foreach ($importData as $csvLine) {
-                $season->matchweeks()->create([
-                        'id'                    => $csvLine->id,
-                        'number_consecutive'    => $csvLine->number_consecutive,
-                        'name'                  => $csvLine->name,
-                        'begin'                 => $csvLine->begin,
-                        'end'                   => $csvLine->end,
-                        'published'             => $csvLine->published ?? '0'
-                    ]
-                );
-            }
-            // reguard the model
-            Matchweek::reguard();
-        }
-
-        Session::flash('success', $number_of_records.' Spielwoch(en) erfolreich importiert.');
-
-        return redirect()->route('seasons.show', $season);
-    }
 }

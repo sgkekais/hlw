@@ -53,7 +53,10 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "jrean/laravel-user-verification"
+                "jrean/laravel-user-verification",
+                "arcanedev/no-captcha",
+                "maatwebsite/excel",
+                "spatie/laravel-cookie-consent"
             ]
         }
     },

@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 class VerifyAdmins
 {
     /**
+     * Roles that may use the admin area.
+     */
+    const ROLES = ['super_admin', 'admin'];
+
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -16,9 +21,12 @@ class VerifyAdmins
      */
     public function handle($request, Closure $next)
     {
-        // if a user has the role 'visitor', redirect him / her to the front page
-        if (Auth::user()->hasRole('visitor')) {
-            return redirect('/')->with('');
+        // users without an admin role are logged out, e.g. a role was revoked during the session
+        if (!Auth::user()->hasAnyRole(self::ROLES)) {
+            Auth::logout();
+            $request->session()->invalidate();
+
+            abort(403);
         }
 
         return $next($request);

@@ -63,8 +63,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         // custom middleware to check whether user has admin or visitor role
         'isAdmin' => \HLW\Http\Middleware\VerifyAdmins::class,
-        // custom middleware to check whether a user is verified
-        'isVerified' => \HLW\Http\Middleware\IsVerified::class,
+        // hides public pages with personal data, see config/hlw.php
+        'publicPersonalData' => \HLW\Http\Middleware\PublicPersonalData::class,
         // permission middlewares
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,

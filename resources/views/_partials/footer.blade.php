@@ -9,7 +9,6 @@
                     @foreach (\HLW\Division::published()->orderBy('name')->get() as $division)
                         <li><a href="{{ route('frontend.divisions.show', $division) }}" title="zur Spielklasse">{{ $division->competition->name_short }} {{ $division->name }}</a></li>
                     @endforeach
-                    <li><a href="{{ route('chatter.home') }}" title="zum Clubhaus">Clubhaus</a></li>
                     <li><a href="{{ route('frontend.static.infos') }}" title="Satzung, Vorstand, Infos">Infos</a></li>
                     <li><a href="{{ route('frontend.static.halloffame') }}" title="Ruhmeshalle">Ruhmeshalle</a></li>
                 </ul>
@@ -29,7 +28,7 @@
                     Ihr sucht einen Verein?
                 </h5>
                 <p>
-                    Registriert euch und postet unter 'Börse' im Clubhaus!
+                    Schreibt eine E-Mail an den Vorstand, wir helfen gerne weiter.
                 </p>
             </div>
             <div class="col-md-4">
@@ -43,18 +42,6 @@
                 <ul class="list-unstyled">
                     <li><img src="{{ asset('storage/bsgligalogooriginal.png') }}" class="bg-white rounded" height="50"> <a href="http://www.bsgdbuv-cup.de/" target="_blank" class="pl-2" title="zur Kleinfeld-Liga Düsseldorf">Kleinfeld-Liga Düsseldorf</a> <span class="fa fa-fw fa-external-link"></span></li>
                 </ul>
-                <span class="pull-right">
-                    {{-- TEMPORARY: login/registration hidden until the PHP update is done
-                    @guest
-                        <a href="{{ route('login') }}" title="Anmelden">Login</a> |
-                        <a href="{{ route('register') }}" title="Registrieren">Registrieren</a>
-                    @endguest
-                    @auth
-                        <a href="{{ route('frontend.user.profile.show') }}" title="Profil">Profil</a> |
-                        <a href="{{ route('logout') }}" title="Abmelden">Logout</a>
-                    @endauth
-                    --}}
-                </span>
             </div>
         </div>
         <div class="row pb-2">

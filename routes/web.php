@@ -15,11 +15,6 @@
  * Frontend routes
  ******************************************************/
 
-Auth::routes();
-// user verification
-Route::get('email-verification/error', 'Auth\RegisterController@getVerificationError')->name('email-verification.error');
-Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
-
 Route::get('/', 'PagesController@index')->name('home');
 
 // division details
@@ -31,10 +26,13 @@ Route::get('division/{division}/tables/ajax-away-table', 'DivisionController@aja
 Route::get('division/{division}/tables/ajax-cross-table', 'DivisionController@ajaxGetCrossTable');
 Route::get('division/{division}/fixtures', 'DivisionController@fixtures')->name('frontend.divisions.fixtures');
 Route::get('division/{division}/fixtures/ajax-fixtures', 'DivisionController@ajaxGetFixtures');
-Route::get('division/{division}/sinners', 'DivisionController@sinners')->name('frontend.divisions.sinners');
-Route::get('division/{division}/sinners/ajax-sinners', 'DivisionController@ajaxGetSinners');
-Route::get('division/{division}/scorers', 'DivisionController@scorers')->name('frontend.divisions.scorers');
-Route::get('division/{division}/scorers/ajax-scorers', 'DivisionController@ajaxGetScorers');
+// personal data, only public if enabled in config/hlw.php
+Route::group(['middleware' => 'publicPersonalData'], function () {
+    Route::get('division/{division}/sinners', 'DivisionController@sinners')->name('frontend.divisions.sinners');
+    Route::get('division/{division}/sinners/ajax-sinners', 'DivisionController@ajaxGetSinners');
+    Route::get('division/{division}/scorers', 'DivisionController@scorers')->name('frontend.divisions.scorers');
+    Route::get('division/{division}/scorers/ajax-scorers', 'DivisionController@ajaxGetScorers');
+});
 
 // list all clubs of a season
 Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seasons.clubs');
@@ -49,14 +47,6 @@ Route::get('clubs/{club}/ajax-club-results', 'ClubController@ajaxGetClubResults'
 // fixtures
 Route::get('fixtures/{fixture}', 'FixtureController@show')->name('frontend.fixtures.show');
 
-// user profile
-Route::group(['middleware' => ['auth', 'isVerified']], function() {
-    Route::get('profile', 'AccountController@profile')->name('frontend.user.profile.show');
-    Route::post('profile', 'AccountController@update')->name('frontend.user.profile.update');
-    Route::post('profile/clubs', 'AccountController@addClubFavorite')->name('frontend.user.profile.club.add');
-    Route::delete('profile/clubs/{club}', 'AccountController@deleteClubFavorite')->name('frontend.user.profile.club.delete');
-});
-
 // archive
     Route::get('archive', 'ArchiveController@index')->name('frontend.archive.index');
     // hall of fame
@@ -70,6 +60,14 @@ Route::get('infos', 'PagesController@infos')->name('frontend.static.infos');
 Route::get('matchreport', 'PagesController@matchReport')->name('frontend.static.matchreport');
 // Route::get('jhvCorona', 'PagesController@jhvCorona')->name('frontend.static.jhvCorona');
 Route::get('datenschutz', 'PagesController@datenschutz')->name('frontend.static.datenschutz');
+
+/*******************************************************
+ * Admin login, the only login of the site
+ ******************************************************/
+
+Route::get('admin/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('admin/login', 'Auth\LoginController@login');
+Route::post('admin/logout', 'Auth\LoginController@logout')->name('logout');
 
 /*******************************************************
  * Admin Routes
@@ -103,16 +101,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::delete('seasons/{season}/clubs/{club}', 'SeasonController@destroyClubAssignment')->name('destroyClubAssignment');
     // Matchweek crud, all matchweek routes are handled with a specific season
     Route::resource('seasons.matchweeks', 'MatchweekController');
-    // Csv import of matchweeks
-    Route::post('seasons/{season}/matchweeks/import', 'MatchweekController@importCSV')->name('seasons.matchweeks.import');
     // Rescheduling of matches
     Route::get('matchweeks/{matchweek}/fixtures/{fixture}/create', 'FixtureController@create')->name('reschedule.create');
     // Fixtures crud, all fixtures routes are handled with a specific matchweek
     Route::resource('matchweeks.fixtures', 'FixtureController');
     // Fixtures overview
     Route::get('fixtures', 'FixtureController@index')->name('fixtures.index');
-    // Fixture import
-    Route::post('fixtures/import', 'FixtureController@importCSV')->name('fixtures.import');
     // Managing cards of a match
     Route::resource('fixtures.cards', 'CardController', [
         'except' => 'index'
@@ -130,17 +124,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::delete('fixtures/{fixture}/matchreport', 'FixtureController@deleteMatchReport')->name('fixtures.matchreport.delete');
     // Stadiums
     Route::resource('stadiums', 'StadiumController');
-    Route::post('stadiums/import', 'StadiumController@importCSV')->name('stadiums.import');
     // Clubs
     Route::resource('clubs', 'ClubController');
-    Route::get('clubs/{club}/generate-playerpassports', 'ClubController@generatePlayerPassports')->name('generatePlayerPassports');
-    Route::get('clubs/{club}/display-playerpassports', 'ClubController@displayPlayerPassports')->name('displayPlayerPassports');
-    // Csv import of clubs
-    Route::post('clubs/import', 'ClubController@importCSV')->name('clubs.import');
+    // PARKED: player passports (PDF) are rebuilt after the Laravel upgrade, see also the views admin/clubs/show and admin/players/playerPassport
+    // Route::get('clubs/{club}/generate-playerpassports', 'ClubController@generatePlayerPassports')->name('generatePlayerPassports');
+    // Route::get('clubs/{club}/display-playerpassports', 'ClubController@displayPlayerPassports')->name('displayPlayerPassports');
     // Assigning and managing players
     Route::resource('clubs.players', 'PlayerController');
-    Route::get('{player}/pdf', 'PlayerController@generatePlayerPassport')->name('generatePlayerPassport');
-    Route::get('{player}/pdf-debug', 'PlayerController@generatePlayerPassportDebug')->name('generatePlayerPassportDebug');;
+    // PARKED: player passports, see above
+    // Route::get('{player}/pdf', 'PlayerController@generatePlayerPassport')->name('generatePlayerPassport');
+    // Route::get('{player}/pdf-debug', 'PlayerController@generatePlayerPassportDebug')->name('generatePlayerPassportDebug');
     // Assigning and managing contacts
     Route::resource('clubs.contacts', 'ContactController');
     // Assigning and managing stadiums

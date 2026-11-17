@@ -288,7 +288,7 @@
         @php
             $goals = $fixture->goals;
         @endphp
-        @if (!$goals->isEmpty())
+        @if (config('hlw.public_personal_data') && !$goals->isEmpty())
             <div class="row mt-2 ">
                 <div class="col text-center">
                     <h2 class="font-weight-bold font-italic">
@@ -349,7 +349,7 @@
         @php
             $cards = $fixture->cards;
         @endphp
-        @if (!$cards->isEmpty())
+        @if (config('hlw.public_personal_data') && !$cards->isEmpty())
             <hr>
             <div class="row mt-2">
                 <div class="col text-center">

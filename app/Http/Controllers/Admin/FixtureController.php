@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Excel;
 use Illuminate\Support\Facades\Storage;
 
 class FixtureController extends Controller
@@ -288,58 +287,6 @@ class FixtureController extends Controller
         Session::flash('success', 'Schiedsrichterzuordnung erfolgreich entfernt.');
 
         return redirect()->route('matchweeks.fixtures.show', [$fixture->matchweek, $fixture]);
-    }
-
-    /**
-     * TODO: messages, record number, progress
-     * Import fixtures from csv-files
-     * @param Request $request
-     * @param Season $season
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function importCSV(Request $request, Season $season)
-    {
-        $this->validate($request, [
-            'csvfile' => 'required|file'
-        ]);
-
-        $importData = Excel::load($request->csvfile, function ($reader) {
-        })->get();
-        // TODO: number format -> string in csv?
-        if ($number_of_records = $importData->count()) {
-            // temporarily unguard the model to set id
-            Fixture::unguard();
-            foreach ($importData as $csvLine) {
-                $fixture = Fixture::create([
-                    'id'                => intval($csvLine->id),
-                    'matchweek_id'      => $csvLine->matchweek_id ? intval($csvLine->matchweek_id) : null,
-                    'datetime'          => $csvLine->datetime,
-                    'stadium_id'        => $csvLine->stadium_id ? intval($csvLine->stadium_id) : null,
-                    'club_id_home'      => $csvLine->club_id_home,
-                    'club_id_away'      => $csvLine->club_id_away,
-                    'goals_home'        => $csvLine->goals_home,
-                    'goals_away'        => $csvLine->goals_away,
-                    'goals_home_11m'    => $csvLine->goals_home_11m,
-                    'goals_away_11m'    => $csvLine->goals_away_11m,
-                    'goals_home_rated'  => $csvLine->goals_home_rated,
-                    'goals_away_rated'  => $csvLine->goals_away_rated,
-                    'rated_note'        => $csvLine->rated_note,
-                    'cancelled'         => $csvLine->cancelled,
-                    'note'              => $csvLine->note,
-                    'published'         => $csvLine->published,
-                    'rescheduled_from_fixture_id'   => $csvLine->rescheduled_from_fixture_id ? intval($csvLine->rescheduled_from_fixture_id) : null,
-                    'rescheduled_by_club'   => $csvLine->rescheduled_by_club ? intval($csvLine->rescheduled_by_club) : null,
-                    'reschedule_reason'     => $csvLine->reschedule_reason,
-                    'reschedule_count'      => $csvLine->reschedule_count
-                ]);
-            }
-            // reguard the model
-            Fixture::reguard();
-        }
-
-        Session::flash('success', $number_of_records . ' Paarung(en) erfolreich importiert.');
-
-        return redirect()->route('seasons.show', $season);
     }
 
     /**
