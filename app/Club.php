@@ -4,6 +4,7 @@ namespace HLW;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -69,34 +70,32 @@ class Club extends Model
     use LogsActivity;
 
     /**
-     * The attributes that should be logged.
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'name',
-        'name_short',
-        'name_code',
-        'founded',
-        'league_entry',
-        'league_exit',
-        'colours_club_primary',
-        'colours_club_secondary',
-        'colours_kit_home_primary',
-        'colours_kit_home_secondary',
-        'colours_kit_away_primary',
-        'colours_kit_away_secondary',
-        'website',
-        'facebook',
-        'note',
-        'is_real_club',
-        'published'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'name',
+                'name_short',
+                'name_code',
+                'founded',
+                'league_entry',
+                'league_exit',
+                'colours_club_primary',
+                'colours_club_secondary',
+                'colours_kit_home_primary',
+                'colours_kit_home_secondary',
+                'colours_kit_away_primary',
+                'colours_kit_away_secondary',
+                'website',
+                'facebook',
+                'note',
+                'is_real_club',
+                'published',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -123,20 +122,15 @@ class Club extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     * @var array
-     */
-    protected $dates = [
-        'founded', 'league_entry', 'league_exit'
-    ];
-
-    /**
      * The attributes that should be casted to native types.
      * @var array
      */
     protected $casts = [
         'is_real_club'  => 'boolean',
-        'published'     => 'boolean'
+        'published'     => 'boolean',
+        'founded' => 'datetime',
+        'league_entry' => 'datetime',
+        'league_exit' => 'datetime',
     ];
 
     /***********************************************************
@@ -197,8 +191,6 @@ class Club extends Model
      * ACCESSORS
      ************************************************************/
 
-
-
     /***********************************************************
      * FUNCTIONS
      ************************************************************/
@@ -211,7 +203,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getGamesPlayed(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayed(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played = Fixture::played()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -237,7 +229,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played = Fixture::played()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -263,7 +255,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played = Fixture::played()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -289,7 +281,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRated(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRated(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated = Fixture::rated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -315,7 +307,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated = Fixture::rated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -341,7 +333,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated = Fixture::rated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -367,7 +359,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedWon(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedWon(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_won = Fixture::played()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -399,7 +391,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedWonHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedWonHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_won = Fixture::played()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -429,7 +421,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedWonAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedWonAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_won = Fixture::played()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -457,7 +449,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedWon(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedWon(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_won = Fixture::rated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -487,7 +479,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedWonHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedWonHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_won = Fixture::rated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -515,7 +507,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedWonAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedWonAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_won = Fixture::rated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -537,7 +529,6 @@ class Club extends Model
         return $games_rated_won;
     }
 
-
     /**
      * Get the games that were played (not rated) and ended in a draw
      * Optional: for a given season
@@ -546,7 +537,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedDrawn(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedDrawn(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played_drawn = Fixture::played()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -578,7 +569,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedDrawnHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedDrawnHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played_drawn = Fixture::played()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -608,7 +599,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedDrawnAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedDrawnAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played_drawn = Fixture::played()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -636,7 +627,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedDrawn(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedDrawn(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_drawn = Fixture::rated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -666,7 +657,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedDrawnHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedDrawnHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_drawn = Fixture::rated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -694,7 +685,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedDrawnAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedDrawnAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_drawn = Fixture::rated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -725,7 +716,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedLost(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedLost(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played_lost = Fixture::played()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -757,7 +748,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedLostHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedLostHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played_lost = Fixture::played()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -787,7 +778,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesPlayedLostAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesPlayedLostAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_played_lost = Fixture::played()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -817,7 +808,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedLost(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedLost(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_lost = Fixture::rated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -846,7 +837,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedLostHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedLostHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_lost = Fixture::rated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -873,7 +864,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getGamesRatedLostAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGamesRatedLostAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $games_rated_lost = Fixture::rated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -903,7 +894,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getGoalsFor(Season $season = null, Matchweek $matchweek = null)
+    public function getGoalsFor(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -947,7 +938,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getGoalsForHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGoalsForHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -985,7 +976,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getGoalsForAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGoalsForAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -1023,7 +1014,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getGoalsAgainst(Season $season = null, Matchweek $matchweek = null)
+    public function getGoalsAgainst(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $fixtures = Fixture::playedOrRated()->notCancelled()->ofClub($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -1067,7 +1058,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getGoalsAgainstHome(Season $season = null, Matchweek $matchweek = null)
+    public function getGoalsAgainstHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubHome($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -1105,7 +1096,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getGoalsAgainstAway(Season $season = null, Matchweek $matchweek = null)
+    public function getGoalsAgainstAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $fixtures = Fixture::playedOrRated()->notCancelled()->ofClubAway($this->id)->countsInTables()
             ->when($season, function ($query) use ($season) {
@@ -1143,7 +1134,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return mixed
      */
-    public function getPoints(Season $season = null, Matchweek $matchweek = null)
+    public function getPoints(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $points = $this->getGamesPlayedWon($season, $matchweek)->count() * 3
             + $this->getGamesRatedWon($season, $matchweek)->count() * 3
@@ -1161,7 +1152,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getPointsHome(Season $season = null, Matchweek $matchweek = null)
+    public function getPointsHome(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $points = $this->getGamesPlayedWonHome($season, $matchweek)->count() * 3
             + $this->getGamesRatedWonHome($season, $matchweek)->count() * 3
@@ -1179,7 +1170,7 @@ class Club extends Model
      * @param Matchweek|null $matchweek
      * @return int
      */
-    public function getPointsAway(Season $season = null, Matchweek $matchweek = null)
+    public function getPointsAway(?Season $season = null, ?Matchweek $matchweek = null)
     {
         $points = $this->getGamesPlayedWonAway($season, $matchweek)->count() * 3
             + $this->getGamesRatedWonAway($season, $matchweek)->count() * 3

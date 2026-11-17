@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -46,26 +47,24 @@ class Card extends Model
     use LogsActivity;
 
     /**
-     * The attributes that should be logged.
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'fixture_id',
-        'player_id',
-        'color',
-        'ban_matches',
-        'ban_reduced_by',
-        'ban_season',
-        'ban_lifetime',
-        'ban_reason',
-        'note'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'fixture_id',
+                'player_id',
+                'color',
+                'ban_matches',
+                'ban_reduced_by',
+                'ban_season',
+                'ban_lifetime',
+                'ban_reason',
+                'note',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.

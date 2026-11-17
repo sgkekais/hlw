@@ -2,23 +2,10 @@
 
 namespace Tests\Feature;
 
-use HLW\Card;
-use HLW\Club;
-use HLW\Competition;
-use HLW\Contact;
-use HLW\DivisionOfficial;
-use HLW\Fixture;
-use HLW\Goal;
-use HLW\Person;
-use HLW\Position;
-use HLW\Referee;
-use HLW\Season;
-use HLW\Stadium;
 use HLW\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use Tests\Concerns\UsesRealRecords;
 use Tests\TestCase;
 
 /**
@@ -28,7 +15,7 @@ use Tests\TestCase;
  */
 class SmokeTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseTransactions, UsesRealRecords;
 
     /**
      * Routes that are not part of the comparison: debug tools, the login form
@@ -64,8 +51,6 @@ class SmokeTest extends TestCase
         // edit view calls format() on an empty date of the record
         '#^admin/divisions-official/\{divisions_official\}/edit$#',
     ];
-
-    private $params;
 
     public function test_public_pages_render()
     {
@@ -145,7 +130,7 @@ class SmokeTest extends TestCase
         $this->get("/division/{$params['division']}/scorers")->assertStatus(404);
         $this->get("/division/{$params['division']}/sinners/ajax-sinners")->assertStatus(404);
         $this->get("/division/{$params['division']}")->assertStatus(200)->assertDontSee('Torjäger')->assertDontSee('TORSCHÜTZEN');
-        $this->get("/clubs/{$params['club']}")->assertStatus(200)->assertDontSee('id="players-tab"');
+        $this->get("/clubs/{$params['club']}")->assertStatus(200)->assertDontSee('id="players-tab"', false);
         $this->get("/fixtures/{$params['fixture']}")->assertStatus(200)->assertDontSee('Gemeldete Torschützen');
     }
 
@@ -156,7 +141,7 @@ class SmokeTest extends TestCase
 
         $this->get("/division/{$params['division']}/scorers")->assertStatus(200);
         $this->get("/division/{$params['division']}")->assertStatus(200)->assertSee('Torjäger');
-        $this->get("/clubs/{$params['club']}")->assertStatus(200)->assertSee('id="players-tab"');
+        $this->get("/clubs/{$params['club']}")->assertStatus(200)->assertSee('id="players-tab"', false);
         $this->get("/fixtures/{$params['fixture']}")->assertStatus(200)->assertSee('Gemeldete Torschützen');
     }
 
@@ -207,57 +192,5 @@ class SmokeTest extends TestCase
         }
 
         return false;
-    }
-
-    private function fillParameters($uri)
-    {
-        $params = $this->parameters();
-
-        $url = preg_replace_callback('/\{(\w+)\??\}/', function ($m) use ($params) {
-            return array_key_exists($m[1], $params) && $params[$m[1]] !== null ? $params[$m[1]] : '__missing__';
-        }, $uri);
-
-        return strpos($url, '__missing__') === false ? '/' . ltrim($url, '/') : null;
-    }
-
-    /**
-     * Route parameter values taken from one consistent set of real records:
-     * a fixture of the current season with goals, cards and referees.
-     */
-    private function parameters()
-    {
-        if ($this->params !== null) {
-            return $this->params;
-        }
-
-        $season = Season::current()->whereHas('fixtures.goals')->orderBy('id', 'desc')->first()
-            ?: Season::whereHas('fixtures.goals')->orderBy('id', 'desc')->firstOrFail();
-
-        $fixture = $season->fixtures()->has('goals')->has('cards')->has('referees')->orderBy('datetime', 'desc')->first()
-            ?: $season->fixtures()->has('goals')->orderBy('datetime', 'desc')->firstOrFail();
-
-        $club = $fixture->clubHome;
-        $player = $club->players()->first();
-
-        return $this->params = [
-            'season'             => $season->id,
-            'division'           => $season->division_id,
-            'competition'        => optional($season->division)->competition_id ?: optional(Competition::first())->id,
-            'matchweek'          => $fixture->matchweek_id,
-            'fixture'            => $fixture->id,
-            'club'               => $club->id,
-            'player'             => optional($player)->id,
-            'person'             => optional(optional($player)->person)->id ?: optional(Person::first())->id,
-            'contact'            => optional($club->contacts()->first() ?: Contact::first())->id,
-            'stadium'            => optional($club->stadiums()->first() ?: Stadium::first())->id,
-            'referee'            => optional($fixture->referees()->first() ?: Referee::first())->id,
-            'card'               => optional($fixture->cards()->first() ?: Card::first())->id,
-            'goal'               => optional($fixture->goals()->first() ?: Goal::first())->id,
-            'position'           => optional(Position::first())->id,
-            'divisions_official' => optional(DivisionOfficial::first())->id,
-            'user'               => optional(User::first())->id,
-            'role'               => optional(Role::first())->id,
-            'permission'         => optional(Permission::first())->id,
-        ];
     }
 }

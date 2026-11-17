@@ -697,10 +697,14 @@
                                                         <span class="fa fa-pencil-square-o"></span>
                                                         @if ($player->sign_on)
                                                             {{ $player->sign_on->format('d.m.Y') }}
-                                                            @if (Carbon::now()->diffInYears($player->sign_on) > 0)
-                                                                <br><small class="text-muted">{{ Carbon::now()->diffInYears($player->sign_on) == 1 ? Carbon::now()->diffInYears($player->sign_on)." Jahr" : Carbon::now()->diffInYears($player->sign_on)." Jahre" }} dabei</small>
+                                                            @php
+                                                                // Carbon 3 returns signed floats, count full years and days since signing on
+                                                                $years = (int) $player->sign_on->diffInYears(Carbon::now());
+                                                            @endphp
+                                                            @if ($years > 0)
+                                                                <br><small class="text-muted">{{ $years }} {{ $years == 1 ? "Jahr" : "Jahre" }} dabei</small>
                                                             @else
-                                                                <br><small class="text-muted">{{ Carbon::now()->diffInDays($player->sign_on)}} Tage dabei</small>
+                                                                <br><small class="text-muted">{{ (int) $player->sign_on->diffInDays(Carbon::now()) }} Tage dabei</small>
                                                             @endif
                                                         @endif
                                                     </p>

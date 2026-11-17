@@ -1,5 +1,5 @@
 
-@if(str_is('home', Route::currentRouteName()))
+@if(Str::is('home', Route::currentRouteName()))
 
     <div class="jumbotron jumbotron-fluid p-0" style="color: #fff9c4; background: url({{ asset('storage/duesseldorf.jpg') }}) left; background-size: cover;">
         <div class="pt-4 pb-4" style="box-shadow: inset 0px 5px 5px 0px rgba(173,173,173,0.5); width: 100%; height: 100%">
@@ -18,7 +18,7 @@
 
 @endif
 
-@if(str_is('frontend.divisions.*', Route::currentRouteName()))
+@if(Str::is('frontend.divisions.*', Route::currentRouteName()))
 
     @php
         // different jumbo backgrounds for different divisions

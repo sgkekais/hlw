@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -34,18 +35,18 @@ class Contact extends Model
     use LogsActivity;
 
     /**
-     * The attributes that should be logged
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'hierarchy_level', 'mail', 'mobile'
-    ];
-
-    /**
-     * Only changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'hierarchy_level',
+                'mail',
+                'mobile',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable

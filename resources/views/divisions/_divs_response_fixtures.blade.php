@@ -50,7 +50,7 @@
             </div>
             <div class="col-2">
                 {{-- date - day of week --}}
-                {{ $fixture->datetime ? $fixture->datetime->formatLocalized('%a').", " : null }}
+                {{ $fixture->datetime ? $fixture->datetime->isoFormat('dd').", " : null }}
                 @if($fixture->datetime)
                     {{ $fixture->datetime->format('d.m.') }}
                 @else

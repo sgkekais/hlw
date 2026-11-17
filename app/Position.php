@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -27,18 +28,17 @@ class Position extends Model
     use LogsActivity;
 
     /**
-     * The attributes that should be logged.
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'name', 'type'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'name',
+                'type',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.

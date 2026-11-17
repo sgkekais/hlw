@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -47,21 +48,24 @@ class Player extends Model
      */
     protected $table = 'clubs_people';
 
-   use LogsActivity;
+    use LogsActivity;
 
     /**
-     * The attributes that should be logged.
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'person_id', 'sign_on', 'sign_off', 'number', 'position_id', 'public'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'person_id',
+                'sign_on',
+                'sign_off',
+                'number',
+                'position_id',
+                'public',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -71,16 +75,10 @@ class Player extends Model
         'person_id', 'sign_on', 'sign_off', 'number', 'position_id', 'public'
     ];
 
-    /**
-     * The attributes that should be mutated to dates.
-     * @var array
-     */
-    protected $dates = [
-        'sign_on', 'sign_off'
-    ];
-
     protected $casts = [
-        'public' => 'boolean'
+        'public' => 'boolean',
+        'sign_on' => 'datetime',
+        'sign_off' => 'datetime',
     ];
 
     /*******************************************************

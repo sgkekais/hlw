@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use PDF;
+use PDF; // PARKED: barryvdh/laravel-dompdf is installed again when the player passports are rebuilt
 
 class ClubController extends Controller
 {

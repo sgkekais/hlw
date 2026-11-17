@@ -5,6 +5,7 @@ namespace HLW;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -59,17 +60,18 @@ class Season extends Model
 {
     use LogsActivity;
 
-    // log attributes
-    protected static $logAttributes = [
-        'division_id', 'begin', 'end', 'season_nr', 'champion_id', 'champion_icon', 'champion_icon_color', 'ranks_champion', 'ranks_promotion', 'ranks_relegation',
-        'playoff_champion', 'playoff_cup', 'playoff_relegation', 'max_rescheduling', 'rules', 'note', 'published'
-    ];
-
     /**
-     * Only the changed attributes should be logged
-     * @var bool
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'division_id', 'begin', 'end', 'season_nr', 'champion_id', 'champion_icon', 'champion_icon_color', 'ranks_champion', 'ranks_promotion', 'ranks_relegation',
+                'playoff_champion', 'playoff_cup', 'playoff_relegation', 'max_rescheduling', 'rules', 'note', 'published',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -81,18 +83,12 @@ class Season extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates
-     * @var array
-     */
-    protected $dates = [
-        'begin', 'end'
-    ];
-
-    /**
      * @var array
      */
     protected $casts = [
-        'published' => 'boolean'
+        'published' => 'boolean',
+        'begin' => 'datetime',
+        'end' => 'datetime',
     ];
 
     /***********************************************************
@@ -278,7 +274,7 @@ class Season extends Model
      * @param int $scope
      * @return \Illuminate\Support\Collection|static
      */
-    public function generateTable (Matchweek $matchweek = null, $scope = 0) {
+    public function generateTable (?Matchweek $matchweek = null, $scope = 0) {
 
         // create new fields for table
         $clubs = $this->clubs()->orderBy('name')->get();

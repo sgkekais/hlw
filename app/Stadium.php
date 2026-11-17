@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -45,18 +46,22 @@ class Stadium extends Model
     use LogsActivity;
 
     /**
-     * The attributes that should be logged.
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'name', 'name_short', 'gmaps', 'lat', 'long', 'note', 'published'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'name',
+                'name_short',
+                'gmaps',
+                'lat',
+                'long',
+                'note',
+                'published',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.

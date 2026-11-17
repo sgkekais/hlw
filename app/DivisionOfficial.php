@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -27,25 +28,24 @@ class DivisionOfficial extends Model
     use LogsActivity;
 
     /**
+     * The attributes that are logged, only when they changed.
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'name',
+                'name_short',
+            ])
+            ->logOnlyDirty();
+    }
+
+    /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'divisions_official';
-
-    /**
-     * The attributes that should be logged.
-     * @var array
-     */
-    protected static $logAttributes = [
-        'name', 'name_short'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
 
     /**
      * The attributes that are mass assignable.

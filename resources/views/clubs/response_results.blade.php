@@ -83,7 +83,7 @@
                                 </td>
                                 @if ($fixture->datetime)
                                     <td class="align-middle text-left" style="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-decoration: line-through": null }}">
-                                        <span class="d-none d-md-inline-block text-uppercase" style="width: 24px">{{ $fixture->datetime->formatLocalized('%a') }}</span>
+                                        <span class="d-none d-md-inline-block text-uppercase" style="width: 24px">{{ $fixture->datetime->isoFormat('dd') }}</span>
                                         {{-- date --}}
                                         <span class="d-inline d-md-none pr-1">{{ $fixture->datetime->format('d.m.') }}</span>
                                         <span class="d-none d-md-inline px-1">{{ $fixture->datetime->format('d.m.y') }}</span>

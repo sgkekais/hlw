@@ -4,7 +4,6 @@ namespace HLW;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -54,11 +53,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be mutated to dates
-     * @var array
-     */
-    protected $dates = [
-        'ban_date'
+    protected $casts = [
+        'ban_date' => 'datetime',
     ];
 }

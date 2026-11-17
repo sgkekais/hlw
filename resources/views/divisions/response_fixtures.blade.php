@@ -52,7 +52,7 @@
                             {{-- date - day of week, date, time --}}
                             <td class="align-middle" style="{{ $fixture->rescheduledTo || $fixture->isCancelled() ? "text-decoration: line-through": null }}">
                                 @if ($fixture->datetime)
-                                    <span class="d-none d-md-inline-block text-uppercase" style="width: 24px">{{ $fixture->datetime->formatLocalized('%a') }}</span>
+                                    <span class="d-none d-md-inline-block text-uppercase" style="width: 24px">{{ $fixture->datetime->isoFormat('dd') }}</span>
                                     <span class="d-inline d-md-none pr-1">{{ $fixture->datetime->format('d.m.') }}</span>
                                     <span class="d-none d-md-inline px-1">{{ $fixture->datetime->format('d.m.y') }}</span>
                                     @if ($fixture->datetime->format('H:i') != "00:00")

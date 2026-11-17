@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -79,33 +80,36 @@ class Fixture extends Model
     use LogsActivity;
 
     /**
-     * The attributes that should be logged
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'datetime',
-        'stadium_id',
-        'club_id_home',
-        'club_id_home_alt_text',
-        'club_id_away',
-        'club_id_away_alt_text',
-        'goals_home',
-        'goals_away',
-        'goals_home_11m',
-        'goals_away_11m',
-        'goals_home_rated', 'goals_away_rated', 'rated_note',
-        'note',
-        'match_report_url',
-        'cancelled',
-        'published',
-        'rescheduled_from_fixture_id', 'rescheduled_by_club', 'reschedule_reason', 'reschedule_count'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'datetime',
+                'stadium_id',
+                'club_id_home',
+                'club_id_home_alt_text',
+                'club_id_away',
+                'club_id_away_alt_text',
+                'goals_home',
+                'goals_away',
+                'goals_home_11m',
+                'goals_away_11m',
+                'goals_home_rated',
+                'goals_away_rated',
+                'rated_note',
+                'note',
+                'match_report_url',
+                'cancelled',
+                'published',
+                'rescheduled_from_fixture_id',
+                'rescheduled_by_club',
+                'reschedule_reason',
+                'reschedule_count',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that can be mass assigned
@@ -132,21 +136,14 @@ class Fixture extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     * @var array
-     */
-    protected $dates = [
-        'datetime'
-    ];
-
-    /**
      * The attributes that should be casted to native types.
      * @var array
      */
     protected $casts = [
         'cancelled' => 'boolean',
         'published' => 'boolean',
-        'counts_in_tables' => 'boolean'
+        'counts_in_tables' => 'boolean',
+        'datetime' => 'datetime',
     ];
 
     /***********************************************************

@@ -3,6 +3,7 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -38,18 +39,20 @@ class Matchweek extends Model
     use LogsActivity;
 
     /**
-     * The attributes that should be logged
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'number_consecutive', 'name', 'begin', 'end', 'published'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'number_consecutive',
+                'name',
+                'begin',
+                'end',
+                'published',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that can be mass assigned
@@ -60,19 +63,13 @@ class Matchweek extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates
-     * @var array
-     */
-    protected $dates = [
-        'begin', 'end'
-    ];
-
-    /**
      * The attributes that should be casted to native types.
      * @var array
      */
     protected $casts = [
-        'published'     => 'boolean'
+        'published'     => 'boolean',
+        'begin' => 'datetime',
+        'end' => 'datetime',
     ];
 
     /***********************************************************

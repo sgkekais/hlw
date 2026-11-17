@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,8 +17,7 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             CompetitionsSeeder::class,
             DivisionsSeeder::class,
-            DivisionsOfficialSeeder::class,
-            ChatterTableSeeder::class
+            DivisionsOfficialSeeder::class
         ]);
     }
 }

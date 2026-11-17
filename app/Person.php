@@ -3,6 +3,8 @@
 namespace HLW;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -45,18 +47,24 @@ class Person extends Model
     use LogsActivity;
 
     /**
-     * The attributes that should be logged.
-     * @var array
+     * The attributes that are logged, only when they changed.
      */
-    protected static $logAttributes = [
-        'first_name', 'last_name', 'date_of_birth', 'photo', 'photo_public', 'registered_at_club', 'official_division_id', 'note', 'active'
-    ];
-
-    /**
-     * Only the changed attributes should be logged
-     * @var bool
-     */
-    protected static $logOnlyDirty = true;
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'first_name',
+                'last_name',
+                'date_of_birth',
+                'photo',
+                'photo_public',
+                'registered_at_club',
+                'official_division_id',
+                'note',
+                'active',
+            ])
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -67,19 +75,12 @@ class Person extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     * @var array
-     */
-    protected $dates = [
-        'date_of_birth'
-    ];
-
-    /**
      * @var array
      */
     protected $casts = [
         'photo_public'  => 'boolean',
-        'active'        => 'boolean'
+        'active'        => 'boolean',
+        'date_of_birth' => 'datetime',
     ];
 
     /*******************************************************
@@ -114,7 +115,7 @@ class Person extends Model
      */
     public function getFullNameShortenedAttribute()
     {
-        return $this->last_name.", ".str_limit($this->first_name, 1, '.');
+        return $this->last_name.", ".Str::limit($this->first_name, 1, '.');
     }
 
     /*******************************************************
