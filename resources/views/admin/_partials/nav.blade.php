@@ -44,7 +44,7 @@
                             </a>
                         @endcan
                         <div class="dropdown-divider"></div>
-                        <h6 class="dropdown-header">Torschützen & Sünder</h6>
+                        <h6 class="dropdown-header">Torschützen & Sünderkartei</h6>
                         @foreach (\HLW\Division::with('competition')->orderBy('competition_id')->orderBy('name')->get() as $nav_division)
                             <a class="dropdown-item {{ Route::is('admin.divisions.*') && request()->route('division')->is($nav_division) ? 'active' : null }}" href="{{ route('admin.divisions.scorers', $nav_division) }}">
                                 <span class="fa fa-list-ol fa-fw"></span> {{ $nav_division->competition->name_short }} {{ $nav_division->name }}

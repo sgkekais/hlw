@@ -8,6 +8,8 @@
         Es zählen nur die Tore gespielter Spiele. Tore in nachträglich gewerteten oder annullierten Spielen werden nicht berücksichtigt.
     </p>
 
+    @include('admin.statistics._tabs')
+
     @include('admin.statistics._season_select')
 
     @if ($scorers->isEmpty())

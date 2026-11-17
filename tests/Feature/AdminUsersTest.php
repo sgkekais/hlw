@@ -124,6 +124,10 @@ class AdminUsersTest extends TestCase
         $this->get("/admin/divisions/{$params['division']}/sinners?season_id={$params['season']}")
             ->assertStatus(200)
             ->assertSee('Sünderkartei');
+
+        // both lists link to each other and keep the season
+        $this->get("/admin/divisions/{$params['division']}/scorers?season_id={$params['season']}")
+            ->assertSee("/admin/divisions/{$params['division']}/sinners?season_id={$params['season']}", false);
     }
 
     public function test_super_admins_cannot_lock_out_user_management()

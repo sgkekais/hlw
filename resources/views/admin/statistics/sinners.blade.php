@@ -8,6 +8,8 @@
         Die Zahl in Klammern gibt die Anzahl der Spiele wieder, die der Spieler noch gesperrt ist.
     </p>
 
+    @include('admin.statistics._tabs')
+
     @include('admin.statistics._season_select')
 
     @include('divisions.response_sinners')
