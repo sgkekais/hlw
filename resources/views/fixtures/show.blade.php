@@ -71,17 +71,6 @@
                         @endif
                     </div>
                     <div class="mb-0 bg-black-transparent">
-                        @auth
-                            @php
-                                $referees = $fixture->referees;
-                            @endphp
-                            @if (!$referees->isEmpty())
-                                @foreach ($referees as $referee)
-                                    @svg('whistle', ['class' => 'align-middle pr-1', 'style' => 'fill: #fff', 'width' => '35', 'height' => '35'])
-                                    {{ $referee->person->full_name_shortened }}
-                                @endforeach
-                            @endif
-                        @endauth
                     </div>
                 </div>
                 {{-- away details --}}

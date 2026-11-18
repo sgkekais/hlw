@@ -522,61 +522,6 @@
                         </div>
                     </div>
                 @endif
-                @auth
-                    @php
-                        $contacts = $club->contacts;
-                    @endphp
-                    <div class="row mt-2">
-                        <div class="col">
-                            <h2 class="font-weight-bold font-italic text-uppercase" style="color: {{ $primary_color }}">Ansprechpartner</h2>
-                            <p class="text-muted">Nur für angemeldete Mitglieder sichtbar.</p>
-                            @if (!$contacts->isEmpty())
-                                <ul class="list-group">
-                                    <li class="list-group-item d-flex flex-column flex-md-row justify-content-between">
-                                        <div class="col-md-1 font-weight-bold">
-                                            <span class="font-weight-bold">#</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <span class="fa fa-user"></span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <span class="fa fa-envelope"></span>
-                                        </div>
-                                        @hasanyrole('super_admin|admin|club_contact')
-                                            <div class="col-md-4 ">
-                                                <span class="fa fa-phone"></span>
-                                                <br class="d-none d-md-inline-block">
-                                                <small class="text-muted">Nur für Admins und Ansprechpartner sichtbar</small>
-                                            </div>
-                                        @endhasanyrole
-                                    </li>
-                                    @foreach ($club->contacts()->orderBy('hierarchy_level')->with('person')->get() as $contact)
-                                        <li class="list-group-item d-flex flex-column flex-md-row justify-content-between">
-                                            <div class="col-md-1 font-weight-bold">
-                                                {{ $contact->hierarchy_level }}
-                                            </div>
-                                            <div class="col-md-3">
-                                                {{ $contact->person->first_name }} {{ $contact->person->last_name }}
-                                            </div>
-                                            <div class="col-md-4">
-                                                {{ $contact->mail }}
-                                            </div>
-                                            @hasanyrole('super_admin|admin|club_contact')
-                                                <div class="col-md-4">
-                                                    {{ $contact->mobile }}
-                                                </div>
-                                            @endhasanyrole
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @else
-                                <div class="alert alert-info">
-                                    <span class="fa fa-info-circle"></span> Es wurden keine Ansprechpartner angegeben.
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                @endauth
                 {{--
                 TODO: Stadion anzeigen?
                 @if($club->regularStadium()->first())

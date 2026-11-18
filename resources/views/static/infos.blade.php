@@ -17,13 +17,6 @@
             <div class="col">
                 <h1 class="font-weight-bold font-italic text-uppercase">Infos</h1>
                 <ul class="nav nav-pills nav-fill d-flex flex-column flex-md-row">
-                    @auth
-                        @hasanyrole('super_admin|admin|club_contact')
-                            <li class="nav-item mr-md-2">
-                                <a class="nav-link border border-success rounded" href="#referees">Schiedsrichter</a>
-                            </li>
-                        @endhasanyrole
-                    @endauth
                     <li class="nav-item mt-2 mt-md-0">
                         <a class="nav-link border border-success rounded" href="#hlw">HLW-Satzung</a>
                     </li>
@@ -33,11 +26,9 @@
                     <li class="nav-item ml-md-2 mt-2 mt-md-0">
                         <a class="nav-link border border-success rounded" href="#join">Mitmachen</a>
                     </li>
-                    @auth
-                        <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
-                            <a class="nav-link border border-success rounded" href="{{ route('frontend.static.matchreport') }}" title="Herunterladen"><span class="fa fa-fw fa-download" title="Herunterladen"></span> Spielberichtsbogen</a>
-                        </li>
-                    @endauth
+                    <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
+                        <a class="nav-link border border-success rounded" href="{{ route('frontend.static.matchreport') }}" title="Herunterladen"><span class="fa fa-fw fa-download" title="Herunterladen"></span> Spielberichtsbogen</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -60,7 +51,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Daniel Alberty</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
-                                    <p class="card-text">Schiedsrichteransetzungen & Ansprechpartner Teams</p>
+                                    <p class="card-text">Schiedsrichteransetzungen</p>
                                     <div class="mt-auto">
                                         <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:vorstand@hobbyligawest.de" title="Mail an D. Alberty">vorstand</a>
                                     </div>
@@ -70,7 +61,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Jürgen Kaiser</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
-                                    <p class="card-text">Spielpläne HLW + AH & Ansprechpartner Teams</p>
+                                    <p class="card-text">Spielpläne HLW + AH</p>
                                     <div class="mt-auto">
                                         <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:vorstand@hobbyligawest.de" title="Mail an J. Kaiser">vorstand</a>
                                     </div>
@@ -81,7 +72,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Harald Scholz</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
-                                    <p class="card-text">Spielerpässe & Ansprechpartner Teams</p>
+                                    <p class="card-text">Spielerpässe</p>
                                     <div class="mt-auto">
                                         <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:vorstand@hobbyligawest.de" title="Mail an H. Scholz">vorstand</a>
                                     </div>
@@ -104,7 +95,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h4 class="card-title font-weight-bold">Erwin Scholz</h4>
                                     <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
-                                    <p class="card-text">Kassierer & Ansprechpartner Teams</p>
+                                    <p class="card-text">Kassierer</p>
                                     <div class="mt-auto">
                                         <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:vorstand@hobbyligawest.de" title="Mail an E. Scholz">vorstand</a>
                                     </div>
@@ -116,17 +107,7 @@
                                     <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
                                     <p class="card-text">Social Media</p>
                                     <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:vorstand@hobbyligawest.de" title="Mail an S. Abels">vorstand</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body d-flex flex-column">
-                                    <h4 class="card-title font-weight-bold">Stefan Abels</h4>
-                                    <h5 class="card-subtitle mb-2 text-muted">Aufgaben</h5>
-                                    <p class="card-text">Vertretung Spielerpässe</p>
-                                    <div class="mt-auto">
-                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:vorstand@hobbyligawest.de" title="Mail an S. Abels">vorstand</a>
+                                        <span class="fa fa-fw fa-envelope-o"></span> <a href="mailto:vorstand@hobbyligawest.de" title="Mail an J. Kasten">vorstand</a>
                                     </div>
                                 </div>
                             </div>
@@ -147,47 +128,6 @@
                 </div>
             </div>
         </div>
-        @auth
-            @hasanyrole('super_admin|admin|club_contact')
-                @if (!$referees->isEmpty())
-                    <a id="referees"></a>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <h2 class="font-weight-bold font-italic">Schiedsrichter</h2>
-                            <p class="text-muted">
-                                Diese Daten sind nur für Admins und die Ansprechpartner der Teams einsehbar.
-                            </p>
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex flex-column flex-md-row justify-content-between">
-                                    <div class="col-md-4 text-left">
-                                        <span class="fa fa-user" title="Schiedsrichter"></span>
-                                    </div>
-                                    <div class="col-md-4 text-left">
-                                        <span class="fa fa-envelope" title="E-Mail"></span>
-                                    </div>
-                                    <div class="col-md-4 text-md-right">
-                                        <span class="fa fa-phone" title="Telefon"></span>
-                                    </div>
-                                </li>
-                                @foreach ($referees->sortBy('person.last_name') as $referee)
-                                    <li class="list-group-item d-flex flex-column flex-md-row justify-content-between">
-                                        <div class="col-md-4 text-left">
-                                            {{ $referee->person->full_name_shortened }}
-                                        </div>
-                                        <div class="col-md-4 text-left">
-                                            {{ $referee->mail }}
-                                        </div>
-                                        <div class="col-md-4 text-md-right">
-                                            {{ $referee->mobile }}
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif
-            @endhasanyrole
-        @endauth
         {{-- HLW-Satzung --}}
         <a id="hlw"></a>
         <div class="row mt-4">
