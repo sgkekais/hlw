@@ -1,0 +1,3 @@
+Roboto: Apache License 2.0 / SIL Open Font License 1.1, Google Fonts.
+Barlow Condensed: SIL Open Font License 1.1, Jeremy Tribby, Google Fonts.
+Both may be bundled with software, see https://openfontlicense.org

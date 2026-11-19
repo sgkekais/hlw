@@ -68,7 +68,7 @@
             </div>
             <div class="col-md-4">
                 <input type="file" name="photo" id="photo" aria-describedby="photoHelp">
-                <small id="photoHelp" class="form-text text-muted">Passbild</small>
+                <small id="photoHelp" class="form-text text-muted">Passbild als JPEG, PNG oder WebP, mindestens 300 × 300 Pixel. Es wird für den Spielerpass verkleinert gespeichert.</small>
             </div>
             <div class="col-md-2">
                 <label for="photo_public">Passbild öffentlich?</label>

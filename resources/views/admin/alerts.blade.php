@@ -1,3 +1,17 @@
+<!-- Validation errors of the last form -->
+@if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="fa fa-exclamation-circle"></span> <strong>Bitte prüfen:</strong>
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <!-- Info Alert -->
 @if (Session::has('info'))
     <div class="alert alert-info alert-dismissible fade show mt-4" role="alert">

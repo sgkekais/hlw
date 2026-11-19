@@ -21,7 +21,7 @@ class CleanUploads extends Command
     protected $description = 'Delete match reports of past seasons and upload files without a reference';
 
     /**
-     * Upload folders below the public disk and the columns that refer to their files.
+     * Upload folders and the columns that refer to their files.
      */
     const FOLDERS = [
         'passportphotos' => [['people', 'photo']],
@@ -31,10 +31,16 @@ class CleanUploads extends Command
         'matchreports'   => [['fixtures', 'match_report_url']],
     ];
 
+    /**
+     * Folders that are not on the public disk.
+     */
+    const DISKS = [
+        'clubpassports' => 'local',
+    ];
+
     public function handle(): int
     {
         $force = $this->option('force');
-        $disk = Storage::disk('public');
         $this->info($force ? 'Deleting.' : 'Dry run, nothing is deleted. Use --force to delete.');
 
         // match reports of seasons that ended before today
@@ -50,13 +56,14 @@ class CleanUploads extends Command
 
         $this->line(sprintf('Match reports of past seasons: %d', $pastReports->count()));
         if ($force && $pastReports->isNotEmpty()) {
-            $disk->delete($pastReports->values()->all());
+            Storage::disk('public')->delete($pastReports->values()->all());
             // without the models, so the activity log is not flooded
             DB::table('fixtures')->whereIn('id', $pastReports->keys())->update(['match_report_url' => null]);
         }
 
         $rows = [];
         foreach (self::FOLDERS as $folder => $columns) {
+            $disk = Storage::disk(self::DISKS[$folder] ?? 'public');
             $referenced = $this->references($columns);
             // in a dry run the past match reports still count as referenced in the database
             if (!$force && $folder === 'matchreports') {

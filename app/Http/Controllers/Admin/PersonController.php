@@ -5,6 +5,9 @@ namespace HLW\Http\Controllers\Admin;
 use HLW\Club;
 use HLW\DivisionOfficial;
 use HLW\Person;
+use HLW\Support\PassportPhoto;
+use Illuminate\Validation\ValidationException;
+use RuntimeException;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +16,12 @@ use Illuminate\Support\Facades\Storage;
 
 class PersonController extends Controller
 {
+    /**
+     * Passport photos: common image formats only (no SVG), at most 15 MB and
+     * big enough for printing, they are optimized when stored.
+     */
+    const PHOTO_RULES = 'nullable|image|mimes:jpeg,png,webp|max:15360|dimensions:min_width=300,min_height=300';
+
     public function __construct()
     {
         // Permissions
@@ -69,26 +78,24 @@ class PersonController extends Controller
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'date_of_birth' => 'nullable|date',
-            'photo'         => 'nullable|file|mimes:jpeg,png,jpg,gif,svg'
+            'photo'         => self::PHOTO_RULES,
         ]);
 
-        $person = new Person($request->all());
+        // the photo first, so an unreadable image does not leave a person behind
+        $photo = $this->optimizedPhoto($request);
+
+        $person = new Person($request->except('photo'));
 
         // save the model
         $person->save();
 
-        // is there a photo?
+        // is there a photo? only an optimized copy is stored, see PassportPhoto
         $store_message = "";
-        if($request->hasFile('photo'))
+        if($photo !== null)
         {
-            // store the uploaded logo and save the path to the logo in the database
-            if ($request->file('photo')->store('public/passportphotos/'.$person->id)) {
-                $photo_path = 'passportphotos/'.$person->id.'/'.$request->file('photo')->hashName();
-                $person->photo = $photo_path;
-                $store_message = "Passbild erfoglreich hochgeladen. ";
-                // save the club again
-                $person->save();
-            }
+            $person->photo = PassportPhoto::store($photo, $person->id);
+            $store_message = "Passbild erfoglreich hochgeladen. ";
+            $person->save();
         }
 
         return redirect()->route('people.index')
@@ -135,26 +142,21 @@ class PersonController extends Controller
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'date_of_birth' => 'nullable|date',
-            'photo'         => 'nullable|file|mimes:jpeg,png,jpg,gif,svg'
+            'photo'         => self::PHOTO_RULES,
         ]);
 
+        $photo = $this->optimizedPhoto($request);
+
         // update the changes
-        $person->update($request->all());
+        $person->update($request->except('photo'));
 
-        // is there a new photo selected?
-        if($request->hasFile('photo'))
+        // is there a new photo selected? replace the old one
+        if($photo !== null)
         {
-            // then delete the old logo
-            Storage::delete($person->photo);#
-
-            // store the uploaded logo and save the path to the logo in the database
-            if ($request->file('photo')->store('public/passportphotos/'.$person->id)) {
-                $photo_path = 'passportphotos/'.$person->id.'/'.$request->file('photo')->hashName();
-                $person->photo = $photo_path;
-                $store_message = "Passbild erfoglreich hochgeladen. ";
-                // save the club again
-                $person->save();
-            }
+            $old_photo = $person->photo;
+            $person->photo = PassportPhoto::store($photo, $person->id);
+            $person->save();
+            PassportPhoto::delete($old_photo);
         }
 
         return redirect()->route('people.index')
@@ -173,11 +175,31 @@ class PersonController extends Controller
         $last_name = $person->last_name;
         $id = $person->id;
 
-        // delete the model
+        // delete the model and the photo
+        $photo = $person->photo;
         $person->delete();
+        PassportPhoto::delete($photo);
 
         // return to index
         return redirect()->route('people.index')
             ->with('success', 'Person '.$first_name.' '.$last_name.' mit der ID '.$id.' gelöscht.');
+    }
+
+    /**
+     * The optimized JPEG data of the uploaded photo, null without upload.
+     */
+    private function optimizedPhoto(Request $request): ?string
+    {
+        if (!$request->hasFile('photo')) {
+            return null;
+        }
+
+        try {
+            return PassportPhoto::optimize($request->file('photo')->getRealPath());
+        } catch (RuntimeException $e) {
+            throw ValidationException::withMessages([
+                'photo' => 'Das Passbild konnte nicht verarbeitet werden. Bitte als JPEG oder PNG mit höchstens 30 Megapixeln speichern und erneut hochladen.',
+            ]);
+        }
     }
 }

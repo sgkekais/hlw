@@ -22,6 +22,7 @@ class CleanUploadsTest extends TestCase
     {
         parent::setUp();
         Storage::fake('public');
+        Storage::fake('local');
 
         // only the records of this test refer to files
         DB::table('fixtures')->update(['match_report_url' => null]);

@@ -5,11 +5,11 @@ namespace HLW\Http\Controllers\Admin;
 use HLW\Club;
 use HLW\Person;
 use HLW\Player;
+use HLW\Support\PlayerPassports;
 use HLW\Position;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use PDF; // PARKED: barryvdh/laravel-dompdf is installed again when the player passports are rebuilt
 
 class PlayerController extends Controller
 {
@@ -26,6 +26,7 @@ class PlayerController extends Controller
             'update'
         ]);
         $this->middleware('permission:delete club_player_assignment')->only('destroy');
+        $this->middleware('permission:generate player_passport')->only('generatePlayerPassport');
     }
 
     /**
@@ -131,30 +132,20 @@ class PlayerController extends Controller
         return redirect()->route('clubs.show', compact('club'));
     }
 
-    public function generatePlayerPassportDebug(Player $player) {
+    /**
+     * The passport of a single player, not stored.
+     */
+    public function generatePlayerPassport(Club $club, Player $player)
+    {
+        abort_unless($player->club_id === $club->id, 404);
 
-        $player->load([
-            'person',
-            'club'
+        $pdf = PlayerPassports::render(collect([$player]), auth()->user()->name);
+
+        return response($pdf, 200, [
+            'Content-Type'        => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.date('Y-m-d').'_Spielerpass_'.$player->id.'.pdf"',
+            'Cache-Control'       => 'no-store, private',
         ]);
-
-        $passport = PDF::loadView('admin.players.playerPassport', compact('player'));
-
-        // return $passport->setPaper('a5', 'landscape')->stream('Pass.pdf');
-
-        return view('admin.players.playerPassport', compact('player'));
-    }
-
-    public function generatePlayerPassport(Player $player) {
-
-        $player->load([
-            'person',
-            'club'
-        ]);
-
-        $passport = PDF::loadView('admin.players.playerPassport', compact('player'));
-
-        return $passport->setPaper('a5', 'landscape')->stream(date('Y-m-d').'-Pass-'.$player->person->last_name.'.pdf');
     }
 
     /**

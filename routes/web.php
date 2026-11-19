@@ -40,9 +40,6 @@ Route::get('season/{season}/clubs', 'ClubController@index')->name('frontend.seas
 // clubs
 Route::get('clubs/{club}', 'ClubController@show')->name('frontend.clubs.show');
 Route::get('clubs/{club}/ajax-club-results', 'ClubController@ajaxGetClubResults');
-//Route::group(['middleware' => ['can:read playerPassports']], function() {
-//   Route::get('clubs/{club}/passmappe','ClubController@displayPlayerPassports')->name('playerpassports');
-//});
 
 // fixtures
 Route::get('fixtures/{fixture}', 'FixtureController@show')->name('frontend.fixtures.show');
@@ -129,14 +126,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::resource('stadiums', 'StadiumController');
     // Clubs
     Route::resource('clubs', 'ClubController');
-    // PARKED: player passports (PDF) are rebuilt after the Laravel upgrade, see also the views admin/clubs/show and admin/players/playerPassport
-    // Route::get('clubs/{club}/generate-playerpassports', 'ClubController@generatePlayerPassports')->name('generatePlayerPassports');
-    // Route::get('clubs/{club}/display-playerpassports', 'ClubController@displayPlayerPassports')->name('displayPlayerPassports');
+    // Passport folder of the club: create (replaces the previous one) and download
+    Route::post('clubs/{club}/passports', 'ClubController@generatePlayerPassports')->name('generatePlayerPassports');
+    Route::get('clubs/{club}/passports', 'ClubController@displayPlayerPassports')->name('displayPlayerPassports');
     // Assigning and managing players
     Route::resource('clubs.players', 'PlayerController');
-    // PARKED: player passports, see above
-    // Route::get('{player}/pdf', 'PlayerController@generatePlayerPassport')->name('generatePlayerPassport');
-    // Route::get('{player}/pdf-debug', 'PlayerController@generatePlayerPassportDebug')->name('generatePlayerPassportDebug');
+    // Passport of a single player
+    Route::get('clubs/{club}/players/{player}/passport', 'PlayerController@generatePlayerPassport')->name('generatePlayerPassport');
     // Assigning and managing contacts
     Route::resource('clubs.contacts', 'ContactController');
     // Assigning and managing stadiums

@@ -4,12 +4,12 @@ namespace HLW\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use HLW\Club;
+use HLW\Support\PlayerPassports;
 use HLW\Stadium;
 use Illuminate\Http\Request;
 use HLW\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use PDF; // PARKED: barryvdh/laravel-dompdf is installed again when the player passports are rebuilt
 
 class ClubController extends Controller
 {
@@ -40,6 +40,10 @@ class ClubController extends Controller
             'updateStadiumAssignment'
         ]);
         $this->middleware('permission:delete club_stadium_assignment')->only('destroyStadiumAssignment');
+        $this->middleware('permission:generate player_passports')->only([
+            'generatePlayerPassports',
+            'displayPlayerPassports',
+        ]);
     }
 
     /**
@@ -335,32 +339,26 @@ class ClubController extends Controller
         return redirect()->route('clubs.show', $club);
     }
 
+    /**
+     * Create the passport folder of all active players and replace the previous one.
+     */
     public function generatePlayerPassports(Club $club)
     {
-        $active_players = $club->players()->whereNull('sign_off')->get()->sortBy('person.last_name');
+        PlayerPassports::storeForClub($club, auth()->user()->name);
 
-        $active_players->load(['person', 'club']);
-
-        $passport = PDF::loadView('admin.clubs.playerPassports', compact('active_players'));
-
-        $passport->setPaper('a5', 'landscape');
-
-        $filename = date('Y-m-d').'_Passmappe_'.$club->id.'-'.$club->name_code.'.pdf';
-
-        $passport->save(storage_path('app/public/clubpassports/'.$filename));
-        $passports_url = 'clubpassports/'.$filename;
-        $club->passports_url = $passports_url;
-        $club->passports_timestamp = Carbon::now();
-        // save the club
-        $club->save();
-
-        return redirect()->route('clubs.show', $club);
+        return redirect()->route('clubs.show', $club)
+            ->with('success', 'Passmappe erfolgreich erzeugt.');
     }
 
+    /**
+     * Download the current passport folder of the club.
+     */
     public function displayPlayerPassports(Club $club)
     {
-        $storage_path = storage_path('app/public/'.$club->passports_url);
+        abort_unless($club->passports_url && Storage::disk('local')->exists($club->passports_url), 404);
 
-        return response()->download($storage_path);
+        return Storage::disk('local')->download($club->passports_url, PlayerPassports::downloadName($club), [
+            'Cache-Control' => 'no-store, private',
+        ]);
     }
 }

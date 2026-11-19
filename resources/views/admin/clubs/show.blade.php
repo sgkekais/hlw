@@ -39,18 +39,23 @@
                 </a>
                 <br>
             @endcan
-            {{-- PARKED: player passports are rebuilt after the Laravel upgrade (routes commented out in routes/web.php)
             @can('generate player_passports')
-                <a class="btn btn-danger mt-2" href="{{ route('generatePlayerPassports', $club) }}" title="Passmappe erzeugen">
-                    <span class="fa fa-repeat"></span> Passmappe erzeugen
-                </a>
+                <!-- passport folder: creating it replaces the previous one -->
+                <form class="d-inline" method="POST" action="{{ route('generatePlayerPassports', $club) }}">
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn btn-danger mt-2" title="Passmappe aller aktiven Spieler neu erzeugen, ersetzt die bisherige">
+                        <span class="fa fa-repeat"></span> Passmappe erzeugen
+                    </button>
+                </form>
+                @if ($club->passports_url)
+                    <a class="btn btn-secondary mt-2" href="{{ route('displayPlayerPassports', $club) }}" title="Aktuelle Passmappe herunterladen">
+                        <span class="fa fa-file-pdf-o"></span> Passmappe herunterladen
+                        (Stand: {{ \Carbon\Carbon::parse($club->passports_timestamp)->format('d.m.Y H:i') }} Uhr)
+                    </a>
+                @else
+                    <span class="text-muted d-inline-block mt-2">Noch keine Passmappe erzeugt.</span>
+                @endif
             @endcan
-            @if ($club->passports_url)
-                <a class="btn btn-secondary mt-2" href="{{ route('displayPlayerPassports', $club) }}" title="Passmappe ansehen">
-                    <span class="fa fa-file-pdf-o"></span> Passmappe ansehen (Stand: {{ $club->passports_timestamp }})
-                </a>
-            @endif
-            --}}
         </div>
         <!-- dates -->
         <div class="col-md-6">
@@ -412,14 +417,12 @@
                                         <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                     </a>
                                 @endcan
-                                {{-- PARKED: player passports are rebuilt after the Laravel upgrade (routes commented out in routes/web.php)
                                 @can('generate player_passport')
-                                    <!-- generate player passport pdf -->
-                                    <a class="btn btn-danger btn-sm" href="{{ route('generatePlayerPassport', [$p_active]) }}" target="_blank" title="Spielerpass erzeugen">
+                                    <!-- passport of this player, not stored -->
+                                    <a class="btn btn-danger btn-sm" href="{{ route('generatePlayerPassport', [$club, $p_active]) }}" target="_blank" title="Spielerpass anzeigen">
                                         <span class="fa fa-file-pdf-o" aria-hidden="true"></span>
                                     </a>
                                 @endcan
-                                --}}
                             </td>
                         </tr>
                     @endforeach

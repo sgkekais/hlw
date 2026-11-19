@@ -36,7 +36,7 @@ return [
     'different'            => ':attribute und :other müssen sich unterscheiden.',
     'digits'               => ':attribute muss :digits Stellen haben.',
     'digits_between'       => ':attribute muss zwischen :min und :max Stellen haben.',
-    'dimensions'           => ':attribute hat ungültige Bildabmessungen.',
+    'dimensions'           => ':attribute hat ungültige Bildabmessungen (mindestens 300 × 300 Pixel).',
     'distinct'             => 'Das Feld :attribute beinhaltet einen bereits vorhandenen Wert.',
     'email'                => ':attribute muss eine gültige E-Mail-Adresse sein.',
     'exists'               => 'Der gewählte Wert für :attribute ist ungültig.',
@@ -117,6 +117,7 @@ return [
     */
 
     'attributes' => [
+        'photo'                 => 'Das Passbild',
         'name'                  => 'Name',
         'username'              => 'Benutzername',
         'email'                 => 'E-Mail-Adresse',

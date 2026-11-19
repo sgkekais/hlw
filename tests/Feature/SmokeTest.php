@@ -25,6 +25,8 @@ class SmokeTest extends TestCase
     const EXCLUDED = [
         '#^(api|_debugbar|_ignition)\b#',
         '#^admin/(calendar|login)$#',
+        // file download, 404 without a stored passport folder, see PlayerPassportsTest
+        '#^admin/clubs/\{club\}/passports$#',
     ];
 
     /**
