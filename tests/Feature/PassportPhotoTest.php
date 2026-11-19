@@ -49,6 +49,17 @@ class PassportPhotoTest extends TestCase
         $this->assertFalse(PassportPhoto::hasExif($path));
     }
 
+    public function test_portrait_photo_with_a_stale_orientation_is_not_turned()
+    {
+        // pixels already upright, the editor kept the orientation of the camera
+        $photo = UploadedFile::fake()->createWithContent('photo.jpg', $this->withOrientation($this->jpeg(800, 1200), 6));
+
+        $this->post('/admin/people', $this->person(['photo' => $photo]))->assertSessionHasNoErrors();
+
+        [$width, $height] = getimagesize(Storage::disk('public')->path(Person::where('last_name', 'Passbildtest')->firstOrFail()->photo));
+        $this->assertSame([427, 640], [$width, $height]);
+    }
+
     public function test_orientation_is_read_without_ext_exif()
     {
         $file = tempnam(sys_get_temp_dir(), 'hlw');

@@ -16,7 +16,9 @@ use Throwable;
  */
 class OptimizePassportPhotos extends Command
 {
-    protected $signature = 'hlw:optimize-passport-photos {--force : replace the photos, otherwise only report}';
+    protected $signature = 'hlw:optimize-passport-photos
+        {--force : replace the photos, otherwise only report}
+        {--originals= : folder of a copy of the original photos, relative to the project; converts the photos with an EXIF orientation again}';
 
     protected $description = 'Replace the passport photos by optimized copies (JPEG, at most 640 px, without metadata)';
 
@@ -25,6 +27,10 @@ class OptimizePassportPhotos extends Command
         $force = $this->option('force');
         $disk = Storage::disk('public');
         $this->info($force ? 'Replacing photos.' : 'Dry run, nothing is changed. Use --force to replace the photos.');
+
+        if ($this->option('originals') !== null) {
+            return $this->fromOriginals(base_path($this->option('originals')), $force);
+        }
 
         $counts = ['optimized' => 0, 'already optimized' => 0, 'file missing' => 0, 'failed' => 0, 'smaller than 300 px' => 0];
         $bytesBefore = 0;
@@ -81,6 +87,61 @@ class OptimizePassportPhotos extends Command
 
         $this->table(['', 'Photos'], collect($counts)->map(fn ($count, $label) => [$label, $count])->values()->all());
         $this->line(sprintf('Size of the optimized photos: %.1f MB before, %.1f MB after', $bytesBefore / 1048576, $bytesAfter / 1048576));
+
+        return self::SUCCESS;
+    }
+
+    /**
+     * Convert the photos again whose original carries an EXIF orientation,
+     * after the rule for turning them changed. The copy of the originals has
+     * one folder per person id, as the passportphotos folder had.
+     */
+    private function fromOriginals(string $folder, bool $force): int
+    {
+        if (!is_dir($folder)) {
+            $this->error('Folder not found: '.$folder);
+
+            return self::FAILURE;
+        }
+
+        $disk = Storage::disk('public');
+        $counts = ['converted again' => 0, 'turned now' => 0, 'without orientation' => 0, 'no single original' => 0, 'failed' => 0];
+        $people = DB::table('people')->whereNotNull('photo')->orderBy('id')->get(['id', 'photo']);
+
+        foreach ($people as $person) {
+            $files = glob($folder.'/'.$person->id.'/*') ?: [];
+            if (count($files) !== 1) {
+                $counts['no single original']++;
+                continue;
+            }
+            $original = $files[0];
+            $orientation = PassportPhoto::orientation($original);
+            if ($orientation === 1) {
+                $counts['without orientation']++;
+                continue;
+            }
+
+            try {
+                $info = getimagesize($original);
+                $data = PassportPhoto::optimize($original);
+                if ($force) {
+                    $path = PassportPhoto::store($data, $person->id);
+                    DB::table('people')->where('id', $person->id)->update(['photo' => $path]);
+                    PassportPhoto::delete($person->photo);
+                }
+            } catch (Throwable $e) {
+                $counts['failed']++;
+                $this->warn("person {$person->id}: ".$e->getMessage());
+                continue;
+            }
+
+            $counts['converted again']++;
+            if (PassportPhoto::needsTurn($orientation, $info[0], $info[1])) {
+                $counts['turned now']++;
+            }
+        }
+
+        $this->table(['', 'Photos'], collect($counts)->map(fn ($count, $label) => [$label, $count])->values()->all());
 
         return self::SUCCESS;
     }

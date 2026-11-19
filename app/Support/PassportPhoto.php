@@ -95,7 +95,7 @@ class PassportPhoto
         imagedestroy($image);
 
         // rotate the small copy, the large one would need its memory twice
-        if ($info[2] === IMAGETYPE_JPEG) {
+        if ($info[2] === IMAGETYPE_JPEG && self::needsTurn(self::orientation($sourcePath), $width, $height)) {
             $target = self::orientate($target, self::orientation($sourcePath));
         }
 
@@ -185,14 +185,25 @@ class PassportPhoto
     }
 
     /**
-     * Rotate photos taken with a turned phone according to their EXIF orientation.
+     * Whether a photo is turned according to its EXIF orientation.
+     *
+     * Only a quarter turn (orientation 5 to 8) of a landscape image is applied:
+     * that is a portrait photo taken with a turned phone. Many stored photos
+     * are already upright in portrait format but still carry the orientation
+     * of the camera, because an editor turned the pixels and kept the tag. The
+     * old passports ignored the tag, so these photos stay as they are.
+     */
+    public static function needsTurn(int $orientation, int $width, int $height): bool
+    {
+        return $orientation >= 5 && $width > $height;
+    }
+
+    /**
+     * Rotate by a quarter turn according to the EXIF orientation 5 to 8.
      */
     private static function orientate($image, int $orientation)
     {
         switch ($orientation) {
-            case 2: imageflip($image, IMG_FLIP_HORIZONTAL); break;
-            case 3: $image = imagerotate($image, 180, 0); break;
-            case 4: imageflip($image, IMG_FLIP_VERTICAL); break;
             case 5: imageflip($image, IMG_FLIP_HORIZONTAL); $image = imagerotate($image, 90, 0); break;
             case 6: $image = imagerotate($image, -90, 0); break;
             case 7: imageflip($image, IMG_FLIP_HORIZONTAL); $image = imagerotate($image, -90, 0); break;

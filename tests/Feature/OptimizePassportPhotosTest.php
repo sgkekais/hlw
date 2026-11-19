@@ -77,6 +77,49 @@ class OptimizePassportPhotosTest extends TestCase
         $this->assertFalse(PassportPhoto::hasExif(Storage::disk('public')->path($this->people[1]->fresh()->photo)));
     }
 
+    public function test_photos_are_converted_again_from_the_originals()
+    {
+        $originals = storage_path('framework/testing/originals');
+        $make = function (int $id, string $jpeg) use ($originals) {
+            @mkdir($originals.'/'.$id, 0755, true);
+            file_put_contents($originals.'/'.$id.'/original.jpg', $jpeg);
+        };
+        // upright portrait with a stale orientation, turned wrongly before; a landscape phone photo; one without orientation
+        $make($this->people[0]->id, $this->withOrientation($this->image(800, 1200, 'jpeg'), 6));
+        $make($this->people[1]->id, $this->withOrientation($this->image(1200, 800, 'jpeg'), 6));
+        $make($this->people[2]->id, $this->image(800, 1200, 'jpeg'));
+        $before = $this->people->map(fn ($p) => $p->fresh()->photo);
+
+        $this->artisan('hlw:optimize-passport-photos', ['--originals' => 'storage/framework/testing/originals'])
+            ->expectsTable(['', 'Photos'], [
+                ['converted again', 2], ['turned now', 1], ['without orientation', 1], ['no single original', 1], ['failed', 0],
+            ]);
+        $this->assertEquals($before, $this->people->map(fn ($p) => $p->fresh()->photo));
+
+        $this->artisan('hlw:optimize-passport-photos', ['--originals' => 'storage/framework/testing/originals', '--force' => true])
+            ->assertSuccessful();
+
+        $disk = Storage::disk('public');
+        foreach ([0, 1] as $i) {
+            $photo = $this->people[$i]->fresh()->photo;
+            $this->assertNotSame($before[$i], $photo);
+            $this->assertSame([427, 640], array_slice(getimagesize($disk->path($photo)), 0, 2));
+        }
+        $disk->assertMissing('passportphotos/1/large.png');
+        // without orientation: untouched, and the originals stay
+        $this->assertSame($before[2], $this->people[2]->fresh()->photo);
+        $this->assertFileExists($originals.'/'.$this->people[0]->id.'/original.jpg');
+
+        exec('rm -rf '.escapeshellarg($originals));
+    }
+
+    private function withOrientation(string $jpeg, int $orientation): string
+    {
+        $exif = "Exif\0\0".'II*'."\0".pack('V', 8).pack('v', 1).pack('vvVvv', 0x0112, 3, 1, $orientation, 0).pack('V', 0);
+
+        return substr($jpeg, 0, 2)."\xFF\xE1".pack('n', strlen($exif) + 2).$exif.substr($jpeg, 2);
+    }
+
     private function image(int $width, int $height, string $format): string
     {
         $image = imagecreatetruecolor($width, $height);
