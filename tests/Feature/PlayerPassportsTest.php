@@ -80,6 +80,22 @@ class PlayerPassportsTest extends TestCase
             ->assertSee('Stand: 19.11.2026 11:30 Uhr');
     }
 
+    public function test_no_passport_folder_without_active_players()
+    {
+        $this->actingAs(User::role('admin')->firstOrFail());
+        Storage::disk('local')->put('clubpassports/x/old.pdf', '%PDF-1.7 old');
+        DB::table('clubs')->where('id', $this->club->id)->update(['passports_url' => 'clubpassports/x/old.pdf', 'passports_timestamp' => '2026-11-19 10:00:00']);
+        DB::table('clubs_people')->where('club_id', $this->club->id)->update(['sign_off' => '2026-11-01']);
+
+        $this->post(route('generatePlayerPassports', $this->club))
+            ->assertRedirect(route('clubs.show', $this->club))
+            ->assertSessionHas('warning');
+
+        $this->assertNull($this->club->fresh()->passports_url);
+        Storage::disk('local')->assertMissing('clubpassports/x/old.pdf');
+        $this->assertEmpty(Storage::disk('local')->allFiles());
+    }
+
     public function test_download_only_for_admins()
     {
         Storage::disk('local')->put('clubpassports/x/mappe.pdf', '%PDF-1.7 test');

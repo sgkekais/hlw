@@ -71,10 +71,24 @@ class PlayerPassports
 
     /**
      * Create the passport folder of all active players of the club and replace the previous one.
+     * Without active players there is no passport folder, a previous one is removed.
+     * Returns the number of passports.
      */
-    public static function storeForClub(Club $club, string $creator): void
+    public static function storeForClub(Club $club, string $creator): int
     {
         $players = $club->players()->whereNull('sign_off')->with('person')->get()->sortBy('person.last_name')->values();
+
+        if ($players->isEmpty()) {
+            $previous = $club->passports_url;
+            $club->passports_url = null;
+            $club->passports_timestamp = null;
+            $club->save();
+            if ($previous) {
+                Storage::disk('local')->delete($previous);
+            }
+
+            return 0;
+        }
 
         $path = self::FOLDER.'/'.$club->id.'/'.Carbon::now()->format('Y-m-d_His').'_Passmappe.pdf';
         if (!Storage::disk('local')->put($path, self::render($players, $creator))) {
@@ -89,6 +103,8 @@ class PlayerPassports
         if ($previous && $previous !== $path) {
             Storage::disk('local')->delete($previous);
         }
+
+        return $players->count();
     }
 
     /**

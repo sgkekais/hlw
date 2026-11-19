@@ -344,10 +344,15 @@ class ClubController extends Controller
      */
     public function generatePlayerPassports(Club $club)
     {
-        PlayerPassports::storeForClub($club, auth()->user()->name);
+        $count = PlayerPassports::storeForClub($club, auth()->user()->name);
+
+        if ($count === 0) {
+            return redirect()->route('clubs.show', $club)
+                ->with('warning', 'Der Verein hat keine aktiven Spieler, daher gibt es keine Passmappe.');
+        }
 
         return redirect()->route('clubs.show', $club)
-            ->with('success', 'Passmappe erfolgreich erzeugt.');
+            ->with('success', 'Passmappe mit '.$count.' '.($count === 1 ? 'Spielerpass' : 'Spielerpässen').' erfolgreich erzeugt.');
     }
 
     /**
